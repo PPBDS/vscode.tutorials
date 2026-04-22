@@ -3,37 +3,3 @@
 * Renamed package from `positron.tutorials` to `vscode.tutorials`.
 
 * Removed `renv` configuration.
-
-# positron.tutorials 0.2.1
-
-* Use .onAttach() to download any needed tutorial data which is not currently installed.
-
-* Fix errors in tutorials.
-
-* Use Cmd/Ctrl + Enter, not Cmd/Ctrl + Shift + Enter.
-
-# positron.tutorials 0.2.0
-
-* Clean up functions and tests.
-
-* Clean up DESCRIPTION.
-
-* Update for R 4.5.0.
-
-# positron.tutorials 0.1.2
-
-* Added single quotes for software program names in the TITLE and DESCRIPTION, following CRAN guidelines.
-
-* Added the process_submissions() function.
-
-# positron.tutorials 0.1.0
-
-* Use GitHub Pages for all publishing.
-
-* Redo most PNG files.
-
-* Transition all tutorials to covering Positron instead of RStudio.
-
-# positron.tutorials 0.0.1
-
-* Copy relevant tutorials from 'r4ds.tutorials' package.
