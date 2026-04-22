@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(positron.tutorials)
+library(vscode.tutorials)
 
-test_check("positron.tutorials")
+test_check("vscode.tutorials")

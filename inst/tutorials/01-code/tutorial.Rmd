@@ -77,9 +77,9 @@ question_text(NULL,
 ###
 
 ```
-dkane@MacBookPro positron.tutorials % echo $0
+dkane@MacBookPro vscode.tutorials % echo $0
 /bin/zsh
-dkane@MacBookPro positron.tutorials % 
+dkane@MacBookPro vscode.tutorials % 
 ```
 
 You answer should indicate some sort of UNIX-alike shell. In Windows, you should get something like `/bin/bash`. If not, investigate further, especially if it seems like you are using Powershell.
@@ -100,9 +100,9 @@ question_text(NULL,
 ###
 
 ```
-dkane@MacBookPro positron.tutorials % git --version
+dkane@MacBookPro vscode.tutorials % git --version
 git version 2.39.3 (Apple Git-146)
-dkane@MacBookPro positron.tutorials % 
+dkane@MacBookPro vscode.tutorials % 
 ```
 
 If Git is not installed, figure out how to install it and then restart this tutorial.

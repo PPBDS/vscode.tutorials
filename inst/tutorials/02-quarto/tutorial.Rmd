@@ -1074,7 +1074,7 @@ With *inline* code, we can insert R code of arbitrary complexity directly in the
 ## Quarto 4
 ### 
 
-Restart your R session with `Cmd/Ctrl + Shift + 0`. As always, you are doing this work in your *other* Positron window, the one in which this tutorial is *not* running. If you mistakenly restart R in this window, this tutorial will quit. Which is OK! You can just restart it with `learnr::run_tutorial(name = "02-quarto", package = "positron.tutorials")`.
+Restart your R session with `Cmd/Ctrl + Shift + 0`. As always, you are doing this work in your *other* Positron window, the one in which this tutorial is *not* running. If you mistakenly restart R in this window, this tutorial will quit. Which is OK! You can just restart it with `learnr::run_tutorial(name = "02-quarto", package = "vscode.tutorials")`.
 
 <!-- I don't think that Positron, unlike RStudio, does anything special with a code chunk labeled `setup`. So, maybe redo this example completely, teaching something different? -->
 

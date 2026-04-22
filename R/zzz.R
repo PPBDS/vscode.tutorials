@@ -28,7 +28,7 @@ data_manifest <- list(
 
 .onAttach <- function(libname, pkgname) {
   
-  base_url <- "https://raw.githubusercontent.com/PPBDS/positron.tutorials/main/inst/tutorials"
+  base_url <- "https://raw.githubusercontent.com/PPBDS/vscode.tutorials/main/inst/tutorials"
   files_downloaded <- character(0)
   
   for (tut in names(data_manifest)) {
@@ -77,7 +77,7 @@ data_manifest <- list(
   # Only print if we downloaded something
   if (length(files_downloaded) > 0) {
     packageStartupMessage(
-      "positron.tutorials: Downloaded ", length(files_downloaded), " data file(s):\n",
+      "vscode.tutorials: Downloaded ", length(files_downloaded), " data file(s):\n",
       paste0("  ", files_downloaded, collapse = "\n")
     )
   }

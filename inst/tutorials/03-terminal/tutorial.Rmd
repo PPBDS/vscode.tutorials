@@ -1909,11 +1909,11 @@ The `...` indicates that there are many more files in this directory. I am not a
 
 ### Exercise 3
 
-In your browser, go to `https://github.com/PPBDS/positron.tutorials`. 
+In your browser, go to `https://github.com/PPBDS/vscode.tutorials`. 
 
 This is the location for the R package which contains this tutorial. Click on the `TODO.txt` file, which should bring you to this URL:
 
-`https://github.com/PPBDS/positron.tutorials/blob/main/TODO.txt`. 
+`https://github.com/PPBDS/vscode.tutorials/blob/main/TODO.txt`. 
 
 Click on the "Download raw file" symbol to download the `TODO.txt` file to your computer.  
 
@@ -2158,7 +2158,7 @@ Davids-MacBook-Pro-2:grepping dkane$
 Download this file and move it from your `Downloads` file to your current directory, which is `grepping`. 
 
 ````
-https://github.com/PPBDS/positron.tutorials/blob/main/inst/tutorials/03-terminal/images/grepping.txt
+https://github.com/PPBDS/vscode.tutorials/blob/main/inst/tutorials/03-terminal/images/grepping.txt
 ````
 
 Run `ls` to confirm.

@@ -164,7 +164,7 @@ If it failed and you have just installed Git, then you need to quit and restart 
 If you need to restart Positron, you will then need to do two things. First, restart this tutorial with:
 
 ````
-learnr::run_tutorial("04-github-1", "positron.tutorials")
+learnr::run_tutorial("04-github-1", "vscode.tutorials")
 ````
 
 Second, start a new Positron window with `File -> New Window`.

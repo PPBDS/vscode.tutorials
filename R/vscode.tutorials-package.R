@@ -1,12 +1,12 @@
-#' Positron Tutorials
+#' VS Code Tutorials
 #'
-#' A comprehensive collection of interactive tutorials covering Positron and modern 
+#' A comprehensive collection of interactive tutorials covering VS Code and modern
 #' development workflows, R for Data Science essentials, and US Census data analysis.
 #' This package makes extensive use of the tools in the tutorial.helpers package.
 #'
 #' @description
-#' The positron.tutorials package provides interactive tutorials in three main categories:
-#' Positron and modern development tools, R for Data Science fundamentals, and
+#' The vscode.tutorials package provides interactive tutorials in three main categories:
+#' VS Code and modern development tools, R for Data Science fundamentals, and
 #' US Census data analysis. The R for Data Science tutorials are based on 
 #' \href{https://r4ds.hadley.nz/}{\emph{R for Data Science (2e)}} by Hadley Wickham, 
 #' Mine Çetinkaya-Rundel, and Garrett Grolemund. The Census tutorial draws from 
@@ -41,7 +41,7 @@
 #'
 #' @section Running Tutorials:
 #' To run a tutorial, use:
-#' \code{learnr::run_tutorial(name = "short_tutorial_name", package = "positron.tutorials")}
+#' \code{learnr::run_tutorial(name = "short_tutorial_name", package = "vscode.tutorials")}
 #'
 #' Available tutorial names include: 01-code, 02-quarto, 03-terminal, 04-github-1, 
 #' 05-github-2, 06-websites-1, 07-websites-2, r4ds-1, r4ds-2, r4ds-3, r4ds-4, 

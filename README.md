@@ -1,18 +1,18 @@
 
 <!-- README.md is generated from README.Rmd. Edit ONLY this file if you need to make a change in README.md. But, after you edit it, you run `rmarkdown::render("README.Rmd")` in order to create the new README.md, which is the thing which is actually used. Must be a better way of doing this! -->
 
-# Positron Tutorials
+# VS Code Tutorials
 
 <!-- badges: start -->
 
 [![R build
-status](https://github.com/PPBDS/positron.tutorials/workflows/R-CMD-check/badge.svg)](https://github.com/PPBDS/positron.tutorials/actions)
+status](https://github.com/PPBDS/vscode.tutorials/workflows/R-CMD-check/badge.svg)](https://github.com/PPBDS/vscode.tutorials/actions)
 <!-- badges: end -->
 
 ## About this package
 
-**positron.tutorials** is a collection of tutorials for working with
-Positron. Covers scripts, Quarto documents, git, Github, and Quarto
+**vscode.tutorials** is a collection of tutorials for working with VS
+Code. Covers scripts, Quarto documents, git, Github, and Quarto
 websites. Makes extensive use of the tools in the
 **[tutorial.helpers](https://ppbds.github.io/tutorial.helpers/)**
 package.
@@ -22,7 +22,7 @@ package.
 To install the package from CRAN:
 
 ``` r
-install.packages("positron.tutorials")
+install.packages("vscode.tutorials")
 ```
 
 However, the CRAN package does not include the data necessary for
@@ -30,7 +30,7 @@ running the tutorials. The best solution is to install the development
 version from [GitHub](https://github.com/) with:
 
 ``` r
-remotes::install_github("PPBDS/positron.tutorials")
+remotes::install_github("PPBDS/vscode.tutorials")
 ```
 
 However, if you want to use the CRAN version, then, when you first load
@@ -43,8 +43,8 @@ There are many tutorials in the package. To run a tutorial, use
 `learnr::run_tutorial()`, providing the short name of the tutorial and
 the package name.
 
-    learnr::run_tutorial(name = "01-code", 
-                         package = "positron.tutorials")
+    learnr::run_tutorial(name = "01-code",
+                         package = "vscode.tutorials")
 
 ### Positron Tutorials
 

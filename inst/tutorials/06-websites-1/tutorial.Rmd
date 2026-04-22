@@ -92,9 +92,9 @@ question_text(NULL,
 ### 
 
 ```
-dkane@macbook positron.tutorials % quarto --version
+dkane@macbook vscode.tutorials % quarto --version
 1.6.39
-dkane@macbook positron.tutorials % 
+dkane@macbook vscode.tutorials % 
 ```
 
 As long as the version is at least 1.6, you are OK. 
