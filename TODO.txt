@@ -1,0 +1,179 @@
+## Priorities
+
+Options for VScode/Codespaces?
+
+* One key difference is that there is no Console in VScode, so lots of text needs to change.
+
+* Key issue is the different starting directories. 
+
+* Put an introductory section in r4ds-1 which reminds people how the Positron and Codespace/VS Code approaches differ, most importantly in which directory you start in, both for bash and for R.
+
+* Design changes which make all r4ds tutorials work well for both IDEs.
+
+* Change the names from 01-code to positron-01-code, and so on.
+
+* Create copies of all 7 of the 0* tutorials, named vscode-01-code and so on. Or maybe we don't need to do that since they are very similar for both IDEs.
+
+* Errors when r4ds-4 is run as a tutorial:
+
+Output created: tutorial.html
+Warning: There were 7 warnings in `mutate()`.
+The first warning was:
+ℹ In argument: `value_numeric = case_when(...)`.
+Caused by warning:
+! NAs introduced by coercion
+ℹ Run `dplyr::last_dplyr_warnings()` to see the 6 remaining warnings.
+
+
+* Make extension take an "exclusion" argument which accepts a comma-separated list of packages to exclude, most importantly learnr.
+
+### Other Stuff
+
+There is a NOTE on a couple of the CRAN checks. Seems like the .Rbuildignore is not being referenced in those checks, leaving the package as 48 MB. How can this be?
+
+r4ds-4 is probably too long. Maybe split it up into two tutorials?
+r4ds-5 takes too long to compile.
+
+Need more guidance for the plots, and to make that guidance sensible in how it changes as we do more tutorials. These tutorials will be completed over just a week or so. We want students to improve their plotting skills as we go on.
+
+All r4ds tutorials should be like r4ds-4 in that they should all create a data directory and download some stuff to it. Getting good at downloading and keepingf track of things is very valuable.
+
+* Would options(pillar.print_max = Inf, pillar.print_min = Inf)	 make the use of  df_print: default not necessary? Which is best? Again, goal is for printed out tibbles to look the same in the tutorial html as they look in the Console.
+
+Tutorial times from 2025
+
+# A tibble: 7 × 3
+  source                minutes     N
+  <fct>                   <dbl> <int>
+1 01-code_answers          119     68
+2 02-quarto_answers         90     50
+3 03-terminal_answers      112.    46
+4 04-github-1_answers      120     53
+5 05-github-2_answers       60     44
+6 06-websites-1_answers     60     39
+7 07-websites-2_answers    120     33
+
+Update images in 01-code.
+
+Should longer tutorials like 1, 4 and 7 have one of their exercises removed?
+
+* Should we be using duckdplyr more and/or in place of other databases?
+
+* Finish skeleton in tutorial.helpers
+
+* Finish "Tutorials in the Age of AI" in tutorial.helpers.
+
+* Rewrite "Instructions"
+
+* Do we need an AI Getting Started tutorial which would highlight things like don't use install.packages() in your scripts and other generic lessons for working with AI? Maybe this is an "Introduction to AI" tutorial in tutorial.helpers?
+
+* Clean up data documentation, especially for r4ds tutorials. Note that the files should be much less than 100 megabytes each because we want students to be able to easily download them and back them up in their personal repos.
+
+
+* Does source'ing a script work on Postitron?
+
+* Revisit Description
+
+* Keep package help page and README page in sync better.
+
+* What do we do with skeleton.Rmd in tutorial.helpers package?
+
+* Posit introduction website has a better image for naming elements of the screen.
+
+* Add Positron Assistant introduction.
+
+* Add how to delete a repo, and then delete one of the ones you made.
+
+For when we revisit the details of the terminal: https://code.visualstudio.com/docs/terminal/basics
+
+Windows and the Terminal; see below.
+
+Add images for early tutorials, especially pictures of the Terminal.
+
+
+## Things to do earlier
+
+In total, we make 5 websites. We need to make their construction more consistent, making things simpler in the initial ones and more complex, with more skipped steps, in later ones. Students will probably be doing all these within a day or two.
+
+## Other items
+
+teach use()
+
+Any reason to make the Tutorial descriptions longer, like a full sentence or two? Use Grok to provide one sentence descriptions for each tutorial, and then use that description in two places: the file itself and the home page of the package.
+
+If we ever redo the images, make sure to delete the Positron default welcome page first, but only if this is no longer shown by default. I think it is when you start up but not in a new Window.
+
+Any reason to explore the Visual editor?
+
+To shrink the size of all the PNG files, do:
+
+find . -type f -name "*.png" -exec pngquant "{}" -o "{}" --force \;
+
+
+ ## AI Links
+
+Apparently, there is active work on a Positron Assistant. 
+
+https://ellmer.tidyverse.org/
+https://www.tidyverse.org/blog/2025/01/experiments-llm/
+https://www.youtube.com/watch?v=RBTl94xeKqg
+https://drmowinckels.io/blog/2025/ollama/
+https://www.seascapemodels.org/rstats/2025/03/15/LMs-in-R-with-ellmer.html
+
+## Windows and the Terminal
+
+Does the Git Bash hack really work? I only do this in settings.json:
+
+"terminal.integrated.defaultProfile.windows": "Git Bash"
+
+But note this (from I don't know where):
+
+{
+  "terminal.integrated.profiles.windows": {
+    "RTools Bash": {
+      "path": "C:\\rtools45\\usr\\bin\\bash.exe",
+      "args": ["--login"]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "RTools Bash"
+}
+
+Check with Sophia on this. Maybe what I have works because, even without it, installing Git Bash seems to add Git Bash to the set of choices from `+`, then add Terminal button. If so, all we need to change is the default. But then maybe just changing the default to RTools Bash is enough, since RTools also installs its own bash, and it also seems to be available from the `+`.
+
+So, maybe just adding the default is enough, even before we install either Rtools or Git, just as we define the files.dialog.defaultPath before we have created the `projects` directory.
+
+Understand fully how Windows will work in the terminal in Positron, at least for modern window shells.
+
+
+## Other tutorials
+
+Tutorial Github codespaces, called 08-codespaces. How does R work in a codespace? You don't have Positron! You have VScode. 
+
+Subject area tutorials:
+
+* baseball
+
+* stocks
+
+* bitcoin
+
+* ?
+
+Maybe an Advanced Positron tutorial? Covers topics like multiple Terminals and Consoles. Advanced Git/GitHub trickery, especially for when the Git history is rich. Branching
+
+Add a tutorial about working with large, complex projects? Each topic would involve forking an already existing project and then making a bunch of changes, perhaps including getting the raw data.
+
+Cover material in book titled something like R Stuff that it is not in the manual: https://rstats.wtf/ Might cover things like the **here** package.
+
+Maybe a different tutorial which walked through a bunch of different Quarto project types, not because we are especially interested in Dashboards, but because we want to give students more practice dealing with projects with lots of different files doing different things.
+
+
+
+
+## For Later
+
+What about Chromebooks??!! Too much to worry about. 
+
+We could do all the example repos in PPBDS and then leave them up forever, so they would be available to students doing the work.
+
+Alec Rogers
