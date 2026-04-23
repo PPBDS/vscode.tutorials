@@ -32,6 +32,9 @@ options(tutorial.exercise.timelimit = 60,
 
 <!-- DK: If too long, could get rid of Script 3. -->
 
+<!-- DK: Ignore project stuff. We will probably delete. -->
+
+<!-- AR: ? -->
 
 ## Introduction
 ### 
