@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">vscode.tutorials</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,6 +51,7 @@
 </h1></div>
 <!-- badges: start -->
 
+<p>Package website: <a href="https://ppbds.github.io/vscode.tutorials/" class="uri">https://ppbds.github.io/vscode.tutorials/</a></p>
 <div class="section level2">
 <h2 id="about-this-package">About this package<a class="anchor" aria-label="anchor" href="#about-this-package"></a>
 </h2>
@@ -59,30 +60,27 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>To install the package from CRAN:</p>
+<p>Install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"vscode.tutorials"</span><span class="op">)</span></span></code></pre></div>
-<p>However, the CRAN package does not include the data necessary for running the tutorials. The best solution is to install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"PPBDS/vscode.tutorials"</span><span class="op">)</span></span></code></pre></div>
-<p>However, if you want to use the CRAN version, then, when you first load the library, you will be prompted to run <code>setup_tutorial_data()</code> at the Console in order to download the necessary data.</p>
 </div>
 <div class="section level2">
 <h2 id="tutorials">Tutorials<a class="anchor" aria-label="anchor" href="#tutorials"></a>
 </h2>
-<p>There are many tutorials in the package. To run a tutorial, use <code><a href="https://pkgs.rstudio.com/learnr/reference/run_tutorial.html" class="external-link">learnr::run_tutorial()</a></code>, providing the short name of the tutorial and the package name.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="at">name =</span> <span class="st">"01-code"</span>,</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>                     <span class="at">package =</span> <span class="st">"vscode.tutorials"</span>)</span></code></pre></div>
+<p>There are many tutorials in the package. The recommended way to launch them is with the <a href="https://open-vsx.org/extension/PPBDS/vscode-r-tutorials" class="external-link">R Tutorials extension for VS Code</a>, which lists every installed tutorial and lets you start one with a click.</p>
+<p>As a backup, you can launch a tutorial from the R console with <code><a href="https://pkgs.rstudio.com/learnr/reference/run_tutorial.html" class="external-link">learnr::run_tutorial()</a></code>, providing the short name of the tutorial and the package name.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="at">name =</span> <span class="st">"01-code"</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>                     <span class="at">package =</span> <span class="st">"vscode.tutorials"</span>)</span></code></pre></div>
 <div class="section level3">
-<h3 id="positron-tutorials">Positron Tutorials<a class="anchor" aria-label="anchor" href="#positron-tutorials"></a>
+<h3 id="vs-code-tutorials-1">VS Code Tutorials<a class="anchor" aria-label="anchor" href="#vs-code-tutorials-1"></a>
 </h3>
-<p>The core tutorials introduce students to the Positron integrated development environment.</p>
+<p>The core tutorials introduce students to the VS Code integrated development environment.</p>
 <ul>
-<li><p><em>Positron and Code</em> (“01-code”). Introduce students to Positron and to writing R code in simple scripts.</p></li>
-<li><p><em>Positron and Quarto</em> (“02-quarto”). Demonstrate more tricks for working with R code using Positron, and also explain Quarto documents.</p></li>
+<li><p><em>VS Code and Scripts</em> (“01-code”). Introduce students to VS Code and to writing R code in simple scripts.</p></li>
+<li><p><em>VS Code and Quarto</em> (“02-quarto”). Demonstrate more tricks for working with R code using VS Code, and also explain Quarto documents.</p></li>
 <li><p><em>Terminal</em> (“03-terminal”). Teach the command line.</p></li>
-<li><p><em>Positron and GitHub Introduction</em> (“04-github-1”). Explain the basics of Git and GitHub, mostly in the context of Positron.</p></li>
-<li><p><em>Positron and GitHub Advanced</em> (“05-github-2”). Provide more practice in working with Git/GitHub, including more details on the use of GitHub Pages.</p></li>
+<li><p><em>VS Code and GitHub Introduction</em> (“04-github-1”). Explain the basics of Git and GitHub, mostly in the context of VS Code.</p></li>
+<li><p><em>VS Code and GitHub Advanced</em> (“05-github-2”). Provide more practice in working with Git/GitHub, including more details on the use of GitHub Pages.</p></li>
 <li><p><em>Quarto Websites Introduction</em> (“06-websites-1”). Demonstrate the basics of website construction using Quarto projects.</p></li>
 <li><p><em>Quarto Websites Advanced</em> (“07-websites-2”). Practice Quarto websites, with a focus on splitting data analysis tasks into separate files.</p></li>
 </ul>

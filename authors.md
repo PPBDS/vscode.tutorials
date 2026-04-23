@@ -11,13 +11,13 @@ Source:
 [`DESCRIPTION`](https://github.com/PPBDS/vscode.tutorials/blob/main/DESCRIPTION)
 
 Kane D (2026). *vscode.tutorials: Tutorials for Learning 'VS Code' in
-GitHub Codespaces*. R package version 0.0.1,
+GitHub Codespaces*. R package version 0.0.2,
 <https://ppbds.github.io/vscode.tutorials/>.
 
     @Manual{,
       title = {vscode.tutorials: Tutorials for Learning 'VS Code' in GitHub Codespaces},
       author = {David Kane},
       year = {2026},
-      note = {R package version 0.0.1},
+      note = {R package version 0.0.2},
       url = {https://ppbds.github.io/vscode.tutorials/},
     }
