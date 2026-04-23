@@ -1,10 +1,20 @@
-.Rproj.user
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
 
+# R CMD check / build artifacts
+*.Rcheck/
+*.tar.gz
+
+# pkgdown output
+docs/
+
+# Quarto
 **/.quarto/
 **/*_files/
-**/*html
-!/tests/**/*.html
-**/.DS_Store
-docs
 
-/.quarto/
+# OS
+.DS_Store

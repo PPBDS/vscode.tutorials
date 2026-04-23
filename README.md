@@ -9,6 +9,8 @@
 status](https://github.com/PPBDS/vscode.tutorials/workflows/R-CMD-check/badge.svg)](https://github.com/PPBDS/vscode.tutorials/actions)
 <!-- badges: end -->
 
+Package website: <https://ppbds.github.io/vscode.tutorials/>
+
 ## About this package
 
 **vscode.tutorials** is a collection of tutorials for working with VS
@@ -19,50 +21,44 @@ package.
 
 ## Installation
 
-To install the package from CRAN:
-
-``` r
-install.packages("vscode.tutorials")
-```
-
-However, the CRAN package does not include the data necessary for
-running the tutorials. The best solution is to install the development
-version from [GitHub](https://github.com/) with:
+Install the development version from [GitHub](https://github.com/)
+with:
 
 ``` r
 remotes::install_github("PPBDS/vscode.tutorials")
 ```
 
-However, if you want to use the CRAN version, then, when you first load
-the library, you will be prompted to run `setup_tutorial_data()` at the
-Console in order to download the necessary data.
-
 ## Tutorials
 
-There are many tutorials in the package. To run a tutorial, use
+There are many tutorials in the package. The recommended way to launch
+them is with the [R Tutorials extension for VS
+Code](https://open-vsx.org/extension/PPBDS/vscode-r-tutorials), which
+lists every installed tutorial and lets you start one with a click.
+
+As a backup, you can launch a tutorial from the R console with
 `learnr::run_tutorial()`, providing the short name of the tutorial and
 the package name.
 
     learnr::run_tutorial(name = "01-code",
                          package = "vscode.tutorials")
 
-### Positron Tutorials
+### VS Code Tutorials
 
-The core tutorials introduce students to the Positron integrated
+The core tutorials introduce students to the VS Code integrated
 development environment.
 
-- *Positron and Code* (“01-code”). Introduce students to Positron and to
-  writing R code in simple scripts.
+- *VS Code and Scripts* (“01-code”). Introduce students to VS Code and
+  to writing R code in simple scripts.
 
-- *Positron and Quarto* (“02-quarto”). Demonstrate more tricks for
-  working with R code using Positron, and also explain Quarto documents.
+- *VS Code and Quarto* (“02-quarto”). Demonstrate more tricks for
+  working with R code using VS Code, and also explain Quarto documents.
 
 - *Terminal* (“03-terminal”). Teach the command line.
 
-- *Positron and GitHub Introduction* (“04-github-1”). Explain the basics
-  of Git and GitHub, mostly in the context of Positron.
+- *VS Code and GitHub Introduction* (“04-github-1”). Explain the basics
+  of Git and GitHub, mostly in the context of VS Code.
 
-- *Positron and GitHub Advanced* (“05-github-2”). Provide more practice
+- *VS Code and GitHub Advanced* (“05-github-2”). Provide more practice
   in working with Git/GitHub, including more details on the use of
   GitHub Pages.
 

@@ -13,14 +13,14 @@
 #' \href{https://walker-data.com/census-r/}{\emph{Analyzing US Census Data: Methods, Maps, and Models in R}} 
 #' by Kyle Walker.
 #'
-#' @section Positron and Development Tools Tutorials:
-#' The package includes seven tutorials focused on Positron and modern R development:
+#' @section VS Code and Development Tools Tutorials:
+#' The package includes seven tutorials focused on VS Code and modern R development:
 #' \itemize{
-#'   \item \strong{Positron and Code} (01-code): Introduction to Positron and writing R code in simple scripts
-#'   \item \strong{Positron and Quarto} (02-quarto): Advanced R coding tricks in Positron and Quarto document creation
+#'   \item \strong{VS Code and Scripts} (01-code): Introduction to VS Code and writing R code in simple scripts
+#'   \item \strong{VS Code and Quarto} (02-quarto): Advanced R coding tricks in VS Code and Quarto document creation
 #'   \item \strong{Terminal} (03-terminal): Command line fundamentals
-#'   \item \strong{Positron and GitHub Introduction} (04-github-1): Git and GitHub basics within Positron
-#'   \item \strong{Positron and GitHub Advanced} (05-github-2): Advanced Git/GitHub workflows and GitHub Pages
+#'   \item \strong{VS Code and GitHub Introduction} (04-github-1): Git and GitHub basics within VS Code
+#'   \item \strong{VS Code and GitHub Advanced} (05-github-2): Advanced Git/GitHub workflows and GitHub Pages
 #'   \item \strong{Quarto Websites Introduction} (06-websites-1): Basic website construction using Quarto projects
 #'   \item \strong{Quarto Websites Advanced} (07-websites-2): Advanced Quarto websites with modular data analysis
 #' }
