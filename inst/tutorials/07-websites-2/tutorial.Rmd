@@ -178,7 +178,7 @@ The `.quarto` directory does not yet exist because we haven't rendered any of ou
 
 ### Exercise 6
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 library(tutorial.helpers)
@@ -226,7 +226,7 @@ Quarto offers a wide range of output formats. You can find the complete list at 
 
 Open the `index.qmd` file using the Explorer pane. Replace the title with `"Homepage"`. Save the file.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("index.qmd")
@@ -619,13 +619,13 @@ Because this is a Quarto website project, the format for all the `qmd` files is 
 
 Create a new code chunk in `index.qmd` and load the **tidyverse** package. Save the file.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("index.qmd", chunk = "Last")
 ````
 
-CP/CR. (Did you remember to `library(tutorial.helpers)` in the Console so that this function is available?)
+CP/CR. (Did you remember to `library(tutorial.helpers)` in the R Terminal so that this function is available?)
 
 ```{r website-2-5}
 question_text(NULL,
@@ -685,7 +685,7 @@ Create another code chunk. Ask AI to create a some code which makes a cool looki
 
 `Cmd/Ctrl + Shift + K` to ensure that the plot looks good. If it looks bad, or there are some weird messages/warnings, use the AI to fix things.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("index.qmd", chunk = "Last")
@@ -836,7 +836,7 @@ Quarto allows for a combination of plain text and R code. This same feature allo
 
 Open `about.qmd `. Delete all the current text, except for the YAML header. Ensure that the `title` is `"About"`. Add `## About Me` as the first (and only) line of text. Render the QMD. 
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("about.qmd")
@@ -873,7 +873,7 @@ Write a one sentence description of yourself. Write it below the header. Include
 My name is David Kane, and I graduated from Williams College.
 ````
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("about.qmd")
@@ -914,7 +914,7 @@ My name is **David Kane**, and I graduated from *Williams College*.
 
 `Cmd/Ctrl + Shift + K`
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("about.qmd")
@@ -977,7 +977,7 @@ It should look like:
 
 `Cmd/Ctrl + Shift + K`. (Recall that rendering automatically saves the file first.)
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("about.qmd", pattern = "Bootcamp")
@@ -1053,7 +1053,7 @@ You should see `index.qmd`, `about.qmd`, and `sources.qmd` in the output. If not
 
 In the `sources.qmd` file, below the YAML header, add the text `An overview of sources used in my project.` Save the file.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("sources.qmd", pattern = "overview")
@@ -1088,7 +1088,7 @@ Add the following sentence to `sources.qmd`:
 These are my sources. Here are some challenges. Quarto websites are awesome.
 ````
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("sources.qmd")
@@ -1163,7 +1163,7 @@ Since `- about.qmd` appears without either the `href` or `text` argument, Quarto
 
 ### 
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("_quarto.yml")
@@ -1313,7 +1313,7 @@ Change `_quarto.yml` so that the `navbar` section looks like this
       - about.qmd
 ````        
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("_quarto.yml")
@@ -1579,7 +1579,7 @@ Make sure that `process_data.R` is one of these files. We often use scripts to r
 
 ### Exercise 6
 
-Though an R script will use the libraries you already have loaded if executed interactively in the Console, it is good practice to include these at the top of the script. Any script you create should run correctly, even if you have just re-started R.
+Though an R script will use the libraries you already have loaded if executed interactively in the R Terminal, it is good practice to include these at the top of the script. Any script you create should run correctly, even if you have just re-started R.
 
 In `process_data.R`, load the **tidyverse** package using the `library()` command. 
 
@@ -1637,7 +1637,7 @@ diamonds |>
 dkane@macbook website-3 % 
 ````
 
-You should try to learn how to work in two ways. First is *interactively*, trying things at the Console. Seeing what happens. Going line-by-line. Second is *writtenly* --- yes, I just made up this word --- adding code to your script/QMD and then executing all the code at once. 
+You should try to learn how to work in two ways. First is *interactively*, trying things at the R Terminal. Seeing what happens. Going line-by-line. Second is *writtenly* --- yes, I just made up this word --- adding code to your script/QMD and then executing all the code at once. 
 
 <!-- Could explain this better, maybe illustrate some step-by-step examples. -->
 
@@ -1645,7 +1645,7 @@ Of course, the best approach is to use these two methods during your analysis, d
 
 ### Exercise 8
 
-Place your cursor in `process_data.R` at `filter(z != 0) |>`. Hit `Cmd/Ctrl + Enter`. This will cause the pipe to be pasted to the Console and then executed there. (Note that this should generate an error.) CP/CR.
+Place your cursor in `process_data.R` at `filter(z != 0) |>`. Hit `Cmd/Ctrl + Enter`. This will cause the pipe to be pasted to the R Terminal and then executed there. (Note that this should generate an error.) CP/CR.
 
 ```{r website-3-8}
 question_text(NULL,
@@ -1668,13 +1668,13 @@ Show Traceback
 >
 ````
 
-The cause of the error is the distinction between the two worlds: the world of the Console and the world of the Script (which is just like QMD world, as we have discussed before). The Script includes `library(tidyverse)`. So, when you source `process_data.R` in the next question, everything works fine. The Console, however, knows nothing about the `diamonds` tibble or about commands like `select()` or `filter()`. Recall that we recently restarted R. So, the **tidyverse** library, which contains `diamonds` and those commands, has not been loaded in the Console. 
+The cause of the error is the distinction between the two worlds: the world of the R Terminal and the world of the Script (which is just like QMD world, as we have discussed before). The Script includes `library(tidyverse)`. So, when you source `process_data.R` in the next question, everything works fine. The R Terminal, however, knows nothing about the `diamonds` tibble or about commands like `select()` or `filter()`. Recall that we recently restarted R. So, the **tidyverse** library, which contains `diamonds` and those commands, has not been loaded in the R Terminal. 
 
-A line of code, like `library(tidyverse)`, might exist in a script, but unless/until that line is executed in the Console, the Console won't know anything about it.
+A line of code, like `library(tidyverse)`, might exist in a script, but unless/until that line is executed in the R Terminal, the R Terminal won't know anything about it.
 
 ### Exercise 9
 
-"Source" the entire script by choosing the "Source R File with Echo" menu option from the "Source" button the upper right (the right-pointing right triangle). This takes all the code from the script and feeds it, line-by-line, to the Console. CP/CR.
+"Source" the entire script by choosing the "Source R File with Echo" menu option from the "Source" button the upper right (the right-pointing right triangle). This takes all the code from the script and feeds it, line-by-line, to the R Terminal. CP/CR.
 
 ```{r website-3-9}
 question_text(NULL,
@@ -1769,7 +1769,7 @@ Second, the rows of the tibble are not shown because the pipe no longer just spi
 
 ### Exercise 11
 
-From the Console, run `ls()`. CP/CR.
+From the R Terminal, run `ls()`. CP/CR.
 
 ```{r website-3-11}
 question_text(NULL,
@@ -1794,7 +1794,7 @@ We have created a new object in the environment, called `D_diamonds`. You can al
 
 Restart your R session again. You can never restart your R session too often! The best way to do this is with the shortcut command: `Cmd/Ctrl + Shift + 0`. (This is the number zero, not the letter "O.")
 
-From the Console, run `ls()`. CP/CR.
+From the R Terminal, run `ls()`. CP/CR.
 
 ```{r website-3-12}
 question_text(NULL,
@@ -1819,7 +1819,7 @@ character(0)
 
 ### Exercise 13
 
-Source `process_data.R`. From the Console, run `ls()`. CP/CR.
+Source `process_data.R`. From the R Terminal, run `ls()`. CP/CR.
 
 ```{r website-3-13}
 question_text(NULL,
@@ -1851,13 +1851,13 @@ question_text(NULL,
 
 I sourced without echo above, so the code is not repeated, but we do see the **tidyverse** warnings.
 
-`D_diamonds` is back! If you type `D_diamonds` at the Console and hit "Enter," the contents of the tibble will appear.
+`D_diamonds` is back! If you type `D_diamonds` at the R Terminal and hit "Enter," the contents of the tibble will appear.
 
 ### Exercise 14
 
 It is often useful to save a permanent copy of an R object like a plot or a tibble. [`write_rds()`](https://readr.tidyverse.org/reference/read_rds.html) from the **readr** package is the most common approach for tibbles.
 
-From the Console, run `write_rds(D_diamonds, file = "clean_data.rds")`. This function does not produce any output. The first argument is the R object(s) which you want to save. The second argument is the name of the file which will hold that object.
+From the R Terminal, run `write_rds(D_diamonds, file = "clean_data.rds")`. This function does not produce any output. The first argument is the R object(s) which you want to save. The second argument is the name of the file which will hold that object.
 
 From the Terminal, run `ls clean*`. CP/CR.
 
@@ -1889,9 +1889,9 @@ There are now three objects associated with our tibble:
 
 ### Exercise 15
 
-Restart your R session with `Cmd/Ctrl + Shift + 0`. When R restarts, you should still be in the `website-3` project. At the Console, run `library(tidyverse)`. We need to reload the **tidyverse** every time we restart R.
+Restart your R session with `Cmd/Ctrl + Shift + 0`. When R restarts, you should still be in the `website-3` project. At the R Terminal, run `library(tidyverse)`. We need to reload the **tidyverse** every time we restart R.
 
-At the Console, run `read_rds("clean_data.rds")`. CP/CR.
+At the R Terminal, run `read_rds("clean_data.rds")`. CP/CR.
 
 ```{r website-3-15}
 question_text(NULL,
@@ -1926,11 +1926,11 @@ Your answer should look like:
 >
 ````
 
-The value returned by `read_rds()` is whatever is contained in the RDS object. In this case, that is a tibble. But, when the object at the Console is a tibble, the contents of the tibble are just printed out, as here.
+The value returned by `read_rds()` is whatever is contained in the RDS object. In this case, that is a tibble. But, when the object at the R Terminal is a tibble, the contents of the tibble are just printed out, as here.
 
 ### Exercise 16
 
-Open the `process_data`.R` script. At the bottom, skip a line after the pipe and then add this line (the same one we just executed at the Console):
+Open the `process_data`.R` script. At the bottom, skip a line after the pipe and then add this line (the same one we just executed at the R Terminal):
 
 ````
 write_rds(D_diamonds, file = "clean_data.rds")
@@ -2032,7 +2032,7 @@ Make sure that `make_plot.R` is one of these files. We often use scripts to reco
 
 ### Exercise 19
 
-Though an R script will use the libraries you already have loaded if executed interactively in the Console, it is good practice to include these at the top of the script. Any script you create should run correctly, even if you have just re-started R.
+Though an R script will use the libraries you already have loaded if executed interactively in the R Terminal, it is good practice to include these at the top of the script. Any script you create should run correctly, even if you have just re-started R.
 
 In `make_plot.R`, load the **tidyverse** package using the `library()` command. 
 
@@ -2112,7 +2112,7 @@ Second, it starts a new pipe with `x` and then creates our plot. Because the plo
 
 ### Exercise 21
 
-Source (with echo) the entire script. This takes all the code from the script and feeds it, line-by-line, to the Console. CP/CR.
+Source (with echo) the entire script. This takes all the code from the script and feeds it, line-by-line, to the R Terminal. CP/CR.
 
 ```{r website-3-21}
 question_text(NULL,

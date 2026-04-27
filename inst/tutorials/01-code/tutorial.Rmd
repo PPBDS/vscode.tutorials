@@ -34,7 +34,7 @@ options(tutorial.exercise.timelimit = 60,
 
 <!-- DK: Ignore project stuff. We will probably delete. -->
 
-<!-- AR: ? -->
+<!-- AR: Be aggressive. -->
 
 ## Introduction
 ### 

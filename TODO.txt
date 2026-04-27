@@ -1,3 +1,13 @@
+## Alec
+
+Skip two GitHub tutorials. So, you are doing 1, 2, 3, 6, and 7.
+
+Get rid of all Positron.
+
+Many of the images are different.
+
+What is the cool way of adding images?
+
 ## Priorities
 
 Options for VScode/Codespaces?

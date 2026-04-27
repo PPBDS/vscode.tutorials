@@ -48,19 +48,19 @@ The most useful reference for Git/GitHub is [*Happy Git and GitHub for the useR*
 
 ### 
 
-Start a new window with `File -> New Window`. This new window is the location in which you will do all the work for the tutorial, including the creation of new projects. The current window, the one in which you are reading these words, is just used to run this tutorial. 
+Open a new R Terminal. This new terminal is the location in which you will do all the work for the tutorial. The current R terminal is just used to run this tutorial. 
 
 
 ## Terminal Overview
 ### 
 
-The Positron [Terminal](https://docs.posit.co/ide/user/ide/guide/tools/terminal.html) is how you directly communicate with the computer using commands, whereas the Positron [Console](https://docs.posit.co/ide/user/ide/guide/code/console.html) is how you talk to R.
+We use the bash shell to communicate with the codespace computer. Bash is an example of a UNIX shell. There are others, including zsh, but they all behave very similarly. Regardless of the specific program, we often use the word "shell" or "terminal" to refer to them.
 
-This section will help introduce you to the Terminal if you have not worked at the command line before, or it will serves as a refresher if you have.
+This section will help introduce you to the shell if you have not worked at the command line before, or it will serves as a refresher if you have.
 
 ### Exercise 1
 
-Start by clicking on the Terminal tab in Positron. This is next to the Console tab in the bottom Panel.
+Start by clicking on the bash terminal. This brings the shell to the foreground.
 
 You should see some text, which is a portion of the path to the current working directory, followed by a prompt such as `%` or `$`. Copy and paste the entire prompt into the box below.
 
@@ -80,16 +80,10 @@ question_text(NULL,
 Your answer might be something like:
 
 ```         
-Davids-MBP:projects dkane$ 
+@davidkane9 ➜ /workspaces/github-1 (main) $ 
 ```
 
-Or like:
-
-```
-dkane@MacBookPro projects %
-```
-
-Paths differ. They often include the username, which is `dkane` for me. They also usually specify the current directory, which is `projects` in this case. They usually end with a character like `$` or `%`. 
+Prompts differ. They often include the username, which is `davidkane9` for me. They also usually specify the current directory, which is `github-1` in this case because we this work by creating a new repo: `github-1`. Prompts usually end with a character like `$` or `%`. 
 
 ### Exercise 2
 
@@ -109,14 +103,16 @@ question_text(NULL,
 Your answer should look like:
 
 ```         
-dkane@MacBookPro projects % pwd
-/Users/dkane/Desktop/projects
-dkane@MacBookPro projects % 
+@davidkane9 ➜ /workspaces/github-1 (main) $ pwd
+/workspaces/github-1
+@davidkane9 ➜ /workspaces/github-1 (main) $ 
 ```
 
 Your answer will be different, not least because your username is unlikely to be `dkane`. This result of `pwd` is the location on your computer in which the R program started up when you opened Positron.
 
-Going forward, make sure to pay special attention to whether given commands are supposed to be run in the *Console* or the *Terminal*.
+Going forward, make sure to pay special attention to whether given commands are supposed to be run in the *bash terminal* or the *R Terminal*.
+
+<!-- DK: Capitalization above? -->
 
 ## Setting up Git
 ### 
@@ -153,141 +149,19 @@ The details will differ. Don't worry if you have a different version of Git inst
 
 If this fails, you need to install [Git](https://git-scm.com/) by following the instructions from the [Install Git](https://happygitwithr.com/install-git.html) chapter in [*Happy Git and GitHub for the useR*](https://happygitwithr.com/).
 
-### Exercise 2
 
-If `git --version` worked in the previous exercise, you can skip this question. 
-
-If it failed and you have just installed Git, then you need to quit and restart Positron so that it has a chance to "recognize" that Git is now installed. 
-
-(Note that restarting Positron is **not** the same as restarting your R session **within** your Positron instance. To quit Positron you need to go to the `Positron -> Quit Positron` menu item.)
-
-If you need to restart Positron, you will then need to do two things. First, restart this tutorial with:
-
-````
-learnr::run_tutorial("04-github-1", "vscode.tutorials")
-````
-
-Second, start a new Positron window with `File -> New Window`.
-
-Run `git --version` in the Terminal to make sure that Git is installed and accessible. CP/CR.
-
-```{r setting-up-git-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 2)
-```
-
-### 
 
 [*Pro Git*](https://git-scm.com/book/en/v2) is the best reference book for Git and GitHub.
 
-### Exercise 3
-
-The next step is to create a GitHub account by following the instructions at the [GitHub homepage](https://github.com/). 
-
-**Follow [this advice](https://happygitwithr.com/github-acct.html#username-advice) when choosing your username.** 
-
-We recommend using a permanent email address for this account, not one which you lose access to when, for example, you change schools or jobs.
-
-Copy your GitHub account URL in the field below.
-
-```{r setting-up-git-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 2)
-```
-
-### 
-
-Your answer should look like this:
-
-```         
-https://github.com/your-username
-```
 
 [Git](https://en.wikipedia.org/wiki/Git) is "software for tracking changes in any set of files, usually used for coordinating work among programmers collaboratively developing source code during software development."
 
+
+
+
 ### Exercise 4
 
-Now that you have your GitHub account, you need to connect it to Positron. The first step of doing this is to give Git your GitHub email (which is how it connects you to GitHub) and a GitHub username, which does not have to be the same as your Git username, and generally won't be.
-
-### 
-
-In the Console, run this command, substituting the email and user name you used for your GitHub account:
-
-```         
-usethis::use_git_config(user.name = "Your Name", user.email = "your@email.org")
-```
-
-Note that this will not return anything. As long as you don't get an error message, it (probably) worked. When I ran this command, I used:
-
-```         
-usethis::use_git_config(user.name = "David Kane", user.email = "dave.kane@gmail.com")
-```
-
-This Git username ("David Kane") is not the same as my GitHub username ("davekane9"), but the email for both ("dave.kane@gmail.com") is the same.
-
-### 
-
-Run `git config --global user.name` in the *Terminal* to make sure your computer remembers your Git username. Note that you should be always be working in the Terminal associated with your new Positron window, not in the Terminal in the window in which this tutorial is being run.
-
-CP/CR.
-
-```{r setting-up-git-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 2)
-```
-
-### 
-
-You answer should look like this:
-
-```         
-dkane@MacBookPro projects % git config --global user.name
-David Kane
-dkane@MacBookPro projects % 
-```
-
-Of course, it should be your username, not mine!
-
-### Exercise 5
-
-Run `git config --global user.email` in the *Terminal* to make sure your Git email is stored too. And make sure that it is the same as the email you used to create your GitHub account.
-
-CP/CR.
-
-```{r setting-up-git-5}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
-```
-
-### 
-
-Your answer should look like:
-
-```         
-dkane@MacBookPro projects % git config --global user.email
-dave.kane@gmail.com
-dkane@MacBookPro projects % 
-```
-
-Now, your Git username and email are stored so that your computer can automate a lot of the tedious steps required to communicate with GitHub.
-
-### Exercise 6
+<!-- DK: This should all be cut. But maybe more of these details belong in Getting Started chapter and the Getting Started tutorial. -->
 
 **Note:** Make sure you received the expected outputs of the name and email associated with your GitHub account in the previous two exercises.
 
@@ -318,7 +192,7 @@ After you've done that, go ahead and click "Create repository" to create your fi
 
 GitHub should have directed you to a page called the project page after creating the repo. Copy and paste the URL of the project page below.
 
-```{r setting-up-git-6}
+```{r setting-up-git-4}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -337,7 +211,7 @@ github.com/davidkane9/First-Repo
 
 The "public" option means that anyone will be able to view the repository. But only you can edit it. You might have noticed "Add .gitignore" as another option, but we generally prefer to create our own `.gitignore` file.
 
-### Exercise 7
+### Exercise 5
 
 The next step will be to create the exact same project on your local computer through the process of **cloning**. By having a local and a GitHub version, you can edit your project on your computer and then send all the changes you've made to GitHub. This process ensures that the GitHub version is synced up with your local version.
 
@@ -349,7 +223,7 @@ include_graphics("images/repo_clone.png")
 
 Paste the link below.
 
-```{r setting-up-git-7}
+```{r setting-up-git-5}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -368,7 +242,7 @@ https://github.com/davidkane9/First-Repo.git
 
 This link points to your project folder on GitHub. It is slightly different from the URL of the project page because the `.git` suffix tells you that it's a special GitHub object, not a webpage.
 
-### Exercise 8
+### Exercise 6
 
 Read through all these steps before starting the process of connecting your repo to a project on your computer.
 
@@ -391,7 +265,7 @@ include_graphics("images/new-from-git.png")
 This should close your other Positron window and then re-open it in the `First-Repo` project. 
 
 
-### Exercise 9
+### Exercise 7
 
 **All further questions in this tutorial should be completed in the `First-Repo` project, not in the Positron window in which this tutorial is running.**
 
@@ -405,9 +279,9 @@ Note the message that "There is no interpreter running." Note the "Start Interpr
 
 Select the latest R version from the menu. (If you have more than one R version installed, you ought to delete the older ones. You may also have Python as an option.) Or, if one version of R is the only interpreter that Positron can find, it might just start R for you.
 
-Either way, R should start in the Console. Copy/paste everything in the Console from "Type 'demo()'" through the prompt.
+Either way, R should start in the R Terminal. Copy/paste everything in the R Terminal from "Type 'demo()'" through the prompt.
 
-```{r setting-up-git-9}
+```{r setting-up-git-7}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -428,11 +302,11 @@ Type 'q()' to quit R.
 >
 ````
 
-### Exercise 10
+### Exercise 8
 
-Confirm that your setup is correct. In the Terminal (not the Console), run `git remote -v`. CP/CR.
+Confirm that your setup is correct. In the Terminal (not the R Terminal), run `git remote -v`. CP/CR.
 
-```{r setting-up-git-10}
+```{r setting-up-git-8}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -454,7 +328,7 @@ Note how my prompt has changed so that it ends with `First-Repo` because this ne
 
 Don't worry too much about the details of "origin," "fetch," and "push." You've successfully linked a repo to an Positron project!
 
-### Exercise 11
+### Exercise 9
 
 <!-- Revisit this to confirm it works. Update images. -->
 
@@ -466,7 +340,7 @@ A PAT is just a special computer-generated password between your computer and Gi
 
 ### 
 
-Create a PAT by using the `usethis::create_github_token()` function in the Console. This should redirect you to a GitHub page about creating a PAT.
+Create a PAT by using the `usethis::create_github_token()` function in the R Terminal. This should redirect you to a GitHub page about creating a PAT.
 
 ### 
 
@@ -480,19 +354,19 @@ include_graphics("images/pat.png")
 
 Press "Generate Token" at the bottom of the page to finalize your PAT. If you have trouble, the function `usethis::gh_token_help()` may be helpful.
 
-### Exercise 12
+### Exercise 10
 
 Now that you have created your PAT, you should first temporarily copy it somewhere you have easy access to. We will need to store it somewhere so that Positron can "see" it.
 
-Run `gitcreds::gitcreds_set()` in the Console and follow the prompts, providing your token when asked.
+Run `gitcreds::gitcreds_set()` in the R Terminal and follow the prompts, providing your token when asked.
 
 ### 
 
 Restart your R session with `Cmd/Ctrl + Shift + 0`. This is **not** the same thing as restarting Positron.
 
-Run `usethis::git_sitrep()` in the Console. CP/CR.
+Run `usethis::git_sitrep()` in the R Terminal. CP/CR.
 
-```{r setting-up-git-12}
+```{r setting-up-git-10}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -1047,7 +921,7 @@ Close the Positron welcome screen, if any.
 
 Start latest version of R as your interpreter, if necessary.
 
-From the Console, run `getwd()`. CP/CR.
+From the R Terminal, run `getwd()`. CP/CR.
 
 ```{r publishing-with-github-pages-2}
 question_text(NULL,
@@ -1112,7 +986,7 @@ include_graphics("images/second-repo-2.png")
 
 The black dot next to "Untitled-1" indicates that there are unsaved changes in this file. Save the file, naming it `analysis.qmd`.
 
-At the Console, run `list.files()`. CP/CR.
+At the R Terminal, run `list.files()`. CP/CR.
 
 ```{r publishing-with-github-pages-4}
 question_text(NULL,
@@ -1390,7 +1264,7 @@ include_graphics("images/second-repo-7.png")
 
 As usual, the HTML file is displayed in the Viewer tab and, in the Panel, the focus switches to the Terminal, in which Quarto is "Watching files for changes."
 
-In the Console, run `tutorial.helpers::show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+In the R Terminal, run `tutorial.helpers::show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
 ```{r publishing-with-github-pages-12}
 question_text(NULL,
@@ -1425,7 +1299,7 @@ Make sure to use spaces (not tabs) in YAML headers.
 
 `Cmd/Ctrl + Shift + K` to render the the document. The HTML should now be clean.
 
-In the Console, run `tutorial.helpers::show_file("analysis.qmd", end = 8)`. CP/CR.
+In the R Terminal, run `tutorial.helpers::show_file("analysis.qmd", end = 8)`. CP/CR.
 
 ```{r publishing-with-github-pages-13}
 question_text(NULL,
@@ -1514,7 +1388,7 @@ Create a new R code chunk with `Cmd/Ctrl + option + i`. Ask [Grok](https://grok.
 
 Paste that code into the new code chunk. `Cmd/Ctrl + shift + K` to render. If there is an error, or if the graphic is ugly, iterate with your AI until you have a graphic of which you are proud.
 
-In the Console, run `tutorial.helpers::show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+In the R Terminal, run `tutorial.helpers::show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
 ```{r publishing-with-github-pages-16}
 question_text(NULL,

@@ -32,13 +32,13 @@ options(tutorial.exercise.timelimit = 60,
 
 <!-- Ought to use #| in the first tutorial and tricks like suppress() and execute in the second. -->
 
-<!-- Add more about Console/QMD world in the first example. It works well in the second already. Really ought to just switch the first example with the second! -->
+<!-- Add more about R Terminal/QMD world in the first example. It works well in the second already. Really ought to just switch the first example with the second! -->
 
 <!-- Should there be more projects, each moving more quickly during the creation phase, the core coding is done with AI? Only if this current tutorial only takes 45 minutes. -->
 
 <!-- Project 1 should be slightly less sophisticated and project 2 should be slightly more. Project 1 should only use code chunk options. It should not use execute or suppressPackage. Project 2 should be the reverse. Project 3 should do what Project 2 does, but without explicit instructions. Project 4 should fork. Or maybe 3 forks? Should any project use the GitHub created .gitignore and discuss stuff there. -->
 
-<!-- More explicit emphasis on QMD world versus Console world. -->
+<!-- More explicit emphasis on QMD world versus R Terminal world. -->
 
 <!-- Consider getting rid of palmerpenguins. -->
 
@@ -93,7 +93,7 @@ Connect the `project-1` Github repo to a project on your computer using the othe
 
 - Click "OK"
 
-From the Console in the new Positron window, run `list.files()`. (You might need to select R for the interpreter first.) CP/CR.
+From the R Terminal in the new Positron window, run `list.files()`. (You might need to select R for the interpreter first.) CP/CR.
 
 ```{r project-1-2}
 question_text(NULL,
@@ -120,7 +120,7 @@ Positron has automatically placed you within the `project-1` project. The `proje
 
 Go to `File -> New File ...-> Quarto Document`. Title it "Quarto 1". You are the author. Save it with the name `quarto-1.qmd`. 
 
-From the Console, run `list.files()`. CP/CR.
+From the R Terminal, run `list.files()`. CP/CR.
 
 ```{r project-1-3}
 question_text(NULL,
@@ -289,7 +289,7 @@ You should see your commit message in the top (most recent) commit.
 
 Add a code chunk within your document which includes `library(tidyverse)`. Render the document to ensure that everything works. (Fix any errors if it doesn't.)
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 tutorial.helpers::show_file("quarto-1.qmd", chunk = "Last")
@@ -324,7 +324,7 @@ You could also manually type the chunk delimiters ```` ```{r} ```` and ```` ``` 
 
 Add `library(palmerpenguins)` to the code chunk. Render the document to ensure that everything works. (Fix any errors if it doesn't.)
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 tutorial.helpers::show_file("quarto-1.qmd", chunk = "Last")
@@ -379,7 +379,7 @@ Your HTML should look like this. Of course, your copy/paste job will be a mess.
 include_graphics("images/penguins.png")
 ```
 
-Because the code is just the name of the tibble, R prints out the first 10 rows of the tibble, along with some other information, just like it would if you typed `penguins` at the Console.
+Because the code is just the name of the tibble, R prints out the first 10 rows of the tibble, along with some other information, just like it would if you typed `penguins` at the R Terminal.
 
 ### Exercise 11
 
@@ -394,7 +394,7 @@ Also, we don't want those warnings from loading the **tidyverse** package to be 
 
 `Cmd/Ctrl + Shift + K` to confirm that everything looks good. The only thing that should appear in the HTML, other than title and author, is the `penguins` data set.
 
-In the Console, run `tutorial.helpers::show_file("quarto-1.qmd")`. CP/CR.
+In the R Terminal, run `tutorial.helpers::show_file("quarto-1.qmd")`. CP/CR.
 
 ```{r project-1-11}
 question_text(NULL,
@@ -469,7 +469,7 @@ penguins |>
 
 Render `quarto-1.qmd`, either by hitting the "Preview" button or by using `Cmd/Ctrl + Shift + K`.
 
-From the Console, run `tutorial.helpers::show_file("quarto-1.qmd", chunk = "Last")`. CP/CR.
+From the R Terminal, run `tutorial.helpers::show_file("quarto-1.qmd", chunk = "Last")`. CP/CR.
 
 ```{r project-1-12}
 question_text(NULL,
@@ -634,7 +634,7 @@ Note that Github looks different depending on which page you go to, whether it i
 
 Connect the `project-2` Github repo to a project on your computer. Name the project `project-2` also. Keeping the names of repos/projects aligned makes organization simpler.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 list.files()
@@ -662,7 +662,7 @@ Positron will automatically restart and place you within the `project-2` project
 
 Select `File -> New File -> Quarto Document`. Provide a title ("Quarto 2") and an author (you). Save the document as `quarto-2.qmd`. `Cmd/Ctrl + Shift + K`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 list.files(all.files = TRUE)
@@ -698,7 +698,7 @@ The single `.` refers to this directory while `..` refers to the directory above
 
 Create a `.gitignore` with `*_files` and a blank line.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file(".gitignore")
@@ -821,7 +821,7 @@ Third, there is a warning message. We need to handle this sensibly, lest readers
 
 We need to make it so that we do not see this code or the output in the render `quarto-2.html` document. To do this, we will put `#| echo: false` and `#| message: false` before `library(tidyverse)` in the first code chunk. Render.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-2.qmd")
@@ -846,7 +846,7 @@ question_text(NULL,
 
 Unfortunately, `quarto-2.html` still shows the code which creates the plot. So, before `penguins` in the second code chunk, add `#| echo: false`. Render the document.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-2.qmd")
@@ -879,7 +879,7 @@ execute:
   echo: false
 ```
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-2.qmd")
@@ -930,7 +930,7 @@ Render `quarto-2.qmd` to make sure everything still works. Fix anything which do
 
 ### Exercise 10
 
-We still have the Warning to deal with. From the Console, type `penguins` and hit Enter. (This will probably produce an error.) CP/CR.
+We still have the Warning to deal with. From the R Terminal, type `penguins` and hit Enter. (This will probably produce an error.) CP/CR.
 
 ```{r project-2-10}
 question_text(NULL,
@@ -951,15 +951,15 @@ Error: object 'penguins' not found
 > 
 ```
 
-Recall the distinction between QMD World and Console World. In the QMD World, we have loaded the **tidyverse** and **palmerpenguins** packages. The latter contains the `penguins` tibble and the former includes the functions for printing tibbles nicely.
+Recall the distinction between QMD World and R Terminal World. In the QMD World, we have loaded the **tidyverse** and **palmerpenguins** packages. The latter contains the `penguins` tibble and the former includes the functions for printing tibbles nicely.
 
-But in Console world, we haven't done those things. We restarted R at the beginning of this section. We need to explicitly `library()` those two packages.
+But in R Terminal world, we haven't done those things. We restarted R at the beginning of this section. We need to explicitly `library()` those two packages.
 
 ### Exercise 11
 
-Put your cursor in `quarto-2.qmd` on the `library(tidyverse)` line. Hit `Cmd/Ctrl + Enter`. Note how the code is pasted down in the Console and then run there. Your cursor automatically moves down one line in `quarto-2.qmd` to the `library(palmerpenguins)` line. Hit `Cmd/Ctrl + Enter` again.
+Put your cursor in `quarto-2.qmd` on the `library(tidyverse)` line. Hit `Cmd/Ctrl + Enter`. Note how the code is pasted down in the R Terminal and then run there. Your cursor automatically moves down one line in `quarto-2.qmd` to the `library(palmerpenguins)` line. Hit `Cmd/Ctrl + Enter` again.
 
-From the Console, run `search()`. CP/CR.
+From the R Terminal, run `search()`. CP/CR.
 
 ```{r project-2-11}
 question_text(NULL,
@@ -974,12 +974,12 @@ question_text(NULL,
 
 The return value from `search()` should include `"package:palmerpenguins"` along with all the packages which make up the *Tidyverse*, like **lubridate** and **forcats**.
 
-The key lesson is that the Console does not know about the QMD file and the QMD file does not know about the Console. You need to keep them in sync.
+The key lesson is that the R Terminal does not know about the QMD file and the QMD file does not know about the R Terminal. You need to keep them in sync.
 
 
 ### Exercise 12
 
-From the Console, run `summary(penguins$body_mass_g)`. CP/CR.
+From the R Terminal, run `summary(penguins$body_mass_g)`. CP/CR.
 
 ```{r project-2-12}
 question_text(NULL,
@@ -1009,7 +1009,7 @@ There are two standard ways to get rid of a warning message. First, we can make 
 
 Because this section has gone on long enough, we take the second approach. To plotting code chunk, add `#| warning: false`. Render `quarto-2.qmd`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-2.qmd", chunk = "Last")

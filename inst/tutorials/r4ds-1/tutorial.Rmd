@@ -83,19 +83,19 @@ Create a Github repo called `r4ds-1`. Set the "Add README" toggle switch to "On.
 
 Connect the repo to a project on your computer using `File -> New Folder from Git ...`.  Make sure to select the "Open in a new window" box. Start an R interpreter, if necessary.
 
-You need two Positron windows: this one for running the tutorial and the one you just created for writing your code and interacting with the Console.
+You need two Positron windows: this one for running the tutorial and the one you just created for writing your code and interacting with the R Terminal.
 
 In the new window, select `File -> New File -> Quarto Document ...`. Provide a title -- `"Analyzing the Billboard 100"` -- and an author (you). Render the document and save it as `analysis.qmd`.
 
 Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file(".gitignore")
 ```
 
-If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the Console.
+If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the R Terminal.
 
 CP/CR.
 
@@ -125,7 +125,7 @@ execute:
 
 Using `Cmd/Ctrl + Shift + K`, render the file again. Only the title and author should appear in the HTML.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -157,7 +157,7 @@ This means that `analysis.qmd` lacks an empty last line. Add one. Text files sho
 
 Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Enter` to execute that line.
 
-Note how this command causes `library(tidyverse)` to be copied down to the Console and then executed. 
+Note how this command causes `library(tidyverse)` to be copied down to the R Terminal and then executed. 
 
 CP/CR.
 
@@ -172,7 +172,7 @@ question_text(NULL,
 
 ###
 
-You should practice moving from QMD World to Console World and back.
+You should practice moving from QMD World to R Terminal World and back.
 
 Note that **ggplot2** is loaded with **tidyverse**.
 
@@ -180,7 +180,7 @@ R has several systems for making graphs, but [**ggplot2**](https://ggplot2.tidyv
 
 ### Exercise 4
 
-From the Console, run these three commands:
+From the R Terminal, run these three commands:
 
 `getwd()`  
 `dir.create("data")`  
@@ -222,7 +222,7 @@ The [`billboard`](https://tidyr.tidyverse.org/reference/billboard.html) tibble i
 
 Loading the **tidyverse** package automatically loaded the packages which are part of the "core" *Tidyverse*, including **tidyr**, **ggplot2**, and **dplyr**.
 
-Type `billboard` into the Console.
+Type `billboard` into the R Terminal.
 
 CP/CR.
 
@@ -396,7 +396,7 @@ Provide the AI with your current code.
 
 Ask AI: Continue the code by assigning the plot to the variable `line_graph`, and then save `line_graph` with `ggsave()`.
 
-Update your code in `analysis.qmd`. Place your cursor on the first line of this code and run `Cmd/Ctrl + Enter` in order to run the code in the Console. You may need to do this twice so that both the plot creation code and `ggsave()` are executed.
+Update your code in `analysis.qmd`. Place your cursor on the first line of this code and run `Cmd/Ctrl + Enter` in order to run the code in the R Terminal. You may need to do this twice so that both the plot creation code and `ggsave()` are executed.
 
 CP/CR.
 
@@ -429,7 +429,7 @@ line_graph <- billboard |>
 
 ###
 
-This creates the plot object `line_graph` which you can view by typing its name in the Console. You can use `ggsave(filename = "billboard_tracks.png", plot = line_graph)` to save the image as a PNG file.
+This creates the plot object `line_graph` which you can view by typing its name in the R Terminal. You can use `ggsave(filename = "billboard_tracks.png", plot = line_graph)` to save the image as a PNG file.
 
 ### Exercise 7
 
@@ -650,7 +650,7 @@ You can also rename variables as you `select()` them by using `=`. The new name 
 
 Before creating a plot, we need to ensure that your data matches our data. In the QMD, replace your code from the previous exercise with our code.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -713,7 +713,7 @@ The pipe takes the thing on its left and passes it along to the function on its 
 
 ### Exercise 15
 
-Within the Console, type `billboard_clean`, which we previously assigned to a pipe and ran in the Console. Hit `Enter`.
+Within the R Terminal, type `billboard_clean`, which we previously assigned to a pipe and ran in the R Terminal. Hit `Enter`.
 
 CP/CR.
 
@@ -742,13 +742,13 @@ billboard_clean
 
 ### Exercise 16
 
-Ask AI: Generate R code that uses `billboard_clean` to plot a basic graph showing a histogram for `improvement`. Mention you want to use the data from `billboard_clean` and copy/paste the `billboard_clean` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
+Ask AI: Generate R code that uses `billboard_clean` to plot a basic graph showing a histogram for `improvement`. Mention you want to use the data from `billboard_clean` and copy/paste the `billboard_clean` you ran in the R Terminal with the resulting tibble. You only need the top 3 lines, mainly to include column names.
 
 Within `labs()`, edit or add a proper title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `Cmd/Ctrl + Shift + K` to ensure that everything works. 
 
 Make your plot look nice. Edit the appearance by hand or get AI to help. The titles should be legible and everything should have proper capitalization.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -787,7 +787,7 @@ A histogram divides the x-axis into equally spaced bins and then uses the height
 
 Ask AI: Continue the code for the plot with `theme()` in order to make the plot look nice. Make the `title` and `subtitle` fit on the graph. If necessary, manually edit the sizes. Place this code as a continuation of the graph code, in the end the chunk should just have the final graph. Run `Cmd/Ctrl + Shift + K` to ensure that everything works. 
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -846,7 +846,7 @@ Key functions you'll learn:
 
 We begin by downloading our CSV file `music.csv` to our the `data` directory directly from the internet using `download.file()`. 
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 download.file(
@@ -1209,7 +1209,7 @@ This data is now tidy as NA values are removed, but we could make future computa
 
 ### Exercise 11
 
-In the Console, type out `household` and press enter. The result should be a tibble that is a part of **tidyverse**.
+In the R Terminal, type out `household` and press enter. The result should be a tibble that is a part of **tidyverse**.
 
 Provide AI with the first 3 lines of the `household` tibble.
 
@@ -1250,7 +1250,7 @@ household |>
 
 Before creating a plot, we need to ensure that your data matches our data. In the QMD, replace your code from exercise 12 with our code and place it within a new code chunk.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -1321,7 +1321,7 @@ Why ensure that your data is tidy? There are two main advantages:
 
 ### Exercise 14
 
-Within the Console, type `billboard_longer`, which we previously assigned to a pipe and ran in the Console. Hit `Enter`.
+Within the R Terminal, type `billboard_longer`, which we previously assigned to a pipe and ran in the R Terminal. Hit `Enter`.
 
 CP/CR.
 
@@ -1348,11 +1348,11 @@ Most real-world data is untidy because it's often organized for data entry rathe
 
 ### Exercise 15
 
-Ask AI to generate R code that uses `billboard_longer` to plot a basic graph showing the Billboard rank of each track over the weeks after they were released. Mention you want to use the data from `billboard_longer` and copy/paste the `billboard_longer` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
+Ask AI to generate R code that uses `billboard_longer` to plot a basic graph showing the Billboard rank of each track over the weeks after they were released. Mention you want to use the data from `billboard_longer` and copy/paste the `billboard_longer` you ran in the R Terminal with the resulting tibble. You only need the top 3 lines, mainly to include column names.
 
 Within `labs()`, edit or add a proper title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `Cmd/Ctrl + Shift + K` to ensure that everything works. Make your plot look nice.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -1403,7 +1403,7 @@ You will learn about importing, organizing, and visualizing data using core pack
 
 `Cmd/Ctrl + Shift + K` to ensure that everything works.  The resulting HTML page should be attractive, showing clean versions of your two plots.
 
-At the Console, run:
+At the R Terminal, run:
 
 ```
 tutorial.helpers::show_file("analysis.qmd")
@@ -1430,7 +1430,7 @@ Tabular data is considered *tidy* if and only if it satisfies the following rule
 
 ### Exercise 2
 
-Publish your rendered QMD to GitHub Pages. In the Terminal --- not the Console! --- run:
+Publish your rendered QMD to GitHub Pages. In the Terminal --- not the R Terminal! --- run:
 
 ````
 quarto publish gh-pages analysis.qmd

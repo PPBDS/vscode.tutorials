@@ -77,19 +77,19 @@ Create a Github repo called `r4ds-3`. Set the "Add README" toggle switch to "On.
 
 Connect the repo to a project on your computer using `File -> New Folder from Git ...`. Make sure to select the "Open in a new window" box.
 
-You need two Positron windows: this one for running the tutorial and the one you just created for writing your code and interacting with the Console.
+You need two Positron windows: this one for running the tutorial and the one you just created for writing your code and interacting with the R Terminal.
 
 Select `File -> New File -> Quarto Document ...`. Provide a title -- `"Analyzing Baby Names and Flights"` -- and an author (you). Render the document and save it as `analysis.qmd`.
 
 Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file(".gitignore")
 ```
 
-If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the Console.
+If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the R Terminal.
 
 CP/CR.
 
@@ -120,7 +120,7 @@ execute:
   echo: false
 ```
 
-Render the file using `Cmd/Ctrl + Shift + K`. In the Console, run:
+Render the file using `Cmd/Ctrl + Shift + K`. In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -150,7 +150,7 @@ Databases are run by database management systems (DBMS's), which come in three b
 
 Place your cursor in the QMD file at the start of the `library(tidyverse)` line. Use `Cmd/Ctrl + Shift + Enter` to execute all the libraries in the code chunk.
 
-Note that this causes `library(tidyverse)` to be copied down to the Console and then executed.
+Note that this causes `library(tidyverse)` to be copied down to the R Terminal and then executed.
 
 CP/CR.
 
@@ -169,7 +169,7 @@ For this tutorial, we will be working with the babynames database. At the simple
 
 ### Exercise 4
 
-From the Console, run these three commands:
+From the R Terminal, run these three commands:
 
 `getwd()`
 `dir.create("data")`
@@ -226,7 +226,7 @@ We begin by downloading a DuckDB version of the babynames dataset directly from 
 
 This stores the database file, `data/nameby_year.duckdb`, to our the `data` directory so we can use it in this tutorial.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 download.file(
@@ -319,7 +319,7 @@ Add the code as a replacement to the current code in your current chuck in the Q
 
 Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -393,7 +393,7 @@ Replace the code in your current code chunk in your new QMD by pasting this code
  dbplyr_names <- tbl(con_names, "babynames")
 ```
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -418,7 +418,7 @@ To use `dbplyr`, you must first use `tbl()` to create an object that represents 
 
 Ask AI: how to use `dbplyr` to filter the data to show all names start with A after the year 2000 using `str_starts()`. Paste this code into the same code chunk and place your cursor at the start of `dbplyr_names` and run `Cmd/Ctrl + Enter`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -452,7 +452,7 @@ Paste your current pipe into AI and ask it for a continuation that uses `if_else
 
 Place your cursor on the first line of the code in your current code chunk at the start of `dbplyr_names` and run `Cmd/Ctrl + Enter`. 
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -485,7 +485,7 @@ CP/CR.
 
 Prompt AI to continue the pipe by using `.by()` to summarize the data by grouping by `year` and `length_class`, calculating the total number of babies in each group by summing `n` using `sum()`. Add the code as a continuation of your pipe to your QMD in the same chunk. Place your cursor on the first line of the code in your current code chunk at the start of `dbplyr_names` and run `Cmd/Ctrl + Enter`. 
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -522,7 +522,7 @@ The `.by` argument is a selection of columns to group by for just this operation
 
 Prompt the AI to arrange the summarized results in ascending order by `year`, and collect the results from the database into a local R tibble for further use, such as plotting. Add the code to your QMD in the same chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`. Now, prompt the AI to arrange the summarized results in ascending order by year, and collect the results from the database into a local R tibble for further use, such as plotting. Add the code to your QMD in the same chunk. Place your cursor on the first line of the code in your current code chunk at the start of `dbplyr_names` and run `Cmd/Ctrl + Enter`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -563,7 +563,7 @@ Now that we have filtered our dataset through a pipe, we need to be on track wit
 
 **Change the start letter from `A` to a letter of your choice.**
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -635,7 +635,7 @@ The `collect()` function is the bridge between database operations and in-memory
 
 ### Exercise 13
 
-Within the Console, type `x`, which we previously assigned to a pipe and ran in the Console. Hit `Enter`.
+Within the R Terminal, type `x`, which we previously assigned to a pipe and ran in the R Terminal. Hit `Enter`.
 
 CP/CR.   
 
@@ -660,11 +660,11 @@ The `.by` argument in `summarize()` performs grouped operations without modifyin
 
 ### Exercise 14
 
-Ask AI to generate R code that plots a basic line graph showing the proportion of "Short" vs. "Long" names starting with a specific letter --- the letter you choose to replace `A`--- over the years. Mention you want to use the data from `x` and copy and paste the `x` you ran in the Console with the resulting dataframe. You only need the top 3 lines, mainly to include column names.
+Ask AI to generate R code that plots a basic line graph showing the proportion of "Short" vs. "Long" names starting with a specific letter --- the letter you choose to replace `A`--- over the years. Mention you want to use the data from `x` and copy and paste the `x` you ran in the R Terminal with the resulting dataframe. You only need the top 3 lines, mainly to include column names.
 
 Within `labs()` edit or add a proper title, subtitle, and caption. If axis labels are appropriate, add them, but if unnecessary, don't bother. Don't assign the code to any variable. Put this code into a new code chunk. Run `Cmd/Ctrl + Shift + K`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -704,7 +704,7 @@ Creating categorical variables like `length_class` transforms continuous data (n
 
 ### Exercise 15
 
-Publish your rendered QMD to GitHub Pages. In the Terminal --- not the Console! --- run:
+Publish your rendered QMD to GitHub Pages. In the Terminal --- not the R Terminal! --- run:
 
 ```         
 quarto publish gh-pages analysis.qmd
@@ -754,7 +754,7 @@ We begin by downloading a DuckDB version of the flights dataset directly from Gi
 
 This stores the database file, `data/nycflights13.duckdb`, to our the `data` directory so we can use it in this tutorial.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 download.file(
@@ -782,7 +782,7 @@ question_text(NULL,
 
 Ask AI: how to connect the `flights` table from the `nycflights13` database located in the "data" directory to `duckdb` using `DBI::dbConnect()` by assigning it to a variable `con_air`, so it is accessible to use with the rest of the code in the document. Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -853,7 +853,7 @@ Paste this code as a replacement to your current code in the same chunk in your 
  dbplyr_fly <- tbl(con_air, "flights")
 ```
 
- View the data by putting `dbplyr_fly` in your Console. Copy/paste the resulting lazy table.
+ View the data by putting `dbplyr_fly` in your R Terminal. Copy/paste the resulting lazy table.
 
 ```{r flights-4}
 question_text(NULL,
@@ -885,7 +885,7 @@ View the `tailnum` column by pasting this in your console:
 class(pull(dbplyr_fly, tailnum))
 ```
 
-Ask AI: how to check the column type of `tailnum` from the `flights` table using `class()`. Add the code to your Console and hit `Enter`.
+Ask AI: how to check the column type of `tailnum` from the `flights` table using `class()`. Add the code to your R Terminal and hit `Enter`.
 
 CP/CR.
 
@@ -916,7 +916,7 @@ The column type of `tailnum` is character.
 
 Ask AI: Clean the `dbplyr_fly` table by selecting the columns `dep_time`, `sched_dep_time`, `dep_delay`, and `tailnum`. Then, create a new column called `tail_number` by extracting numeric values from the character column `tailnum` using the `parse_number()` function. Add the code to your QMD in a new chunk. Assign this pipe to `departure_data`. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -949,7 +949,7 @@ Use `parse_number()` when the string contains non-numeric text that you want to 
 
  Ask your favorite AI to write code that summarizes how many missing values are in the `dep_time` and `arr_time` columns using the function `is.na()`. Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -986,7 +986,7 @@ We have a lot of missing values that needs to be cleaned.  `is.na(x)` works with
 
 Ask AI: how you can continue your previous pipe and filters out rows where dep_time is missing using `!is.na()`. Add the code to your QMD in the same chunk as an addition to the pipe that is assigned to `departure_data`. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`. View your new cleaned data.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -1020,7 +1020,7 @@ departure_data
 ### Exercise 9
 
 Ask AI: how you can find tail numbers starting with "N1". Add the code to your QMD in a new code chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -1058,7 +1058,7 @@ Also, `n_distinct(x)` counts the number of distinct (unique) values of one or mo
 
 The scheduled departure time and the actual departure time for flights is written in the 24-hr system. Let's change this to the 12-hr system. Ask your favorite AI how to break military time into hours and minutes in R using integer division and modulo operators for the `sched_dep_time` and `dep_time` columns. Add the code to your QMD in a new code chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -1095,7 +1095,7 @@ When combined with`%%` or `%/%`, `row_number()` can be a useful tool for dividin
 
 Let's add a column for positive delays only. Ask the same AI how to continue the pipe and add `true_dep_delay` using `pmax(dep_delay, 0)` to treat early departures (negative delays) as 0. Then, how to use `count()` to group by `sched_hour` and `dep_hour`, weighing by `true_dep_delay` to get total delay minutes for each hour combination. Add the code to your QMD in the same code chunk as a continuation of your pipe. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -1134,7 +1134,7 @@ Note that these are different to the summary functions `min()` and `max()` which
 
 Now that we have filtered our dataset through a pipe, we need to be on track with the same, correct, code. Replace your latest code chunk with our code in your QMD.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -1208,7 +1208,7 @@ Weighted counts with `count(wt = ...)` transform a frequency table into a sum ta
 
 ### Exercise 14
 
-Within the Console, type `x`, which we previously assigned to a pipe and ran in the Console. Hit `Enter`.
+Within the R Terminal, type `x`, which we previously assigned to a pipe and ran in the R Terminal. Hit `Enter`.
 
 CP/CR.
 
@@ -1237,11 +1237,11 @@ In the next exercise, you will see a crosstabulation structure - with two groupi
 
 Ask AI to generate R code that creates a beautiful heatmap using `geom_tile()`. (You can make a different plot than a heatmap, if you like.) The plot must make sense. It must be something which tells us about the world. It can't just be nonsense. You need to look at the output.
 
-Mention you want to use the data from `x` and copy and paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
+Mention you want to use the data from `x` and copy and paste the `x` you ran in the R Terminal with the resulting tibble. You only need the top 3 lines, mainly to include column names.
 
 Within `labs()` edit or add a proper title, subtitle, and caption. If axis labels are appropriate, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Add this code to a new code cell. Run `Cmd/Ctrl + Shift + K`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")

@@ -127,7 +127,7 @@ Always start a new data science project with a new Github repo.
 
 In the other window, connect the `first-website` Github repo to a project on your computer using the usual procedure: `File -> New Folder from Git...` and so on.  
 
-You may need to close the "Welcome" window and start an R interpreter for the Console. 
+You may need to close the "Welcome" window and start an R interpreter for the R Terminal. 
 
 From the Terminal (in the other window), run `ls`. CP/CR.
 
@@ -240,7 +240,7 @@ Now that we have created the necessary files, it is useful to examine them one-b
 
 ### Exercise 1
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("_quarto.yml")
@@ -248,7 +248,7 @@ show_file("_quarto.yml")
 
 CP/CR.
 
-Did you get an error when you ran this? Something about 'could not find function "show_file"'? This is because you need run `library(tutorial.helpers)` in the Console to have direct access to `show_file()`, which is a function in the **tutorial.helpers** package. Of course, you could use the double colon notation --- `tutorial.helpers::show_file("_quarto.yml")` --- as we did in previous tutorials. But, at this stage in your R education, we want you to become more comfortable with packages, and knowing yourself when they need to be loaded.
+Did you get an error when you ran this? Something about 'could not find function "show_file"'? This is because you need run `library(tutorial.helpers)` in the R Terminal to have direct access to `show_file()`, which is a function in the **tutorial.helpers** package. Of course, you could use the double colon notation --- `tutorial.helpers::show_file("_quarto.yml")` --- as we did in previous tutorials. But, at this stage in your R education, we want you to become more comfortable with packages, and knowing yourself when they need to be loaded.
 
 
 ```{r examining-files-1}
@@ -273,7 +273,7 @@ But other values for `type` are possible.
 
 ### Exercise 2
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("_quarto.yml", start = 4, end = 10)
@@ -309,7 +309,7 @@ Indents and other whitespace matter in YAML files. Be careful!
 
 ### Exercise 3
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("_quarto.yml", start = 12, end = 16)
@@ -342,7 +342,7 @@ The `css` line tells Quarto to use the `styles.css` file, located in the same di
 
 ### Exercise 4
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("index.qmd")
@@ -386,7 +386,7 @@ If you do not answer the question or if you are using an old version of Quarto w
 
 ### Exercise 5
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file(".gitignore")
@@ -541,7 +541,7 @@ Look the Source Control button. Note how many new files there are. Most of this 
 
 Add `_site` to the `.gitignore`. Don't forget that the last line of `.gitignore` should always be blank. Save the file. 
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file(".gitignore")
@@ -935,7 +935,7 @@ The `.quarto` directory is like the `.git` directory. We will never look at or c
 
 Open the `_quarto.yml` file in the Editor. Change `title: "A New Website"` to `title: "A New Website, second edition"`. Save the file.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 show_file("_quarto.yml", start = 4, end = 5)

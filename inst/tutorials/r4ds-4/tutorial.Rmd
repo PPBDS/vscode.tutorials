@@ -148,19 +148,19 @@ Create a Github repo called `r4ds-4`. Set the "Add README" toggle switch to "On.
 
 Connect the repo to a project on your computer using `File -> New Folder from Git ...`. Make sure to select the "Open in a new window" box.
 
-You need two Positron windows: this one for running the tutorial and the one you just created for writing your code and interacting with the Console.
+You need two Positron windows: this one for running the tutorial and the one you just created for writing your code and interacting with the R Terminal.
 
 In the new window, select `File -> New File -> Quarto Document ...`. Provide a title -- `"NBA and FIFA"` -- and an author (you). Render the document and save it as `analysis.qmd`.
 
 Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file(".gitignore")
 ```
 
-If that fails, it is probably because you have not yet loaded `library(tutorial.helpers) in the Console.
+If that fails, it is probably because you have not yet loaded `library(tutorial.helpers) in the R Terminal.
 
 CP/CR.
 
@@ -204,7 +204,7 @@ execute:
   echo: false
 ```
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -227,7 +227,7 @@ Like CSV, parquet is used for rectangular data, but instead of being a text form
 
 ### Exercise 3
 
-Place your cursor in the QMD file on the `suppressPackageStartupMessages()` line. Use `Cmd/Ctrl + Enter` to execute that line. This should load up all the libraries in the Console.
+Place your cursor in the QMD file on the `suppressPackageStartupMessages()` line. Use `Cmd/Ctrl + Enter` to execute that line. This should load up all the libraries in the R Terminal.
 
 CP/CR.
 
@@ -246,7 +246,7 @@ Both **arrow** and **dbplyr** provide **dplyr** backends, so you might wonder wh
 
 ### Exercise 4
 
-From the Console, run these three commands:
+From the R Terminal, run these three commands:
 
 `getwd()`  
 `dir.create("data")`  
@@ -298,7 +298,7 @@ We begin by downloading our parquet files `data/game.parquet` and `line_score.pa
 
 This adds the parquet files, `game.parquet` and `line_score.parquet`, to our working directory so we can use it in this tutorial.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 download.file(
@@ -940,7 +940,7 @@ There are four types of mutating join, but there’s one that you’ll use almos
 
 Before creating a plot, we need to ensure that your data matches our data. In the QMD, replace your code from the previous exercise with our code.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -1037,7 +1037,7 @@ To describe a specific type of join, we indicate matches with dots. The matches 
 
 ### Exercise 16
 
-Within the Console, type `nba_clean`, which we previously assigned to a pipe and ran in the Console. Hit `Enter`.
+Within the R Terminal, type `nba_clean`, which we previously assigned to a pipe and ran in the R Terminal. Hit `Enter`.
 
 CP/CR.
 
@@ -1068,7 +1068,7 @@ Ask AI to generate R code that uses `nba_clean` to create an interesting plot. I
 
 Within `labs()`, edit or add a proper title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `Cmd/Ctrl + Shift + K` to ensure that everything works. Make your plot look nice.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -1148,7 +1148,7 @@ We begin by downloading our parquet file `data/fifa.parquet` directly from GitHu
 
 This adds the parquet file `fifa.parquet` to our working directory so we can use it in this tutorial.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 download.file(
@@ -1765,7 +1765,7 @@ Oftentimes when working with non-English dates and `%b` or `%B` you will need to
 
 Before creating a plot, we need to ensure that your data matches our data. In the QMD, replace your code from the previous exercise with our code.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -1857,7 +1857,7 @@ Unless otherwise specified, lubridate always uses UTC. UTC (Coordinated Universa
 
 ### Exercise 18
 
-Within the Console, type `final_fifa`, which we previously assigned to a pipe and ran in the Console. Hit `Enter`.
+Within the R Terminal, type `final_fifa`, which we previously assigned to a pipe and ran in the R Terminal. Hit `Enter`.
 
 CP/CR.
 
@@ -1888,7 +1888,7 @@ Ask AI to use the `final_fifa` dataset to generate an interesting chart. Include
 
 Within `labs()`, edit or add a proper title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `Cmd/Ctrl + Shift + K` to ensure that everything works. Make your plot look nice.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -1952,7 +1952,7 @@ You learned about working with parquet files using **[arrow](https://arrow.apach
 
 `Cmd/Ctrl + Shift + K` to ensure that everything works.  The resulting HTML page should be attractive, showing clean versions of your plot(s).
 
-At the Console, run:
+At the R Terminal, run:
 
 ```
 show_file("analysis.qmd")
@@ -1992,7 +1992,7 @@ We recommend using `curl::multi_download()` to get very large files as it’s bu
 
 ### Exercise 3
 
-Publish your rendered QMD to GitHub Pages. In the Terminal --- not the Console! --- run:
+Publish your rendered QMD to GitHub Pages. In the Terminal --- not the R Terminal! --- run:
 
 ```
 quarto publish gh-pages analysis.qmd

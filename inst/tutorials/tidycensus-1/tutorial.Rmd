@@ -80,19 +80,19 @@ Create a Github repo called `tidycensus-plots`. Set the "Add README" toggle swit
 
 Connect the repo to a project on your computer using `File -> New Folder from Git ...`. Make sure to select the "Open in a new window" box. 
 
-You need two Positron windows: this one for running the tutorial and the one you just created for writing your code and interacting with the Console.
+You need two Positron windows: this one for running the tutorial and the one you just created for writing your code and interacting with the R Terminal.
 
 Select `File -> New File -> Quarto Document ...`. Provide a title -- `"TexasIncome"` -- and an author (you). Render the document and save it as `TexasIncome.qmd`.
 
 Create a `.gitignore` file with `_files` on the first line and then a blank line. Save and push.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file(".gitignore")
 ```
 
-If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the Console.
+If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the R Terminal.
 
 CP/CR.
 
@@ -120,7 +120,7 @@ execute:
   echo: false
 ```
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 tutorial.helpers::show_file("TexasIncome.qmd", chunk = "Last")
@@ -145,7 +145,7 @@ Render again. Everything looks nice, albeit empty, because we have added code to
 
 Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Enter` to execute that line.
 
-Note that this causes the entire code cell to be copied down to the Console and then executed. 
+Note that this causes the entire code cell to be copied down to the R Terminal and then executed. 
 
 CP/CR.
 
@@ -172,7 +172,7 @@ A critical part of the Census data analysis process is data visualization, where
 
 Ask AI to use **tidycensus** to get data on the median household income for all counties in Texas for 2020.
 
-Put what it gives you in a new code chunk and do `Cmd/Ctrl + Enter` to send it to the Console.
+Put what it gives you in a new code chunk and do `Cmd/Ctrl + Enter` to send it to the R Terminal.
 
 CP/CR.
 
@@ -210,7 +210,7 @@ The `geometry` argument in `get_acs()` controls whether spatial boundary data is
 Copy and paste our code to replace it with what you have.
 
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 tutorial.helpers::show_file("TexasIncome.qmd", chunk = "Last")
@@ -235,9 +235,9 @@ question_text(NULL,
 
 Edit your QMD, to change the value of `geometry` to `TRUE`.
 
-Take your code chunk and do `Cmd/Ctrl + Enter` to send it to the Console.
+Take your code chunk and do `Cmd/Ctrl + Enter` to send it to the R Terminal.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 tutorial.helpers::show_file("TexasIncome.qmd", chunk = "Last")
@@ -277,7 +277,7 @@ The `geometry = TRUE` argument returns spatial polygons, useful for maps and spa
 
 ### Exercise 4
 
-Run `glimpse()` on `income_tx` in the Console.
+Run `glimpse()` on `income_tx` in the R Terminal.
 
 CP/CR.
 
@@ -422,7 +422,7 @@ ggplot(income_tx) +
 ### Exercise 10
 
 
-In the Console, run the following command to display the last chunk of your `.qmd` file: CP/CR
+In the R Terminal, run the following command to display the last chunk of your `.qmd` file: CP/CR
 
 ```         
 tutorial.helpers::show_file("TexasIncome.qmd", chunk = "Last")
@@ -464,7 +464,7 @@ execute:
   echo: false
 ```
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 tutorial.helpers::show_file("CaliforniaBachelors.qmd", chunk = "Last")
@@ -489,7 +489,7 @@ Render again. Everything looks nice, albeit empty, because we have added code to
 
 Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Enter` to execute that line.
 
-Note that this causes `library(tidyverse)` to be copied down to the Console and then executed. 
+Note that this causes `library(tidyverse)` to be copied down to the R Terminal and then executed. 
 
 CP/CR.
 
@@ -544,9 +544,9 @@ edu_ca <- get_acs(
 
 Using our code, set `geometry = TRUE`.
 
-Take your code chunk and do `Cmd/Ctrl + Enter` to send it to the Console.
+Take your code chunk and do `Cmd/Ctrl + Enter` to send it to the R Terminal.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 tutorial.helpers::show_file("CaliforniaBachelors.qmd", chunk = "Last")
@@ -707,7 +707,7 @@ ggplot(edu_ca) +
 
 ### Exercise 9
 
-In the Console, run the following command to display the last chunk of your `.qmd` file
+In the R Terminal, run the following command to display the last chunk of your `.qmd` file
 
 ```
 tutorial.helpers::show_file("CaliforniaBachelors.qmd", chunk = "Last")
@@ -755,7 +755,7 @@ execute:
   echo: false
 ```
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 tutorial.helpers::show_file("CaliforniaAge.qmd", chunk = "Last")
@@ -780,7 +780,7 @@ Render again. Everything looks nice, albeit empty, because we have added code to
 
 Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Enter` to execute that line.
 
-Note that this causes `library(tidyverse)` to be copied down to the Console and then executed. 
+Note that this causes `library(tidyverse)` to be copied down to the R Terminal and then executed. 
 
 CP/CR.
 
@@ -839,9 +839,9 @@ AI is your best friend! Professionals use AI to generate code and plot. You howe
 
 Using our code, add `geometry = FALSE`.
 
-Take your code chunk and do `Cmd/Ctrl + Enter` to send it to the Console.
+Take your code chunk and do `Cmd/Ctrl + Enter` to send it to the R Terminal.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 tutorial.helpers::show_file("CaliforniaAge.qmd", chunk = "Last")
@@ -1051,7 +1051,7 @@ ggplot(largest_ca, aes(x = reorder(NAME, median_age), y = median_age)) +
 
 ### Exercise 10
 
-In the Console, run the following command to display the last chunk of your `.qmd` file.
+In the R Terminal, run the following command to display the last chunk of your `.qmd` file.
 
 ```
 tutorial.helpers::show_file("CaliforniaAge.qmd", chunk = "Last")

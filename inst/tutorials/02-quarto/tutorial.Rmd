@@ -55,7 +55,7 @@ Click "Next" and then "Create."
 
 Click "Current Window" because that window is not the window running this tutorial, so you can re-start it. You always need two windows when completing a tutorial.
 
-Run `getwd()` in the Console. CP/CR.
+Run `getwd()` in the R Terminal. CP/CR.
 
 ```{r quarto-1-1}
 question_text(NULL,
@@ -93,7 +93,7 @@ format: html
 
 Change the title to “My First Quarto Document”.
 
-Run `list.files()` in the Console. CP/CR.
+Run `list.files()` in the R Terminal. CP/CR.
 
 ```{r quarto-1-2}
 question_text(NULL,
@@ -114,7 +114,7 @@ character(0)
 
 Since we have not saved the file yet, it does not appear in this listing.
 
-Quarto is a command line interface tool, not an R package. This means that help is, by-and-large, not available through `?` at the Console. Instead, as you work through this tutorial, and use Quarto in the future, you should refer to the [Quarto documentation](https://quarto.org/). Of course, in the modern world, we just ask an AI when we have a problem.
+Quarto is a command line interface tool, not an R package. This means that help is, by-and-large, not available through `?` at the R Terminal. Instead, as you work through this tutorial, and use Quarto in the future, you should refer to the [Quarto documentation](https://quarto.org/). Of course, in the modern world, we just ask an AI when we have a problem.
 
 
 ### Exercise 3
@@ -140,7 +140,7 @@ A Quarto file uses `qmd` as its extension, where those initials stand for **Q**u
 
 ### Exercise 4
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-1.qmd", end = 4)
@@ -289,7 +289,7 @@ You can also insert a code cell with the shortcut key: `Cmd/Ctrl + Shift + i`.
 
 Save the file. Render it again.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-1.qmd", pattern = "6")
@@ -332,7 +332,7 @@ Paste that URL --- `http://localhost:3807/` in my case; yours will be different 
 
 Delete the first code cell. Add `This is my first Markdown text.` two lines below the YAML header. Save the file.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-1.qmd")
@@ -408,7 +408,7 @@ Render the file again. Does everything look good in the Viewer/browser?
 
 ### 
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-1.qmd")
@@ -437,13 +437,13 @@ Strictly speaking, the underlying command being issued is the "Preview" commend,
 ## Quarto 2
 ### 
 
-Restart your R session. The best way to do this is with the shortcut key `Cmd/Ctrl + Shift + 0`. There is also a "Restart console" button in the upper right portion of the Console tab. 
+Restart your R session. The best way to do this is with the shortcut key `Cmd/Ctrl + Shift + 0`. There is also a "Restart console" button in the upper right portion of the R Terminal tab. 
 
 ```{r}
 include_graphics("images/add-numbers.png")
 ```
 
-Restarting the Console just means restarting R.
+Restarting the R Terminal just means restarting R.
 
 Let's create another Quarto document so that we can explore how to include R code within the document.
 
@@ -474,7 +474,7 @@ The newly created code cell will be empty.
 
 Save the file.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-2.qmd")
@@ -669,7 +669,7 @@ Chunk labels cannot be duplicated. Each chunk label must be unique.
 
 ### Exercise 10
 
-**Important Point**: There are two different "worlds" with which we are dealing. First is the world of the Quarto document, the QMD file. Second is the world of the Console in our current Positron window. **These worlds only connect when we connect them**. Something written in a Quarto document --- or an R script --- is not, by default, part of our current R session.
+**Important Point**: There are two different "worlds" with which we are dealing. First is the world of the Quarto document, the QMD file. Second is the world of the R Terminal in our current Positron window. **These worlds only connect when we connect them**. Something written in a Quarto document --- or an R script --- is not, by default, part of our current R session.
 
 ### 
 
@@ -681,7 +681,7 @@ Right now, the **tidyverse** package has not been loaded into the current R sess
 
 * Press the small triangle --- labeled "Run Cell" --- directly above the code chunk. This runs all the code in the chunk/cell. (Again, the terms cell and chunk are used interchangeably.)
 
-Run the code chunk. Then, run `pull(mtcars, 1)` in the Console. CP/CR.
+Run the code chunk. Then, run `pull(mtcars, 1)` in the R Terminal. CP/CR.
 
 ```{r quarto-2-10}
 question_text(NULL,
@@ -694,7 +694,7 @@ question_text(NULL,
 
 ### 
 
-If you run this command without running `library(tidyverse)` in the Console, you will get an error about not finding the "pull" function. The fact that `library(tidyverse)` exists in the QMD, and that you have "used" it there by rendering the document, has no bearing on the world of the Console.
+If you run this command without running `library(tidyverse)` in the R Terminal, you will get an error about not finding the "pull" function. The fact that `library(tidyverse)` exists in the QMD, and that you have "used" it there by rendering the document, has no bearing on the world of the R Terminal.
 
 ### Exercise 11
 
@@ -731,7 +731,7 @@ ggplot(data = iris,
 
 Render the file. You should now see your R code (since we did not set `echo: false`), as well as a blank plot (since we have not added a geom layer).
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-2.qmd", chunk = "Last")
@@ -771,7 +771,7 @@ Add `geom_point()` to your plot. Render the file again. Now our plot isn't empty
 
 ### 
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-2.qmd", chunk = "Last")
@@ -810,7 +810,7 @@ Render the file again to see your completed graph.
 
 ### 
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-2.qmd", chunk = "Last")
@@ -916,7 +916,7 @@ execute:
 
 to the bottom of the YAML header. This sets `echo` to `false` throughout the document. `Cmd/Ctrl + Shift + K`. The resulting HTML is empty, other than the title and author.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-3.qmd", start = -20)
@@ -976,7 +976,7 @@ Indent `echo: false` again. `Cmd/Ctrl + Shift + K` to confirm that everything wo
 
 Below the code chunk, add the following sentence to `quarto-3.qmd`: `The value of x is ?, a surprisingly high value.` `Cmd/Ctrl + Shift + K`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-3.qmd", start = -6)
@@ -1080,7 +1080,7 @@ Restart your R session with `Cmd/Ctrl + Shift + 0`. As always, you are doing thi
 
 ### Exercise 1
 
-Run `search()` in the Console. CP/CR.
+Run `search()` in the R Terminal. CP/CR.
 
 ```{r quarto-4-1}
 question_text(NULL,
@@ -1106,7 +1106,7 @@ Make a new Quarto document. The title is "My Fourth Quarto Document". You are th
 
 Save the document as `quarto-4.qmd`. 
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-4.qmd")
@@ -1155,17 +1155,17 @@ Put `library(tidyverse)` in the code chunk.
 
 ### 
 
-**Notice the sloppy language!** There are two ways in which we can "load" **tidyverse** corresponding to the two worlds we are working in simultaneous: QMD World and Console World.
+**Notice the sloppy language!** There are two ways in which we can "load" **tidyverse** corresponding to the two worlds we are working in simultaneous: QMD World and R Terminal World.
 
 ### 
 
-Putting the character string `library(tidyverse)` inside the `setup` code chunk is enough to "load" this package in QMD World because, whenever we render a file, every line of code in the file is sent to R for processing. Those characters, however, have no connection to Console World until we explicitly execute them by hand, generally with `Cmd/Ctrl + Enter`, run once for each line of R code we want executed in the Console.
+Putting the character string `library(tidyverse)` inside the `setup` code chunk is enough to "load" this package in QMD World because, whenever we render a file, every line of code in the file is sent to R for processing. Those characters, however, have no connection to R Terminal World until we explicitly execute them by hand, generally with `Cmd/Ctrl + Enter`, run once for each line of R code we want executed in the R Terminal.
 
 Do that now. Place the cursor next to the `library(tidyverse)` call and hit `Cmd/Ctrl + Enter`.
 
 ### 
 
-Once all that is done, run `search()` in the Console. CP/CR.
+Once all that is done, run `search()` in the R Terminal. CP/CR.
 
 ```{r quarto-4-3}
 question_text(NULL,
@@ -1180,13 +1180,13 @@ question_text(NULL,
 
 The output of the call to `search()` should include the string `package:tidyverse`, indicating that the **tidyverse** package is loaded.
 
-The key lesson is that we are operating in two worlds simultaneously: QMD World and Console World. We are responsible for keeping them in sync with commands like `Cmd/Ctrl + Enter`.
+The key lesson is that we are operating in two worlds simultaneously: QMD World and R Terminal World. We are responsible for keeping them in sync with commands like `Cmd/Ctrl + Enter`.
 
 ### Exercise 4
 
 Our HTML file looks ugly, both because of the annoying message and because it shows the R code. We want neither. Add `echo: false` and `message: false` to the code chunk options. `Cmd/Ctrl + Shift + K`. 
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-4.qmd", chunk = "Last")
@@ -1229,7 +1229,7 @@ diamonds
 `Cmd/Ctrl + Shift + K`. 
 
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-4.qmd", chunk = "Last")
@@ -1258,7 +1258,7 @@ Give your favorite generative AI program (Grok, ChatGPT, Claude, DeepSeek, et ce
 
 Replace `diamonds` in the code chunk with this code. `Cmd/Ctrl + Shift + K`. (If rendering the document fails, show your AI the error and ask it to fix the code.) If you can't get it to work, just stop with the last version, even if it fails.
 
-In the Console, run:
+In the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("quarto-4.qmd", chunk = "Last")

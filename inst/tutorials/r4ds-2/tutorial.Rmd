@@ -55,19 +55,19 @@ Create a Github repo called `r4ds-2`. Set the "Add README" toggle switch to "On.
 
 Connect the repo to a project on your computer using `File -> New Folder from Git ...`.  Make sure to select the "Open in a new window" box. 
 
-You need two Positron windows: this one for running the tutorial and the one you just created for writing your code and interacting with the Console.
+You need two Positron windows: this one for running the tutorial and the one you just created for writing your code and interacting with the R Terminal.
 
 Select `File -> New File -> Quarto Document ...`. Provide a title -- `"Analyzing Cheese and Wine"` -- and an author (you). Save the file as `analysis.qmd`. Render the document. 
 
 Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file(".gitignore")
 ```
 
-If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the Console.
+If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the R Terminal.
 
 CP/CR.
 
@@ -96,7 +96,7 @@ execute:
   echo: false
 ```
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -121,7 +121,7 @@ You can read a single worksheet from a spreadsheet with the `sheet` argument in 
 
 Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Enter` to execute that line. Do this again for the `library(readxl)` line and the `library(dbplyr)` line. 
 
-Note that this causes `library(tidyverse)`, `library(readxl)`, and `library(dbplyr)` to be copied down to the Console and then executed. 
+Note that this causes `library(tidyverse)`, `library(readxl)`, and `library(dbplyr)` to be copied down to the R Terminal and then executed. 
 
 CP/CR.
 
@@ -140,7 +140,7 @@ You can use `excel_sheets()` to get information on all worksheets in an Excel sp
 
 ### Exercise 4
 
-From the Console, run these three commands:
+From the R Terminal, run these three commands:
 
 `getwd()`
 `dir.create("data")`
@@ -181,7 +181,7 @@ The [cheese.csv](https://github.com/rfordatascience/tidytuesday/blob/main/data/2
 
 We begin by downloading our spreadsheet `cheeses.xlsx` directly from GitHub to the `data` directory using `download.file()`. 
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 download.file(
@@ -709,7 +709,7 @@ read_excel("data/cheeses.xlsx") |>
   arrange(country, desc(n))
 ```
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -771,7 +771,7 @@ cheese_tibble <- read_excel("data/cheeses.xlsx") |>
 
 ### Exercise 15
 
-Within the Console, type `cheese_tibble`, which we previously assigned to a pipe and ran in the Console. Hit `Enter`.
+Within the R Terminal, type `cheese_tibble`, which we previously assigned to a pipe and ran in the R Terminal. Hit `Enter`.
 
 CP/CR.
 
@@ -802,7 +802,7 @@ You add labels with the `labs()` function.
 
 Ask AI to use the `labs()` function and add a `title`, `subtitle`, `caption`, and labels for the `x` and `y` axes. Add this code as a continuation of your pipe to the same chunk in your QMD. Place your cursor at the beginning of the line where it says `cheese_tibble|> ` and run `Cmd/Ctrl + Shift + K` to render.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```
 show_file("analysis.qmd", chunk = "Last")
@@ -853,7 +853,7 @@ The `wine` dataset contains the results of a chemical analysis of wines grown in
 
 We begin by downloading our spreadsheet `wine.xlsx` directly from GitHub to the `data` directory using `download.file()`. 
 
-In the Console, run:
+In the R Terminal, run:
 ```         
 download.file(
   "https://github.com/PPBDS/vscode.tutorials/raw/refs/heads/main/inst/tutorials/r4ds-2/data/wine.xlsx",
@@ -879,7 +879,7 @@ You can write data back to disk as an Excel file using the `write_xlsx()` functi
 
 ### Exercise 2
 
-Ask AI how to read a `.xlsx` spreadsheet called `data/wine.xlsx` using `read_excel()`. Add this code to a new code chunk in your QMD. Place your cursor at the beginning of the line and run `Cmd/Ctrl + Enter`. Type `wine` in the Console to retrieve the contents of `wine`.
+Ask AI how to read a `.xlsx` spreadsheet called `data/wine.xlsx` using `read_excel()`. Add this code to a new code chunk in your QMD. Place your cursor at the beginning of the line and run `Cmd/Ctrl + Enter`. Type `wine` in the R Terminal to retrieve the contents of `wine`.
 
 CP/CR.
 
@@ -906,7 +906,7 @@ We use `scale_y_continuous()` when we want to modify the y-axis for continuous d
 
 ### Exercise 3
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 summary(read_excel("data/wine.xlsx"))
@@ -1214,7 +1214,7 @@ Just like we did with `read_excel()`, we can supply column names, NA strings, an
 
 Now that we have filtered our dataset through a pipe, we need to be on track with the same, correct, code. Replace your code with our code in your QMD.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -1267,7 +1267,7 @@ Variation is the tendency of the values of a variable to change from measurement
 
 ### Exercise 15
 
-Within the Console, type `wine_tibble`, which we previously assigned to a pipe and ran in the Console. Hit `Enter`.
+Within the R Terminal, type `wine_tibble`, which we previously assigned to a pipe and ran in the R Terminal. Hit `Enter`.
 
 CP/CR.
 
@@ -1300,7 +1300,7 @@ Copy and paste our specific prompt into the AI:
 
  Add this code into a new code chunk in your QMD.  Place your cursor on the first line of the code in your current code chunk at the start of `wine_tibble` and run `Cmd/Ctrl + Shift + K` to render.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")

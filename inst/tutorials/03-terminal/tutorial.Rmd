@@ -55,7 +55,7 @@ Windows users should use a Unix-like shell rather than the default PowerShell. W
 
 First, you installed [Git for Windows](https://gitforwindows.org/), including Git Bash, which will provide the shell we need.
 
-Second, from the Console, you have run:
+Second, from the R Terminal, you have run:
 
 ````
 tutorial.helpers::set_positron_settings(
@@ -109,7 +109,7 @@ But, again, if you are a Windows user, everything will work the same for you as 
 ## Terminal
 ### 
 
-The Terminal tab is next to the Console tab within the Panel in the lower left portion of the Positron window.  We use the Console tab to talk to R. We use the Terminal tab to talk directly with the computer. Sadly, the Console and the Terminal speak different languages.
+The Terminal tab is next to the R Terminal tab within the Panel in the lower left portion of the Positron window.  We use the R Terminal tab to talk to R. We use the Terminal tab to talk directly with the computer. Sadly, the R Terminal and the Terminal speak different languages.
 
 ### Exercise 1
 
@@ -138,7 +138,7 @@ Your answer will look different from mine. Default prompts vary from computer to
 
 ### 
 
-My prompt acts as a quick way to tell you where in the computer you are. The Terminal is sensitive to which folder location you are in, just like the Console is.
+My prompt acts as a quick way to tell you where in the computer you are. The Terminal is sensitive to which folder location you are in, just like the R Terminal is.
 
 ### Exercise 2
 
@@ -389,7 +389,7 @@ You will practice using paths both inside and outside the current working direct
 
 ### Exercise 1
 
-By default, the Terminal in Positron starts with a working directory which is the same as the folder you created for the project. That is, both the Console and the Terminal *start* in the same place.
+By default, the Terminal in Positron starts with a working directory which is the same as the folder you created for the project. That is, both the R Terminal and the Terminal *start* in the same place.
 
 Run `pwd` to show your current working directory. CP/CR.
 
