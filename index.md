@@ -15,6 +15,7 @@ package.
 Install the development version from [GitHub](https://github.com/) with:
 
 ``` r
+
 remotes::install_github("PPBDS/vscode.tutorials")
 ```
 
