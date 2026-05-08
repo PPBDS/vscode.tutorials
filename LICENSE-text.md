@@ -1,4 +1,4 @@
 # License
 
     YEAR: 2025
-    COPYRIGHT HOLDER: positron.tutorials authors
+    COPYRIGHT HOLDER: vscode.tutorials authors
