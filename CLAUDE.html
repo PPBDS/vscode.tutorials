@@ -47,7 +47,10 @@ inst/extdata/&lt;name&gt;/ # stable source copies of data students may download<
 <div class="section level2">
 <h2 id="philosophy-ai-era">Philosophy (AI era)<a class="anchor" aria-label="anchor" href="#philosophy-ai-era"></a></h2>
 <p>The goal is not to teach coding — it is to teach students how to <strong>use AI to create data science artifacts</strong>. After the initial VS Code and infrastructure tutorials, students should mostly interact with an AI agent that edits their files, renders their Quarto document, and helps them debug. They should learn to steer analysis, inspect output, notice problems, and ask for refinements.</p>
-<ul><li>Show students <strong>results</strong> (plots, printed tibbles, summary statistics, rendered pages), not just the code that produced them.</li>
+<ul><li>
+<code>01-code</code> through <code>09-infrastructure</code> are setup/infrastructure tutorials. They may repeat core lessons about terminals, GitHub, Codespaces, Quarto, files, and warnings.</li>
+<li>Later tutorials are data science tutorials. They should follow an exploratory path through data toward a useful published artifact.</li>
+<li>Show students <strong>results</strong> (plots, printed tibbles, summary statistics, rendered pages), not just the code that produced them.</li>
 <li>Questions ask students to prompt AI for file edits, render, inspect output, and compare their output to ours.</li>
 <li>Prefer many small exercises that form a data analysis path over one large prompt that solves the whole section.</li>
 <li>Students should not type R into learnr exercise chunks in post-infrastructure tutorials. Their work happens in <code>analysis.qmd</code> and supporting files.</li>
@@ -64,7 +67,8 @@ inst/extdata/&lt;name&gt;/ # stable source copies of data students may download<
 <strong>Never</strong> instruct students to use <code>Cmd/Ctrl + Enter</code> to run QMD code or <code>Cmd/Ctrl + Shift + K</code> to render.</li>
 <li>
 <code>#| cache: true</code> is a <strong>render-time</strong> feature — the cache is created during <code>quarto render</code>, not by running code interactively. The first render with caching takes noticeably longer; subsequent renders load from disk.</li>
-<li>Add <code>analysis_cache</code> to <code>.gitignore</code>; cache files do not belong on GitHub.</li>
+<li>Cache chunks when students are done with an expensive piece of code. Most tutorials should use caching at least once; tutorials with several expensive visualizations or data-preparation chunks may use it more often.</li>
+<li>Add the generated cache directory (usually <code>analysis_cache</code>) to <code>.gitignore</code>; cache files do not belong on GitHub.</li>
 </ul></div>
 <div class="section level2">
 <h2 id="subject-area-tutorials">Subject-area tutorials<a class="anchor" aria-label="anchor" href="#subject-area-tutorials"></a></h2>
@@ -86,19 +90,21 @@ inst/extdata/&lt;name&gt;/ # stable source copies of data students may download<
 <strong>Summary</strong> — mirrors the Introduction in past tense; finishes with <code>quarto publish gh-pages</code> and a GitHub URL.</li>
 </ol><div class="section level3">
 <h3 id="introduction-exercises-standard-sequence">Introduction exercises (standard sequence)<a class="anchor" aria-label="anchor" href="#introduction-exercises-standard-sequence"></a></h3>
-<ol style="list-style-type: decimal"><li>Create repo from <code>codespace-starter</code> template, open Codespace, create <code>analysis.qmd</code>, render, open <code>analysis.html</code> with Live Server, set up <code>.gitignore</code>, CP/CR.</li>
-<li>Add <code><a href="https://tidyverse.tidyverse.org" class="external-link">library(tidyverse)</a></code> to QMD with <code>#| message: false</code> and <code>execute: echo: false</code> in YAML, render, check Live Server tab, CP/CR.</li>
-<li>In a bash terminal, run <code>quarto render analysis.qmd</code>; confirm the Live Server tab auto-refreshes. CP/CR.</li>
-<li>(Optional) Create <code>data/</code> directory via <code>dir.create("data")</code>, CP/CR.</li>
+<ol style="list-style-type: decimal"><li>Create repo from <code>codespace-starter</code> template, open Codespace, create <code>analysis.qmd</code>, render, open <code>analysis.html</code> with Live Server, set up <code>.gitignore</code>, submit evidence.</li>
+<li>Add <code><a href="https://tidyverse.tidyverse.org" class="external-link">library(tidyverse)</a></code> to QMD with <code>#| message: false</code> and <code>execute: echo: false</code> in YAML, render, check the rendered HTML, submit evidence.</li>
+<li>In a bash terminal, run <code>quarto render analysis.qmd</code>; confirm the rendered HTML auto-refreshes. CP/CR.</li>
+<li>(Optional) Create <code>data/</code> directory via <code>dir.create("data")</code>. CP/CR.</li>
 </ol><p>Replace <code>XX</code> placeholders with actual repo names, titles, and knowledge drops.</p>
+<p>Keep introductions short. Avoid repeating details that the exercises will teach. If students must read several paragraphs before the first exercise, split the prose with Continue buttons; better yet, cut the prose down.</p>
 </div>
 <div class="section level3">
 <h3 id="topic-exercises">Topic exercises<a class="anchor" aria-label="anchor" href="#topic-exercises"></a></h3>
 <ul><li>Begin by getting data into the student’s project. Often this means asking AI to create <code>data/</code>, download a file from a stable URL, and record where it came from.</li>
 <li>Ask for one concrete edit per exercise. Do not micromanage individual R function arguments unless the detail is pedagogically important.</li>
-<li>Render after every meaningful edit. The Live Server tab is the student’s feedback loop.</li>
+<li>Render after every meaningful edit. The rendered HTML is the student’s feedback loop.</li>
 <li>Use several linked exercises to build an analysis path: inspect the data, notice a pattern or problem, refine the data, make a rough plot, improve the plot, add interpretation.</li>
 <li>The final section should make the rendered page look good enough to publish.</li>
+<li>Before including a visualization exercise, ask what it shows that the preceding table or exercise did not. If the answer is nothing new — the same finding in a different form — cut the exercise and communicate the finding in the table’s knowledge drop instead.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="writing-student-prompts-to-ai">Writing student prompts to AI<a class="anchor" aria-label="anchor" href="#writing-student-prompts-to-ai"></a></h3>
@@ -122,6 +128,7 @@ inst/extdata/&lt;name&gt;/ # stable source copies of data students may download<
 <li>
 <strong>Command line</strong>: <code>git add analysis.qmd &amp;&amp; git commit -m "Add X analysis" &amp;&amp; git push</code> in a bash terminal.</li>
 </ul><p>The Summary commit exercise (sequence step 3) should say “commit any remaining changes” — by that point the main content is already committed section by section.</p>
+<p>Exception: if the tutorial has only one or two topic sections and the Summary’s commit would cover all outstanding work, the final topic-section commit may be omitted to avoid asking students to commit twice in quick succession.</p>
 </div>
 <div class="section level3">
 <h3 id="exercise-rhythm">Exercise rhythm<a class="anchor" aria-label="anchor" href="#exercise-rhythm"></a></h3>
@@ -129,31 +136,43 @@ inst/extdata/&lt;name&gt;/ # stable source copies of data students may download<
 <ol style="list-style-type: decimal"><li>
 <strong>Prompt AI / edit <code>analysis.qmd</code></strong> — students ask their AI agent to add or change something concrete.</li>
 <li>
-<strong>Render</strong> — students run <code>quarto render analysis.qmd</code> in a bash terminal and inspect the Live Server tab.</li>
+<strong>Render</strong> — students run <code>quarto render analysis.qmd</code> in a bash terminal and inspect the rendered HTML.</li>
 <li>
-<strong>Verify</strong> — students CP/CR evidence that they completed the exercise. This might be output from the rendered HTML, a printed tibble, a plot description, a file listing, a URL, or <code>show_file("analysis.qmd", chunk = "Last")</code>.</li>
+<strong>Verify</strong> — students submit evidence that they completed the exercise. Use CP/CR only for terminal command-and-response evidence.</li>
 <li>
-<strong>Show our example when useful</strong> — the test chunk may display our plot, tibble, summary, or other expected output after submission.</li>
+<strong>Show the expected output</strong> — after students submit and press Continue, show our expected output, answer, plot, tibble, or representative paste.</li>
 <li>
-<strong>Knowledge drop</strong> — after submission, provide a short paragraph that tells students what to notice, teaches domain knowledge, or foreshadows the next exercise.</li>
+<strong>Knowledge drop</strong> — insert another <code>###</code> separator so students press Continue again before seeing the knowledge drop. Then provide a short paragraph that tells students what to notice, teaches domain knowledge, or foreshadows the next exercise.</li>
 </ol><p>The canonical loop is:</p>
-<p><code>prompt AI/edit analysis.qmd -&gt; render -&gt; inspect Live Server -&gt; CP/CR evidence -&gt; optional example output -&gt; knowledge drop -&gt; next exercise</code></p>
+<p><code>prompt AI/edit analysis.qmd -&gt; render -&gt; inspect rendered HTML -&gt; submit evidence -&gt; expected output/answer -&gt; Continue -&gt; knowledge drop -&gt; next exercise</code></p>
+</div>
+<div class="section level3">
+<h3 id="submission-evidence">Submission evidence<a class="anchor" aria-label="anchor" href="#submission-evidence"></a></h3>
+<p>CP/CR means <strong>Copy/Paste the Command/Response</strong>. Use CP/CR only for terminal or R Terminal submissions where students paste both the command they ran and the response they got. Do not add extra wording like “the command and response” or “the terminal output”; that is already implied by CP/CR.</p>
+<p>For rendered HTML output, say “copy and paste from the HTML” or “copy and paste the table/summary/text from the HTML.” Do not call HTML submissions CP/CR.</p>
+<p>Use <code><a href="https://ppbds.github.io/tutorial.helpers/reference/show_file.html" class="external-link">show_file()</a></code> when checking file contents or code: <code>.gitignore</code>, the last chunk, a data-analysis pipeline, chart code, or the final QMD state. When checking chart code or a data pipeline, pair <code><a href="https://ppbds.github.io/tutorial.helpers/reference/show_file.html" class="external-link">show_file()</a></code> with our rendered plot, tibble, or other output so students can compare both the code and its result.</p>
+<p>Use terminal CP/CR for directory structure and command output, such as <code><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files()</a></code>, <code>pwd</code>, <code>ls</code>, or render messages.</p>
 </div>
 <div class="section level3">
 <h3 id="analysis-path">Analysis path<a class="anchor" aria-label="anchor" href="#analysis-path"></a></h3>
 <p>Build topic sections from linked exercise units. A typical path:</p>
 <ol style="list-style-type: decimal"><li>Download or load data and document the source.</li>
-<li>Inspect with a printed tibble, <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count()</a></code>, or <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> (avoid <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> on wide datasets — it prints one line per column).</li>
-<li>Notice a problem or opportunity: too many categories, missing values, outliers, awkward variable names, an important subgroup, or an unclear plot.</li>
+<li>Inspect rows and individual variables before plotting relationships: printed tibbles, <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count()</a></code>, histograms, missingness checks, top categories, random/sample rows, or <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> (avoid <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> on wide datasets — it prints one line per column).</li>
+<li>Make students discover the data structure. If a variable will matter later, have students ask AI or consult documentation to learn what it means before using it in a final plot.</li>
+<li>Notice a problem or opportunity: too many categories, missing values, outliers, awkward variable names, an important subgroup, unclear variable meaning, suspicious data structure, or an unclear plot.</li>
+<li>Treat incomplete, sampled, truncated, or otherwise suspicious data as a teachable discovery. Ask students to uncover the limitation with summaries or plots, then explain what conclusions are and are not supported.</li>
 <li>Ask AI to refine the analysis.</li>
 <li>Make a rough plot or table.</li>
 <li>Improve labels, grouping, ordering, scale, caption, and visual polish.</li>
-<li>Add a short interpretation paragraph about what the plot or table shows.</li>
-</ol><p>The final artifact should be a published page with a meaningful result about the world, not just a completed worksheet.</p>
+<li>End each significant visualization with a dedicated interpretation exercise asking students to write one or two sentences about what the plot shows. This is distinct from the knowledge drop: the KD teaches; the interpretation exercise asks students to synthesize what they observed. Every major plot or table should have one.</li>
+</ol><p><strong>Structural exploration for downloaded or unfamiliar datasets.</strong> Before moving to plots, add exercises that let students discover the dataset’s shape and vocabulary. Three exercises work well together: <code><a href="https://rdrr.io/r/base/names.html" class="external-link">names()</a></code> in the R Terminal gives students the exact column names they need to prompt AI accurately (CP/CR); <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> on a column group of ≤ ~15 columns reveals types and spot-checks values (ask AI to render it in a chunk); and <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> on key numeric columns catches placeholder values and establishes scale before plotting. Do not use <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> on the full dataset when it has more than ~15 columns — split by column group first (e.g., <code>select(starts_with("artist")) |&gt; glimpse()</code>). These exercises are most valuable for downloaded CSVs and unfamiliar datasets; they are less necessary for well-known built-in datasets where the column structure is self-evident from the first print. Place any “what does this variable mean?” exercise immediately after students first see the column name — not after they have already used it in a summary or plot.</p>
+<p><strong>Categorical comparisons.</strong> For comparisons across categories, scaffold the student’s choice rather than prescribing it: first have students count observations per category so they can see what is plentiful, then ask them to choose two categories with enough data to compare (e.g., at least 100 rows each), then build the comparison plot. This gives students practice making an informed analytical decision rather than following a script.</p>
+<p>The final artifact should be a published page with a meaningful result about the world, not just a completed worksheet.</p>
+<p>For histograms and other distribution plots, usually include the number of observations used in the plot, especially when missing values or filters may exclude rows. Put <code>n</code> in the subtitle, caption, or nearby knowledge drop so readers know whether they are seeing the full dataset or only available values.</p>
 </div>
 <div class="section level3">
 <h3 id="summary-exercises-standard-sequence">Summary exercises (standard sequence)<a class="anchor" aria-label="anchor" href="#summary-exercises-standard-sequence"></a></h3>
-<ol style="list-style-type: decimal"><li>Final <code>quarto render</code>, <code>show_file("analysis.qmd")</code>, CP/CR.</li>
+<ol style="list-style-type: decimal"><li>Final <code>quarto render</code>, <code>show_file("analysis.qmd")</code>, submit evidence.</li>
 <li>
 <code>quarto publish gh-pages analysis.qmd</code> in bash Terminal; paste resulting URL.</li>
 <li>Commit and push any remaining changes; paste GitHub repo URL.</li>
@@ -170,7 +189,7 @@ inst/extdata/&lt;name&gt;/ # stable source copies of data students may download<
 <span>  try_again_button <span class="op">=</span> <span class="st">"Edit Answer"</span>,</span>
 <span>  incorrect <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rows <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
-<p>Use for CP/CR questions. Set <code>rows</code> to match expected output length.</p>
+<p>Use for evidence-submission questions. Set <code>rows</code> to match expected output length.</p>
 </div>
 <div class="section level3">
 <h3 id="yes-answer-questions">Yes-answer questions<a class="anchor" aria-label="anchor" href="#yes-answer-questions"></a></h3>
@@ -186,10 +205,15 @@ inst/extdata/&lt;name&gt;/ # stable source copies of data students may download<
 </div>
 <div class="section level2">
 <h2 id="knowledge-drops">Knowledge drops<a class="anchor" aria-label="anchor" href="#knowledge-drops"></a></h2>
-<ul><li>Usually one short paragraph; one or two sentences is often enough.</li>
-<li>Place after students submit an exercise (after <code>###</code>). Place before the question only when context is needed to answer.</li>
-<li>Reference our example output when the test chunk displays a plot, tibble, or summary.</li>
+<ul><li>Every exercise must have a knowledge drop after submission. This applies even when the exercise is mostly setup, committing, publishing, or verification.</li>
+<li>Usually one short paragraph; one or two sentences is often enough.</li>
+<li>Place after students submit an exercise and after the expected output/answer. The usual pattern is question chunk, <code>###</code>, expected output/answer, <code>###</code>, knowledge drop.</li>
+<li>Place before the question only when context is needed to answer.</li>
+<li>Reference our example output when the test chunk displays a plot, tibble, or summary. When the test chunk reveals specific numbers, use them — “496 zero values (nearly 5%)” rather than “many zero values.” Concrete numbers make knowledge drops credible and easier for students to verify against their own output.</li>
 <li>Tell students what to notice in their rendered output, explain why it matters, or identify the next natural data-science move.</li>
+<li>In the age of AI, knowledge drops should emphasize concepts students need to steer and audit AI-generated work: data shape, units of observation, missingness, filtering, variable meaning, plot interpretation, domain context, and whether a result supports the claim being made.</li>
+<li>When AI handles syntax or transformations under the hood, name the concept and explain it in plain language after students see the result. Students do not need to memorize syntax immediately, but they do need to recognize what AI did and why it matters.</li>
+<li>Do not use recycled/default knowledge drops in post-infrastructure tutorials. Save repeated infrastructure lessons for <code>01-code</code> through <code>09-infrastructure</code>; later tutorials need knowledge drops tied to the current exercise, current data, or current infrastructure issue.</li>
 <li>Use knowledge drops to teach the data science ecosystem for the tutorial’s area: gold-standard data sources, common measures, important packages, file formats, APIs, data-quality issues, and standard patterns analysts look for.</li>
 <li>Name packages and functions students will encounter in AI-generated code — so they can recognize and evaluate them, not so they can dictate them in prompts.</li>
 <li>No road signs (“In the next section…”). Teach something real.</li>
@@ -203,7 +227,7 @@ inst/extdata/&lt;name&gt;/ # stable source copies of data students may download<
 <li>
 <code>echo = FALSE</code> everywhere (set globally in setup chunk via <code>knitr::opts_chunk$set(echo = FALSE)</code>).</li>
 <li>Set <code>knitr::opts_chunk$set(out.width = '90%')</code> in setup for consistent image sizing.</li>
-<li>Avoid exercise code chunks in post-infrastructure tutorials. Use question chunks for CP/CR and test chunks for our example output.</li>
+<li>Avoid exercise code chunks in post-infrastructure tutorials. Use question chunks for evidence submissions and test chunks for our example output.</li>
 </ul></div>
 <div class="section level2">
 <h2 id="test-chunk-output">Test chunk output<a class="anchor" aria-label="anchor" href="#test-chunk-output"></a></h2>
@@ -234,9 +258,11 @@ inst/extdata/&lt;name&gt;/ # stable source copies of data students may download<
 <ul><li>Never depend on a fragile third-party URL at tutorial run time.</li>
 <li>Keep stable source copies for student downloads under <code>inst/extdata/&lt;tutorial&gt;/</code> when practical, and document the original source.</li>
 <li>Students usually create their own <code>data/</code> directory inside their project and download or copy data there.</li>
+<li>In later tutorials, prefer asking AI to download a file from a stable URL and put it in <code>data/</code> over teaching students exact <code><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file()</a></code> syntax, unless that syntax is the point of the exercise.</li>
 <li>Avoid <code>inst/tutorials/&lt;name&gt;/data/</code> for new post-infrastructure tutorials unless there is a specific learnr runtime reason.</li>
 <li>Do not download from the web during tutorial compile/run. If a test chunk needs data, load a small stable copy from the package.</li>
-<li>For large data, create smaller teaching files and use CP/CR verification rather than heavy test computations.</li>
+<li>For large data, create smaller teaching files and use lightweight evidence submissions rather than heavy test computations.</li>
+<li>If a teaching dataset is incomplete, sampled, capped, or otherwise artificial, do not hide that fact. Build an exercise path that lets students discover the limitation and reason about how it affects interpretation.</li>
 </ul></div>
 <div class="section level2">
 <h2 id="authoring-with-ai-agents">Authoring with AI agents<a class="anchor" aria-label="anchor" href="#authoring-with-ai-agents"></a></h2>
@@ -259,6 +285,7 @@ inst/extdata/&lt;name&gt;/ # stable source copies of data students may download<
 <pre><code>&lt;pre&gt;&lt;code&gt;```{r}
 1 + 1
 ```&lt;/code&gt;&lt;/pre&gt;</code></pre>
+<p>When showing multiple commands for students to copy/paste, make sure they render as separate lines. Do not let Markdown collapse separate commands into one paragraph.</p>
 </div>
 <div class="section level2">
 <h2 id="checking-a-tutorial">Checking a tutorial<a class="anchor" aria-label="anchor" href="#checking-a-tutorial"></a></h2>
@@ -274,11 +301,12 @@ inst/extdata/&lt;name&gt;/ # stable source copies of data students may download<
 <h2 id="formatting-conventions">Formatting conventions<a class="anchor" aria-label="anchor" href="#formatting-conventions"></a></h2>
 <ul><li>Keyboard input and inline code: <code>backticks</code>
 </li>
-<li>Package names: <strong>bolded</strong>
-</li>
+<li>Package names in prose: bolded and linked to the package’s gold-standard documentation site, usually the official package website (e.g. <strong><a href="https://ggplot2.tidyverse.org/" class="external-link">ggplot2</a></strong>, <strong><a href="https://dplyr.tidyverse.org/" class="external-link">dplyr</a></strong>). Do not link package names inside code.</li>
 <li>Function names always include parentheses: <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv()</a></code>, not <code>read_csv</code>
 </li>
 <li>Section/topic titles: sentence case</li>
+<li>Terminal names: <code>R Terminal</code> and <code>bash terminal</code>
+</li>
 <li>Abbreviation: CP/CR = Copy/Paste the Command/Response</li>
 </ul></div>
 <div class="section level2">
