@@ -77,6 +77,18 @@
 <strong>Namespaces</strong>: every function in R lives in a package’s namespace. <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">dplyr::filter</a></code> names the function explicitly and avoids masking entirely. In reusable code (packages, sourced scripts), reach for the namespace prefix rather than relying on load order.</li>
 </ol></div>
 </div>
+<div class="section level2">
+<h2 id="authoring-conventions">Authoring conventions<a class="anchor" aria-label="anchor" href="#authoring-conventions"></a></h2>
+<p>This package is an exception to the <em>pedagogical</em> parts of the base tutorial guide, but it shares the project-wide <em>syntactic</em> conventions. In particular:</p>
+<ul><li>
+<p><strong>Per-chunk options use Quarto’s <code>#| key: value</code> syntax on lines inside the chunk, not inline <code>, key = value</code> on the header.</strong> So an answer chunk is</p>
+<pre><code>```{r section-name-N-test}
+#| echo: true
+# our code</code></pre>
+<p>```</p>
+<p>not <code>{r section-name-N-test, echo = TRUE}</code>. This works in both <code>.Rmd</code> and <code>.qmd</code> via modern knitr (≥ 1.35) and is the canonical style across every tutorial package in the project (the Primer, <code>misc.tutorials</code>, and this one). Use it for <code>echo</code>, <code>message</code>, <code>warning</code>, <code>cache</code>, <code>eval</code>, and every other chunk option. The only inline options that remain on the header line are <code>include = FALSE</code> on the setup chunk and the <code>child = ...</code> argument on info-section / download-answers child chunks.</p>
+</li>
+</ul></div>
 </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
