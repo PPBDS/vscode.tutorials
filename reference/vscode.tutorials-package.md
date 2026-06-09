@@ -23,22 +23,25 @@ development:
 
 - **Terminal** (03-terminal): Command line fundamentals
 
-- **VS Code and GitHub Introduction** (04-github-1): Git and GitHub
+- **AI Introduction** (04-ai-1): Meeting the Gemini CLI agent and using
+  it to create and render a Quarto analysis
+
+- **VS Code and GitHub Introduction** (05-github-1): Git and GitHub
   basics within VS Code
 
-- **VS Code and GitHub Advanced** (05-github-2): Advanced Git/GitHub
+- **VS Code and GitHub Advanced** (06-github-2): Advanced Git/GitHub
   workflows and GitHub Pages
 
-- **AI** (06-ai): Using the Gemini CLI for AI-assisted data science work
-  in GitHub Codespaces
+- **AI and Git** (07-ai-2): Using the Gemini CLI to run and explain a
+  full Git workflow
 
-- **Quarto Websites Introduction** (07-websites-1): Basic website
+- **Quarto Websites Introduction** (08-websites-1): Basic website
   construction using Quarto projects
 
-- **Quarto Websites Advanced** (08-websites-2): Advanced Quarto websites
+- **Quarto Websites Advanced** (09-websites-2): Advanced Quarto websites
   with modular data analysis
 
-- **Infrastructure** (09-infrastructure): A tour of devcontainers and
+- **Infrastructure** (10-infrastructure): A tour of devcontainers and
   how they keep Codespaces consistent
 
 ## Running Tutorials
@@ -47,8 +50,8 @@ To run a tutorial, use:
 `learnr::run_tutorial(name = "short_tutorial_name", package = "vscode.tutorials")`
 
 Available tutorial names include: 01-code, 02-quarto, 03-terminal,
-04-github-1, 05-github-2, 06-ai, 07-websites-1, 08-websites-2, and
-09-infrastructure.
+04-ai-1, 05-github-1, 06-github-2, 07-ai-2, 08-websites-1,
+09-websites-2, and 10-infrastructure.
 
 ## See also
 
