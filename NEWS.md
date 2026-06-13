@@ -1,5 +1,10 @@
 # vscode.tutorials (development version)
 
+* Fixed the example Quarto file shown in `02-quarto` Exercise 4: it was
+  leaking literal `<pre><code>` tags into the display. It now uses a knitr
+  `verbatim` chunk, so the `{r}` code chunks appear cleanly (and are not
+  executed).
+
 * `02-quarto` now introduces the **Live Server** extension (right-click
   `quarto-1.html` -> "Open with Live Server") alongside the existing Quarto
   Preview pane, so students meet the browser-based viewing workflow the later

@@ -129,7 +129,7 @@ Again, there is no necessary connection between the **title** of a Quarto docume
 Here is an example of a Quarto file:
 
 
-````
+````{verbatim, echo=TRUE}
 ---
 title: "My First Quarto Document"
 author: "Your Name"
@@ -144,19 +144,18 @@ Quarto enables you to weave together content and executable code into a finished
 
 When you click the **Render** button, a document will be generated that includes both content and the output of embedded code. You can embed code like this:
 
-<pre><code>```{r}
+```{r}
 1 + 1
-```</code></pre>
+```
 
 You can add options to executable code like this:
 
-<pre><code>```{r}
+```{r}
 #| echo: false
 2 * 2
-```</code></pre>
+```
 
 The `echo: false` option disables the printing of code (only output is displayed).
-</code></pre>
 ````
 
 ### 
