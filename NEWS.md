@@ -1,5 +1,10 @@
 # vscode.tutorials (development version)
 
+* `02-quarto` now introduces the **Live Server** extension (right-click
+  `quarto-1.html` -> "Open with Live Server") alongside the existing Quarto
+  Preview pane, so students meet the browser-based viewing workflow the later
+  tutorials rely on.
+
 * Split the AI tutorial into two and reordered the curriculum. `04-ai-1`
   (**AI Introduction**) now comes right after the terminal tutorial and
   introduces the Gemini CLI agent (create and render a Quarto analysis, no

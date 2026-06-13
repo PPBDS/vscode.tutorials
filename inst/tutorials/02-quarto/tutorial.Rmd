@@ -398,6 +398,45 @@ To encourage the use of shortcut keys going forward, we will start using them di
 
 Strictly speaking, the underlying command being issued is the "Preview" command, which both renders the QMD once and then also continues to watch for any changes in the QMD, re-rendering as needed.
 
+### Exercise 10
+
+So far you have viewed your rendered document in the "Quarto Preview" pane inside VS Code. There is a second way to view it, and it is the one you will rely on in later tutorials: the **Live Server** extension, which opens the HTML file in its own browser tab and refreshes it automatically whenever the file changes.
+
+In the Explorer (the file tree on the left side of VS Code), find `quarto-1.html`. Right-click it and select **"Open with Live Server"**.
+
+```{r}
+include_graphics("images/live-server.png")
+```
+
+This opens `quarto-1.html` in a new browser tab served through your Codespace. The URL will look something like `https://[codespace-name]-5500.app.github.dev/quarto-1.html`.
+
+Copy/paste that URL below.
+
+```{r quarto-1-10}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+````
+https://congenial-chainsaw-wv757pv4pp67cpw-5500.app.github.dev/quarto-1.html
+````
+
+Keep this tab open. Every time `quarto-1.html` is updated in your Codespace --- whether you re-render with `Cmd/Ctrl + Shift + K` or run `quarto render` yourself --- the tab will refresh automatically.
+
+###
+
+Live Server is a VS Code extension that hosts HTML files so they can be viewed in a browser and reloads the page whenever a file changes. This is necessary in a Codespace because the files live on a remote computer and cannot be opened directly in a browser.
+
+###
+
+Why learn two ways to view your work? The "Quarto Preview" pane is quick and lives right inside the editor. Live Server gives you a real browser tab that behaves exactly like the published web page your readers will eventually see --- which is why the later tutorials lean on it. Either one shows you the rendered HTML; use whichever you prefer.
+
 ## Quarto 2
 ### 
 
