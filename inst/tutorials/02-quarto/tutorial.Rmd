@@ -118,7 +118,16 @@ question_text(NULL,
 	rows = 6)
 ```
 
-### 
+###
+
+````
+---
+title: "My First Quarto Document"
+format: html
+---
+````
+
+###
 
 The argument `end = 4` to `show_file()` causes just the first four lines of `quarto-1.qmd` to be printed.
 
@@ -274,7 +283,13 @@ question_text(NULL,
 	rows = 17)
 ```
 
-### 
+###
+
+````
+6 + 3
+````
+
+###
 
 This should return a single character vector with `"6 + 3"`, the line that you added to the code cell.
 
@@ -312,7 +327,19 @@ question_text(NULL,
 	rows = 3)
 ```
 
-### 
+###
+
+````
+---
+title: "My First Quarto Document"
+author: "Your Name"
+format: html
+---
+
+This is my first Markdown text.
+````
+
+###
 
 This should return your entire Quarto document. If you do not have an empty line at the end of your file, you will get a warning message like this:
 
@@ -389,7 +416,21 @@ question_text(NULL,
     rows = 6)
 ```
 
-### 
+###
+
+````
+---
+title: "My First Quarto Document"
+author: "Your Name"
+format: html
+---
+
+## My Header
+
+You can do a lot of cool things in Quarto like **bold** and *italic* text.
+````
+
+###
 
 You can find a full list of Markdown formatting styles and commands [here](https://www.markdownguide.org/basic-syntax/).
 
@@ -464,7 +505,7 @@ The listing should include `quarto-2.qmd`, `quarto-2.html`, and the `quarto-2_fi
 
 ### Exercise 2
 
-Add a code cell by using the shortcut key combination: `Cmd/Ctrl + Shift + I`. (In other words, on the Mac, the shortcut key is `Cmd + Shift + i` while on Windows it is `Ctrl + Shift + I`.)
+Add a code cell by using the shortcut key combination: `Cmd/Ctrl + Shift + I`. (In other words, on the Mac, the shortcut key is `Cmd + Shift + I` while on Windows it is `Ctrl + Shift + I`.)
 
 The newly created code cell will be empty.
 
@@ -487,7 +528,19 @@ question_text(NULL,
     rows = 6)
 ```
 
-### 
+###
+
+<pre><code>---
+title: "My Second Quarto Document"
+author: "Your Name"
+format: html
+---
+
+&#96;&#96;&#96;{r}
+&#96;&#96;&#96;
+</code></pre>
+
+###
 
 Note the curly braces `{}` at the top of the chunk, with an `r` inside. The `r` indicates that Quarto should use R to run the code.
 
@@ -737,7 +790,22 @@ question_text(NULL,
     rows = 10)
 ```
 
-### 
+###
+
+````
+ggplot(data = iris,
+       mapping = aes(x = Sepal.Width,
+                     y = Sepal.Length,
+                     color = Species)) +
+  geom_point() +
+  labs(title = "Measurements for Different Species of Iris",
+       subtitle = "Virginica has the longest sepals",
+       x = "Sepal Width",
+       y = "Sepal Length",
+       caption = "Fisher (1936)")
+````
+
+###
 
 AI code is not perfect! A new piping character, `|>`, was introduced to replace `%>%`. But AI often uses the older version. If your AI used `%>%`, tell it to replace those characters with the newer `|>`. This can help "teach" your AI to write better code for you.
 
@@ -847,7 +915,22 @@ question_text(NULL,
 	rows = 10)
 ```
 
-### 
+###
+
+<pre><code>---
+title: "My Third Quarto Document"
+author: "Your Name"
+format: html
+execute:
+  echo: false
+---
+
+&#96;&#96;&#96;{r}
+x <- 123456789
+&#96;&#96;&#96;
+</code></pre>
+
+###
 
 If we are using a code option for only one or two code chunks, then we can place it in the relevant code chunks, using the hash-pipe: `#|`. However, any code chunk option that applies to most or all code chunks should be placed in the YAML header under the `execute:` category.
 
@@ -907,7 +990,16 @@ question_text(NULL,
 	rows = 6)
 ```
 
-### 
+###
+
+<pre><code>&#96;&#96;&#96;{r}
+x <- 123456789
+&#96;&#96;&#96;
+
+The value of x is ?, a surprisingly high value.
+</code></pre>
+
+###
 
 We want the actual value of `x` to appear in the document, in place of the `?`. To do so, we need to make use of *inline* code.
 
@@ -1036,17 +1128,17 @@ question_text(NULL,
     rows = 5)
 ```
 
-### 
+###
 
 ````
-> tutorial.helpers::show_file("quarto-4.qmd")
 ---
 title: "My Fourth Quarto Document"
 author: David Kane
 format: html
 ---
->
 ````
+
+###
 
 It might be tempting to name your files `code.R` or `myscript.R`, but you should think a bit harder before choosing a name for your file. Three important principles for file naming are as follows:
 
@@ -1115,7 +1207,16 @@ question_text(NULL,
 	rows = 5)
 ```
 
-### 
+###
+
+````
+#| label: setup
+#| echo: false
+#| message: false
+library(tidyverse)
+````
+
+###
 
 Chunk options are instructions for Quarto, not R code. Lines that start with `#|` tell Quarto how to handle a chunk when the document is rendered.
 
@@ -1153,7 +1254,14 @@ question_text(NULL,
 	rows = 3)
 ```
 
-### 
+###
+
+````
+#| echo: false
+diamonds
+````
+
+###
 
 This should cause the top of the `diamonds` tibble to be printed out in the HTML.
 
@@ -1210,6 +1318,8 @@ ggplot(diamonds, aes(x = carat, y = price, color = clarity)) +
   ) +
   scale_y_continuous(labels = scales::dollar_format())
 ````
+
+###
 
 Generative AI is the future of coding, and much else. Practice using it as much as you can.
 

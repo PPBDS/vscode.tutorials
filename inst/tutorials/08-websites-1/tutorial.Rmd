@@ -182,12 +182,33 @@ question_text(NULL,
 	rows = 10)
 ```
 
-### 
+###
+
+````
+project:
+  type: website
+
+website:
+  title: "A New Website"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+````
+
+###
 
 YAML files are how [Quarto projects](https://quarto.org/docs/projects/quarto-projects.html) describe themselves. You can identify `_quarto.yml` as a YAML file from its `.yml` extension and its content. The first two lines specify that this is a website.
 
 ````
-project:                                   
+project:
   type: website
 ````
 
@@ -212,9 +233,7 @@ question_text(NULL,
 	rows = 3)
 ```
 
-### 
-
-These lines provide metadata about the website and its organization.
+###
 
 ````
 website:
@@ -225,6 +244,10 @@ website:
         text: Home
       - about.qmd
 ````
+
+###
+
+These lines provide metadata about the website and its organization.
 
 Indents and other whitespace matter in YAML files. Be careful!
 
@@ -248,9 +271,7 @@ question_text(NULL,
 	rows = 5)
 ```
 
-### 
-
-These lines provide formatting information about the pages of the website. 
+###
 
 ````
 format:
@@ -259,6 +280,10 @@ format:
     css: styles.css
     toc: true
 ````
+
+###
+
+These lines provide formatting information about the pages of the website.
 
 The `css` line tells Quarto to use the `styles.css` file, located in the same directory, for the styling of the pages.
 
@@ -282,12 +307,9 @@ question_text(NULL,
 	rows = 3)
 ```
 
-### 
-
-The answer should look like:
+###
 
 ````
-> show_file("index.qmd")
 ---
 title: "A New Website"
 ---
@@ -295,8 +317,9 @@ title: "A New Website"
 This is a Quarto website.
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
->
 ````
+
+###
 
 Whenever a web browser goes to a directory on the internet, it looks for an `index.html` file. If found, that file is displayed. So, the `index.qmd` file, which we will soon render as `index.html`, is important.
 
@@ -326,14 +349,14 @@ question_text(NULL,
 	rows = 3)
 ```
 
-### 
+###
 
 ```
-> show_file(".gitignore")
 /.quarto/
 **/*.quarto_ipynb
->
 ```
+
+###
 
 The leading `/` in `/.quarto/` escapes the `.`. In other words, we need the leading `/` if we want to ignore the files in a dotted directory.
 
@@ -483,15 +506,15 @@ question_text(NULL,
 	rows = 3)
 ```
 
-### 
+###
 
 ````
-> show_file(".gitignore")
 /.quarto/
 **/*.quarto_ipynb
 _site
->
 ````
+
+###
 
 Ignoring `_site` is [recommended](https://quarto.org/docs/publishing/github-pages.html) because it contains many generated files that change frequently. We never edit them directly, so there is no need to back them up. They will still be published to the web from your Codespace.
 
@@ -882,14 +905,14 @@ question_text(NULL,
 	rows = 3)
 ```
 
-### 
+###
 
 ````
-> show_file("_quarto.yml", start = 4, end = 5)
-website:                                 
+website:
   title: "A New Website, second edition"
->
 ````
+
+###
 
 The project title now exists in three places. We changed it in `_quarto.yml`, but we have not yet updated it in the `_site` files that constitute the rendered website, nor in the files already published to GitHub Pages.
 

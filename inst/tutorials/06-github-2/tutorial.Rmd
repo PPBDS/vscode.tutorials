@@ -312,10 +312,10 @@ question_text(NULL,
 ###
 
 ````
-R 4.4.3> tutorial.helpers::show_file("quarto-1.qmd", chunk = "Last")
 library(tidyverse)
-R 4.4.3> 
 ````
+
+###
 
 Anytime you use `show_file()` without having a blank line at the end of the file, you will get a warning message.
 
@@ -350,13 +350,11 @@ Your answer should look like:
 
 
 ````
-R 4.4.3> tutorial.helpers::show_file("quarto-1.qmd", chunk = "Last")
 library(tidyverse)
 library(palmerpenguins)
-R 4.4.3>
 ````
 
-### 
+###
 
 There is an important distinction between `install.packages()` and `library()`. You only need to install a package once --- it downloads and saves the package to your machine. `library()` loads an already-installed package into your current R session and must be called every time you start a new session.
 
@@ -407,38 +405,26 @@ question_text(NULL,
 
 ###
 
-Because of limitations in our technology, we can't show you what the whole file looks like.
+Your answer should look like this:
 
-<!-- 
-DK: When we use this, the code seems to run, trying to print out the penguins data set, but just giving us:
-
-<div data-pagedtable="false">
-  <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["species"],"name":[1],"type":["fct"],"align":["left"]},{"l
-...
-
-Not sure about the cause.
-
-````
-R 4.4.3> tutorial.helpers::show_file("quarto-1.qmd")
----
+<pre><code>---
 title: "Quarto 1"
 author: ppbds-student
 format: html
 ---
 
-```{r}
+&#96;&#96;&#96;{r}
 #| echo: false
 #| message: false
 library(tidyverse)
 library(palmerpenguins)
-```
+&#96;&#96;&#96;
 
-```{r}
+&#96;&#96;&#96;{r}
 #| echo: false
 penguins
-```
-```` -->
+&#96;&#96;&#96;
+</code></pre>
 
 ###
 
@@ -502,7 +488,6 @@ question_text(NULL,
 My answer looks like this, but yours will be different, of course.
 
 ````
-R 4.4.3> tutorial.helpers::show_file("quarto-1.qmd", chunk="Last")
 theme_custom <- theme_minimal(base_size = 14) +
   theme(
     plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
@@ -532,8 +517,8 @@ penguins |>
       caption = "Data from the palmerpenguins package"
     ) +
   theme_custom
-R 4.4.3> 
 ````
+
 ###
 
 Generative AI is the biggest change in the day-to-day work of data scientists in the last 30 years. Use it every chance you get.
@@ -827,12 +812,11 @@ question_text(NULL,
 
 Your answer should look like this:
 
-```         
-R 4.4.3> tutorial.helpers::show_file(".gitignore")
+```
 *_files
-R 4.4.3> 
 ```
 
+###
 
 Note that `*` is a "regular expression" which matches any characters. So, Git will ignore any files or directories which end with `_files`, including `quarto-2_files`.
 
@@ -904,12 +888,13 @@ question_text(NULL,
 
 Your answer should look like this:
 
-<pre><code>
-> tutorial.helpers::show_file("quarto-2.qmd", chunk = "Last")
-<pre><code>```{r}
+````
 library(tidyverse)
-```</code></pre>
-</code></pre>
+````
+
+###
+
+Loading the **tidyverse** in the setup chunk makes its packages --- including **ggplot2** and the `mpg` dataset --- available to every other chunk in the document. Keeping all your `library()` calls in one chunk at the top is the standard way to organize a Quarto file.
 
 ### Exercise 7
 
@@ -939,19 +924,18 @@ question_text(NULL,
 
 Your answer should look like:
 
-````
-> tutorial.helpers::show_file("quarto-2.qmd")
----
+<pre><code>---
 title: "Quarto 2"
 author: ppbds-student
 format: html
 execute:
   echo: false
 ---
-```{r}
+
+&#96;&#96;&#96;{r}
 suppressPackageStartupMessages(library(tidyverse))
-```
-````
+&#96;&#96;&#96;
+</code></pre>
 
 ###
 
@@ -1023,8 +1007,6 @@ question_text(NULL,
 Your answer will vary depending on the graphic you chose. It might look something like this:
 
 ````
-> tutorial.helpers::show_file("quarto-2.qmd", chunk = "Last")
-```{r}
 mpg |>
   ggplot(aes(x = displ, y = hwy, color = class)) +
     geom_point() +
@@ -1032,7 +1014,6 @@ mpg |>
          x = "Engine Displacement (L)",
          y = "Highway MPG",
          color = "Car Class")
-```
 ````
 
 ###

@@ -69,13 +69,12 @@ question_text(NULL,
 
 ###
 
-Your answer should look like this:
-
 ````
-> show_file()
 Error in `show_file()`:
 ! could not find function "show_file"
 ````
+
+###
 
 Going forward, we will not include boilerplate like "Your answer should look like this." Instead, you can assume that any quote directly after a question is our answer to the question.
 
@@ -131,7 +130,6 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> show_file(file.path(R.home(), "COPYING"), end = 7)
                     GNU GENERAL PUBLIC LICENSE
                        Version 2, June 1991
 
@@ -139,7 +137,6 @@ R 4.5.3> show_file(file.path(R.home(), "COPYING"), end = 7)
                        51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
-R 4.5.3>
 ````
 
 ###
@@ -200,11 +197,11 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> show_file(file.path(R.home(), "COPYING"), end = 7)
 Error in show_file(file.path(R.home(), "COPYING"), end = 7) :
   could not find function "show_file"
-✗ R 4.5.3>
 ````
+
+###
 
 It failed, even though it had just worked before. The reason is that, whenever you restart R, you get a "clean slate," with nothing but the default packages loaded.
 
@@ -315,6 +312,12 @@ question_text(NULL,
 	incorrect = NULL,
 	rows = 3)
 ```
+
+###
+
+````
+5 + 5
+````
 
 ###
 
@@ -709,6 +712,14 @@ question_text(NULL,
 
 ###
 
+````
+library(tidyverse)
+
+# This is an example of a code comment within an R script.
+````
+
+###
+
 Did you remember to have a blank line at the end of the file? If not, you got a warning. Always have a blank line at the end of any text file.
 
 ###
@@ -767,6 +778,14 @@ question_text(NULL,
 
 ###
 
+````
+library(tidyverse)
+
+# Had an OK filet mignon at Cheesecake Factory.
+````
+
+###
+
 Get in the habit of adding comments.
 
 Figuring out *why* something was done is much more difficult than understanding *how* it was done. For example, `geom_smooth()` has an argument called `span`, which controls the smoothness of the curve. Larger values yield a smoother curve. Suppose you decide to change the value of `span` from its default of 0.75 to 0.9. It is easy for a future reader to understand what is happening, but unless you note your thinking in a comment, no one will understand *why* you changed from the default.
@@ -806,6 +825,16 @@ question_text(NULL,
 
 ###
 
+````
+library(tidyverse)
+
+# Had an OK filet mignon at Cheesecake Factory.
+ggplot(data = diamonds,
+       mapping = aes(x = carat))
+````
+
+###
+
 `ggplot()` will generate a blank plot, at least until a `geom` layer is added.
 
 
@@ -841,6 +870,18 @@ question_text(NULL,
 
 ###
 
+````
+library(tidyverse)
+
+# Had an OK filet mignon at Cheesecake Factory.
+ggplot(data = diamonds,
+       mapping = aes(x = carat)) +
+  geom_histogram(bins = 100,
+                 color = "white")
+````
+
+###
+
 The `color` argument used here modifies the *border* color of our columns. To change the *fill* color, use the `fill` argument.
 
 ### Exercise 9
@@ -871,6 +912,19 @@ question_text(NULL,
 	incorrect = NULL,
 	rows = 3)
 ```
+
+###
+
+````
+library(tidyverse)
+
+# Had an OK filet mignon at Cheesecake Factory.
+ggplot(data = diamonds,
+       mapping = aes(x = carat)) +
+  geom_histogram(bins = 100,
+                 color = "white") +
+  scale_y_continuous(labels = scales::comma_format())
+````
 
 ###
 
@@ -909,6 +963,24 @@ question_text(NULL,
     incorrect = NULL,
     rows = 8)
 ```
+
+###
+
+````
+library(tidyverse)
+
+# Had an OK filet mignon at Cheesecake Factory.
+ggplot(data = diamonds,
+       mapping = aes(x = carat)) +
+  geom_histogram(bins = 100,
+                 color = "white") +
+  scale_y_continuous(labels = scales::comma_format()) +
+  labs(title = "Histogram of Carat (Weight) among 50,000 Diamonds",
+       subtitle = "Carats just at or above meaningful numbers are very common",
+       x = "Carat",
+       y = "Count",
+       caption = "diamonds dataset from ggplot2 package")
+````
 
 ###
 
@@ -1083,6 +1155,23 @@ question_text(NULL,
 	incorrect = NULL,
 	rows = 3)
 ```
+
+###
+
+````
+library(tidyverse)
+
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy, color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Engine Size versus Highway Fuel Efficiency",
+       subtitle = "Larger engines tend to deliver fewer miles per gallon",
+       x = "Engine Displacement (Liters)",
+       y = "Highway Miles per Gallon",
+       color = "Drive",
+       caption = "mpg dataset from ggplot2 package")
+````
 
 ###
 

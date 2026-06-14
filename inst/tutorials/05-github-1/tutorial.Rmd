@@ -704,10 +704,10 @@ question_text(NULL,
 ###
 
 ````
-> tutorial.helpers::show_file("analysis-1.qmd", chunk = "Last")
 library(tidyverse)
->
 ````
+
+###
 
 The HTML shows both our code and some annoying messages. No viewer wants to see that!
 
@@ -737,18 +737,20 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> tutorial.helpers::show_file("analysis-1.qmd", end = 8)
 ---
 title: "A Beautiful Graphic"
 author: "PPBDS Student"
 format: html
 execute:
-    echo: false
+  echo: false
 ---
 
 PPBDS student is a data maestro!
-
 ````
+
+###
+
+Setting `execute: echo: false` in the YAML header applies to the whole document: every code chunk still runs, but only its output appears in the rendered HTML --- the code itself is hidden. That is usually what you want for a published page, where readers care about the results, not the code that produced them.
 
 ### Exercise 3
 
@@ -829,7 +831,6 @@ question_text(NULL,
 ###
 
 ````
-> tutorial.helpers::show_file("analysis-1.qmd", chunk = "Last")
 ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
   geom_point(alpha = 0.7) +
   scale_color_brewer(palette = "Set2") +
@@ -851,8 +852,9 @@ ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
     panel.grid.major = element_line(color = "grey90"),
     panel.grid.minor = element_blank()
   )
->
 ````
+
+###
 
 My image looks like:
 

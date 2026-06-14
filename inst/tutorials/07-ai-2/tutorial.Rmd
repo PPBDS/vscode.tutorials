@@ -409,7 +409,37 @@ question_text(NULL,
 
 ###
 
-Your answer should show the full contents of `analysis.qmd`, including a YAML header with `execute: echo: false`, a setup chunk using `suppressPackageStartupMessages(library(tidyverse))`, and at least two ggplot2 code chunks creating plots.
+It should look something like this --- a YAML header with `execute: echo: false`, a setup chunk loading the tidyverse, and the stacked-area storm chart Gemini built. Your plotting code will differ:
+
+<pre><code>---
+title: "Exploring Storms"
+author: "PPBDS Student"
+execute:
+  echo: false
+---
+
+&#96;&#96;&#96;{r}
+suppressPackageStartupMessages(library(tidyverse))
+&#96;&#96;&#96;
+
+&#96;&#96;&#96;{r}
+storms |>
+  filter(status %in% c("tropical depression", "tropical storm", "hurricane")) |>
+  count(year, status) |>
+  ggplot(aes(x = year, y = n, fill = status)) +
+  geom_area() +
+  scale_fill_manual(values = c("tropical depression" = "lightblue",
+                               "tropical storm" = "orange",
+                               "hurricane" = "darkred")) +
+  labs(title = "Atlantic Storms by Type per Year",
+       x = "Year",
+       y = "Number of Storms",
+       fill = "Storm Type")
+&#96;&#96;&#96;</code></pre>
+
+###
+
+You did not write any of this code yourself --- you described the goal and Gemini produced it. The skill you practiced is reviewing what the agent wrote and confirming that it does what you asked.
 
 ### Exercise 2
 

@@ -178,11 +178,9 @@ question_text(NULL,
 	rows = 10)
 ```
 
-### 
+###
 
 ````
-> library(tutorial.helpers)
-+ show_file("_quarto.yml")
 project:
   type: website
 
@@ -199,8 +197,9 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
->
 ````
+
+###
 
 Quarto offers a wide range of output formats. You can find the complete list at https://quarto.org/docs/output-formats/all-formats.html. Many formats share some output options (e.g., `toc: true` for including a table of contents), but others have options that are format specific e.g., `code-fold: true` collapses code chunks into a `<details>` tag for HTML output so the user can display it on demand. It’s not applicable in a PDF or Word document.
 
@@ -225,10 +224,9 @@ question_text(NULL,
 	rows = 3)
 ```
 
-### 
+###
 
 ````
-> show_file("index.qmd")
 ---
 title: "Homepage"
 ---
@@ -236,8 +234,9 @@ title: "Homepage"
 This is a Quarto website.
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
->
 ````
+
+###
 
 Note that the `title` (`"Website 1"`) in `_quarto.yml` has no necessary connection to the `title` (`"Homepage"`) in `index.qmd`. The former is the title for the entire website. The latter is the title for just the (yet-to-be-created) `index.html` page, which will be the home page for the website.
 
@@ -656,13 +655,13 @@ question_text(NULL,
 	rows = 3)
 ```
 
-### 
+###
 
 ````
-> show_file("index.qmd", chunk = "Last")
 suppressPackageStartupMessages(library(tidyverse))
->
 ````
+
+###
 
 Notice that the package startup messages will appear on the home page. Wrap `library(tidyverse)` in `suppressPackageStartupMessages()` to keep the output clean.
 
@@ -815,6 +814,8 @@ ggplot(top_songs, aes(x = week_num, y = rank, color = song_artist)) +
   guides(color = guide_legend(nrow = 2))
 ````
 
+###
+
 As AI gets better, less iteration will be necessary. But you still need to be *intentional*, to demonstrate *agency* and *understanding*. You must be able to explain what the plot means. You don't have to *write* the code, but you should be able to *read* the code, perhaps after asking the AI for help.
 
 ### Exercise 8
@@ -877,6 +878,8 @@ title: "About"
 ## About Me
 ````
 
+###
+
 Hash signs in front of text make the text into a header. The organization of headers is determined by the number of hash signs. Fewer hash signs make higher level headers, i.e. bigger text. More hash signs make lower level headers, i.e. smaller text. 
 
 ### Exercise 10
@@ -915,6 +918,8 @@ title: "About"
 
 My name is David Kane, and I graduated from Williams College.
 ````
+
+###
 
 You can have a Quarto document without a YAML header, if you like. You can also have an empty YAML header. But, it will often be the case that we want all the files in a project to have similar YAML headers in order to create a consistent look-and-feel.
 
@@ -956,6 +961,8 @@ title: "About"
 
 My name is **David Kane**, and I graduated from *Williams College*.
 ````
+
+###
 
 Quarto, which is based on the Markdown language, has a variety of [formatting options](https://quarto.org/docs/authoring/markdown-basics.html).
 
@@ -1009,9 +1016,13 @@ question_text(NULL,
     rows = 3)
 ```
 
+###
+
 ````
 [Kane's Free Data Science Bootcamp](https://bootcamp.davidkane.info)
 ````
+
+###
 
 You only need a few [formatting tricks](https://quarto.org/docs/authoring/markdown-basics.html) for working with Quarto files, but you will use those tricks repeatedly.
 
@@ -1084,13 +1095,13 @@ question_text(NULL,
     rows = 3)
 ```
 
-### 
+###
 
 ````
-> show_file("sources.qmd", pattern = "overview")
 An overview of sources used in my project.
->
 ````
+
+###
 
 Keep in mind that your browser probably has two tabs which show your website. First, the GitHub Pages version, which has not changed since you last hit `quarto publish gh-pages`. The only way to affect the public website is to publish to it. Second, the `localhost` version, which is what you have been changing every time that you render `index.qmd`.
 
@@ -1131,6 +1142,8 @@ An overview of sources used in my project.
 
 These are my sources. Here are some challenges. Quarto websites are awesome.
 ````
+
+###
 
 A website, when you first look closely, may appear overwhelming in its complexity. But it is usually created from a small collection of text files, each of them quite simple.
 
@@ -1216,6 +1229,8 @@ format:
     css: styles.css
     toc: true
 ````
+
+###
 
 **YAML files are *very* tricky!** Tabs and white spaces matter. The code `left` before the navbar items puts the navigation bar on the left side of your site. This can be changed to `right`.
 
@@ -1371,7 +1386,9 @@ format:
     toc: true
 ````
 
-Run `quarto preview` to see the changes. 
+###
+
+Run `quarto preview` to see the changes.
 
 ### Exercise 22
 
@@ -1758,6 +1775,8 @@ library(knitr)
 include_graphics("billboard.png")
 ```</code></pre>
 </code></pre>
+
+###
 
 There was nothing wrong with keeping the plotting code in `index.qmd`. The trouble is that it re-runs on every render. By moving the work into scripts and displaying only the saved image, the site renders almost instantly --- no matter how slow the original analysis was.
 
