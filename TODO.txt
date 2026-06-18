@@ -1,4 +1,28 @@
-## Harshil and Var
+## Problem
+
+
+
+## Codespaces
+
+I need to think more clearly about climbing the complexity ladder. 
+
+The first step is just using codespace straight from codebase-starter. We don't need a repo and we haven't really learned about Git anywhere. Main point is to get very comfortable with VS Code and AI. Could do this for all tutorials through terminal. Clean up Getting Started chapter; Getting Started tutorial, which is in the tutorial.helpers package.
+
+The second step of the complexity ladder is to use a newly created repo using our make_repo script. Where are students taught this? If it is only in Getting Started chapter, then aren't they going to forget.
+
+The third step of the ladder is template repo.
+
+The fourth step of the ladder is making your own devcontainer.json and using it. 
+
+
+## Organization
+
+I think we need a 01-introduction tutorial. This would be the first tutorial that someone does after Getting Started. Indeed, it should probably repeat key issues from Getting Started. That is, it should be self-contained. We want students to start using AI within the IDE as soon as possible. So, this tutorial would include:
+
+* Basic vscode components, often taken from 01-code.
+* A couple of terminal questions.
+* Using Gemini.
+
 
 ## Preceptor
 
