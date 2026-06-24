@@ -1,5 +1,7 @@
 ## Tutorial Edits
 
+Need to ensure that, by the time we finish the core VS Code tutorials that students are very comfortable with repo, .gitginore, QMD and so on. That is, we want to guarantee that all later tutorials can start with one question that starts (and states) from the assumption that you are in a repo named `x` and which tells you to set up a QMD, .gitigore with *_files, commit/push. And then the rest of the tutorial just has the student telling AI what to do with the QMD.
+
 ### 01-introduction
 
 We need a 01-introduction tutorial. This would be the first tutorial that someone does after Getting Started. Indeed, it should probably repeat key issues from Getting Started. That is, it should be self-contained. We want students to start using AI within the IDE as soon as possible. So, this tutorial would include:
@@ -42,39 +44,27 @@ Still good tutorials, but we make some changes.
 
   * Maybe there aren't any AI tutorials! 00-introduction introduces the idea and then every subsequent tutorial uses AI. Indeed, the second ai tutorial (which is mostly git?) would just become part of the second GitHub tutorial.
 
- ### websites
 
-  * 
+### websites
 
+  * It is cool for the first website tutorial to be "by hand," meaning running the `quarto create` command at the terminal, and then exploring each of the resulting files. 
 
+  * It is cool that the website tutorials do a good job of showing students how to organize a project, with different scripts, saved data, and so on. We teach architecture, not coding.
 
-## Codespaces
+  * Nothing wrong with having two tutorials, but probably not two "website" tutorials. Maybe the first is websites and the second is "projects" more generally, including dashboards.
 
-I need to think more clearly about climbing the complexity ladder. 
+  * I don't know the best way to handle (or teach) the creation of projects in the era of AI. Instead of remembering/running `quarto create`, can we just tell AI to make all the necessary files for a Quarto website? Instead of remembering `quarto publish`, can we just tell it to publish the website? 
 
-The first step is just using codespace straight from codebase-starter. We don't need a repo and we haven't really learned about Git anywhere. Main point is to get very comfortable with VS Code and AI. Could do this for all tutorials through terminal. Clean up Getting Started chapter; Getting Started tutorial, which is in the tutorial.helpers package.
+### infrastructure
 
-The second step of the complexity ladder is to use a newly created repo using our make_repo script. Where are students taught this? If it is only in Getting Started chapter, then aren't they going to forget.
+  * infrastructure is very important. I like the content which the current tutorial covers. Students need to understand devcontainers. 
 
-The third step of the ladder is template repo.
+  * Need to end infrastructure tutorial (or add another tutorial) with a topic for creating your own `codespace-starter`, maybe called `starter`.
 
-The fourth step of the ladder is making your own devcontainer.json and using it. 
-
-
-## Organization
+  * But surely there is more infrasture-related topics to cover. Most important might be databases. How about working with APIs? Grabbing live data? 
 
 
 
-## Preceptor
-
-Need to ensure that, by the time we finish the core VS Code tutorials that students are very comfortable with repo, .gitginore, QMD and so on. That is, we want to guarantee that all later tutorials can start with one question that starts (and states) from the assumption that you are in a repo named `x` and which tells you to set up a QMD, .gitigore with *_files, commit/push. And then the rest of the tutorial just has the student telling AI what to do with the QMD.
-
-
-Need to end infrastructure tutorial (or add another tutorial) with a topic for creating your own `codespace-starter`, maybe called `starter`. Key is to change the settings so that this compiles quickly, and then students can launch it fast and then (how) turn it into a new repo. Must be possible for this process to be fast.
-
-## Priorities
-
-Maybe a different tutorial which walked through a bunch of different Quarto project types, not because we are especially interested in Dashboards, but because we want to give students more practice dealing with projects with lots of different files doing different things.
 
 ### Other Stuff
 
