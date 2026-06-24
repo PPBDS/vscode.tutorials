@@ -7,7 +7,7 @@ Need to ensure that, by the time we finish the core VS Code tutorials that stude
 We need a 01-introduction tutorial. This would be the first tutorial that someone does after Getting Started. Indeed, it should probably repeat key issues from Getting Started. That is, it should be self-contained. We want students to start using AI within the IDE as soon as possible. So, this tutorial would include:
 
   * Basic vscode components, often taken from 01-code.
-  * A couple of terminal questions.
+  * A couple of bash Terminal questions.
   * Make a script that adds 2 numbers. And run it. Just to show how you make a file and then do stuff with that file.
   * Two examples of using AI. 
     + The first would be GitHub Copilot, since we can be pretty sure that this will always work. Have it make a script which adds 10 numbers. Have the AI run the script. Then use show_file() so that we know that it worked.
@@ -31,7 +31,11 @@ Still good tutorials, but we make some changes.
 
  ### 04-terminal 
  
- Could be shorter since students rarely use shell commands themselves. But it might also include a couple of git commands, like log and status. Also, this might be a good time to explain how to Upload . . . a file. (Right click the open area in the Explorer tab and "Upload . . ." is an option. This is more important than you might think --- and we should mention these examples. You sometimes need to download data by hand, and so then need to upload it from your Downloads folder. You also sometimes need to upload an image which you want to mimic since, I think, you often can't just "paste" it in to the AI prompt.)
+  * Could be shorter since students rarely use shell commands themselves. But it might also include a couple of git commands, like log and status. 
+
+  * Could at least mention a bunch of commands, like `find`, which students will never use but which they might see AI using on their behalf.
+ 
+  * Also, this might be a good time to explain how to Upload . . . a file. (Right click the open area in the Explorer tab and "Upload . . ." is an option. This is more important than you might think --- and we should mention these examples. You sometimes need to download data by hand, and so then need to upload it from your Downloads folder. You also sometimes need to upload an image which you want to mimic since, I think, you often can't just "paste" it in to the AI prompt.)
 
 ### 05/06 GitHub
 
