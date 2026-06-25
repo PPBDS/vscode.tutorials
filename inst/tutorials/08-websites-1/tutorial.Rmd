@@ -810,9 +810,10 @@ All pages are rendered every time you publish. This can be problematic if some p
 
 ### Exercise 4
 
-There are other publishing options besides GitHub Pages. You would replace `gh-pages` in `quarto publish` with options like `quarto-pub` or `netlify` to use those services.
+The publishing process may take a minute or two to complete. The URL for your website is provided at the end.
 
-Copy/paste the last 10 or so lines of the output.
+Copy/paste the last 8 or so lines of the output from running `quarto publish gh-pages`. CP/CR.
+
 
 ```{r publishing-4}
 question_text(NULL,
@@ -835,7 +836,7 @@ To https://github.com/ppbds-student/08-websites-1.git
 @ppbds-student ➜ /workspaces/08-websites-1 (main) $
 ````
 
-The publishing process may take a minute or two to complete. The URL for your website is provided at the end.
+There are other publishing options besides GitHub Pages. You would replace `gh-pages` in `quarto publish` with options like `quarto-pub` or `netlify` to use those services.
 
 ### Exercise 5
 
