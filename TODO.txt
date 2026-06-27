@@ -2,6 +2,16 @@
 
 Need to ensure that, by the time we finish the core VS Code tutorials that students are very comfortable with repo, .gitginore, QMD and so on. That is, we want to guarantee that all later tutorials can start with one question that starts (and states) from the assumption that you are in a repo named `x` and which tells you to set up a QMD, .gitigore with *_files, commit/push. And then the rest of the tutorial just has the student telling AI what to do with the QMD.
 
+But, at the same time, we don't want to overwhelm them during week 1. So, we need to bring things in slowly.
+
+Getting Started chapter introduces Codespaces and VS Code. (Might make this longer?) But does nothing with Git/GitHub. Getting Started tutorial does a little more with Codespaces and VS Code but its main focus is showing how to work with tutorials. We want both these to be sort of quick, although we should have a couple of AI questions.
+
+We can split AI into two parts. In Getting Started and the Introduction, we just use GitHub Copilot. We know it will always be there and will always work for at least a few questions. Then, later, we can learn how to operate something like Antigravity from the command line.
+
+There is a temptation to hold off on repos until after the first few tutorials, but then we can't publish nice pages during the quarto tutorial. So, best to just bite the bullet and have students use connect-repo early, starting in the introduction, or maybe even in Getting Started.
+
+
+
 ### 01-introduction
 
 We need a 01-introduction tutorial. This would be the first tutorial that someone does after Getting Started. Indeed, it should probably repeat key issues from Getting Started. That is, it should be self-contained. We want students to start using AI within the IDE as soon as possible. So, this tutorial would include:

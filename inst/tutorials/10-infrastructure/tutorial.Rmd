@@ -33,11 +33,19 @@ This tutorial explores devcontainers --- configuration files that define how a G
 
 ### Exercise 1
 
-You must do this tutorial in a Codespace created from a GitHub repo named `10-infrastructure`. If you haven't already done this, follow these steps:
+As with your earlier tutorials, you do this one in your own repo named `10-infrastructure`. To set that up:
 
-1. Create a GitHub Repo: go to the [codespace-starter repo](https://github.com/ppbds-student/codespace-starter). Click the green "Use this Template" drop-down button and select "Create a new repository". Name the repo `10-infrastructure`. Then click "Create repository".
+1. Launch a Codespace: go to the [codespace-starter repo](https://github.com/PPBDS/codespace-starter). Click the green "Code" drop-down button, select the "Codespaces" tab, and click "Create codespace on main".
 
-2. Create a Codespace from `10-infrastructure`: from this repo's page, click the green "Code" drop down button, select the "Codespaces" tab, and click "Create Codespace on main".
+2. Create your work repo: in the bash Terminal, run
+
+````
+.devcontainer/connect-repo.sh 10-infrastructure
+````
+
+The first time, a browser prompt asks you to **authorize** --- click through it, then come back. The script signs you in as yourself and creates a new public `10-infrastructure` repo under your GitHub account.
+
+3. Open your repo as the workspace: **File → Open Folder → `/workspaces/10-infrastructure`**.
 
 Copy and paste the URL for your `10-infrastructure` repository.
 
@@ -105,22 +113,50 @@ question_text(NULL,
 Your answer should look like:
 
 ````
-@ppbds-student ➜ /workspaces/10-infrastructure (main) $ pwd
+10-infrastructure $ pwd
 /workspaces/10-infrastructure
-@ppbds-student ➜ /workspaces/10-infrastructure (main) $ ls -a
-.  ..  .devcontainer  .git
-@ppbds-student ➜ /workspaces/10-infrastructure (main) $
+10-infrastructure $ ls -a
+.  ..  .git
+10-infrastructure $
 ````
 
 ###
 
-The `.devcontainer` directory tells GitHub Codespaces how to set up this Codespace. The `.git` directory confirms this repo is tracked by Git.
+Your `10-infrastructure` repo starts almost empty --- the `.git` directory confirms it is tracked by Git, but there is nothing else here yet. This is where you will save your own work. Notice what is *missing*: there is no `.devcontainer` directory, even though this Codespace clearly has one configured. We track it down next.
 
 ### Exercise 4
 
-Run `cat .devcontainer/devcontainer.json`. CP/CR.
+In the bash Terminal, run `cd ../codespace-starter`, then run `pwd`. CP/CR.
 
 ```{r introduction-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+Your output should look like:
+
+````
+10-infrastructure $ cd ../codespace-starter
+codespace-starter $ pwd
+/workspaces/codespace-starter
+codespace-starter $
+````
+
+###
+
+Both repos live side by side inside this Codespace, under `/workspaces`: your own `10-infrastructure` and the `codespace-starter` you launched from. The `..` in `cd ../codespace-starter` means "the parent directory," so the command moves up from `/workspaces/10-infrastructure` to `/workspaces`, then down into `codespace-starter`. That is where the `devcontainer.json` that configured this machine actually lives --- not in your work repo, which is just for saving your own work. Notice the prompt change from `10-infrastructure $` to `codespace-starter $`: the prompt always shows the name of the directory you are in, a quick way to confirm where you are.
+
+### Exercise 5
+
+Run `cat .devcontainer/devcontainer.json`. CP/CR.
+
+```{r introduction-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -131,7 +167,7 @@ question_text(NULL,
 
 ###
 
-Your output will show the full `devcontainer.json` for the `codespace-starter` template. You will explore each part of this file in the Codespace Starter Devcontainer section. Keep this Codespace open --- you will need it alongside a second Codespace in the next section.
+Your output shows the full `devcontainer.json` from the `codespace-starter` repo. You will explore each part of this file in the Codespace Starter Devcontainer section. Keep this Codespace open --- you will need it alongside a second Codespace in the next section.
 
 ## Jupyter Notebook Devcontainer
 ###
@@ -276,11 +312,9 @@ Pygments==2.20.0
 
 Use AI to update the devcontainer so it installs and configures the environment for using R instead of Python. Some ways you can do this include:
 
-1. Use the Copilot chat sidebar.
+1. Copy and paste the entire document to an AI chatbot --- ChatGPT, Claude, Gemini, or any other.
 
-2. Copy and paste the entire document to an AI chatbot.
-
-3. Use the gemini CLI in a bash Terminal.
+2. Use one of the AI command-line assistants (`claude`, `codex`, `agy`, or `aider`) in a bash Terminal in your `codespace-starter` Codespace.
 
 Copy and paste your new `devcontainer.json`.
 
@@ -366,7 +400,7 @@ Until you commit, changes exist only in your local files and can be discarded at
 Replace the first paragraph of `README.md` with:
 
 ```
-This is YOUR NAME's new python Codespace!
+This is YOUR NAME's new Python Codespace!
 ```
 
 Save the changes. In the Source Control side bar, write a commit message like "Updated README". Then, press the "Commit Button". A pop-up will appear:
@@ -438,8 +472,6 @@ Each line excludes files that shouldn't be tracked in Git:
 
 - `.ipynb_checkpoints/` ignores the auto-save folder that Jupyter creates whenever you run a notebook --- these are temporary files that don't need to be saved to Git.
 
-###
-
 ### Exercise 10
 
 Navigate to the `data` directory and open atlantis.csv. Paste the top 5 lines.
@@ -502,13 +534,13 @@ Go to the Source Control side bar and press the "Publish Branch" button.
 
 You may be asked to sign into GitHub. If so, select "Allow" then your GitHub account. This happens because we created this Codespace directly from a template. We have a local Git repository in the Codespace, but do not yet have a Git Repository on GitHub. Press the "Publish Branch" button again.
 
-Run `git log --oneline`. CP/CR.
-
 Now you can name the GitHub repository and then select if you'd like to make it private or public. Name it `codespaces-jupyter` and choose public.
 
 ```{r}
 include_graphics("images/publish-cs.png")
 ```
+
+Run `git log --oneline`. CP/CR.
 
 
 ```{r devcontainers-12}
@@ -917,11 +949,11 @@ Stopped Codespaces don't use compute hours but still occupy storage --- they can
 ## Codespace Starter Devcontainer
 ###
 
-You have examined two devcontainer files so far: one for a generic Python Codespace and one you wrote from scratch for a minimal R setup. Now you will look at the devcontainer behind the Codespace you are working in right now. The `codespace-starter` template uses a custom image built specifically for this course and a detailed `settings` block that configures VS Code's behavior. Many of the behaviors you may have noticed --- auto-save, plots appearing inside the editor, the Git commit button working without an extra confirmation step --- are controlled here.
+You have examined two devcontainer files so far: one for a generic Python Codespace and one you wrote from scratch for a minimal R setup. Now you will look at the devcontainer behind the Codespace you are working in right now. `codespace-starter` uses a custom image built specifically for this course and a detailed `settings` block that configures VS Code's behavior. Many of the behaviors you may have noticed --- auto-save, plots appearing inside the editor, the Git commit button working without an extra confirmation step --- are controlled here.
 
 ### Exercise 1
 
-In the File Explorer, navigate to `.devcontainer/devcontainer.json`. Copy and paste the entire file.
+In the bash Terminal, run `cd /workspaces/codespace-starter`, then `cat .devcontainer/devcontainer.json`. Copy and paste the entire output.
 
 ```{r codespace-starter-1}
 question_text(NULL,
@@ -954,14 +986,14 @@ question_text(NULL,
 Your answer should look like:
 
 ```
-"image": "ghcr.io/ppbds/devcontainers/student:0.3.0",
+"image": "ghcr.io/ppbds/devcontainers/student:0.6.0",
 ```
 
 Note that the version number will change as the image is updated.
 
 ###
 
-`codespace-starter` uses a custom PPBDS image **locked** to version `0.2.1`, so every student gets the exact same setup regardless of when they open the Codespace. It pre-installs everything the course needs: Quarto, `gh`, `tutorial.helpers`, `vscode.tutorials`, `gemini`, and `claude`.
+`codespace-starter` uses a custom PPBDS image **locked** to version `0.6.0`, so every student gets the exact same setup regardless of when they open the Codespace. It pre-installs everything the course needs: Quarto, `gh`, the `arf` R console, `httpgd`, `pak`, the `tutorial.helpers` and `vscode.tutorials` packages, a Python data-science stack, and four AI command-line assistants --- `claude`, `codex`, `agy`, and `aider`.
 
 ### Exercise 3
 
@@ -978,8 +1010,6 @@ question_text(NULL,
 
 ###
 
-<!-- HK: Added mechatroner.rainbow-csv to extensions list which was missing from the expected answer. -->
-
 Your answer should look like:
 
 ```
@@ -987,16 +1017,20 @@ Your answer should look like:
   "reditorsupport.r",
   "quarto.quarto",
   "PPBDS.vscode-r-tutorials",
-  "google.gemini-cli-vscode-ide-companion",
   "ritwickdey.LiveServer",
   "tomoki1207.pdf",
-  "mechatroner.rainbow-csv"
+  "mechatroner.rainbow-csv",
+  // Python data science: language support + notebooks. Unlike the AI
+  // assistant panels above, these are ordinary language tooling that
+  // renders fine in the web Codespaces client.
+  "ms-python.python",
+  "ms-toolsai.jupyter"
 ],
 ```
 
 ###
 
-Each extension serves a specific role: `reditorsupport.r` provides R language support, `quarto.quarto` enables Quarto document rendering, `PPBDS.vscode-r-tutorials` powers the tutorial panel you are using right now, `google.gemini-cli-vscode-ide-companion` is a sidebar companion for the Gemini CLI, `ritwickdey.LiveServer` lets you preview HTML files in the browser, `tomoki1207.pdf` adds a PDF viewer directly inside VS Code, and `mechatroner.rainbow-csv` adds a CSV viewer with color-coded columns.
+Each extension serves a specific role: `reditorsupport.r` provides R language support, `quarto.quarto` enables Quarto document rendering, `PPBDS.vscode-r-tutorials` powers the tutorial panel you are using right now, `ritwickdey.LiveServer` lets you preview HTML files in the browser, `tomoki1207.pdf` adds a PDF viewer directly inside VS Code, `mechatroner.rainbow-csv` adds a CSV viewer with color-coded columns, and `ms-python.python` with `ms-toolsai.jupyter` add Python language support and Jupyter notebooks. Notice what is *absent*: there are no AI-assistant extensions. The AI tools ship as command-line programs instead (`claude`, `codex`, `agy`, `aider`), because the in-editor AI panels render poorly in the browser-based Codespaces client --- a CLI works on every device.
 
 ### Exercise 4
 
@@ -1016,12 +1050,12 @@ question_text(NULL,
 Your answer should look like:
 
 ```
-"r.rterm.linux": "/home/rstudio/.cargo/bin/arf",
+"r.rterm.linux": "/usr/local/bin/arf",
 ```
 
 ###
 
-`arf` is a fast replacement for the default R Terminal: it starts more quickly and handles pasted multi-line code more reliably. The path is written out directly here so VS Code always knows where to find it.
+`arf` is a fast, Rust-based replacement for the default R Terminal: it starts more quickly and handles pasted multi-line code more reliably. The path points at `/usr/local/bin/arf`, a stable symlink the image provides for exactly this purpose, so the setting keeps working even if the image's internals move.
 
 ### Exercise 5
 
@@ -1148,6 +1182,56 @@ Your answer should look like:
 
 By default, VS Code opens files in "preview" mode --- clicking a second file replaces the first tab, so beginners often think their file disappeared. Setting this to `false` means every file opens in a permanent tab.
 
+### Exercise 10
+
+Find the line beginning with `"python.defaultInterpreterPath"`. Copy and paste it.
+
+```{r codespace-starter-10}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+Your answer should look like:
+
+```
+"python.defaultInterpreterPath": "/opt/venv/bin/python",
+```
+
+###
+
+The image ships a full Python data-science stack --- numpy, pandas, matplotlib, scikit-learn, and more --- in a virtual environment at `/opt/venv`. This setting points the Python extension at that environment, so `import pandas` works in a Jupyter notebook or a Quarto Python chunk with no setup. This is a recent addition: earlier versions of `codespace-starter` were R-only.
+
+### Exercise 11
+
+Find the line beginning with `"postCreateCommand"`. Copy and paste it.
+
+```{r codespace-starter-11}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+Your answer should look like:
+
+```
+"postCreateCommand": "R -q -e 'pak::pkg_install(c(\"PPBDS/tutorial.helpers\", \"PPBDS/vscode.tutorials\"), ask = FALSE)'",
+```
+
+###
+
+Like the Jupyter template's `updateContentCommand`, this runs automatically when the Codespace is created. It refreshes the two fast-moving course packages --- `tutorial.helpers` and `vscode.tutorials` --- to their latest versions, so you always get the newest tutorials even though the image itself is pinned. The image bakes in working copies as a fallback, so a momentary GitHub outage never blocks the Codespace from opening.
+
 
 ## Summary
 ###
@@ -1179,7 +1263,7 @@ Stopping Codespaces when you are done with them conserves your free monthly comp
 
 ### Exercise 2
 
-Commit and push any remaining uncommitted files in your `10-infrastructure` Codespace. Copy/paste the URL to your `10-infrastructure` GitHub repo.
+Paste the URL of the `r-devcontainer` GitHub repository you created in the New Devcontainer section.
 
 ```{r summary-2}
 question_text(NULL,
@@ -1192,7 +1276,15 @@ question_text(NULL,
 
 ###
 
-Because `devcontainer.json` is committed to the repo, the Codespace configuration travels with the code --- anyone who forks your repo gets the exact same setup. This is the same principle behind `renv.lock` and `requirements.txt`: capture your setup in Git so it can be reproduced by anyone.
+Your URL should look something like:
+
+```
+https://github.com/ppbds-student/r-devcontainer
+```
+
+###
+
+Because the `devcontainer.json` you wrote is committed to `r-devcontainer`, the Codespace configuration travels with the repo --- anyone who launches a Codespace from it gets the exact same R setup. This is the same principle behind `renv.lock` and `requirements.txt`: capture your setup in Git so it can be reproduced by anyone.
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
