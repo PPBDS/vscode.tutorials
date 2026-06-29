@@ -35,11 +35,36 @@
 <div id="claudemd--vscodetutorials" class="section level1">
 
 <p><code>vscode.tutorials</code> is the <strong>infrastructure / mechanics</strong> tutorial package: the first tutorials a student does, which teach the <em>tools and environment</em> — Git, GitHub, <code>.gitignore</code>, <code>_files</code> directories, terminals, GitHub Codespaces, Quarto rendering, the distinction between QMD World and R World, package ecosystems, CP/CR, and the rest of the working setup.</p>
-<p><strong>This package is the explicit exception to the base tutorial guide.</strong> The base guide (<a href="https://github.com/PPBDS/ai-rules/blob/main/claude-md/tutorials/CLAUDE.md" class="external-link"><code>claude-md/tutorials/CLAUDE.md</code></a>) is the default contract for <em>normal</em>, post-infrastructure data science tutorials, and it explicitly does <strong>not</strong> govern this package. Everything the base guide tells a normal tutorial to <em>assume</em> — that students already know Git, terminals, rendering, and CP/CR — is what the tutorials here exist to <em>teach</em>. So the base guide’s rules (no exercise code chunks, no generic knowledge drops, work-in-the-QMD-not-the-R-Terminal, and so on) do not bind these tutorials. Teach the mechanics directly.</p>
-<p>(The <code>tutorial.helpers</code> package’s tutorials are the other base-guide exception, for the same reason.)</p>
-<blockquote>
-<p>This file is a starting point. It currently does little more than house the infrastructure knowledge drops salvaged from the normal tutorials (below). A fuller authoring guide for <code>vscode.tutorials</code> can grow here over time.</p>
-</blockquote>
+<div class="section level2">
+<h2 id="relationship-to-the-base-tutorial-guide">Relationship to the base tutorial guide<a class="anchor" aria-label="anchor" href="#relationship-to-the-base-tutorial-guide"></a></h2>
+<p>The base guide (<a href="https://github.com/PPBDS/ai-rules/blob/main/claude-md/tutorials/CLAUDE.md" class="external-link"><code>claude-md/tutorials/CLAUDE.md</code></a>) is the default contract for tutorials across the project, and <strong><code>vscode.tutorials</code> mostly <em>follows</em> it.</strong> Its rules for question types, knowledge drops, the Introduction/Summary structure, submission evidence (CP/CR, <code>show_file()</code>), and the syntactic conventions all apply here. Read the base guide first; it is the default, not an outside reference. Two things set this package apart:</p>
+<ol style="list-style-type: decimal"><li><p><strong>No build-two-graphics-and-publish arc.</strong> The one structural piece of a normal tutorial these lack is its analysis path — get data, explore it, build a plot or table, interpret, publish. A <code>vscode.tutorials</code> tutorial’s <em>topic</em> is a piece of the working setup (Git, terminals, Codespaces, devcontainers, rendering), not a data analysis, so there is no <code>analysis.qmd</code> working chunk and no published graphic. Everything else about how an exercise and a tutorial are shaped still comes from the base guide.</p></li>
+<li><p><strong>A narrow, shrinking mechanics exception — first few tutorials only.</strong> The genuinely from-scratch teaching, where the base guide’s <em>assumptions</em> (students already know Git, terminals, rendering, CP/CR) are exactly what we <em>teach</em>, lives in the earliest tutorials. There the base guide’s bans (no exercise code chunks, no generic knowledge drops, work-in-the-QMD-not-the-R-Terminal) do not bind: we teach the mechanics directly, run commands in the Terminal because the Terminal is the lesson, and use the generic infrastructure knowledge drops collected below. This is <strong>not</strong> a blanket property of the package — it is concentrated in the first few tutorials and may be removed entirely before long. Do not invoke it for a later tutorial just because the file happens to live in this package.</p></li>
+</ol><p>(The <code>tutorial.helpers</code> package’s tutorials are the other home of this mechanics exception, for the same reason.)</p>
+<div class="section level3">
+<h3 id="what-downstream-packages-assume">What downstream packages assume<a class="anchor" aria-label="anchor" href="#what-downstream-packages-assume"></a></h3>
+<p>Later packages (<code>misc.tutorials</code>, the Primer) do <strong>not</strong> assume a student has done <em>all</em> of <code>vscode.tutorials</code> — only the foundational material in the first several tutorials, roughly <strong>through the GitHub tutorials</strong> (<code>06-github-2</code>). The later <code>vscode.tutorials</code> tutorials (<code>07-ai-2</code>, the websites pair, <code>10-infrastructure</code>) are not part of that assumed base. (This is about what downstream tutorials may rely on, not a claim about which tutorials students finish — many do reach the later ones.)</p>
+</div>
+<div class="section level3">
+<h3 id="the-universal-entry-point">The universal entry point<a class="anchor" aria-label="anchor" href="#the-universal-entry-point"></a></h3>
+<p>Outside any single tutorial, students learn one fixed way to begin, the same for every tutorial in every package:</p>
+<ol style="list-style-type: decimal"><li>
+<strong>Open a Codespace on <code>main</code> from <code>PPBDS/codespace-starter</code></strong> (or, on a local machine, open VS Code there). Work always starts here.</li>
+<li>
+<strong>Start the tutorial from the R Tutorials extension.</strong> (When a tutorial lives in another package — e.g. <code>primer.tutorials</code> — installing that package is also taught outside the tutorial context.)</li>
+</ol><p>That is the entire entry ritual a student must carry in their head. Crucially, because every student is <em>already in a <code>codespace-starter</code> Codespace</em> when a tutorial begins, <strong>a tutorial does not require the student to have set up a work repo beforehand.</strong> The intro itself walks them through creating and connecting one — <code>connect-repo</code>, <code>File → Open Folder</code>, and the rest. There is no “be in repo <code>whatever</code> before you start, or exit and restart”: setting up the repo is the first thing the tutorial does.</p>
+<p>How much the intro spells out scales with where the tutorial sits:</p>
+<ul><li>
+<strong>Early <code>vscode.tutorials</code>:</strong> walk it through slowly — run <code>connect-repo</code>, explain what it does, show the two folders that now sit side by side under <code>/workspaces</code>, and so on. This is teaching content, not boilerplate, and naming <code>codespace-starter</code> / <code>connect-repo</code> here is correct because the environment is the subject.</li>
+<li>
+<strong>Later tutorials (and downstream packages):</strong> just say <em>“create and connect to a repo called <code>whatever</code>.”</em> The mechanics were taught earlier, so the standard repo line carries the whole setup. Downstream normal tutorials keep this environment-agnostic per the base guide — the student executes “create and connect” the same way regardless of where they are.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="running-locally">Running locally<a class="anchor" aria-label="anchor" href="#running-locally"></a></h3>
+<p>All <code>vscode.tutorials</code> are written for a <strong>GitHub Codespace using VS Code</strong> — that is the assumed environment. The tutorials <em>can</em> be run on a local machine, and with a reasonable setup 90%+ of the steps work identically, but some things differ. The directory structure is not the same, and conveniences that ship with <code>codespace-starter</code> do not exist locally: a tool like <code>connect-repo</code> only exists when you begin from <code>codespace-starter</code>. A local student instead creates a repo by hand (or asks AI for the <code>git</code> commands) and clones it to their machine.</p>
+<p>We do <strong>not</strong> teach these local-vs-Codespace differences — the tutorials are written for the Codespace path — but we do <strong>mention</strong> them on occasion, so a local student isn’t left stranded. <strong>TODO: revisit which tutorials should carry these mentions, and where.</strong> Right now they appear ad hoc; they deserve deliberate placement.</p>
+</div>
+</div>
 <div class="section level2">
 <h2 id="generic-knowledge-drops-to-integrate">Generic knowledge drops to integrate<a class="anchor" aria-label="anchor" href="#generic-knowledge-drops-to-integrate"></a></h2>
 <p>As the normal tutorials (the Primer; <code>misc.tutorials</code>) adopted the base guide’s knowledge-drop rule — every drop must (1) make a key point from the companion chapter, (2) talk about the data, or (3) comment on what the most recent command displayed — a set of <strong>generic infrastructure knowledge drops</strong> were pulled out of them. Those lessons are real and worth teaching; they just belong <em>here</em>, in the infrastructure tutorials, not in a data science tutorial.</p>
@@ -79,7 +104,7 @@
 </div>
 <div class="section level2">
 <h2 id="authoring-conventions">Authoring conventions<a class="anchor" aria-label="anchor" href="#authoring-conventions"></a></h2>
-<p>This package is an exception to the <em>pedagogical</em> parts of the base tutorial guide, but it shares the project-wide <em>syntactic</em> conventions. In particular:</p>
+<p>The project-wide <em>syntactic</em> conventions apply here exactly as in the base guide and every other tutorial package. In particular:</p>
 <ul><li>
 <p><strong>Per-chunk options use Quarto’s <code>#| key: value</code> syntax on lines inside the chunk, not inline <code>, key = value</code> on the header.</strong> So an answer chunk is</p>
 <pre><code>```{r section-name-N-test}
