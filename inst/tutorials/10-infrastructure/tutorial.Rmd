@@ -33,19 +33,7 @@ This tutorial explores devcontainers --- configuration files that define how a G
 
 ### Exercise 1
 
-As with your earlier tutorials, you do this one in your own repo named `10-infrastructure`. To set that up:
-
-1. Launch a Codespace: go to the [codespace-starter repo](https://github.com/PPBDS/codespace-starter). Click the green "Code" drop-down button, select the "Codespaces" tab, and click "Create codespace on main".
-
-2. Create your work repo: in the bash Terminal, run
-
-````
-.devcontainer/connect-repo.sh 10-infrastructure
-````
-
-The first time, a browser prompt asks you to **authorize** --- click through it, then come back. The script signs you in as yourself and creates a new public `10-infrastructure` repo under your GitHub account.
-
-3. Open your repo as the workspace: **File → Open Folder → `/workspaces/10-infrastructure`**.
+Create and connect to a repo called `10-infrastructure`, then open it as your workspace.
 
 Copy and paste the URL for your `10-infrastructure` repository.
 

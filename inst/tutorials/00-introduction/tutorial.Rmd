@@ -1,0 +1,92 @@
+---
+title: "Introduction"
+author: David Kane
+tutorial:
+  id: "00-introduction"
+output:
+  learnr::tutorial:
+    df_print: default
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+description: "The first tutorial in the sequence. Introduces how the tutorials work and gets your working environment set up."
+---
+
+```{r setup, include = FALSE}
+library(learnr)
+library(tutorial.helpers)
+library(knitr)
+
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(out.width = '90%')
+options(tutorial.exercise.timelimit = 60,
+        tutorial.storage = "local")
+```
+
+```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```
+
+## Introduction
+###
+
+This is the first tutorial in the sequence. It introduces how the tutorials work and gets your working environment set up.
+
+### Exercise 1
+
+Create and connect to a repo called `00-introduction`, then open it as your workspace.
+
+Copy and paste the URL for your `00-introduction` repository.
+
+```{r introduction-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+Your answer should look something like:
+
+````
+https://github.com/ppbds-student/00-introduction
+````
+
+###
+
+TODO: knowledge drop.
+
+## Summary
+###
+
+This tutorial introduced how the tutorials work and got your working environment set up.
+
+### Exercise 1
+
+Commit and push any remaining changes. Copy and paste the URL for your `00-introduction` repository.
+
+```{r summary-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+Your answer should look something like:
+
+````
+https://github.com/ppbds-student/00-introduction
+````
+
+###
+
+TODO: knowledge drop.
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
