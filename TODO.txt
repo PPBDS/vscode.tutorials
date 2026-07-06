@@ -82,18 +82,22 @@ Still good tutorials, but we make some changes.
 
 ### Other Stuff
 
-Tutorial times from 2025
+Tutorial times from 2026
 
-# A tibble: 7 × 3
-  source                minutes     N
-  <fct>                   <dbl> <int>
-1 01-code_answers          119     68
-2 02-quarto_answers         90     50
-3 03-terminal_answers      112.    46
-4 04-github-1_answers      120     53
-5 05-github-2_answers       60     44
-6 06-websites-1_answers     60     39
-7 07-websites-2_answers    120     33
+   source                    minutes     N
+   <fct>                       <dbl> <int>
+ 1 getting-started_answers      35      47
+ 2 introduction-to-r_answers    45      43
+ 3 01-code_answers              85      40
+ 4 02-quarto_answers            90      35
+ 5 03-terminal_answers         120      32
+ 6 04-ai-1_answers              78      28
+ 7 05-github-1_answers          60      29
+ 8 06-github-2_answers          73      28
+ 9 07-ai-2_answers              50      27
+10 r4ds-1_answers               90      22
+11 08-websites-1_answers        60      24
+12 r4ds-2_answers               90      15
 
 Update images in 01-code.
 

@@ -649,9 +649,11 @@ Both Codespaces are counting against your available Codespace time. It's good to
 
 ### Exercise 16
 
+<!-- DK: Question from Krrish: Also, I just had a question on one of the exercises. It asks me to delete the codespace because all of the code is saved because of the commit button. However, if I delete the codespace, the R tutorial will be gone and that means I will lose progress of my vscode.tutorial and if I create a new codespace, I will have to start all over again. I'm lost on what I should do? -->
+
 Click the `...` next to your Codespace where you were working on the website and select "Delete".
 
-Once it is deleted, go to the GitHub repo page for your website and look at the file list under the `<> Code` tab. You can see that all of the files you had created are here. In the upper right of this table, you can see that there have been 3 commits to the repo and that the last commit was made recently. Click on the "3 commits" button.
+Once it is deleted, go to the GitHub repo page for your website and look at the file list under the `<> Code` tab. You can see that all of the files you had created are there. In the upper right of this table, you can see that there have been 3 commits to the repo and that the last commit was made recently. Click on the "3 commits" button.
 
 ```{r}
 include_graphics("images/p1-gh-repo-code.png")
