@@ -704,10 +704,10 @@ Open `.devcontainer/devcontainer.json` in the editor. Replace all of its content
 }
 ```
 
-Save the file. Then in the **R Terminal**, run:
+Save the file. Then in the **bash Terminal**, run:
 
 ```
-tutorial.helpers::show_file(".devcontainer/devcontainer.json")
+cat .devcontainer/devcontainer.json
 ```
 
 CP/CR.
