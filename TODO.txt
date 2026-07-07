@@ -1,3 +1,11 @@
+## Krrish
+
+Delete (after splitting up) infrastructure into three tutorials, both because it is too long and because we need to add some material. 10-devcontainer just includes the first two sections of current tutorial. 11-codebase-starter starts with third component of the current tutorial. Maybe add some more material? 12-docker explains the docker files that create the image which our codebase-starter uses.
+
+Use Claude extensively. But you are RESPONSIBLE for what it produces. 
+
+
+
 ## Tutorial Edits
 
 Need to ensure that, by the time we finish the core VS Code tutorials that students are very comfortable with repo, .gitginore, QMD and so on. That is, we want to guarantee that all later tutorials can start with one question that starts (and states) from the assumption that you are in a repo named `x` and which tells you to set up a QMD, .gitigore with *_files, commit/push. And then the rest of the tutorial just has the student telling AI what to do with the QMD.

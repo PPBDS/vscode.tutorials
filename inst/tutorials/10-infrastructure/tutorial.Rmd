@@ -974,14 +974,14 @@ question_text(NULL,
 Your answer should look like:
 
 ```
-"image": "ghcr.io/ppbds/devcontainers/student:0.6.0",
+"image": "ghcr.io/ppbds/devcontainer:1.0.1",
 ```
 
 Note that the version number will change as the image is updated.
 
 ###
 
-`codespace-starter` uses a custom PPBDS image **locked** to version `0.6.0`, so every student gets the exact same setup regardless of when they open the Codespace. It pre-installs everything the course needs: Quarto, `gh`, the `arf` R console, `httpgd`, `pak`, the `tutorial.helpers` and `vscode.tutorials` packages, a Python data-science stack, and four AI command-line assistants --- `claude`, `codex`, `agy`, and `aider`.
+`codespace-starter` uses a custom PPBDS image **pinned** to a specific version, so every student gets the exact same setup regardless of when they open the Codespace. There is a single image, `ghcr.io/ppbds/devcontainer`, that serves the whole PPBDS organization --- students taking the course and developers working on PPBDS packages alike. It pre-installs everything the course needs: Quarto, `gh`, the `arf` R console, `httpgd`, `pak`, the four course tutorial packages (`tutorial.helpers`, `vscode.tutorials`, `misc.tutorials`, and `primer.tutorials`), R stacks for modeling, mapping, and presentation, a Python data-science stack, and four AI command-line assistants --- `claude`, `codex`, `agy`, and `aider`.
 
 ### Exercise 3
 
@@ -1072,9 +1072,34 @@ By default, R opens plots in a separate window that would be invisible in a Code
 
 ### Exercise 6
 
-Find the line containing `"git.enableSmartCommit"`. Copy and paste it.
+Find the line containing `"r.source.echo"`. Copy and paste it.
 
 ```{r codespace-starter-6}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+Your answer should look like:
+
+```
+"r.source.echo": true,
+```
+
+###
+
+The "Run Source" button (the ▷ in the editor title bar) and its `Ctrl/Cmd + Shift + S` shortcut normally run a file silently, showing only the final output. This setting makes them run `source()` with `echo = TRUE` instead, so each line of code is printed as it executes --- when something goes wrong, you can see exactly which line produced the error.
+
+### Exercise 7
+
+Find the line containing `"git.enableSmartCommit"`. Copy and paste it.
+
+```{r codespace-starter-7}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1095,11 +1120,11 @@ Your answer should look like:
 
 Smart commit automatically includes all changed files in the commit when you click the Commit button in the Source Control sidebar --- you do not need to run `git add` separately. This is why clicking Commit in the `codespace-starter` Codespace works without an extra confirmation step, while the Jupyter Notebook template required one.
 
-### Exercise 7
+### Exercise 8
 
 Find the line containing `"files.autoSave"`. Copy and paste it.
 
-```{r codespace-starter-7}
+```{r codespace-starter-8}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1120,11 +1145,11 @@ Your answer should look like:
 
 With `"afterDelay"`, VS Code automatically saves open files a short time after you stop typing. This prevents the most common beginner mistake in coding environments: running code that still reflects the last-saved version rather than the current edits, because the file was never manually saved.
 
-### Exercise 8
+### Exercise 9
 
 Find the line containing `"editor.wordWrap"`. Copy and paste it.
 
-```{r codespace-starter-8}
+```{r codespace-starter-9}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1145,11 +1170,11 @@ Your answer should look like:
 
 Word wrap causes long lines to wrap to the next line visually rather than extending off the right edge of the screen. Without it, long comment blocks or URLs in code appear truncated, and students on small screens may not notice that content is hidden to the right.
 
-### Exercise 9
+### Exercise 10
 
 Find the line containing `"workbench.editor.enablePreview"`. Copy and paste it.
 
-```{r codespace-starter-9}
+```{r codespace-starter-10}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1170,11 +1195,11 @@ Your answer should look like:
 
 By default, VS Code opens files in "preview" mode --- clicking a second file replaces the first tab, so beginners often think their file disappeared. Setting this to `false` means every file opens in a permanent tab.
 
-### Exercise 10
+### Exercise 11
 
 Find the line beginning with `"python.defaultInterpreterPath"`. Copy and paste it.
 
-```{r codespace-starter-10}
+```{r codespace-starter-11}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1195,11 +1220,11 @@ Your answer should look like:
 
 The image ships a full Python data-science stack --- numpy, pandas, matplotlib, scikit-learn, and more --- in a virtual environment at `/opt/venv`. This setting points the Python extension at that environment, so `import pandas` works in a Jupyter notebook or a Quarto Python chunk with no setup. This is a recent addition: earlier versions of `codespace-starter` were R-only.
 
-### Exercise 11
+### Exercise 12
 
 Find the line beginning with `"postCreateCommand"`. Copy and paste it.
 
-```{r codespace-starter-11}
+```{r codespace-starter-12}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1213,12 +1238,12 @@ question_text(NULL,
 Your answer should look like:
 
 ```
-"postCreateCommand": "R -q -e 'pak::pkg_install(c(\"PPBDS/tutorial.helpers\", \"PPBDS/vscode.tutorials\"), ask = FALSE)'",
+"postCreateCommand": "R -q -e 'pak::pkg_install(c(\"PPBDS/tutorial.helpers\", \"PPBDS/vscode.tutorials\", \"PPBDS/misc.tutorials\", \"PPBDS/primer.tutorials\"), ask = FALSE)'",
 ```
 
 ###
 
-Like the Jupyter template's `updateContentCommand`, this runs automatically when the Codespace is created. It refreshes the two fast-moving course packages --- `tutorial.helpers` and `vscode.tutorials` --- to their latest versions, so you always get the newest tutorials even though the image itself is pinned. The image bakes in working copies as a fallback, so a momentary GitHub outage never blocks the Codespace from opening.
+Like the Jupyter template's `updateContentCommand`, this runs automatically when the Codespace is created. It refreshes the four fast-moving course packages --- `tutorial.helpers`, `vscode.tutorials`, `misc.tutorials`, and `primer.tutorials` --- to their latest versions, so you always get the newest tutorials even though the image itself is pinned. The image bakes in working copies as a fallback, so a momentary GitHub outage never blocks the Codespace from opening.
 
 
 ## Summary

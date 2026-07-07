@@ -1,8 +1,17 @@
 # Tests that URLs students are instructed to download from in 03-terminal are
 # still reachable. We check for text/plain content-type to catch cases where a
 # URL silently redirects to an HTML error page instead of the raw file.
+# GitHub rate-limits anonymous requests from CI runners, so retry 429s and, if
+# still throttled, skip: a rate limit is not evidence the URL is broken.
 check_url_is_plain_text <- function(url) {
-  resp <- httr2::request(url) |> httr2::req_perform()
+  resp <- tryCatch(
+    httr2::request(url) |>
+      httr2::req_retry(max_tries = 3, max_seconds = 30) |>
+      httr2::req_perform(),
+    httr2_http_429 = function(cnd) {
+      testthat::skip(paste("Rate limited (HTTP 429) fetching", url))
+    }
+  )
   expect_equal(httr2::resp_status(resp), 200)
   expect_match(httr2::resp_content_type(resp), "text/plain")
 }
