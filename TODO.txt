@@ -4,6 +4,7 @@ Delete (after splitting up) infrastructure into three tutorials, both because it
 
 Use Claude extensively. But you are RESPONSIBLE for what it produces. 
 
+A student claimed that "when trying to do the 10-infrastructure tutorial it requires you to make two more code spaces in the tutorial." Is that true? Is it a good idea?
 
 
 ## Tutorial Edits
@@ -46,6 +47,7 @@ Still good tutorials, but we make some changes.
   * Tutorials should end with repo URL. (Maybe I should spend some time updating the claude.md where it discusses how tutorials end. Most common is with a published GitHub page. But a simple repo URL is also OK. And more advanced tutorials end with a website.)
   * We should change up the examples --- Script-1, Script-2 and so on --- so that the first version might imply that students do things by hand, just so they learn how the underlying technology works. The second and subsequent versions urge the students to use AI.
   * Right now, the examples are too much like the old world, where we add a new line to the script/quarto with each question. We don't teach coding anymore! We teach using AI and/or infrastructure.
+  * Need to teach `Cmd/Ctrl + Shift + K` for rendering qmd files. Even if we use AI to do this later, it is still good to have students do it by hand a bunch, and to see the command which is issued at the bash Terminal when they use those keys.
 
  ### 04-terminal 
  
