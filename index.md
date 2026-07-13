@@ -68,11 +68,16 @@ development environment.
   websites, building two sites and refactoring analysis code into
   scripts that save results as RDS and PNG files.
 
-- *Infrastructure* (“10-infrastructure”). Tour devcontainers and how
-  they keep Codespaces consistent.
+- *Devcontainers* (“10-devcontainer”). Introduce devcontainers, touring
+  a pre-built Jupyter devcontainer.json and building an R
+  devcontainer.json from scratch.
+
+- *Codebase Starter Devcontainer* (“11-codebase-start”). Tour the
+  devcontainer.json behind `codespace-starter` itself.
+
+- *The Devcontainer Dockerfile* (“12-docker”). Read through the
+  Dockerfile that builds the PPBDS devcontainer image.
 
 The *R for Data Science* and *Analyzing US Census Data* tutorials now
 live in the separate
 **[misc.tutorials](https://github.com/PPBDS/misc.tutorials)** package.
-
-sophia test

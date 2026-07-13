@@ -49,10 +49,10 @@ Later packages (`misc.tutorials`, the Primer) do **not** assume a
 student has done *all* of `vscode.tutorials` — only the foundational
 material in the first several tutorials, roughly **through the GitHub
 tutorials** (`06-github-2`). The later `vscode.tutorials` tutorials
-(`07-ai-2`, the websites pair, `10-infrastructure`) are not part of that
-assumed base. (This is about what downstream tutorials may rely on, not
-a claim about which tutorials students finish — many do reach the later
-ones.)
+(`07-ai-2`, the websites pair, `10-devcontainer`, `11-codebase-start`,
+`12-docker`) are not part of that assumed base. (This is about what
+downstream tutorials may rely on, not a claim about which tutorials
+students finish — many do reach the later ones.)
 
 ### The universal entry point
 
