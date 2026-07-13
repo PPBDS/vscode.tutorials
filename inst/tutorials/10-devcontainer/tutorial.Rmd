@@ -219,7 +219,7 @@ codespaces-jupyter    ppbds-student/codespaces-jupyter    main    Active
 
 ###
 
-The github.com/codespaces page is where you manage all your active Codespaces. Each one uses hours and storage from your GitHub monthly limit, so stop or delete ones you're not using.
+The `github.com/codespaces` page is where you manage all your active Codespaces. Each one uses hours and storage from your GitHub monthly limit, so stop or delete ones you're not using.
 
 ### Exercise 3
 
@@ -261,8 +261,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your answer should look like this:
 
 ```
 "vscode": {
@@ -315,11 +313,7 @@ Pygments==2.20.0
 
 ### Exercise 6
 
-Use AI to update the devcontainer so it installs and configures the environment for using R instead of Python. Some ways you can do this include:
-
-1. Copy and paste the entire document to an AI chatbot --- ChatGPT, Claude, Gemini, or any other.
-
-2. Use one of the AI command-line assistants (`claude`, `codex`, `agy`, or `aider`) in a bash Terminal in your `codespace-starter` Codespace.
+Tell AI to edit `devcontainer.json` so it installs and configures the environment for using R instead of Python. 
 
 Copy and paste your new `devcontainer.json`.
 
@@ -479,7 +473,7 @@ Each line excludes files that shouldn't be tracked in Git:
 
 ### Exercise 10
 
-Navigate to the `data` directory and open atlantis.csv. Paste the top 5 lines.
+Navigate to the `data` directory and open `atlantis.csv`. Paste the top 5 lines.
 
 ```{r devcontainers-10}
 question_text(NULL,
@@ -531,7 +525,7 @@ This notebooks reads sample population data from `data/atlantis.csv` and plots i
 
 ###
 
-A `.ipynb` file is a Jupyter notebook --- like a Quarto document, it mixes text, code, and output in runnable cells. `populations.ipynb` reads population data from `atlantis.csv` and plots it with matplotlib, the same read-then-visualize workflow you've used in R.
+A `.ipynb` file is a Jupyter notebook --- like a Quarto document, it mixes text, code, and output in runnable cells. `populations.ipynb` reads population data from `atlantis.csv` and plots it with **matplotlib**, the same read-then-visualize workflow you've used in R.
 
 ### Exercise 12
 

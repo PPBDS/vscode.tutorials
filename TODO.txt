@@ -1,11 +1,34 @@
 ## Krrish
 
-Delete (after splitting up) infrastructure into three tutorials, both because it is too long and because we need to add some material. 10-devcontainer just includes the first two sections of current tutorial. 11-codebase-starter starts with third component of the current tutorial. Maybe add some more material? 12-docker explains the docker files that create the image which our codebase-starter uses.
-
-Use Claude extensively. But you are RESPONSIBLE for what it produces.  Done
-
 A student claimed that "when trying to do the 10-infrastructure tutorial it requires you to make two more code spaces in the tutorial." Is that true? Is it a good idea?
 
+Take ownership of those three tutorials (10, 11, 12). Add yourself as co-author. Aim for 60 minutes each.
+
+It is codepsace-starter, not codebase-start.
+
+Delete 10-infrastructure. 
+
+Come up with a list of things we want to teach students, and then figure out where to put that stuff, and then how to do it. Examples:
+
+1) Install VS Code extension
+
+2) Create a repo/.devcontainer/ from scratch and start a codespace from it.
+
+Students should know how to install a VC Code extension by hand. Maybe share an image. Then, we need to check that they did it. We almost always want this to be some command which we can run which returns evidence that the student did what we wanted. Surely there is a command which returns all the installed VS Code extensions.
+
+Make a new devcontainer from scratch, save it as a repo, then start a codespace from it?
+
+Do not refer to specific AIs like Claude.
+
+No talk about templates.
+
+Own every word. Or send me an email with your questions. But there is no reason to keep anything.
+
+Own every knowledge drop. Several here are much less important than other stuff we should teach students.
+
+Add some images, especially in devcontainer.
+
+Always bold R package and Python libraries. Anything which might appear at a terminal, or a URL, is in backticks.
 
 ## Tutorial Edits
 
