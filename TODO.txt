@@ -2,7 +2,7 @@
 
 Delete (after splitting up) infrastructure into three tutorials, both because it is too long and because we need to add some material. 10-devcontainer just includes the first two sections of current tutorial. 11-codebase-starter starts with third component of the current tutorial. Maybe add some more material? 12-docker explains the docker files that create the image which our codebase-starter uses.
 
-Use Claude extensively. But you are RESPONSIBLE for what it produces. 
+Use Claude extensively. But you are RESPONSIBLE for what it produces.  Done
 
 A student claimed that "when trying to do the 10-infrastructure tutorial it requires you to make two more code spaces in the tutorial." Is that true? Is it a good idea?
 
