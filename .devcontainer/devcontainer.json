@@ -1,0 +1,19 @@
+{
+    "name": "vscode-tutorials-devcontainer",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "features": {
+        "ghcr.io/rocker-org/devcontainer-features/r-rig:latest": {
+            "version": "release"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "anthropic.claude-code",
+                "REditorSupport.r"
+            ]
+        }
+    }
+}

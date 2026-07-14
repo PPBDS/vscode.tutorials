@@ -1,6 +1,8 @@
 ---
 title: "The Devcontainer Dockerfile"
-author: David Kane
+author:
+  - David Kane
+  - Krrish Jayakumar
 tutorial:
   id: "12-docker"
 output:
