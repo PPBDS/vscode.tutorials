@@ -827,6 +827,33 @@ question_text(NULL,
 
 ### Exercise 9
 
+Now install an extension by hand instead of editing JSON. Open the Extensions view with `Ctrl+Shift+X` (or `Cmd+Shift+X` on Mac). Search for **"Rainbow CSV"** (or **"GitLens"**, if you prefer). Click **Install**.
+
+Once it finishes installing, copy and paste the confirmation --- e.g. the extension's entry in the Extensions sidebar showing **"Installed"**.
+
+```{r new-devcontainer-9}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```
+Rainbow CSV
+mechatroner.rainbow-csv
+Installed
+```
+
+###
+
+This is a completely different way of installing an extension than the `customizations.vscode.extensions` array you just found in `devcontainer.json`. Installing through the Marketplace UI only affects *this* running Codespace --- it is not saved anywhere, so the next time you rebuild or open a fresh Codespace from this repo, Rainbow CSV will be gone. The JSON array, by contrast, is declarative and committed to the repo: it installs automatically for anyone --- including your future self --- who opens a Codespace from `r-devcontainer`, with no manual step required.
+
+### Exercise 10
+
 In the blank Codespace, go to the Source Control sidebar. Write a commit message like **"add R devcontainer"** and press the **Commit** button. Then press **"Publish Branch"**. Name the repository `r-devcontainer` and choose public.
 
 ```{r}
@@ -835,7 +862,7 @@ include_graphics("images/publish-cs.png")
 
 Run `git log --oneline`. CP/CR.
 
-```{r new-devcontainer-9}
+```{r new-devcontainer-10}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -857,11 +884,11 @@ main $
 
 `(HEAD -> main, origin/main)` on the same commit means your local branch and GitHub are up to date with each other.
 
-### Exercise 10
+### Exercise 11
 
 Go to GitHub. In the upper-right corner, click your profile picture, then select **"Your repositories"**. Click the repository named `r-devcontainer`. Paste the URL of the repo.
 
-```{r new-devcontainer-10}
+```{r new-devcontainer-11}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -880,13 +907,13 @@ https://github.com/ppbds-student/r-devcontainer
 
 This Codespace was created directly from a template, so there was no GitHub repo yet --- "Publish Branch" is what creates it.
 
-### Exercise 11
+### Exercise 12
 
 If you haven't already, stop the blank Codespace. Open the Command Palette with `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac), type `>stop`, and select **"Codespaces: Stop Current Codespace"**.
 
 Then go to `https://github.com/codespaces`. Find the row for the blank Codespace and copy and paste it.
 
-```{r new-devcontainer-11}
+```{r new-devcontainer-12}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -898,6 +925,38 @@ question_text(NULL,
 ###
 
 Stopped Codespaces don't use compute hours but still occupy storage --- they can be restarted at any time. Deleting a Codespace frees the storage entirely but cannot be undone.
+
+### Exercise 13
+
+Go to your `r-devcontainer` repo on GitHub (the one you published in Exercise 11). Click the green **"Code"** button, go to the **Codespaces** tab, and create a brand new Codespace directly from this repo --- do not reuse the old blank one.
+
+Once it finishes building, confirm that `devcontainer.json` was automatically applied. In the bash Terminal, run:
+
+```
+R --version
+```
+
+CP/CR, to confirm the tidyverse R image loaded automatically.
+
+```{r new-devcontainer-13}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+````
+R version 4.5.3 (2026-03-11) -- "Reassured Reassurer"
+````
+Note that your R version may differ as R releases new versions regularly.
+
+###
+
+This confirms the `.devcontainer` configuration you hand-wrote is portable and reproducible: you never told this new Codespace to install R or the R extension --- it read `devcontainer.json` from the repo and set itself up automatically. Anyone, including your future self, can clone or open a Codespace from `r-devcontainer` and get the exact same environment, without manually repeating any of the setup steps you did in Exercises 2 through 5.
 
 ## Summary
 ###
