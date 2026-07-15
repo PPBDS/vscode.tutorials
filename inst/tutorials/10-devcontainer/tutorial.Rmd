@@ -359,7 +359,7 @@ Describing what you want in plain English works just as well for configuration f
 
 ### Exercise 7
 
-Since the rest of this Codespace still uses Python, let's revert any changes we've made to `devcontainer.json`. Go to the Source Control side bar and press the revert button on the right.
+ Let's revert any changes we've made to `devcontainer.json`. Go to the Source Control side bar and press the revert button on the right.
 
 ```{r}
 include_graphics("images/revert-devcontainer.png")
