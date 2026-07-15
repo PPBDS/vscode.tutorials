@@ -716,7 +716,11 @@ This file is simpler than what the AI produced --- fewer fields means fewer thin
 
 ### Exercise 5
 
-Click the blue connection indicator in the bottom-left corner of VS Code (it shows text like **"Codespaces: ..."**). From the menu that appears, select **"Rebuild Container"**, then **"Full Rebuild"**. Wait for the rebuild to complete --- the window will reload when the new container is ready.
+Click the blue/gray connection indicator in the bottom-left corner of VS Code (it shows text like **"Codespaces: ..."**). From the menu that appears, select **"Rebuild Container"**, then **"Full Rebuild"**. Wait for the rebuild to complete --- the window will reload when the new container is ready.
+
+```{r}
+include_graphics("images/blue-connection.png")
+```
 
 Once the Codespace has reloaded, in the bash Terminal run:
 
