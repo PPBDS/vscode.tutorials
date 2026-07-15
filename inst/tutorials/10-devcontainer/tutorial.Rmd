@@ -603,6 +603,12 @@ question_text(NULL,
 
 ###
 
+````
+https://curly-waffle-6vvgjxrjvj662pgq.github.dev/
+````
+
+###
+
 Without a `.devcontainer` directory, GitHub falls back to a generic default setup with no customization. This is the starting point for any brand-new project where you want to configure the Codespace from scratch.
 
 ### Exercise 2
