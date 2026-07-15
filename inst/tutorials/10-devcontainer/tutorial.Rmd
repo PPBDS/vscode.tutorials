@@ -1,6 +1,8 @@
 ---
 title: "Devcontainers"
-author: David Kane
+author:
+  - David Kane
+  - Krrish Jayakumar
 tutorial:
   id: "10-devcontainer"
 output:
@@ -127,8 +129,6 @@ question_text(NULL,
 
 ###
 
-Your output should look like:
-
 ````
 10-devcontainer $ cd ../codespace-starter
 codespace-starter $ pwd
@@ -164,7 +164,7 @@ A **devcontainer** is a way to describe a Codespace's setup in a file. Instead o
 
 ### Exercise 1
 
-Go to https://github.com/codespaces/templates. Then press the "Use This Template" button for the Jupyter Notebook notebook template. This will open a new Codespace using this template. Copy and paste its URL.
+Go to `https://github.com/codespaces/templates`. Then press the "Use This Template" button for the Jupyter Notebook notebook template. This will open a new Codespace using this template. Copy and paste its URL.
 
 ```{r}
 include_graphics("images/jupyter-template.png")
@@ -181,8 +181,6 @@ question_text(NULL,
 
 ###
 
-Your answer should look something like:
-
 ````
 https://silver-space-adventure-97xrvw59xhx.github.dev/
 ````
@@ -193,7 +191,7 @@ The Jupyter Notebook template is a pre-built Codespace for Python data science u
 
 ### Exercise 2
 
-Now, you should have two Codespaces open. Go to https://github.com/codespaces. Then copy and paste the two table rows corresponding to your open Codespaces.
+Now, you should have two Codespaces open. Go to `https://github.com/codespaces`. Then copy and paste the two table rows corresponding to your open Codespaces.
 
 ```{r}
 include_graphics("images/open-codespaces.png")
@@ -209,8 +207,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your answer should look something like:
 
 ````
 10-devcontainer       ppbds-student/10-devcontainer       main    Active
@@ -236,15 +232,13 @@ question_text(NULL,
 
 ###
 
-Your answer should look like this:
-
 ```
 "image": "mcr.microsoft.com/devcontainers/universal:2",
 ```
 
 ###
 
-The `image` field tells GitHub which pre-built setup to use --- think of it as choosing a computer that already has certain software installed. `mcr.microsoft.com/devcontainers/universal:2` is Microsoft's general-purpose setup with Python and several other programming languages pre-installed.
+
 
 ### Exercise 4
 
@@ -273,8 +267,6 @@ question_text(NULL,
 
 ###
 
-This block lists which VS Code extensions to pre-install. `ms-toolsai.jupyter` enables Jupyter notebooks; `ms-python.python` adds Python code completion and error highlighting.
-
 ### Exercise 5
 
 Find the line beginning with `"updateContentCommand"` in `devcontainer.json`. Copy and paste it. Then navigate to `requirements.txt` in the File Explorer and copy and paste the entire file.
@@ -289,8 +281,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your answer should look like this:
 
 ```
 "updateContentCommand": "python3 -m pip install -r requirements.txt",
@@ -309,11 +299,13 @@ Pygments==2.20.0
 
 ###
 
-`updateContentCommand` runs when the Codespace is first created and again whenever the repo's files change --- so if someone pushes a new `requirements.txt`, the packages update automatically. `pandas` and `matplotlib` are the core packages: the Python equivalents of the tidyverse tools you've been using in R.
-
 ### Exercise 6
 
-Tell AI to edit `devcontainer.json` so it installs and configures the environment for using R instead of Python. 
+Use AI to update the devcontainer so it installs and configures the environment for using R instead of Python. Some ways you can do this include:
+
+1. Copy and paste the entire document to your preferred AI chatbot.
+
+2. Use one of the AI command-line assistants (`gemini`, `claude`, `codex`, `agy`, or `aider`) in a bash Terminal in your `codespace-starter` Codespace.
 
 Copy and paste your new `devcontainer.json`.
 
@@ -327,8 +319,6 @@ question_text(NULL,
 ```
 
 ###
-
-My new file looks like this:
 
 ```
 {
@@ -378,8 +368,6 @@ question_text(NULL,
 
 ###
 
-You should see something like this:
-
 ```
 @ppbds-student ➜ /workspaces/codespaces-jupyter (main) $ git status
 On branch main
@@ -423,8 +411,6 @@ question_text(NULL,
 
 ###
 
-Your output should look something like this:
-
 ```
 @ppbds-student ➜ /workspaces/codespaces-jupyter (main) $ git log --oneline
 bf71a79 (HEAD -> main) Updated README
@@ -434,7 +420,7 @@ bf71a79 (HEAD -> main) Updated README
 
 ###
 
-This pop-up doesn't appear when we use Codespaces started with `codespace-starter` because that template enables smart commit, a VS Code feature that automatically includes all changed files when the "Commit" button is pressed. The pop-up appeared in this Codespace because the devcontainer.json does not enable this feature.
+This pop-up doesn't appear when we use Codespaces started with `codespace-starter` because that template enables smart commit, a VS Code feature that automatically includes all changed files when the "Commit" button is pressed. The pop-up appeared in this Codespace because the `devcontainer.json` does not enable this feature.
 
 ### Exercise 9
 
@@ -453,23 +439,11 @@ question_text(NULL,
 
 ###
 
-It should look something like this:
-
 ```
 notebooks/data
 notebooks/cifar_net.pth
 .ipynb_checkpoints/
 ```
-
-###
-
-Each line excludes files that shouldn't be tracked in Git:
-
-- `notebooks/data` ignores the data directory (which may contain large files unsuitable for GitHub)
-
-- `notebooks/cifar_net.pth` ignores a saved PyTorch model file (also large and can be recreated by running the training code again)
-
-- `.ipynb_checkpoints/` ignores the auto-save folder that Jupyter creates whenever you run a notebook --- these are temporary files that don't need to be saved to Git.
 
 ### Exercise 10
 
@@ -486,8 +460,6 @@ question_text(NULL,
 
 ###
 
-Your answer should look something like this.
-
 ```
 year,population
 2000,12400
@@ -495,10 +467,6 @@ year,population
 2002,13800
 2003,13600
 ```
-
-###
-
-CSV (comma-separated values) is a plain-text format where each row is a record and each column is separated by a comma --- `atlantis.csv` contains simulated year-by-year population data for a fictional city.
 
 ### Exercise 11
 
@@ -515,17 +483,11 @@ question_text(NULL,
 
 ###
 
-Your answer should look something like this:
-
 ```
 # Population Data from CSV
 
 This notebooks reads sample population data from `data/atlantis.csv` and plots it using Matplotlib. Edit `data/atlantis.csv` and re-run this cell to see how the plots change!
 ```
-
-###
-
-A `.ipynb` file is a Jupyter notebook --- like a Quarto document, it mixes text, code, and output in runnable cells. `populations.ipynb` reads population data from `atlantis.csv` and plots it with **matplotlib**, the same read-then-visualize workflow you've used in R.
 
 ### Exercise 12
 
@@ -552,8 +514,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your log should look like this:
 
 ```
 @ppbds-student ➜ /workspaces/codespaces-jupyter (main) $ git log --oneline
@@ -589,8 +549,6 @@ question_text(NULL,
 
 ###
 
-Your URL should look something like this:
-
 ```
 https://github.com/ppbds-student/codespaces-jupyter
 ```
@@ -602,7 +560,7 @@ Codespaces started from `codespace-starter` are backed by an existing GitHub rep
 
 If you haven't already, stop the Jupyter Notebook Codespace. Open the Command Palette with `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac), type `>stop`, and select **"Codespaces: Stop Current Codespace"**.
 
-Then go to https://github.com/codespaces. Find the row for the Jupyter Notebook Codespace and copy and paste it.
+Then go to `https://github.com/codespaces`. Find the row for the Jupyter Notebook Codespace and copy and paste it.
 
 ```{r devcontainers-14}
 question_text(NULL,
@@ -614,8 +572,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your answer should look something like:
 
 ````
 codespaces-jupyter    ppbds-student/codespaces-jupyter    main    Stopped
@@ -632,7 +588,7 @@ In the previous section you explored a devcontainer someone else wrote. Now you 
 
 ### Exercise 1
 
-Go to https://github.com/codespaces/templates. Click "Use This Template" for the **Blank** template. This will open a new blank Codespace. You should now have two Codespaces open: the one running this tutorial and the new blank one.
+Go to `https://github.com/codespaces/templates`. Click "Use This Template" for the **Blank** template. This will open a new blank Codespace. You should now have two Codespaces open: the one running this tutorial and the new blank one.
 
 Copy and paste the URL of the new blank Codespace.
 
@@ -644,6 +600,12 @@ question_text(NULL,
 	incorrect = NULL,
 	rows = 3)
 ```
+
+###
+
+````
+https://curly-waffle-6vvgjxrjvj662pgq.github.dev/
+````
 
 ###
 
@@ -672,8 +634,6 @@ question_text(NULL,
 
 ###
 
-Your output should look like:
-
 ````
 devcontainer.json
 ````
@@ -684,7 +644,7 @@ GitHub Codespaces looks for a file named exactly `devcontainer.json` inside a di
 
 ### Exercise 3
 
-Open an AI chatbot --- ChatGPT, Gemini, Claude, or any other. Ask it:
+Open your AI chatbot. Ask it:
 
 ```
 Write a devcontainer.json for an R data science project.
@@ -762,7 +722,11 @@ This file is simpler than what the AI produced --- fewer fields means fewer thin
 
 ### Exercise 5
 
-Click the blue connection indicator in the bottom-left corner of VS Code (it shows text like **"Codespaces: ..."**). From the menu that appears, select **"Rebuild Container"**, then **"Full Rebuild"**. Wait for the rebuild to complete --- the window will reload when the new container is ready.
+Click the blue/gray connection indicator in the bottom-left corner of VS Code (it shows text like **"Codespaces: ..."**). From the menu that appears, select **"Rebuild Container"**, then **"Full Rebuild"**. Wait for the rebuild to complete --- the window will reload when the new container is ready.
+
+```{r}
+include_graphics("images/blue-connection.png")
+```
 
 Once the Codespace has reloaded, in the bash Terminal run:
 
@@ -782,8 +746,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your output should begin with something like:
 
 ````
 R version 4.5.3 (2026-03-11) -- "Reassured Reassurer"
@@ -809,15 +771,11 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 "image": "ghcr.io/rocker-org/devcontainer/tidyverse:4",
 ```
 
 ###
-
-`ghcr.io/rocker-org/devcontainer/tidyverse:4` is a pre-built image from the [Rocker Project](https://rocker-project.org/) that comes with R 4.x, the tidyverse, and common data science packages already installed --- no install scripts needed.
 
 ### Exercise 7
 
@@ -834,8 +792,6 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 "customizations": {
   "vscode": {
@@ -847,8 +803,6 @@ Your answer should look like:
 ```
 
 ###
-
-The `customizations` block holds tool-specific settings --- each tool reads only its own key. The `vscode` key contains settings only VS Code reads, so the same `devcontainer.json` can also work with other editors.
 
 ### Exercise 8
 
@@ -865,15 +819,11 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 "REditorSupport.r"
 ```
 
 ###
-
-Extension IDs follow the format `publisher.extension-name`. `REditorSupport.r` provides colored code, code completion, and inline R output --- the same extension you've been using throughout this course.
 
 ### Exercise 9
 
@@ -895,8 +845,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your log should look like this:
 
 ```
 main $ git log --oneline
@@ -924,8 +872,6 @@ question_text(NULL,
 
 ###
 
-Your URL should look something like this:
-
 ```
 https://github.com/ppbds-student/r-devcontainer
 ```
@@ -938,7 +884,7 @@ This Codespace was created directly from a template, so there was no GitHub repo
 
 If you haven't already, stop the blank Codespace. Open the Command Palette with `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac), type `>stop`, and select **"Codespaces: Stop Current Codespace"**.
 
-Then go to https://github.com/codespaces. Find the row for the blank Codespace and copy and paste it.
+Then go to `https://github.com/codespaces`. Find the row for the blank Codespace and copy and paste it.
 
 ```{r new-devcontainer-11}
 question_text(NULL,
@@ -956,11 +902,11 @@ Stopped Codespaces don't use compute hours but still occupy storage --- they can
 ## Summary
 ###
 
-This tutorial introduced devcontainers as a way to define and share consistent Codespace setups. You toured the Jupyter Notebook template's `devcontainer.json` --- its starting image, VS Code extensions, and startup command --- then built your own minimal R devcontainer.json from scratch, used AI to draft a first version, replaced it with a clean version, and rebuilt a Codespace to confirm it worked. The next tutorial, `11-codebase-start`, tours a third, more elaborate devcontainer.json: the one behind `codespace-starter` itself.
+This tutorial introduced devcontainers as a way to define and share consistent Codespace setups. You toured the Jupyter Notebook template's `devcontainer.json` --- its starting image, VS Code extensions, and startup command --- then built your own minimal R `devcontainer.json` from scratch, used AI to draft a first version, replaced it with a clean version, and rebuilt a Codespace to confirm it worked. The next tutorial, `11-codebase-start`, tours a third, more elaborate `devcontainer.json`: the one behind `codespace-starter` itself.
 
 ### Exercise 1
 
-Go to https://github.com/codespaces. Stop any Codespaces you are no longer using by clicking the three-dot menu next to each one and selecting "Stop codespace". Paste the URL of your `codespaces-jupyter` GitHub repository below.
+Go to `https://github.com/codespaces`. Stop any Codespaces you are no longer using by clicking the three-dot menu next to each one and selecting "Stop codespace". Paste the URL of your `codespaces-jupyter` GitHub repository below.
 
 ```{r summary-1}
 question_text(NULL,
@@ -972,8 +918,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your URL should look something like:
 
 ```
 https://github.com/ppbds-student/codespaces-jupyter
@@ -995,8 +939,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your URL should look something like:
 
 ```
 https://github.com/ppbds-student/r-devcontainer

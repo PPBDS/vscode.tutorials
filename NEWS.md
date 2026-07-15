@@ -29,7 +29,7 @@
   Gemini to run and explain a full Git workflow. Full sequence is now
   `01-code`, `02-quarto`, `03-terminal`, `04-ai-1`, `05-github-1`,
   `06-github-2`, `07-ai-2`, `08-websites-1`, `09-websites-2`,
-  `10-infrastructure`.
+  `10-devcontainer`, `11-codebase-start`, `12-docker`.
 
 * The Git tutorials (`05-github-1`, `06-github-2`) now note that either AI
   approach --- a chat window with copy/paste, or the Gemini CLI agent --- is

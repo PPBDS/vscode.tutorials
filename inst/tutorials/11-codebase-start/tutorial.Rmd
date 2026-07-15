@@ -1,6 +1,8 @@
 ---
 title: "Codebase Starter Devcontainer"
-author: David Kane
+author:
+  - David Kane
+  - Krrish Jayakumar
 tutorial:
   id: "11-codebase-start"
 output:

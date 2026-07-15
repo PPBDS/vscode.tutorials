@@ -46,33 +46,34 @@ the package name.
 The core tutorials introduce students to the VS Code integrated
 development environment.
 
-- *VS Code and Scripts* (“01-code”). Introduce students to VS Code and
-  to writing R code in simple scripts.
+  - *VS Code and Scripts* (“01-code”). Introduce students to VS Code and
+    to writing R code in simple scripts.
 
-- *VS Code and Quarto* (“02-quarto”). Demonstrate more tricks for
-  working with R code using VS Code, and also explain Quarto documents.
+  - *VS Code and Quarto* (“02-quarto”). Demonstrate more tricks for
+    working with R code using VS Code, and also explain Quarto
+    documents.
 
-- *Terminal* (“03-terminal”). Teach the command line.
+  - *Terminal* (“03-terminal”). Teach the command line.
 
-- *AI Introduction* (“04-ai-1”). Meet the Gemini CLI agent and use it to
-  create and render a Quarto analysis.
+  - *AI Introduction* (“04-ai-1”). Meet the Gemini CLI agent and use it
+    to create and render a Quarto analysis.
 
-- *VS Code and GitHub Introduction* (“05-github-1”). Explain the basics
-  of Git and GitHub, mostly in the context of VS Code.
+  - *VS Code and GitHub Introduction* (“05-github-1”). Explain the
+    basics of Git and GitHub, mostly in the context of VS Code.
 
-- *VS Code and GitHub Advanced* (“06-github-2”). Provide more practice
-  in working with Git/GitHub, including more details on the use of
-  GitHub Pages.
+  - *VS Code and GitHub Advanced* (“06-github-2”). Provide more practice
+    in working with Git/GitHub, including more details on the use of
+    GitHub Pages.
 
-- *AI and Git* (“07-ai-2”). Return to the Gemini CLI, now using it to
-  run and explain a full Git workflow.
+  - *AI and Git* (“07-ai-2”). Return to the Gemini CLI, now using it to
+    run and explain a full Git workflow.
 
-- *Quarto Websites Introduction* (“08-websites-1”). Demonstrate the
-  basics of website construction using Quarto projects.
+  - *Quarto Websites Introduction* (“08-websites-1”). Demonstrate the
+    basics of website construction using Quarto projects.
 
-- *Quarto Websites Advanced* (“09-websites-2”). Practice Quarto
-  websites, building two sites and refactoring analysis code into
-  scripts that save results as RDS and PNG files.
+  - *Quarto Websites Advanced* (“09-websites-2”). Practice Quarto
+    websites, building two sites and refactoring analysis code into
+    scripts that save results as RDS and PNG files.
 
 - *Devcontainers* (“10-devcontainer”). Introduce devcontainers,
   touring a pre-built Jupyter devcontainer.json and building an R
