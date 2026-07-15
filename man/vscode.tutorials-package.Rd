@@ -28,9 +28,9 @@ The package includes tutorials focused on VS Code and modern R development:
 \item \strong{AI and Git} (07-ai-2): Using the Gemini CLI to run and explain a full Git workflow
 \item \strong{Quarto Websites Introduction} (08-websites-1): Basic website construction using Quarto projects
 \item \strong{Quarto Websites Advanced} (09-websites-2): Advanced Quarto websites with modular data analysis
-\item \strong{Devcontainers} (10-devcontainer): A tour of a pre-built devcontainer.json, then building a minimal one from scratch
+\item \strong{Devcontainers} (10-devcontainer): An introduction to devcontainers, touring a pre-built Jupyter devcontainer.json and building an R devcontainer.json from scratch
 \item \strong{Codebase Starter Devcontainer} (11-codebase-start): A tour of the devcontainer.json behind codespace-starter itself
-\item \strong{The Devcontainer Dockerfile} (12-docker): A reading tour of the Dockerfile that builds the codespace-starter image
+\item \strong{The Devcontainer Dockerfile} (12-docker): A reading tour of the Dockerfile that builds the PPBDS devcontainer image
 }
 }
 
