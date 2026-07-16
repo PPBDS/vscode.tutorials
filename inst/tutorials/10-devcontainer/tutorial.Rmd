@@ -155,7 +155,7 @@ question_text(NULL,
 
 ###
 
-Your output shows the full `devcontainer.json` from the `codespace-starter` repo. You will explore each part of this file in a later tutorial, `11-codebase-start`. Keep this Codespace open --- you will need it alongside a second Codespace in the next section.
+Your output shows the full `devcontainer.json` from the `codespace-starter` repo. You will explore each part of this file in a later tutorial, `11-codespace-starter`. Keep this Codespace open --- you will need it alongside a second Codespace in the next section.
 
 ## Jupyter Notebook Devcontainer
 ###
@@ -956,7 +956,7 @@ Stopped Codespaces don't use compute hours but still occupy storage --- they can
 ## Summary
 ###
 
-This tutorial introduced devcontainers as a way to define and share consistent Codespace setups. You toured the Jupyter Notebook template's `devcontainer.json` --- its starting image, VS Code extensions, and startup command --- then built your own minimal R devcontainer.json from scratch, used AI to draft a first version, replaced it with a clean version, and rebuilt a Codespace to confirm it worked. The next tutorial, `11-codebase-start`, tours a third, more elaborate devcontainer.json: the one behind `codespace-starter` itself.
+This tutorial introduced devcontainers as a way to define and share consistent Codespace setups. You toured the Jupyter Notebook template's `devcontainer.json` --- its starting image, VS Code extensions, and startup command --- then built your own minimal R devcontainer.json from scratch, used AI to draft a first version, replaced it with a clean version, and rebuilt a Codespace to confirm it worked. The next tutorial, `11-codespace-starter`, tours a third, more elaborate devcontainer.json: the one behind `codespace-starter` itself.
 
 ### Exercise 1
 

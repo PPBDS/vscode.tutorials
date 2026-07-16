@@ -29,7 +29,7 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-In `11-codebase-start` you found the line `"image": "ghcr.io/ppbds/devcontainer:1.0.1"` inside `codespace-starter`'s `devcontainer.json`. That image does not appear out of nowhere --- it is built from a Dockerfile maintained by PPBDS. This tutorial reads through that real, current Dockerfile, section by section, to understand what it does and why it is written the way it is.
+In `11-codespace-starter` you found the line `"image": "ghcr.io/ppbds/devcontainer:1.0.1"` inside `codespace-starter`'s `devcontainer.json`. That image does not appear out of nowhere --- it is built from a Dockerfile maintained by PPBDS. This tutorial reads through that real, current Dockerfile, section by section, to understand what it does and why it is written the way it is.
 
 ###
 
@@ -554,19 +554,24 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.5@sha256:289c5d02d8115aa209f4a8a49ee9378dccbf623897eed9cc46c87dfbbca9015b
 ```
 
 ###
 
-The image is pinned by **digest** (the long `sha256:...` hash), not just by the `:4.5` tag. A tag like `:4.5` floats --- Rocker can push a new build under that same tag at any time, silently changing what every future build of this Dockerfile pulls in. The digest freezes the base at one exact, immutable build. Bumping it is a deliberate act: pull `:4.5` fresh, copy in the new digest, and commit the change on purpose, rather than being surprised by an upstream update.
+This image is pinned by **digest** (the long `sha256:...` hash), not just by the `:4.5` tag. A tag like `:4.5` floats: Rocker can push a new build under that same tag any time, silently changing what future builds pull in. The digest locks the base to one exact, unchanging build. Bumping it is deliberate --- pull `:4.5` fresh, copy in the new digest, and commit the change on purpose, instead of being surprised by an upstream update.
 
 ### Exercise 2
 
-Find the sentence in the header comment that explains why the old base/dev/student image trio was removed. Copy and paste it.
+Time to build something of your own. In the terminal, create a new file called `Dockerfile` (no extension) in your project folder, and write a simple Dockerfile that starts from a small base image and runs one command. For example:
+
+```
+FROM alpine:3.20
+CMD ["echo", "Hello from my first Docker image!"]
+```
+
+Feel free to use a different base image or command, as long as it is your own short, working Dockerfile. Paste the full contents of your `Dockerfile` below.
 
 ```{r docker-2}
 question_text(NULL,
@@ -579,7 +584,75 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
+A Dockerfile is just a short recipe: a `FROM` line picks a starting image (here, `alpine:3.20`, a tiny ~5 MB Linux distribution often used as a lightweight base), and each instruction after it adds one more layer on top. `CMD` sets the command that runs when a container starts from the image --- in this example, printing a greeting. It's the same shape as the much longer devcontainer Dockerfile you just read, just doing more work: more `FROM`, `RUN`, `COPY`, and `ENV` lines.
+
+### Exercise 3
+
+Now build your Dockerfile into an image. In the terminal, in the same folder as your `Dockerfile`, run:
+
+```
+docker build -t my-first-image .
+```
+
+This builds (`docker build`) the Dockerfile in the current directory (`.`) and tags (`-t`) the resulting image `my-first-image`. Once it finishes, run `docker images` to confirm your new image is listed, then paste the output of `docker images` below.
+
+```{r docker-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+`docker build` reads your Dockerfile, runs each instruction in order, and saves the result as a local image --- a self-contained snapshot that can run as a container on any machine with Docker installed. The `-t` tag (`my-first-image`) is just a friendly name; underneath, the image is still identified by a digest, the same kind of `sha256:...` hash that pins the devcontainer's base image in Exercise 1.
+
+### Exercise 4
+
+Finally, make your image public so it has a real URL anyone can pull it from. GitHub Container Registry (GHCR) is a convenient option, since it uses the same GitHub account and `gh` CLI you already have. First authenticate Docker with GHCR:
+
+```
+docker login ghcr.io
+```
+
+Then tag your image for GHCR and push it:
+
+```
+docker tag my-first-image ghcr.io/YOUR_GITHUB_USERNAME/my-first-image:latest
+docker push ghcr.io/YOUR_GITHUB_USERNAME/my-first-image:latest
+```
+
+On github.com, open the new package's settings and change its visibility to public. Paste the public URL of your image below (it will look like `https://github.com/YOUR_GITHUB_USERNAME/my-first-image/pkgs/container/my-first-image`).
+
+```{r docker-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+`docker tag` gives your local image a second name that matches where it's headed --- `ghcr.io/...` --- without rebuilding anything. `docker push` uploads it to GHCR, the exact same registry that hosts `ghcr.io/ppbds/devcontainer` itself. Once a package is public, its URL works like any other public download: anyone can `docker pull` it, or reference it in a `devcontainer.json`'s `image` line, the same way `codespace-starter` references the PPBDS devcontainer image.
+
+### Exercise 5
+
+Find the sentence in the header comment that explains why the old base/dev/student image trio was removed. Copy and paste it.
+
+```{r docker-5}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
 
 ```
 It replaced the old base/dev/student trio in v1.0.0 —
@@ -590,13 +663,13 @@ permission bugs than it saved.
 
 ###
 
-There is now **one image for everyone**: students launched via `codespace-starter` and PPBDS package developers alike. The old three-image split existed to keep the student image lean, but the actual difference between the "dev" and "student" images was tiny (qpdf plus five R packages) --- not worth the extra CI configuration and the permission bugs that came from images built slightly differently from each other.
+There's now one image for everyone --- students launched via `codespace-starter` and PPBDS package developers alike. The old three-image split kept the student image lean, but the "dev" and "student" images barely differed (just qpdf plus five R packages). That tiny gain wasn't worth the extra CI setup and the permission bugs that crept in when slightly different images diverged.
 
-### Exercise 3
+### Exercise 6
 
 Find the comment describing the Dockerfile's overall layer order. Copy and paste it.
 
-```{r docker-3}
+```{r docker-6}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -606,8 +679,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your answer should look like:
 
 ```
 Layer order matters and mirrors the old base → dev → student layering:
@@ -618,13 +689,13 @@ then course packages and per-user installs (rstudio), then Python/JS
 
 ###
 
-Docker caches each instruction as a separate layer and reuses cached layers for any instruction that hasn't changed, stopping at the first instruction that *has* changed and rebuilding everything after it. Putting the most stable things first --- system libraries, CLI tools --- means a change deep in the file (say, a new R package) does not force Docker to redo the slow `apt-get` layers. If the order were reversed, almost any edit would invalidate the whole cache and every rebuild would be slow.
+Docker caches each instruction as its own layer, reusing every cached layer until it hits the first one that changed --- then it rebuilds everything after that point. That's why the most stable things (system libraries, CLI tools) come first: a change deep in the file, like adding one R package, won't force Docker to redo the slow `apt-get` layers. Flip the order, and almost any small edit would blow away the whole cache, making every rebuild slow.
 
-### Exercise 4
+### Exercise 7
 
 Find the five `ARG` lines that pin tool versions (`QUARTO_VERSION`, `ARF_VERSION`, `NODE_MAJOR`, `CLAUDE_CODE_VERSION`, `CODEX_VERSION`). Copy and paste them, and note which CLI mentioned nearby is the *exception* to this pinning approach.
 
-```{r docker-4}
+```{r docker-7}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -634,8 +705,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your answer should look like:
 
 ```
 ARG QUARTO_VERSION=1.9.38
@@ -649,13 +718,13 @@ The exception is the Antigravity CLI (`agy`) --- its installer offers no version
 
 ###
 
-Pinning versions with `ARG` means every build of this Dockerfile installs the *exact same* Quarto, `arf`, Node, Claude Code, and Codex versions until someone deliberately bumps the number --- a reproducible build. `agy` cannot be pinned this way because its installer has no version-pin mechanism, so it floats with each rebuild. That is an accepted, isolated exception: the CLI smoke test near the bottom of the file still fails the build if a future `agy` release breaks.
+Pinning versions with `ARG` means every build installs the *exact same* Quarto, `arf`, Node, Claude Code, and Codex --- until someone deliberately bumps a number. That's what makes the build reproducible. `agy` is the lone exception: its installer has no version-pin option, so it floats with every rebuild. That's accepted as a known gap --- the CLI smoke test near the bottom still fails the build if a future `agy` release breaks something.
 
-### Exercise 5
+### Exercise 8
 
 Find the bullet point in the system-libraries comment that explains why `libuv1-dev` is baked into the image even though the R package that needs it doesn't strictly require it. Copy and paste that bullet.
 
-```{r docker-5}
+```{r docker-8}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -665,8 +734,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your answer should look like:
 
 ```
 - libuv1-dev: fs >= 2.1.0 declares libuv as a sysreq. The P3M binary works
@@ -678,13 +745,13 @@ Your answer should look like:
 
 ###
 
-The `fs` package's P3M binary already works without `libuv1-dev` on the system --- but `pak` still checks the package's declared system requirements and prints an alarming "Missing system package" message every time, even though nothing is actually broken. Since `fs` is a dependency of `primer.tutorials` and gets installed constantly, that phantom warning would appear on nearly every student install. Baking the small library is simpler than trying to suppress the warning.
+The `fs` package's binary already works fine without `libuv1-dev` --- but `pak` still checks fs's declared requirements and prints a scary "Missing system package" warning anyway, even though nothing's broken. Since `fs` is a dependency of `primer.tutorials` and installs constantly, that phantom warning would hit nearly every student. Baking in the small library is simpler than fighting the warning.
 
-### Exercise 6
+### Exercise 9
 
 Find the line inside the `libnode-dev-virtual` package's control file that lists what it `Provides`. Copy and paste it, and explain in one sentence why this trick exists.
 
-```{r docker-6}
+```{r docker-9}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -695,21 +762,19 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 'Provides: libnode-dev, libv8-dev' \
 ```
 
 ###
 
-`pak`'s sysreqs database says the V8 R package needs the Debian package `libnode-dev`, but the actual V8 binary from Posit Package Manager is statically linked and needs no system library at all --- and installing a real `libnode-dev` would conflict with the NodeSource `nodejs` package installed earlier. Rather than live with a scary but false "Missing system package" warning on every install that touches V8 (like `gt`), the Dockerfile builds a tiny metadata-only `.deb` that *claims* to provide `libnode-dev`/`libv8-dev` without shipping any files, satisfying `pak`'s check without installing anything real.
+`pak` thinks the **V8** R package needs the Debian package `libnode-dev` --- but the real **V8** binary is statically linked and needs no system library, and installing an actual `libnode-dev` would conflict with the NodeSource `nodejs` package installed earlier. So instead of a false "Missing system package" warning on every install that touches **V8** (like `gt`), the Dockerfile builds a tiny fake `.deb` that just *claims* to provide `libnode-dev`/`libv8-dev`, satisfying `pak`'s check without installing anything real.
 
-### Exercise 7
+### Exercise 10
 
 Find the two-part comment (in the "hardenings" block and the "Everything below installs as rstudio" block) that explains why a `pak` run as root can break later installs by the non-root user. Copy and paste the sentence describing what happens to `filelock`.
 
-```{r docker-7}
+```{r docker-10}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -720,8 +785,6 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 Locks created by ROOT here are group-unreadable (root's
 umask), and a later rstudio-user pak run then dies with
@@ -731,13 +794,13 @@ broke the student build (2026-07).
 
 ###
 
-`pkgdepends` (used by `pak`) locks package directories while installing. When those locks are created by root, they inherit root's restrictive umask and end up unreadable by other users. If a *later* install runs as the non-root `rstudio` user (as most of the R installs in this Dockerfile do, after `USER rstudio`), it cannot even open the leftover lock file and the build --- or a student's own `pak::pkg_install()` --- fails outright. This is why the site-library's `_cache` directory is deleted and permissions are widened with `chmod -R g+rwX` right after the root-run installs, and why everything after that point runs `USER rstudio` instead of root.
+`pkgdepends` (used by `pak`) locks package directories while installing. Locks created by root inherit root's restrictive umask, so they end up unreadable by anyone else. If a *later* install runs as the non-root `rstudio` user, it can't even open that leftover lock file --- and the build, or a student's own `pak::pkg_install()`, fails outright. That's why the `_cache` directory gets deleted and permissions get widened (`chmod -R g+rwX`) right after the root-run installs, and why everything after that runs as `USER rstudio` instead of root.
 
-### Exercise 8
+### Exercise 11
 
 Find the `ENV` line that turns off `pak`'s system-requirement auto-install behavior. Copy and paste it.
 
-```{r docker-8}
+```{r docker-11}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -748,21 +811,19 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 ENV PKG_SYSREQS=false
 ```
 
 ###
 
-Without this, `pak` will try to run `sudo apt-get install` whenever it thinks a system library is missing. The non-root `rstudio` user cannot `sudo`, so that attempt just fails --- and, as with the V8/`libnode-dev` case, `pak` sometimes *mis-detects* a library as missing even though it is already baked into the image. Turning this off stops `pak` from trying to install anything at the system level; it will still print any system requirements it finds, but the build (and a student's runtime installs) relies on the libraries already baked in near the top of the file.
+Without this, `pak` would try `sudo apt-get install` whenever it thinks a system library is missing. The non-root `rstudio` user can't `sudo`, so that attempt just fails --- and, like the **V8**/`libnode-dev` case, `pak` sometimes *mis-detects* a library as missing when it's already baked in. Turning this off stops `pak` from installing anything at the system level; it'll still print any requirements it finds, but the build (and student installs) relies on the libraries already baked in near the top of the file.
 
-### Exercise 9
+### Exercise 12
 
 Find the `RUN` block that installs the four PPBDS course packages from GitHub. Copy and paste it, and note the one argument to `pak::pkg_install()` that is not just the package list.
 
-```{r docker-9}
+```{r docker-12}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -772,8 +833,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your answer should look like:
 
 ```
 RUN R -q -e 'pak::pkg_install(c( \
@@ -788,13 +847,13 @@ The extra argument is `upgrade = TRUE`.
 
 ###
 
-Installing straight from each package's GitHub default branch (rather than CRAN or an r-universe build) matches PPBDS practice: the ecosystem expects the development version. `upgrade = TRUE` forces `pak` to also pull the latest version of every transitive dependency --- `learnr`, `knitr`, `rmarkdown`, `xfun`, and so on. Without it, a binary dependency built against a newer `xfun` than the one Rocker shipped can fail to load with an error like `object 'attr' is not exported by 'namespace:xfun'` --- exactly the kind of ABI mismatch the smoke test just below this block is designed to catch.
+Installing straight from each package's GitHub default branch (instead of CRAN or an r-universe build) matches PPBDS practice --- the ecosystem expects the development version. `upgrade = TRUE` makes `pak` also pull the latest version of every transitive dependency: `learnr`, `knitr`, `rmarkdown`, `xfun`, and more. Skip it, and a dependency built against a newer `xfun` than Rocker shipped can fail with an error like `object 'attr' is not exported by 'namespace:xfun'` --- exactly the ABI mismatch the smoke test right below this block is built to catch.
 
-### Exercise 10
+### Exercise 13
 
-Find the `remotes::install_url()` line that installs CatBoost. Copy and paste it, and explain in one sentence why CatBoost needs this special install method instead of a normal `pak::pkg_install()` call.
+Find the `remotes::install_url()` line that installs **CatBoost**. Copy and paste it, and explain in one sentence why **CatBoost** needs this special install method instead of a normal `pak::pkg_install()` call.
 
-```{r docker-10}
+```{r docker-13}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -805,21 +864,19 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 R -q -e 'remotes::install_url("https://github.com/catboost/catboost/releases/download/v1.2.10/catboost-R-linux-x86_64-1.2.10.tgz", INSTALL_opts = c("--no-multiarch", "--no-test-load", "--no-staged-install"))'
 ```
 
 ###
 
-CatBoost is not on CRAN, so there is no package for `pak` to find --- it has to be installed directly from CatBoost's own pinned release binary for linux-x86_64 (which is fine, since the image only targets amd64). It is installed with `--no-test-load`, meaning the install step itself never confirms the package actually works. That is exactly why "Modeling smoke test 2" near the bottom of the file goes further than every other smoke test here: it doesn't just load the `catboost` package, it fits a real model through `tidymodels`/`bonsai` and checks the predictions, proving the binary and the engine binding both actually work.
+**CatBoost** isn't on CRAN, so there's no package for `pak` to find --- it installs directly from **CatBoost**'s own pinned linux-x86_64 release binary (fine, since the image only targets amd64). It's installed with `--no-test-load`, so the install step never confirms it actually works. That's why "Modeling smoke test 2" goes further than the rest: instead of just loading the `catboost` package, it fits a real model through `tidymodels`/`bonsai` and checks the predictions, proving the binary and the engine binding both work.
 
-### Exercise 11
+### Exercise 14
 
 Find the `ENV` line that sets `RETICULATE_PYTHON`, and the comment just above the Python venv block explaining why it is set even though nothing installed in this Dockerfile uses it directly. Copy and paste the `ENV` line.
 
-```{r docker-11}
+```{r docker-14}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -830,8 +887,6 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 ENV PATH=/opt/venv/bin:$PATH \
     RETICULATE_PYTHON=/opt/venv/bin/python
@@ -839,13 +894,13 @@ ENV PATH=/opt/venv/bin:$PATH \
 
 ###
 
-Quarto renders Python chunks through the Jupyter engine (`ipykernel`), which needs no bridge from R at all --- so nothing baked into this image actually requires `RETICULATE_PYTHON`. It is set anyway as a convenience: *if* a student later installs R's `reticulate` package (not baked in), it will automatically connect to this same `/opt/venv` environment instead of finding, or creating, a separate Python installation. The Python packages themselves are pinned in `requirements.lock`, generated from `requirements.txt` via `uv pip compile` --- and a separate build step fails the build if `requirements.txt` and `requirements.lock` ever fall out of sync, so an edited `.txt` file can never silently ship with a stale lock.
+Quarto renders Python chunks through the Jupyter engine (`ipykernel`), which needs no bridge from R at all --- so nothing baked in here actually requires `RETICULATE_PYTHON`. It's set anyway as a convenience: *if* a student later installs R's `reticulate` package, it'll automatically connect to this same `/opt/venv` instead of hunting for a separate Python. The Python packages are pinned in `requirements.lock`, generated from `requirements.txt` via `uv pip compile` --- and a separate build step fails if the two files ever fall out of sync, so a stale lock can never ship silently.
 
-### Exercise 12
+### Exercise 15
 
 Find the line that installs Observable Framework. Copy and paste it, and explain when a student actually needs this CLI versus when Quarto already has them covered.
 
-```{r docker-12}
+```{r docker-15}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -856,21 +911,19 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 RUN npm install -g @observablehq/framework@1.13.4 && observable --version
 ```
 
 ###
 
-Interactive Observable charts *inside* an existing Quarto document need nothing extra --- Quarto already bundles support for `{ojs}` cells. The `observable` CLI installed here is only needed for a different use case: building a standalone Observable Framework data app or dashboard project (`observable create`, `observable preview`, `observable build`), which is a separate kind of project from a Quarto document.
+Interactive Observable charts *inside* an existing Quarto document need nothing extra --- Quarto already bundles support for `{ojs}` cells. The `observable` CLI is only for a different job: building a standalone Observable Framework data app or dashboard (`observable create`, `observable preview`, `observable build`), which is its own separate kind of project.
 
-### Exercise 13
+### Exercise 16
 
 Find the "Modeling smoke test 3" `RUN` line near the bottom of the file, the one that fits a `brms` model. Copy and paste it, and explain why this test needs to actually fit a model rather than just checking that the `brms` package loads.
 
-```{r docker-13}
+```{r docker-16}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -881,15 +934,13 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 RUN R --vanilla -e 'fit <- brms::brm(mpg ~ wt, data = mtcars, chains = 1, iter = 100, refresh = 0, silent = 2); stopifnot(inherits(fit, "brmsfit")); cat("brms + Stan end-to-end OK\n")'
 ```
 
 ###
 
-`brms` fits Bayesian models by compiling and running a Stan program, which depends on the image's C++ toolchain working correctly --- a problem that a simple `requireNamespace("brms")` load check would never catch, since the package can load fine even if Stan compilation is broken. Fitting a tiny model (one chain, 100 iterations --- just enough to prove compilation and sampling both run, not to produce a good estimate) is what actually proves the whole modeling stack works. This is the same idea behind every other smoke test in this section: catch a broken build *here*, during the image build, rather than the first time a student tries to use the feature.
+`brms` fits Bayesian models by compiling and running a Stan program, which depends on the image's C++ toolchain working --- something a simple `requireNamespace("brms")` load check would never catch, since the package loads fine even if Stan compilation is broken. Fitting a tiny model (one chain, 100 iterations --- just enough to prove compilation and sampling run, not to get a good estimate) is what actually proves the modeling stack works. Same idea as every smoke test here: catch a broken build *now*, during the image build, not the first time a student uses the feature.
 
 ## Summary
 ###
