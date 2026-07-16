@@ -1,5 +1,7 @@
 ## Krrish
 
+Install an R package. Install a Python. Both by hand. And also ask AI to do it.
+
 A student claimed that "when trying to do the 10-infrastructure tutorial it requires you to make two more code spaces in the tutorial." Is that true? Is it a good idea?
 
 Take ownership of those three tutorials (10, 11, 12). Add yourself as co-author. Aim for 60 minutes each.
@@ -26,7 +28,7 @@ Own every word. Or send me an email with your questions. But there is no reason 
 
 Own every knowledge drop. Several here are much less important than other stuff we should teach students.
 
-Add some images, especially in devcontainer.
+Add some images, especially in devcontainer. 
 
 Always bold R package and Python libraries. Anything which might appear at a terminal, or a URL, is in backticks.
 
