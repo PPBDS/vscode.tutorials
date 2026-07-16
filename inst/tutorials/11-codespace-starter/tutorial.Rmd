@@ -1,8 +1,10 @@
 ---
-title: "Codebase Starter Devcontainer"
-author: David Kane
+title: "Codespace Starter Devcontainer"
+author:
+  - David Kane
+  - Krrish Jayakumar
 tutorial:
-  id: "11-codebase-start"
+  id: "11-codespace-starter"
 output:
   learnr::tutorial:
     df_print: default
@@ -52,8 +54,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your answer should look something like:
 
 ````
 {
@@ -111,8 +111,6 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 "image": "ghcr.io/ppbds/devcontainer:1.0.1",
 ```
@@ -121,7 +119,7 @@ Note that the version number will change as the image is updated.
 
 ###
 
-`codespace-starter` uses a custom PPBDS image **pinned** to a specific version, so every student gets the exact same setup regardless of when they open the Codespace. There is a single image, `ghcr.io/ppbds/devcontainer`, that serves the whole PPBDS organization --- students taking the course and developers working on PPBDS packages alike. It pre-installs everything the course needs: Quarto, `gh`, the `arf` R console, `httpgd`, `pak`, the four course tutorial packages (`tutorial.helpers`, `vscode.tutorials`, `misc.tutorials`, and `primer.tutorials`), R stacks for modeling, mapping, and presentation, a Python data-science stack, and four AI command-line assistants --- `claude`, `codex`, `agy`, and `aider`. The next tutorial, `12-docker`, looks inside the actual build file that produces this image.
+Your `codespace-starter` uses a pinned version of a custom image, `ghcr.io/ppbds/devcontainer`, so every student gets the exact same setup. No surprises, no version conflicts. The image comes pre-loaded with everything you need: `Quarto`, `gh`, the `arf R console`, **pak**, our four course packages (**tutorial.helpers**, **vscode.tutorials**, **misc.tutorials**, **primer.tutorials**), R and Python data-science stacks, and AI assistants for your terminal. Next up, 12-docker shows how this image is actually built.
 
 ### Exercise 3
 
@@ -137,8 +135,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your answer should look like:
 
 ```
 "extensions": [
@@ -158,7 +154,7 @@ Your answer should look like:
 
 ###
 
-Each extension serves a specific role: `reditorsupport.r` provides R language support, `quarto.quarto` enables Quarto document rendering, `PPBDS.vscode-r-tutorials` powers the tutorial panel you are using right now, `ritwickdey.LiveServer` lets you preview HTML files in the browser, `tomoki1207.pdf` adds a PDF viewer directly inside VS Code, `mechatroner.rainbow-csv` adds a CSV viewer with color-coded columns, and `ms-python.python` with `ms-toolsai.jupyter` add Python language support and Jupyter notebooks. Notice what is *absent*: there are no AI-assistant extensions. The AI tools ship as command-line programs instead (`claude`, `codex`, `agy`, `aider`), because the in-editor AI panels render poorly in the browser-based Codespaces client --- a CLI works on every device.
+Each extension has one job: `reditorsupport.r` for R, `quarto.quarto` for Quarto, `PPBDS.vscode-r-tutorials` for the tutorial panel, `ritwickdey.LiveServer` for HTML previews, `tomoki1207.pdf` for PDFs, `mechatroner.rainbow-csv` for colored CSVs, and `ms-python.python` plus `ms-toolsai.jupyter` for Python and Jupyter. Notice what's missing: no AI-assistant extensions. Instead, AI tools run from the terminal—they work better as CLI programs on every device, and in-editor panels don't render well in browser-based Codespaces.
 
 ### Exercise 4
 
@@ -175,15 +171,13 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 "r.rterm.linux": "/usr/local/bin/arf",
 ```
 
 ###
 
-`arf` is a fast, Rust-based replacement for the default R Terminal: it starts more quickly and handles pasted multi-line code more reliably. The path points at `/usr/local/bin/arf`, a stable symlink the image provides for exactly this purpose, so the setting keeps working even if the image's internals move.
+`arf` is a fast, Rust-based stand-in for the default R Terminal --- it starts quicker and handles pasted multi-line code more reliably. The path `/usr/local/bin/arf` is a stable symlink the image sets up just for this, so the setting keeps working even if the image's internals change.
 
 ### Exercise 5
 
@@ -200,15 +194,13 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 "r.plot.useHttpgd": true,
 ```
 
 ###
 
-By default, R opens plots in a separate window that would be invisible in a Codespace. Setting this to `true` sends plots to the `httpgd` tool instead, which streams them into a panel inside VS Code.
+By default, R opens plots in a separate window that would be invisible in a Codespace. Setting this to `true` sends plots to the **httpgd** tool instead, which streams them into a panel inside VS Code.
 
 ### Exercise 6
 
@@ -224,8 +216,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your answer should look like:
 
 ```
 "r.source.echo": true,
@@ -250,15 +240,13 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 "git.enableSmartCommit": true,
 ```
 
 ###
 
-Smart commit automatically includes all changed files in the commit when you click the Commit button in the Source Control sidebar --- you do not need to run `git add` separately. This is why clicking Commit in the `codespace-starter` Codespace works without an extra confirmation step, while the Jupyter Notebook template required one.
+Smart commit automatically includes all changed files in the commit when you click the Commit button in the Source Control sidebar --- you do not need to run `git add` separately. This is why clicking Commit in the `codespace-starter` Codespace works without an extra confirmation step, while the Jupyter Notebook devcontainer setup required one.
 
 ### Exercise 8
 
@@ -274,8 +262,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your answer should look like:
 
 ```
 "files.autoSave": "afterDelay",
@@ -300,8 +286,6 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 "editor.wordWrap": "on",
 ```
@@ -324,8 +308,6 @@ question_text(NULL,
 ```
 
 ###
-
-Your answer should look like:
 
 ```
 "workbench.editor.enablePreview": false,
@@ -350,15 +332,13 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 "python.defaultInterpreterPath": "/opt/venv/bin/python",
 ```
 
 ###
 
-The image ships a full Python data-science stack --- numpy, pandas, matplotlib, scikit-learn, and more --- in a virtual environment at `/opt/venv`. This setting points the Python extension at that environment, so `import pandas` works in a Jupyter notebook or a Quarto Python chunk with no setup. This is a recent addition: earlier versions of `codespace-starter` were R-only.
+The image ships a full Python data-science stack --- **numpy**, **pandas**, **matplotlib**, **scikit-learn**, and more --- in a virtual environment at `/opt/venv`. This setting points the Python extension at that environment, so `import pandas` works in a Jupyter notebook or a Quarto Python chunk with no setup. This is a recent addition: earlier versions of `codespace-starter` were R-only.
 
 ### Exercise 12
 
@@ -375,15 +355,13 @@ question_text(NULL,
 
 ###
 
-Your answer should look like:
-
 ```
 "postCreateCommand": "R -q -e 'pak::pkg_install(c(\"PPBDS/tutorial.helpers\", \"PPBDS/vscode.tutorials\", \"PPBDS/misc.tutorials\", \"PPBDS/primer.tutorials\"), ask = FALSE)'",
 ```
 
 ###
 
-Like the Jupyter template's `updateContentCommand`, this runs automatically when the Codespace is created. It refreshes the four fast-moving course packages --- `tutorial.helpers`, `vscode.tutorials`, `misc.tutorials`, and `primer.tutorials` --- to their latest versions, so you always get the newest tutorials even though the image itself is pinned. The image bakes in working copies as a fallback, so a momentary GitHub outage never blocks the Codespace from opening.
+This runs automatically when your Codespace opens, refreshing the four course packages — **tutorial.helpers**, **vscode.tutorials**, **misc.tutorials**, **primer.tutorials** — to their latest versions. You always get the newest tutorials even though the image is pinned. A working copy is baked into the image as a fallback, so GitHub outages won't block your Codespace from opening.
 
 ## Summary
 ###

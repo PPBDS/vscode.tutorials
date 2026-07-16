@@ -29,7 +29,7 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-In `11-codebase-start` you found the line `"image": "ghcr.io/ppbds/devcontainer:1.0.1"` inside `codespace-starter`'s `devcontainer.json`. That image does not appear out of nowhere --- it is built from a Dockerfile maintained by PPBDS. This tutorial reads through that real, current Dockerfile, section by section, to understand what it does and why it is written the way it is.
+In `11-codespace-starter` you found the line `"image": "ghcr.io/ppbds/devcontainer:1.0.1"` inside `codespace-starter`'s `devcontainer.json`. That image does not appear out of nowhere --- it is built from a Dockerfile maintained by PPBDS. This tutorial reads through that real, current Dockerfile, section by section, to understand what it does and why it is written the way it is.
 
 ###
 
