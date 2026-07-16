@@ -238,7 +238,7 @@ question_text(NULL,
 
 ###
 
-
+The `image` field tells GitHub which pre-built setup to use --- think of it as choosing a computer that already has certain software installed. `mcr.microsoft.com/devcontainers/universal:2` is Microsoft's general-purpose setup with Python and several other programming languages pre-installed.
 
 ### Exercise 4
 
@@ -266,6 +266,8 @@ question_text(NULL,
 ```
 
 ###
+
+This block lists which VS Code extensions to pre-install. `ms-toolsai.jupyter` enables Jupyter notebooks; `ms-python.python` adds Python code completion and error highlighting.
 
 ### Exercise 5
 
@@ -305,7 +307,7 @@ Use AI to update the devcontainer so it installs and configures the environment 
 
 1. Copy and paste the entire document to your preferred AI chatbot.
 
-2. Use one of the AI command-line assistants (`gemini`, `claude`, `codex`, `agy`, or `aider`) in a bash Terminal in your `codespace-starter` Codespace.
+2. Use an AI command-line assistant in a bash Terminal in your `codespace-starter` Codespace.
 
 Copy and paste your new `devcontainer.json`.
 
@@ -345,11 +347,9 @@ question_text(NULL,
 
 ###
 
-Describing what you want in plain English works just as well for configuration files like `devcontainer.json` as it does for analysis code. Once comfortable, you can publish your own repo as a template and reuse it for future projects.
-
 ### Exercise 7
 
-Since the rest of this Codespace still uses Python, let's revert any changes we've made to `devcontainer.json`. Go to the Source Control side bar and press the revert button on the right.
+Let's revert any changes we've made to `devcontainer.json`. Go to the Source Control side bar and press the revert button on the right.
 
 ```{r}
 include_graphics("images/revert-devcontainer.png")
@@ -445,6 +445,14 @@ notebooks/cifar_net.pth
 .ipynb_checkpoints/
 ```
 
+###
+
+notebooks/data – skip the data folder; it's often huge and doesn't belong in Git. 
+
+notebooks/cifar_net.pth – skip the saved model file too; you can always regenerate it by rerunning training. 
+
+.ipynb_checkpoints/ – Jupyter's auto-save clutter. Nobody needs it in version control.
+
 ### Exercise 10
 
 Navigate to the `data` directory and open `atlantis.csv`. Paste the top 5 lines.
@@ -467,6 +475,9 @@ year,population
 2002,13800
 2003,13600
 ```
+###
+
+CSV (comma-separated values) is a plain-text format where each row is a record and each column is separated by a comma --- `atlantis.csv` contains simulated year-by-year population data for a fictional city.
 
 ### Exercise 11
 
@@ -488,6 +499,9 @@ question_text(NULL,
 
 This notebooks reads sample population data from `data/atlantis.csv` and plots it using Matplotlib. Edit `data/atlantis.csv` and re-run this cell to see how the plots change!
 ```
+###
+
+A `.ipynb` file is a Jupyter notebook --- like a Quarto document, it mixes text, code, and output in runnable cells. `populations.ipynb` reads population data from `atlantis.csv` and plots it with **matplotlib**, the same read-then-visualize workflow you've used in R.
 
 ### Exercise 12
 
@@ -606,6 +620,8 @@ question_text(NULL,
 ````
 https://curly-waffle-6vvgjxrjvj662pgq.github.dev/
 ````
+
+Your answer may look different from ours.
 
 ###
 
@@ -850,7 +866,7 @@ Installed
 
 ###
 
-This is a completely different way of installing an extension than the `customizations.vscode.extensions` array you just found in `devcontainer.json`. Installing through the Marketplace UI only affects *this* running Codespace --- it is not saved anywhere, so the next time you rebuild or open a fresh Codespace from this repo, Rainbow CSV will be gone. The JSON array, by contrast, is declarative and committed to the repo: it installs automatically for anyone --- including your future self --- who opens a Codespace from `r-devcontainer`, with no manual step required.
+Installing an extension through the Marketplace UI is a one-time, temporary fix — it only applies to this Codespace, and vanishes the moment you rebuild or start fresh. Adding it to the customizations.vscode.extensions array in devcontainer.json is the permanent fix: since it's committed to the repo, that extension installs automatically for anyone (including future you) who spins up a Codespace from r-devcontainer — no manual clicking required.
 
 ### Exercise 10
 
@@ -902,8 +918,8 @@ question_text(NULL,
 ```
 https://github.com/ppbds-student/r-devcontainer
 ```
+Your answer may look different from ours.
 
-###
 
 This Codespace was created directly from a template, so there was no GitHub repo yet --- "Publish Branch" is what creates it.
 
