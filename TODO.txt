@@ -44,22 +44,41 @@ There is a temptation to hold off on repos until after the first few tutorials, 
 
 
 
-### 01-introduction
+### 00-introduction Jacob
 
-We need a 01-introduction tutorial. This would be the first tutorial that someone does after Getting Started. Indeed, it should probably repeat key issues from Getting Started. That is, it should be self-contained. We want students to start using AI within the IDE as soon as possible. So, this tutorial would include:
+Skim 01-code and 02-quarto
+
+Don't bother with Antigravity
+
+We need a 01-introduction tutorial. 
+
+  * Comnfortable in VS Code
+  * 10 Terminal questions --- just cut and paste from Terminal
+  * Run `.devcontainer/connect-repo.sh introduction`. Discuss what it does. `pwd` is a reasonable questions, as is `ls -a`. Look at the URL for your repo. (Steal from 05-github-1.)
+  * Script 1 (use Copilot) -- maybe cut/paste from 01-code
+  * 5  questions about Git/GitHub.
+  * Log in to Antigravity (steal from 04-ai-1). Mention Copilot, and highlight the possibilities for using all sorts of AI.
+  * Script 2 -- maybe cut/paste from 01-code
+  * After this, we are AI agnostic. (But which pictures?)
+  * Each script finishes with asking AI to make a plot using only library(tidyverse) and a the diamonds data set from the ggplot2 package.
+  * Mention full access but tell students not to use it.
+
+This would be the first tutorial that someone does after Getting Started. Indeed, it should probably repeat key issues from Getting Started. That is, it should be self-contained. We want students to start using AI within the IDE as soon as possible. So, this tutorial would include:
 
   * Basic vscode components, often taken from 01-code.
   * A couple of bash Terminal questions, including the -h option.
-  * Make a script that adds 2 numbers. And run it. Just to show how you make a file and then do stuff with that file.
+  * (maybe) make a script that adds 2 numbers. And run it. Just to show how you make a file and then do stuff with that file.
   * Two examples of using AI. 
     + The first would be GitHub Copilot, since we can be pretty sure that this will always work. Have it make a script which adds 10 numbers. Have the AI run the script. Then use show_file() so that we know that it worked.
     + The second would be Antigravity. All (?) students have Google accounts (and those that don't could just skip these questions). Once it is connected, it could make another script, and then the AI could run it. show_file() again.
   * Mention that we can't keep this code because we don't own this repo. Question could be `ls` from bash, and then discuss the files we will lose once the codebase closes.
-  * Run `connect-repo.sh introduction`. Discuss what it does. `pwd` is a reasonable questions, as is `ls -a`.
+
   * Use AI --- whatever AI you want; we don't force particular AI usage --- to create a tidyverse script which makes a beautiful diamonds plot. Tell AI to run the script. show_file() to see their script.  Show/discuss our answer.
   * Git commit/push by hand. Question is `git log`.
   * Last question is URL for the repo.
   * At the end, reinforce how we always do things: Start codespace. Make repo. Start AI. Start tutorial. We assume that you understand these steps and will use them all going forward. We will just tell you to do things. We leave it to you to use AI.
+
+
 
 ### 02-code and 03-quarto 
 
