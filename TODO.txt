@@ -32,6 +32,20 @@ Add some images, especially in devcontainer.
 
 Always bold R package and Python libraries. Anything which might appear at a terminal, or a URL, is in backticks.
 
+## 13-openrouter
+
+The 13th tutorial will teach students how to use openrouter (https://openrouter.ai/). This is tricky! 
+
+  * We usually don't want students to ever have to give some company their credit card number. Presumably openrouter includes some trial credits? 
+
+  * Note that we have (I think!) included all the installations necessary to run openrouter in our current codebase-starter. Obviously, we need to check that.
+
+  * Purpose of this tutorial is to show students the easiest way to use cheap open-weights models, and to explain why this is desirable. We want students to be comfortable using different models, switching models and so on. We no longer teach students to code. We teach them how to use AI to write code. The purpose of this tutorial is to show them the easiest (?)way of using the cheapest high quality models.
+
+I am not sure about the best structure of the tutorial. But our usual approach is to not ask students questions. Instead, we give students instructions --- probably various commands that can be issued when using openrouter --- and then teach them things in the knowledge drop.
+
+I am open to this being two tutorials. Also, what other infrastructure should we teach students about. Maybe create some complex repos, have students fork them, understand them, and then fix them?
+
 ## Tutorial Edits
 
 Need to ensure that, by the time we finish the core VS Code tutorials that students are very comfortable with repo, .gitginore, QMD and so on. That is, we want to guarantee that all later tutorials can start with one question that starts (and states) from the assumption that you are in a repo named `x` and which tells you to set up a QMD, .gitigore with *_files, commit/push. And then the rest of the tutorial just has the student telling AI what to do with the QMD.
