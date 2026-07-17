@@ -37,12 +37,113 @@ In `10-devcontainer` you examined a generic Python devcontainer and wrote a mini
 
 You do not need to create a new repo for this tutorial. All of the exercises below work directly inside the `codespace-starter` checkout that is already part of this Codespace.
 
+### Exercise 1
+
+In the bash Terminal, run `echo $CODESPACE_NAME`. CP/CR.
+
+```{r introduction-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+```
+$ echo $CODESPACE_NAME
+congenial-space-broccoli-7qpj5xvw9xhpqj9
+```
+
+Note that your own value will be a different, randomly generated name.
+
+###
+
+GitHub sets several environment variables the moment a Codespace's container starts, and `CODESPACE_NAME` is one of them --- it's how the Codespace itself, or any script running inside it, can tell it isn't sitting on a local machine. The rest of this tutorial reads the file that configured this exact container: `.devcontainer/devcontainer.json`.
+
+### Exercise 2
+
+In the bash Terminal, run `cd /workspaces/codespace-starter`, then `ls .devcontainer`. CP/CR.
+
+```{r introduction-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+```
+$ cd /workspaces/codespace-starter
+$ ls .devcontainer
+devcontainer.json
+```
+
+###
+
+GitHub Codespaces looks for a directory named exactly `.devcontainer` at a repo's root the moment a Codespace is created --- if it finds one, it reads `devcontainer.json` inside and builds the container accordingly. You'll read this exact file, line by line, for the rest of this section.
+
+### Exercise 3
+
+Still in the bash Terminal, run `which arf`. CP/CR.
+
+```{r introduction-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+```
+$ which arf
+/usr/local/bin/arf
+```
+
+###
+
+`which` reports which program on your PATH a command actually resolves to --- useful any time a command behaves unexpectedly. Here it resolves to `arf`, not a standard R binary, because this Codespace's `devcontainer.json` deliberately points the R Terminal at a different program, which you'll examine directly in a few exercises.
+
+### Exercise 4
+
+Run `which python`. CP/CR.
+
+```{r introduction-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+```
+$ which python
+/opt/venv/bin/python
+```
+
+###
+
+That path is not the system's default Python --- it's a **virtual environment**, a self-contained folder of packages kept separate from the rest of the machine, that this Codespace activates by default. You'll see this same path again later in this section, and you'll install a package into it yourself before the tutorial ends.
+
 ## Codespace Starter Devcontainer
 ###
 
+This section works through `codespace-starter`'s `.devcontainer/devcontainer.json` field by field, in the order they appear in the file: the custom image, the VS Code extensions array, the settings block, and finally the `postCreateCommand`. Each exercise asks you to find one line or block and identify what it configures, building up a complete picture of how this Codespace came to look and behave the way it does. Where the Jupyter Notebook devcontainer and the minimal R devcontainer you wrote in `10-devcontainer` left most defaults untouched, `codespace-starter` customizes nearly every layer --- image, extensions, editor settings, and startup command --- because it needs to behave identically on every student's machine. By the end of the section you will have accounted for every top-level field in the file, and you will install a package or two yourself to see the difference between what `postCreateCommand` automates and what you still do by hand.
+
 ### Exercise 1
 
-In the bash Terminal, run `cd /workspaces/codespace-starter`, then `cat .devcontainer/devcontainer.json`. Copy and paste the entire output.
+In the bash Terminal, run `cd /workspaces/codespace-starter`, then `cat .devcontainer/devcontainer.json` to see the whole file on your screen. Find the line beginning with `"name"`. Copy and paste it.
 
 ```{r codespace-starter-1}
 question_text(NULL,
@@ -50,51 +151,20 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 30)
+	rows = 3)
 ```
 
 ###
 
-````
-{
-  "name": "PPBDS Codespace",
-  "image": "ghcr.io/ppbds/devcontainer:1.0.1",
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "reditorsupport.r",
-        "quarto.quarto",
-        "PPBDS.vscode-r-tutorials",
-        "ritwickdey.LiveServer",
-        "tomoki1207.pdf",
-        "mechatroner.rainbow-csv",
-        // Python data science: language support + notebooks. Unlike the AI
-        // assistant panels above, these are ordinary language tooling that
-        // renders fine in the web Codespaces client.
-        "ms-python.python",
-        "ms-toolsai.jupyter"
-      ],
-      "settings": {
-        "r.rterm.linux": "/usr/local/bin/arf",
-        "r.plot.useHttpgd": true,
-        "r.source.echo": true,
-        "git.enableSmartCommit": true,
-        "files.autoSave": "afterDelay",
-        "editor.wordWrap": "on",
-        "workbench.editor.enablePreview": false,
-        "python.defaultInterpreterPath": "/opt/venv/bin/python"
-      }
-    }
-  },
-  "postCreateCommand": "R -q -e 'pak::pkg_install(c(\"PPBDS/tutorial.helpers\", \"PPBDS/vscode.tutorials\", \"PPBDS/misc.tutorials\", \"PPBDS/primer.tutorials\"), ask = FALSE)'"
-}
-````
+```
+"name": "PPBDS Codespace",
+```
 
-Note that the exact `name` field, key order, and image version may differ slightly on your machine as the image is updated.
+Note that this exact string may differ slightly on your machine.
 
 ###
 
-Standard JSON doesn't allow comments, but `devcontainer.json` uses **JSONC** (JSON with Comments), which does. The comments here explain *why* each setting exists --- useful for instructors and future maintainers.
+The `name` field is purely cosmetic --- it is the label GitHub shows for this configuration in the Codespace-creation picker and the VS Code window title. It has no effect on what gets installed. Every other field in this file, which you will examine one at a time over the rest of this section, does.
 
 ### Exercise 2
 
@@ -154,7 +224,7 @@ question_text(NULL,
 
 ###
 
-Each extension has one job: `reditorsupport.r` for R, `quarto.quarto` for Quarto, `PPBDS.vscode-r-tutorials` for the tutorial panel, `ritwickdey.LiveServer` for HTML previews, `tomoki1207.pdf` for PDFs, `mechatroner.rainbow-csv` for colored CSVs, and `ms-python.python` plus `ms-toolsai.jupyter` for Python and Jupyter. Notice what's missing: no AI-assistant extensions. Instead, AI tools run from the terminal—they work better as CLI programs on every device, and in-editor panels don't render well in browser-based Codespaces.
+Standard JSON doesn't allow comments, but `devcontainer.json` is actually **JSONC** (JSON with Comments) --- that's what lets the `// Python data science:` note above explain why those last two extensions are grouped separately, right inside the config file itself. Each extension has one job: `reditorsupport.r` for R, `quarto.quarto` for Quarto, `PPBDS.vscode-r-tutorials` for the tutorial panel, `ritwickdey.LiveServer` for HTML previews, `tomoki1207.pdf` for PDFs, `mechatroner.rainbow-csv` for colored CSVs, and `ms-python.python` plus `ms-toolsai.jupyter` for Python and Jupyter. Notice what's missing: no AI-assistant extensions --- instead, AI tools run from the terminal, because they work better as CLI programs on every device, and in-editor panels don't render well in browser-based Codespaces.
 
 ### Exercise 4
 
@@ -177,7 +247,7 @@ question_text(NULL,
 
 ###
 
-`arf` is a fast, Rust-based stand-in for the default R Terminal --- it starts quicker and handles pasted multi-line code more reliably. The path `/usr/local/bin/arf` is a stable symlink the image sets up just for this, so the setting keeps working even if the image's internals change.
+You ran `which arf` back in the Introduction --- this is why: `arf` is a fast, Rust-based stand-in for the default R Terminal --- it starts quicker and handles pasted multi-line code more reliably. The path `/usr/local/bin/arf` is a stable symlink the image sets up just for this, so the setting keeps working even if the image's internals change.
 
 ### Exercise 5
 
@@ -338,7 +408,7 @@ question_text(NULL,
 
 ###
 
-The image ships a full Python data-science stack --- **numpy**, **pandas**, **matplotlib**, **scikit-learn**, and more --- in a virtual environment at `/opt/venv`. This setting points the Python extension at that environment, so `import pandas` works in a Jupyter notebook or a Quarto Python chunk with no setup. This is a recent addition: earlier versions of `codespace-starter` were R-only.
+That path is the same one you found with `which python` in the Introduction. The image ships a full Python data-science stack --- **numpy**, **pandas**, **matplotlib**, **scikit-learn**, and more --- in a virtual environment at `/opt/venv`. This setting points the Python extension at that environment, so `import pandas` works in a Jupyter notebook or a Quarto Python chunk with no setup. This is a recent addition: earlier versions of `codespace-starter` were R-only. You'll install a package into this exact environment yourself in a few exercises.
 
 ### Exercise 12
 
@@ -361,12 +431,218 @@ question_text(NULL,
 
 ###
 
-This runs automatically when your Codespace opens, refreshing the four course packages — **tutorial.helpers**, **vscode.tutorials**, **misc.tutorials**, **primer.tutorials** — to their latest versions. You always get the newest tutorials even though the image is pinned. A working copy is baked into the image as a fallback, so GitHub outages won't block your Codespace from opening.
+This runs automatically when your Codespace opens, refreshing the four course packages — **tutorial.helpers**, **vscode.tutorials**, **misc.tutorials**, **primer.tutorials** — to their latest versions. You always get the newest tutorials even though the image is pinned. A working copy is baked into the image as a fallback, so GitHub outages won't block your Codespace from opening. But `postCreateCommand` only ever reinstalls these four specific packages — anything else you need, you install yourself, either by hand or by asking AI, which is exactly what the next few exercises do.
+
+### Exercise 13
+
+In the R Terminal, run `install.packages("praise")`. CP/CR.
+
+```{r codespace-starter-13}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 14)
+```
+
+###
+
+```
+> install.packages("praise")
+Installing package into '/home/ppbds-student/R/library'
+(as 'lib' is unspecified)
+trying URL 'https://cloud.r-project.org/src/contrib/praise_1.0.0.tar.gz'
+Content type 'application/x-gzip' length 6431 bytes
+downloaded 6431 bytes
+
+* installing *source* package 'praise' ...
+** package 'praise' successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** DONE (praise)
+```
+
+###
+
+`install.packages()` is base R's package manager: it downloads one package from CRAN and compiles or unpacks it into your library, one call at a time. Contrast this with **pak** (Exercise 2 and 12): pak resolves and installs entire dependency trees in parallel, which is exactly why `postCreateCommand` uses `pak::pkg_install()` rather than `install.packages()` for the four course packages.
+
+### Exercise 14
+
+In the bash Terminal, run `/opt/venv/bin/pip install emoji`. CP/CR.
+
+```{r codespace-starter-14}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+```
+$ /opt/venv/bin/pip install emoji
+Collecting emoji
+  Downloading emoji-2.14.0-py3-none-any.whl (590 kB)
+Installing collected packages: emoji
+Successfully installed emoji-2.14.0
+```
+
+###
+
+That's the same `/opt/venv` from Exercise 11. Calling `/opt/venv/bin/pip` directly, instead of just `pip`, guarantees the package lands in the same virtual environment `python.defaultInterpreterPath` points VS Code at --- so `import emoji` works immediately in a Python chunk with no restart. Unlike R, where one library path is usually active by default, Python needs its interpreter and its installer to match, or the install and the `import` land in two different places.
+
+### Exercise 15
+
+Ask AI to install the R package `cowsay` for you, and to tell you exactly what command it ran. CP/CR.
+
+```{r codespace-starter-15}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 12)
+```
+
+###
+
+```
+> install.packages("cowsay")
+Installing package into '/home/ppbds-student/R/library'
+(as 'lib' is unspecified)
+trying URL 'https://cloud.r-project.org/src/contrib/cowsay_0.9.0.tar.gz'
+downloaded 22 KB
+
+* installing *source* package 'cowsay' ...
+** package 'cowsay' successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** DONE (cowsay)
+```
+
+###
+
+Whether you type `install.packages()` yourself or ask AI to "install cowsay," the same function ultimately runs --- an AI agent doesn't have a separate installation mechanism, it calls the same R functions and Terminal commands you would type by hand. The only real difference is who decided which command to run, which is exactly why it's worth reading the command AI reports back, the same way you read your own in Exercise 13.
+
+### Exercise 16
+
+Ask AI to install the Python library `pyfiglet` into this Codespace's Python environment, and to tell you exactly what command it ran. CP/CR.
+
+```{r codespace-starter-16}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+```
+$ /opt/venv/bin/pip install pyfiglet
+Collecting pyfiglet
+  Downloading pyfiglet-1.0.2-py3-none-any.whl (1.1 MB)
+Installing collected packages: pyfiglet
+Successfully installed pyfiglet-1.0.2
+```
+
+###
+
+A good AI agent in this Codespace targets `/opt/venv/bin/pip` rather than a plain `pip`, because that's the interpreter `python.defaultInterpreterPath` (Exercise 11) points VS Code at --- but an assistant without that context might install into the wrong environment, leaving `import pyfiglet` to fail silently later. Checking which `pip` or `python` actually ran is worth doing before trusting the result, not after.
 
 ## Summary
 ###
 
 This tutorial toured the `devcontainer.json` behind `codespace-starter` itself: its pinned custom PPBDS image, its VS Code extensions array, the settings that control the R Terminal, plot rendering, Git commits, autosave, word wrap, tab behavior, and the Python interpreter, and the `postCreateCommand` that keeps the four fast-moving course packages current. The next tutorial, `12-docker`, goes one level deeper and reads through the Dockerfile that actually builds the `ghcr.io/ppbds/devcontainer` image this `devcontainer.json` points at.
+
+### Exercise 1
+
+In the R Terminal, run `installed.packages()[c("tutorial.helpers", "vscode.tutorials", "misc.tutorials", "primer.tutorials"), "Version"]`. CP/CR.
+
+```{r summary-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+```
+> installed.packages()[c("tutorial.helpers", "vscode.tutorials", "misc.tutorials", "primer.tutorials"), "Version"]
+tutorial.helpers  vscode.tutorials    misc.tutorials  primer.tutorials
+         "0.6.3"           "0.4.1"           "0.9.2"           "1.3.0"
+```
+
+###
+
+These four version numbers are exactly what `postCreateCommand` (Exercise 12) refreshed the moment this Codespace opened --- check again in a few weeks and they may well differ, even though the underlying image stays pinned to `ghcr.io/ppbds/devcontainer:1.0.1`. A stable image with fast-moving packages layered on top is precisely why `postCreateCommand` exists instead of baking these four packages into the image itself.
+
+### Exercise 2
+
+In one or two sentences: if `"git.enableSmartCommit": true` were removed from this `devcontainer.json`, what would change about clicking the Commit button in the Source Control sidebar? Paste your interpretation below.
+
+```{r summary-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+Without smart commit, clicking Commit only commits files already staged with `git add`; unstaged changes are left out, or VS Code shows a confirmation pop-up asking whether to stage and commit everything --- the same pop-up `10-devcontainer` showed for the Jupyter Notebook devcontainer, which does not enable this setting.
+
+###
+
+This is the same pop-up you saw in `10-devcontainer`'s Exercise 8 --- one line in this section's `devcontainer.json`, `git.enableSmartCommit`, is the entire reason it never appears here.
+
+### Exercise 3
+
+In the bash Terminal, run `cat /etc/os-release`. CP/CR.
+
+```{r summary-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+###
+
+```
+$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.4 LTS (Jammy Jellyfish)"
+ID=ubuntu
+ID_LIKE=debian
+```
+
+###
+
+This file describes the Linux distribution baked inside `ghcr.io/ppbds/devcontainer:1.0.1` --- the same image field you found in Exercise 2. `devcontainer.json` only ever *references* this image by name; it says nothing about how the image itself was built. `12-docker`, next, reads the Dockerfile that does.
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
