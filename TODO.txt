@@ -32,7 +32,22 @@ Add some images, especially in devcontainer.
 
 Always bold R package and Python libraries. Anything which might appear at a terminal, or a URL, is in backticks.
 
-## 13-openrouter
+## 13-my-codepsace-starter
+
+This is a graduation exeercise for the last three tutorials. Students now understand devcontainers, dockerfiles and images. So, they can now create their own version of codebase-starer, called my-codebase-starter. This will, obviously, look a lot like ours. But it won't have all our junk, the stuff we just include for teaching purposes, like all the PPBDS tutorial packages. 
+
+They will need their own dockerfile. (Does this need to me in its own directory? Much more convenient if it just lived in the same repo.) They need to build their own image files. Their devcontainer.json needs to include that image file.
+
+Question: Does that mean that using this repo as a template will work fast for them --- because they own the repo? If yes, then great! If not, then they will need to do something similar to what we do with connect-repo.sh.
+
+But under no circumstances do we want them using connect-repo! It is a hack, mainly necessitated by teaching requirements. If they need to do something like that then teach them the raw git commands which accomplish the same thing.
+
+
+## 14-dotfiles
+
+Should there ne a dotfiles tutorial, or should an introduction to this topic be handled in 13-my-codebase-starter? I think that, ideally, it is handled in 13. The motivating example is Git/GitHub. We want dotfiles to include all the Git/GitHub info so that connecting a new repo is easy. This is complex stuff! I am still unsure what `gh` does. 
+
+## 15-openrouter
 
 The 13th tutorial will teach students how to use openrouter (https://openrouter.ai/). This is tricky! 
 
@@ -45,6 +60,9 @@ The 13th tutorial will teach students how to use openrouter (https://openrouter.
 I am not sure about the best structure of the tutorial. But our usual approach is to not ask students questions. Instead, we give students instructions --- probably various commands that can be issued when using openrouter --- and then teach them things in the knowledge drop.
 
 I am open to this being two tutorials. Also, what other infrastructure should we teach students about. Maybe create some complex repos, have students fork them, understand them, and then fix them?
+
+
+
 
 ## Tutorial Edits
 
