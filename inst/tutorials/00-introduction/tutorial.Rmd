@@ -34,21 +34,49 @@ options(tutorial.exercise.timelimit = 60,
 
 This is the first tutorial you should complete after **Getting Started**. It repeats the most important setup ideas so that it can stand on its own.
 
-By the end, you will have:
 
-* moved around VS Code and used its Terminal;
-* created your own GitHub repository;
-* created and run R scripts by hand and with AI;
-* made two plots using the `diamonds` data;
-* committed your files with Git and pushed them to GitHub.
+
+You will:
+
+* Move around VS Code and use its Terminal tab.
+* Create your own GitHub repository.
+* Create and run R scripts by hand and with AI.
+* Make two plots using the `diamonds` data.
+* Commit your files with Git and push them to GitHub.
 
 ###
 
 Every tutorial begins in the same place: a Codespace on the `main` branch of [`PPBDS/codespace-starter`](https://github.com/PPBDS/codespace-starter). You then start the tutorial from the R Tutorials view in VS Code. That is where you should be now.
 
+<!-- DK: Cut or add images. -->
+
 The tutorial itself runs in an R process displayed in a Terminal tab named something like **R Tutorial**. Leave that Terminal alone. Closing it stops the tutorial.
 
+<!-- DK: Change all prompts and responses. Ie.
+
+codespace-starter $ pwd
+/workspaces/codespace-starter
+codespace-starter $  -->
+
 ###
+
+<!-- DK: Give URL for Codebase-starter -->
+
+<!-- DK: Sections to have, in order
+
+    Terminal
+    Git and GitHub
+        starting with connect-repo.
+    Script 1
+        Using Copilot (show images)
+        Commit and push at end. View on web. 
+    Script 2
+        AI agnostic
+        Commit/push at end. Maybe git log question.
+    Summary
+        URL for repo     -->
+
+ <!-- DK: revisit the start of code/quarto/terminal. First, the starting info is like later tutorials that we have: "You should be in a repo called . . ."  Second, make them shorter by deleting questions you stole for introduction. -->
 
 VS Code is split into a few parts:
 
