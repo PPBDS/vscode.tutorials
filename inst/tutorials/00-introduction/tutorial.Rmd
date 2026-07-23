@@ -32,7 +32,7 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-This is the first tutorial you should complete after **Getting Started**. It repeats the most important setup ideas so that it can stand on its own.
+This is the first tutorial you should complete after **Getting Started**. It repeats the most important setup ideas so that it can stand on its own. No prior experience is assumed. We move slowly and explain every step.
 
 By the end, you will have:
 
@@ -70,15 +70,40 @@ You can make a part bigger or smaller by dragging its edge. If you close somethi
 
 Most questions ask you to **Copy/Paste the Command and Response**, shortened to **CP/CR**. Copy the command you typed and the answer the Terminal gave you. Paste both into the answer box.
 
-Your answer may look a little different from ours. That is OK. Usernames and version numbers can be different.
+Your answer may look a little different from ours. That is OK. Usernames, version numbers, and the exact look of the prompt can be different. In our examples we shorten the prompt to just the folder name and a `$`, like `codespace-starter $`. Your real prompt is usually longer, but it means the same thing.
+
+## The Terminal
+###
+
+The Terminal is a place where you type commands and the computer answers. In this section you will run a handful of simple, safe commands. Every question is just Copy/Paste the Command and Response.
 
 ###
 
-Open a bash Terminal. Click the small down arrow beside the `+` in the Terminal panel and choose **bash**. You should now have at least two Terminal tabs: **R Tutorial**, which is busy running this tutorial, and **bash**, where you will work.
+First, make sure you can see the Terminal. It is the panel across the bottom of the window. If it is not there, open it from the menu bar: click **View**, then choose **Terminal**.
+
+```{r}
+include_graphics("images/open-terminal-menu.png")
+```
+
+You can also open it with the keyboard shortcut shown in the menu, `` Ctrl+` `` (the key just above `Tab`).
+
+###
+
+You want a **bash** Terminal. Look at the top-right corner of the Terminal panel. Click the small down arrow beside the `+`, then choose **bash**. The picture below shows an open bash Terminal: the **TERMINAL** tab is selected, the red box marks the `bash` label, and the `+` and down-arrow buttons for opening more Terminals sit just to its right.
+
+```{r}
+include_graphics("images/terminal-on-open.png")
+```
+
+You should now have at least two Terminal tabs: **R Tutorial**, which is busy running this tutorial, and **bash**, where you will work. Leave the **R Tutorial** tab alone.
 
 ### Exercise 1
 
-In the bash Terminal, run `pwd`. CP/CR.
+In the bash Terminal, type `pwd` and press `Enter`. You should see something like the picture below. Then CP/CR.
+
+```{r}
+include_graphics("images/pwd-example.png")
+```
 
 ```{r terminal-1}
 question_text(NULL,
@@ -92,9 +117,9 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/codespace-starter (main) $ pwd
+codespace-starter $ pwd
 /workspaces/codespace-starter
-@ppbds-student ➜ /workspaces/codespace-starter (main) $
+codespace-starter $
 ````
 
 `pwd` means **print working directory**. It tells you which folder you are in. Right now, you should be in the `codespace-starter` folder.
@@ -115,8 +140,8 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/codespace-starter (main) $ ls
-@ppbds-student ➜ /workspaces/codespace-starter (main) $
+codespace-starter $ ls
+codespace-starter $
 ````
 
 `ls` shows the files in your folder. Nothing appears because this folder does not have any regular files yet.
@@ -137,24 +162,24 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/codespace-starter (main) $ ls -a
+codespace-starter $ ls -a
 .  ..  .devcontainer  .git
-@ppbds-student ➜ /workspaces/codespace-starter (main) $
+codespace-starter $
 ````
 
-The `-a` part tells `ls` to show **all** files, including hidden files. Hidden file names start with a dot. Do not change anything inside the `.git` folder.
+The `-a` part is an **option**. It tells `ls` to show **all** files, including hidden files. Hidden file names start with a dot. Do not change anything inside the `.git` folder.
 
 ### Exercise 4
 
-Small options can change what a command does. Many commands use `-h` to show help.
+Options change what a command does. Many commands also have a `--help` option that explains how they work without doing anything.
 
 Run:
 
 ````
-.devcontainer/connect-repo.sh -h
+ls --help
 ````
 
-CP/CR. The response is long, so paste as much as the answer box will comfortably hold.
+CP/CR. The response is long, so paste just the first several lines.
 
 ```{r terminal-4}
 question_text(NULL,
@@ -162,7 +187,7 @@ question_text(NULL,
     allow_retry = TRUE,
     try_again_button = "Edit Answer",
     incorrect = NULL,
-    rows = 18)
+    rows = 10)
 ```
 
 ###
@@ -170,34 +195,39 @@ question_text(NULL,
 The beginning should look like:
 
 ````
-connect-repo.sh — create or connect to your GitHub work repo
-
-This script just automates a few GitHub steps so you can start fast.
-There is no magic here: below is every command it runs, what it means,
-and how you could do the exact same thing yourself with gh and git.
+codespace-starter $ ls --help
+Usage: ls [OPTION]... [FILE]...
+List information about the FILEs (the current directory by default).
+Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
 ````
 
-Here `-h` means **help**. It explains the command without doing anything.
-
-The help text tells you what `connect-repo.sh` does. It signs you in to GitHub, makes or finds your repo, and opens its folder. Later tutorials will show you the Git commands behind this shortcut.
+`--help` is a safe way to learn what a command does. It just prints a description; it never changes your files. Almost every command you meet has a `--help` option, so this is a good habit whenever you see a new one.
 
 ### Exercise 5
 
-Before making your permanent repository, create one disposable file by hand.
-
-Open the Application Menu from the three horizontal bars at the top left. Choose `File -> New File...`, then **R Document**.
+Now make a file by hand, just to see how it works. Open the Application Menu from the three horizontal bars at the top left. Choose `File -> New File...`.
 
 ```{r}
 include_graphics("images/create-new-file.png")
 ```
 
-Enter the following code:
+When VS Code asks what kind of file to make, choose **R Document**.
+
+```{r}
+include_graphics("images/select-new-r-file.png")
+```
+
+Type this single line into the new file:
 
 ````
 1 + 2
 ````
 
-Save the file as `warmup.R` at the top level of `codespace-starter`. A black dot on an Editor tab means the file has unsaved changes. `Cmd/Ctrl + S` saves the file.
+Save the file as `warmup.R` at the top level of `codespace-starter`. Press `Cmd/Ctrl + S`; in the Save dialog, make sure the path ends in `codespace-starter/warmup.R`, then press **OK**. A black dot on an Editor tab means the file has unsaved changes; saving makes the dot disappear.
+
+```{r}
+include_graphics("images/save-warmup.png")
+```
 
 In the bash Terminal, run `Rscript warmup.R`. CP/CR.
 
@@ -213,12 +243,12 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/codespace-starter (main) $ Rscript warmup.R
+codespace-starter $ Rscript warmup.R
 [1] 3
-@ppbds-student ➜ /workspaces/codespace-starter (main) $
+codespace-starter $
 ````
 
-An R script is a text file containing R commands. `Rscript warmup.R` asks R to execute every command in the file. The code remains in the script after it runs, so you can inspect, edit, and run it again.
+An R script is a text file containing R commands. `Rscript warmup.R` asks R to run every command in the file. The code stays in the script after it runs, so you can look at it, change it, and run it again.
 
 ### Exercise 6
 
@@ -236,14 +266,23 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/codespace-starter (main) $ ls
+codespace-starter $ ls
 warmup.R
-@ppbds-student ➜ /workspaces/codespace-starter (main) $
+codespace-starter $
 ````
 
-The file exists in the `PPBDS/codespace-starter` working copy, but you do not own that GitHub repository and cannot push your work to it. Closing the browser does not immediately erase the file, but deleting or rebuilding the Codespace will. We need a repository that you own.
+Your new file now appears. The problem is that this file lives inside the `PPBDS/codespace-starter` working copy, which you do **not** own. You cannot save your work to that repository on GitHub. Closing the browser does not erase the file right away, but deleting or rebuilding the Codespace will. You need a repository that belongs to you. That is what the next section sets up.
 
-### Exercise 7
+## Git and GitHub
+###
+
+**Git** is a tool that keeps a history of your files. A **repository**, or **repo**, is a folder that Git is watching. **GitHub** is a website that keeps a copy of your repo online, so your work is safe and shareable.
+
+The `codespace-starter` folder you have been working in is one repo, but it belongs to the course, not to you. In this section you will create your own repo, named `introduction`, and connect to it.
+
+We give you a shortcut for this called `connect-repo.sh`. It signs you in to GitHub, creates (or finds) a repo with the name you give it, and opens that repo's folder. Later tutorials will show you the individual Git commands hiding behind this shortcut.
+
+### Exercise 1
 
 Run:
 
@@ -251,11 +290,11 @@ Run:
 .devcontainer/connect-repo.sh introduction
 ````
 
-Follow the browser sign-in instructions if they appear. Authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/introduction`.
+If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/introduction`.
 
-CP/CR the useful part of the script's response. If the window reload removed the earlier output, paste the first prompt you see in the new `introduction` Terminal instead.
+CP/CR the useful part of the script's response. If the window reload cleared the output, paste the first prompt you see in the new `introduction` Terminal instead.
 
-```{r terminal-7}
+```{r github-1}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -275,13 +314,13 @@ The two folders now sit beside each other:
 /workspaces/introduction
 ````
 
-The first supplied the Codespace and the tutorial. The second is yours and will hold your work. `warmup.R` remains in the first folder, which is why it does not appear in your new Explorer.
+The first supplied the Codespace and the tutorial. The second is yours and will hold your work. `warmup.R` stays behind in the first folder, which is why it does not appear in your new Explorer.
 
-### Exercise 8
+### Exercise 2
 
 Open a new bash Terminal if necessary. Run `pwd`. CP/CR.
 
-```{r terminal-8}
+```{r github-2}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -293,18 +332,18 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/introduction (main) $ pwd
+introduction $ pwd
 /workspaces/introduction
-@ppbds-student ➜ /workspaces/introduction (main) $
+introduction $
 ````
 
 Stop and fix the open folder if your result still ends in `codespace-starter`. All remaining work belongs in `/workspaces/introduction`.
 
-### Exercise 9
+### Exercise 3
 
 Run `ls -a`. CP/CR.
 
-```{r terminal-9}
+```{r github-3}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -316,18 +355,28 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/introduction (main) $ ls -a
+introduction $ ls -a
 .  ..  .git
-@ppbds-student ➜ /workspaces/introduction (main) $
+introduction $
 ````
 
-The repository is intentionally almost empty. The hidden `.git` directory is enough to make it a Git repository.
+The repository is almost empty on purpose. The hidden `.git` directory is enough to make it a Git repository. You will fill it with your own work as you go.
 
-### Exercise 10
+### Exercise 4
 
-Run `git remote get-url origin`. CP/CR.
+Now go see your repository on GitHub with your own eyes and make sure it is really there.
 
-```{r terminal-10}
+Open a new browser tab and go to [github.com](https://github.com). Sign in with the same account if you are asked. Click your profile picture in the top-right corner, choose **Your repositories**, and find the one named **introduction**. Click it.
+
+You are now on your repository's page. Near the top-right of the box that lists your files, there is a **Commits** link showing how many commits the repository has. The red box in the picture below marks it.
+
+```{r}
+include_graphics("images/analysis-1-gh-1.png")
+```
+
+Your repository is brand new, so it will have far fewer files than this example and only a commit or two — but the page layout and the **Commits** link are in the same place. Copy and paste the text of the **Commits** link (for example, `1 Commit`).
+
+```{r github-4}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -338,36 +387,34 @@ question_text(NULL,
 
 ###
 
-````
-@ppbds-student ➜ /workspaces/introduction (main) $ git remote get-url origin
-https://github.com/ppbds-student/introduction.git
-@ppbds-student ➜ /workspaces/introduction (main) $
-````
+The picture shows a different repository, `04-github-1` with several files, so it has `3 Commits`. Yours might just say `1 Commit` right now. That is fine.
 
-In Git, a **remote** is another copy of the repository. `origin` is the conventional name for the GitHub copy. Your URL will contain your GitHub username.
+Seeing the repository in your browser proves two things: the repository really exists on GitHub, and it belongs to **you** (your username appears in the address bar, like `github.com/your-username/introduction`). This is the online home where your work will live. Later in this tutorial you will push files here and watch the commit count grow.
 
 ## Script 1: GitHub Copilot
 ###
 
-Open a new R Terminal from the Terminal menu. Keep the **R Tutorial** Terminal running, and use this new R Terminal for the R commands below.
+Now you will use your first AI helper. **GitHub Copilot** is an AI assistant built right into VS Code. We start with Copilot because it is always available and works out of the box.
 
-The picture shows the Terminal menu. Click the small arrow beside the `+`, then choose **R Terminal**. The red boxes show where to click.
+Open a new R Terminal from the Terminal menu. Keep the **R Tutorial** Terminal running, and use this new R Terminal for the R commands below. Click the small arrow beside the `+`, then choose **R Terminal**. The red boxes show where to click.
 
 ```{r}
 include_graphics("images/new-terminal.png")
 ```
 
-GitHub Copilot is an AI helper inside VS Code. Click the Chat button in the title bar, then click **Open Chat**. The red box in the picture shows the Chat button. If Copilot asks you to sign in, use the same GitHub account you used for the Codespace.
+###
+
+Click the Chat button in the title bar, then click **Open Chat**. The red box in the picture shows the Chat button. If Copilot asks you to sign in, use the same GitHub account you used for the Codespace.
 
 ```{r}
 include_graphics("images/copilot-chat-icon.png")
 ```
 
-Before starting any AI agent, verify that its Terminal or workspace is `/workspaces/introduction`. An agent reads and writes relative to the folder in which it starts; an agent accidentally started in `codespace-starter` can create files that are invisible in your `introduction` Explorer and absent from your repository.
+Before starting any AI agent, check that its Terminal or workspace is `/workspaces/introduction`. An agent reads and writes files relative to the folder it starts in. An agent accidentally started in `codespace-starter` can create files that never show up in your `introduction` Explorer and never reach your repository.
 
 ###
 
-AI agents may offer **Full Access**, **Always Allow**, or a similarly named mode. Do **not** use it in this course. Keep the agent in a review or permission-based mode. Read each proposed command or file change, approve it once if it makes sense, and reject or question anything surprising. Never paste passwords, tokens, private data, or secrets into an AI prompt.
+AI agents may offer a **Full Access**, **Always Allow**, or similarly named mode. Do **not** use it in this course. Keep the agent in a review or permission-based mode. Read each proposed command or file change, approve it once if it makes sense, and reject or question anything surprising. Never paste passwords, tokens, private data, or secrets into an AI prompt.
 
 ### Exercise 1
 
@@ -375,7 +422,13 @@ Give Copilot this prompt, adjusting the wording if needed:
 
 > Create an R script named script-1.R. It should add the integers from 1 through 10 and print the result. Run the script with Rscript and tell me the result. Do not install any packages.
 
-Review and approve the file write and the `Rscript` command individually. CP/CR Copilot's final response, including the result.
+Review and approve the file write and the `Rscript` command one at a time. Then, in the R Terminal, run:
+
+````
+tutorial.helpers::show_file("script-1.R")
+````
+
+CP/CR.
 
 ```{r script-1-1}
 question_text(NULL,
@@ -388,30 +441,7 @@ question_text(NULL,
 
 ###
 
-Your answer will vary, but the sum should be `55` and `script-1.R` should appear in Explorer.
-
-### Exercise 2
-
-In the R Terminal, run:
-
-````
-tutorial.helpers::show_file("script-1.R")
-````
-
-CP/CR.
-
-```{r script-1-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
-```
-
-###
-
-One reasonable answer is:
+Your answer will vary, but the sum should be `55` and `script-1.R` should appear in Explorer. One reasonable answer is:
 
 ````
 numbers <- 1:10
@@ -419,7 +449,7 @@ total <- sum(numbers)
 print(total)
 ````
 
-### Exercise 3
+### Exercise 2
 
 Finish the script with a plot. Ask Copilot:
 
@@ -431,7 +461,7 @@ Review the changes and allow the agent to run the script. Then run the following
 tutorial.helpers::show_file("script-1.R")
 ````
 
-```{r script-1-3}
+```{r script-1-2}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -468,10 +498,61 @@ ggsave("diamonds-1.png", diamonds_plot, width = 8, height = 5)
 
 This solution loads only **tidyverse**, uses only `diamonds`, assigns the plot to an object, and saves a PNG. Click `diamonds-1.png` in Explorer to inspect your own result.
 
+### Exercise 3
+
+Time to save your work. **Git** records a snapshot of your files, called a **commit**. A **push** sends your commits up to GitHub. Do both by hand through the Source Control view.
+
+Click the Source Control icon (the branching icon) in the Activity Bar on the left. Your new files appear under **Changes**. Each one has a `U`, which means **untracked**: Git can see the file, but it is not yet part of any commit.
+
+```{r}
+include_graphics("images/source-control.png")
+```
+
+Now commit and push:
+
+1. Review the files under **Changes**. Do not commit secrets, tokens, or files you do not understand.
+2. Type `Add script-1 and diamonds plot` as the commit message.
+3. Press **Commit**. The Codespace is set up to include all the displayed changes.
+4. Press **Sync Changes** to push the commit to GitHub.
+
+After you commit, the green button becomes **Sync Changes**, like this:
+
+```{r}
+include_graphics("images/analysis-1-post-commit.png")
+```
+
+When the sync finishes, view your work on the web. Open your `introduction` repository on GitHub and refresh the page. Copy/paste the file names shown on the repository's main page.
+
+The GitHub page looks like this. This older example has a different repo name and different files, but the layout is the same.
+
+```{r}
+include_graphics("images/github-repository.png")
+```
+
+```{r script-1-3}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 6)
+```
+
+###
+
+You should see at least:
+
+````
+diamonds-1.png
+script-1.R
+````
+
+This GitHub page is the online copy of your work. The Codespace is where you work. The GitHub repo is where you keep and share it. If your computer stopped working right now, your commit would still be safe on GitHub.
+
 ## Your choice of AI
 ###
 
-Copilot is only one option. The Codespace may also provide command-line agents from OpenAI, Anthropic, Google, and other providers. These tools have different interfaces, models, limits, and account requirements, but the core workflow is the same:
+Copilot is only one option. The Codespace may also provide command-line agents from Google, OpenAI, Anthropic, and other providers. These tools have different interfaces, models, limits, and account requirements, but the core workflow is the same:
 
 1. describe the outcome you want;
 2. let the AI inspect the relevant files;
@@ -496,9 +577,9 @@ question_text(NULL,
 
 ###
 
-Authentication screens and model names change frequently, so your output may look different. A Google sign-in grants a temporary token; it does not give the program your Google password.
+Authentication screens and model names change often, so your output may look different. A Google sign-in grants a temporary token; it does not give the program your Google password.
 
-From this point forward, this course is **AI agnostic**. “Ask AI” means use whichever AI you prefer. We will generally show prompts and results, not tool-specific buttons or screenshots.
+From this point forward, this course is **AI agnostic**. "Ask AI" means use whichever AI you prefer — Copilot, Antigravity, or any other agent the Codespace provides. We will generally show prompts and results, not tool-specific buttons or screenshots. The same rule as before still holds: stay in a review mode and never turn on full access.
 
 ## Script 2: AI agnostic
 ### Exercise 1
@@ -575,7 +656,9 @@ ggsave("diamonds-2.png", diamonds_plot, width = 8, height = 5)
 
 ### Exercise 3
 
-Run `list.files()` in the R Terminal. CP/CR.
+Save this work too. Through the Source Control view, commit your new files with the message `Add script-2 and second diamonds plot`, then press **Sync Changes** to push.
+
+Then, in the bash Terminal, run `git log`. CP/CR the most recent entry.
 
 ```{r script-2-3}
 question_text(NULL,
@@ -583,97 +666,27 @@ question_text(NULL,
     allow_retry = TRUE,
     try_again_button = "Edit Answer",
     incorrect = NULL,
-    rows = 4)
+    rows = 8)
 ```
 
 ###
 
+Your answer should look something like:
+
 ````
-R 4.5.3> list.files()
-[1] "diamonds-1.png" "diamonds-2.png" "script-1.R" "script-2.R"
-R 4.5.3>
+introduction $ git log
+commit be56bbaedd692a6d29bba410f0a6fd5b1d844a64 (HEAD -> main, origin/main, origin/HEAD)
+Author: ppbds-student <ppbds-student@users.noreply.github.com>
+Date:   Thu Jul 23 16:57:38 2026 +0000
+
+    Add script-2 and second diamonds plot
 ````
 
-Unlike `warmup.R`, these files are inside your own repo. They are saved in the Codespace, but they are not on GitHub yet.
-
-## Git and GitHub
-###
-
-**Git** keeps a history of your files. A **commit** saves one point in that history. **GitHub** keeps a copy of the repo online. A **push** sends your commits to GitHub.
-
-Start with Source Control. Click the branching icon in the Activity Bar on the left. This opens the Source Control Side Bar.
-
-Your new files appear under **Changes**. Each new file has a `U`, which means **untracked**. Git can see the file, but the file has not been included in a commit yet.
+`git log` lists your commits, newest first. When the newest line shows both `main` and `origin/main`, your Codespace and GitHub agree on the latest commit — your push worked. You can also see the same history on GitHub by clicking the commit-count link on the repo page.
 
 ```{r}
-include_graphics("images/source-control.png")
+include_graphics("images/analysis-1-gh-2.png")
 ```
-
-### Exercise 1
-
-Commit and push by hand through the Source Control view:
-
-1. Review the files under **Changes**. Do not commit secrets, tokens, or files you do not understand.
-2. Enter `Complete introduction tutorial` as the commit message.
-3. Press **Commit**. The Codespace is configured to include all the displayed changes.
-4. Press **Sync Changes** to push the commit to GitHub.
-
-After the commit, the green button changes to **Sync Changes**, like this:
-
-```{r}
-include_graphics("images/source-control-sync.png")
-```
-
-Then run `git log -1 --oneline --decorate` in the bash Terminal. CP/CR.
-
-```{r git-github-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 4)
-```
-
-###
-
-````
-8a4f2d1 (HEAD -> main, origin/main, origin/HEAD) Complete introduction tutorial
-````
-
-The letters and numbers at the start will be different for you. When `main` and `origin/main` are on the same line, your Codespace and GitHub have the same newest commit.
-
-### Exercise 2
-
-Open your `introduction` repository on GitHub and refresh the page. Copy/paste the file names shown on the repository's main page.
-
-The GitHub page looks like this. This older example has a different repo name and different files, but the layout is the same.
-
-```{r}
-include_graphics("images/github-repository.png")
-```
-
-```{r git-github-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 6)
-```
-
-###
-
-You should see at least:
-
-````
-diamonds-1.png
-diamonds-2.png
-script-1.R
-script-2.R
-````
-
-This GitHub page is the online copy of your work. The Codespace is where you work. The GitHub repo is where you keep and share the work.
 
 ## Summary
 ###
@@ -687,7 +700,7 @@ From now on, begin course work with the same routine:
 3. Start whichever AI you want to use, in review mode.
 4. Start the tutorial.
 
-Future tutorials will often say only “create and connect to a repo,” “ask AI,” “run,” or “commit and push.” You now know the choices behind those instructions. We leave the choice of AI and the exact mechanics to you, but you must always review the results.
+Future tutorials will often say only "create and connect to a repo," "ask AI," "run," or "commit and push." You now know the choices behind those instructions. We leave the choice of AI and the exact mechanics to you, but you must always review the results.
 
 ### Exercise 1
 
