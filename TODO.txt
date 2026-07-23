@@ -1,40 +1,35 @@
-## Krrish
+## Notes for infrastructure tutorials
 
-Install an R package. Install a Python. Both by hand. And also ask AI to do it. Done
+### Skills to cover 
 
-A student claimed that "when trying to do the 10-infrastructure tutorial it requires you to make two more code spaces in the tutorial." Is that true? Is it a good idea?
+Install VS Code extension
 
-Take ownership of those three tutorials (10, 11, 12). Add yourself as co-author. Aim for 60 minutes each. Done
+Create a repo/.devcontainer/ from scratch and start a codespace from it.
 
-It is codepsace-starter, not codebase-start. Done
+Create their own images. How can we check these?
 
-Delete 10-infrastructure. Done
+### Outline
 
-Come up with a list of things we want to teach students, and then figure out where to put that stuff, and then how to do it. Examples: Done
+10-devcontainer
+11-codebase-starter
+12-docker
+13-starter
+14-dotfiles
+15-openrouter
 
-1) Install VS Code extension Done
+Might have some other ones, especially ones which begin by forking a PPBDS repo with various problems and then work on disagnosing/solving them.
 
-2) Create a repo/.devcontainer/ from scratch and start a codespace from it. Done
 
-Students should know how to install a VC Code extension by hand. Maybe share an image. Then, we need to check that they did it. We almost always want this to be some command which we can run which returns evidence that the student did what we wanted. Surely there is a command which returns all the installed VS Code extensions. Done
 
-Make a new devcontainer from scratch, save it as a repo, then start a codespace from it? Done
+## 10-devcontainer
+## 11-codebase-starter
+## 12-docker
 
-Do not refer to specific AIs like Claude. Done
 
-No talk about templates. 
 
-Own every word. Or send me an email with your questions. But there is no reason to keep anything. Done
+## 13-starter
 
-Own every knowledge drop. Several here are much less important than other stuff we should teach students. Done
-
-Add some images, especially in devcontainer. Done
-
-Always bold R package and Python libraries. Anything which might appear at a terminal, or a URL, is in backticks. Done
-
-## 13-my-codepsace-starter
-
-This is a graduation exeercise for the last three tutorials. Students now understand devcontainers, dockerfiles and images. So, they can now create their own version of codebase-starer, called my-codebase-starter. This will, obviously, look a lot like ours. But it won't have all our junk, the stuff we just include for teaching purposes, like all the PPBDS tutorial packages. 
+This is a graduation exeercise for the last three tutorials. Students now understand devcontainers, dockerfiles and images. So, they can now create their own version of `codebase-starter`, called `starter`. This will, obviously, look a lot like ours. But it won't have all our junk, the stuff we just include for teaching purposes, like all the PPBDS tutorial packages. 
 
 They will need their own dockerfile. (Does this need to me in its own directory? Much more convenient if it just lived in the same repo.) They need to build their own image files. Their devcontainer.json needs to include that image file.
 
@@ -45,17 +40,17 @@ But under no circumstances do we want them using connect-repo! It is a hack, mai
 
 ## 14-dotfiles
 
-Should there ne a dotfiles tutorial, or should an introduction to this topic be handled in 13-my-codebase-starter? I think that, ideally, it is handled in 13. The motivating example is Git/GitHub. We want dotfiles to include all the Git/GitHub info so that connecting a new repo is easy. This is complex stuff! I am still unsure what `gh` does. 
+Should there be a dotfiles tutorial, or should an introduction to this topic be handled in 13-my-codebase-starter? I think that, ideally, it is handled in 13. The motivating example is Git/GitHub. We want dotfiles to include all the Git/GitHub info so that connecting a new repo is easy. This is complex stuff! I am still unsure what `gh` does. 
 
 ## 15-openrouter
 
-The 13th tutorial will teach students how to use openrouter (https://openrouter.ai/). This is tricky! 
+Teach ow to use openrouter (https://openrouter.ai/). This is tricky! 
 
   * We usually don't want students to ever have to give some company their credit card number. Presumably openrouter includes some trial credits? 
 
   * Note that we have (I think!) included all the installations necessary to run openrouter in our current codebase-starter. Obviously, we need to check that.
 
-  * Purpose of this tutorial is to show students the easiest way to use cheap open-weights models, and to explain why this is desirable. We want students to be comfortable using different models, switching models and so on. We no longer teach students to code. We teach them how to use AI to write code. The purpose of this tutorial is to show them the easiest (?)way of using the cheapest high quality models.
+  * Purpose of this tutorial is to show students the easiest way to use cheap open weights models, and to explain why this is desirable. We want students to be comfortable using different models, switching models and so on. We no longer teach students to code. We teach them how to use AI to write code. The purpose of this tutorial is to show them the easiest (?) way of using the cheapest high quality models.
 
 I am not sure about the best structure of the tutorial. But our usual approach is to not ask students questions. Instead, we give students instructions --- probably various commands that can be issued when using openrouter --- and then teach them things in the knowledge drop.
 
@@ -70,7 +65,6 @@ Need to ensure that, by the time we finish the core VS Code tutorials that stude
 
 But, at the same time, we don't want to overwhelm them during week 1. So, we need to bring things in slowly.
 
-Getting Started chapter introduces Codespaces and VS Code. (Might make this longer?) But does nothing with Git/GitHub. Getting Started tutorial does a little more with Codespaces and VS Code but its main focus is showing how to work with tutorials. It does show some bash Terminal commands. Make sure to show the -h option to one command. We should have some AI questions.
 
 We can split AI into two parts. In Getting Started and the Introduction, we just use GitHub Copilot. We know it will always be there and will always work for at least a few questions. Then, later, we can learn how to operate something like Antigravity from the command line.
 
@@ -139,6 +133,7 @@ Still good tutorials, but we make some changes.
   * We certainly don't need multiple new repos. But maybe creating one other repo, besides the one we are in, would be a good idea. But we create that one by hand! By going into the /workspace directory, looking at the two repos already there --- codebase-starter and new-repo --- and then using git commands to create a repo. 
   * The purpose of these tutorials is to teach git (and GitHub) after all.
   * Might be that the second tutorial walks through what connect-repo is doing, line by line, and issues the same or similar commands. This would show that connect-repo does more than just connect. It reloads the window . . . or whatever that is.
+  * Would be great if students did not need to use create-repo . . .
 
   ### ai tutorials
 
@@ -157,7 +152,7 @@ Still good tutorials, but we make some changes.
 
 ### infrastructure
 
-  * infrastructure is very important. I like the content which the current tutorial covers. Students need to understand devcontainers. 
+
 
   * Need to end infrastructure tutorial (or add another tutorial) with a topic for creating your own `codespace-starter`, maybe called `starter`.
 
