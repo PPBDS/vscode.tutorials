@@ -1,8 +1,6 @@
 ---
-title: "Codespace Starter Devcontainer"
-author:
-  - David Kane
-  - Krrish Jayakumar
+title: "Codespace Starter"
+author: David Kane
 tutorial:
   id: "11-codespace-starter"
 output:
@@ -31,9 +29,13 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-In `10-devcontainer` you examined a generic Python devcontainer and wrote a minimal R devcontainer from scratch. Now you will look at the devcontainer behind the Codespace you are working in right now --- the one that controls behaviors you've likely already noticed, like auto-save, plots appearing inside the editor, and the Git commit button working without an extra confirmation step. `codespace-starter` uses a custom image built specifically for this course, plus a detailed `settings` block that configures all of it.
+<!-- DK: Problem that I have a PPBDS/codebase-starter and this tutorial is `11-codebase-starter`? Hopefully not . . . But maybe we need to require that  -->
+
+In `10-devcontainer` you examined a generic Python devcontainer and wrote a minimal R devcontainer from scratch. Now you will look at the devcontainer behind the Codespace you are working in right now. `codespace-starter` uses a custom image built specifically for this course, plus a detailed `settings` block that configures all of it.
 
 ### Exercise 1
+
+<!-- DK: All these opening lines need to be replaced with "You should be in a repo . . ." -->
 
 Create and connect to a repo called `11-codespace-starter`, then open it as your workspace.
 
@@ -56,11 +58,13 @@ https://github.com/ppbds-student/11-codespace-starter
 
 ###
 
-This new repo is empty except for a `.git` folder --- the `devcontainer.json` that actually configured this Codespace lives somewhere else entirely, which you'll track down in a couple of exercises.
+This new repo is empty except for a `.git` folder --- the `devcontainer.json` that actually configured this codespace lives somewhere else entirely, which you'll track down in a couple of exercises.
 
 ### Exercise 2
 
-Copy and paste the URL for your Codespace.
+<!-- DK: Delete the next few questions? They are the same as in 10. Bug or feature? -->
+
+Copy and paste the URL for your codespace.
 
 ```{r introduction-2}
 question_text(NULL,
@@ -76,11 +80,10 @@ question_text(NULL,
 ```
 https://congenial-space-broccoli-7qpj5xvw9xhpqj9.github.dev/
 ```
-Your answer should be similar to ours.
 
 ###
 
-Every Codespace runs on its own remote machine that GitHub provisions for you --- this URL is that machine's unique address, and it stays the same for the rest of this tutorial.
+Every codespace runs on its own remote machine that GitHub provisions for you --- this URL is that machine's unique address, and it stays the same for the rest of this tutorial.
 
 ### Exercise 3
 
@@ -113,8 +116,8 @@ Your new repo and `codespace-starter` sit side by side under `/workspaces` in th
 This section walks through `codespace-starter’`s `.devcontainer/devcontainer.json` field by field, examining the custom image, VS Code extensions, settings, and `postCreateCommand`. Unlike the minimal configurations from `10-devcontainer`, this setup customizes almost everything to guarantee an identical experience for every student. By the end, you'll understand each top-level field and manually install a package to see exactly what `postCreateCommand` automates versus what you still do by hand.
 
 ### Exercise 1
-
-In the bash Terminal, run `cd /workspaces/codespace-starter`, then `cat .devcontainer/devcontainer.json` to see the whole file on your screen. Find the line beginning with `"name"`. Copy and paste it.
+ 
+In the bash Terminal, run `cd /workspaces/codespace-starter`. In the Explorer, open `devcontainer/devcontainer.json` to see the whole file on your screen. Find the line beginning with `"name"`. Copy and paste it.
 
 ```{r codespace-starter-1}
 question_text(NULL,
@@ -156,7 +159,7 @@ question_text(NULL,
 
 ###
 
-Your `codespace-starter` uses a pinned version of a custom image, `ghcr.io/ppbds/devcontainer`, so every student gets the exact same setup, pre-loaded with Quarto, R, Python, the four course packages, and AI tools. The next tutorial, `12-docker`, shows how this image is actually built.
+Your `codespace-starter` uses a pinned version of a custom image, `ghcr.io/ppbds/devcontainer`, so every student gets the exact same setup, pre-loaded with Quarto, R, Python, the four course tutorial packages, and various AI tools. We will explore images --- how they work and how to build them --- in a future tutorial.
 
 ### Exercise 3
 

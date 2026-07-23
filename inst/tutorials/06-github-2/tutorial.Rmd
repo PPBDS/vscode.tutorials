@@ -219,7 +219,7 @@ include_graphics("images/p1-pre-ignore-sc.png")
 
 There are 14 files that git has recognized as changed. Most are in the `quarto-1_files` directory --- intermediate files not worth tracking. We'll create a `.gitignore` to tell git to ignore them.
 
-Select the File Explorer icon in the Activity Bar. Then, click the new document button to the right of the "PROJECT-1" heading. 
+Select the Explorer icon in the Activity Bar. Then, click the new document button to the right of the "PROJECT-1" heading. 
 
 ```{r}
 include_graphics("images/p1-create-ignore.png")

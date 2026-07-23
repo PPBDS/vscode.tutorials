@@ -1805,7 +1805,7 @@ Click on the "Download raw file" symbol to download the `TODO.txt` file to your 
 knitr::include_graphics("images/download-file.png")
 ```
 
-Find the location of the file using Finder (Mac) or File Explorer (Windows). You'll need to know where this file exists on your computer in order to upload it to your Codespace. Back in your Codespace, drag and drop `TODO.txt` into the `files` directory in the File Explorer.
+Find the location of the file using Finder (Mac) or File Explorer (Windows). You'll need to know where this file exists on your computer in order to upload it to your Codespace. Back in your Codespace, drag and drop `TODO.txt` into the `files` directory in the Explorer.
 
 ![](images/drag-drop.gif)
 
