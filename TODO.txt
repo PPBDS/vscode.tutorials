@@ -213,3 +213,6 @@ To shrink the size of all the PNG files, do:
 find . -type f -name "*.png" -exec pngquant "{}" -o "{}" --force \;
 
 We could do all the example repos in PPBDS and then leave them up forever, so they would be available to students doing the work. Or for a ppbds-student account.
+
+
+David Kane
