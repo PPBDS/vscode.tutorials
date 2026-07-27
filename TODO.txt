@@ -23,6 +23,7 @@ Create their own images. How can we check these?
 13-starter
 14-dotfiles
 15-openrouter
+16-models
 
 Might have some other ones, especially ones which begin by forking a PPBDS repo with various problems and then work on disagnosing/solving them.
 
@@ -49,19 +50,23 @@ But under no circumstances do we want them using connect-repo! It is a hack, mai
 
 Should there be a dotfiles tutorial, or should an introduction to this topic be handled in 13-my-codebase-starter? I think that, ideally, it is handled in 13. The motivating example is Git/GitHub. We want dotfiles to include all the Git/GitHub info so that connecting a new repo is easy. This is complex stuff! I am still unsure what `gh` does. 
 
-## 15-openrouter
+## 15-openrouter and 16-models
 
-Teach ow to use openrouter (https://openrouter.ai/). This is tricky! 
+Both drafted. 15 is the key plus `aider`; 16 removes the agent --- raw `curl`,
+prices as data, open weights vs closed, then `ellmer` from R.
 
-  * We usually don't want students to ever have to give some company their credit card number. Presumably openrouter includes some trial credits? 
+Two tutorials rather than one because a free OpenRouter account gets 50
+requests a day, which one long tutorial would blow.
 
-  * Note that we have (I think!) included all the installations necessary to run openrouter in our current codebase-starter. Obviously, we need to check that.
+`ellmer` needs adding to the PPBDS/devcontainers image; `aider` is already
+there.
 
-  * Purpose of this tutorial is to show students the easiest way to use cheap open weights models, and to explain why this is desirable. We want students to be comfortable using different models, switching models and so on. We no longer teach students to code. We teach them how to use AI to write code. The purpose of this tutorial is to show them the easiest (?) way of using the cheapest high quality models.
+### Still open
 
-I am not sure about the best structure of the tutorial. But our usual approach is to not ask students questions. Instead, we give students instructions --- probably various commands that can be issued when using openrouter --- and then teach them things in the knowledge drop.
-
-I am open to this being two tutorials. Also, what other infrastructure should we teach students about. Maybe create some complex repos, have students fork them, understand them, and then fix them?
+What other infrastructure should we teach? The fork-a-broken-repo idea (create
+complex PPBDS repos with planted problems, have students fork, understand, and
+fix them) is the strongest remaining candidate, but it is assessment rather
+than instruction and needs its own spec plus a set of maintained repos.
 
 
 

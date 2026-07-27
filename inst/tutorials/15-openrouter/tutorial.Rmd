@@ -1,0 +1,744 @@
+---
+title: "OpenRouter"
+author: David Kane
+tutorial:
+  id: "15-openrouter"
+output:
+  learnr::tutorial:
+    df_print: default
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+description: "Get an OpenRouter account and API key without giving anyone a credit card, store the key so it survives a rebuild, and use it to drive `aider` --- switching between free and cheap models mid-session."
+---
+
+```{r setup, include = FALSE}
+library(learnr)
+library(tutorial.helpers)
+library(knitr)
+
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(out.width = '90%')
+options(tutorial.exercise.timelimit = 60,
+        tutorial.storage = "local")
+```
+
+```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```
+
+## Introduction
+###
+
+Every AI tool you have used so far --- Copilot, Antigravity, Claude Code --- ties you to one company's models. [OpenRouter](https://openrouter.ai/) is different: it is a *router*. One account, one key, one API, and behind it several hundred models from dozens of companies. You change which model you are talking to by changing a string.
+
+###
+
+This matters for two reasons. The first is money. The best open weights models cost a fraction of what the frontier models cost --- often less than a hundredth --- and for most of the work you will actually do, they are good enough. The second is habit. A student who has only ever used one model tends to believe that model is *the* AI. A student who has switched models four times in an afternoon understands that the model is a component, and that picking the right one is a decision she gets to make.
+
+###
+
+You will not need a credit card for this tutorial, and you will not need one to keep using what you set up here.
+
+### Exercise 1
+
+Create and connect to a repo called `15-openrouter`, then open it as your workspace.
+
+Copy and paste the URL for your `15-openrouter` repository.
+
+```{r introduction-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+https://github.com/ppbds-student/15-openrouter
+```
+
+###
+
+Everything in this tutorial happens in a Terminal, not in a QMD. There is no `analysis.qmd` here and nothing to render --- the subject is the plumbing, not an analysis.
+
+### Exercise 2
+
+In the bash Terminal, run `aider --version`. CP/CR.
+
+```{r introduction-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+$ aider --version
+aider 0.86.2
+```
+
+###
+
+**[aider](https://aider.chat/)** is already installed --- you saw the line that put it there in `12-docker`: `pipx install aider-chat`. It is the one AI CLI in the image that belongs to no particular model company. `claude` wants an Anthropic account, `codex` wants an OpenAI account, `agy` wants a Google account. `aider` wants a key, and it does not care whose.
+
+### Exercise 3
+
+In the bash Terminal, run `which aider`. CP/CR.
+
+```{r introduction-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+$ which aider
+/usr/local/bin/aider
+```
+
+###
+
+`pipx` installed `aider` into its own isolated Python environment under `/opt/pipx` and then dropped a small launcher --- a *shim* --- at `/usr/local/bin/aider`, which is on everyone's `PATH`. That is why `aider` runs from any directory without you activating anything. The tool's own Python dependencies stay walled off from the `/opt/venv` stack you use for data science, so neither can break the other.
+
+## Your OpenRouter Key
+###
+
+An API key is how a program proves to a service that it is you. In this section you will get one, prove it works, and --- the part most people get wrong --- store it somewhere that is both durable and safe.
+
+### Exercise 1
+
+Go to [openrouter.ai](https://openrouter.ai/) and sign in. Use the **Sign in with GitHub** option, since you already have that account.
+
+Once you are signed in, copy and paste the URL of the page you land on.
+
+```{r key-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+https://openrouter.ai/
+```
+
+###
+
+Signing up costs nothing and asks for no payment method. OpenRouter makes its money by taking a small cut when you buy credits; an account that never buys any is still a real account with a real key.
+
+### Exercise 2
+
+Go to <https://openrouter.ai/settings/privacy> and find the **Data Training** section.
+
+Turn **on** the two settings that mention *free* endpoints. Leave the two about paid endpoints and the data discount alone.
+
+Copy and paste the names of the two settings you turned on.
+
+```{r key-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+```
+Allow free endpoints that train on request data
+Allow free endpoints that publish prompts
+```
+
+###
+
+Read what those two actually say. The first allows providers "that may retain and/or train on prompts and completions." The second allows providers that "may publish prompts and completions to public datasets."
+
+Nothing is free. When a company serves a model at no charge, you are paying with your prompts. OpenRouter ships both toggles *off*, which is why a free model returns `No endpoints found matching your data policy` until you turn them on --- the refusal is the setting working correctly, not a bug.
+
+So there is a rule that follows, and it is not optional: **never send anything private through a free endpoint.** Not un-published research, not anyone's personal data, not a company's internal code. Course work is fine. Your own scratch code is fine. Draw the line there.
+
+Notice what sits directly above, untouched: a **Zero Data Retention** section that will route you only to providers who store nothing at all. The whole page is one dial, from "pay nothing and publish everything" to "pay full price and leave no trace," and you have just set yours to one end of it.
+
+### Exercise 3
+
+Go to <https://openrouter.ai/workspaces/default/keys> --- the **API Keys** page of your default workspace --- and create a key named `codespace`.
+
+Copy the key when it is shown --- this is the only time you will see it --- and paste it somewhere you can get at it for the next exercise.
+
+**Do not paste the key into this tutorial.** Copy and paste only the *name* you gave the key.
+
+```{r key-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+codespace
+```
+
+###
+
+Your key begins `sk-or-v1-` and then runs on for another sixty-odd characters. Treat it exactly like a password, because that is what it is: anyone holding it can spend your account's money, and the service has no way to tell them from you. The reason the site shows it to you once and never again is that OpenRouter does not keep a copy it can read either --- it stores a hash, checks yours against it, and that is all.
+
+Naming keys matters more than it looks. When you eventually have keys on four machines and one of them leaks, the name is how you know which one to revoke.
+
+Note where this key lives: inside a **workspace**, not on your account. A workspace is a box you can put keys, spending limits, and routing rules in, so that one project's key cannot spend another project's budget. Your account also has *management* keys, which are a different animal --- they administer the account itself rather than talking to models, and this course never needs one.
+
+### Exercise 4
+
+In the bash Terminal, set the key as an environment variable. Replace the placeholder with your actual key:
+
+<pre><code>export OPENROUTER_API_KEY=sk-or-v1-your-actual-key-here
+</code></pre>
+
+Then run this, which prints only the first eight characters:
+
+<pre><code>echo ${OPENROUTER_API_KEY:0:8}
+</code></pre>
+
+CP/CR --- the second command only.
+
+```{r key-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+$ echo ${OPENROUTER_API_KEY:0:8}
+sk-or-v1
+```
+
+###
+
+`export` puts a name and value into the shell's *environment* --- a small set of variables that every program the shell starts inherits. That is the whole mechanism by which `aider` will find your key in a moment: you never hand it the key, it reads `OPENROUTER_API_KEY` out of the environment it was born with.
+
+We printed eight characters rather than the whole thing on purpose. `echo $OPENROUTER_API_KEY` would have put your live key into the Terminal scrollback and into the answers file this tutorial saves. Secrets leak most often through exactly this kind of small convenience.
+
+### Exercise 5
+
+Ask OpenRouter who you are. In the bash Terminal:
+
+<pre><code>curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool
+</code></pre>
+
+CP/CR.
+
+```{r key-5}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 18)
+```
+
+###
+
+```
+{
+    "data": {
+        "label": "codespace",
+        "limit": null,
+        "limit_reset": null,
+        "limit_remaining": null,
+        "include_byok_in_limit": false,
+        "usage": 0,
+        "usage_daily": 0,
+        "usage_weekly": 0,
+        "usage_monthly": 0,
+        "byok_usage": 0,
+        "byok_usage_daily": 0,
+        "byok_usage_weekly": 0,
+        "byok_usage_monthly": 0,
+        "is_free_tier": true
+    }
+}
+```
+
+###
+
+That `-H "Authorization: Bearer ..."` header is the entire authentication story for essentially every modern web API, including all the AI ones. There is no login, no session, no cookie --- each request carries the key, the server checks it, and answers. `curl` is just the plainest possible way to make such a request.
+
+Read the reply. `is_free_tier` is `true` and `limit` is `null`, meaning no spending cap because there is nothing to spend. `usage` counts dollars, and yours will stay at `0` for this entire tutorial. The `byok` fields stand for *bring your own key* --- OpenRouter will let you route through your own account at another provider, and it counts that traffic separately.
+
+### Exercise 6
+
+Open a **new** bash Terminal (the `+` in the Terminal panel). In that new Terminal, run:
+
+<pre><code>echo ${OPENROUTER_API_KEY:0:8}
+</code></pre>
+
+CP/CR.
+
+```{r key-6}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+$ echo ${OPENROUTER_API_KEY:0:8}
+
+```
+
+###
+
+Empty. An environment belongs to one process. `export` in the first Terminal changed *that shell's* environment and the environment of anything it starts --- and nothing else. The new Terminal is a different shell, started fresh, which never inherited your variable.
+
+This is the same isolation lesson as QMD World and R World: separate processes do not share state, and that is usually a feature rather than a bug.
+
+### Exercise 7
+
+Make the key survive. Go to <https://github.com/settings/codespaces>.
+
+Under **Codespaces secrets**, click **New secret**. Name it `OPENROUTER_API_KEY`, paste your key as the value, and under **Repository access** select `PPBDS/codespace-starter`. Save it.
+
+Copy and paste the name of the secret and the repository you granted access to.
+
+```{r key-7}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+<!-- VERIFY: that a student can grant a *user* secret to PPBDS/codespace-starter, a
+     public repo they do not own. If the repository picker refuses, the fallback
+     is appending the export line to ~/.bashrc, and this exercise must be rewritten. -->
+
+```
+OPENROUTER_API_KEY
+PPBDS/codespace-starter
+```
+
+###
+
+A Codespaces secret is stored encrypted by GitHub and injected as an environment variable into every Codespace you create from the repositories you named. Your key now outlives this Codespace: delete this one, start another next week, and `OPENROUTER_API_KEY` is simply *there*, with nothing typed and nothing stored on disk.
+
+You name `codespace-starter` because that is the repository your Codespace was built from --- the machine you are sitting in belongs to it, not to `15-openrouter`.
+
+The secret takes effect on Codespace *creation*, so it is not in the shell you are using right now. Your `export` covers you for the rest of this tutorial.
+
+### Exercise 8
+
+Ask AI to create a `.gitignore` in your `15-openrouter` repo containing `.env` on its own line.
+
+In the R Terminal, run `show_file(".gitignore")`. CP/CR.
+
+```{r key-8}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+<pre><code>.env
+</code></pre>
+
+###
+
+If that failed, it is probably because you have not loaded `library(tutorial.helpers)` in the R Terminal.
+
+`.env` is the conventional filename for a file holding keys, so it is the first thing to put out of Git's reach. You have used `.gitignore` to keep clutter out of a repo; here it is doing security work.
+
+Understand what is at stake. GitHub scans public pushes for credentials --- OpenRouter keys among them --- and will often block the push or notify the service, which revokes the key on the spot. That protection is real and it is not something to rely on. Bots scrape new public commits within minutes of a push, and a key that reaches a public repo should be considered spent. If it ever happens to you, the fix is not to delete the commit; it is to delete the *key* at <https://openrouter.ai/workspaces/default/keys> and make a new one.
+
+## Driving A Model
+###
+
+Now the payoff. You have a key that cost nothing, and `aider` is a coding agent that will use it. In this section you will find the free models, run one, and then swap it out for a different one without restarting anything.
+
+### Exercise 1
+
+You need the name of a model that is free *today*. Ask `aider` first. In the bash Terminal, in your `15-openrouter` repo:
+
+<pre><code>aider --list-models openrouter/ | grep ':free'
+</code></pre>
+
+CP/CR.
+
+```{r aider-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+```
+$ aider --list-models openrouter/ | grep ':free'
+- openrouter/deepseek/deepseek-chat-v3-0324:free
+- openrouter/deepseek/deepseek-chat:free
+- openrouter/deepseek/deepseek-r1:free
+- openrouter/google/gemini-2.0-flash-exp:free
+```
+
+###
+
+Four models. Every one of them is dead.
+
+`aider` is not asking OpenRouter anything here --- it is reading a list of model names compiled into the tool when it was released. Those four were free once. They have all since been withdrawn, and if you start `aider` with one you will get an error rather than a model.
+
+This is worth more than the exercise it interrupts. A tool that answers instantly and confidently from a list baked in at build time is a thing you will meet constantly, and the failure is silent: nothing about that output announces that it is a year out of date.
+
+### Exercise 2
+
+So ask OpenRouter instead of asking `aider`. In the bash Terminal:
+
+<pre><code>curl -s https://openrouter.ai/api/v1/models | python -c "import sys, json; print('\n'.join(sorted(m['id'] for m in json.load(sys.stdin)['data'] if m['id'].endswith(':free'))))"
+</code></pre>
+
+CP/CR.
+
+```{r aider-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 18)
+```
+
+###
+
+```
+cohere/north-mini-code:free
+google/gemma-4-26b-a4b-it:free
+google/gemma-4-31b-it:free
+inclusionai/ling-3.0-flash:free
+nvidia/nemotron-3-nano-30b-a3b:free
+nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+nvidia/nemotron-3-super-120b-a12b:free
+nvidia/nemotron-3-ultra-550b-a55b:free
+nvidia/nemotron-nano-12b-v2-vl:free
+nvidia/nemotron-nano-9b-v2:free
+nvidia/nemotron-3.5-content-safety:free
+openai/gpt-oss-20b:free
+poolside/laguna-m.1:free
+poolside/laguna-s-2.1:free
+poolside/laguna-xs-2.1:free
+```
+
+###
+
+Fifteen live models, and no overlap at all with what `aider` claimed. Your own list will differ from ours too, because the free roster turns over constantly --- companies put models up to attract users and take them down when the attracting is done.
+
+Carry away the command rather than the names. Anything that hard-codes a specific free model --- a tutorial, a blog post, your own config file --- is broken within months, and the fix is always to go ask the service what exists right now.
+
+Notice the shape of a name: `google/` is the company that made the model, `gemma-4-31b-it` is the model, and `:free` selects a no-cost variant of it. The `:free` variant is the same weights as the paid one. What differs is the rate limit, and who gets to keep your prompts.
+
+### Exercise 3
+
+Pick any model from the list you just printed and start `aider` with it. We used `openai/gpt-oss-20b:free`; if yours is gone, substitute one of your own. Note the `openrouter/` on the front --- that part tells `aider` which service to route through.
+
+<pre><code>aider --model openrouter/openai/gpt-oss-20b:free --no-auto-commits
+</code></pre>
+
+Answer `Yes` if it offers to add `.aider*` to your `.gitignore`.
+
+Copy and paste the banner `aider` prints when it starts.
+
+```{r aider-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+###
+
+```
+Added .aider* to .gitignore
+Aider v0.86.2
+Model: openrouter/openai/gpt-oss-20b:free with whole edit format
+Git repo: .git with 0 files
+Repo-map: using 4096 tokens, auto refresh
+>
+```
+
+###
+
+`aider` found the Git repo by itself, and then edited your `.gitignore` --- it keeps its own chat history and cache in files starting `.aider`, and it knows you do not want those committed. Your `.gitignore` now holds two lines rather than the one you wrote.
+
+It is built around the assumption that your work is version-controlled, which is why `--no-auto-commits` was worth passing: without it, `aider` commits every change it makes on your behalf. That is a defensible default and a confusing one to learn with, so we turned it off. You will commit by hand at the end, as usual.
+
+The `>` is a prompt. `aider` is now a shell of its own, running inside your bash Terminal, and the slash commands you are about to use belong to it rather than to bash.
+
+### Exercise 4
+
+At the `aider` prompt, ask for a script:
+
+<pre><code>Create hello.R which prints the number of rows in the diamonds data set from ggplot2.
+</code></pre>
+
+When it finishes, in the R Terminal run `show_file("hello.R")`. CP/CR.
+
+```{r aider-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+<pre><code>library(ggplot2)
+
+cat(nrow(diamonds), "\n")
+</code></pre>
+
+###
+
+A model that costs nothing just wrote and saved a working file. Sit with that for a second --- three years ago this was a paid product, and now it is the floor.
+
+Do not over-generalize from it either. A free 20-billion-parameter model handles a two-line script easily and will struggle with a large refactor across six files. Knowing which jobs to hand to which model is the actual skill; the next tutorial gives you numbers to reason about it with.
+
+### Exercise 5
+
+At the `aider` prompt, run `/tokens`. CP/CR.
+
+```{r aider-5}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+
+```
+> /tokens
+
+Approximate context window usage for openrouter/openai/gpt-oss-20b:free, in
+tokens:
+
+$ 0.0000      471 system messages
+$ 0.0000       24 hello.R         /drop to remove
+==================
+$ 0.0000      495 tokens total
+          130,577 tokens remaining in context window
+          131,072 tokens max context window size
+```
+
+###
+
+A **token** is roughly three-quarters of a word; it is the unit models read, write, and bill in. The **context window** is how much of it the model can hold at once, and everything in that table is re-sent to the model on *every* message you type. That is why a long session gets slower and more expensive as it goes, and why `/clear` --- which drops the conversation history but keeps your files --- is worth reaching for more often than beginners do.
+
+Look at what dominates: 471 tokens of *system messages* against 24 tokens of your actual file. Before you type anything, the agent has already spent most of the conversation telling the model how to behave. Those instructions are re-sent every time, and on a paid model you pay for them every time.
+
+The dollar column is all zeros because this model is free. On a paid model it fills in, and watching it while you work is the cheapest cost lesson available.
+
+### Exercise 6
+
+Now switch models without leaving the session. Pick a *different* model from the live list you printed in Exercise 2, and put `openrouter/` on the front of it. At the `aider` prompt:
+
+<pre><code>/model openrouter/google/gemma-4-31b-it:free
+</code></pre>
+
+CP/CR.
+
+```{r aider-6}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+
+```
+> /model openrouter/google/gemma-4-31b-it:free
+Aider v0.86.2
+Main model: openrouter/google/gemma-4-31b-it:free with whole edit format
+Weak model: openrouter/openai/gpt-oss-20b:free
+Git repo: .git with 1 files
+Repo-map: using 4096 tokens, auto refresh
+Added hello.R to the chat.
+```
+
+###
+
+This is the exercise the whole tutorial exists for. You changed which artificial intelligence you are talking to by typing one line, mid-conversation, and `hello.R` is still in the chat. Google's model picked up where OpenAI's left off.
+
+Look at what the banner says now that it did not say at startup. There are two models listed: a **main model**, which you just changed, and a **weak model**, still the one you started with. Agents send a surprising amount of low-stakes traffic --- summarizing the conversation so far, writing a commit message --- and `aider` keeps sending that to the cheap model while your real requests go to the new one. Pointing the trivial work at a cheap model and the hard work at an expensive one is one of the standard ways professionals hold costs down, and here it happened by itself.
+
+The agent is the durable thing; the model is a part you swap. That framing outlasts any particular model's name. It is also the reason a router is worth using at all: without one, "try a different company's model" means a new account, a new key, a new bill, and probably a new tool.
+
+There is a trap here, and you already know enough to avoid it. `aider` has a `/models` command that searches for model names --- and it searches the same stale built-in list that lied to you in Exercise 1. Use the live list from Exercise 2 instead.
+
+### Exercise 7
+
+Ask the new model a question about the code, without letting it edit anything. At the `aider` prompt:
+
+<pre><code>/ask What would break in hello.R if ggplot2 were not installed?
+</code></pre>
+
+CP/CR.
+
+```{r aider-7}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+
+```
+> /ask What would break in hello.R if ggplot2 were not installed?
+
+The library(ggplot2) call on line 1 would fail with "there is no package
+called 'ggplot2'", and the script would stop there. Nothing after it runs,
+so nrow(diamonds) is never reached --- diamonds ships inside ggplot2, so
+it would not exist either way.
+```
+
+###
+
+`aider` has three modes and they are worth knowing apart. `/ask` answers questions and touches nothing. `/code` --- the default --- edits your files. `/architect` uses *two* models: an expensive one to plan the change and a cheap one to carry it out.
+
+That third mode is the professional's cost move, and it generalizes past `aider`. Thinking is the part worth paying for. Typing the resulting code is nearly free, and a cheap model does it about as well.
+
+### Exercise 8
+
+Leave `aider` by running `/quit` at its prompt. Then, back in the bash Terminal, check your account again:
+
+<pre><code>curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool
+</code></pre>
+
+CP/CR.
+
+```{r aider-8}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 18)
+```
+
+###
+
+```
+{
+    "data": {
+        "label": "codespace",
+        "limit": null,
+        "limit_reset": null,
+        "limit_remaining": null,
+        "include_byok_in_limit": false,
+        "usage": 0,
+        "usage_daily": 0,
+        "usage_weekly": 0,
+        "usage_monthly": 0,
+        "byok_usage": 0,
+        "byok_usage_daily": 0,
+        "byok_usage_weekly": 0,
+        "byok_usage_monthly": 0,
+        "is_free_tier": true
+    }
+}
+```
+
+###
+
+Every usage figure is `0`. You ran a coding agent, wrote a file, and switched models, and it cost nothing --- which is exactly the claim this tutorial opened with.
+
+The limits behind that are worth knowing precisely, because you will run into them, and notice that they are *not* in this response: request limits are enforced but not reported here. A free account gets **20 requests per minute and 50 per day** across all free models put together. Every message you send an agent is at least one request, and agents sometimes send several for one instruction, so fifty goes faster than it sounds. When you exhaust it you get an HTTP `429`, and there are exactly three responses: wait, or buy $10 of credits once, which lifts the daily ceiling to 1,000, or pay per token for a model that is not free. The next tutorial works out what that third option actually costs.
+
+### Exercise 9
+
+Commit and push your work --- `hello.R` and `.gitignore`.
+
+In the bash Terminal, run `git log --oneline`. CP/CR.
+
+```{r aider-9}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+```
+$ git log --oneline
+a3f9c21 (HEAD -> main, origin/main) Add hello.R and .gitignore
+```
+
+###
+
+One commit, written by you. Had you left `--no-auto-commits` off, `aider` would have made its own commit the moment it wrote `hello.R`, and your history would be a record of the agent's work rather than yours. Teams disagree about which they want. The point is that it is a setting, and now you know it is there.
+
+## Summary
+###
+
+You now have an OpenRouter account, an API key that cost nothing and required no credit card, and a place to keep that key --- a Codespaces secret --- where it survives the destruction of this machine and never touches a repo.
+
+###
+
+You saw that an environment variable belongs to a single process, that `Authorization: Bearer` is the whole of API authentication, and that a leaked key is revoked rather than deleted. You ran `aider` against a free model, watched it write a file, read its token accounting, and then switched to a different company's model in the middle of the session without losing your work.
+
+###
+
+That last move is the one to remember. The model is a component with a name, a price, and a rate limit, and you get to choose it. In `16-models` you will look at what those prices actually are, why open weights models are so much cheaper than the alternatives, and how to call a model from R rather than from a coding agent.
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
