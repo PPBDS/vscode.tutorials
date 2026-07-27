@@ -53,11 +53,11 @@ You've already been creating and storing Git repositories on GitHub. Now, we'll 
 
 ### Exercise 1
 
-You must do this tutorial in a Codespace created from a Github repo named '05-github-1'. If you haven't already done this, follow these steps:
+You must do this tutorial in a Codespace created from a Github repo named 'github-introduction'. If you haven't already done this, follow these steps:
 
-1. Create a GitHub Repo: go to the [codespace-starter repo] (https://github.com/ppbds-student/codespace-starter). Click the green "Use this Template" drop-down button and select "Create a new repository". On the next page name the repo `05-github-1`. Then click "Create repository".
+1. Create a GitHub Repo: go to the [codespace-starter repo] (https://github.com/ppbds-student/codespace-starter). Click the green "Use this Template" drop-down button and select "Create a new repository". On the next page name the repo `github-introduction`. Then click "Create repository".
 
-2. Create a Codespace from `05-github-1`: From this repo's page, click the green "Code" drop down button, in the top right, then select the "Codespaces" tab and then click "Create Codespace on main".
+2. Create a Codespace from `github-introduction`: From this repo's page, click the green "Code" drop down button, in the top right, then select the "Codespaces" tab and then click "Create Codespace on main".
 
 ```{r}
 include_graphics("images/create-codespace.png")
@@ -65,7 +65,7 @@ include_graphics("images/create-codespace.png")
 
 Copy and paste the URLS for:
 
-1. Your `05-github-1` repository.
+1. Your `github-introduction` repository.
 
 2. Your Codespace.
 
@@ -83,7 +83,7 @@ question_text(NULL,
 Your answer should look something like:
 
 ````
-https://github.com/ppbds-student/05-github-1
+https://github.com/ppbds-student/github-introduction
 https://congenial-chainsaw-wv757pv4pp67cpw.github.dev/
 ````
 
@@ -109,12 +109,12 @@ question_text(NULL,
 Your answer should look like:
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ pwd
-/workspaces/05-github-1
-@ppbds-student ➜ /workspaces/05-github-1 (main) $
+github-introduction $ pwd
+/workspaces/github-introduction
+github-introduction $
 ````
 
-You should be in a directory named `05-github-1`. By default, creating a repo from the Codespace starter and opening a Codespace creates this root directory.
+You should be in a directory named `github-introduction`. By default, creating a repo from the Codespace starter and opening a Codespace creates this root directory.
 
 ### Exercise 3
 
@@ -134,8 +134,8 @@ question_text(NULL,
 Your answer should look like:
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ ls
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ 
+github-introduction $ ls
+github-introduction $ 
 ````
 
 There are no non-hidden files or directories in the repository so far.
@@ -158,9 +158,9 @@ question_text(NULL,
 Your answer should look like:
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ ls -a
+github-introduction $ ls -a
 .  ..  .devcontainer  .git
-@ppbds-student ➜ /workspaces/05-github-1 (main) $
+github-introduction $
 ````
 
 `.` refers to the current directory. `..` stands for the parent directory. These two links are present in (almost) every directory on your computer.
@@ -205,14 +205,14 @@ question_text(NULL,
 You should have something like this:
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ cat analysis-1.qmd 
+github-introduction $ cat analysis-1.qmd 
 ---
 title: "Analysis 1"
 author: "PPBDS Student"
 format: html
 ---
 
-@ppbds-student ➜ /workspaces/05-github-1 (main) $
+github-introduction $
 ````
 
 
@@ -279,9 +279,9 @@ question_text(NULL,
 Your answer should look like:
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ ls
+github-introduction $ ls
 analysis-1_files  analysis-1.html  analysis-1.qmd
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ 
+github-introduction $ 
 ````
 
 The bottom part of the Source Control pane shows the history of changes in this repo.
@@ -313,7 +313,7 @@ question_text(NULL,
 Your answer should look like:
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ ls -R analysis-1_files
+github-introduction $ ls -R analysis-1_files
 analysis-1_files:
 libs
 
@@ -335,7 +335,7 @@ axe-check.js
 
 analysis-1_files/libs/quarto-html/tabsets:
 tabsets.js
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ 
+github-introduction $ 
 ````
 
 Whenever you render a document using Quarto, it creates a directory called `base-name-of-your-file_files`. Since the base name of `analysis-1.qmd` is `analysis-1`, the new directory is `analysis-1_files`. This directory is filled with the programs, information, and other files that helped turn `analysis-1.qmd` into `analysis-1.html`. This is mostly confusing stuff that we should ignore. In fact, we usually don't even want it monitored by Git or stored on GitHub.
@@ -360,9 +360,9 @@ question_text(NULL,
 Your answer should look like:
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ ls -a
+github-introduction $ ls -a
 .  ..  analysis-1_files  analysis-1.html  analysis-1.qmd  .devcontainer  .git  .gitignore
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ 
+github-introduction $ 
 ````
 
 Because `.gitignore` begins with a `.`, it is a hidden file. It would not appear if we just used `ls`. Note that the Source Control pane now shows a new file, `.gitignore` with an associated "U", meaning it is also untracked.
@@ -387,9 +387,9 @@ question_text(NULL,
 Your answer should look like:
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ cat .gitignore
+github-introduction $ cat .gitignore
 analysis-1_files
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ 
+github-introduction $ 
 ````
 
 The `analysis-1_files` line in `.gitignore` tells Git to ignore the `analysis-1_files` directory and everything in it.
@@ -429,7 +429,7 @@ question_text(NULL,
 Your answer should look like this:
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ git log
+github-introduction $ git log
 commit e6e05d17847846e0fda9ceedb9cce3b58fd0a024
 Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
 Date:   Fri May 1 19:22:33 2026 +0000
@@ -466,7 +466,7 @@ question_text(NULL,
 Your answer should look something like this:
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ cat analysis-1.qmd
+github-introduction $ cat analysis-1.qmd
 ---
 title: "Analysis 1"
 author: "PPBDS Student"
@@ -474,7 +474,7 @@ format: html
 ---
 
 PPBDS student is a data maestro!
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ 
+github-introduction $ 
 ````
 
 
@@ -540,7 +540,7 @@ question_text(NULL,
 Your answer should look something like:
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ git log
+github-introduction $ git log
 commit b81019c11410adc933cdb256649ee4cf66f9026f (HEAD -> main)
 Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
 Date:   Fri May 1 19:41:05 2026 +0000
@@ -603,7 +603,7 @@ question_text(NULL,
 Your answer should look like:
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ git log
+github-introduction $ git log
 commit be56bbaedd692a6d29bba410f0a6fd5b1d844a64 (HEAD -> main, origin/main, origin/HEAD)
 Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
 Date:   Mon May 4 16:57:38 2026 +0000
@@ -627,7 +627,7 @@ A term like "commit be56bbaedd692a6d29bba410f0a6fd5b1d844a64" gives us the addre
 
 ### Exercise 18
 
-If you look at the GitHub page for `05-github-1`, you will see that the changes have been pushed to GitHub. If your computer stops working, you won't lose any of your work.
+If you look at the GitHub page for `github-introduction`, you will see that the changes have been pushed to GitHub. If your computer stops working, you won't lose any of your work.
 
 ```{r}
 include_graphics("images/analysis-1-gh-1.png")
@@ -914,20 +914,20 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ git log -n 1
+github-introduction $ git log -n 1
 commit d8486207321f7e682075bc5fab87e02f8124a5f1 (HEAD -> main, origin/main, origin/HEAD)
 Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
 Date:   Mon May 4 19:30:10 2026 +0000
 
     added chart
-@ppbds-student ➜ /workspaces/05-github-1 (main) $
+github-introduction $
 ````
 
 We are being a little sloppy to equate "pushing" with "syncing." Strictly speaking, "syncing" does two things: it "pushes" your changes to GitHub *and* it "pulls" any changes made on GitHub to your local computer. But, in this case, because no one else but you can change the GitHub repo, there is nothing to "pull." 
 
 ### Exercise 7
 
-Let's publish our results to [GitHub Pages](https://pages.github.com/). Before we do, go to the GitHub repo for `05-github-1`, click on the "Settings" top menu item, and then click on the "Pages" side menu item.
+Let's publish our results to [GitHub Pages](https://pages.github.com/). Before we do, go to the GitHub repo for `github-introduction`, click on the "Settings" top menu item, and then click on the "Pages" side menu item.
 
 ```{r}
 include_graphics("images/repo-settings-pages.png")
@@ -954,8 +954,8 @@ question_text(NULL,
 Here is what I see, broken up to allow for comments:
 
 ````
-@ppbds-student ➜ /workspaces/05-github-1 (main) $ quarto publish gh-pages analysis-1.qmd
-? Publish site to https://ppbds-student.github.io/05-github-1/ using gh-pages? (Y/n) › Yes
+github-introduction $ quarto publish gh-pages analysis-1.qmd
+? Publish site to https://ppbds-student.github.io/github-introduction/ using gh-pages? (Y/n) › Yes
 ````
 
 There are settings that will prevent this question from being asked every time we update the website. Otherwise, Quarto will check each time.
@@ -966,9 +966,9 @@ Switched to a new branch 'gh-pages'
 [gh-pages (root-commit) 0e5631c] Initializing gh-pages branch
 remote: 
 remote: Create a pull request for 'gh-pages' on GitHub by visiting:        
-remote:      https://github.com/ppbds-student/05-github-1/pull/new/gh-pages        
+remote:      https://github.com/ppbds-student/github-introduction/pull/new/gh-pages        
 remote: 
-To https://github.com/ppbds-student/05-github-1
+To https://github.com/ppbds-student/github-introduction
  * [new branch]      HEAD -> gh-pages
  ````
 
@@ -978,7 +978,7 @@ By default, `quarto publish` follows the standard GitHub Pages approach of creat
 Switched to branch 'main'
 Your branch is up to date with 'origin/main'.
 
-From https://github.com/ppbds-student/05-github-1
+From https://github.com/ppbds-student/github-introduction
  * branch            gh-pages   -> FETCH_HEAD
 Rendering for publish:
 
@@ -996,7 +996,7 @@ output file: analysis-1.knit.md
 
 ### Exercise 8
 
-Go to your `05-github-1` page on GitHub. Refresh the page. `quarto publish` has changed some of the items. Copy and paste all the text in the "Visit site" box.
+Go to your `github-introduction` page on GitHub. Refresh the page. `quarto publish` has changed some of the items. Copy and paste all the text in the "Visit site" box.
 
 
 ```{r publishing-with-github-pages-8}
@@ -1023,7 +1023,7 @@ include_graphics("images/gh-pages-published.png")
 
 We could have made these changes by hand, but it is much easier to let `quarto publish` handle them.
 
-Publishing to GitHub Pages has not changed any of the files in our repo, so the "Source Control" button does not show any changes for us to deal with. Our local repo matches our `05-github-1` on GitHub. We are done!
+Publishing to GitHub Pages has not changed any of the files in our repo, so the "Source Control" button does not show any changes for us to deal with. Our local repo matches our `github-introduction` on GitHub. We are done!
 
 
 ## Summary

@@ -1,5 +1,5 @@
 ---
-title: "Codespace Starter"
+title: "Our Codespace Starter"
 author: David Kane
 tutorial:
   id: "11-codespace-starter"
@@ -37,9 +37,9 @@ In `10-devcontainer` you examined a generic Python devcontainer and wrote a mini
 
 <!-- DK: All these opening lines need to be replaced with "You should be in a repo . . ." -->
 
-Create and connect to a repo called `11-codespace-starter`, then open it as your workspace.
+Create and connect to a repo called `our-codespace-starter`, then open it as your workspace.
 
-Copy and paste the URL for your `11-codespace-starter` repository.
+Copy and paste the URL for your `our-codespace-starter` repository.
 
 ```{r introduction-1}
 question_text(NULL,
@@ -53,7 +53,7 @@ question_text(NULL,
 ###
 
 ```
-https://github.com/ppbds-student/11-codespace-starter
+https://github.com/ppbds-student/our-codespace-starter
 ```
 
 ###
@@ -101,8 +101,8 @@ question_text(NULL,
 ###
 
 ```
-$ cd ../codespace-starter
-$ ls .devcontainer
+our-codespace-starter $ cd ../codespace-starter
+codespace-starter $ ls .devcontainer
 AGENTS.md  STUDENT_WORKFLOW.md  connect-repo.sh  devcontainer.json  welcome.sh
 ```
 
@@ -154,7 +154,7 @@ question_text(NULL,
 ###
 
 ```
-"image": "ghcr.io/ppbds/devcontainer:1.0.1",
+"image": "ghcr.io/ppbds/devcontainer:1.0.5",
 ```
 
 ###
@@ -545,7 +545,7 @@ question_text(NULL,
 ###
 
 ```
-$ /opt/venv/bin/pip install emoji
+codespace-starter $ /opt/venv/bin/pip install emoji
 Collecting emoji
   Downloading emoji-2.14.0-py3-none-any.whl (590 kB)
 Installing collected packages: emoji
@@ -609,7 +609,7 @@ question_text(NULL,
 ###
 
 ```
-$ /opt/venv/bin/pip install pyfiglet
+codespace-starter $ /opt/venv/bin/pip install pyfiglet
 Collecting pyfiglet
   Downloading pyfiglet-1.0.2-py3-none-any.whl (1.1 MB)
 Installing collected packages: pyfiglet
@@ -627,7 +627,7 @@ This tutorial toured the `devcontainer.json` behind `codespace-starter` itself: 
 
 ### Exercise 1
 
-In the bash Terminal, in your `11-codespace-starter` repo, run `git status`. CP/CR.
+In the bash Terminal, in your `our-codespace-starter` repo, run `git status`. CP/CR.
 
 ```{r summary-1}
 question_text(NULL,
@@ -641,10 +641,10 @@ question_text(NULL,
 ###
 
 ```
-11-codespace-starter $ git status
+our-codespace-starter $ git status
 On branch main
 nothing to commit, working tree clean
-11-codespace-starter $
+our-codespace-starter $
 ```
 
 ###
@@ -653,7 +653,7 @@ A clean `git status` here just confirms Git isn't tracking anything you haven't 
 
 ### Exercise 2
 
-Paste the URL of your `11-codespace-starter` repository.
+Paste the URL of your `our-codespace-starter` repository.
 
 ```{r summary-2}
 question_text(NULL,
@@ -667,7 +667,7 @@ question_text(NULL,
 ###
 
 ```
-https://github.com/ppbds-student/11-codespace-starter
+https://github.com/ppbds-student/our-codespace-starter
 ```
 
 ###
@@ -690,7 +690,7 @@ question_text(NULL,
 ###
 
 ```
-11-codespace-starter    ppbds-student/11-codespace-starter    main    Stopped
+our-codespace-starter    ppbds-student/our-codespace-starter    main    Stopped
 ```
 
 ###

@@ -147,7 +147,7 @@ question_text(NULL,
 ### 
 
 ```         
-@ppbds-student ➜ /workspaces/project-1 (main) $ quarto preview /workspaces/project-1/quarto-1.qmd --no-browser --no-watch-inputs
+project-1 $ quarto preview /workspaces/project-1/quarto-1.qmd --no-browser --no-watch-inputs
 pandoc 
   to: html
   output-file: quarto-1.html
@@ -200,9 +200,9 @@ question_text(NULL,
 Watching files for changes
 Browse at http://localhost:5456/
 Listening on http://127.0.0.1:5456/
-^C@ppbds-student ➜ /workspaces/project-1 (main) $ ls
+^Cproject-1 $ ls
 quarto-1_files  quarto-1.html  quarto-1.qmd
-@ppbds-student ➜ /workspaces/project-1 (main) $ 
+project-1 $ 
 ````
 
 Note that `^C` symbol, which is how `Ctrl + c` is recorded.
@@ -241,9 +241,9 @@ question_text(NULL,
 ### 
 
 ```         
-@ppbds-student ➜ /workspaces/project-1 (main) $ cat .gitignore
+project-1 $ cat .gitignore
 quarto-1_files
-@ppbds-student ➜ /workspaces/project-1 (main) $ 
+project-1 $ 
 ```
 
 Now the blue badge on the Source Control icon in the Activity Bar shows a 3 instead of 14. This means that `.gitignore` is working and that `quarto-1_files` are now ignored by git.
@@ -268,7 +268,7 @@ question_text(NULL,
 Your answer should look something like this:
 
 ````
-@ppbds-student ➜ /workspaces/project-1 (main) $ git log
+project-1 $ git log
 commit 05d03bf26fd9cc79ec1a6754ea750fb5ef84531f (HEAD -> main, origin/main, origin/HEAD)
 Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
 Date:   Wed May 6 13:31:50 2026 +0000
@@ -544,7 +544,7 @@ question_text(NULL,
 Your output should begin something like this:
 
 ````
-@ppbds-student ➜ /workspaces/project-1 (main) $ quarto publish gh-pages quarto-1.qmd
+project-1 $ quarto publish gh-pages quarto-1.qmd
 ? Update site at https://ppbds-student.github.io/project-1/? (Y/n) › Yes
 Rendering for gh-pages:
 
@@ -575,11 +575,11 @@ question_text(NULL,
 Your answer should look something like this:
 
 ````
-@ppbds-student ➜ /workspaces/project-1 (main) $ git log --oneline
+project-1 $ git log --oneline
 a7c3e91 (HEAD -> main, origin/main, origin/HEAD) add AI graphic
 05d03bf initial version
 e3b01ee Initial commit
-@ppbds-student ➜ /workspaces/project-1 (main) $
+project-1 $
 ````
 
 ###
@@ -842,7 +842,7 @@ question_text(NULL,
 Your answer should look like this:
 
 ```
-@ppbds-student ➜ /workspaces/project-2 (main) $ git log
+project-2 $ git log
 commit 8f414d418c039a79364b6fbe4c6de32acb1e6235 (HEAD -> main, origin/main, origin/HEAD)
 Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
 Date:   Wed May 6 14:12:30 2026 +0000
@@ -854,7 +854,7 @@ Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
 Date:   Wed May 6 08:31:03 2026 -0400
 
     Initial commit
-@ppbds-student ➜ /workspaces/project-2 (main) $
+project-2 $
 ```
 
 There have been two commits in this repo. The first was generated automatically when we created the repo. The second was the one we just committed by hand, along with the commit message "initial version." Note how, next to the word "commit," there is a 40 character string of letters and numbers. This is the "hash" by which Git identifies each commit. The hash is always unique.
@@ -965,7 +965,7 @@ question_text(NULL,
 Your `git status` output should look something like this:
 
 ```
-@ppbds-student ➜ /workspaces/project-2 (main) $ git status
+project-2 $ git status
 On branch main
 Your branch is up to date with 'origin/main'.
 
@@ -976,7 +976,7 @@ Changes not staged for commit:
         modified:   quarto-2.qmd
 
 no changes added to commit (use "git add" and/or "git commit -a" to commit)
-@ppbds-student ➜ /workspaces/project-2 (main) $
+project-2 $
 ```
 
 ###
@@ -1084,12 +1084,12 @@ question_text(NULL,
 Your answer should look something like this:
 
 ```
-@ppbds-student ➜ /workspaces/project-2 (main) $ git log --oneline
+project-2 $ git log --oneline
 c4d91b2 (HEAD -> main, origin/main, origin/HEAD) add AI graphic
 a3f9c21 load tidyverse, suppress echo
 8f414d4 initial version
 4abced5 Initial commit
-@ppbds-student ➜ /workspaces/project-2 (main) $
+project-2 $
 ```
 
 ###

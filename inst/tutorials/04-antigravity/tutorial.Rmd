@@ -74,7 +74,7 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/04-ai-1 (main) $ agy
+antigravity $ agy
 ? Do you want to connect to Antigravity? Yes
 ? Do you trust the files in this folder? Yes
 
@@ -624,9 +624,9 @@ question_text(NULL,
 Your answer should look something like:
 
 ````
-@ppbds-student ➜ /workspaces/04-ai-1 (main) $ ls
+antigravity $ ls
 analysis.html  analysis_cache  analysis_files  analysis.qmd
-@ppbds-student ➜ /workspaces/04-ai-1 (main) $
+antigravity $
 ````
 
 ###
@@ -993,10 +993,10 @@ question_text(NULL,
 Your answer should look something like:
 
 ````
-@ppbds-student ➜ /workspaces/07-ai-2 (main) $ git log --oneline
+antigravity $ git log --oneline
 a3b8c21 (HEAD -> main) initial version with analysis and gitignore
 e3b01ee Initial commit
-@ppbds-student ➜ /workspaces/07-ai-2 (main) $
+antigravity $
 ````
 
 The `(HEAD -> main)` indicator confirms your local branch is current, but the missing `origin/main` means this commit hasn't been pushed to GitHub yet. Pushing is what sends it there and makes it visible to others.

@@ -93,7 +93,7 @@ question_text(NULL,
 ### 
 
 ````
-@ppbds-student ➜ /workspaces/website-1 $ quarto create project website .
+website-1 $ quarto create project website .
 ? Title (website) › Website 1
 Creating project at /workspaces/website-1:
   - Created _quarto.yml
@@ -101,7 +101,7 @@ Creating project at /workspaces/website-1:
   - Created index.qmd
   - Created about.qmd
   - Created styles.css
-@ppbds-student ➜ /workspaces/website-1 $ 
+website-1 $ 
 ````
 
 Quarto is telling you what it did: creating 5 new files and placing them in the *current* directory. Recall that, on the command line, a `.` refers to the current directory. 
@@ -122,10 +122,10 @@ question_text(NULL,
 ### 
 
 ````
-@ppbds-student ➜ /workspaces/website-1 $ ls -a
+website-1 $ ls -a
 .               .git            about.qmd       styles.css
 ..              .gitignore      _quarto.yml     index.qmd
-@ppbds-student ➜ /workspaces/website-1 $
+website-1 $
 ````
 
 The basic set of files necessary for making a Quarto website has been added to the current directory. 
@@ -148,10 +148,10 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/website-1 $ cat .gitignore
+website-1 $ cat .gitignore
 /.quarto/
 **/*.quarto_ipynb
-@ppbds-student ➜ /workspaces/website-1 $ 
+website-1 $ 
 ````
 
 The `.quarto` directory does not yet exist because we haven't rendered any of our QMD files yet. But when we do, we don't want any of the junk in that file to be backed up with Git.
@@ -258,13 +258,13 @@ question_text(NULL,
 ### 
 
 ````
-@ppbds-student ➜ /workspaces/website-1 $ git log -n 1
+website-1 $ git log -n 1
 commit a84054404f314acd719a89005253fb004c95a540 (HEAD -> main, origin/main, origin/HEAD)
 Author: David Kane <dave.kane@gmail.com>
 Date:   Sun Mar 16 10:16:34 2025 -0400
 
     initial version
-@ppbds-student ➜ /workspaces/website-1 $ 
+website-1 $ 
 ````
 
 <!-- not exactly the best link ... -->
@@ -289,13 +289,13 @@ question_text(NULL,
 Your answer should look something like:
 
 ````
-@ppbds-student ➜ /workspaces/website-1 $ quarto render
+website-1 $ quarto render
 [1/2] index.qmd
 [2/2] about.qmd
 
 Output created: _site/index.html
 
-@ppbds-student ➜ /workspaces/website-1 $ 
+website-1 $ 
 ````
 
 `render` just creates the website. It does not "watch" the website, as `preview` does.
@@ -356,9 +356,9 @@ question_text(NULL,
 ### 
 
 ````
-@ppbds-student ➜ /workspaces/website-1 $ ls _site
+website-1 $ ls _site
 about.html      index.html      search.json     site_libs       styles.css
-@ppbds-student ➜ /workspaces/website-1 $ 
+website-1 $ 
 ````
 
 Again, we never edit files in the `_site` directory directly. We run commands, like `quarto render`, which manipulate these files.
@@ -381,10 +381,10 @@ question_text(NULL,
 ### 
 
 ````
-@ppbds-student ➜ /workspaces/website-1 $ cat .gitignore 
+website-1 $ cat .gitignore 
 /.quarto/
 _site
-@ppbds-student ➜ /workspaces/website-1 $ 
+website-1 $ 
 ````
 
 Note that `_site` ignores any file or directory named `_site` anywhere in the repository, which is generally what we want.
@@ -407,7 +407,7 @@ question_text(NULL,
 Your answer should look something like this:
 
 ````
-@ppbds-student ➜ /workspaces/website-1 $ quarto preview
+website-1 $ quarto preview
 Preparing to preview
 [1/1] index.qmd
 
@@ -469,13 +469,13 @@ question_text(NULL,
 ### 
 
 ````
-@ppbds-student ➜ /workspaces/website-1 $ git log -n 1
+website-1 $ git log -n 1
 commit 766d1ad5d4838f2851fd372432c74e2bad8eb17a (HEAD -> main, origin/main, origin/HEAD)
 Author: David Kane <dave.kane@gmail.com>
 Date:   Sun Mar 16 11:59:04 2025 -0400
 
     last commit
-@ppbds-student ➜ /workspaces/website-1 $ 
+website-1 $ 
 ````
 
 We recommend that you use a Quarto project for your websites, books, dashboards and so on.
@@ -567,7 +567,7 @@ question_text(NULL,
 ### 
 
 ````
-@ppbds-student ➜ /workspaces/website-2 $ quarto create project website .
+website-2 $ quarto create project website .
 ? Title (website) › Website 2
 Creating project at /workspaces/website-2:
   - Created _quarto.yml
@@ -575,7 +575,7 @@ Creating project at /workspaces/website-2:
   - Created index.qmd
   - Created about.qmd
   - Created styles.css
-@ppbds-student ➜ /workspaces/website-2 $ 
+website-2 $ 
 ````
 
 We are moving faster in the creation of Website 2 than we did when making Website 1 because you should already be familiar with the steps. Later in this website, we will also learn how to save analysis results to files so the site does not re-run all its code on every render.
@@ -598,11 +598,11 @@ question_text(NULL,
 ### 
 
 ````
-@ppbds-student ➜ /workspaces/website-2 $ cat .gitignore
+website-2 $ cat .gitignore
 /.quarto/
 **/*.quarto_ipynb
 _site
-@ppbds-student ➜ /workspaces/website-2 $ 
+website-2 $ 
 ````
 
 Keeping track of all the different files and understanding how they work together is the central skill in creating larger projects.
@@ -625,11 +625,11 @@ question_text(NULL,
 ### 
 
 ````
-@ppbds-student ➜ /workspaces/website-2 $ cat index.qmd 
+website-2 $ cat index.qmd 
 ---
 title: "Billboard Graphic"
 ---
-@ppbds-student ➜ /workspaces/website-2 $ 
+website-2 $ 
 ````
 
 Because this is a Quarto website project, the format for all the `qmd` files is `html` by default. So the YAML header does not need to specify that explicitly. 
@@ -702,7 +702,7 @@ Note how changing `index.qmd` causes the `index.html` to be re-rendered, leading
 
 Create another code chunk. Create a cool-looking plot using the `billboard` tibble from the **tidyr** package and `ggplot()`. Make sure you understand what the plot is showing. Work with AI to solve any errors, improve the code, make the graphic better and so on.
 
-You now know two reasonable ways to work with AI, and either is fine here. You can ask an AI in a chat window --- Grok, ChatGPT, Claude, and so on --- and copy/paste the code it gives you into your chunk by hand, the way we did in the earlier tutorials. Or you can let the Gemini CLI read and edit `index.qmd` for you directly, the way you learned in the `04-ai-1` tutorial. Use whichever you prefer.
+You now know two reasonable ways to work with AI, and either is fine here. You can ask an AI in a chat window --- Grok, ChatGPT, Claude, and so on --- and copy/paste the code it gives you into your chunk by hand, the way we did in the earlier tutorials. Or you can let an AI command-line assistant like `agy` read and edit `index.qmd` for you directly, the way you learned in the *Antigravity* tutorial. Use whichever you prefer.
 
 `Cmd/Ctrl + Shift + K` to ensure that the plot looks good. If it looks bad, or there are some weird messages/warnings, use the AI to fix things.
 
@@ -1067,9 +1067,9 @@ question_text(NULL,
 ### 
 
 ````
-@ppbds-student ➜ /workspaces/website-2 $ ls *qmd
+website-2 $ ls *qmd
 about.qmd       index.qmd       sources.qmd
-@ppbds-student ➜ /workspaces/website-2 $ 
+website-2 $ 
 ````
 
 You should see `index.qmd`, `about.qmd`, and `sources.qmd` in the output. If not, make sure you are in the `website-2` directory. The `*qmd` regular expression selects only files with names which end with the letters `qmd`.
@@ -1252,10 +1252,10 @@ question_text(NULL,
 ### 
 
 ````
-@ppbds-student ➜ /workspaces/website-2 $ ls _site/*html
+website-2 $ ls _site/*html
 _site/about.html        _site/sources.html
 _site/index.html
-@ppbds-student ➜ /workspaces/website-2 $ 
+website-2 $ 
 ````
 
 You should see `sources.html`. Quarto websites, like many similar frameworks, place all the pages which appear on the web into a single directory, like `_site`, and then move that directory onto a hosting service like GitHub Pages.
@@ -1299,7 +1299,7 @@ question_text(NULL,
 ### 
 
 ````
-@ppbds-student ➜ /workspaces/website-2 $ head source-1.qmd source-2.qmd 
+website-2 $ head source-1.qmd source-2.qmd 
 ==> source-1.qmd <==
 ---
 title: "Source 1"
@@ -1313,7 +1313,7 @@ title: "Source 2"
 format: html
 ---
 
-@ppbds-student ➜ /workspaces/website-2 $ 
+website-2 $ 
 ````
 
 In many Terminal commands, you can provide more than one file as the target of the command. In this case, `head` will be applied to `source-1.qmd` and then `source-2.qmd` sequentially.
@@ -1408,13 +1408,13 @@ question_text(NULL,
 ### 
 
 ````
-@ppbds-student ➜ /workspaces/website-2 $ git log -n 1
+website-2 $ git log -n 1
 commit f0973447485da8bb8e8e36f65e39b5640519dccc (HEAD -> main, origin/main, origin/HEAD)
 Author: David Kane <dave.kane@gmail.com>
 Date:   Mon Mar 17 18:03:23 2025 -0400
 
     Added source pages
-@ppbds-student ➜ /workspaces/website-2 $ 
+website-2 $ 
 ````
 
 Type `quarto publish` in the Terminal and hit "Enter." Note how you did not need to specify `gh-pages`. Quarto is smart enough to know that, since GitHub Pages is what you used last time, it is probably what you want now.  
@@ -1447,7 +1447,7 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/website-2 $ cat process_data.R
+website-2 $ cat process_data.R
 library(tidyverse)
 
 billboard <- billboard |>
@@ -1490,7 +1490,7 @@ top_songs <- billboard_filtered |>
   filter(week_num >= 0 & week_num <= 52) |>
   filter(!is.na(rank)) |>
   mutate(song_artist = paste0(track, " (", artist, ")"))
-@ppbds-student ➜ /workspaces/website-2 $
+website-2 $
 ````
 
 Because this is a script, not a Quarto document, there are no code chunks and you do not need `suppressPackageStartupMessages()`. We put `library(tidyverse)` at the top so the script runs correctly even in a freshly restarted R session.
@@ -1598,9 +1598,9 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/website-2 $ ls clean*
+website-2 $ ls clean*
 clean_data.rds
-@ppbds-student ➜ /workspaces/website-2 $
+website-2 $
 ````
 
 `clean*` is a regular expression that matches any file beginning with `clean`. There are now three things associated with our data: the script `process_data.R` that creates it, the in-memory object `top_songs` that disappears when R restarts, and the file `clean_data.rds` that persists on disk.
@@ -1627,11 +1627,11 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/website-2 $ tail -n 3 process_data.R
+website-2 $ tail -n 3 process_data.R
   mutate(song_artist = paste0(track, " (", artist, ")"))
 
 write_rds(top_songs, file = "clean_data.rds")
-@ppbds-student ➜ /workspaces/website-2 $
+website-2 $
 ````
 
 This is a common pattern in larger projects: each script ends by saving an object that later scripts read in. Run `process_data.R` once, and `clean_data.rds` is ready for everything downstream.
@@ -1689,7 +1689,7 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/website-2 $ cat make_plot.R
+website-2 $ cat make_plot.R
 library(tidyverse)
 
 x <- read_rds("clean_data.rds")
@@ -1714,7 +1714,7 @@ billboard_plot <- x |>
   theme(legend.position = "bottom")
 
 ggsave("billboard.png", billboard_plot)
-@ppbds-student ➜ /workspaces/website-2 $
+website-2 $
 ````
 
 The fact that the tibble was called `top_songs` in `process_data.R` is irrelevant. `write_rds()` saves the object, not its name, so we are free to call it `x` here.
@@ -1735,9 +1735,9 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/website-2 $ ls *.png
+website-2 $ ls *.png
 billboard.png
-@ppbds-student ➜ /workspaces/website-2 $
+website-2 $
 ````
 
 Just like RDS saves a tibble, a PNG saves a graphic. `ggsave()` writes the most recent plot (or the one you name) to an image file, so we avoid re-drawing it every time the site renders.
@@ -1798,7 +1798,7 @@ question_text(NULL,
 ###
 
 ````
-@ppbds-student ➜ /workspaces/website-2 $ git show --name-status HEAD
+website-2 $ git show --name-status HEAD
 commit 5ff52befc37ba1a3ac87dac781f48d6c6251c225 (HEAD -> main, origin/main, origin/HEAD)
 Author: David Kane <dave.kane@gmail.com>
 Date:   Mon Mar 17 20:08:52 2025 -0400
@@ -1810,7 +1810,7 @@ A       clean_data.rds
 M       index.qmd
 A       make_plot.R
 A       process_data.R
-@ppbds-student ➜ /workspaces/website-2 $
+website-2 $
 ````
 
 This is the workflow professionals use. First, get something working all in one place. Second, split the slow parts into scripts --- `process_data.R` cleans the data and saves `clean_data.rds`, `make_plot.R` reads that and saves `billboard.png` --- so that `index.qmd` only has to show the image. In a larger project, these files often live in dedicated `code/`, `data/`, and `images/` directories. Separating data cleaning, visualization, and reporting makes pipelines faster to iterate on and easier to debug.

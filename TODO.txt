@@ -1,9 +1,8 @@
 ## topics
 
+What should repo names be now that tutorial titles (i.e., the "name" of the tutorial) are things like "Getting Started" and "Terminal Introduction"? Perhaps the answer is all lower case with spaces (and other weird characters) replaced with dashes.
+
 Now that our prompt is the name of the directory only, we need to worry about two things. First, we need to change the provided answers to match this, rather than showing the old, much longer prompt. Second, we need to be aware that we occasionally change the order of the tutorials, which means that we change their names, which means that we are changing the repos, which means that we are changing the prompts.
-
-04-ai should be antigravity, and it probably comes after quarto.
-
 
 ## Notes for infrastructure tutorials
 

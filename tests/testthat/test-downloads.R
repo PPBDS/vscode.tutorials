@@ -35,10 +35,10 @@ test_that("03-terminal: TODO.txt is downloadable", {
   )
 })
 
-test_that("03-terminal: grepping.txt is downloadable", {
+test_that("03-terminal-2: grepping.txt is downloadable", {
   testthat::skip_on_cran()
   testthat::skip_if_offline()
   check_url_is_plain_text(
-    "https://raw.githubusercontent.com/PPBDS/vscode.tutorials/refs/heads/main/inst/tutorials/03-terminal/images/grepping.txt"
+    "https://raw.githubusercontent.com/PPBDS/vscode.tutorials/refs/heads/main/inst/tutorials/03-terminal-2/images/grepping.txt"
   )
 })
