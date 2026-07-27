@@ -1,3 +1,10 @@
+## topics
+
+Now that our prompt is the name of the directory only, we need to worry about two things. First, we need to change the provided answers to match this, rather than showing the old, much longer prompt. Second, we need to be aware that we occasionally change the order of the tutorials, which means that we change their names, which means that we are changing the repos, which means that we are changing the prompts.
+
+04-ai should be antigravity, and it probably comes after quarto.
+
+
 ## Notes for infrastructure tutorials
 
 ### Skills to cover 
@@ -70,6 +77,8 @@ We can split AI into two parts. In Getting Started and the Introduction, we just
 
 There is a temptation to hold off on repos until after the first few tutorials, but then we can't publish nice pages during the quarto tutorial. So, best to just bite the bullet and have students use connect-repo early, starting in the introduction, or maybe even in Getting Started.
 
+So, Getting Started due Monday evening, started in class. introduction dues Tuesday, so kids can do real stuff on Wednesday. code and quarto due Wed/Thur, so we are posting web pages on Friday.
+
 
 
 ### 00-introduction Jacob
@@ -80,7 +89,7 @@ Don't bother with Antigravity
 
 We need a 01-introduction tutorial. 
 
-  * Comnfortable in VS Code
+  * Comfortable in VS Code
   * 10 Terminal questions --- just cut and paste from Terminal
   * Run `.devcontainer/connect-repo.sh introduction`. Discuss what it does. `pwd` is a reasonable questions, as is `ls -a`. Look at the URL for your repo. (Steal from 05-github-1.)
   * Script 1 (use Copilot) -- maybe cut/paste from 01-code

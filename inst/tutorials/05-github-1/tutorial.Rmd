@@ -29,6 +29,12 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
+<!-- DK: Prompts are wrong. -->
+
+<!-- Can just assert that you should be in a repo, which you have done several times already. -->
+
+<!-- Maybe just delete? Much of this is junk, like creating a qmd by hand, section by section. Much of this was covered in introduction and quarto. -->
+
 ## Introduction
 ### 
 
@@ -87,7 +93,7 @@ Notice the two URLs look quite different. Your repo URL (`github.com/...`) is wh
 
 ### Exercise 2
 
-At the Terminal, run `pwd`. CP/CR.
+At the bash Terminal, run `pwd`. CP/CR.
 
 ```{r using-git-2}
 question_text(NULL,

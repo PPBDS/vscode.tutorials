@@ -342,7 +342,7 @@ The two folders now sit beside each other:
 /workspaces/introduction
 ````
 
-The first supplied the Codespace and the tutorial. The second is yours and will hold your work. `warmup.R` stays behind in the first folder, which is why it does not appear in your new Explorer.
+The first supplied the Codespace and the tutorial. The second is yours and will hold your work. 
 
 ### Exercise 2
 
@@ -388,11 +388,11 @@ introduction $ ls -a
 introduction $
 ````
 
-The repository is almost empty on purpose. The hidden `.git` directory is enough to make it a Git repository. You will fill it with your own work as you go.
+The hidden `.git` directory is what defines a Git repository. Git fill it with your work as you proceed. You never use directly, or even examine, the `.git` folder.
 
 ### Exercise 4
 
-Now go see your repository on GitHub with your own eyes and make sure it is really there.
+Check your repository on GitHub.
 
 Open a new browser tab and go to [github.com](https://github.com). Sign in with the same account if you are asked. Click your profile picture in the top-right corner, choose **Your repositories**, and find the one named **introduction**. Click it.
 
@@ -577,7 +577,6 @@ script-1.R
 
 This GitHub page is the online copy of your work. The Codespace is where you work. The GitHub repo is where you keep and share it. If your computer stopped working right now, your commit would still be safe on GitHub.
 
-## Your choice of AI
 ###
 
 Copilot is only one option. The Codespace may also provide command-line agents from Google, OpenAI, Anthropic, and other providers. These tools have different interfaces, models, limits, and account requirements, but the core workflow is the same:
@@ -588,28 +587,11 @@ Copilot is only one option. The Codespace may also provide command-line agents f
 4. run or render the result;
 5. inspect the result and ask for revisions.
 
-### Exercise 1
-
-Google's Antigravity CLI is an optional second example. In a new bash Terminal, enter `agy`. If prompted, choose the Google sign-in option, open the authentication link, sign in, and return to the Terminal. Do not choose a full-access or always-proceed mode.
-
-If you do not have a Google account, Antigravity is unavailable, or you would rather continue with Copilot, skip the sign-in and enter `Skipped; I will use [name of AI]` below. Otherwise, CP/CR the short success message and the prompt showing that Antigravity is ready.
-
-```{r ai-choice-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
-```
-
+## Script 2: AI agnostic
 ###
 
-Authentication screens and model names change often, so your output may look different. A Google sign-in grants a temporary token; it does not give the program your Google password.
+From this point forward, this course is **AI agnostic**. "Ask AI" means use whichever AI you prefer — Copilot, Antigravity, or any other agent the Codespace provides. We will generally show prompts and results, not tool-specific buttons or screenshots. 
 
-From this point forward, this course is **AI agnostic**. "Ask AI" means use whichever AI you prefer — Copilot, Antigravity, or any other agent the Codespace provides. We will generally show prompts and results, not tool-specific buttons or screenshots. The same rule as before still holds: stay in a review mode and never turn on full access.
-
-## Script 2: AI agnostic
 ### Exercise 1
 
 Use any AI to complete this task:

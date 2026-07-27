@@ -26,6 +26,14 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
+<!-- DK: Make it shorter. Remove some of the material which is now covered in introduction. -->
+
+<!-- DK: Looks like everything (?) in Script 1 is covered introduction, so delete it? But maybe save (or move to introduction, some of the intro material about tutorial.helpers package, show_file(), different R Terminal windows and so on. -->
+
+<!-- DK: Script 2 does too much code writing by hand. Use Copilot! -->
+
+<!-- Maybe we want start of script 1, followed by version of script 2 which uses AI. -->
+
 ## Introduction
 ###
 
