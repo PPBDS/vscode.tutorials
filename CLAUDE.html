@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">vscode.tutorials</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,6 +114,48 @@
 <p>not <code>{r section-name-N-test, echo = TRUE}</code>. This works in both <code>.Rmd</code> and <code>.qmd</code> via modern knitr (≥ 1.35) and is the canonical style across every tutorial package in the project (the Primer, <code>misc.tutorials</code>, and this one). Use it for <code>echo</code>, <code>message</code>, <code>warning</code>, <code>cache</code>, <code>eval</code>, and every other chunk option. The only inline options that remain on the header line are <code>include = FALSE</code> on the setup chunk and the <code>child = ...</code> argument on info-section / download-answers child chunks.</p>
 </li>
 </ul></div>
+<div class="section level2">
+<h2 id="consistency-rules-prompts-repo-names-and-tutorial-titles">Consistency rules: prompts, repo names, and tutorial titles<a class="anchor" aria-label="anchor" href="#consistency-rules-prompts-repo-names-and-tutorial-titles"></a></h2>
+<p>These rules keep every example transcript in every tutorial consistent with what a student actually sees. They interlock: <strong>changing a tutorial’s title fans out into many required edits</strong>, listed below. Do not change one piece without the others.</p>
+<div class="section level3">
+<h3 id="the-bash-prompt-in-example-answers">The bash prompt in example answers<a class="anchor" aria-label="anchor" href="#the-bash-prompt-in-example-answers"></a></h3>
+<p><code>codespace-starter</code>’s <code>welcome.sh</code> sets <code>PS1='\W \$ '</code>, so in any Codespace started from <code>codespace-starter</code> the bash prompt is <strong>the basename of the current working directory, a space, and a dollar sign</strong>:</p>
+<pre><code>codespace-starter $ cd example
+example $</code></pre>
+<ul><li>Every example transcript must use this style — never GitHub’s stock long prompt (<code>@user ➜ /workspaces/dir (main) $</code>), never a bare <code>$</code>.</li>
+<li>The prompt tracks <code>cd</code>: after <code>cd example</code> the prompt is <code>example $</code>; after <code>cd ..</code> it reverts to the parent’s name.</li>
+<li>In the <strong>home directory</strong> bash’s <code>\W</code> renders <code>~</code>, so the prompt is <code>~ $</code>. The home directory is <code>/home/rstudio</code> (the image’s user is <code>rstudio</code>) — not <code>/home/codespace</code>.</li>
+<li>
+<strong>Exception — Codespaces not started from our image.</strong> The Jupyter and Blank template Codespaces (toured in <code>10-devcontainers</code>) show GitHub’s stock long prompt. Those transcripts are correct as-is; leave them.</li>
+<li>
+<strong>Subtlety, taught in <code>00-introduction</code> and <code>03-terminal-1</code>:</strong> only a <em>newly opened</em> bash Terminal gets the short prompt. The terminal already open when the Codespace starts shows the stock long prompt (the <code>PS1</code> override lands at the end of <code>~/.bashrc</code> and only affects shells started afterward). Tutorials tell students to open a fresh bash Terminal.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="repo-names-derive-from-tutorial-titles">Repo names derive from tutorial titles<a class="anchor" aria-label="anchor" href="#repo-names-derive-from-tutorial-titles"></a></h3>
+<p>A tutorial that has the student create a work repo names that repo after the <strong>tutorial’s title</strong>: lowercase, with spaces and other non-alphanumeric characters replaced by dashes. “GitHub Introduction” → <code>github-introduction</code>; “Our Codespace Starter” → <code>our-codespace-starter</code>. Tutorials without a repo (the terminal pair) stay in <code>codespace-starter</code>, so their prompts read <code>codespace-starter $</code>.</p>
+<p>Consequently, <strong>when a tutorial’s title changes, update all of these</strong> (they all embed the repo name):</p>
+<ol style="list-style-type: decimal"><li>The “Create and connect to a repo called <code>&lt;name&gt;</code>” instruction (and any other prose naming the repo).</li>
+<li>Every prompt line in every example transcript (<code>&lt;name&gt; $</code>).</li>
+<li>Every path (<code>/workspaces/&lt;name&gt;</code>, <code>Creating project at /workspaces/&lt;name&gt;:</code>).</li>
+<li>Every URL: <code>https://github.com/&lt;user&gt;/&lt;name&gt;</code>, <code>https://codespaces.new/...</code>, GitHub Pages (<code>https://&lt;user&gt;.github.io/&lt;name&gt;/</code>), git remote lines in <code>git log</code>/push output.</li>
+<li>Rows copied from the github.com/codespaces list (they show repo names).</li>
+</ol><p>Do <strong>not</strong> change: the tutorial’s <code>id:</code> in the YAML (it keys stored student answers), the tutorial’s directory name under <code>inst/tutorials/</code>, or chunk labels.</p>
+<ul><li>A title must not collide with a directory that already exists under <code>/workspaces</code> — in particular, a title that would map to <code>codespace-starter</code> is forbidden (that folder is always present).</li>
+<li>
+<strong>Known exceptions to one-title-one-repo:</strong> <code>06-github-2</code> uses two repos (<code>project-1</code>, <code>project-2</code>) and <code>09-websites-2</code> uses two (<code>website-1</code>, <code>website-2</code>). The title rule cannot name two repos, so these keep their ordinal names; their prompts still follow the prompt rule.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="the-devcontainer-image-pin-ghcrioppbdsdevcontainerxyz">The devcontainer image pin (<code>ghcr.io/ppbds/devcontainer:X.Y.Z</code>)<a class="anchor" aria-label="anchor" href="#the-devcontainer-image-pin-ghcrioppbdsdevcontainerxyz"></a></h3>
+<p>The version tag students see when they read <code>codespace-starter</code>’s <code>devcontainer.json</code> changes regularly. The authoritative value is the <code>"image"</code> pin in <a href="https://github.com/PPBDS/codespace-starter/blob/main/.devcontainer/devcontainer.json" class="external-link">PPBDS/codespace-starter <code>.devcontainer/devcontainer.json</code></a>. <strong>Whenever that pin is bumped, update every versioned copy in this repo</strong> (find them with <code>grep -rn 'ghcr.io/ppbds/devcontainer:' --include='*.Rmd' --include='*.yaml' .</code>):</p>
+<ol style="list-style-type: decimal"><li>
+<code>inst/tutorials/11-codespace-starter/tutorial.Rmd</code> — the expected answer for the find-the-<code>"image"</code>-line exercise.</li>
+<li>
+<code>inst/tutorials/12-docker/tutorial.Rmd</code> — the intro’s back-reference to that line.</li>
+<li>
+<code>.github/workflows/R-CMD-check.yaml</code> — the CI <code>container: image:</code> tag (this one is normally bumped as part of the codespace-starter release process; the tutorials are what get forgotten).</li>
+</ol><p>Unversioned mentions of <code>ghcr.io/ppbds/devcontainer</code> (no <code>:X.Y.Z</code>) are fine and need no touching. Separately, <code>12-docker</code> embeds a full copy of the <code>PPBDS/devcontainers</code> Dockerfile — when that Dockerfile changes materially, the embedded copy (and the exercises reading it) must be refreshed too.</p>
+</div>
+</div>
 </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
