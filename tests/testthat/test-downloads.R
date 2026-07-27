@@ -35,10 +35,7 @@ test_that("03-terminal: TODO.txt is downloadable", {
   )
 })
 
-test_that("03-terminal: grepping.txt is downloadable", {
-  testthat::skip_on_cran()
-  testthat::skip_if_offline()
-  check_url_is_plain_text(
-    "https://raw.githubusercontent.com/PPBDS/vscode.tutorials/refs/heads/main/inst/tutorials/03-terminal/images/grepping.txt"
-  )
-})
+# NOTE: the grepping.txt test was removed. That file was deleted from the repo
+# in 0d22efc ("initial clean up") and 03-terminal no longer mentions it, so the
+# test was checking a URL that can only ever 404 -- it failed every CI run on
+# main. Restore both the file and this test together if the exercise comes back.

@@ -258,7 +258,7 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 18)
+	rows = 26)
 ```
 
 ###
@@ -266,7 +266,9 @@ question_text(NULL,
 ```
 {
     "data": {
-        "label": "codespace",
+        "label": "sk-or-v1-2f3...4db",
+        "is_management_key": false,
+        "is_provisioning_key": false,
         "limit": null,
         "limit_reset": null,
         "limit_remaining": null,
@@ -279,7 +281,14 @@ question_text(NULL,
         "byok_usage_daily": 0,
         "byok_usage_weekly": 0,
         "byok_usage_monthly": 0,
-        "is_free_tier": true
+        "is_free_tier": true,
+        "expires_at": null,
+        "creator_user_id": "user_3H6M1V4hd8yG3Y5pPH46FLTWmJF",
+        "rate_limit": {
+            "requests": -1,
+            "interval": "10s",
+            "note": "This field is deprecated and safe to ignore."
+        }
     }
 }
 ```
@@ -288,7 +297,9 @@ question_text(NULL,
 
 That `-H "Authorization: Bearer ..."` header is the entire authentication story for essentially every modern web API, including all the AI ones. There is no login, no session, no cookie --- each request carries the key, the server checks it, and answers. `curl` is just the plainest possible way to make such a request.
 
-Read the reply. `is_free_tier` is `true` and `limit` is `null`, meaning no spending cap because there is nothing to spend. `usage` counts dollars, and yours will stay at `0` for this entire tutorial. The `byok` fields stand for *bring your own key* --- OpenRouter will let you route through your own account at another provider, and it counts that traffic separately.
+Read the reply. `is_free_tier` is `true` and `limit` is `null`: no spending cap, because there is nothing to spend. Every `usage` figure is `0` and will stay there for this entire tutorial. The `label` is your key with its middle cut out --- enough to tell two keys apart, not enough to use one. (If you gave your key a name when you made it, you will see that name here instead.)
+
+Then read the last field, which is the interesting one. `rate_limit` reports `-1` requests and carries a note saying it is deprecated and safe to ignore. The limits are real and enforced; this field just stopped being how you learn them. Live services accumulate fields like this --- still emitted so old code does not break, no longer meaning anything --- and believing one is a normal way to be wrong about an API.
 
 ### Exercise 6
 
@@ -656,9 +667,9 @@ That third mode is the professional's cost move, and it generalizes past `aider`
 
 ### Exercise 8
 
-Leave `aider` by running `/quit` at its prompt. Then, back in the bash Terminal, check your account again:
+Leave `aider` by running `/quit` at its prompt. Then, back in the bash Terminal, check what the session cost you. This is the same request as before, with `grep` keeping only the usage lines:
 
-<pre><code>curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool
+<pre><code>curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool | grep usage
 </code></pre>
 
 CP/CR.
@@ -669,19 +680,12 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 18)
+	rows = 8)
 ```
 
 ###
 
 ```
-{
-    "data": {
-        "label": "codespace",
-        "limit": null,
-        "limit_reset": null,
-        "limit_remaining": null,
-        "include_byok_in_limit": false,
         "usage": 0,
         "usage_daily": 0,
         "usage_weekly": 0,
@@ -690,16 +694,15 @@ question_text(NULL,
         "byok_usage_daily": 0,
         "byok_usage_weekly": 0,
         "byok_usage_monthly": 0,
-        "is_free_tier": true
-    }
-}
 ```
 
 ###
 
-Every usage figure is `0`. You ran a coding agent, wrote a file, and switched models, and it cost nothing --- which is exactly the claim this tutorial opened with.
+Every usage figure is still `0`. The `byok` ones stand for *bring your own key* --- OpenRouter will route through an account you hold directly with another provider, and it meters that traffic separately from credits spent here. You ran a coding agent, wrote a file, and switched models, and it cost nothing --- which is exactly the claim this tutorial opened with.
 
-The limits behind that are worth knowing precisely, because you will run into them, and notice that they are *not* in this response: request limits are enforced but not reported here. A free account gets **20 requests per minute and 50 per day** across all free models put together. Every message you send an agent is at least one request, and agents sometimes send several for one instruction, so fifty goes faster than it sounds. When you exhaust it you get an HTTP `429`, and there are exactly three responses: wait, or buy $10 of credits once, which lifts the daily ceiling to 1,000, or pay per token for a model that is not free. The next tutorial works out what that third option actually costs.
+The limits behind that are worth knowing precisely, because you will run into them, and notice that they are *not* in this response: request limits are enforced, but the only field that ever reported them is the deprecated one you just read. A free account gets **20 requests per minute and 50 per day** across all free models put together. Every message you send an agent is at least one request, and agents sometimes send several for one instruction, so fifty goes faster than it sounds.
+
+When you exhaust it, the request fails with `HTTP 429 Too Many Requests`, and there are exactly three responses: wait, or buy $10 of credits once, which lifts the daily ceiling to 1,000, or pay per token for a model that is not free. The next tutorial works out what that third option actually costs.
 
 ### Exercise 9
 

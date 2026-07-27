@@ -150,40 +150,61 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 16)
+	rows = 30)
 ```
 
 ###
 
-<!-- VERIFY: response envelope field set. -->
+Ours, with the model's chain of thought cut short to fit:
 
 ```
 {
-    "id": "gen-1753632000-abc123",
-    "model": "openai/gpt-oss-20b:free",
+    "id": "gen-1785184071-Ek9msxDQCT6FtDLjnFt7",
     "object": "chat.completion",
+    "created": 1785184071,
+    "model": "openai/gpt-oss-20b:free",
+    "provider": "Darkbloom",
     "choices": [
         {
+            "index": 0,
+            "finish_reason": "stop",
+            "native_finish_reason": "stop",
             "message": {
                 "role": "assistant",
-                "content": "A tibble is the tidyverse's version of a data frame, with stricter behavior and much nicer printing."
-            },
-            "finish_reason": "stop"
+                "content": "A tibble is a modern, tidyverse-centric re-implementation of R's data frame that retains tabular structure but offers cleaner printing, no automatic coercion to factors, and a consistent, column-wise subsetting interface.",
+                "reasoning": "We need to answer: \"In one sentence, what is a tibble?\" Probably a brief definition ...",
+                "refusal": null
+            }
         }
     ],
     "usage": {
-        "prompt_tokens": 17,
-        "completion_tokens": 24,
-        "total_tokens": 41
+        "prompt_tokens": 77,
+        "completion_tokens": 177,
+        "total_tokens": 254,
+        "cost": 0,
+        "cost_details": {
+            "upstream_inference_cost": 1.35065e-05
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 120
+        }
     }
 }
 ```
 
 ###
 
-That is the whole of it. A model name, a list of messages each tagged with a `role`, and a key in the header. Everything else --- the chat interfaces, the agents, the editor plugins --- is software wrapped around this one call.
+Underneath, it is one call: a model name, a list of messages each tagged with a `role`, and a key in the header. Everything else --- the chat interfaces, the agents, the editor plugins --- is software wrapped around that.
 
-Two fields repay a close look. `finish_reason` says `stop`, meaning the model finished its thought; when it says `length` instead, the model was cut off mid-sentence by a token limit, which is the actual explanation for most "the AI stopped in the middle" complaints. And `usage` is the meter: 17 tokens in, 24 out. That is what you are billed for, and it is why the next section is about tokens rather than about questions or minutes.
+Four fields in the reply repay a close look.
+
+`provider` names the company that actually ran the model. You asked for `openai/gpt-oss-20b:free` and OpenRouter picked a firm called Darkbloom to serve it. That is the routing in *router*: the weights are published, several companies host them, and the service chose one for you. Yours will likely name a different company.
+
+`reasoning` is the model thinking out loud before answering, and `reasoning_tokens` prices it: **120 of the 177 output tokens were thinking, not answer.** Reasoning models bill you for the deliberation, and it is usually the larger half.
+
+`cost` is `0` --- exactly what you were promised. But `upstream_inference_cost` says the inference really cost about **$0.0000135**, and somebody paid it. Free is a business decision by whoever wants your prompts, not an absence of cost.
+
+And `finish_reason` says `stop`, meaning the model finished its thought. When it says `length` instead, the model was cut off by a token limit --- the actual explanation for most "the AI stopped in the middle" complaints.
 
 ### Exercise 3
 
@@ -245,27 +266,44 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 10)
+	rows = 20)
 ```
 
 ###
 
-```
-library(tidyverse)
+Ours, abridged --- it ran to 546 tokens and offered three different solutions:
 
-diamonds |>
+```
+Below is a compact **R** script that will give you the number of observations
+for each level of the `cut` variable in the built-in `diamonds gegeben` data
+set from the **ggplot2** package.
+
+## 2a. Plain R base solution (very concise)
+cut_counts_base <- table(diamonds$cut)
+
+## 2b. dplyr / tidyverse solution
+cut_counts_tidy <- diamonds %>%
   count(cut)
+
+### What you'll see
+
+   Fair Good Ideal Premium       Very Good
+    475    10105    12558    68146          46978
 ```
 
 ###
+
+Read the last four lines again, then look at the real data. The true counts are Fair 1610, Good 4906, Very Good 12082, Premium 13791, Ideal 21551. **Every single number the model printed is invented.** `diamonds` has 53,940 rows; the model claims 68,146 Premium diamonds by itself, and its five numbers add to more than twice the data set.
+
+It is not a coding failure --- `table(diamonds$cut)` and `count(cut)` both work. It is that the model was never *going* to run anything, so when it wrote a section headed "What you'll see," it produced text shaped like output rather than output. There is a German word wedged into the first sentence too, which tells you something about how carefully this was assembled.
+
+This is the single most important habit in the course: **code from a model can be checked by running it; claims from a model about what the code produces cannot.** Run it yourself. Every time. A cheap model is a fine way to get `count(cut)` written, and no way at all to learn how many Ideal diamonds there are.
 
 Piping the response through `python` to pull out `choices[0].message.content` is how you get the answer without the envelope around it --- useful the moment you want a model's output inside a script rather than on your screen.
 
-That is a correct, idiomatic, three-line answer from a model that charged you nothing. Hold it next to what you would have paid a frontier model for the identical result.
-
 ### Exercise 2
 
-Run the same request against `anthropic/claude-opus-4.8`.
+Run the same request against `anthropic/claude-opus-4.8`, piping through `python -m json.tool` this time rather than pulling out the content.
 
 This one is **not** free, and your account has no credits, so it will fail. Copy and paste the error.
 
@@ -275,18 +313,20 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 6)
+	rows = 12)
 ```
 
 ###
 
-<!-- VERIFY: exact 402 message text for a zero-credit account. -->
-
 ```
 {
     "error": {
-        "message": "Insufficient credits. Add more using https://openrouter.ai/settings/credits",
-        "code": 402
+        "message": "This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 1600. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account",
+        "code": 402,
+        "metadata": {
+            "provider_name": null,
+            "previous_errors": [ ... ]
+        }
     }
 }
 ```
@@ -294,6 +334,10 @@ question_text(NULL,
 ###
 
 A `402` is the HTTP status code for *Payment Required* --- one of the rarest codes on the ordinary web, and routine on this one.
+
+Read what it actually says, because it is not "you have no money." It is that you cannot afford the request's *worst case*. The model may produce up to 65,536 output tokens, so the service reserves the cost of all 65,536 before it starts, and you can cover 1,600 of them. Ask for fewer and the same request would go through. Metered services almost always price the ceiling rather than the outcome, which is worth knowing before you are surprised by it.
+
+`previous_errors` holds four copies of the same complaint: OpenRouter tried four different providers for Opus and each refused in turn. The routing was working; there was simply nowhere for it to route.
 
 Now the reason for the price gap. **Open weights** models --- `gpt-oss`, DeepSeek, Qwen, Llama, Gemma --- are published as files anyone can download and run. **Closed** models --- Opus, GPT, Gemini --- exist only on their owner's servers. That difference has an economic consequence that is entirely predictable: when a dozen companies can serve the same Qwen weights, they compete on price and margins collapse toward the cost of the electricity. When only Anthropic can serve Opus, the price is whatever Anthropic says it is.
 
@@ -378,7 +422,7 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 6)
+	rows = 10)
 ```
 
 ###
@@ -386,13 +430,21 @@ question_text(NULL,
 ```
 > chat <- chat_openrouter(model = "openai/gpt-oss-20b:free")
 > chat$chat("In one sentence, what is a tibble?")
-A tibble is the tidyverse's version of a data frame, with stricter behavior
-and much nicer printing.
+User asks: "In one sentence, what is a tibble?" Provide one sentence
+definition. Something like "In R, a tibble is a modern re-implementation of
+data frames that is part of the tidyverse." Should answer in one sentence.
+Alright.A **tibble** is a tidy-verse-style, modern reimplementation of R's
+data frame that stores tabular data as a list of consistent-typed columns
+with a clean, concise printing, and features straightforward subsetting.
 ```
 
 ###
 
 `chat_openrouter()` found your key without being told where it was --- it reads `OPENROUTER_API_KEY` out of the environment, the same variable `aider` and `curl` used. One key, three tools.
+
+Now look at what came back. The first four lines are not the answer --- they are the model's *reasoning*, the same `reasoning` field you saw in the raw JSON, which `ellmer` prints along with everything else. You can see the exact seam where deliberation ends and answer begins: `Alright.A **tibble** is`, with no space, because two separate fields were run together.
+
+Your output will not match ours word for word, and may be messier. A `:free` endpoint is served by whichever company is willing to host it that day, and the ones giving inference away are not always the ones tuning it carefully.
 
 Always name the model. `ellmer` has a default, and its documentation says plainly that the default changes; code that relies on it will one day start costing money it did not cost yesterday.
 
@@ -416,25 +468,33 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 8)
+	rows = 12)
 ```
 
 ###
 
+Ours, with the reasoning trimmed --- the last four lines are what it offered as the answer:
+
 ```
+1. "the room was filthy" -> Negative (clear negative).
+2. staff ... it's a compliment about staff, positive.
+3. "fine, but overpriced" -> Mixed?  ...
+We need just one per line, no additional text.
 negative
 positive
 mixed
-positive
+ perhatian positif
 ```
 
 ###
 
-This is the use case that makes cheap models matter. Four hotel reviews are a toy; four *hundred thousand* of them is a real data set, and there has never been a way to turn free text into a usable variable at that scale. Hand-coding was the only option, and it meant hiring people.
+Three labels right, and the fourth is `perhatian positif` --- Indonesian for "positive attention." The instruction said one label per line and nothing else; it produced a paragraph of reasoning, then three correct labels, then a word in the wrong language.
 
-Run the arithmetic. Four hundred thousand short reviews is on the order of 20 million input tokens. On the Qwen coder model that is about **$1.40**. On Opus it is **$100**, for a labeling job where the cheap model is very nearly as good. Cost is not a footnote to that decision; it is the reason the analysis happens at all.
+This is the use case that makes cheap models matter and the reason they cannot be trusted raw, in one result. Four hotel reviews are a toy; four *hundred thousand* is a real data set, and until recently there was no way to turn free text into a usable variable at that scale short of hiring people to read it. Four hundred thousand short reviews is on the order of 20 million input tokens: about **$1.40** on the Qwen coder model, about **$100** on Opus.
 
-The catch worth naming: a model asked for four labels will occasionally return five, or add a sentence of commentary. Production code pins the output down --- `ellmer` will make a model return a specified structure rather than free prose --- and always validates what came back before trusting it.
+But a column with `perhatian positif` in it is not a variable, it is a bug. Two habits make this workable, and professionals use both. First, **structured output**: `ellmer` can require the model to return a value matching a type you specify --- one of exactly three labels --- rather than free prose, which turns a wrong answer into an error you can catch. Second, **validate anyway**: check that you got back as many labels as you sent rows, and that every label is one you expected.
+
+Neither habit is optional at scale. On four reviews you can see the bad one. On four hundred thousand you cannot.
 
 ## Paying
 ###
