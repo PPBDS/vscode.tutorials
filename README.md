@@ -38,7 +38,7 @@ As a backup, you can launch a tutorial from the R console with
 `learnr::run_tutorial()`, providing the short name of the tutorial and
 the package name.
 
-    learnr::run_tutorial(name = "01-code",
+    learnr::run_tutorial(name = "01-introduction",
                          package = "vscode.tutorials")
 
 ### VS Code Tutorials
@@ -46,42 +46,47 @@ the package name.
 The core tutorials introduce students to the VS Code integrated
 development environment.
 
-- *VS Code and Scripts* (“01-code”). Introduce students to VS Code and
-  to writing R code in simple scripts.
+- *Introduction* (“01-introduction”). The first tutorial after **Getting
+  Started**: move around VS Code, use the Terminal, create a GitHub
+  repo, run R scripts, make plots, and commit and push with Git.
 
-- *VS Code and Quarto* (“02-quarto”). Demonstrate more tricks for
-  working with R code using VS Code, and also explain Quarto documents.
+- *Code* (“02-code”). Introduce students to VS Code and to writing R
+  code in simple scripts.
 
-- *Terminal* (“03-terminal”). Teach the command line.
+- *Quarto* (“03-quarto”). Demonstrate more tricks for working with R
+  code using VS Code, and also explain Quarto documents.
 
-- *AI Introduction* (“04-ai-1”). Meet the Gemini CLI agent and use it to
-  create and render a Quarto analysis.
+- *Terminal Introduction* (“04-terminal-1”). Teach the basics of the
+  command line.
 
-- *VS Code and GitHub Introduction* (“05-github-1”). Explain the basics
-  of Git and GitHub, mostly in the context of VS Code.
+- *Terminal Advanced* (“05-terminal-2”). More command line: paths,
+  options, wildcards, regular expressions, and file operations.
 
-- *VS Code and GitHub Advanced* (“06-github-2”). Provide more practice
+- *Antigravity* (“06-antigravity”). Meet the Antigravity CLI agent
+  (`agy`) and use it to create and render a Quarto analysis.
+
+- *GitHub Introduction* (“07-github-1”). Explain the basics of Git and
+  GitHub, mostly in the context of VS Code.
+
+- *VS Code and GitHub Advanced* (“08-github-2”). Provide more practice
   in working with Git/GitHub, including more details on the use of
   GitHub Pages.
 
-- *AI and Git* (“07-ai-2”). Return to the Gemini CLI, now using it to
-  run and explain a full Git workflow.
-
-- *Quarto Websites Introduction* (“08-websites-1”). Demonstrate the
+- *Quarto Websites Introduction* (“09-websites-1”). Demonstrate the
   basics of website construction using Quarto projects.
 
-- *Quarto Websites Advanced* (“09-websites-2”). Practice Quarto
+- *Quarto Websites Advanced* (“10-websites-2”). Practice Quarto
   websites, building two sites and refactoring analysis code into
   scripts that save results as RDS and PNG files.
 
-- *Devcontainers* (“10-devcontainer”). Introduce devcontainers,
-  touring a pre-built Jupyter devcontainer.json and building an R
+- *Devcontainers* (“11-devcontainers”). Introduce devcontainers, touring
+  a pre-built Jupyter devcontainer.json and building an R
   devcontainer.json from scratch.
 
-- *Codebase Starter Devcontainer* (“11-codebase-start”). Tour the
+- *Our Codespace Starter* (“12-codespace-starter”). Tour the
   devcontainer.json behind `codespace-starter` itself.
 
-- *The Devcontainer Dockerfile* (“12-docker”). Read through the
+- *The Devcontainer Dockerfile* (“13-docker”). Read through the
   Dockerfile that builds the PPBDS devcontainer image.
 
 The *R for Data Science* and *Analyzing US Census Data* tutorials now

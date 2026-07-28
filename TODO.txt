@@ -1,9 +1,6 @@
 ## topics
 
-Now that our prompt is the name of the directory only, we need to worry about two things. First, we need to change the provided answers to match this, rather than showing the old, much longer prompt. Second, we need to be aware that we occasionally change the order of the tutorials, which means that we change their names, which means that we are changing the repos, which means that we are changing the prompts.
-
-04-ai should be antigravity, and it probably comes after quarto.
-
+What should repo names be now that tutorial titles (i.e., the "name" of the tutorial) are things like "Getting Started" and "Terminal Introduction"? Perhaps the answer is all lower case with spaces (and other weird characters) replaced with dashes.
 
 ## Notes for infrastructure tutorials
 
@@ -39,7 +36,7 @@ Might have some other ones, especially ones which begin by forking a PPBDS repo 
 
 This is a graduation exeercise for the last three tutorials. Students now understand devcontainers, dockerfiles and images. So, they can now create their own version of `codebase-starter`, called `starter`. This will, obviously, look a lot like ours. But it won't have all our junk, the stuff we just include for teaching purposes, like all the PPBDS tutorial packages. 
 
-They will need their own dockerfile. (Does this need to me in its own directory? Much more convenient if it just lived in the same repo.) They need to build their own image files. Their devcontainer.json needs to include that image file.
+They will need their own dockerfile. (Does this need to be in its own directory? Much more convenient if it just lived in the same repo.) They need to build their own image files. Their devcontainer.json needs to include that image file.
 
 Question: Does that mean that using this repo as a template will work fast for them --- because they own the repo? If yes, then great! If not, then they will need to do something similar to what we do with connect-repo.sh.
 
@@ -80,9 +77,9 @@ But, at the same time, we don't want to overwhelm them during week 1. So, we nee
 
 We can split AI into two parts. In Getting Started and the Introduction, we just use GitHub Copilot. We know it will always be there and will always work for at least a few questions. Then, later, we can learn how to operate something like Antigravity from the command line.
 
-There is a temptation to hold off on repos until after the first few tutorials, but then we can't publish nice pages during the quarto tutorial. So, best to just bite the bullet and have students use connect-repo early, starting in the introduction, or maybe even in Getting Started.
 
-So, Getting Started due Monday evening, started in class. introduction dues Tuesday, so kids can do real stuff on Wednesday. code and quarto due Wed/Thur, so we are posting web pages on Friday.
+
+So, Getting Started due Monday evening, started in class. introduction due Tuesday, so kids can do real stuff on Wednesday. code and quarto due Wed/Thur, so we are posting web pages on Friday.
 
 
 

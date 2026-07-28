@@ -19,18 +19,19 @@ tutorial.helpers package.
 
 The package includes tutorials focused on VS Code and modern R development:
 \itemize{
-\item \strong{VS Code and Scripts} (01-code): Introduction to VS Code and writing R code in simple scripts
-\item \strong{VS Code and Quarto} (02-quarto): Advanced R coding tricks in VS Code and Quarto document creation
-\item \strong{Terminal} (03-terminal): Command line fundamentals
-\item \strong{AI Introduction} (04-ai-1): Meeting the Gemini CLI agent and using it to create and render a Quarto analysis
-\item \strong{VS Code and GitHub Introduction} (05-github-1): Git and GitHub basics within VS Code
-\item \strong{VS Code and GitHub Advanced} (06-github-2): Advanced Git/GitHub workflows and GitHub Pages
-\item \strong{AI and Git} (07-ai-2): Using the Gemini CLI to run and explain a full Git workflow
-\item \strong{Quarto Websites Introduction} (08-websites-1): Basic website construction using Quarto projects
-\item \strong{Quarto Websites Advanced} (09-websites-2): Advanced Quarto websites with modular data analysis
-\item \strong{Devcontainers} (10-devcontainer): An introduction to devcontainers, touring a pre-built Jupyter devcontainer.json and building an R devcontainer.json from scratch
-\item \strong{Codebase Starter Devcontainer} (11-codebase-start): A tour of the devcontainer.json behind codespace-starter itself
-\item \strong{The Devcontainer Dockerfile} (12-docker): A reading tour of the Dockerfile that builds the PPBDS devcontainer image
+\item \strong{Introduction} (01-introduction): First tutorial after Getting Started --- VS Code, the Terminal, repos, R scripts, plots, and Git
+\item \strong{Code} (02-code): Introduction to VS Code and writing R code in simple scripts
+\item \strong{Quarto} (03-quarto): Advanced R coding tricks in VS Code and Quarto document creation
+\item \strong{Terminal Introduction} (04-terminal-1): Command line fundamentals
+\item \strong{Terminal Advanced} (05-terminal-2): More command line: paths, options, wildcards, and regular expressions
+\item \strong{Antigravity} (06-antigravity): Meeting the Antigravity CLI agent (agy) and using it to create and render a Quarto analysis
+\item \strong{GitHub Introduction} (07-github-1): Git and GitHub basics within VS Code
+\item \strong{VS Code and GitHub Advanced} (08-github-2): Advanced Git/GitHub workflows and GitHub Pages
+\item \strong{Quarto Websites Introduction} (09-websites-1): Basic website construction using Quarto projects
+\item \strong{Quarto Websites Advanced} (10-websites-2): Advanced Quarto websites with modular data analysis
+\item \strong{Devcontainers} (11-devcontainers): An introduction to devcontainers, touring a pre-built Jupyter devcontainer.json and building an R devcontainer.json from scratch
+\item \strong{Our Codespace Starter} (12-codespace-starter): A tour of the devcontainer.json behind codespace-starter itself
+\item \strong{The Devcontainer Dockerfile} (13-docker): A reading tour of the Dockerfile that builds the PPBDS devcontainer image
 }
 }
 
@@ -39,9 +40,10 @@ The package includes tutorials focused on VS Code and modern R development:
 To run a tutorial, use:
 \code{learnr::run_tutorial(name = "short_tutorial_name", package = "vscode.tutorials")}
 
-Available tutorial names include: 01-code, 02-quarto, 03-terminal, 04-ai-1,
-05-github-1, 06-github-2, 07-ai-2, 08-websites-1, 09-websites-2,
-10-devcontainer, 11-codebase-start, and 12-docker.
+Available tutorial names include: 01-introduction, 02-code, 03-quarto,
+04-terminal-1, 05-terminal-2, 06-antigravity, 07-github-1, 08-github-2,
+09-websites-1, 10-websites-2, 11-devcontainers, 12-codespace-starter, and
+13-docker.
 }
 
 \seealso{

@@ -2,7 +2,7 @@
 title: Quarto
 author: David Kane
 tutorial:
-  id: 02-quarto
+  id: "03-quarto"
 output:
   learnr::tutorial:
     progressive: yes
@@ -35,7 +35,7 @@ options(tutorial.exercise.timelimit = 60,
 
 This tutorial covers how to create Quarto documents using Visual Studio Code in [GitHub Codespaces](https://github.com/features/codespaces). For help with setting this up, see [Getting Started](https://ppbds.github.io/primer/getting-started.html). Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
-You should be running this tutorial from a Codespace created from the [Codespace starter](https://github.com/PPBDS/codespace-starter). You may reuse the Codespace that you used for the `01-code` tutorial. If you do this, there may be some leftover files. Feel free to delete them.
+You should be running this tutorial from a Codespace created from the [Codespace starter](https://github.com/PPBDS/codespace-starter). You may reuse the Codespace that you used for the `02-code` tutorial. If you do this, there may be some leftover files. Feel free to delete them.
 
 ## Quarto 1
 ### 
@@ -1083,7 +1083,7 @@ With *inline* code, we can insert R code of arbitrary complexity directly in the
 ## Quarto 4
 ### 
 
-Restart your R session by opening a new R Terminal and closing your previous one. As always, you are doing this work in an R Terminal different from the one that is running this tutorial. If you mistakenly restart R in this terminal, this tutorial will quit. That is OK! You can restart it with `learnr::run_tutorial(name = "02-quarto", package = "vscode.tutorials")`.
+Restart your R session by opening a new R Terminal and closing your previous one. As always, you are doing this work in an R Terminal different from the one that is running this tutorial. If you mistakenly restart R in this terminal, this tutorial will quit. That is OK! You can restart it with `learnr::run_tutorial(name = "03-quarto", package = "vscode.tutorials")`.
 
 ### Exercise 1
 

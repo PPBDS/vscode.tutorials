@@ -2,7 +2,7 @@
 title: Code
 author: David Kane
 tutorial:
-  id: 01-code
+  id: "02-code"
 output:
   learnr::tutorial:
     progressive: yes

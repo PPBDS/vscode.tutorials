@@ -2,7 +2,7 @@
 title: "Devcontainers"
 author: David Kane
 tutorial:
-  id: "10-devcontainers"
+  id: "11-devcontainers"
 output:
   learnr::tutorial:
     df_print: default
@@ -33,9 +33,9 @@ This tutorial explores devcontainers --- configuration files that define how a G
 
 ### Exercise 1
 
-Create and connect to a repo called `10-devcontainers`, then open it as your workspace.
+Create and connect to a repo called `devcontainers`, then open it as your workspace.
 
-Copy and paste the URL for your `10-devcontainers` repository.
+Copy and paste the URL for your `devcontainers` repository.
 
 ```{r introduction-1}
 question_text(NULL,
@@ -49,7 +49,7 @@ question_text(NULL,
 ###
 
 ```
-https://github.com/ppbds-student/10-devcontainers
+https://github.com/ppbds-student/devcontainers
 ```
 
 ###
@@ -96,16 +96,16 @@ question_text(NULL,
 
 
 ```
-10-devcontainers $ pwd
-/workspaces/10-devcontainer
-10-devcontainers$ ls -a
+devcontainers $ pwd
+/workspaces/devcontainers
+devcontainers $ ls -a
 .  ..  .git
-10-devcontainers $
+devcontainers $
 ```
 
 ###
 
-Your `10-devcontainers` repo starts almost empty --- the `.git` directory confirms it is tracked by Git, but there is nothing else here yet. This is where you will save your own work. Notice what is *missing*: there is no `.devcontainer` directory, even though this Codespace clearly has one configured. We track it down next.
+Your `devcontainers` repo starts almost empty --- the `.git` directory confirms it is tracked by Git, but there is nothing else here yet. This is where you will save your own work. Notice what is *missing*: there is no `.devcontainer` directory, even though this Codespace clearly has one configured. We track it down next.
 
 ### Exercise 4
 
@@ -125,7 +125,7 @@ question_text(NULL,
 Your output should look like:
 
 ````
-10-devcontainers $ cd ../codespace-starter
+devcontainers $ cd ../codespace-starter
 codespace-starter $ pwd
 /workspaces/codespace-starter
 codespace-starter $
@@ -133,7 +133,7 @@ codespace-starter $
 
 ###
 
-Both repos live side by side inside this Codespace, under `/workspaces`: your own `10-devcontainers` and the `codespace-starter` you launched from. The `..` in `cd ../codespace-starter` means "the parent directory," so the command moves up from `/workspaces/10-devcontainer` to `/workspaces`, then down into `codespace-starter`. That is where the `devcontainer.json` that configured this machine actually lives --- not in your work repo, which is just for saving your own work. Notice the prompt change from `10-devcontainers $` to `codespace-starter $`: the prompt always shows the name of the directory you are in, a quick way to confirm where you are.
+Both repos live side by side inside this Codespace, under `/workspaces`: your own `devcontainers` and the `codespace-starter` you launched from. The `..` in `cd ../codespace-starter` means "the parent directory," so the command moves up from `/workspaces/devcontainers` to `/workspaces`, then down into `codespace-starter`. That is where the `devcontainer.json` that configured this machine actually lives --- not in your work repo, which is just for saving your own work. Notice the prompt change from `devcontainers $` to `codespace-starter $`: the prompt always shows the name of the directory you are in, a quick way to confirm where you are.
 
 ### Exercise 5
 
@@ -150,12 +150,12 @@ question_text(NULL,
 
 ###
 
-Your output shows the full `devcontainer.json` from the `codespace-starter` repo. You will explore each part of this file in a later tutorial, `11-codespace-starter`. Keep this Codespace open --- you will need it alongside a second Codespace in the next section.
+Your output shows the full `devcontainer.json` from the `codespace-starter` repo. You will explore each part of this file in a later tutorial. Keep this Codespace open --- you will need it alongside a second Codespace in the next section.
 
 ## Jupyter Notebook Devcontainer
 ###
 
-A `devcontainer.json` file captures the entire setup --- starting image, packages, extensions, and startup commands --- so that any codespace opened from the repo starts in an identical, ready-to-use state. In this section you will examine the devcontainer for GitHub's Jupyter Notebook template, which sets up a xodespace for doing data science with Python and with Jupyter Notebooks.
+A `devcontainer.json` file captures the entire setup --- starting image, packages, extensions, and startup commands --- so that any codespace opened from the repo starts in an identical, ready-to-use state. In this section you will examine the devcontainer for GitHub's Jupyter Notebook template, which sets up a codespace for doing data science with Python and with Jupyter Notebooks.
 
 ### Exercise 1
 
@@ -204,7 +204,7 @@ question_text(NULL,
 ###
 
 ````
-10-devcontainers      ppbds-student/10-devcontainers       main    Active
+devcontainers      ppbds-student/devcontainers       main    Active
 codespaces-jupyter    ppbds-student/codespaces-jupyter     main    Active
 ````
 

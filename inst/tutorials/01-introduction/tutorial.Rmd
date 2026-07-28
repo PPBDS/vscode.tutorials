@@ -2,7 +2,7 @@
 title: "Introduction"
 author: David Kane
 tutorial:
-  id: "00-introduction"
+  id: "01-introduction"
 output:
   learnr::tutorial:
     df_print: default
@@ -124,6 +124,14 @@ include_graphics("images/terminal-on-open.png")
 ```
 
 You should now have at least two Terminal tabs: **R Tutorial**, which is busy running this tutorial, and **bash**, where you will work. Leave the **R Tutorial** tab alone.
+
+One thing to watch for: a bash Terminal that was already open when the Codespace started shows a long prompt like
+
+````
+@davekane-student ➜ /workspaces/codespace-starter (main) $
+````
+
+with your GitHub username in place of `davekane-student`. Only a **new** bash Terminal --- one you open yourself, like you just did --- gets our short prompt: the name of the directory you are in, a space, and a dollar sign, like `codespace-starter $`. The two prompts behave identically; the short one just wastes less space. All our examples show the short prompt, so if you see the long one, open a fresh bash Terminal.
 
 ### Exercise 1
 
