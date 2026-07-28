@@ -43,7 +43,27 @@ Question: Does that mean that using this repo as a template will work fast for t
 But under no circumstances do we want them using connect-repo! It is a hack, mainly necessitated by teaching requirements. If they need to do something like that then teach them the raw git commands which accomplish the same thing.
 
 
-## 14-dotfiles
+## 14-your-dotfiles
+
+Jacob
+
+No need for a repo.
+
+Starts by running echo $COOLEST_TEACHER in the bash Terminal.
+
+That fails!
+
+Create dotfiles repo. Explain that this is a real permanent thing.
+
+Add some dotfiles. Including a bash dotfile which defines 
+
+Flip some switch in GitHub account settings. 
+
+COOLEST_TEACHER=Preceptor
+
+Start a new codespace and run echo $COOLEST_TEACHER
+
+And it works! 
 
 Should there be a dotfiles tutorial, or should an introduction to this topic be handled in 13-my-codebase-starter? I think that, ideally, it is handled in 13. The motivating example is Git/GitHub. We want dotfiles to include all the Git/GitHub info so that connecting a new repo is easy. This is complex stuff! I am still unsure what `gh` does. 
 
