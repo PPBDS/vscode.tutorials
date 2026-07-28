@@ -15,40 +15,43 @@ tools in the tutorial.helpers package.
 The package includes tutorials focused on VS Code and modern R
 development:
 
-- **VS Code and Scripts** (01-code): Introduction to VS Code and writing
-  R code in simple scripts
+- **Introduction** (01-introduction): First tutorial after Getting
+  Started — VS Code, the Terminal, repos, R scripts, plots, and Git
 
-- **VS Code and Quarto** (02-quarto): Advanced R coding tricks in VS
-  Code and Quarto document creation
+- **Code** (02-code): Introduction to VS Code and writing R code in
+  simple scripts
 
-- **Terminal** (03-terminal): Command line fundamentals
+- **Quarto** (03-quarto): Advanced R coding tricks in VS Code and Quarto
+  document creation
 
-- **AI Introduction** (04-ai-1): Meeting the Gemini CLI agent and using
-  it to create and render a Quarto analysis
+- **Terminal Introduction** (04-terminal-1): Command line fundamentals
 
-- **VS Code and GitHub Introduction** (05-github-1): Git and GitHub
-  basics within VS Code
+- **Terminal Advanced** (05-terminal-2): More command line: paths,
+  options, wildcards, and regular expressions
 
-- **VS Code and GitHub Advanced** (06-github-2): Advanced Git/GitHub
+- **Antigravity** (06-antigravity): Meeting the Antigravity CLI agent
+  (agy) and using it to create and render a Quarto analysis
+
+- **GitHub Introduction** (07-github-1): Git and GitHub basics within VS
+  Code
+
+- **VS Code and GitHub Advanced** (08-github-2): Advanced Git/GitHub
   workflows and GitHub Pages
 
-- **AI and Git** (07-ai-2): Using the Gemini CLI to run and explain a
-  full Git workflow
-
-- **Quarto Websites Introduction** (08-websites-1): Basic website
+- **Quarto Websites Introduction** (09-websites-1): Basic website
   construction using Quarto projects
 
-- **Quarto Websites Advanced** (09-websites-2): Advanced Quarto websites
+- **Quarto Websites Advanced** (10-websites-2): Advanced Quarto websites
   with modular data analysis
 
-- **Devcontainers** (10-devcontainer): An introduction to devcontainers,
-  touring a pre-built Jupyter devcontainer.json and building an R
-  devcontainer.json from scratch
+- **Devcontainers** (11-devcontainers): An introduction to
+  devcontainers, touring a pre-built Jupyter devcontainer.json and
+  building an R devcontainer.json from scratch
 
-- **Codebase Starter Devcontainer** (11-codebase-start): A tour of the
+- **Our Codespace Starter** (12-codespace-starter): A tour of the
   devcontainer.json behind codespace-starter itself
 
-- **The Devcontainer Dockerfile** (12-docker): A reading tour of the
+- **The Devcontainer Dockerfile** (13-docker): A reading tour of the
   Dockerfile that builds the PPBDS devcontainer image
 
 ## Running Tutorials
@@ -56,9 +59,10 @@ development:
 To run a tutorial, use:
 `learnr::run_tutorial(name = "short_tutorial_name", package = "vscode.tutorials")`
 
-Available tutorial names include: 01-code, 02-quarto, 03-terminal,
-04-ai-1, 05-github-1, 06-github-2, 07-ai-2, 08-websites-1,
-09-websites-2, 10-devcontainer, 11-codebase-start, and 12-docker.
+Available tutorial names include: 01-introduction, 02-code, 03-quarto,
+04-terminal-1, 05-terminal-2, 06-antigravity, 07-github-1, 08-github-2,
+09-websites-1, 10-websites-2, 11-devcontainers, 12-codespace-starter,
+and 13-docker.
 
 ## See also
 

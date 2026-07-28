@@ -48,11 +48,11 @@ mechanics exception, for the same reason.)
 Later packages (`misc.tutorials`, the Primer) do **not** assume a
 student has done *all* of `vscode.tutorials` — only the foundational
 material in the first several tutorials, roughly **through the GitHub
-tutorials** (`06-github-2`). The later `vscode.tutorials` tutorials
-(`07-ai-2`, the websites pair, `10-devcontainer`, `11-codebase-start`,
-`12-docker`) are not part of that assumed base. (This is about what
-downstream tutorials may rely on, not a claim about which tutorials
-students finish — many do reach the later ones.)
+tutorials** (`08-github-2`). The later `vscode.tutorials` tutorials (the
+websites pair, `11-devcontainers`, `12-codespace-starter`, `13-docker`)
+are not part of that assumed base. (This is about what downstream
+tutorials may rely on, not a claim about which tutorials students finish
+— many do reach the later ones.)
 
 ### The universal entry point
 
@@ -237,9 +237,9 @@ basename of the current working directory, a space, and a dollar sign**:
   `~ $`. The home directory is `/home/rstudio` (the image’s user is
   `rstudio`) — not `/home/codespace`.
 - **Exception — Codespaces not started from our image.** The Jupyter and
-  Blank template Codespaces (toured in `10-devcontainers`) show GitHub’s
+  Blank template Codespaces (toured in `11-devcontainers`) show GitHub’s
   stock long prompt. Those transcripts are correct as-is; leave them.
-- **Subtlety, taught in `00-introduction` and `03-terminal-1`:** only a
+- **Subtlety, taught in `01-introduction` and `04-terminal-1`:** only a
   *newly opened* bash Terminal gets the short prompt. The terminal
   already open when the Codespace starts shows the stock long prompt
   (the `PS1` override lands at the end of `~/.bashrc` and only affects
@@ -271,18 +271,42 @@ Consequently, **when a tutorial’s title changes, update all of these**
 5.  Rows copied from the github.com/codespaces list (they show repo
     names).
 
-Do **not** change: the tutorial’s `id:` in the YAML (it keys stored
-student answers), the tutorial’s directory name under `inst/tutorials/`,
-or chunk labels.
+Do **not** change: the tutorial’s `id:` in the YAML (it equals the
+directory name, which a title change does not touch), the tutorial’s
+directory name under `inst/tutorials/`, or chunk labels.
 
 - A title must not collide with a directory that already exists under
   `/workspaces` — in particular, a title that would map to
   `codespace-starter` is forbidden (that folder is always present).
-- **Known exceptions to one-title-one-repo:** `06-github-2` uses two
-  repos (`project-1`, `project-2`) and `09-websites-2` uses two
+- **Known exceptions to one-title-one-repo:** `08-github-2` uses two
+  repos (`project-1`, `project-2`) and `10-websites-2` uses two
   (`website-1`, `website-2`). The title rule cannot name two repos, so
   these keep their ordinal names; their prompts still follow the prompt
   rule.
+
+### Renumbering tutorials (directory renames)
+
+Tutorial directory names (`inst/tutorials/NN-slug/`) embed a sequence
+number. Renaming a directory fans out; update all of these together:
+
+1.  `learnr::run_tutorial(name = "NN-slug", ...)` calls — `name` is the
+    **directory** name. They appear in README.Rmd/README.md and inside
+    tutorials (“if you quit, restart with…”).
+2.  `raw.githubusercontent.com/...` and `github.com/.../blob/main/...`
+    URLs that embed `inst/tutorials/NN-slug/` — in tutorials (download
+    exercises) and in `tests/testthat/test-downloads.R`. These point at
+    GitHub `main`, so they 404 (locally and for students) until the
+    rename is pushed.
+3.  Cross-references in prose: “the next tutorial, `NN-slug`”,
+    README.Rmd’s tutorial list (re-render README.md after editing), and
+    this file.
+4.  The YAML `id:` field — **the id must always equal the directory
+    name.** Renumbering a directory therefore means renumbering its id
+    in the same commit. (Changing an id invalidates students’ stored
+    answers for that tutorial; that cost is accepted — consistency
+    wins.)
+
+NEWS.md entries are historical records — never retro-renumber them.
 
 ### The devcontainer image pin (`ghcr.io/ppbds/devcontainer:X.Y.Z`)
 
@@ -294,16 +318,16 @@ The version tag students see when they read `codespace-starter`’s
 repo** (find them with
 `grep -rn 'ghcr.io/ppbds/devcontainer:' --include='*.Rmd' --include='*.yaml' .`):
 
-1.  `inst/tutorials/11-codespace-starter/tutorial.Rmd` — the expected
+1.  `inst/tutorials/12-codespace-starter/tutorial.Rmd` — the expected
     answer for the find-the-`"image"`-line exercise.
-2.  `inst/tutorials/12-docker/tutorial.Rmd` — the intro’s back-reference
+2.  `inst/tutorials/13-docker/tutorial.Rmd` — the intro’s back-reference
     to that line.
 3.  `.github/workflows/R-CMD-check.yaml` — the CI `container: image:`
     tag (this one is normally bumped as part of the codespace-starter
     release process; the tutorials are what get forgotten).
 
 Unversioned mentions of `ghcr.io/ppbds/devcontainer` (no `:X.Y.Z`) are
-fine and need no touching. Separately, `12-docker` embeds a full copy of
+fine and need no touching. Separately, `13-docker` embeds a full copy of
 the `PPBDS/devcontainers` Dockerfile — when that Dockerfile changes
 materially, the embedded copy (and the exercises reading it) must be
 refreshed too.
