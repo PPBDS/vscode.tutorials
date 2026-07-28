@@ -29,15 +29,19 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-In `15-openrouter` you drove a model through `aider`. The agent did the talking. Here you will take the agent away and talk to the model yourself --- first with `curl`, then from R.
+In `15-openrouter`, `aider` talked to the model for you. Now you will take `aider` away and talk to the model yourself --- first from the Terminal, then from R.
 
 ###
 
-There are two reasons to bother. The first is that a coding agent is a thin wrapper around a single HTTP request, and seeing that request stops the whole business from looking like magic. The second is that most of the useful work a model does for a data scientist is not writing code at all. It is reading ten thousand rows of messy free text and telling you what is in them --- and for that you need to call a model from a script, in a loop, cheaply.
+Two reasons this is worth doing.
+
+**It stops being magic.** Underneath every AI tool is one ordinary web request. Once you have sent that request by hand, the whole thing is much less mysterious.
+
+**Most useful AI work is not writing code.** It is reading ten thousand rows of messy text and telling you what is in them. For that you need to call a model from a script, over and over, cheaply.
 
 ###
 
-Cheaply is where this tutorial ends up. By the last exercise you will know what a model costs to the dollar, why some cost a hundred times less than others, and whether it is worth giving OpenRouter ten of yours.
+By the last exercise you will know what a model costs, why some cost a hundred times less than others, and whether $10 is worth spending.
 
 ### Exercise 1
 
@@ -91,14 +95,14 @@ sk-or-v1
 
 ###
 
-If that came back empty, your Codespaces secret has not reached this shell. Either you are in the same Codespace as last time --- secrets arrive when a Codespace is *created*, not when it restarts --- or the secret was never granted access to `PPBDS/codespace-starter`. Fix it at <https://github.com/settings/codespaces>, or just `export` the key again for this session as you did last time.
+If that came back empty, the secret has not reached this Terminal. Either this is the same Codespace as last time --- secrets only arrive when a Codespace is *created* --- or the secret was never given access to `PPBDS/codespace-starter`. Fix it at <https://github.com/settings/codespaces>, or just `export` the key again like last time.
 
-That distinction is worth holding onto, because it is a general property of container configuration rather than a quirk of GitHub: things wired in at creation time do not appear in a machine that already exists. It is the same reason a change to `devcontainer.json` does nothing until you rebuild.
+That rule is worth remembering: settings applied when a machine is built do not appear on a machine that already exists. It is the same reason editing `devcontainer.json` does nothing until you rebuild.
 
 ## The Request Underneath
 ###
 
-Every AI product you have ever used --- the chat window, the editor sidebar, `aider`, Claude Code --- ends up sending the same thing: a list of messages to an HTTP endpoint, with a key in the header. This section is that request, with nothing on top of it.
+Every AI product you have used --- the chat window, the editor sidebar, `aider`, Claude Code --- sends the same thing underneath: a list of messages to a web address, with a key attached. This section is that request, with nothing built on top of it.
 
 ### Exercise 1
 
@@ -127,9 +131,11 @@ $ curl -s https://openrouter.ai/api/v1/models | python -c "import sys, json; pri
 
 ###
 
-Your number will differ from ours by a few dozen, because models arrive and leave constantly.
+Your number will be a bit different from ours. Models arrive and leave all the time.
 
-Notice what that request did *not* need: a key. The catalogue is public. Notice also what a router buys you, now that you can count it --- several hundred models from dozens of companies, reachable with one account, one key, and one bill. The alternative is an account with OpenAI, another with Anthropic, another with Google, another with DeepSeek, four keys to store, four invoices, and four slightly different APIs to write code against.
+Notice what that request did *not* need: a key. The catalogue is public to anyone.
+
+And notice what a router gets you, now that you can count it. Several hundred models, from dozens of companies, through one account and one key. Without a router you would need an account with OpenAI, another with Anthropic, another with Google, another with DeepSeek --- four keys to keep track of and four different ways of asking.
 
 ### Exercise 2
 
@@ -194,17 +200,17 @@ Ours, with the model's chain of thought cut short to fit:
 
 ###
 
-Underneath, it is one call: a model name, a list of messages each tagged with a `role`, and a key in the header. Everything else --- the chat interfaces, the agents, the editor plugins --- is software wrapped around that.
+That is the whole thing: a model name, a list of messages, and a key. Every chat window and coding assistant is software wrapped around this one request.
 
-Four fields in the reply repay a close look.
+Four fields in the reply are worth a look.
 
-`provider` names the company that actually ran the model. You asked for `openai/gpt-oss-20b:free` and OpenRouter picked a firm called Darkbloom to serve it. That is the routing in *router*: the weights are published, several companies host them, and the service chose one for you. Yours will likely name a different company.
+**`provider`** is the company that actually ran the model. You asked for `openai/gpt-oss-20b:free`, and OpenRouter chose a company called Darkbloom to do it. That is the "routing" part: several companies host the same model, and the service picked one. Yours will probably name a different one.
 
-`reasoning` is the model thinking out loud before answering, and `reasoning_tokens` prices it: **120 of the 177 output tokens were thinking, not answer.** Reasoning models bill you for the deliberation, and it is usually the larger half.
+**`reasoning`** is the model thinking out loud before answering. Look at what that costs: **120 of the 177 output tokens were thinking, not answer.** You pay for the thinking too, and it is usually the bigger half.
 
-`cost` is `0` --- exactly what you were promised. But `upstream_inference_cost` says the inference really cost about **$0.0000135**, and somebody paid it. Free is a business decision by whoever wants your prompts, not an absence of cost.
+**`cost`** is `0`, as promised. But `upstream_inference_cost` shows the real cost was about **$0.0000135** --- and somebody paid it. Free means someone else is paying because they want your prompts.
 
-And `finish_reason` says `stop`, meaning the model finished its thought. When it says `length` instead, the model was cut off by a token limit --- the actual explanation for most "the AI stopped in the middle" complaints.
+**`finish_reason`** says `stop`, meaning the model finished its thought. If it says `length`, the model was cut off partway. That is the real reason behind most "the AI stopped in the middle" complaints.
 
 ### Exercise 3
 
@@ -236,14 +242,14 @@ question_text(NULL,
 
 ###
 
-The catalogue is machine-readable, which is the part that matters. Prices are not marketing copy on a pricing page you have to go read; they are data, in the same response your program already fetches, and you can sort by them.
+The prices are **data**, not marketing text on a web page. They arrive in the same response your program already asked for, so your program can sort by them.
 
-Look at the spread. Output tokens on Opus cost ninety-three times what they cost on the Qwen coder model. Not ninety-three percent more --- ninety-three times. That ratio is the subject of the next section.
+Now look at the spread. Output on Opus costs ninety-three times what it costs on the Qwen model. Not ninety-three percent more. Ninety-three *times*. The next section explains why.
 
 ## Open Weights
 ###
 
-Why should two things that both answer questions in English differ in price by two orders of magnitude? The answer is not mostly about quality. It is about who is allowed to sell them.
+Why should two things that both answer questions in English differ in price by a hundred times? The answer is mostly not about quality. It is about who is allowed to sell them.
 
 ### Exercise 1
 
@@ -293,13 +299,17 @@ cut_counts_tidy <- diamonds %>%
 
 ###
 
-Read the last four lines again, then look at the real data. The true counts are Fair 1610, Good 4906, Very Good 12082, Premium 13791, Ideal 21551. **Every single number the model printed is invented.** `diamonds` has 53,940 rows; the model claims 68,146 Premium diamonds by itself, and its five numbers add to more than twice the data set.
+Look at those last four lines, then look at the truth. The real counts are Fair 1610, Good 4906, Very Good 12082, Premium 13791, Ideal 21551.
 
-It is not a coding failure --- `table(diamonds$cut)` and `count(cut)` both work. It is that the model was never *going* to run anything, so when it wrote a section headed "What you'll see," it produced text shaped like output rather than output. There is a German word wedged into the first sentence too, which tells you something about how carefully this was assembled.
+**Every number the model printed is made up.** `diamonds` has 53,940 rows. The model claims 68,146 Premium diamonds on their own, and its five numbers add up to more than twice the whole data set.
 
-This is the single most important habit in the course: **code from a model can be checked by running it; claims from a model about what the code produces cannot.** Run it yourself. Every time. A cheap model is a fine way to get `count(cut)` written, and no way at all to learn how many Ideal diamonds there are.
+The code is fine --- `table(diamonds$cut)` and `count(cut)` both work. The problem is that the model never ran anything. It cannot. So when it wrote a heading saying "What you'll see," it wrote text that *looks* like output. There is also a German word stuck in the first sentence, which tells you how carefully this was put together.
 
-Piping the response through `python` to pull out `choices[0].message.content` is how you get the answer without the envelope around it --- useful the moment you want a model's output inside a script rather than on your screen.
+Here is the habit to take from this tutorial, and it matters more than anything else in it:
+
+> **You can check a model's code by running it. You cannot check a model's claim about what the code prints.**
+
+So run it yourself. Every time. A cheap model is a fine way to get `count(cut)` written for you. It is no way at all to find out how many Ideal diamonds there are.
 
 ### Exercise 2
 
@@ -333,21 +343,27 @@ question_text(NULL,
 
 ###
 
-A `402` is the HTTP status code for *Payment Required* --- one of the rarest codes on the ordinary web, and routine on this one.
+`402` means *Payment Required*. You will almost never see it on the ordinary web. Here it is routine.
 
-Read what it actually says, because it is not "you have no money." It is that you cannot afford the request's *worst case*. The model may produce up to 65,536 output tokens, so the service reserves the cost of all 65,536 before it starts, and you can cover 1,600 of them. Ask for fewer and the same request would go through. Metered services almost always price the ceiling rather than the outcome, which is worth knowing before you are surprised by it.
+Read what it actually says, though, because it is not quite "you have no money." It says you cannot afford the *worst case*. The model is allowed to write up to 65,536 tokens, so OpenRouter sets aside the cost of all 65,536 before starting, and you can only cover 1,600. Ask for a shorter answer and the same request would work.
 
-`previous_errors` holds four copies of the same complaint: OpenRouter tried four different providers for Opus and each refused in turn. The routing was working; there was simply nowhere for it to route.
+Services that charge by use almost always reserve the maximum like this. Worth knowing before it surprises you.
 
-Now the reason for the price gap. **Open weights** models --- `gpt-oss`, DeepSeek, Qwen, Llama, Gemma --- are published as files anyone can download and run. **Closed** models --- Opus, GPT, Gemini --- exist only on their owner's servers. That difference has an economic consequence that is entirely predictable: when a dozen companies can serve the same Qwen weights, they compete on price and margins collapse toward the cost of the electricity. When only Anthropic can serve Opus, the price is whatever Anthropic says it is.
+`previous_errors` has four copies of the same complaint. OpenRouter tried four different companies for Opus, and all four said no. The routing worked fine. There was just nowhere to route to.
 
-So you are not usually paying ninety-three times more for something ninety-three times better. You are paying for a monopoly on the good ones, and paying commodity rates for the rest.
+Now the reason for the price gap.
+
+**Open weights** models --- `gpt-oss`, DeepSeek, Qwen, Llama, Gemma --- are published as files that anyone can download and run. **Closed** models --- Opus, GPT, Gemini --- live only on their owner's computers.
+
+That difference decides the price. When a dozen companies can all run the same Qwen model, they compete, and the price falls to roughly what the electricity costs. When only Anthropic is allowed to run Opus, the price is whatever Anthropic says it is.
+
+So you are usually not paying ninety-three times more for something ninety-three times better. You are paying for the fact that only one company sells it.
 
 ### Exercise 3
 
-Work out what a real session costs. A busy hour with a coding agent runs to roughly 500,000 input tokens --- agents resend the whole conversation with every message --- and 50,000 output tokens.
+Work out what a real hour of work costs. A busy hour with a coding assistant uses roughly 500,000 input tokens (remember, the whole conversation is resent every message) and 50,000 output tokens.
 
-Using the prices you printed earlier, have AI compute the cost of that hour on `qwen/qwen3-coder-30b-a3b-instruct` and on `anthropic/claude-opus-4.8`. Copy and paste both figures.
+Using the prices you printed earlier, have AI work out the cost of that hour on `qwen/qwen3-coder-30b-a3b-instruct` and on `anthropic/claude-opus-4.8`. Copy and paste both figures.
 
 ```{r weights-3}
 question_text(NULL,
@@ -367,14 +383,16 @@ claude-opus-4.8:  0.5 * 5.00 + 0.05 * 25.00 = $3.75
 
 ###
 
-Five cents against three dollars seventy-five, for one hour. Over a semester of daily use that is the difference between a few dollars and a few hundred.
+Five cents against three dollars and seventy-five. For one hour. Over a semester of daily use, that is the difference between a few dollars and a few hundred.
 
-Which does not mean always take the cheap one. It means the choice is now a real decision with a number attached, and the sensible policy is the one professionals actually use: cheap models for the bulk of the work --- boilerplate, renaming, tests, the tenth variation on a plot --- and an expensive model for the genuinely hard problem you are stuck on. That is exactly what `aider`'s `/architect` mode automates, and now you can see why it is worth the trouble.
+This does not mean always pick the cheap one. It means you now have a real number to decide with. What professionals actually do is use a cheap model for most of the work --- renaming things, writing tests, the tenth version of a plot --- and an expensive model for the problem they are genuinely stuck on.
+
+That is exactly what `aider`'s `/architect` mode does for you, and now you can see why it is worth the trouble.
 
 ## Models From R
 ###
 
-Everything so far has been about writing code. But the reason a data scientist cares about cheap models is different, and larger: a model is a function you can call on every row of a data set.
+Everything so far has been about writing code. But the reason a data scientist cares about cheap models is bigger than that: **a model is something you can run on every row of a data set.**
 
 ### Exercise 1
 
@@ -402,9 +420,9 @@ question_text(NULL,
 
 ###
 
-**[ellmer](https://ellmer.tidyverse.org/)** is the tidyverse's package for talking to language models from R. It covers the same ground `curl` just covered, with the HTTP hidden: one function per provider, a chat object you can keep talking to, and the same `OPENROUTER_API_KEY` environment variable you have been using all along.
+**[ellmer](https://ellmer.tidyverse.org/)** is the tidyverse package for talking to AI models from R. It does the same job as the `curl` commands above, but hides the web request. You get one function per service, a chat object you can keep talking to, and it uses the same `OPENROUTER_API_KEY` you have been using all along.
 
-It is not the only option --- **[httr2](https://httr2.r-lib.org/)** would let you build that `POST` request by hand, and Python's `openai` library is the equivalent on the other side --- but `ellmer` is the one that fits the way you already work in R.
+It is not the only choice. **[httr2](https://httr2.r-lib.org/)** would let you build the request by hand, and Python has the `openai` library. But `ellmer` fits the way you already work in R.
 
 ### Exercise 2
 
@@ -440,13 +458,13 @@ with a clean, concise printing, and features straightforward subsetting.
 
 ###
 
-`chat_openrouter()` found your key without being told where it was --- it reads `OPENROUTER_API_KEY` out of the environment, the same variable `aider` and `curl` used. One key, three tools.
+`chat_openrouter()` found your key on its own. It read `OPENROUTER_API_KEY`, the same variable `aider` and `curl` used. One key, three tools.
 
-Now look at what came back. The first four lines are not the answer --- they are the model's *reasoning*, the same `reasoning` field you saw in the raw JSON, which `ellmer` prints along with everything else. You can see the exact seam where deliberation ends and answer begins: `Alright.A **tibble** is`, with no space, because two separate fields were run together.
+Now look at what came back. The first few lines are not the answer. They are the model's *reasoning* --- the same `reasoning` field you saw in the JSON earlier, which `ellmer` prints too. You can see exactly where thinking stops and answering starts: `Alright.A **tibble** is`, with no space, because two separate pieces got stuck together.
 
-Your output will not match ours word for word, and may be messier. A `:free` endpoint is served by whichever company is willing to host it that day, and the ones giving inference away are not always the ones tuning it carefully.
+Your output will not match ours word for word, and may be messier than ours. Free models are run by whichever company is giving them away that day, and those are not always the ones being careful.
 
-Always name the model. `ellmer` has a default, and its documentation says plainly that the default changes; code that relies on it will one day start costing money it did not cost yesterday.
+Always name the model. `ellmer` has a default, and its own documentation warns that the default changes. Code that relies on it may start costing money one day without you touching it.
 
 ### Exercise 3
 
@@ -488,13 +506,18 @@ mixed
 
 ###
 
-Three labels right, and the fourth is `perhatian positif` --- Indonesian for "positive attention." The instruction said one label per line and nothing else; it produced a paragraph of reasoning, then three correct labels, then a word in the wrong language.
+Three labels are right. The fourth is `perhatian positif` --- Indonesian for "positive attention." We asked for one label per line and nothing else. We got a paragraph of thinking, three correct labels, and then a word in the wrong language.
 
-This is the use case that makes cheap models matter and the reason they cannot be trusted raw, in one result. Four hotel reviews are a toy; four *hundred thousand* is a real data set, and until recently there was no way to turn free text into a usable variable at that scale short of hiring people to read it. Four hundred thousand short reviews is on the order of 20 million input tokens: about **$1.40** on the Qwen coder model, about **$100** on Opus.
+This one result shows both why cheap models matter and why you cannot trust them blindly.
 
-But a column with `perhatian positif` in it is not a variable, it is a bug. Two habits make this workable, and professionals use both. First, **structured output**: `ellmer` can require the model to return a value matching a type you specify --- one of exactly three labels --- rather than free prose, which turns a wrong answer into an error you can catch. Second, **validate anyway**: check that you got back as many labels as you sent rows, and that every label is one you expected.
+Four hotel reviews is a toy. Four *hundred thousand* is a real data set, and until recently the only way to turn that much writing into a usable column was to pay people to read it. Four hundred thousand short reviews is roughly 20 million tokens: about **$1.40** on the Qwen model, about **$100** on Opus.
 
-Neither habit is optional at scale. On four reviews you can see the bad one. On four hundred thousand you cannot.
+But a column containing `perhatian positif` is not data, it is a bug. Two habits fix this, and professionals use both:
+
+1. **Ask for a fixed shape.** `ellmer` can require the model to return one of exactly three labels instead of free writing. A wrong answer then becomes an error you can catch.
+2. **Check anyway.** Count that you got back as many labels as you sent rows, and that every label is one you expected.
+
+Neither is optional once the data is big. With four reviews you can spot the bad one. With four hundred thousand you cannot.
 
 ## Paying
 ###
@@ -528,13 +551,17 @@ free tier: True
 
 ###
 
-Zero, which is where this course expects you to stay. **Nothing in this course requires you to give anyone a credit card**, and a free account with 50 requests a day is enough for every tutorial we will ask you to do.
+Zero, and that is where this course expects you to stay. **Nothing in this course needs a credit card.** A free account with 50 requests a day covers every tutorial we will ask you to do.
 
-Pulling two fields out of that response rather than printing all fourteen is worth noticing as a habit. An API gives you everything it has; a useful program takes the two things it came for.
+Notice the habit in that command, too: the reply had fourteen fields and we asked for two. An API hands you everything it has. A good program takes only what it came for.
 
-It is still worth knowing exactly what the ten dollars buys, so that the decision is yours rather than ours. Buying credits once --- the minimum is $10, and OpenRouter takes about 5.5% --- does three things permanently: the free-model ceiling rises from 50 requests a day to 1,000; every paid model becomes available at the per-token prices you printed earlier; and you can turn those privacy toggles back off, because paid endpoints do not require your prompts as payment.
+Still, you should know what $10 would buy, so the choice is yours rather than ours. Buying credits once --- the minimum is $10, and OpenRouter keeps about 5.5% --- changes three things for good:
 
-That last one is the reason a professional buys credits even if they never touch an expensive model. Ten dollars is what it costs to stop paying with your data. Whether that trade is worth it to you is a judgment, and you now have every number you need to make it.
+- your free-model limit goes from 50 requests a day to 1,000
+- every paid model becomes available at the prices you printed earlier
+- you can turn those privacy switches back **off**, because paid models do not want your prompts as payment
+
+That last one is why a professional might buy credits even if they never touch an expensive model. Ten dollars is the price of no longer paying with your data. Whether that is worth it is your call, and you now have every number you need to make it.
 
 ### Exercise 2
 
@@ -560,20 +587,24 @@ $ git log --oneline
 
 ###
 
-Nothing you committed contains your key --- worth confirming rather than assuming. The key lived in an environment variable and in GitHub's encrypted secret store, and never in a file. That is the arrangement to reproduce on every project you ever work on.
+Nothing you committed contains your key. That is worth checking rather than assuming. The key lived in an environment variable and in GitHub's encrypted store, and never in a file. Copy that arrangement on every project you ever work on.
 
 ## Summary
 ###
 
-You took the agent away and found one HTTP request underneath it: a model name, a list of messages, and a key in the header. Everything built on top of a language model is built on that.
+You took the assistant away and found one ordinary web request underneath: a model name, a list of messages, and a key. Everything built on top of an AI model is built on that.
 
 ###
 
-You saw the price catalogue as data rather than marketing, and found a ninety-three-fold spread between an open weights model and a frontier one. The explanation is competition, not quality: published weights can be served by anyone, so their price falls to the cost of running them, while a closed model is priced by the only company allowed to sell it. That is why the sensible working habit is a cheap model for most of the work and an expensive one for the problem you are actually stuck on.
+You saw prices as data rather than marketing, and found a ninety-three-fold gap between a cheap model and an expensive one. The reason is competition, not quality. Anyone can run a published model, so its price falls to the cost of running it. Only one company can run a closed model, so it charges what it likes.
+
+That is why the sensible habit is a cheap model for most work and an expensive one for the problem you are truly stuck on.
 
 ###
 
-You called a model from R with **ellmer**, using the same key, and used it for the job that has no other solution --- turning free text into a variable. And you finished where you started, at zero dollars, now knowing precisely what the ten-dollar decision would buy you.
+You called a model from R with **ellmer** and used it for the job nothing else can do: turning ordinary writing into a column of data. You also saw it get one of four labels wrong, which is why checking the output is part of the job.
+
+And you finished where you started --- at zero dollars, now knowing exactly what $10 would buy.
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```

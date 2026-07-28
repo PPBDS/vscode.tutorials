@@ -29,15 +29,19 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-Every AI tool you have used so far --- Copilot, Antigravity, Claude Code --- ties you to one company's models. [OpenRouter](https://openrouter.ai/) is different: it is a *router*. One account, one key, one API, and behind it several hundred models from dozens of companies. You change which model you are talking to by changing a string.
+Every AI tool you have used so far --- Copilot, Antigravity, Claude Code --- locks you to one company's models. [OpenRouter](https://openrouter.ai/) does not. It is a **router**: one account and one key, with hundreds of models behind it. To use a different model, you type a different name.
 
 ###
 
-This matters for two reasons. The first is money. The best open weights models cost a fraction of what the frontier models cost --- often less than a hundredth --- and for most of the work you will actually do, they are good enough. The second is habit. A student who has only ever used one model tends to believe that model is *the* AI. A student who has switched models four times in an afternoon understands that the model is a component, and that picking the right one is a decision they get to make.
+Why bother? Two reasons.
+
+**Money.** The cheapest good models cost about a hundredth of what the famous ones cost. For most of your work they are good enough.
+
+**Habit.** If you only ever use one model, you start to think that model *is* AI. Once you have switched models a few times, you see it for what it is: a part you choose.
 
 ###
 
-You will not need a credit card for this tutorial, and you will not need one to keep using what you set up here.
+You will not need a credit card, today or ever, for anything in this tutorial.
 
 ### Exercise 1
 
@@ -62,7 +66,7 @@ https://github.com/ppbds-student/15-openrouter
 
 ###
 
-Everything in this tutorial happens in a Terminal, not in a QMD. There is no `analysis.qmd` here and nothing to render --- the subject is the plumbing, not an analysis.
+Everything here happens in a Terminal. There is no `analysis.qmd` and nothing to render. This tutorial is about the tools, not about analysing data.
 
 ### Exercise 2
 
@@ -86,7 +90,9 @@ aider 0.86.2
 
 ###
 
-**[aider](https://aider.chat/)** is already installed --- you saw the line that put it there in `12-docker`: `pipx install aider-chat`. It is the one AI CLI in the image that belongs to no particular model company. `claude` wants an Anthropic account, `codex` wants an OpenAI account, `agy` wants a Google account. `aider` wants a key, and it does not care whose.
+**[aider](https://aider.chat/)** is an AI coding assistant that runs in the Terminal. It is already installed in your Codespace --- you saw the line that installs it back in `12-docker`.
+
+Here is what makes it useful today. The other AI tools each belong to one company: `claude` wants an Anthropic account, `codex` wants an OpenAI account, `agy` wants a Google account. `aider` just wants a key, and it does not care whose.
 
 ### Exercise 3
 
@@ -110,12 +116,12 @@ $ which aider
 
 ###
 
-`pipx` installed `aider` into its own isolated Python environment under `/opt/pipx` and then dropped a small launcher --- a *shim* --- at `/usr/local/bin/aider`, which is on everyone's `PATH`. That is why `aider` runs from any directory without you activating anything. The tool's own Python dependencies stay walled off from the `/opt/venv` stack you use for data science, so neither can break the other.
+`which` tells you where a command lives. `/usr/local/bin` is one of the folders the Terminal searches whenever you type a command, which is why `aider` works from any directory without you doing anything first.
 
 ## Your OpenRouter Key
 ###
 
-An API key is how a program proves to a service that it is you. In this section you will get one, prove it works, and --- the part most people get wrong --- store it somewhere that is both durable and safe.
+An **API key** is a long password that a program uses to prove it is you. In this section you will get one, check that it works, and store it safely.
 
 ### Exercise 1
 
@@ -140,7 +146,7 @@ https://openrouter.ai/
 
 ###
 
-Signing up costs nothing and asks for no payment method. OpenRouter makes its money by taking a small cut when you buy credits; an account that never buys any is still a real account with a real key.
+Signing up is free and asks for no card. OpenRouter earns money by taking a small cut when people buy credits. An account that never buys any is still a real account with a real key.
 
 ### Exercise 2
 
@@ -168,13 +174,11 @@ Allow free endpoints that publish prompts
 
 ###
 
-Read what those two actually say. The first allows providers "that may retain and/or train on prompts and completions." The second allows providers that "may publish prompts and completions to public datasets."
+Read what you just agreed to. The companies running these free models may keep your prompts, train on them, and publish them.
 
-Nothing is free. When a company serves a model at no charge, you are paying with your prompts. OpenRouter ships both toggles *off*, which is why a free model returns `No endpoints found matching your data policy` until you turn them on --- the refusal is the setting working correctly, not a bug.
+That is the deal. The model is free because **you are paying with your words instead of your money**. OpenRouter starts both switches off, so a free model refuses to answer until you turn them on. The refusal is the setting doing its job.
 
-So there is a rule that follows, and it is not optional: **never send anything private through a free endpoint.** Not un-published research, not anyone's personal data, not a company's internal code. Course work is fine. Your own scratch code is fine. Draw the line there.
-
-Notice what sits directly above, untouched: a **Zero Data Retention** section that will route you only to providers who store nothing at all. The whole page is one dial, from "pay nothing and publish everything" to "pay full price and leave no trace," and you have just set yours to one end of it.
+One rule follows, and it is not optional: **never send anything private through a free model.** No personal information, no unpublished work, no company code. Schoolwork is fine. Practice code is fine. Stop there.
 
 ### Exercise 3
 
@@ -201,11 +205,11 @@ codespace
 
 ###
 
-Your key begins `sk-or-v1-` and then runs on for another sixty-odd characters. Treat it exactly like a password, because that is what it is: anyone holding it can spend your account's money, and the service has no way to tell them from you. The reason the site shows it to you once and never again is that OpenRouter does not keep a copy it can read either --- it stores a hash, checks yours against it, and that is all.
+Your key starts with `sk-or-v1-` and runs on for another sixty characters or so.
 
-Naming keys matters more than it looks. When you eventually have keys on four machines and one of them leaks, the name is how you know which one to revoke.
+Treat it exactly like a password, because that is what it is. Anyone who has it can spend your money, and the website cannot tell them apart from you.
 
-Note where this key lives: inside a **workspace**, not on your account. A workspace is a box you can put keys, spending limits, and routing rules in, so that one project's key cannot spend another project's budget. Your account also has *management* keys, which are a different animal --- they administer the account itself rather than talking to models, and this course never needs one.
+The site shows it once and never again. That is on purpose: OpenRouter does not keep a readable copy either. If you lose it, you do not recover it --- you delete it and make a new one.
 
 ### Exercise 4
 
@@ -239,15 +243,15 @@ sk-or-v1
 
 ###
 
-`export` puts a name and value into the shell's *environment* --- a small set of variables that every program the shell starts inherits. That is the whole mechanism by which `aider` will find your key in a moment: you never hand it the key, it reads `OPENROUTER_API_KEY` out of the environment it was born with.
+`export` stores a name and a value in the Terminal's **environment**. Every program you start from that Terminal can read it. That is how `aider` will find your key in a minute --- you never hand it over, `aider` looks up `OPENROUTER_API_KEY` by itself.
 
-We printed eight characters rather than the whole thing on purpose. `echo $OPENROUTER_API_KEY` would have put your live key into the Terminal scrollback and into the answers file this tutorial saves. Secrets leak most often through exactly this kind of small convenience.
+We printed only the first eight characters on purpose. Printing the whole key would put it in your Terminal history and in the answers file this tutorial saves. Small conveniences like that are how most secrets leak.
 
 ### Exercise 5
 
-Ask OpenRouter who you are. In the bash Terminal:
+Now use the key. Ask OpenRouter what it knows about your account:
 
-<pre><code>curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool
+<pre><code>curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool | grep -E '"label"|"usage"|"is_free_tier"'
 </code></pre>
 
 CP/CR.
@@ -258,48 +262,25 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 26)
+	rows = 6)
 ```
 
 ###
 
 ```
-{
-    "data": {
         "label": "sk-or-v1-2f3...4db",
-        "is_management_key": false,
-        "is_provisioning_key": false,
-        "limit": null,
-        "limit_reset": null,
-        "limit_remaining": null,
-        "include_byok_in_limit": false,
         "usage": 0,
-        "usage_daily": 0,
-        "usage_weekly": 0,
-        "usage_monthly": 0,
-        "byok_usage": 0,
-        "byok_usage_daily": 0,
-        "byok_usage_weekly": 0,
-        "byok_usage_monthly": 0,
         "is_free_tier": true,
-        "expires_at": null,
-        "creator_user_id": "user_3H6M1V4hd8yG3Y5pPH46FLTWmJF",
-        "rate_limit": {
-            "requests": -1,
-            "interval": "10s",
-            "note": "This field is deprecated and safe to ignore."
-        }
-    }
-}
 ```
 
 ###
 
-That `-H "Authorization: Bearer ..."` header is the entire authentication story for essentially every modern web API, including all the AI ones. There is no login, no session, no cookie --- each request carries the key, the server checks it, and answers. `curl` is just the plainest possible way to make such a request.
+The important part of that command is `-H "Authorization: Bearer ..."`. That one line is how nearly every web API checks who you are. There is no login screen and no password box. Each request carries the key, the server checks it, and answers.
 
-Read the reply. `is_free_tier` is `true` and `limit` is `null`: no spending cap, because there is nothing to spend. Every `usage` figure is `0` and will stay there for this entire tutorial. The `label` is your key with its middle cut out --- enough to tell two keys apart, not enough to use one. (If you gave your key a name when you made it, you will see that name here instead.)
+The reply comes back as **JSON**, a format that packs a lot of fields into one line. `python -m json.tool` spreads it out so you can read it, and `grep` keeps only the three lines we care about.
 
-Then read the last field, which is the interesting one. `rate_limit` reports `-1` requests and carries a note saying it is deprecated and safe to ignore. The limits are real and enforced; this field just stopped being how you learn them. Live services accumulate fields like this --- still emitted so old code does not break, no longer meaning anything --- and believing one is a normal way to be wrong about an API.
+`usage` is `0`. You have spent nothing, and it will still say `0` when you finish. `is_free_tier` is `true`, meaning you have not bought credits. `label` is your key with the middle removed --- enough to tell two keys apart, not enough for anyone to use one.
+
 
 ### Exercise 6
 
@@ -328,9 +309,9 @@ $ echo ${OPENROUTER_API_KEY:0:8}
 
 ###
 
-Empty. An environment belongs to one process. `export` in the first Terminal changed *that shell's* environment and the environment of anything it starts --- and nothing else. The new Terminal is a different shell, started fresh, which never inherited your variable.
+Empty. Your `export` only changed the Terminal you typed it in. The new Terminal started fresh and knows nothing about it.
 
-This is the same isolation lesson as QMD World and R World: separate processes do not share state, and that is usually a feature rather than a bug.
+This is the same lesson as QMD World and R World: two things running side by side do not share what you set up in the other one.
 
 ### Exercise 7
 
@@ -362,11 +343,11 @@ PPBDS/codespace-starter
 
 ###
 
-A Codespaces secret is stored encrypted by GitHub and injected as an environment variable into every Codespace you create from the repositories you named. Your key now outlives this Codespace: delete this one, start another next week, and `OPENROUTER_API_KEY` is simply *there*, with nothing typed and nothing stored on disk.
+GitHub now stores your key, encrypted, and hands it to every new Codespace you start. Delete this Codespace, open a new one next week, and `OPENROUTER_API_KEY` is already there. You never type it again, and it is never saved in a file.
 
-You name `codespace-starter` because that is the repository your Codespace was built from --- the machine you are sitting in belongs to it, not to `15-openrouter`.
+You picked `codespace-starter` because that is the repo your Codespace was built from. The machine you are sitting in belongs to it, not to `15-openrouter`.
 
-The secret takes effect on Codespace *creation*, so it is not in the shell you are using right now. Your `export` covers you for the rest of this tutorial.
+One catch: GitHub only hands over secrets when a Codespace is **created**. This one already exists, so the secret is not here yet. Your `export` covers you for the rest of today.
 
 ### Exercise 8
 
@@ -392,14 +373,16 @@ question_text(NULL,
 
 If that failed, it is probably because you have not loaded `library(tutorial.helpers)` in the R Terminal.
 
-`.env` is the conventional filename for a file holding keys, so it is the first thing to put out of Git's reach. You have used `.gitignore` to keep clutter out of a repo; here it is doing security work.
+`.env` is the usual name for a file that holds keys, so it is the first thing to hide from Git. You have used `.gitignore` before to keep clutter out of a repo. Here it is doing security work.
 
-Understand what is at stake. GitHub scans public pushes for credentials --- OpenRouter keys among them --- and will often block the push or notify the service, which revokes the key on the spot. That protection is real and it is not something to rely on. Bots scrape new public commits within minutes of a push, and a key that reaches a public repo should be considered spent. If it ever happens to you, the fix is not to delete the commit; it is to delete the *key* at <https://openrouter.ai/workspaces/default/keys> and make a new one.
+Take this seriously. Bots scan new public commits within minutes looking for keys, and a key that reaches a public repo should be treated as stolen. GitHub tries to catch this and often blocks the push, but do not count on it.
+
+If it ever happens to you, deleting the commit does **not** fix it. Go delete the key at <https://openrouter.ai/workspaces/default/keys> and make a new one.
 
 ## Driving A Model
 ###
 
-Now the payoff. You have a key that cost nothing, and `aider` is a coding agent that will use it. In this section you will find the free models, run one, and then swap it out for a different one without restarting anything.
+Now the fun part. You have a key that cost nothing, and `aider` will use it. You will find a free model, run it, and then swap in a different one without even restarting.
 
 ### Exercise 1
 
@@ -431,11 +414,11 @@ $ aider --list-models openrouter/ | grep ':free'
 
 ###
 
-Four models. Every one of them is dead.
+Four models. **Every one of them is dead.**
 
-`aider` is not asking OpenRouter anything here --- it is reading a list of model names compiled into the tool when it was released. Those four were free once. They have all since been withdrawn, and if you start `aider` with one you will get an error rather than a model.
+`aider` never asked OpenRouter anything. It printed a list that was built into the program when it was released. Those four models were free once. They have all been shut down since, and starting `aider` with one gets you an error.
 
-This is worth more than the exercise it interrupts. A tool that answers instantly and confidently from a list baked in at build time is a thing you will meet constantly, and the failure is silent: nothing about that output announces that it is a year out of date.
+Remember this feeling. A tool answered instantly, confidently, and wrongly, and nothing in the output warned you. You will meet this again.
 
 ### Exercise 2
 
@@ -477,11 +460,11 @@ poolside/laguna-xs-2.1:free
 
 ###
 
-Fifteen live models, and no overlap at all with what `aider` claimed. Your own list will differ from ours too, because the free roster turns over constantly --- companies put models up to attract users and take them down when the attracting is done.
+Fifteen real models, and not one of them appeared on `aider`'s list. Your list will differ from ours as well. Free models come and go constantly: a company offers one to attract users, then takes it away.
 
-Carry away the command rather than the names. Anything that hard-codes a specific free model --- a tutorial, a blog post, your own config file --- is broken within months, and the fix is always to go ask the service what exists right now.
+So remember the command, not the names. Any tutorial or blog post that names a specific free model stops working within months. The fix is always to ask the service what exists right now.
 
-Notice the shape of a name: `google/` is the company that made the model, `gemma-4-31b-it` is the model, and `:free` selects a no-cost variant of it. The `:free` variant is the same weights as the paid one. What differs is the rate limit, and who gets to keep your prompts.
+Look at how a name is built. In `google/gemma-4-31b-it:free`, `google` is the company that made it, `gemma-4-31b-it` is the model, and `:free` picks the no-cost version. The free version is the same model as the paid one. What changes is how often you may use it, and who keeps your prompts.
 
 ### Exercise 3
 
@@ -516,11 +499,11 @@ Repo-map: using 4096 tokens, auto refresh
 
 ###
 
-`aider` found the Git repo by itself, and then edited your `.gitignore` --- it keeps its own chat history and cache in files starting `.aider`, and it knows you do not want those committed. Your `.gitignore` now holds two lines rather than the one you wrote.
+`aider` found your Git repo by itself and added a line to `.gitignore`. It saves its own notes in files starting with `.aider`, and it knows you do not want those committed.
 
-It is built around the assumption that your work is version-controlled, which is why `--no-auto-commits` was worth passing: without it, `aider` commits every change it makes on your behalf. That is a defensible default and a confusing one to learn with, so we turned it off. You will commit by hand at the end, as usual.
+`--no-auto-commits` matters too. Without it, `aider` commits every change it makes for you. That is a reasonable default but a confusing one to learn with, so we turned it off. You will commit by hand at the end.
 
-The `>` is a prompt. `aider` is now a shell of its own, running inside your bash Terminal, and the slash commands you are about to use belong to it rather than to bash.
+The `>` at the bottom is a prompt. `aider` is now waiting for you inside your Terminal. The slash commands you are about to type belong to `aider`, not to bash.
 
 ### Exercise 4
 
@@ -549,9 +532,9 @@ cat(nrow(diamonds), "\n")
 
 ###
 
-A model that costs nothing just wrote and saved a working file. Sit with that for a second --- three years ago this was a paid product, and now it is the floor.
+A model that cost you nothing just wrote a working file and saved it. A few years ago that was a paid product.
 
-Do not over-generalize from it either. A free 20-billion-parameter model handles a two-line script easily and will struggle with a large refactor across six files. Knowing which jobs to hand to which model is the actual skill; the next tutorial gives you numbers to reason about it with.
+Do not read too much into it, though. A free model handles a two-line script easily and struggles badly with a big change across six files. Knowing which job to give which model is the real skill, and the next tutorial gives you numbers for deciding.
 
 ### Exercise 5
 
@@ -584,11 +567,13 @@ $ 0.0000      495 tokens total
 
 ###
 
-A **token** is roughly three-quarters of a word; it is the unit models read, write, and bill in. The **context window** is how much of it the model can hold at once, and everything in that table is re-sent to the model on *every* message you type. That is why a long session gets slower and more expensive as it goes, and why `/clear` --- which drops the conversation history but keeps your files --- is worth reaching for more often than beginners do.
+A **token** is about three-quarters of a word. Tokens are what models read, write, and charge for. The **context window** is how much the model can hold in mind at once.
 
-Look at what dominates: 471 tokens of *system messages* against 24 tokens of your actual file. Before you type anything, the agent has already spent most of the conversation telling the model how to behave. Those instructions are re-sent every time, and on a paid model you pay for them every time.
+Here is the part that surprises people: everything in that table is sent to the model again with *every single message* you type. That is why long conversations get slower and pricier. `/clear` throws away the chat history but keeps your files, and it is worth using more often than beginners think.
 
-The dollar column is all zeros because this model is free. On a paid model it fills in, and watching it while you work is the cheapest cost lesson available.
+Now compare the two numbers. Your file is 24 tokens. The `system messages` are 471. Before you typed anything, `aider` had already spent most of the conversation explaining to the model how to behave --- and that gets re-sent every time.
+
+The dollar column is all zeros because this model is free. On a paid model those fill in, and watching them is the cheapest lesson about cost you will ever get.
 
 ### Exercise 6
 
@@ -622,13 +607,13 @@ Added hello.R to the chat.
 
 ###
 
-This is the exercise the whole tutorial exists for. You changed which artificial intelligence you are talking to by typing one line, mid-conversation, and `hello.R` is still in the chat. Google's model picked up where OpenAI's left off.
+This is the exercise the whole tutorial is built around. One line, typed in the middle of a conversation, and you are now talking to a completely different AI --- from a different company. `hello.R` is still there. Google's model picked up exactly where OpenAI's left off.
 
-Look at what the banner says now that it did not say at startup. There are two models listed: a **main model**, which you just changed, and a **weak model**, still the one you started with. Agents send a surprising amount of low-stakes traffic --- summarizing the conversation so far, writing a commit message --- and `aider` keeps sending that to the cheap model while your real requests go to the new one. Pointing the trivial work at a cheap model and the hard work at an expensive one is one of the standard ways professionals hold costs down, and here it happened by itself.
+The banner also shows something new. There are now **two** models: a *main model*, which you just changed, and a *weak model*, still the one you started with. `aider` sends the small jobs --- summarising the chat, writing a commit message --- to the cheap model, and your real questions to the main one. Using a cheap model for easy work and an expensive one for hard work is what professionals do, and here it happened automatically.
 
-The agent is the durable thing; the model is a part you swap. That framing outlasts any particular model's name. It is also the reason a router is worth using at all: without one, "try a different company's model" means a new account, a new key, a new bill, and probably a new tool.
+So: **the tool stays, the model is a part you swap.** That idea will outlive every model name in this tutorial. It is also why a router is worth having. Without one, trying another company's model means a new account, a new key, and a new bill.
 
-There is a trap here, and you already know enough to avoid it. `aider` has a `/models` command that searches for model names --- and it searches the same stale built-in list that lied to you in Exercise 1. Use the live list from Exercise 2 instead.
+One warning. `aider` has a `/models` command for searching model names, and it reads the same out-of-date built-in list that fooled you in Exercise 1. Use your Exercise 2 list instead.
 
 ### Exercise 7
 
@@ -661,15 +646,19 @@ it would not exist either way.
 
 ###
 
-`aider` has three modes and they are worth knowing apart. `/ask` answers questions and touches nothing. `/code` --- the default --- edits your files. `/architect` uses *two* models: an expensive one to plan the change and a cheap one to carry it out.
+`aider` has three modes worth knowing:
 
-That third mode is the professional's cost move, and it generalizes past `aider`. Thinking is the part worth paying for. Typing the resulting code is nearly free, and a cheap model does it about as well.
+- `/ask` answers questions and changes nothing.
+- `/code` is the default. It edits your files.
+- `/architect` uses **two** models: an expensive one to plan the change, a cheap one to type it out.
+
+That last one is the money-saving trick, and it is worth understanding beyond `aider`. Thinking is the part worth paying for. Writing out the resulting code is easy, and a cheap model does it just as well.
 
 ### Exercise 8
 
-Leave `aider` by running `/quit` at its prompt. Then, back in the bash Terminal, check what the session cost you. This is the same request as before, with `grep` keeping only the usage lines:
+Leave `aider` by typing `/quit`. Then, back in the bash Terminal, check what all that cost you:
 
-<pre><code>curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool | grep usage
+<pre><code>curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool | grep '"usage"'
 </code></pre>
 
 CP/CR.
@@ -680,29 +669,22 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 8)
+	rows = 4)
 ```
 
 ###
 
 ```
         "usage": 0,
-        "usage_daily": 0,
-        "usage_weekly": 0,
-        "usage_monthly": 0,
-        "byok_usage": 0,
-        "byok_usage_daily": 0,
-        "byok_usage_weekly": 0,
-        "byok_usage_monthly": 0,
 ```
 
 ###
 
-Every usage figure is still `0`. The `byok` ones stand for *bring your own key* --- OpenRouter will route through an account you hold directly with another provider, and it meters that traffic separately from credits spent here. You ran a coding agent, wrote a file, and switched models, and it cost nothing --- which is exactly the claim this tutorial opened with.
+Still zero. You ran an AI coding assistant, wrote a file, asked it a question, and switched models --- and it cost nothing. That is exactly what this tutorial promised at the start.
 
-The limits behind that are worth knowing precisely, because you will run into them, and notice that they are *not* in this response: request limits are enforced, but the only field that ever reported them is the deprecated one you just read. A free account gets **20 requests per minute and 50 per day** across all free models put together. Every message you send an agent is at least one request, and agents sometimes send several for one instruction, so fifty goes faster than it sounds.
+There are limits, though, and you should know them before you hit one. A free account gets **20 requests per minute and 50 per day**, counting all free models together. Every message you send is at least one request, and an assistant sometimes sends several for a single instruction, so 50 goes faster than it sounds.
 
-When you exhaust it, the request fails with `HTTP 429 Too Many Requests`, and there are exactly three responses: wait, or buy $10 of credits once, which lifts the daily ceiling to 1,000, or pay per token for a model that is not free. The next tutorial works out what that third option actually costs.
+When you run out, requests fail with `HTTP 429 Too Many Requests`. You then have three choices: wait, buy $10 of credits once to raise the daily limit to 1,000, or pay per use for a model that is not free. The next tutorial works out what that last one actually costs.
 
 ### Exercise 9
 
@@ -728,20 +710,24 @@ a3f9c21 (HEAD -> main, origin/main) Add hello.R and .gitignore
 
 ###
 
-One commit, written by you. Had you left `--no-auto-commits` off, `aider` would have made its own commit the moment it wrote `hello.R`, and your history would be a record of the agent's work rather than yours. Teams disagree about which they want. The point is that it is a setting, and now you know it is there.
+One commit, and you wrote it. Without `--no-auto-commits`, `aider` would have made its own commit the moment it created `hello.R`, and your history would record the assistant's work instead of yours. Teams disagree about which they prefer. What matters is that it is a setting, and you now know it exists.
 
 ## Summary
 ###
 
-You now have an OpenRouter account, an API key that cost nothing and required no credit card, and a place to keep that key --- a Codespaces secret --- where it survives the destruction of this machine and never touches a repo.
+You have an OpenRouter account and an API key. Neither cost anything, and neither needed a credit card. The key is saved as a Codespaces secret, so it survives this machine being deleted and never sits in a repo.
 
 ###
 
-You saw that an environment variable belongs to a single process, that `Authorization: Bearer` is the whole of API authentication, and that a leaked key is revoked rather than deleted. You ran `aider` against a free model, watched it write a file, read its token accounting, and then switched to a different company's model in the middle of the session without losing your work.
+Along the way you learned that an `export` only affects the Terminal you typed it in, that `Authorization: Bearer` is how APIs check who you are, and that a leaked key gets deleted rather than hidden.
+
+You also ran `aider` on a free model, watched it write a file, saw how tokens are counted, and switched to another company's model mid-conversation without losing your work.
 
 ###
 
-That last move is the one to remember. The model is a component with a name, a price, and a rate limit, and you get to choose it. In `16-models` you will look at what those prices actually are, why open weights models are so much cheaper than the alternatives, and how to call a model from R rather than from a coding agent.
+That last move is the one to remember. A model is a part with a name, a price, and a limit, and you get to choose it.
+
+In `16-models` you will find out what those prices actually are, why some models cost a hundred times less than others, and how to use a model from R instead of from a coding assistant.
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
