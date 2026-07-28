@@ -1,8 +1,8 @@
 ---
-title: VS Code and GitHub Advanced
+title: GitHub 2
 author: David Kane
 tutorial:
-  id: 06-github-2
+  id: "08-github-2"
 output:
   learnr::tutorial:
     progressive: yes
@@ -627,7 +627,7 @@ Retrieving…
 
 Active
 ppbds-student
-ppbds-student/06-github-2
+PPBDS/codespace-starter
 automatic funicular
 main
 

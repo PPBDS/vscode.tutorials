@@ -1,8 +1,8 @@
 ---
-title: Quarto Websites Introduction
+title: Websites 1
 author: David Kane
 tutorial:
-  id: 08-websites-1
+  id: "09-websites-1"
 output:
   learnr::tutorial:
     progressive: yes

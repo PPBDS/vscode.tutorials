@@ -2,7 +2,7 @@
 title: "Antigravity"
 author: David Kane
 tutorial:
-  id: "04-antigravity"
+  id: "06-antigravity"
 output:
   learnr::tutorial:
     df_print: default

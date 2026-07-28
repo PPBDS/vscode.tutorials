@@ -1,8 +1,8 @@
 ---
-title: Quarto Websites Advanced
+title: Websites 2
 author: David Kane
 tutorial:
-  id: 09-websites-2
+  id: "10-websites-2"
 output:
   learnr::tutorial:
     progressive: yes

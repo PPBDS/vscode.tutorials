@@ -1,8 +1,8 @@
 ---
-title: Terminal Advanced
+title: Terminal 2
 author: David Kane
 tutorial:
-  id: 03-terminal-2
+  id: "05-terminal-2"
 output:
   learnr::tutorial:
     progressive: yes
@@ -32,7 +32,7 @@ options(tutorial.exercise.timelimit = 60,
 
 <!-- Fix introduction and summary. -->
 
-<!-- Change to show that you are in the 03-terminal-1 repo, presumably. -->
+<!-- Change to show that you are in the 05-terminal-2 repo, presumably. -->
 
 <!-- Explain more often that these are all programs that spit out stuff, which can often be chained together or just allowed to dump. -->
 
@@ -2063,7 +2063,7 @@ grepping $
 Now, we'll download another text file. You can view the file on the following webpage:
 
 ````
-https://github.com/PPBDS/vscode.tutorials/blob/main/inst/tutorials/03-terminal-2/images/grepping.txt
+https://github.com/PPBDS/vscode.tutorials/blob/main/inst/tutorials/05-terminal-2/images/grepping.txt
 ````
 Then navigate to the URL for the raw text file.
 
@@ -2097,7 +2097,7 @@ question_text(NULL,
 My answer looks like:
 
 ````
-codespace-starter $ curl -o grepping/grepping.txt https://raw.githubusercontent.com/PPBDS/vscode.tutorials/refs/heads/main/inst/tutorials/03-terminal-2/images/grepping.txt
+codespace-starter $ curl -o grepping/grepping.txt https://raw.githubusercontent.com/PPBDS/vscode.tutorials/refs/heads/main/inst/tutorials/05-terminal-2/images/grepping.txt
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100    38  100    38    0     0    455      0 --:--:-- --:--:-- --:--:--   457

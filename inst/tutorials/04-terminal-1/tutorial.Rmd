@@ -1,8 +1,8 @@
 ---
-title: Terminal Introduction
+title: Terminal 1
 author: David Kane
 tutorial:
-  id: 03-terminal-1
+  id: "04-terminal-1"
 output:
   learnr::tutorial:
     progressive: yes
@@ -30,7 +30,7 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- Change to show that you are in the 03-terminal-1 repo, presumably. -->
+<!-- Change to show that you are in the 04-terminal-1 repo, presumably. -->
 
 
 <!-- Which to move to terminal-2? -->
@@ -40,8 +40,6 @@ options(tutorial.exercise.timelimit = 60,
 <!-- Explain more often that these are all programs that spit out stuff, which can often be chained together or just allowed to dump. -->
 
 <!-- Mention Rscript and python -e. -->
-
-<!-- Change the prompt in the answers to be the one we now use. -->
 
 <!-- Some diagrams which show directory structure would be nice. -->
 

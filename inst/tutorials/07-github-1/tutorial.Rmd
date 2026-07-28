@@ -1,8 +1,8 @@
 ---
-title: GitHub Introduction
+title: GitHub 1
 author: David Kane
 tutorial:
-  id: 05-github-1
+  id: "07-github-1"
 output:
   learnr::tutorial:
     progressive: yes
