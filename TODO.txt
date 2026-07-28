@@ -73,11 +73,6 @@ But, at the same time, we don't want to overwhelm them during week 1. So, we nee
 We can split AI into two parts. In Getting Started and the Introduction, we just use GitHub Copilot. We know it will always be there and will always work for at least a few questions. Then, later, we can learn how to operate something like Antigravity from the command line.
 
 
-
-So, Getting Started due Monday evening, started in class. introduction due Tuesday, so kids can do real stuff on Wednesday. code and quarto due Wed/Thur, so we are posting web pages on Friday.
-
-
-
 ### 00-introduction Jacob
 
 Skim 01-code and 02-quarto

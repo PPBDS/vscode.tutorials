@@ -2,7 +2,7 @@
 title: "Our Codespace Starter"
 author: David Kane
 tutorial:
-  id: "12-codespace-starter"
+  id: "12-our-codespace-starter"
 output:
   learnr::tutorial:
     df_print: default
@@ -29,15 +29,11 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-<!-- DK: Problem that I have a PPBDS/codebase-starter and this tutorial is `11-codebase-starter`? Hopefully not . . . But maybe we need to require that  -->
-
 In `11-devcontainers` you examined a generic Python devcontainer and wrote a minimal R devcontainer from scratch. Now you will look at the devcontainer behind the Codespace you are working in right now. `codespace-starter` uses a custom image built specifically for this course, plus a detailed `settings` block that configures all of it.
 
 ### Exercise 1
 
-<!-- DK: All these opening lines need to be replaced with "You should be in a repo . . ." -->
-
-Create and connect to a repo called `our-codespace-starter`, then open it as your workspace.
+You should be in a repo called `our-codespace-starter`, or something like it. If not, create it and then open it as your workspace.
 
 Copy and paste the URL for your `our-codespace-starter` repository.
 
