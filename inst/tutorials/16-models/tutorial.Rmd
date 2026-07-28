@@ -534,7 +534,7 @@ Pulling two fields out of that response rather than printing all fourteen is wor
 
 It is still worth knowing exactly what the ten dollars buys, so that the decision is yours rather than ours. Buying credits once --- the minimum is $10, and OpenRouter takes about 5.5% --- does three things permanently: the free-model ceiling rises from 50 requests a day to 1,000; every paid model becomes available at the per-token prices you printed earlier; and you can turn those privacy toggles back off, because paid endpoints do not require your prompts as payment.
 
-That last one is the reason a professional buys credits even if she never touches an expensive model. Ten dollars is what it costs to stop paying with your data. Whether that trade is worth it to you is a judgment, and you now have every number you need to make it.
+That last one is the reason a professional buys credits even if they never touch an expensive model. Ten dollars is what it costs to stop paying with your data. Whether that trade is worth it to you is a judgment, and you now have every number you need to make it.
 
 ### Exercise 2
 

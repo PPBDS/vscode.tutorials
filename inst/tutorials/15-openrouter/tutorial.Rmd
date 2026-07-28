@@ -33,7 +33,7 @@ Every AI tool you have used so far --- Copilot, Antigravity, Claude Code --- tie
 
 ###
 
-This matters for two reasons. The first is money. The best open weights models cost a fraction of what the frontier models cost --- often less than a hundredth --- and for most of the work you will actually do, they are good enough. The second is habit. A student who has only ever used one model tends to believe that model is *the* AI. A student who has switched models four times in an afternoon understands that the model is a component, and that picking the right one is a decision she gets to make.
+This matters for two reasons. The first is money. The best open weights models cost a fraction of what the frontier models cost --- often less than a hundredth --- and for most of the work you will actually do, they are good enough. The second is habit. A student who has only ever used one model tends to believe that model is *the* AI. A student who has switched models four times in an afternoon understands that the model is a component, and that picking the right one is a decision they get to make.
 
 ###
 
