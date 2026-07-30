@@ -239,7 +239,7 @@ question_text(NULL,
 ###
 
 <pre><code>[user]
-	name = Ada Lovelace
+	name = David Kane
 	email = ppbds-student@users.noreply.github.com
 [init]
 	defaultBranch = main
