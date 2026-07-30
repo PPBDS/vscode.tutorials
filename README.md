@@ -83,7 +83,7 @@ development environment.
   a pre-built Jupyter devcontainer.json and building an R
   devcontainer.json from scratch.
 
-- *Our Codespace Starter* (“12-codespace-starter”). Tour the
+- *Our Codespace Starter* (“12-our-codespace-starter”). Tour the
   devcontainer.json behind `codespace-starter` itself.
 
 - *The Devcontainer Dockerfile* (“13-docker”). Read through the

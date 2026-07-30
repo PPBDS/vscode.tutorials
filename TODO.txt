@@ -14,13 +14,13 @@ Create their own images. How can we check these?
 
 ### Outline
 
-10-devcontainer
-11-codebase-starter
-12-docker
-13-starter
-14-dotfiles
-15-openrouter
-16-models
+11-devcontainer
+12-our-codebase-starter
+13-docker
+14-your-starter
+15-dotfiles
+16-openrouter
+17-models
 
 Might have some other ones, especially ones which begin by forking a PPBDS repo with various problems and then work on disagnosing/solving them.
 
@@ -32,9 +32,9 @@ Might have some other ones, especially ones which begin by forking a PPBDS repo 
 
 
 
-## 13-starter
+## 14-your-starter
 
-This is a graduation exeercise for the last three tutorials. Students now understand devcontainers, dockerfiles and images. So, they can now create their own version of `codebase-starter`, called `starter`. This will, obviously, look a lot like ours. But it won't have all our junk, the stuff we just include for teaching purposes, like all the PPBDS tutorial packages. 
+This is a graduation exercise for the last three tutorials. Students now understand devcontainers, dockerfiles and images. So, they can now create their own version of `codebase-starter`, called `starter`. This will, obviously, look a lot like ours. But it won't have all our junk, the stuff we just include for teaching purposes, like all the PPBDS tutorial packages. 
 
 They will need their own dockerfile. (Does this need to be in its own directory? Much more convenient if it just lived in the same repo.) They need to build their own image files. Their devcontainer.json needs to include that image file.
 
@@ -98,7 +98,7 @@ But, at the same time, we don't want to overwhelm them during week 1. So, we nee
 We can split AI into two parts. In Getting Started and the Introduction, we just use GitHub Copilot. We know it will always be there and will always work for at least a few questions. Then, later, we can learn how to operate something like Antigravity from the command line.
 
 
-### 00-introduction Jacob
+### 00-introduction
 
 Skim 01-code and 02-quarto
 
@@ -234,11 +234,9 @@ In total, we make 5 websites. We need to make their construction more consistent
 
 ## Other items
 
-To shrink the size of all the PNG files, do:
 
-find . -type f -name "*.png" -exec pngquant "{}" -o "{}" --force \;
-
-We could do all the example repos in PPBDS and then leave them up forever, so they would be available to students doing the work. Or for a ppbds-student account.
+AI could do all the example repos in PPBDS and then leave them up forever, so they would be available to students doing the work. Or for a ppbds-student account.
 
 
-David Kane
+## Schedule
+

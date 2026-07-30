@@ -31,9 +31,10 @@ not an outside reference. Two things set this package apart:
    generic knowledge drops, work-in-the-QMD-not-the-R-Terminal) do not bind: we teach
    the mechanics directly, run commands in the Terminal because the Terminal is the
    lesson, and use the generic infrastructure knowledge drops collected below. This is
-   **not** a blanket property of the package — it is concentrated in the first few
-   tutorials and may be removed entirely before long. Do not invoke it for a later
-   tutorial just because the file happens to live in this package.
+   **not** a blanket property of the package: the exception covers exactly the first
+   three tutorials — Introduction, Code, and Quarto — and **ends with Quarto**. Do not
+   invoke it for any later tutorial just because the file happens to live in this
+   package. (It may yet be removed entirely.)
 
 (The `tutorial.helpers` package's tutorials are the other home of this mechanics
 exception, for the same reason.)
@@ -41,12 +42,17 @@ exception, for the same reason.)
 ### What downstream packages assume
 
 Later packages (`misc.tutorials`, the Primer) do **not** assume a student has done
-*all* of `vscode.tutorials` — only the foundational material in the first several
-tutorials, roughly **through the GitHub tutorials** (`08-github-2`). The later
-`vscode.tutorials` tutorials (the websites pair, `11-devcontainers`,
-`12-codespace-starter`, `13-docker`) are not part of that assumed base. (This is about
-what downstream tutorials may rely on, not a claim about which tutorials students
-finish — many do reach the later ones.)
+*all* of `vscode.tutorials` — only the foundational material **through the Quarto
+tutorial**, the same boundary as the mechanics exception above. Nothing after
+Quarto is part of that assumed base. (This is about what downstream tutorials may
+rely on, not a claim about which tutorials students finish — many do reach the
+later ones.)
+
+**TODO:** two skills the base guide's standard Introduction/Summary sequences lean
+on are currently taught *after* Quarto — `.gitignore` (first taught in Antigravity)
+and `quarto publish gh-pages` (taught in GitHub 1; the Quarto tutorial already
+carries a comment to add the publish step). Until those move into the first three
+tutorials, the through-Quarto boundary is the intent, not quite the current state.
 
 ### The universal entry point
 
@@ -203,9 +209,9 @@ example $
   home directory is `/home/rstudio` (the image's user is `rstudio`) — not
   `/home/codespace`.
 - **Exception — Codespaces not started from our image.** The Jupyter and Blank
-  template Codespaces (toured in `11-devcontainers`) show GitHub's stock long
-  prompt. Those transcripts are correct as-is; leave them.
-- **Subtlety, taught in `01-introduction` and `04-terminal-1`:** only a *newly
+  template Codespaces (toured in the Devcontainers tutorial) show GitHub's stock
+  long prompt. Those transcripts are correct as-is; leave them.
+- **Subtlety, taught in Introduction and Terminal 1:** only a *newly
   opened* bash Terminal gets the short prompt. The terminal already open when the
   Codespace starts shows the stock long prompt (the `PS1` override lands at the
   end of `~/.bashrc` and only affects shells started afterward). Tutorials tell
@@ -238,10 +244,19 @@ name, which a title change does not touch), the tutorial's directory name under
 - A title must not collide with a directory that already exists under
   `/workspaces` — in particular, a title that would map to `codespace-starter`
   is forbidden (that folder is always present).
-- **Known exceptions to one-title-one-repo:** `08-github-2` uses two repos
-  (`project-1`, `project-2`) and `10-websites-2` uses two (`website-1`,
+- **Known exceptions to one-title-one-repo:** GitHub 2 uses two repos
+  (`project-1`, `project-2`) and Websites 2 uses two (`website-1`,
   `website-2`). The title rule cannot name two repos, so these keep their
   ordinal names; their prompts still follow the prompt rule.
+
+### Refer to tutorials by title, not number
+
+Sequence numbers change often; titles rarely do. In prose — this file, and
+cross-references inside tutorials — refer to a tutorial by its **title** ("the
+Quarto tutorial", "GitHub 1"), never by its `NN-slug` directory name. Reserve the
+directory name for places that genuinely need it: paths, URLs, `run_tutorial()`
+calls, and ids. This keeps most references immune to renumbering and shrinks the
+fan-out below.
 
 ### Renumbering tutorials (directory renames)
 
@@ -273,15 +288,18 @@ pin in [PPBDS/codespace-starter
 **Whenever that pin is bumped, update every versioned copy in this repo** (find
 them with `grep -rn 'ghcr.io/ppbds/devcontainer:' --include='*.Rmd' --include='*.yaml' .`):
 
-1. `inst/tutorials/12-codespace-starter/tutorial.Rmd` — the expected answer for
-   the find-the-`"image"`-line exercise.
-2. `inst/tutorials/13-docker/tutorial.Rmd` — the intro's back-reference to that
+1. The Our Codespace Starter tutorial (currently
+   `inst/tutorials/12-our-codespace-starter/tutorial.Rmd`) — the expected answer
+   for the find-the-`"image"`-line exercise.
+2. The Devcontainer Dockerfile tutorial (currently
+   `inst/tutorials/13-docker/tutorial.Rmd`) — the intro's back-reference to that
    line.
 3. `.github/workflows/R-CMD-check.yaml` — the CI `container: image:` tag (this
    one is normally bumped as part of the codespace-starter release process; the
    tutorials are what get forgotten).
 
 Unversioned mentions of `ghcr.io/ppbds/devcontainer` (no `:X.Y.Z`) are fine and
-need no touching. Separately, `13-docker` embeds a full copy of the
-`PPBDS/devcontainers` Dockerfile — when that Dockerfile changes materially, the
-embedded copy (and the exercises reading it) must be refreshed too.
+need no touching. Separately, The Devcontainer Dockerfile tutorial embeds a full
+copy of the `PPBDS/devcontainers` Dockerfile — when that Dockerfile changes
+materially, the embedded copy (and the exercises reading it) must be refreshed
+too.
