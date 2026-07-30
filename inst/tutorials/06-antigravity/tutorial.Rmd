@@ -227,11 +227,11 @@ Antigravity decomposes your prompt into tool calls dynamically --- the exact com
 
 ### Exercise 6
 
-Ask Antigravity to create an `analysis.qmd` file. Tell it you want:
+Ask Antigravity to create an `analysis.qmd` file, set up the way you learned in the Quarto tutorial. Tell it you want:
 
 - A YAML header with the title `"Exploring Storms and Flights"` and your name as author
 - `execute: echo: false` in the YAML
-- A setup chunk loading `library(tidyverse)` wrapped in `suppressPackageStartupMessages()`
+- A setup chunk loading `library(tidyverse)`, with `#| message: false`
 - A plot using the `storms` dataset from **dplyr** --- for example, a line chart showing the number of named storms per year
 
 Allow the file to be written when Antigravity asks for permission. CP/CR the tool authorization and Antigravity's explanation of what it created.
@@ -249,7 +249,7 @@ question_text(NULL,
 
 
 ````
-> Create an analysis.qmd with a title, author, execute echo false, suppressPackageStartupMessages tidyverse, and a ggplot2 plot using a built-in dataset.
+> Create an analysis.qmd with a title, author, execute echo false, a setup chunk loading tidyverse with message false, and a ggplot2 plot using a built-in dataset.
 
 ╔ Tool Use: write_file ════════════════════╗
 ║  Path: analysis.qmd                      ║
@@ -261,7 +261,7 @@ Allow this tool call? (1=once, 2=always, n=no): 1
 
 I've created `analysis.qmd` with:
 - YAML header titled "Exploring Storms and Flights" and `execute: echo: false`
-- Setup chunk using `suppressPackageStartupMessages(library(tidyverse))`
+- Setup chunk loading `library(tidyverse)` with `#| message: false`
 - A line chart showing the number of named storms per year using the `storms` dataset
 
 >
@@ -302,7 +302,7 @@ Antigravity ran two commands to answer one question, using the result of each st
 
 ### Exercise 8
 
-Let's view the rendered file in a browser. In the Explorer (the file tree on the left side of VS Code), find `analysis.html`. Right-click it and select **"Open with Live Server"**.
+Let's view the rendered file in a browser, the way you learned in the Quarto tutorial: in the Explorer, find `analysis.html`, right-click it, and select **"Open with Live Server"**.
 
 ```{r}
 include_graphics("images/live-server.png")
@@ -339,7 +339,7 @@ include_graphics("images/first-render.png")
 
 ###
 
-Live Server is a VS Code extension that hosts HTML files so they can be viewed in a browser and reloads the page whenever a file changes. This is necessary in a Codespace because the files live on a remote computer and cannot be opened directly in a browser.
+You met Live Server in the Quarto tutorial; nothing here is new except that an agent, rather than you, is triggering the renders.
 
 ### Exercise 9
 
@@ -396,7 +396,7 @@ When Antigravity adds a plot and re-renders, two things happen automatically: Qu
 
 ### Exercise 10
 
-Ask Antigravity to create a `.gitignore` file suitable for a Quarto R project. Type something like:
+In the Quarto tutorial you wrote a `.gitignore` by hand. This time, delegate the job: ask Antigravity to create a `.gitignore` file suitable for a Quarto R project. Type something like:
 
 ```
 Create a .gitignore file.
@@ -421,7 +421,7 @@ question_text(NULL,
 
 ###
 
-Git tracks changes to files in your repository, but there are certain files that we should not track. A `.gitignore` tells Git to ignore certain files entirely. The guiding principle: if a file can be *regenerated* from your source, it doesn't belong in the commit history.
+Same principle as in the Quarto tutorial: if a file can be *regenerated* from your source, it doesn't belong in the commit history. The agent may write a more thorough `.gitignore` than your hand-made one --- extra patterns are harmless. Delegating housekeeping files like this is the normal workflow from now on.
 
 ### Exercise 11
 

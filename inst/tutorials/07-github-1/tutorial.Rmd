@@ -8,7 +8,7 @@ output:
     progressive: yes
     'allow_skip:': yes
 runtime: shiny_prerendered
-description: Introduction to Git and GitHub, using Codespaces. Walks through cloning a repo, creating a personal access token, making commits, pushing, and publishing a Quarto document with GitHub Pages.
+description: Introduction to Git and GitHub. Opens up the connect-repo script, creates and deletes a repo by hand with the gh command-line program, walks through the commit/push cycle, and publishes a Quarto document with GitHub Pages.
 ---
 
 ```{r setup, include = FALSE}
@@ -29,12 +29,6 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- DK: Prompts are wrong. -->
-
-<!-- Can just assert that you should be in a repo, which you have done several times already. -->
-
-<!-- Maybe just delete? Much of this is junk, like creating a qmd by hand, section by section. Much of this was covered in introduction and quarto. -->
-
 ## Introduction
 ### 
 
@@ -47,27 +41,19 @@ The most useful references for Git/GitHub are [*Happy Git and GitHub for the use
 
 GitHub is an online drive for all your R code and projects. In the professional world, what you have in your GitHub account is often more important than what you have on your resume. It is a verifiable demonstration of your abilities.
 
-You've already been creating and storing Git repositories on GitHub. Now, we'll practice using the Git program.
+Until now, `connect-repo` has done all the GitHub work for you. In this tutorial we open that black box: you will read the commands it runs, run the important ones yourself --- creating, wiring, and deleting a repo by hand --- and learn to read what Git is telling you about your files.
 
 [Git](https://en.wikipedia.org/wiki/Git) is "software for tracking changes in any set of files, usually used for coordinating work among programmers collaboratively developing source code during software development."
 
 ### Exercise 1
 
-You must do this tutorial in a Codespace created from a Github repo named 'github-introduction'. If you haven't already done this, follow these steps:
+You should be doing this tutorial in a repo named `github-introduction`. If you are not, create one and connect to it, as you learned in earlier tutorials.
 
-1. Create a GitHub Repo: go to the [codespace-starter repo] (https://github.com/ppbds-student/codespace-starter). Click the green "Use this Template" drop-down button and select "Create a new repository". On the next page name the repo `github-introduction`. Then click "Create repository".
+Copy and paste the URLs for:
 
-2. Create a Codespace from `github-introduction`: From this repo's page, click the green "Code" drop down button, in the top right, then select the "Codespaces" tab and then click "Create Codespace on main".
+1. Your `github-introduction` repository on GitHub. Find it under **Your repositories**, as you learned in the Introduction tutorial.
 
-```{r}
-include_graphics("images/create-codespace.png")
-```
-
-Copy and paste the URLS for:
-
-1. Your `github-introduction` repository.
-
-2. Your Codespace.
+2. This Codespace --- the address in your browser's address bar, ending in `.github.dev`.
 
 ```{r using-git-1}
 question_text(NULL,
@@ -114,7 +100,7 @@ github-introduction $ pwd
 github-introduction $
 ````
 
-You should be in a directory named `github-introduction`. By default, creating a repo from the Codespace starter and opening a Codespace creates this root directory.
+You should be in a directory named `github-introduction`. `connect-repo` created it, side by side with `codespace-starter`, under `/workspaces`.
 
 ### Exercise 3
 
@@ -135,10 +121,11 @@ Your answer should look like:
 
 ````
 github-introduction $ ls
-github-introduction $ 
+AGENTS.md
+github-introduction $
 ````
 
-There are no non-hidden files or directories in the repository so far.
+The only visible file is `AGENTS.md`, which `connect-repo` copied in when it created the repo. It holds guidance for AI assistants working with you in this course --- agents read instruction files like this from the folder they run in.
 
 ### Exercise 4
 
@@ -159,7 +146,7 @@ Your answer should look like:
 
 ````
 github-introduction $ ls -a
-.  ..  .devcontainer  .git
+.  ..  .git  AGENTS.md
 github-introduction $
 ````
 
@@ -170,6 +157,227 @@ github-introduction $
 Unless you have a good reason, you should never mess with the contents of a hidden directory like `.git`.
 
 ### Exercise 5
+
+Time to open the black box. The `connect-repo` script has a `--help` option that explains --- without running anything --- every command it issues. Run:
+
+````
+/workspaces/codespace-starter/.devcontainer/connect-repo.sh --help
+````
+
+Read the whole thing. Then CP/CR the numbered steps (1 through 4).
+
+```{r using-git-5}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 20)
+```
+
+###
+
+The key part of the output:
+
+````
+  1. ACT AS YOU, NOT AS THE CODESPACE
+         unset GITHUB_TOKEN GH_TOKEN
+     A Codespace starts with a built-in token that can only touch
+     codespace-starter and can't create repos. Clearing it makes `gh` and
+     `git` use YOUR GitHub login instead.
+
+  2. SIGN IN TO GITHUB AS YOURSELF (once per Codespace)
+         gh auth login --hostname github.com --git-protocol https --web
+     Opens a browser sign-in. Click Authorize, then come back.
+
+  3. MAKE `git push` AUTHENTICATE AS YOU
+         git config --global credential.helper store
+     Stores your token so pushes go out as you, not as the built-in
+     Codespace token.
+
+  4. CREATE A NEW REPO, OR CONNECT TO ONE THAT EXISTS
+     New repo on your account (doesn't exist yet):
+         gh repo create <name> --public --clone
+     Existing repo:
+         gh repo clone <name>
+     Either way you end up with the repo at /workspaces/<name>.
+````
+
+###
+
+There is no magic here --- the script says so itself. `connect-repo` is a convenience wrapper around a handful of commands, and `--help` is the same convention you met with `ls --help` in the Introduction tutorial: a safe way to learn what a program does without running it. The two programs doing the real work are `git` (tracking changes) and `gh`, GitHub's official command-line program (talking to github.com). You will now run the important commands yourself.
+
+### Exercise 6
+
+Start with identity. Run `gh auth status`. CP/CR.
+
+```{r using-git-6}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+###
+
+````
+github-introduction $ gh auth status
+github.com
+  ✓ Logged in to github.com account your-username
+  - Active account: true
+  - Git operations protocol: https
+  - Token: gho_************************************
+  - Token scopes: 'gist', 'read:org', 'repo', 'workflow'
+````
+
+###
+
+This is steps 1--3 of the script, already done: when you first ran `connect-repo`, it signed you in, and every `gh` and `git` command since has acted as *you*. Note the **token scopes** line --- the list of powers your login carries. `repo` means you can create and push to repositories. Remember this list; it matters in a few exercises. When an AI agent pushes code for you, it is using exactly these credentials.
+
+### Exercise 7
+
+Now step 4, by hand. Let's create a throwaway repo --- we will delete it shortly. Run these commands, one at a time:
+
+````
+cd /workspaces
+gh repo create scratch-repo --public --clone
+````
+
+Then run `ls`. CP/CR.
+
+```{r using-git-7}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+###
+
+````
+github-introduction $ cd /workspaces
+workspaces $ gh repo create scratch-repo --public --clone
+✓ Created repository your-username/scratch-repo on github.com
+  https://github.com/your-username/scratch-repo
+Cloning into 'scratch-repo'...
+warning: You appear to have cloned an empty repository.
+workspaces $ ls
+codespace-starter  github-introduction  scratch-repo
+workspaces $
+````
+
+###
+
+One command did two jobs: it created the filing cabinet on GitHub, and `--clone` copied it down to a local folder. The "empty repository" warning is expected --- a brand-new repo has no commits yet. This single command is the heart of `connect-repo`. Every repo you have made this course --- `introduction`, `code`, `quarto`, all of them --- was born exactly this way.
+
+### Exercise 8
+
+How does the local folder know which GitHub repo it belongs to? Run:
+
+````
+cd scratch-repo
+git remote -v
+````
+
+CP/CR.
+
+```{r using-git-8}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+````
+workspaces $ cd scratch-repo
+scratch-repo $ git remote -v
+origin  https://github.com/your-username/scratch-repo (fetch)
+origin  https://github.com/your-username/scratch-repo (push)
+scratch-repo $
+````
+
+###
+
+`origin` is Git's conventional nickname for the copy of your repo on GitHub. This is the wiring: when you push, Git sends commits to `origin`; when you pull, it fetches from `origin`. The clone set this up automatically. When something goes wrong with pushing --- and someday it will --- `git remote -v` is the first thing to check: it tells you where Git *thinks* your work is going.
+
+### Exercise 9
+
+We don't need `scratch-repo`. Try to delete it from the command line. Run `gh repo delete scratch-repo`. CP/CR whatever happens --- including a refusal.
+
+```{r using-git-9}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+````
+scratch-repo $ gh repo delete scratch-repo
+X This API operation needs the "delete_repo" scope. To request it, run:  gh auth refresh -h github.com -s delete_repo
+scratch-repo $
+````
+
+Your exact message may differ. The point is the refusal.
+
+###
+
+Look back at the token scopes from Exercise 6: `delete_repo` was not among them. Deleting a repository is so destructive --- the history, the issues, the published site, all gone, unrecoverable --- that your everyday credentials deliberately lack the power. You *could* grant it with the `gh auth refresh` command shown, and the command-line route is occasionally useful. But don't. The normal way to delete a repo is the website, which forces you to slow down.
+
+### Exercise 10
+
+Delete `scratch-repo` from the website. Go to its page on GitHub (`https://github.com/your-username/scratch-repo`), click **Settings** in the top menu, and scroll all the way to the bottom, to the **Danger Zone**. Click **Delete this repository**, and follow the prompts --- GitHub will make you type the repository's full name to confirm.
+
+Then, back in the Terminal, confirm it is gone and clean up the local clone. Run these commands, one at a time:
+
+````
+cd /workspaces
+gh repo view scratch-repo
+rm -rf scratch-repo
+ls
+cd github-introduction
+````
+
+CP/CR.
+
+```{r using-git-10}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+###
+
+````
+scratch-repo $ cd /workspaces
+workspaces $ gh repo view scratch-repo
+GraphQL: Could not resolve to a Repository with the name 'your-username/scratch-repo'. (repository)
+workspaces $ rm -rf scratch-repo
+workspaces $ ls
+codespace-starter  github-introduction
+workspaces $ cd github-introduction
+github-introduction $
+````
+
+###
+
+Two lessons. First, the Danger Zone's type-the-full-name ritual is friction by design: irreversible actions should be hard to do absentmindedly. You will delete repos fairly often --- abandoned experiments, practice work, wrongly named projects --- so remember where this lives: **Settings, bottom of the page**. Second, notice that deleting the repo on GitHub did *not* delete the local clone: the filing cabinet and the desk are separate, and we had to `rm -rf` the folder ourselves. The same is true in reverse --- deleting a local folder never touches GitHub.
+
+### Exercise 11
 
 At the Terminal, create a new Quarto document. From the three horizontal bar icon in the Activity Bar, select `File -> New File...`, then select `Quarto Document` from the drop-down menu. This opens the new file in the Editor.
 
@@ -191,7 +399,7 @@ Then run `cat analysis-1.qmd`.
 
 CP/CR.
 
-```{r using-git-5}
+```{r using-git-11}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -216,7 +424,7 @@ github-introduction $
 ````
 
 
-### Exercise 6
+### Exercise 12
 
 Click the Source Control button in the Activity Bar. This opens the Source Control pane, which is an interface to using Git and GitHub.
 
@@ -230,7 +438,7 @@ Render `analysis-1.qmd` with `Cmd/Ctrl + Shift + K`.
 
 The Terminal tab is filled with a bunch of commands. Copy/paste the last few lines.
 
-```{r using-git-6}
+```{r using-git-12}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -256,7 +464,7 @@ Watching files for changes
 Browse at http://localhost:7383/
 ````
 
-### Exercise 7
+### Exercise 13
 
 The VS Code window has changed quite a bit. The Viewer tab has appeared, showing the HTML. The Source Control pane now includes many new files. The Terminal tab is not showing a prompt.
 
@@ -265,7 +473,7 @@ We can stop the preview of `analysis-1.qmd` by pressing `Ctrl + c` on your keybo
 
 From the Terminal, run `ls`. CP/CR.
 
-```{r using-git-7}
+```{r using-git-13}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -286,7 +494,7 @@ github-introduction $
 
 The bottom part of the Source Control pane shows the history of changes in this repo.
 
-### Exercise 8
+### Exercise 14
 
 Look more closely at the Source Control pane:
 
@@ -299,7 +507,7 @@ We have many new files, like `analysis-1.html`, created when we rendered `analys
 From the Terminal, run `ls -R analysis-1_files`. The `-R` option means **r**ecursive. CP/CR.
 
 
-```{r using-git-8}
+```{r using-git-14}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -340,13 +548,13 @@ github-introduction $
 
 Whenever you render a document using Quarto, it creates a directory called `base-name-of-your-file_files`. Since the base name of `analysis-1.qmd` is `analysis-1`, the new directory is `analysis-1_files`. This directory is filled with the programs, information, and other files that helped turn `analysis-1.qmd` into `analysis-1.html`. This is mostly confusing stuff that we should ignore. In fact, we usually don't even want it monitored by Git or stored on GitHub.
 
-### Exercise 9
+### Exercise 15
 
 From the three horizontal bar icon, `File -> New Text File`. Save this new file as `.gitignore`. (Don't forget the leading period.) 
 
 From the Terminal, run `ls -a`. CP/CR.
 
-```{r using-git-9}
+```{r using-git-15}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -367,13 +575,13 @@ github-introduction $
 
 Because `.gitignore` begins with a `.`, it is a hidden file. It would not appear if we just used `ls`. Note that the Source Control pane now shows a new file, `.gitignore` with an associated "U", meaning it is also untracked.
 
-### Exercise 10
+### Exercise 16
 
 The purpose of the `.gitignore` file is to specify the files and directories that **Git** should **ignore**. Add a new line to the file, `analysis-1_files`, followed by an empty line. Save your changes.
 
 From the Terminal, run `cat .gitignore`. CP/CR.
 
-```{r using-git-10}
+```{r using-git-16}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -400,10 +608,10 @@ Note the change in the Source Control pane!
 include_graphics("images/analysis-git-3.png")
 ```
 
-Now, according to Git, there have been only three changes to the repo. (Of course, there have been more changes, but Git is ignoring anything that resides in `analysis-1_files`.) Three files, `analysis-1.qmd`, `analysis-1.html`, and `.gitignore`, are untracked (U).
+Now, according to Git, there have been only four changes to the repo. (Of course, there have been more changes, but Git is ignoring anything that resides in `analysis-1_files`.) Four files --- `analysis-1.qmd`, `analysis-1.html`, `.gitignore`, and `AGENTS.md` --- are untracked (U).
 
 
-### Exercise 11
+### Exercise 17
 
 In the box above the "Commit" button, add "initial version" as your commit comment. Press the "Commit" button. You will see a dialog box like this:
 
@@ -415,7 +623,7 @@ Press "Yes". In the future, you might click on "Always" so that this dialog stop
 
 From the Terminal, run `git log`. CP/CR.
 
-```{r using-git-11}
+```{r using-git-17}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -430,28 +638,22 @@ Your answer should look like this:
 
 ````
 github-introduction $ git log
-commit e6e05d17847846e0fda9ceedb9cce3b58fd0a024
+commit e6e05d17847846e0fda9ceedb9cce3b58fd0a024 (HEAD -> main)
 Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
 Date:   Fri May 1 19:22:33 2026 +0000
 
     initial version
-
-commit c6ef687e00ddff16f0274cba6949ee470ef3e5ec (origin/main, origin/HEAD)
-Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
-Date:   Fri May 1 13:28:01 2026 -0400
-
-    Initial commit
 ````
 
-`git log` generates a record --- a "log" --- of all the Git actions we have taken. In this case, you can see that we have committed changes twice. The first commit was done behind the scenes when we created the project by connecting to GitHub. The second commit is the one we just made, which adds `analysis-1.qmd`, `.gitignore`, and `analysis-1.html`. 
+`git log` generates a record --- a "log" --- of all the Git actions we have taken. There is exactly one commit. Remember the "empty repository" warning when you created `scratch-repo` by hand? Your `github-introduction` repo was born the same way --- empty --- and this commit, which adds `analysis-1.qmd`, `analysis-1.html`, `.gitignore`, and `AGENTS.md`, is the first entry in its history.
 
-### Exercise 12
+### Exercise 18
 
 Return to editing `analysis-1.qmd`. Add a line beginning with your actual name: "[Your name] is a data maestro!" Make sure there is a blank line at the end of the document, and save.
 
 Run `cat analysis-1.qmd`. CP/CR.
 
-```{r using-git-12}
+```{r using-git-18}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -478,7 +680,7 @@ github-introduction $
 ````
 
 
-### Exercise 13
+### Exercise 19
 
 Within the Source Control pane, press the "Open File" button for `analysis-1.qmd`, which is the first of four symbols to the right of the file name. 
 
@@ -490,7 +692,7 @@ Notice how there is now an orange "M" next to the file name. This indicates that
 
 Hold your cursor over the symbol (a curved arrow) next to the "Open File" button. What is the name for this button?
 
-```{r using-git-13}
+```{r using-git-19}
 question_text(NULL,
 	message = "Discard Changes",
 	answer(NULL, correct = TRUE),
@@ -503,11 +705,11 @@ question_text(NULL,
 
 Clicking this button gets rid of any changes made since the last time you told Git to save them. 
 
-### Exercise 14
+### Exercise 20
 
 Hold your cursor over the symbol --- `+`, a plus sign --- next to the "Discard Changes" button. What is the name for this button?
 
-```{r using-git-14}
+```{r using-git-20}
 question_text(NULL,
 	message = "Stage Changes",
 	answer(NULL, correct = TRUE),
@@ -520,13 +722,13 @@ question_text(NULL,
 
 Saving changes in Git is, in theory, a two-step process. The first step is to "stage" the changes. The second step is to "commit" the changes. For the most part, we don't stage. We just "commit," which incorporates the staging process automatically.
 
-### Exercise 15
+### Exercise 21
 
 Commit the changes with a comment like "added sentence". 
 
 Run `git log`. CP/CR the latest entry.
 
-```{r using-git-15}
+```{r using-git-21}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -548,7 +750,7 @@ Date:   Fri May 1 19:41:05 2026 +0000
     added sentence
 ````
 
-### Exercise 16
+### Exercise 22
 
 The Source Control pane now looks like this:
 
@@ -558,9 +760,9 @@ include_graphics("images/analysis-1-post-commit.png")
 
 Although you have committed your changes to Git --- i.e., the changes have been made locally --- you still need to "push" the changes to GitHub.  Hover your cursor over the "Sync Changes" button. What does the pop-up say?
 
-```{r using-git-16}
+```{r using-git-22}
 question_text(NULL,
-	message = "Push 2 commits to origin/main",
+	message = "Something like \"Push 2 commits to origin/main\" --- or \"Publish Branch\", if this is the repo's very first push.",
 	answer(NULL, correct = TRUE),
 	allow_retry = FALSE,
 	incorrect = NULL,
@@ -573,7 +775,7 @@ The term "origin/main" refers to the "main" branch on the "origin" repo, which i
 
 Note how the bottom portion of the pane, the Source Control Graph, now has two items. Before you committed, it had just one. The Source Control Graph shows the Git history of this repo.
 
-### Exercise 17
+### Exercise 23
 
 Press the "Sync Changes" button.
 
@@ -589,7 +791,7 @@ Notice how the purple cloud icon, representing the remote tracking branch on Git
 
 From the Terminal, run `git log` again. CP/CR.
 
-```{r using-git-17}
+```{r using-git-23}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -615,17 +817,13 @@ Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
 Date:   Mon May 4 16:57:08 2026 +0000
 
     initial version
-
-commit c6ef687e00ddff16f0274cba6949ee470ef3e5ec
-Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
-Date:   Fri May 1 13:28:01 2026 -0400
 ````
 
 This looks the same as before, except that "(HEAD -> main)" in the top line has changed to "(HEAD -> main, origin/main, origin/HEAD)". This tells us that our changes have been pushed to GitHub, not simply committed locally. We will save a discussion of what `"HEAD"` means for later.
 
 A term like "commit be56bbaedd692a6d29bba410f0a6fd5b1d844a64" gives us the address of that commit. We can use that string to revert to the codebase as it looked after that commit.
 
-### Exercise 18
+### Exercise 24
 
 If you look at the GitHub page for `github-introduction`, you will see that the changes have been pushed to GitHub. If your computer stops working, you won't lose any of your work.
 
@@ -641,7 +839,7 @@ include_graphics("images/analysis-1-gh-2.png")
 
 Copy and paste the text of this page.
 
-```{r using-git-18}
+```{r using-git-24}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -688,144 +886,21 @@ GitHub Pages isn't the only option. [Netlify](https://www.netlify.com/), [Quarto
 
 ### Exercise 1
 
-Add an R code chunk in `analysis-1.qmd` by using the shortcut key `Cmd/Ctrl + Option + I`. (Recall that "code chunk" and "code cell" mean the same thing.) In that chunk, put `library(tidyverse)`. Use `Cmd/Ctrl + Shift + K` to render the document. Your preview file should look something like this:
+Let's make `analysis-1.qmd` worth publishing. Set it up as you learned in the Quarto tutorial:
 
-```{r}
-include_graphics("images/analysis-1-preview-start-gh-pages.png")
-```
+* Change the title to "A Beautiful Graphic" and add your name as the author.
 
-As usual, the HTML file is displayed in the Viewer tab and, in the Panel, the focus switches to the Terminal, in which Quarto is "Watching files for changes."
+* Add `execute: echo: false` to the YAML header. Make sure to use two spaces, not a tab, when indenting.
+
+* Add a code chunk which loads **tidyverse**, with `#| message: false`.
+
+* Add a second code chunk holding an AI-generated plot that uses ggplot and a built-in data set. Render with `Cmd/Ctrl + Shift + K` and iterate with your AI until you have a graphic of which you are proud.
+
+(In the Antigravity tutorial you met a CLI agent that can edit your files directly. Either approach is fine throughout these Git tutorials: ask an AI in a chat window and copy/paste the code by hand, or let an agent write it into your file for you. Use whichever you prefer.)
 
 In the R Terminal, run `tutorial.helpers::show_file("analysis-1.qmd", chunk = "Last")`. CP/CR.
 
 ```{r publishing-with-github-pages-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 7)
-```
-
-###
-
-````
-library(tidyverse)
-````
-
-###
-
-The HTML shows both our code and some annoying messages. No viewer wants to see that!
-
-### Exercise 2
-
-Change the title of the document to "A Beautiful Graphic". Add your name as the author by adding `author: Your Name` to the YAML header, along with:
-
-````
-execute:
-  echo: false
-````
-Make sure to use two spaces, not a tab, when indenting YAML headers. Tabs will sometimes work, but it's best to use two spaces instead.
-
-Use `Cmd/Ctrl + Shift + K` to render the document. The HTML should no longer show the `library(tidyverse)` code.
-
-In the R Terminal, run `tutorial.helpers::show_file("analysis-1.qmd", end = 8)`. CP/CR.
-
-```{r publishing-with-github-pages-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
-```
-
-###
-
-````
----
-title: "A Beautiful Graphic"
-author: "PPBDS Student"
-format: html
-execute:
-  echo: false
----
-
-PPBDS student is a data maestro!
-````
-
-###
-
-Setting `execute: echo: false` in the YAML header applies to the whole document: every code chunk still runs, but only its output appears in the rendered HTML --- the code itself is hidden. That is usually what you want for a published page, where readers care about the results, not the code that produced them.
-
-### Exercise 3
-
-Find out how to make the warnings from using `library(tidyverse)` in a code chunk in a Quarto document disappear. Copy/paste the key part of the answer you receive here:
-
-```{r publishing-with-github-pages-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
-```
-
-###
-
-From [Grok](https://grok.com/chat/d17d86c4-1740-4ff4-94a4-bd4aafd50be0):
-
-````
-Wrap the library(tidyverse) call with suppressPackageStartupMessages() to silence the startup messages. This keeps your output clean while still loading the package.
-````
-
-### Exercise 4
-
-Edit `analysis-1.qmd` so that `library(tidyverse)` is replaced by `suppressPackageStartupMessages(library(tidyverse))`. Remove `warning: false` from the YAML header. Render with `Cmd/Ctrl + Shift + K`.
-
-Copy/paste whatever appears in your HTML below:
-
-```{r publishing-with-github-pages-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
-```
-
-###
-
-````
-
-A Beautiful Graphic
-Author
-
-PPBDS Student
-
-PPBDS student is a data maestro!
-````
-
-Don't worry about formatting when you copy and paste from HTML. Your screen should look something like this:
-
-```{r}
-include_graphics("images/analysis-1-preview.png")
-```
-
-
-### Exercise 5
-
-Create a new R code chunk with `Cmd/Ctrl + Option + I`. Ask [Grok](https://grok.com/) (or a generative AI of your choice) this question:
-
-> I have loaded the tidyverse package. Give me some R code that uses ggplot and a built-in data set to create a beautiful graphic.
-
-Paste that code into the new code chunk. Use `Cmd/Ctrl + Shift + K` to render. If there is an error, or if the graphic is ugly, iterate with your AI until you have a graphic of which you are proud.
-
-(In the **AI Introduction** tutorial you also met the Gemini CLI, an agent that can edit your files directly. Either approach is fine throughout these Git tutorials: ask an AI in a chat window and copy/paste the code by hand, or let the Gemini CLI write it into your file for you. Use whichever you prefer.)
-
-In the R Terminal, run `tutorial.helpers::show_file("analysis-1.qmd", chunk = "Last")`. CP/CR.
-
-```{r publishing-with-github-pages-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -888,9 +963,9 @@ ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
   )
 ```
 
-Generative AI is the future of coding. You need to practice more.
+Nothing in this exercise was new: the YAML header, the setup chunk, `#| message: false`, and `execute: echo: false` all come straight from the Quarto tutorial. What *is* new is what comes next: publishing this page from a repo you have managed with raw Git commands.
 
-### Exercise 6
+### Exercise 2
 
 If you click the Source Control button, your Codespaces window should look something like this:
 
@@ -902,7 +977,7 @@ Commit your files and push them to GitHub. Don't forget the commit message. Don'
 
 Use `Ctrl + c` to stop the Quarto watching process. From the Terminal, run `git log -n 1`. CP/CR.
 
-```{r publishing-with-github-pages-6}
+```{r publishing-with-github-pages-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -925,7 +1000,7 @@ github-introduction $
 
 We are being a little sloppy to equate "pushing" with "syncing." Strictly speaking, "syncing" does two things: it "pushes" your changes to GitHub *and* it "pulls" any changes made on GitHub to your local computer. But, in this case, because no one else but you can change the GitHub repo, there is nothing to "pull." 
 
-### Exercise 7
+### Exercise 3
 
 Let's publish our results to [GitHub Pages](https://pages.github.com/). Before we do, go to the GitHub repo for `github-introduction`, click on the "Settings" top menu item, and then click on the "Pages" side menu item.
 
@@ -940,7 +1015,7 @@ From the Terminal, run `quarto publish gh-pages analysis-1.qmd`. Respond with "Y
 CP/CR just the first 10 or so lines of the output.
 
 
-```{r publishing-with-github-pages-7}
+```{r publishing-with-github-pages-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -994,12 +1069,12 @@ output file: analysis-1.knit.md
 
 `quarto publish` processes `analysis-1.qmd` in the same way that `quarto preview` or `quarto render` does.
 
-### Exercise 8
+### Exercise 4
 
 Go to your `github-introduction` page on GitHub. Refresh the page. `quarto publish` has changed some of the items. Copy and paste all the text in the "Visit site" box.
 
 
-```{r publishing-with-github-pages-8}
+```{r publishing-with-github-pages-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,

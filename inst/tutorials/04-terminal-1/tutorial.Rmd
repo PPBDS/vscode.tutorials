@@ -30,8 +30,6 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- Which to move to terminal-2? -->
-
 <!-- Add to Files? -->
 
 <!-- Explain more often that these are all programs that spit out stuff, which can often be chained together or just allowed to dump. -->
