@@ -310,6 +310,12 @@ genuinely need it: paths, URLs, `run_tutorial()` calls, and ids. This
 keeps most references immune to renumbering and shrinks the fan-out
 below.
 
+When a title is written out as a title, quote it: *the next tutorial,
+“Models And Money,” teaches…*; *the “Getting Started” tutorial*.
+Following American style, commas and periods go inside the closing
+quote. Short attributive references (the Quarto tutorial, the Code
+tutorial) stay unquoted.
+
 ### Renumbering tutorials (directory renames)
 
 Tutorial directory names (`inst/tutorials/NN-slug/`) embed a sequence
