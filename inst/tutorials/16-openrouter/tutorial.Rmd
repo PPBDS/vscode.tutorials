@@ -45,9 +45,9 @@ You will not need a credit card, today or ever, for anything in this tutorial.
 
 ### Exercise 1
 
-Create and connect to a repo called `16-openrouter`, then open it as your workspace.
+Create and connect to a repo called `openrouter`, then open it as your workspace.
 
-Copy and paste the URL for your `16-openrouter` repository.
+Copy and paste the URL for your `openrouter` repository.
 
 ```{r introduction-1}
 question_text(NULL,
@@ -61,7 +61,7 @@ question_text(NULL,
 ###
 
 ```
-https://github.com/ppbds-student/16-openrouter
+https://github.com/ppbds-student/openrouter
 ```
 
 ###
@@ -84,7 +84,7 @@ question_text(NULL,
 ###
 
 ```
-$ aider --version
+openrouter $ aider --version
 aider 0.86.2
 ```
 
@@ -110,7 +110,7 @@ question_text(NULL,
 ###
 
 ```
-$ which aider
+openrouter $ which aider
 /usr/local/bin/aider
 ```
 
@@ -237,7 +237,7 @@ question_text(NULL,
 ###
 
 ```
-$ echo ${OPENROUTER_API_KEY:0:8}
+openrouter $ echo ${OPENROUTER_API_KEY:0:8}
 sk-or-v1
 ```
 
@@ -303,7 +303,7 @@ question_text(NULL,
 ###
 
 ```
-$ echo ${OPENROUTER_API_KEY:0:8}
+openrouter $ echo ${OPENROUTER_API_KEY:0:8}
 
 ```
 
@@ -345,13 +345,13 @@ PPBDS/codespace-starter
 
 GitHub now stores your key, encrypted, and hands it to every new Codespace you start. Delete this Codespace, open a new one next week, and `OPENROUTER_API_KEY` is already there. You never type it again, and it is never saved in a file.
 
-You picked `codespace-starter` because that is the repo your Codespace was built from. The machine you are sitting in belongs to it, not to `16-openrouter`.
+You picked `codespace-starter` because that is the repo your Codespace was built from. The machine you are sitting in belongs to it, not to `openrouter`.
 
 One catch: GitHub only hands over secrets when a Codespace is **created**. This one already exists, so the secret is not here yet. Your `export` covers you for the rest of today.
 
 ### Exercise 8
 
-Ask AI to create a `.gitignore` in your `16-openrouter` repo containing `.env` on its own line.
+Ask AI to create a `.gitignore` in your `openrouter` repo containing `.env` on its own line.
 
 In the R Terminal, run `show_file(".gitignore")`. CP/CR.
 
@@ -386,7 +386,7 @@ Now the fun part. You have a key that cost nothing, and `aider` will use it. You
 
 ### Exercise 1
 
-You need the name of a model that is free *today*. Ask `aider` first. In the bash Terminal, in your `16-openrouter` repo:
+You need the name of a model that is free *today*. Ask `aider` first. In the bash Terminal, in your `openrouter` repo:
 
 <pre><code>aider --list-models openrouter/ | grep ':free'
 </code></pre>
@@ -405,7 +405,7 @@ question_text(NULL,
 ###
 
 ```
-$ aider --list-models openrouter/ | grep ':free'
+openrouter $ aider --list-models openrouter/ | grep ':free'
 - openrouter/deepseek/deepseek-chat-v3-0324:free
 - openrouter/deepseek/deepseek-chat:free
 - openrouter/deepseek/deepseek-r1:free
@@ -704,7 +704,7 @@ question_text(NULL,
 ###
 
 ```
-$ git log --oneline
+openrouter $ git log --oneline
 a3f9c21 (HEAD -> main, origin/main) Add hello.R and .gitignore
 ```
 
@@ -727,7 +727,7 @@ You also ran `aider` on a free model, watched it write a file, saw how tokens ar
 
 That last move is the one to remember. A model is a part with a name, a price, and a limit, and you get to choose it.
 
-In `17-models` you will find out what those prices actually are, why some models cost a hundred times less than others, and how to use a model from R instead of from a coding assistant.
+In the next tutorial, "Models And Money," you will find out what those prices actually are, why some models cost a hundred times less than others, and how to use a model from R instead of from a coding assistant.
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
