@@ -43,6 +43,80 @@ This tutorial includes some information from [*R for Data Science (2e)*](https:/
 
 ###
 
+You should be doing this tutorial in a repo called `code`. Recall from the Introduction tutorial: a repo is a folder that Git watches, with a copy kept on GitHub. If your Explorer already shows a `code` folder, you are all set. If it shows `codespace-starter`, the next two exercises will get you connected. Either way, they only take a minute.
+
+### Exercise 1
+
+Open a new bash Terminal. Run `pwd`. CP/CR.
+
+```{r introduction-1}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 3)
+```
+
+###
+
+You will see one of two answers. Either you are already in your repo:
+
+````
+code $ pwd
+/workspaces/code
+code $
+````
+
+or you are still in the course's folder:
+
+````
+codespace-starter $ pwd
+/workspaces/codespace-starter
+codespace-starter $
+````
+
+###
+
+If your result ends in `code`, you are all set --- **do not run the script in the next exercise**; just do its last step. If it ends in `codespace-starter`, the next exercise connects you.
+
+### Exercise 2
+
+**Skip this paragraph --- do not run the script --- if `pwd` showed `/workspaces/code`.** Otherwise, run:
+
+````
+.devcontainer/connect-repo.sh code
+````
+
+If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/code`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
+
+**Everyone**: open a new bash Terminal and run `pwd`. CP/CR.
+
+```{r introduction-2}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 3)
+```
+
+###
+
+````
+code $ pwd
+/workspaces/code
+code $
+````
+
+Stop and fix the open folder if your result still ends in `codespace-starter`. All work in this tutorial belongs in `/workspaces/code`.
+
+###
+
+Your repo lives in two places: this folder and github.com. `connect-repo` created (or found) both. The `codespace-starter` folder still sits beside yours at `/workspaces/codespace-starter` --- it belongs to the course, and nothing you did to it in earlier tutorials matters here. Everything you make in this tutorial will be kept.
+
+###
+
 After starting the tutorial, your R Terminal is "busy" running the tutorial.
 
 You will want to run R commands while completing the tutorial. You can do this in a second R Terminal. Click the small down arrow in the top right of the Terminal panel, next to the + button. From the drop-down menu, select "R Terminal."

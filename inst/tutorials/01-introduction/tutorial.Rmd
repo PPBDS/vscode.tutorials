@@ -326,7 +326,7 @@ Run:
 .devcontainer/connect-repo.sh introduction
 ````
 
-If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/introduction`.
+If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/introduction`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
 
 CP/CR the useful part of the script's response. If the window reload cleared the output, paste the first prompt you see in the new `introduction` Terminal instead.
 

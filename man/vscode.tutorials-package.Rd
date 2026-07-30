@@ -30,7 +30,7 @@ The package includes tutorials focused on VS Code and modern R development:
 \item \strong{Quarto Websites Introduction} (09-websites-1): Basic website construction using Quarto projects
 \item \strong{Quarto Websites Advanced} (10-websites-2): Advanced Quarto websites with modular data analysis
 \item \strong{Devcontainers} (11-devcontainers): An introduction to devcontainers, touring a pre-built Jupyter devcontainer.json and building an R devcontainer.json from scratch
-\item \strong{Our Codespace Starter} (12-codespace-starter): A tour of the devcontainer.json behind codespace-starter itself
+\item \strong{Our Codespace Starter} (12-our-codespace-starter): A tour of the devcontainer.json behind codespace-starter itself
 \item \strong{The Devcontainer Dockerfile} (13-docker): A reading tour of the Dockerfile that builds the PPBDS devcontainer image
 }
 }
@@ -42,7 +42,7 @@ To run a tutorial, use:
 
 Available tutorial names include: 01-introduction, 02-code, 03-quarto,
 04-terminal-1, 05-terminal-2, 06-antigravity, 07-github-1, 08-github-2,
-09-websites-1, 10-websites-2, 11-devcontainers, 12-codespace-starter, and
+09-websites-1, 10-websites-2, 11-devcontainers, 12-our-codespace-starter, and
 13-docker.
 }
 

@@ -219,11 +219,13 @@ example $
 
 ### Repo names derive from tutorial titles
 
-A tutorial that has the student create a work repo names that repo after the
-**tutorial's title**: lowercase, with spaces and other non-alphanumeric characters
-replaced by dashes. "GitHub Introduction" → `github-introduction`; "Our Codespace
-Starter" → `our-codespace-starter`. Tutorials without a repo (the terminal pair)
-stay in `codespace-starter`, so their prompts read `codespace-starter $`.
+**Every tutorial, starting with Introduction, requires its own work repo**, named
+after the **tutorial's title**: lowercase, with spaces and other non-alphanumeric
+characters replaced by dashes. "Terminal 1" → `terminal-1`; "Our Codespace
+Starter" → `our-codespace-starter`. There are no repo-less tutorials: a
+transcript's prompt shows the repo name (`terminal-1 $`) whenever the working
+directory is the repo root, and `codespace-starter $` appears only when a
+transcript genuinely has the student located in that folder.
 
 Consequently, **when a tutorial's title changes, update all of these** (they all
 embed the repo name):

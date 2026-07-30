@@ -30,9 +30,6 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- Change to show that you are in the 04-terminal-1 repo, presumably. -->
-
-
 <!-- Which to move to terminal-2? -->
 
 <!-- Add to Files? -->
@@ -64,6 +61,10 @@ The older, more general term for the terminal is the "command line." All modern 
 
 Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
+###
+
+You should be doing this tutorial in a repo named `terminal-1`. If you are not, create one and connect to it, as you learned in earlier tutorials. (Recall the rule: a tutorial's repo is named after its title, all in lower case, with spaces replaced by dashes --- "Terminal 1" becomes `terminal-1`.)
+
 ## Terminal
 ###
 
@@ -93,12 +94,12 @@ question_text(NULL,
 Your answer should look something like:
 
 ````
-codespace-starter $
-codespace-starter $
-codespace-starter $
+terminal-1 $
+terminal-1 $
+terminal-1 $
 ````
 
-The prompt is the name of the directory you are currently in --- `codespace-starter` --- followed by a space and a dollar sign. The dollar sign indicates the end of the prompt; you type commands after it. (If you are working on your own computer rather than in a Codespace, your prompt will look different. Default prompts vary from computer to computer.)
+The prompt is the name of the directory you are currently in --- `terminal-1` --- followed by a space and a dollar sign. The dollar sign indicates the end of the prompt; you type commands after it. (If you are working on your own computer rather than in a Codespace, your prompt will look different. Default prompts vary from computer to computer.)
 
 ###
 
@@ -109,7 +110,7 @@ The prompt acts as a quick way to tell you where you are on the computer. The Te
 You only get this short prompt in a bash Terminal which you open yourself. A Terminal that was already open when the Codespace started shows GitHub's long default prompt, something like:
 
 ````
-@davekane-student ➜ /workspaces/codespace-starter (main) $
+@davekane-student ➜ /workspaces/terminal-1 (main) $
 ````
 
 with your GitHub username in place of `davekane-student`. The two prompts behave identically. All our examples show the short prompt, so if you see the long one, open a new bash Terminal.
@@ -136,9 +137,9 @@ question_text(NULL,
 Your answer should look something like mine:
 
 ````
-codespace-starter $ pwd
-/workspaces/codespace-starter
-codespace-starter $
+terminal-1 $ pwd
+/workspaces/terminal-1
+terminal-1 $
 ````
 
 The `pwd` command prints the full path to your current working directory. When in more complex file systems, the prompt usually only shows a shorter reminder of your location.
@@ -198,10 +199,10 @@ question_text(NULL,
 Your answer should look like:
 
 ````
-codespace-starter $ mkdir example
-codespace-starter $ cd example
+terminal-1 $ mkdir example
+terminal-1 $ cd example
 example $ pwd
-/workspaces/codespace-starter/example
+/workspaces/terminal-1/example
 example $
 ````
 
@@ -335,9 +336,9 @@ Your answer should look like:
 
 ````
 example $ cd ..
-codespace-starter $ pwd
-/workspaces/codespace-starter
-codespace-starter $
+terminal-1 $ pwd
+/workspaces/terminal-1
+terminal-1 $
 ````
 
 Again, note how the prompt changed because we moved directories. The `..` symbol --- two periods --- always indicates the directory one level up, i.e., the directory in which `example` is located.
@@ -356,9 +357,9 @@ question_text(NULL,
 ```
 
 ````
-codespace-starter $ rm -r example
-codespace-starter $ ls
-codespace-starter $
+terminal-1 $ rm -r example
+terminal-1 $ ls
+terminal-1 $
 ````
 
 `-r` is an **option** that allows us to delete a directory. The `r` stands for **r**ecursive because, in order to delete a directory, you must also (recursively) delete every directory and file within that directory.
@@ -372,7 +373,7 @@ You will practice using paths both inside and outside the current working direct
 
 ### Exercise 1
 
-By default, the Terminal in VS Code starts in `/workspaces/codespace-starter`, the root folder of this Codespace.
+By default, a new Terminal in VS Code starts in the folder you have open: `/workspaces/terminal-1`, your repo.
 
 Run `pwd` to show your current working directory. CP/CR.
 
@@ -426,13 +427,13 @@ question_text(NULL,
 Your answer should look something like:
 
 ````
-codespace-starter $ cd paths
+terminal-1 $ cd paths
 paths $ pwd
-/workspaces/codespace-starter/paths
+/workspaces/terminal-1/paths
 paths $
 ````
 
-Note how the prompt changed after I ran the `cd paths` command. Before, the prompt showed `codespace-starter` because that was the current working directory. Using `cd` changed the current working directory to `paths`, causing the prompt to change as well.
+Note how the prompt changed after I ran the `cd paths` command. Before, the prompt showed `terminal-1` because that was the current working directory. Using `cd` changed the current working directory to `paths`, causing the prompt to change as well.
 
 ### Exercise 4
 
@@ -576,7 +577,7 @@ Your answer should look like this:
 ````
 fruits $ cd ..
 lessons $ pwd
-/workspaces/codespace-starter/paths/lessons
+/workspaces/terminal-1/paths/lessons
 lessons $
 ````
 
@@ -654,7 +655,7 @@ question_text(NULL,
 ````
 lessons $ cd ..
 paths $ pwd
-/workspaces/codespace-starter/paths
+/workspaces/terminal-1/paths
 paths $ mv lessons/tbd .
 paths $ ls
 lessons tbd
@@ -680,10 +681,10 @@ question_text(NULL,
 
 ````
 paths $ cd ..
-codespace-starter $ pwd
-/workspaces/codespace-starter
-codespace-starter $ rm -r paths
-codespace-starter $
+terminal-1 $ pwd
+/workspaces/terminal-1
+terminal-1 $ rm -r paths
+terminal-1 $
 ````
 
 ###
@@ -715,10 +716,10 @@ question_text(NULL,
 ###
 
 ````
-codespace-starter $ mkdir symbols
-codespace-starter $ cd symbols
+terminal-1 $ mkdir symbols
+terminal-1 $ cd symbols
 symbols $ pwd
-/workspaces/codespace-starter/symbols
+/workspaces/terminal-1/symbols
 symbols $ ls
 symbols $
 ````
@@ -750,7 +751,7 @@ symbols $ ls -a
 symbols $
 ````
 
-Every directory, even an "empty" one, includes `.` and `..`. The `.` is a link to the current directory, i.e., to the `symbols` directory in which we are currently located. The `..` is a link to the directory one level up, which is `/workspaces/codespace-starter` in my case.
+Every directory, even an "empty" one, includes `.` and `..`. The `.` is a link to the current directory, i.e., to the `symbols` directory in which we are currently located. The `..` is a link to the directory one level up, which is `/workspaces/terminal-1` in my case.
 
 ### Exercise 3
 
@@ -775,7 +776,7 @@ symbols
 symbols $
 ````
 
-At this point in the tutorial, `symbols` is the only item in `codespace-starter`. `ls ..` lets you view the contents of the parent directory without navigating away from where you are.
+At this point in the tutorial, `symbols` is the only item in `terminal-1`. (Your repo also contains hidden files, like the `.git` directory, but plain `ls` does not show those.) `ls ..` lets you view the contents of the parent directory without navigating away from where you are.
 
 ### Exercise 4
 
@@ -796,11 +797,11 @@ My answer looks like this:
 
 ````
 symbols $ ls ../..
-codespace-starter
+codespace-starter  terminal-1
 symbols $
 ````
 
-Your answer may look different if your Codespace includes other folders inside `/workspaces`.
+Two levels up is `/workspaces`, where your repo sits beside `codespace-starter`, the folder that supplied this Codespace. If you have reused this Codespace for earlier tutorials, their repos (`code`, `quarto`) may be listed too.
 
 ### Exercise 5
 
@@ -821,7 +822,7 @@ My answer looks like this:
 
 ````
 symbols $ pwd
-/workspaces/codespace-starter/symbols
+/workspaces/terminal-1/symbols
 symbols $
 ````
 
@@ -831,7 +832,7 @@ The absolute path for my current working directory breaks down into these compon
 
 * `workspaces`, which is where GitHub Codespaces stores workspace folders.
 
-* `codespace-starter`, which is the name of the folder in which I started this tutorial, followed by `symbols`, which is the directory we just created.
+* `terminal-1`, the repo in which you are doing this tutorial, followed by `symbols`, which is the directory we just created.
 
 ### Exercise 6
 
@@ -873,9 +874,9 @@ question_text(NULL,
 ###
 
 ````
-~ $ cd /workspaces/codespace-starter/symbols
+~ $ cd /workspaces/terminal-1/symbols
 symbols $ pwd
-/workspaces/codespace-starter/symbols
+/workspaces/terminal-1/symbols
 symbols $
 ````
 
@@ -918,10 +919,10 @@ Your answer should look like:
 
 ````
 symbols $ pwd
-/workspaces/codespace-starter/symbols
+/workspaces/terminal-1/symbols
 symbols $ cd ..
-codespace-starter $ rm -rf symbols
-codespace-starter $
+terminal-1 $ rm -rf symbols
+terminal-1 $
 ````
 
 Note that `rm -rf symbols` and `rm -rf symbols/`, with the trailing slash, have the same effect. Except in unusual circumstances, including (or not including) the trailing slash in the name of a directory does not matter.
@@ -948,10 +949,10 @@ question_text(NULL,
 ###
 
 ````
-codespace-starter $ pwd
-/workspaces/codespace-starter
-codespace-starter $ mkdir options
-codespace-starter $ cd options/
+terminal-1 $ pwd
+/workspaces/terminal-1
+terminal-1 $ mkdir options
+terminal-1 $ cd options/
 options $ ls
 options $
 ````
@@ -1390,11 +1391,11 @@ Your answer should look like:
 
 ````
 options $ cd ..
-codespace-starter $ rm -r options
-codespace-starter $
+terminal-1 $ rm -r options
+terminal-1 $
 ````
 
-As usual, note how the prompt changes from `options $` to `codespace-starter $` as we move from the `options` directory to the directory from which we started this tutorial.
+As usual, note how the prompt changes from `options $` to `terminal-1 $` as we move from the `options` directory to the directory from which we started this tutorial.
 
 
 ## Files
@@ -1418,15 +1419,15 @@ question_text(NULL,
 ###
 
 ````
-codespace-starter $ pwd
-/workspaces/codespace-starter
-codespace-starter $ mkdir files
-codespace-starter $ cd files/
+terminal-1 $ pwd
+/workspaces/terminal-1
+terminal-1 $ mkdir files
+terminal-1 $ cd files/
 files $ ls
 files $
 ````
 
-We often, as here, move to the directory in which we will be working. But we could have stayed in the starting directory, which is `/workspaces/codespace-starter` for me, and then worked from there using `files/` in the commands to come.
+We often, as here, move to the directory in which we will be working. But we could have stayed in the starting directory, which is `/workspaces/terminal-1` for me, and then worked from there using `files/` in the commands to come.
 
 ### Exercise 2
 
@@ -1558,8 +1559,8 @@ Your answer should look like:
 
 ````
 files $ cd ..
-codespace-starter $ rm -r files/
-codespace-starter $
+terminal-1 $ rm -r files/
+terminal-1 $
 ````
 
 
