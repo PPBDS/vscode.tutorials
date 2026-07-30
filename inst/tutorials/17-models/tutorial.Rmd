@@ -2,7 +2,7 @@
 title: "Models And Money"
 author: David Kane
 tutorial:
-  id: "16-models"
+  id: "17-models"
 output:
   learnr::tutorial:
     df_print: default
@@ -45,9 +45,9 @@ By the last exercise you will know what a model costs, why some cost a hundred t
 
 ### Exercise 1
 
-Create and connect to a repo called `16-models`, then open it as your workspace.
+Create and connect to a repo called `17-models`, then open it as your workspace.
 
-Copy and paste the URL for your `16-models` repository.
+Copy and paste the URL for your `17-models` repository.
 
 ```{r introduction-1}
 question_text(NULL,
@@ -61,12 +61,12 @@ question_text(NULL,
 ###
 
 ```
-https://github.com/ppbds-student/16-models
+https://github.com/ppbds-student/17-models
 ```
 
 ###
 
-You need the OpenRouter key from `15-openrouter` for everything here. If you saved it as a Codespaces secret and this is a *new* Codespace, it is already waiting for you.
+You need the OpenRouter key from `16-openrouter` for everything here. If you saved it as a Codespaces secret and this is a *new* Codespace, it is already waiting for you.
 
 ### Exercise 2
 
@@ -139,7 +139,7 @@ And notice what a router gets you, now that you can count it. Several hundred mo
 
 ### Exercise 2
 
-Now send an actual prompt. Replace the model with any free one from your `15-openrouter` list if this one is gone:
+Now send an actual prompt. Replace the model with any free one from your `16-openrouter` list if this one is gone:
 
 <pre><code>curl -s https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \

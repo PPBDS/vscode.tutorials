@@ -1,0 +1,36 @@
+---
+title: "Dotfiles"
+author: David Kane
+tutorial:
+  id: "15-dotfiles"
+output:
+  learnr::tutorial:
+    progressive: yes
+    'allow_skip:': yes
+runtime: shiny_prerendered
+description: Personalize every Codespace you ever open with a dotfiles repo. Under construction.
+---
+
+```{r setup, include = FALSE}
+library(learnr)
+library(tutorial.helpers)
+library(knitr)
+
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(out.width = '90%')
+options(tutorial.exercise.timelimit = 60,
+        tutorial.storage = "local")
+```
+
+```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```
+
+## Introduction
+###
+
+This tutorial is under construction.
+
+A dotfiles repo lets you carry your personal configuration --- shell settings, environment variables, Git preferences --- into every Codespace you ever open, automatically.
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```

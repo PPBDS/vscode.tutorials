@@ -1,0 +1,36 @@
+---
+title: "Your Starter"
+author: David Kane
+tutorial:
+  id: "14-your-starter"
+output:
+  learnr::tutorial:
+    progressive: yes
+    'allow_skip:': yes
+runtime: shiny_prerendered
+description: Graduation exercise for the devcontainer tutorials. Build your own version of codespace-starter, with your own Dockerfile, image, and devcontainer.json. Under construction.
+---
+
+```{r setup, include = FALSE}
+library(learnr)
+library(tutorial.helpers)
+library(knitr)
+
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(out.width = '90%')
+options(tutorial.exercise.timelimit = 60,
+        tutorial.storage = "local")
+```
+
+```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```
+
+## Introduction
+###
+
+This tutorial is under construction.
+
+You now understand devcontainers, Dockerfiles, and images. Here, you will put that knowledge to work: building your own version of `codespace-starter` --- a starter repo that belongs to you, without the teaching material you no longer need.
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
