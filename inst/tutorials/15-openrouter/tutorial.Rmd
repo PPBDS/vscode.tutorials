@@ -41,7 +41,9 @@ Why bother? Two reasons.
 
 ###
 
-You will not need a credit card, today or ever, for anything in this tutorial.
+You will not need a credit card for anything in this tutorial. Everything here runs on a free account and free models.
+
+`16-models` is a different story. That one asks you to buy $10 of credits, and that does need a real card. Nothing you do today commits you to it.
 
 ### Exercise 1
 
@@ -90,7 +92,7 @@ aider 0.86.2
 
 ###
 
-**[aider](https://aider.chat/)** is an AI coding assistant that runs in the Terminal. It is already installed in your Codespace --- you saw the line that installs it back in `12-docker`.
+**[aider](https://aider.chat/)** is an AI coding assistant that runs in the Terminal. It is already installed in your Codespace --- you saw the line that installs it back in `13-docker`.
 
 Here is what makes it useful today. The other AI tools each belong to one company: `claude` wants an Anthropic account, `codex` wants an OpenAI account, `agy` wants a Google account. `aider` just wants a key, and it does not care whose.
 
@@ -313,11 +315,15 @@ Empty. Your `export` only changed the Terminal you typed it in. The new Terminal
 
 This is the same lesson as QMD World and R World: two things running side by side do not share what you set up in the other one.
 
+You have already solved this exact problem once. In `14-your-dotfiles` you had a variable that vanished the same way, and you made it stick by putting the `export` line in `~/.bashrc`, where every new Terminal reads it.
+
+That approach would work here too. The next exercise shows you the other one, which GitHub built specifically for values like this.
+
 ### Exercise 7
 
-Make the key survive. Go to <https://github.com/settings/codespaces>.
+Make the key survive. Go to <https://github.com/settings/codespaces> --- the same page where you turned on dotfiles in `14-your-dotfiles`.
 
-Under **Codespaces secrets**, click **New secret**. Name it `OPENROUTER_API_KEY`, paste your key as the value, and under **Repository access** select `PPBDS/codespace-starter`. Save it.
+Scroll past the **Dotfiles** section to **Codespaces secrets** and click **New secret**. Name it `OPENROUTER_API_KEY`, paste your key as the value, and under **Repository access** select `PPBDS/codespace-starter`. Save it.
 
 Copy and paste the name of the secret and the repository you granted access to.
 
@@ -345,9 +351,11 @@ PPBDS/codespace-starter
 
 GitHub now stores your key, encrypted, and hands it to every new Codespace you start. Delete this Codespace, open a new one next week, and `OPENROUTER_API_KEY` is already there. You never type it again, and it is never saved in a file.
 
+Two boxes on one page, delivering two different kinds of thing. **Dotfiles** deliver files you wrote, by cloning your repo onto the machine. **Secrets** deliver values GitHub holds encrypted, straight into the environment, with nothing written to disk. Notice that GitHub will not show you the value again either --- not even to you.
+
 You picked `codespace-starter` because that is the repo your Codespace was built from. The machine you are sitting in belongs to it, not to `15-openrouter`.
 
-One catch: GitHub only hands over secrets when a Codespace is **created**. This one already exists, so the secret is not here yet. Your `export` covers you for the rest of today.
+One catch, and you already know this one: GitHub only hands over secrets when a Codespace is **created**, and this one already exists. Same rule that kept `COOLEST_TEACHER` empty until you built a new machine. Your `export` covers you for the rest of today.
 
 ### Exercise 8
 
@@ -374,6 +382,16 @@ question_text(NULL,
 If that failed, it is probably because you have not loaded `library(tutorial.helpers)` in the R Terminal.
 
 `.env` is the usual name for a file that holds keys, so it is the first thing to hide from Git. You have used `.gitignore` before to keep clutter out of a repo. Here it is doing security work.
+
+You now know three places a value like this could live, and you have used all three. They are worth laying side by side, because the differences are not obvious.
+
+- **A file in the repo, hidden by `.gitignore`.** What most projects do, because the file has to sit next to the code that reads it. It holds only as long as everybody remembers. One `git add -f`, one teammate who never got told, one careless AI agent, and it is public.
+- **Your private `dotfiles` repo.** This genuinely works, and plenty of professionals do it. The costs are worth knowing before you choose it: the key is plaintext in Git history forever, so changing it means a commit and the old one stays in the log; it lands on the disk of every machine you open; and anyone you ever add as a collaborator gets it.
+- **A Codespaces secret.** Encrypted, injected into the environment when a machine is built, never written to a file. Replacing the key is one edit in one place, with no history to rewrite.
+
+We use the secret, and the reason is that last line. A key is not a setting --- it is something you will one day need to revoke in a hurry. Settings are worth keeping forever, which is exactly the property you do not want in a password.
+
+So: **settings in a repo, secrets in a secret store.** Your name and your aliases on one side, anything that can spend money on the other.
 
 Take this seriously. Bots scan new public commits within minutes looking for keys, and a key that reaches a public repo should be treated as stolen. GitHub tries to catch this and often blocks the push, but do not count on it.
 
@@ -684,7 +702,9 @@ Still zero. You ran an AI coding assistant, wrote a file, asked it a question, a
 
 There are limits, though, and you should know them before you hit one. A free account gets **20 requests per minute and 50 per day**, counting all free models together. Every message you send is at least one request, and an assistant sometimes sends several for a single instruction, so 50 goes faster than it sounds.
 
-When you run out, requests fail with `HTTP 429 Too Many Requests`. You then have three choices: wait, buy $10 of credits once to raise the daily limit to 1,000, or pay per use for a model that is not free. The next tutorial works out what that last one actually costs.
+When you run out, requests fail with `HTTP 429 Too Many Requests`. You then have three choices: wait, buy $10 of credits once to raise the daily limit to 1,000, or pay per use for a model that is not free.
+
+`16-models` takes the second of those. It asks you to buy the $10, with a real credit card, because the questions it answers --- what a good model costs, and how much better than a free one it actually is --- cannot be answered on an account that has never spent anything.
 
 ### Exercise 9
 
@@ -717,6 +737,8 @@ One commit, and you wrote it. Without `--no-auto-commits`, `aider` would have ma
 
 You have an OpenRouter account and an API key. Neither cost anything, and neither needed a credit card. The key is saved as a Codespaces secret, so it survives this machine being deleted and never sits in a repo.
 
+That storage decision is the one to carry forward. `14-your-dotfiles` and this tutorial used the same settings page for two different jobs: a repo for the settings you want to keep forever, an encrypted secret for the one thing you may need to revoke in a hurry.
+
 ###
 
 Along the way you learned that an `export` only affects the Terminal you typed it in, that `Authorization: Bearer` is how APIs check who you are, and that a leaked key gets deleted rather than hidden.
@@ -728,6 +750,8 @@ You also ran `aider` on a free model, watched it write a file, saw how tokens ar
 That last move is the one to remember. A model is a part with a name, a price, and a limit, and you get to choose it.
 
 In `16-models` you will find out what those prices actually are, why some models cost a hundred times less than others, and how to use a model from R instead of from a coding assistant.
+
+Bring a credit card to that one. It is the only tutorial in this course that needs one, and the $10 it asks for is the whole budget.
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
