@@ -1,5 +1,5 @@
 ---
-title: GitHub 1
+title: "GitHub Introduction"
 author: David Kane
 tutorial:
   id: "07-github-1"

@@ -48,11 +48,10 @@ Quarto is part of that assumed base. (This is about what downstream tutorials ma
 rely on, not a claim about which tutorials students finish — many do reach the
 later ones.)
 
-**TODO:** two skills the base guide's standard Introduction/Summary sequences lean
-on are currently taught *after* Quarto — `.gitignore` (first taught in Antigravity)
-and `quarto publish gh-pages` (taught in GitHub 1; the Quarto tutorial already
-carries a comment to add the publish step). Until those move into the first three
-tutorials, the through-Quarto boundary is the intent, not quite the current state.
+The Quarto tutorial's Publishing section is what completes this boundary: it
+teaches `.gitignore` and `quarto publish gh-pages`, the last two skills the base
+guide's standard Introduction/Summary sequences lean on. Antigravity and GitHub
+Introduction teach them again later; that repetition is deliberate reinforcement.
 
 ### The universal entry point
 
@@ -222,10 +221,18 @@ example $
 **Every tutorial, starting with Introduction, requires its own work repo**, named
 after the **tutorial's title**: lowercase, with spaces and other non-alphanumeric
 characters replaced by dashes. "Terminal 1" → `terminal-1`; "Our Codespace
-Starter" → `our-codespace-starter`. There are no repo-less tutorials: a
-transcript's prompt shows the repo name (`terminal-1 $`) whenever the working
-directory is the repo root, and `codespace-starter $` appears only when a
-transcript genuinely has the student located in that folder.
+Starter" → `our-codespace-starter`. The reason is ownership: students cannot push
+to `codespace-starter` (it is not their repo), nor publish GitHub Pages from it.
+Some tutorials (the terminal pair) never push at all, but the uniform
+one-tutorial-one-repo rule beats tracking special cases. There are no repo-less
+tutorials: a transcript's prompt shows the repo name (`terminal-1 $`) whenever
+the working directory is the repo root, and `codespace-starter $` appears only
+when a transcript genuinely has the student located in that folder.
+
+`connect-repo` must be run from `/workspaces/codespace-starter` --- the script
+lives there and fails when run from inside another repo. The canonical fix-it
+instruction is therefore two commands: `cd /workspaces/codespace-starter`, then
+`.devcontainer/connect-repo.sh <name>`.
 
 Consequently, **when a tutorial's title changes, update all of these** (they all
 embed the repo name):
@@ -255,7 +262,7 @@ name, which a title change does not touch), the tutorial's directory name under
 
 Sequence numbers change often; titles rarely do. In prose — this file, and
 cross-references inside tutorials — refer to a tutorial by its **title** ("the
-Quarto tutorial", "GitHub 1"), never by its `NN-slug` directory name. Reserve the
+Quarto tutorial", "GitHub Introduction"), never by its `NN-slug` directory name. Reserve the
 directory name for places that genuinely need it: paths, URLs, `run_tutorial()`
 calls, and ids. This keeps most references immune to renumbering and shrinks the
 fan-out below.

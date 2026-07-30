@@ -78,17 +78,18 @@ codespace-starter $
 
 ###
 
-If your result ends in `code`, you are all set --- **do not run the script in the next exercise**; just do its last step. If it ends in `codespace-starter`, the next exercise connects you.
+If your result ends in `code`, you are all set --- **do not run the connect-repo commands in the next exercise**; just do its last step. If it ends in `codespace-starter`, the next exercise connects you.
 
 ### Exercise 2
 
-**Skip this paragraph --- do not run the script --- if `pwd` showed `/workspaces/code`.** Otherwise, run:
+**Skip this paragraph --- do not run these commands --- if `pwd` showed `/workspaces/code`.** Otherwise, run these two commands, one at a time:
 
 ````
+cd /workspaces/codespace-starter
 .devcontainer/connect-repo.sh code
 ````
 
-If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/code`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
+The `connect-repo` script lives in `codespace-starter`, so the first command moves you there; running the script from anywhere else fails. If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/code`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
 
 **Everyone**: open a new bash Terminal and run `pwd`. CP/CR.
 
@@ -370,7 +371,7 @@ knitr::include_graphics("images/save-script-1.png")
 
 ###
 
-The default directory that VS Code suggests for saving a file is not necessarily where you should save it. Be intentional. In this tutorial, we save all files at the top level of the project, in the `codespace-starter` directory.
+The default directory that VS Code suggests for saving a file is not necessarily where you should save it. Be intentional. In this tutorial, we save all files at the top level of the `code` repo.
 
 ###
 
@@ -437,7 +438,7 @@ question_text(NULL,
 Your answer should look like this:
 
 ````
-R 4.5.3> source("/workspaces/codespace-starter/script-1.R", encoding = "UTF-8")
+R 4.5.3> source("/workspaces/code/script-1.R", encoding = "UTF-8")
 ````
 
 ###
@@ -465,7 +466,7 @@ question_text(NULL,
 ###
 
 ```
-R 4.5.3> source("/workspaces/codespace-starter/script-1.R", encoding = "UTF-8", echo = TRUE)
+R 4.5.3> source("/workspaces/code/script-1.R", encoding = "UTF-8", echo = TRUE)
 
 > 5 + 5
 [1] 10
@@ -496,7 +497,7 @@ question_text(NULL,
 The answer is what you might expect:
 
 ````
-R 4.5.3> source("/workspaces/codespace-starter/script-1.R", encoding = "UTF-8", echo = TRUE)
+R 4.5.3> source("/workspaces/code/script-1.R", encoding = "UTF-8", echo = TRUE)
 
 > 5 + 5
 [1] 10
@@ -581,7 +582,7 @@ question_text(NULL,
 Your answer should look like this:
 
 ````
-> source("/workspaces/codespace-starter/script-1.R", echo=TRUE)
+> source("/workspaces/code/script-1.R", echo=TRUE)
 
 > x <- 5 + 5
 
@@ -629,6 +630,83 @@ In this case, the object `x`, which has a value of 10, exists in your workspace.
 [1] 10
 >
 ````
+
+### Exercise 9
+
+`script-1.R` exists only in this Codespace. Recall from the Introduction tutorial: a **commit** is a snapshot of your work, and a **push** copies that snapshot to GitHub. Let's do both. In a bash Terminal, run these three commands, one at a time:
+
+````
+git add script-1.R
+git commit -m "Add script-1"
+git push
+````
+
+CP/CR.
+
+```{r script-1-9}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 8)
+```
+
+###
+
+````
+code $ git add script-1.R
+code $ git commit -m "Add script-1"
+[main 1a2b3c4] Add script-1
+ 1 file changed, 3 insertions(+)
+ create mode 100644 script-1.R
+code $ git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Writing objects: 100% (3/3), 310 bytes | 310.00 KiB/s, done.
+To https://github.com/your-username/code.git
+   9d8c7b6..1a2b3c4  main -> main
+code $
+````
+
+###
+
+Your script now exists in two places: this Codespace and GitHub. Professionals keep their work in the cloud because laptops --- and Codespaces --- fail.
+
+### Exercise 10
+
+Run `git log`. CP/CR.
+
+```{r script-1-10}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 12)
+```
+
+###
+
+````
+code $ git log
+commit 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b (HEAD -> main, origin/main)
+Author: Your Name <you@example.com>
+Date:   Thu Jul 30 14:22:31 2026 +0000
+
+    Add script-1
+
+commit 9d8c7b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c
+Author: Your Name <you@example.com>
+Date:   Thu Jul 30 13:58:02 2026 +0000
+
+    Initial commit
+code $
+````
+
+###
+
+`git log` shows your repo's history, newest first. Each entry has four parts: a long string of letters and numbers (the commit's unique ID), the author, the date, and the message you wrote. The note `HEAD -> main, origin/main` on the newest commit means that your Codespace and GitHub agree on the latest snapshot. After you commit but *before* you push, `origin/main` lags behind --- `git log` is how you notice.
 
 ## Script 2
 ###
@@ -1128,7 +1206,7 @@ question_text(NULL,
 Your answer should look something like:
 
 ```
-> source("/workspaces/codespace-starter/script-2.R", echo = TRUE)
+> source("/workspaces/code/script-2.R", echo = TRUE)
 
 > library(tidyverse)
 
@@ -1169,7 +1247,7 @@ question_text(NULL,
 
 ###
 
-You should see the `diamonds.png` file, which contains your plot. Click the Explorer button on the Activity Bar on the left to see all the files in the `codespace-starter` directory. Click `diamonds.png` to open your plot in the Editor.
+You should see the `diamonds.png` file, which contains your plot. Click the Explorer button on the Activity Bar on the left to see all the files in the `code` repo. Click `diamonds.png` to open your plot in the Editor.
 
 If the title text flows out of the image, you might want to modify the `scale` argument in `ggsave()` to find a better image size. `scale` is set to 1 by default.
 
@@ -1255,16 +1333,60 @@ ggplot(data = mpg,
 
 In many ways, the `subtitle` is the most important part of any graphic. People are busy. You cannot expect them to study your plot closely. Help them by highlighting the one key lesson, the one fact that you hope people will remember. Spell it out clearly.
 
-## Cleanup
+## Summary
 ###
 
-Before moving on, delete the files you have created in this tutorial so that `codespace-starter` is clean for the next one.
+You have made more files since your first push --- `script-2.R`, `script-3.R`, and `diamonds.png`. Let's send them all to GitHub.
 
 ### Exercise 1
 
-In the R Terminal, run `unlink(list.files(), recursive = TRUE)` to delete all files in `codespace-starter`. Then run `list.files()` to confirm the directory is empty. CP/CR.
+In a bash Terminal, run these three commands, one at a time:
 
-```{r cleanup-1}
+````
+git add .
+git commit -m "Finish code tutorial"
+git push
+````
+
+CP/CR.
+
+```{r summary-1}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 10)
+```
+
+###
+
+````
+code $ git add .
+code $ git commit -m "Finish code tutorial"
+[main 5d6e7f8] Finish code tutorial
+ 3 files changed, 42 insertions(+)
+ create mode 100644 diamonds.png
+ create mode 100644 script-2.R
+ create mode 100644 script-3.R
+code $ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Writing objects: 100% (5/5), 128.40 KiB | 12.84 MiB/s, done.
+To https://github.com/your-username/code.git
+   1a2b3c4..5d6e7f8  main -> main
+code $
+````
+
+###
+
+`git add .` stages every changed file at once, rather than naming one file as you did before. Committing in sensible batches, each with a clear message, is the professional habit. Nearly every tutorial from now on ends this way: commit and push.
+
+### Exercise 2
+
+In your browser, go to your `code` repository on github.com, as you learned in the Introduction tutorial. Confirm that `script-1.R`, `script-2.R`, `script-3.R`, and `diamonds.png` are all listed. Copy/paste the URL of your repository.
+
+```{r summary-2}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -1276,17 +1398,14 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> unlink(list.files(), recursive = TRUE)
-R 4.5.3> list.files()
-character(0)
-R 4.5.3>
+https://github.com/your-username/code
 ````
 
-`character(0)` means the vector is empty --- there are no files in `codespace-starter`. Keeping your workspace tidy ensures that the next tutorial starts from a clean state.
-
-## Summary
 ###
 
+This URL is the permanent, shareable home of your work --- it outlives this Codespace. Note the Commits link near the top of the file listing: it now records the history you built, from the initial commit through your final push.
+
+###
 
 This tutorial taught you how to use [**Codespaces**](https://github.com/features/codespaces) with [**R**](https://www.r-project.org/about.html) scripts. It assumed that you have some knowledge of R code, perhaps at the level of the "Introduction" tutorial from the [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) package. It included some information from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 

@@ -49,7 +49,7 @@ options(tutorial.exercise.timelimit = 60,
 
 You have used GitHub Copilot.  The [Antigravity CLI](DK: ) another terminal-based assistant that can read your files, run commands in the terminal, and write new files directly, asking your permission at each step. In this tutorial you will set it up and use it to explore a project and to create and render a Quarto analysis. A second section then reinforces the core `analysis.qmd` workflow: one working chunk per artifact, iterative rewrites, and caching.
 
-You should be located in a repo called `antigravity` or something similar. If not, please set it up.
+You should be doing this tutorial in a repo named `antigravity`. If you are not, create one and connect to it, as you learned in earlier tutorials.
 
 ## Antigravity CLI
 ###

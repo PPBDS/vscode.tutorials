@@ -25,8 +25,6 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- DK: Need to add quarto publish gh-pages analysis.qmd.
-
 <!-- DK: Need to shorten. -->
 
 
@@ -74,17 +72,18 @@ codespace-starter $
 
 ###
 
-If your result ends in `quarto`, you are all set --- **do not run the script in the next exercise**; just do its last step. Otherwise, the next exercise connects you.
+If your result ends in `quarto`, you are all set --- **do not run the connect-repo commands in the next exercise**; just do its last step. Otherwise, the next exercise connects you.
 
 ### Exercise 2
 
-**Skip this paragraph --- do not run the script --- if `pwd` showed `/workspaces/quarto`.** Otherwise, run:
+**Skip this paragraph --- do not run these commands --- if `pwd` showed `/workspaces/quarto`.** Otherwise, run these two commands, one at a time:
 
 ````
+cd /workspaces/codespace-starter
 .devcontainer/connect-repo.sh quarto
 ````
 
-If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer does not show `quarto`, use `File -> Open Folder...` and open `/workspaces/quarto`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
+The `connect-repo` script lives in `codespace-starter`, so the first command moves you there; running the script from anywhere else --- including the `code` repo from the last tutorial --- fails. If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer does not show `quarto`, use `File -> Open Folder...` and open `/workspaces/quarto`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
 
 **Everyone**: open a new bash Terminal and run `pwd`. CP/CR.
 
@@ -1403,7 +1402,7 @@ Generative AI is the future of coding, and much else. Practice using it as much 
 ## Cleanup
 ###
 
-Before moving on, delete the practice files you created in this tutorial. They were exercises, not work worth keeping.
+Before moving on, delete the practice files you created in this tutorial. They were exercises, not work worth keeping. In the final section, you will make a document worth keeping.
 
 ### Exercise 1
 
@@ -1429,10 +1428,208 @@ R 4.5.3>
 
 `character(0)` means the vector is empty --- there are no files left in your `quarto` repo. The `recursive = TRUE` argument is needed here because `unlink()` must also remove the `_files` directories created when rendering Quarto documents. (`unlink()` does not touch hidden files, so the `.git` directory --- the repo itself --- survives.)
 
-## Summary
-### 
+## Publishing
+###
 
-This tutorial covered how to create [Quarto documents](https://docs.posit.co/ide/user/ide/guide/documents/quarto-project.html#creating-new-documents) using [GitHub Codespaces](https://github.com/features/codespaces). Some material was from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
+A rendered HTML file in your Codespace can be seen by nobody but you. In this final section you will make one more Quarto document --- a keeper this time --- and publish it to the web, where anyone can see it.
+
+### Exercise 1
+
+Create a new Quarto document. The title is "Diamonds". You are the author. Add
+
+````
+execute:
+  echo: false
+````
+
+to the YAML header. Save the file as `analysis.qmd`.
+
+Add a `setup` code chunk which loads **tidyverse**, with `#| message: false`. Then add a second code chunk. As in the last section, use AI to produce code for a beautiful graphic using the `diamonds` tibble, and put that code in the second chunk. `Cmd/Ctrl + Shift + K`.
+
+In the R Terminal, run:
+
+````
+tutorial.helpers::show_file("analysis.qmd")
+````
+
+CP/CR.
+
+```{r publishing-1}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 15)
+```
+
+###
+
+<pre><code>---
+title: "Diamonds"
+author: "Your Name"
+format: html
+execute:
+  echo: false
+---
+
+&#96;&#96;&#96;{r}
+#| label: setup
+#| message: false
+library(tidyverse)
+&#96;&#96;&#96;
+
+&#96;&#96;&#96;{r}
+ggplot(diamonds, aes(x = price)) +
+  geom_histogram(bins = 50)
+&#96;&#96;&#96;
+</code></pre>
+
+###
+
+Your plot code will differ from ours --- AI rarely writes the same code twice, and that is fine. This shape --- a YAML header, a `setup` chunk that loads libraries, then work chunks --- is the skeleton of every analysis document you will make from now on.
+
+### Exercise 2
+
+Look at the Source Control icon in the Activity Bar --- the one that looks like a branching line. Its badge shows how many files have changed. The number is large, because rendering created `analysis_files`, a directory with many files inside.
+
+Create a new file named `.gitignore` --- note the leading dot --- containing this single line:
+
+````
+*_files
+````
+
+Save it, and watch the badge drop.
+
+In the R Terminal, run `tutorial.helpers::show_file(".gitignore")`. CP/CR.
+
+```{r publishing-2}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 3)
+```
+
+###
+
+````
+*_files
+````
+
+###
+
+Git tracks changes to the files in your repository, but files that can be *regenerated* from your source do not belong in the history. The `_files` directory is rebuilt at every render, so we tell Git to ignore it. The `*` makes the rule cover any rendered document, not just `analysis.qmd`.
+
+### Exercise 3
+
+Commit and push your work. In the bash Terminal, run these three commands, one at a time:
+
+````
+git add .
+git commit -m "Diamonds analysis"
+git push
+````
+
+CP/CR.
+
+```{r publishing-3}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 10)
+```
+
+###
+
+````
+quarto $ git add .
+quarto $ git commit -m "Diamonds analysis"
+[main 4f2a9c1] Diamonds analysis
+ 3 files changed, 25 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 analysis.html
+ create mode 100644 analysis.qmd
+quarto $ git push
+Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Writing objects: 100% (5/5), 4.21 KiB | 4.21 MiB/s, done.
+To https://github.com/your-username/quarto.git
+   8b3d0e7..4f2a9c1  main -> main
+quarto $
+````
+
+###
+
+Note what is **not** in the commit: `analysis_files` never appears, because of your `.gitignore`. A commit is a snapshot; a push copies it to GitHub. Professionals keep their work in the cloud because laptops --- and Codespaces --- fail.
+
+### Exercise 4
+
+An HTML file in your repo on GitHub is still not a web page. [GitHub Pages](https://pages.github.com/) solves this: it serves files from your repository as a public website, with a real URL you can share.
+
+In the bash Terminal, run `quarto publish gh-pages analysis.qmd`. Respond with "Y" when it asks whether you want to publish. (This might take a minute.) CP/CR.
+
+```{r publishing-4}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 12)
+```
+
+###
+
+````
+quarto $ quarto publish gh-pages analysis.qmd
+? Publish site to https://your-username.github.io/quarto/ using gh-pages? (Y/n) › Yes
+Rendering for publish:
+
+[1/1] analysis.qmd
+Switched to a new branch 'gh-pages'
+[gh-pages (root-commit) 0e5631c] Initializing gh-pages branch
+remote: Create a pull request for 'gh-pages' on GitHub by visiting:
+remote:      https://github.com/your-username/quarto/pull/new/gh-pages
+To https://github.com/your-username/quarto.git
+ * [new branch]      HEAD -> gh-pages
+Published to https://your-username.github.io/quarto/analysis.html
+quarto $
+````
+
+###
+
+`quarto publish` put the rendered HTML on a separate Git "branch" called `gh-pages`, keeping it apart from your source on `main`. GitHub Pages then serves that branch as a website. GitHub Pages is one host among several --- [Netlify](https://www.netlify.com/) and [Quarto Pub](https://quartopub.com/) are popular alternatives.
+
+### Exercise 5
+
+The publish command printed (and may have opened in your browser) the address of your page. It can take a minute or two for the page to appear. Copy/paste the URL of your published page.
+
+```{r publishing-5}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 3)
+```
+
+###
+
+````
+https://your-username.github.io/quarto/analysis.html
+````
+
+###
+
+That page is live on the internet --- anyone you send the URL to can read it. This loop --- edit, render, publish --- is how nearly every later tutorial ends: with a piece of work anyone in the world can see.
+
+## Summary
+###
+
+This tutorial covered how to create [Quarto documents](https://docs.posit.co/ide/user/ide/guide/documents/quarto-project.html#creating-new-documents) using [GitHub Codespaces](https://github.com/features/codespaces), finishing with a document published to the web via GitHub Pages. Some material was from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
