@@ -78,7 +78,7 @@ include_graphics("images/terminal-on-open.png")
 
 ### Exercise 1
 
-Hit the `Enter` key (i.e, the `return` key on Mac or the `enter` key on Windows) two times in the Terminal to see what happens. The Terminal has a string of characters called the **prompt**. After a command has been executed, a prompt appears on a new line to let you know that the Terminal is ready for a new command. Copy and paste the three prompt lines from the Terminal as your answer below. We do a lot of **c**opy/**p**asting of **c**ommands/**r**esponses, so we abbreviate those instructions as CP/CR.
+Hit the `Enter` key (i.e, the `return` key on Mac or the `enter` key on Windows) two times in the Terminal to see what happens. The Terminal has a string of characters called the **prompt**. After a command has been executed, a prompt appears on a new line to let you know that the Terminal is ready for a new command. Copy and paste the three prompt lines from the Terminal as your answer below. CP/CR.
 
 ```{r terminal-1}
 question_text(NULL,
