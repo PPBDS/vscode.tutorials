@@ -48,7 +48,7 @@ development:
   devcontainers, touring a pre-built Jupyter devcontainer.json and
   building an R devcontainer.json from scratch
 
-- **Our Codespace Starter** (12-codespace-starter): A tour of the
+- **Our Codespace Starter** (12-our-codespace-starter): A tour of the
   devcontainer.json behind codespace-starter itself
 
 - **The Devcontainer Dockerfile** (13-docker): A reading tour of the
@@ -61,8 +61,8 @@ To run a tutorial, use:
 
 Available tutorial names include: 01-introduction, 02-code, 03-quarto,
 04-terminal-1, 05-terminal-2, 06-antigravity, 07-github-1, 08-github-2,
-09-websites-1, 10-websites-2, 11-devcontainers, 12-codespace-starter,
-and 13-docker.
+09-websites-1, 10-websites-2, 11-devcontainers,
+12-our-codespace-starter, and 13-docker.
 
 ## See also
 

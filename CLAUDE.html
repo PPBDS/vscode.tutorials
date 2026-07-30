@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">vscode.tutorials</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.9005</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,11 +39,12 @@
 <h2 id="relationship-to-the-base-tutorial-guide">Relationship to the base tutorial guide<a class="anchor" aria-label="anchor" href="#relationship-to-the-base-tutorial-guide"></a></h2>
 <p>The base guide (<a href="https://github.com/PPBDS/ai-rules/blob/main/claude-md/tutorials/CLAUDE.md" class="external-link"><code>claude-md/tutorials/CLAUDE.md</code></a>) is the default contract for tutorials across the project, and <strong><code>vscode.tutorials</code> mostly <em>follows</em> it.</strong> Its rules for question types, knowledge drops, the Introduction/Summary structure, submission evidence (CP/CR, <code>show_file()</code>), and the syntactic conventions all apply here. Read the base guide first; it is the default, not an outside reference. Two things set this package apart:</p>
 <ol style="list-style-type: decimal"><li><p><strong>No build-two-graphics-and-publish arc.</strong> The one structural piece of a normal tutorial these lack is its analysis path — get data, explore it, build a plot or table, interpret, publish. A <code>vscode.tutorials</code> tutorial’s <em>topic</em> is a piece of the working setup (Git, terminals, Codespaces, devcontainers, rendering), not a data analysis, so there is no <code>analysis.qmd</code> working chunk and no published graphic. Everything else about how an exercise and a tutorial are shaped still comes from the base guide.</p></li>
-<li><p><strong>A narrow, shrinking mechanics exception — first few tutorials only.</strong> The genuinely from-scratch teaching, where the base guide’s <em>assumptions</em> (students already know Git, terminals, rendering, CP/CR) are exactly what we <em>teach</em>, lives in the earliest tutorials. There the base guide’s bans (no exercise code chunks, no generic knowledge drops, work-in-the-QMD-not-the-R-Terminal) do not bind: we teach the mechanics directly, run commands in the Terminal because the Terminal is the lesson, and use the generic infrastructure knowledge drops collected below. This is <strong>not</strong> a blanket property of the package — it is concentrated in the first few tutorials and may be removed entirely before long. Do not invoke it for a later tutorial just because the file happens to live in this package.</p></li>
+<li><p><strong>A narrow, shrinking mechanics exception — first few tutorials only.</strong> The genuinely from-scratch teaching, where the base guide’s <em>assumptions</em> (students already know Git, terminals, rendering, CP/CR) are exactly what we <em>teach</em>, lives in the earliest tutorials. There the base guide’s bans (no exercise code chunks, no generic knowledge drops, work-in-the-QMD-not-the-R-Terminal) do not bind: we teach the mechanics directly, run commands in the Terminal because the Terminal is the lesson, and use the generic infrastructure knowledge drops collected below. This is <strong>not</strong> a blanket property of the package: the exception covers exactly the first three tutorials — Introduction, Code, and Quarto — and <strong>ends with Quarto</strong>. Do not invoke it for any later tutorial just because the file happens to live in this package. (It may yet be removed entirely.)</p></li>
 </ol><p>(The <code>tutorial.helpers</code> package’s tutorials are the other home of this mechanics exception, for the same reason.)</p>
 <div class="section level3">
 <h3 id="what-downstream-packages-assume">What downstream packages assume<a class="anchor" aria-label="anchor" href="#what-downstream-packages-assume"></a></h3>
-<p>Later packages (<code>misc.tutorials</code>, the Primer) do <strong>not</strong> assume a student has done <em>all</em> of <code>vscode.tutorials</code> — only the foundational material in the first several tutorials, roughly <strong>through the GitHub tutorials</strong> (<code>08-github-2</code>). The later <code>vscode.tutorials</code> tutorials (the websites pair, <code>11-devcontainers</code>, <code>12-codespace-starter</code>, <code>13-docker</code>) are not part of that assumed base. (This is about what downstream tutorials may rely on, not a claim about which tutorials students finish — many do reach the later ones.)</p>
+<p>Later packages (<code>misc.tutorials</code>, the Primer) do <strong>not</strong> assume a student has done <em>all</em> of <code>vscode.tutorials</code> — only the foundational material <strong>through the Quarto tutorial</strong>, the same boundary as the mechanics exception above. Nothing after Quarto is part of that assumed base. (This is about what downstream tutorials may rely on, not a claim about which tutorials students finish — many do reach the later ones.)</p>
+<p>The Quarto tutorial’s Publishing section is what completes this boundary: it teaches <code>.gitignore</code> and <code>quarto publish gh-pages</code>, the last two skills the base guide’s standard Introduction/Summary sequences lean on. Antigravity and GitHub Introduction teach them again later; that repetition is deliberate reinforcement.</p>
 </div>
 <div class="section level3">
 <h3 id="the-universal-entry-point">The universal entry point<a class="anchor" aria-label="anchor" href="#the-universal-entry-point"></a></h3>
@@ -126,13 +127,14 @@ example $</code></pre>
 <li>The prompt tracks <code>cd</code>: after <code>cd example</code> the prompt is <code>example $</code>; after <code>cd ..</code> it reverts to the parent’s name.</li>
 <li>In the <strong>home directory</strong> bash’s <code>\W</code> renders <code>~</code>, so the prompt is <code>~ $</code>. The home directory is <code>/home/rstudio</code> (the image’s user is <code>rstudio</code>) — not <code>/home/codespace</code>.</li>
 <li>
-<strong>Exception — Codespaces not started from our image.</strong> The Jupyter and Blank template Codespaces (toured in <code>11-devcontainers</code>) show GitHub’s stock long prompt. Those transcripts are correct as-is; leave them.</li>
+<strong>Exception — Codespaces not started from our image.</strong> The Jupyter and Blank template Codespaces (toured in the Devcontainers tutorial) show GitHub’s stock long prompt. Those transcripts are correct as-is; leave them.</li>
 <li>
-<strong>Subtlety, taught in <code>01-introduction</code> and <code>04-terminal-1</code>:</strong> only a <em>newly opened</em> bash Terminal gets the short prompt. The terminal already open when the Codespace starts shows the stock long prompt (the <code>PS1</code> override lands at the end of <code>~/.bashrc</code> and only affects shells started afterward). Tutorials tell students to open a fresh bash Terminal.</li>
+<strong>Subtlety, taught in Introduction and Terminal 1:</strong> only a <em>newly opened</em> bash Terminal gets the short prompt. The terminal already open when the Codespace starts shows the stock long prompt (the <code>PS1</code> override lands at the end of <code>~/.bashrc</code> and only affects shells started afterward). Tutorials tell students to open a fresh bash Terminal.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="repo-names-derive-from-tutorial-titles">Repo names derive from tutorial titles<a class="anchor" aria-label="anchor" href="#repo-names-derive-from-tutorial-titles"></a></h3>
-<p>A tutorial that has the student create a work repo names that repo after the <strong>tutorial’s title</strong>: lowercase, with spaces and other non-alphanumeric characters replaced by dashes. “GitHub Introduction” → <code>github-introduction</code>; “Our Codespace Starter” → <code>our-codespace-starter</code>. Tutorials without a repo (the terminal pair) stay in <code>codespace-starter</code>, so their prompts read <code>codespace-starter $</code>.</p>
+<p><strong>Every tutorial, starting with Introduction, requires its own work repo</strong>, named after the <strong>tutorial’s title</strong>: lowercase, with spaces and other non-alphanumeric characters replaced by dashes. “Terminal 1” → <code>terminal-1</code>; “Our Codespace Starter” → <code>our-codespace-starter</code>. The reason is ownership: students cannot push to <code>codespace-starter</code> (it is not their repo), nor publish GitHub Pages from it. Some tutorials (the terminal pair) never push at all, but the uniform one-tutorial-one-repo rule beats tracking special cases. There are no repo-less tutorials: a transcript’s prompt shows the repo name (<code>terminal-1 $</code>) whenever the working directory is the repo root, and <code>codespace-starter $</code> appears only when a transcript genuinely has the student located in that folder.</p>
+<p><code>connect-repo</code> must be run from <code>/workspaces/codespace-starter</code> — the script lives there and fails when run from inside another repo. The canonical fix-it instruction is therefore two commands: <code>cd /workspaces/codespace-starter</code>, then <code>.devcontainer/connect-repo.sh &lt;name&gt;</code>.</p>
 <p>Consequently, <strong>when a tutorial’s title changes, update all of these</strong> (they all embed the repo name):</p>
 <ol style="list-style-type: decimal"><li>The “Create and connect to a repo called <code>&lt;name&gt;</code>” instruction (and any other prose naming the repo).</li>
 <li>Every prompt line in every example transcript (<code>&lt;name&gt; $</code>).</li>
@@ -142,8 +144,12 @@ example $</code></pre>
 </ol><p>Do <strong>not</strong> change: the tutorial’s <code>id:</code> in the YAML (it equals the directory name, which a title change does not touch), the tutorial’s directory name under <code>inst/tutorials/</code>, or chunk labels.</p>
 <ul><li>A title must not collide with a directory that already exists under <code>/workspaces</code> — in particular, a title that would map to <code>codespace-starter</code> is forbidden (that folder is always present).</li>
 <li>
-<strong>Known exceptions to one-title-one-repo:</strong> <code>08-github-2</code> uses two repos (<code>project-1</code>, <code>project-2</code>) and <code>10-websites-2</code> uses two (<code>website-1</code>, <code>website-2</code>). The title rule cannot name two repos, so these keep their ordinal names; their prompts still follow the prompt rule.</li>
+<strong>Known exceptions to one-title-one-repo:</strong> GitHub 2 uses two repos (<code>project-1</code>, <code>project-2</code>) and Websites 2 uses two (<code>website-1</code>, <code>website-2</code>). The title rule cannot name two repos, so these keep their ordinal names; their prompts still follow the prompt rule.</li>
 </ul></div>
+<div class="section level3">
+<h3 id="refer-to-tutorials-by-title-not-number">Refer to tutorials by title, not number<a class="anchor" aria-label="anchor" href="#refer-to-tutorials-by-title-not-number"></a></h3>
+<p>Sequence numbers change often; titles rarely do. In prose — this file, and cross-references inside tutorials — refer to a tutorial by its <strong>title</strong> (“the Quarto tutorial”, “GitHub Introduction”), never by its <code>NN-slug</code> directory name. Reserve the directory name for places that genuinely need it: paths, URLs, <code>run_tutorial()</code> calls, and ids. This keeps most references immune to renumbering and shrinks the fan-out below.</p>
+</div>
 <div class="section level3">
 <h3 id="renumbering-tutorials-directory-renames">Renumbering tutorials (directory renames)<a class="anchor" aria-label="anchor" href="#renumbering-tutorials-directory-renames"></a></h3>
 <p>Tutorial directory names (<code>inst/tutorials/NN-slug/</code>) embed a sequence number. Renaming a directory fans out; update all of these together:</p>
@@ -158,13 +164,11 @@ example $</code></pre>
 <div class="section level3">
 <h3 id="the-devcontainer-image-pin-ghcrioppbdsdevcontainerxyz">The devcontainer image pin (<code>ghcr.io/ppbds/devcontainer:X.Y.Z</code>)<a class="anchor" aria-label="anchor" href="#the-devcontainer-image-pin-ghcrioppbdsdevcontainerxyz"></a></h3>
 <p>The version tag students see when they read <code>codespace-starter</code>’s <code>devcontainer.json</code> changes regularly. The authoritative value is the <code>"image"</code> pin in <a href="https://github.com/PPBDS/codespace-starter/blob/main/.devcontainer/devcontainer.json" class="external-link">PPBDS/codespace-starter <code>.devcontainer/devcontainer.json</code></a>. <strong>Whenever that pin is bumped, update every versioned copy in this repo</strong> (find them with <code>grep -rn 'ghcr.io/ppbds/devcontainer:' --include='*.Rmd' --include='*.yaml' .</code>):</p>
-<ol style="list-style-type: decimal"><li>
-<code>inst/tutorials/12-codespace-starter/tutorial.Rmd</code> — the expected answer for the find-the-<code>"image"</code>-line exercise.</li>
-<li>
-<code>inst/tutorials/13-docker/tutorial.Rmd</code> — the intro’s back-reference to that line.</li>
+<ol style="list-style-type: decimal"><li>The Our Codespace Starter tutorial (currently <code>inst/tutorials/12-our-codespace-starter/tutorial.Rmd</code>) — the expected answer for the find-the-<code>"image"</code>-line exercise.</li>
+<li>The Devcontainer Dockerfile tutorial (currently <code>inst/tutorials/13-docker/tutorial.Rmd</code>) — the intro’s back-reference to that line.</li>
 <li>
 <code>.github/workflows/R-CMD-check.yaml</code> — the CI <code>container: image:</code> tag (this one is normally bumped as part of the codespace-starter release process; the tutorials are what get forgotten).</li>
-</ol><p>Unversioned mentions of <code>ghcr.io/ppbds/devcontainer</code> (no <code>:X.Y.Z</code>) are fine and need no touching. Separately, <code>13-docker</code> embeds a full copy of the <code>PPBDS/devcontainers</code> Dockerfile — when that Dockerfile changes materially, the embedded copy (and the exercises reading it) must be refreshed too.</p>
+</ol><p>Unversioned mentions of <code>ghcr.io/ppbds/devcontainer</code> (no <code>:X.Y.Z</code>) are fine and need no touching. Separately, The Devcontainer Dockerfile tutorial embeds a full copy of the <code>PPBDS/devcontainers</code> Dockerfile — when that Dockerfile changes materially, the embedded copy (and the exercises reading it) must be refreshed too.</p>
 </div>
 </div>
 </div>
