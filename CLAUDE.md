@@ -261,7 +261,7 @@ other non-alphanumeric characters replaced by dashes. “Terminal 1” →
 `terminal-1`; “Our Codespace Starter” → `our-codespace-starter`. The
 reason is ownership: students cannot push to `codespace-starter` (it is
 not their repo), nor publish GitHub Pages from it. Some tutorials (the
-terminal pair) never push at all, but the uniform one-tutorial-one-repo
+terminal trio) never push at all, but the uniform one-tutorial-one-repo
 rule beats tracking special cases. There are no repo-less tutorials: a
 transcript’s prompt shows the repo name (`terminal-1 $`) whenever the
 working directory is the repo root, and `codespace-starter $` appears
@@ -349,10 +349,10 @@ repo** (find them with
 `grep -rn 'ghcr.io/ppbds/devcontainer:' --include='*.Rmd' --include='*.yaml' .`):
 
 1.  The Our Codespace Starter tutorial (currently
-    `inst/tutorials/12-our-codespace-starter/tutorial.Rmd`) — the
+    `inst/tutorials/13-our-codespace-starter/tutorial.Rmd`) — the
     expected answer for the find-the-`"image"`-line exercise.
 2.  The Devcontainer Dockerfile tutorial (currently
-    `inst/tutorials/13-docker/tutorial.Rmd`) — the intro’s
+    `inst/tutorials/14-docker/tutorial.Rmd`) — the intro’s
     back-reference to that line.
 3.  `.github/workflows/R-CMD-check.yaml` — the CI `container: image:`
     tag (this one is normally bumped as part of the codespace-starter
