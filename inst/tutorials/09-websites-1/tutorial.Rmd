@@ -34,7 +34,7 @@ This tutorial introduces the process of creating and organizing [Quarto websites
 
 ### 
 
-If you haven't already, start a new Github repository named `quarto-websites-introduction` and create a new Codespace where you will run this tutorial and complete all your work.
+You should be doing this tutorial in a repo named `websites-1`. If you are not, create one and connect to it, as you learned in earlier tutorials.
 
 ## Creating files
 ### 
@@ -43,7 +43,7 @@ Let's make a [Quarto website](https://quarto.org/docs/websites/).
 
 ### Exercise 1
 
-Verify that you have created a new public Github repo (called `quarto-websites-introduction`). Copy/paste the URL for the repo.
+Copy/paste the URL for your `websites-1` repository on GitHub.
 
 ```{r creating-files-1}
 question_text(NULL,
@@ -59,7 +59,7 @@ question_text(NULL,
 Your answer should look something like:
 
 ```
-https://github.com/ppbds-student/quarto-websites-introduction
+https://github.com/ppbds-student/websites-1
 ```
 
 Always start a new data science project with a new Github repo.
@@ -94,15 +94,15 @@ question_text(NULL,
 Your answer should look like this:
 
 ````
-quarto-websites-introduction $ quarto create project website .
+websites-1 $ quarto create project website .
 ? Title (website) › A New Website
-Creating project at /workspaces/quarto-websites-introduction:
+Creating project at /workspaces/websites-1:
   - Created _quarto.yml
   - Created .gitignore
   - Created index.qmd
   - Created about.qmd
   - Created styles.css
-quarto-websites-introduction $
+websites-1 $
 ````
 
 Quarto created 5 new files in the current directory. On the command line, `.` always refers to the current directory.
@@ -123,9 +123,9 @@ question_text(NULL,
 ### 
 
 ````
-quarto-websites-introduction $ ls
+websites-1 $ ls
 _quarto.yml     about.qmd       index.qmd       styles.css
-quarto-websites-introduction $
+websites-1 $
 ````
 
 These are the basic files needed to build a Quarto website. Note that `ls` does not show "hidden" files — those beginning with a `.`.
@@ -146,10 +146,10 @@ question_text(NULL,
 ### 
 
 ````
-quarto-websites-introduction $ ls -a
+websites-1 $ ls -a
 .               .git            about.qmd       styles.css
 ..              .gitignore      _quarto.yml     index.qmd
-quarto-websites-introduction $
+websites-1 $
 ````
 
 In general, do not touch or modify "dot" directories — those whose names begin with a period. They are managed by the operating system or other programs. For example, Git uses `.git` to track all changes in the project. Also note that `quarto create` added a `.gitignore` file, which was hidden from the plain `ls` output.
@@ -366,7 +366,7 @@ Sometimes we create a .gitignore by hand — like when we manually add _site to 
 
 ### Exercise 6
 
-Commit all files with the message "initial version" and then sync.
+Commit and push all files with the message "initial version".
 
 Run `git log -n 1` in the Terminal. CP/CR.
 
@@ -382,13 +382,13 @@ question_text(NULL,
 ### 
 
 ````
-quarto-websites-introduction $ git log -n 1
+websites-1 $ git log -n 1
 commit 658eedd63f2c3e2734484a2397935e854f5008f7 (HEAD -> main, origin/main, origin/HEAD)
 Author: ppbds-student <ppbds-student@users.noreply.github.com>
 Date:   Sat Mar 15 22:41:22 2025 -0400
 
     initial version
-quarto-websites-introduction $
+websites-1 $
 ````
 
 To learn more about Git, GitHub, and R, see [Happy Git with R](https://happygitwithr.com/existing-github-last.html).
@@ -415,13 +415,13 @@ question_text(NULL,
 ### 
 
 ````
-quarto-websites-introduction $ quarto render
+websites-1 $ quarto render
 [1/2] index.qmd
 [2/2] about.qmd
 
 Output created: _site/index.html
 
-quarto-websites-introduction $
+websites-1 $
 ````
 
 Quarto tells us what it did: it processed both QMD files and created a `_site` directory containing `index.html`.
@@ -446,10 +446,10 @@ question_text(NULL,
 ###
 
 ````
-quarto-websites-introduction $ ls
+websites-1 $ ls
 _site           index.qmd
 _quarto.yml     about.qmd       styles.css
-quarto-websites-introduction $
+websites-1 $
 ````
 
 Note the addition of a `_site` directory. This is where the HTML files that make up the website are stored. Website output files are often placed in a directory named `_site` or `docs`, depending on your web hosting service.
@@ -472,9 +472,9 @@ question_text(NULL,
 Your answer will probably look something like:
 
 ````
-quarto-websites-introduction $ ls _site
+websites-1 $ ls _site
 about.html      index.html      search.json     site_libs       styles.css
-quarto-websites-introduction $
+websites-1 $
 ````
 
 The `about.html` and `index.html` files are the rendered versions of `about.qmd` and `index.qmd`. They go into `_site` because the convention is to separate outputs (HTML files) from inputs (QMD files).
@@ -534,7 +534,7 @@ question_text(NULL,
 ### 
 
 ````
-quarto-websites-introduction $ quarto preview
+websites-1 $ quarto preview
 Preparing to preview
 
 Watching files for changes
@@ -566,7 +566,7 @@ question_text(NULL,
 ### 
 
 ````
-quarto-websites-introduction $ quarto preview
+websites-1 $ quarto preview
 Preparing to preview
 
 Watching files for changes
@@ -706,10 +706,12 @@ Press `Ctrl + c`.
 
 To make your website publicly visible, you need to "publish" it to the web. The Quarto documentation provides a [thorough discussion](https://quarto.org/docs/publishing/). We will be using [GitHub Pages](https://quarto.org/docs/publishing/github-pages.html).
 
+In later projects, you will often just ask AI to create a website's files and put the site on the web. That is OK! But, at least for now, issue the `quarto publish gh-pages` command yourself, at the Terminal. It is guaranteed to handle the subtle Git branching issues, and their interaction with GitHub Pages, that AI sometimes messes up. By the end of this section you will know exactly what the command does behind the scenes --- which is how you audit anyone, human or AI, who publishes on your behalf.
+
 
 ### Exercise 1
 
-Go to your `quarto-websites-introduction` Github repository.
+Go to your `websites-1` Github repository.
 
 Click "Settings" on the right side of the top menu.
 
@@ -731,7 +733,7 @@ question_text(NULL,
 Your answer should look like:
 
 ````
-https://github.com/ppbds-student/quarto-websites-introduction/settings/pages
+https://github.com/ppbds-student/websites-1/settings/pages
 ````
 
 This page shows the settings that control GitHub Pages. It should look something like this:
@@ -764,16 +766,16 @@ question_text(NULL,
 ### 
 
 ````
-quarto-websites-introduction $ quarto publish gh-pages
-? Publish site to https://ppbds-student.github.io/quarto-websites-introduction/ using gh-pages? (Y/n) › Yes
+websites-1 $ quarto publish gh-pages
+? Publish site to https://ppbds-student.github.io/websites-1/ using gh-pages? (Y/n) › Yes
 Saved working directory and index state WIP on main: 658eedd initial version
 Switched to a new branch 'gh-pages'
 [gh-pages (root-commit) c05d288] Initializing gh-pages branch
 remote:
 remote: Create a pull request for 'gh-pages' on GitHub by visiting:
-remote:      https://github.com/ppbds-student/quarto-websites-introduction/pull/new/gh-pages
+remote:      https://github.com/ppbds-student/websites-1/pull/new/gh-pages
 remote:
-To https://github.com/ppbds-student/quarto-websites-introduction.git
+To https://github.com/ppbds-student/websites-1.git
  * [new branch]      HEAD -> gh-pages
  ...
 ````
@@ -827,13 +829,13 @@ question_text(NULL,
 ###
 
 ````
-To https://github.com/ppbds-student/quarto-websites-introduction.git
+To https://github.com/ppbds-student/websites-1.git
    c05d288..0396c20  HEAD -> gh-pages
 
 [✓] Deploying gh-pages branch to website (this may take a few minutes)
-[✓] Published to https://ppbds-student.github.io/quarto-websites-introduction/
+[✓] Published to https://ppbds-student.github.io/websites-1/
 
-quarto-websites-introduction $
+websites-1 $
 ````
 
 There are other publishing options besides GitHub Pages. You would replace `gh-pages` in `quarto publish` with options like `quarto-pub` or `netlify` to use those services.
@@ -854,18 +856,97 @@ question_text(NULL,
 ### 
 
 ````
-https://ppbds-student.github.io/quarto-websites-introduction/
+https://ppbds-student.github.io/websites-1/
 ````
 
 When using GitHub Pages, the URL always follows the same pattern: your GitHub username followed by `github.io`, then the repo name. Use descriptive names for your repos.
 
 ### Exercise 6
 
+Publishing left your source untouched --- but it did add something to the repo. From the Terminal, run `git branch -a`. CP/CR.
+
+```{r publishing-6}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+### 
+
+````
+websites-1 $ git branch -a
+  gh-pages
+* main
+  remotes/origin/gh-pages
+  remotes/origin/main
+````
+
+###
+
+`quarto publish` created a second branch, `gh-pages`, and pushed it to GitHub (that is the `remotes/origin/gh-pages` line). The `*` marks the branch you are on: `main`, exactly where you have been all along. Your repo now carries two parallel histories.
+
+### Exercise 7
+
+What is on that other branch? From the Terminal, run `git ls-tree --name-only gh-pages`. CP/CR.
+
+```{r publishing-7}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+### 
+
+````
+websites-1 $ git ls-tree --name-only gh-pages
+.nojekyll
+about.html
+index.html
+search.json
+site_libs
+styles.css
+````
+
+###
+
+No QMD files at all. The `gh-pages` branch holds the *rendered site* --- the same files you saw in `_site`. Behind the scenes, `quarto publish gh-pages` does four things: it renders the site into a temporary copy of the repo (a "worktree"), commits the resulting HTML to the `gh-pages` branch, pushes that branch to GitHub, and tells GitHub Pages to serve it. `main` keeps the source; `gh-pages` keeps the product. That division is why the Source Control pane shows no changes after publishing --- nothing on `main` moved. (The extra `.nojekyll` file tells GitHub Pages to serve the files exactly as they are.)
+
+### Exercise 8
+
+Earlier, you visited your repo's Pages settings *before* publishing. Go back: from your repo's page on GitHub, click **Settings**, then **Pages**. Copy/paste the sentence at the top which describes your site.
+
+```{r publishing-8}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+### 
+
+````
+Your site is live at https://ppbds-student.github.io/websites-1/
+````
+
+###
+
+The publish command changed these settings for you: the deployment source is now the `gh-pages` branch. When a publish goes wrong --- yours or an AI agent's --- this page is where you check what GitHub Pages is actually serving.
+
+### Exercise 9
+
 If you look closely in the Explorer pane, you will see a new directory, `.quarto`. Neither this directory, nor any of the files within it, appear in the Source Control pane because of the `/.quarto/` line in the `.gitignore` file.
 
 From the Terminal, run `ls .quarto`. CP/CR.
 
-```{r publishing-6}
+```{r publishing-9}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -877,14 +958,14 @@ question_text(NULL,
 ### 
 
 ````
-quarto-websites-introduction $ ls .quarto
+websites-1 $ ls .quarto
 idx     preview xref
-quarto-websites-introduction $
+websites-1 $
 ````
 
 The `.quarto` directory is like `.git`. Never look at or edit the files inside either — they are managed by Quarto and Git respectively.
 
-### Exercise 7
+### Exercise 10
 
 Open the `_quarto.yml` file in the Editor. Change `title: "A New Website"` to `title: "A New Website, second edition"`. Save the file.
 
@@ -897,7 +978,7 @@ show_file("_quarto.yml", start = 4, end = 5)
 CP/CR.
 
 
-```{r publishing-7}
+```{r publishing-10}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -917,11 +998,11 @@ website:
 
 The project title now exists in three places. We changed it in `_quarto.yml`, but we have not yet updated it in the `_site` files that constitute the rendered website, nor in the files already published to GitHub Pages.
 
-### Exercise 8
+### Exercise 11
 
 From the Terminal, run `quarto preview`. Copy and paste the text from the home page once it comes up on your browser.
 
-```{r publishing-8}
+```{r publishing-11}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -945,13 +1026,13 @@ To learn more about Quarto websites visit https://quarto.org/docs/websites.
 
 But, if you look at the Github Pages version of your website, it still uses the "A New Website" title because we have not (yet) published our new version. We have, however, changed the files in the `_site` directory.
 
-### Exercise 9
+### Exercise 12
 
 From the Terminal, stop the `quarto preview` command with `Ctrl + c`. Run `quarto publish`. You may need to hit `Enter` to confirm that you still want to use GitHub Pages. Refresh once after you are on your website.
 
 CP/CR.
 
-```{r publishing-9}
+```{r publishing-12}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -963,9 +1044,9 @@ question_text(NULL,
 ### 
 
 ````
-quarto-websites-introduction $ quarto publish
-? Publish update to: › https://ppbds-student.github.io/quarto-websites-introduction/ (GitHub Pages)
-From https://github.com/ppbds-student/quarto-websites-introduction
+websites-1 $ quarto publish
+? Publish update to: › https://ppbds-student.github.io/websites-1/ (GitHub Pages)
+From https://github.com/ppbds-student/websites-1
  * branch            gh-pages   -> FETCH_HEAD
 Rendering for publish:
 
@@ -977,31 +1058,31 @@ branch 'gh-pages' set up to track 'origin/gh-pages'.
 HEAD is now at 2576ffd Built site for gh-pages
 [gh-pages f262006] Built site for gh-pages
  3 files changed, 5 insertions(+), 5 deletions(-)
-origin  https://github.com/ppbds-student/quarto-websites-introduction (fetch)
-origin  https://github.com/ppbds-student/quarto-websites-introduction (push)
-To https://github.com/ppbds-student/quarto-websites-introduction
+origin  https://github.com/ppbds-student/websites-1 (fetch)
+origin  https://github.com/ppbds-student/websites-1 (push)
+To https://github.com/ppbds-student/websites-1
    2576ffd..f262006  HEAD -> gh-pages
 
 NOTE: GitHub Pages sites use caching so you might need to click the refresh
 button within your web browser to see changes after deployment.
 
 [✓] Deploying gh-pages branch to website (this may take a few minutes)
-[✓] Published to https://ppbds-student.github.io/quarto-websites-introduction/
+[✓] Published to https://ppbds-student.github.io/websites-1/
 
-quarto-websites-introduction $
+websites-1 $
 ````
 
 This output is shorter because Quarto already created the `gh-pages` branch when you first published.
 
 The `gh-pages` branch is a special branch in GitHub repositories used to host static websites via GitHub Pages. It serves as the deployment source for your website, which GitHub publishes at a URL like `https://<username>.github.io/<repository-name>`.
 
-### Exercise 10
+### Exercise 13
 
 Commit and push all the files in the project. Run `git log -n 2` in the Terminal. CP/CR. 
 
 The `-n 2` option causes Git to just provide the information on the last two commits.
 
-```{r publishing-10}
+```{r publishing-13}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,

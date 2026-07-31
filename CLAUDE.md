@@ -253,9 +253,8 @@ name, which a title change does not touch), the tutorial's directory name under
 - A title must not collide with a directory that already exists under
   `/workspaces` — in particular, a title that would map to `codespace-starter`
   is forbidden (that folder is always present).
-- **Known exception to one-title-one-repo:** Websites 2 uses two repos
-  (`website-1`, `website-2`). The title rule cannot name two repos, so these
-  keep their ordinal names; their prompts still follow the prompt rule.
+- There are currently no exceptions to one-title-one-repo: every tutorial uses
+  exactly one repo, named from its title.
 
 ### Refer to tutorials by title, not number
 
