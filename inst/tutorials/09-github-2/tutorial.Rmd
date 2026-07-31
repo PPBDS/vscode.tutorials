@@ -2,7 +2,7 @@
 title: "GitHub Advanced"
 author: David Kane
 tutorial:
-  id: "08-github-2"
+  id: "09-github-2"
 output:
   learnr::tutorial:
     progressive: yes

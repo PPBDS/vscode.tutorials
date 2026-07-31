@@ -2,7 +2,7 @@
 title: "Models And Money"
 author: David Kane
 tutorial:
-  id: "17-models"
+  id: "18-models"
 output:
   learnr::tutorial:
     df_print: default

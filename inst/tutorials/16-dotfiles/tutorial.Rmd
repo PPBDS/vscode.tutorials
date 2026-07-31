@@ -2,7 +2,7 @@
 title: "Dotfiles"
 author: David Kane
 tutorial:
-  id: "15-dotfiles"
+  id: "16-dotfiles"
 output:
   learnr::tutorial:
     progressive: yes
