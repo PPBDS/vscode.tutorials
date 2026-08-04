@@ -112,13 +112,13 @@ Your repo lives in two places: this folder and github.com. `connect-repo` create
 
 After starting the tutorial, your R Terminal is "busy" running the tutorial.
 
-You will want to run R commands while completing the tutorial. You can do this in a second R Terminal. Click the small down arrow in the top right of the Terminal panel, next to the + button. From the drop-down menu, select "R Terminal."
+You will want to run R commands while completing the tutorial. You can do this in a second R Terminal. Click the small down arrow in the top right of the Panel, next to the `+` button. From the drop-down menu, select **R Terminal**.
 
 ```{r}
 include_graphics("images/new-r-terminal.png")
 ```
 
-Now, you have a fresh R Terminal where you can run commands. You can switch between terminals by clicking the tab names in the Terminal panel, such as "bash" or "R Tutorial," to bring a different terminal into view.
+Now, you have a fresh R Terminal where you can run commands. You can switch between terminals by clicking their tabs on the right side of the Panel, such as **bash** or **R Tutorial**, to bring a different terminal into view. (The tab for the R Terminal you just opened is labeled **R Interactive**.)
 
 ## Checking your setup
 ###

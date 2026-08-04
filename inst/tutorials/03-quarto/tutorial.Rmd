@@ -729,7 +729,7 @@ Chunk labels cannot be duplicated. Each chunk label must be unique.
 
 ### Exercise 9
 
-**Important Point**: There are two different "worlds" that we are dealing with. First is the world of the Quarto document, the QMD file. Second are the worlds of the R Terminals. **These worlds only connect when we connect them**. Something written in a Quarto document --- or an R script --- is not, by default, part of an R Terminal session. The world of an R Terminal session includes only the commands executed in that terminal window.
+**Important Point**: There are two different "worlds" that we are dealing with. First is the world of the Quarto document, the QMD file. Second are the worlds of the R Terminals. **These worlds only connect when we connect them**. Something written in a Quarto document --- or an R script --- is not, by default, part of an R Terminal session. The world of an R Terminal session includes only the commands executed in that terminal.
 
 ### 
 

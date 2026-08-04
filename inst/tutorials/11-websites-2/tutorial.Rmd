@@ -69,7 +69,7 @@ Each website gets its own GitHub repo. This keeps projects independent: separate
 
 ### Exercise 2
 
-In the Terminal, run `quarto create project website .`.  Use "Websites 2" as the title, if asked.
+In the bash Terminal, run `quarto create project website .`.  Use "Websites 2" as the title, if asked.
 
 CP/CR.
 
@@ -102,7 +102,7 @@ We are moving faster than in the Websites 1 tutorial because you are already fam
 
 Add `_site` to the `.gitignore` files. Save it.
 
-In the Terminal, run `cat .gitignore`. CP/CR.
+In the bash Terminal, run `cat .gitignore`. CP/CR.
 
 ```{r the-website-3}
 question_text(NULL,
@@ -129,7 +129,7 @@ Keeping track of all the different files and understanding how they work togethe
 
 In `index.qmd`, delete everything outside the YAML header. Change `title` to `"Billboard Graphic"`. 
 
-In the Terminal, run `cat index.qmd`. CP/CR.
+In the bash Terminal, run `cat index.qmd`. CP/CR.
 
 ```{r the-website-4}
 question_text(NULL,
@@ -186,7 +186,7 @@ Without `#| message: false`, the tidyverse startup messages would appear right o
 
 ### Exercise 6
 
-From the Terminal, run `quarto preview`. 
+From the bash Terminal, run `quarto preview`. 
 
 Copy and paste the home page, leaving out the menu items.
 
@@ -343,7 +343,7 @@ There are two common modes for working with larger projects. First, as here, we 
 
 Go to the Source Control pane. Commit and push your new changes to GitHub. Include a descriptive commit message, e.g. "Added plot to home page".
 
-In the Terminal, run `quarto publish gh-pages`. You may need to hit `Enter` once.
+In the bash Terminal, run `quarto publish gh-pages`. You may need to hit `Enter` once.
 
 Copy/paste the URL below:
 
@@ -547,7 +547,7 @@ You only need a few [formatting tricks](https://quarto.org/docs/authoring/markdo
 
 ### Exercise 13
 
-Push all the changes to GitHub, and issue the `quarto publish gh-pages` command in the Terminal. You need to hit `Enter` at least once. CP/CR.
+Push all the changes to GitHub, and issue the `quarto publish gh-pages` command in the bash Terminal. You need to hit `Enter` at least once. CP/CR.
 
 ```{r the-website-13}
 question_text(NULL,
@@ -576,7 +576,7 @@ Go to `File -> New File...` and select `Quarto Document`. Title it "Sources". Sa
 
 ### 
 
-In the Terminal, run `ls *qmd`. CP/CR.
+In the bash Terminal, run `ls *qmd`. CP/CR.
 
 ```{r the-website-14}
 question_text(NULL,
@@ -759,9 +759,9 @@ format:
 
 ### Exercise 18
 
-Run `quarto preview` from the Terminal. (You may need to first use `Ctrl + c` to end whatever program is currently running.) You will need to hit `Enter` once. Check out your new project! See how "Sources" now appears on the navigation toolbar. Click on "Sources" and see how the text you added to `sources.qmd` now appears on the web.
+Run `quarto preview` from the bash Terminal. (You may need to first use `Ctrl + c` to end whatever program is currently running.) You will need to hit `Enter` once. Check out your new project! See how "Sources" now appears on the navigation toolbar. Click on "Sources" and see how the text you added to `sources.qmd` now appears on the web.
 
-Run `ls _site/*html` in the Terminal. CP/CR.
+Run `ls _site/*html` in the bash Terminal. CP/CR.
 
 ```{r the-website-18}
 question_text(NULL,
@@ -787,7 +787,7 @@ You should see `sources.html`. Quarto websites, like many similar frameworks, pl
 
 In the `_quarto.yml` file, delete the two lines of code that create the link and header for the "Sources" page.
 
-In the Terminal, stop the preview with `Ctrl + c`. Then, use `rm` to remove `sources.qmd`. Run `ls *qmd` in the Terminal. CP/CR.
+In the bash Terminal, stop the preview with `Ctrl + c`. Then, use `rm` to remove `sources.qmd`. Run `ls *qmd` in the bash Terminal. CP/CR.
 
 ```{r the-website-19}
 question_text(NULL,
@@ -808,7 +808,7 @@ Make two more empty Quarto documents, in the same way as you did above, with tit
 
 You should save them both (so they're not `untitled-1` and `untitled-2`). Name them `source-1.qmd` and `source-2.qmd`. 
 
-In the Terminal, run the command `head source-1.qmd source-2.qmd`. CP/CR.
+In the bash Terminal, run the command `head source-1.qmd source-2.qmd`. CP/CR.
 
 ```{r the-websites-20}
 question_text(NULL,
@@ -917,7 +917,7 @@ Run `quarto preview` to see the changes.
 
 Go to the Source Control pane. Commit and push your new changes to GitHub. Include a descriptive commit message, e.g. "Added source pages".
 
-From the Terminal, run `git log -n 1`. CP/CR. 
+From the bash Terminal, run `git log -n 1`. CP/CR. 
 
 ```{r the-websites-22}
 question_text(NULL,
@@ -940,7 +940,7 @@ Date:   Mon Mar 17 18:03:23 2025 -0400
 websites-2 $ 
 ````
 
-Type `quarto publish` in the Terminal and hit "Enter." Note how you did not need to specify `gh-pages`. Quarto is smart enough to know that, since GitHub Pages is what you used last time, it is probably what you want now.  
+Type `quarto publish` in the bash Terminal and hit "Enter." Note how you did not need to specify `gh-pages`. Quarto is smart enough to know that, since GitHub Pages is what you used last time, it is probably what you want now.  
 
 Explore the use of the "Sources" menu on your website.
 
@@ -956,7 +956,7 @@ Close your R Terminal and open a new one to start fresh. Use `File -> New File..
 
 In this script, add `library(tidyverse)` and then, after a blank line, the billboard wrangling code from `index.qmd` --- everything *except* the final `ggplot()` pipe --- ending by assigning the result to an object named `top_songs`. Save the file.
 
-In the Terminal, run `cat process_data.R`. CP/CR.
+In the bash Terminal, run `cat process_data.R`. CP/CR.
 
 ```{r the-websites-23}
 question_text(NULL,
@@ -1107,7 +1107,7 @@ Every object vanished when R restarted. And that is fine! We still have `process
 
 Source `process_data.R` again to recreate `top_songs` (click the Run button ▷). Then, from the R Terminal, run `write_rds(top_songs, file = "clean_data.rds")`. [`write_rds()`](https://readr.tidyverse.org/reference/read_rds.html) comes from the **readr** package and saves an R object to a file; it produces no output.
 
-In the Terminal, run `ls clean*`. CP/CR.
+In the bash Terminal, run `ls clean*`. CP/CR.
 
 ```{r the-websites-27}
 question_text(NULL,
@@ -1136,7 +1136,7 @@ So that the script itself saves its result, open `process_data.R` and, at the bo
 write_rds(top_songs, file = "clean_data.rds")
 ````
 
-In the Terminal, run `tail -n 3 process_data.R`. CP/CR.
+In the bash Terminal, run `tail -n 3 process_data.R`. CP/CR.
 
 ```{r the-websites-28}
 question_text(NULL,
@@ -1198,7 +1198,7 @@ question_text(NULL,
 
 Now we do the same thing for the plot. Use `File -> New File...` to create `make_plot.R`. Add `library(tidyverse)`, read the saved tibble, build the billboard plot (the `ggplot()` pipe from `index.qmd`) assigned to an object named `billboard_plot`, and save it with `ggsave()`. Save the file.
 
-In the Terminal, run `cat make_plot.R`. CP/CR.
+In the bash Terminal, run `cat make_plot.R`. CP/CR.
 
 ```{r the-website-30}
 question_text(NULL,
@@ -1244,7 +1244,7 @@ The fact that the tibble was called `top_songs` in `process_data.R` is irrelevan
 
 ### Exercise 31
 
-Source `make_plot.R` (click the Run button ▷). In the Terminal, run `ls *.png`. CP/CR.
+Source `make_plot.R` (click the Run button ▷). In the bash Terminal, run `ls *.png`. CP/CR.
 
 ```{r the-website-31}
 question_text(NULL,
@@ -1305,9 +1305,9 @@ There was nothing wrong with keeping the plotting code in `index.qmd`. The troub
 
 ### Exercise 33
 
-From the Terminal, run `quarto publish gh-pages`. You will need to hit `Enter` at least once. Then commit and push all the files, with a message like `"Use saved plot on home page"`.
+From the bash Terminal, run `quarto publish gh-pages`. You will need to hit `Enter` at least once. Then commit and push all the files, with a message like `"Use saved plot on home page"`.
 
-From the Terminal, run `git show --name-status HEAD`. CP/CR.
+From the bash Terminal, run `git show --name-status HEAD`. CP/CR.
 
 ```{r the-website-33}
 question_text(NULL,

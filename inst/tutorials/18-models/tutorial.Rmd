@@ -29,7 +29,7 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-In the OpenRouter tutorial, `aider` talked to the model for you. Now you will take `aider` away and talk to the model yourself --- first from the Terminal, then from R.
+In the OpenRouter tutorial, `aider` talked to the model for you. Now you will take `aider` away and talk to the model yourself --- first from the bash Terminal, then from R.
 
 ###
 

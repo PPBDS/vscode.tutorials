@@ -564,7 +564,7 @@ This image is pinned by **digest** (the long `sha256:...` hash), not just by the
 
 ### Exercise 2
 
-Time to build something of your own. In the terminal, create a new file called `Dockerfile` (no extension) in your project folder, and write a simple Dockerfile that starts from a small base image and runs one command. For example:
+Time to build something of your own. In the bash Terminal, create a new file called `Dockerfile` (no extension) in your project folder, and write a simple Dockerfile that starts from a small base image and runs one command. For example:
 
 ```
 FROM alpine:3.20
@@ -588,7 +588,7 @@ A Dockerfile is just a short recipe: a `FROM` line picks a starting image (here,
 
 ### Exercise 3
 
-Now build your Dockerfile into an image. In the terminal, in the same folder as your `Dockerfile`, run:
+Now build your Dockerfile into an image. In the bash Terminal, in the same folder as your `Dockerfile`, run:
 
 ```
 docker build -t my-first-image .

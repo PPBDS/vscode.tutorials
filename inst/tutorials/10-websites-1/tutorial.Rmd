@@ -68,7 +68,7 @@ Always start a new data science project with a new Github repo.
 
 <!-- DK: Show images of how you can this by hand, just as an FYI. -->
 
-In the Terminal, run `quarto create project website .`. Don't forget the `.` at the end of the command — it tells Quarto to place the new files in the current directory.
+In the bash Terminal, run `quarto create project website .`. Don't forget the `.` at the end of the command — it tells Quarto to place the new files in the current directory.
 
 You can also do this using the Application Menu. Start by clicking the hamburger icon (three horizontal bars) in the Activity Bar:
 
@@ -109,7 +109,7 @@ Quarto created 5 new files in the current directory. On the command line, `.` al
 
 ### Exercise 3
 
-In the Terminal, run `ls`. CP/CR.
+In the bash Terminal, run `ls`. CP/CR.
 
 ```{r creating-files-3}
 question_text(NULL,
@@ -132,7 +132,7 @@ These are the basic files needed to build a Quarto website. Note that `ls` does 
 
 ### Exercise 4
 
-In the Terminal, run `ls -a`. CP/CR. 
+In the bash Terminal, run `ls -a`. CP/CR. 
 
 ```{r creating-files-4}
 question_text(NULL,
@@ -368,7 +368,7 @@ Sometimes we create a .gitignore by hand — like when we manually add _site to 
 
 Commit and push all files with the message "initial version".
 
-Run `git log -n 1` in the Terminal. CP/CR.
+Run `git log -n 1` in the bash Terminal. CP/CR.
 
 ```{r examining-files-6}
 question_text(NULL,
@@ -401,7 +401,7 @@ We now have the infrastructure for our website. Next, we will "render" the web p
 
 ### Exercise 1
 
-From the Terminal, run `quarto render`. CP/CR.
+From the bash Terminal, run `quarto render`. CP/CR.
 
 ```{r rendering-and-previewing-1}
 question_text(NULL,
@@ -432,7 +432,7 @@ If you look at the `_site` directory in the Explorer pane, you will see many new
 
 ### Exercise 2
 
-From the Terminal, run `ls`. CP/CR.
+From the bash Terminal, run `ls`. CP/CR.
 
 ```{r rendering-and-previewing-2}
 question_text(NULL,
@@ -456,7 +456,7 @@ Note the addition of a `_site` directory. This is where the HTML files that make
 
 ### Exercise 3
 
-From the Terminal, run `ls _site`. CP/CR.
+From the bash Terminal, run `ls _site`. CP/CR.
 
 ```{r rendering-and-previewing-3}
 question_text(NULL,
@@ -520,7 +520,7 @@ Ignoring `_site` is [recommended](https://quarto.org/docs/publishing/github-page
 
 ### Exercise 5
 
-From the Terminal, run `quarto preview`. CP/CR.
+From the bash Terminal, run `quarto preview`. CP/CR.
 
 ```{r rendering-and-previewing-5}
 question_text(NULL,
@@ -545,14 +545,14 @@ GET: /
 
 The `quarto preview` command does two things. First, it renders the QMD files, just like `quarto render` does. Second, it opens the website in your browser so that you can see what it looks like. Click around and check it out!
 
-In Codespaces, a pop-up notification should appear automatically offering to open the site in your browser. If it does not, click the URL shown in the terminal output.
+In Codespaces, a pop-up notification should appear automatically offering to open the site in your browser. If it does not, click the URL shown in the bash Terminal's output.
 
 
 ### Exercise 6
 
 Look at your website in the browser. Click on the "About" link.
 
-Go to the Terminal. Copy and paste all the output from `quarto preview`.
+Go to the bash Terminal. Copy and paste all the output from `quarto preview`.
 
 ```{r rendering-and-previewing-6}
 question_text(NULL,
@@ -632,7 +632,7 @@ The website is being "hosted" inside your Codespace container and forwarded to y
 
 The advantage of using `quarto preview` is that the website is automatically updated whenever you edit and save the underlying QMD file. Try it by changing the `about.qmd` file, replacing "About this site" with your name. Save the file. 
 
-At the Terminal, you should see a new message. Copy and paste it here.
+At the bash Terminal, you should see a new message. Copy and paste it here.
 
 ```{r rendering-and-previewing-9}
 question_text(NULL,
@@ -697,7 +697,7 @@ About
 David Kane
 ````
 
-To stop `quarto preview`, press `Ctrl + c` in the Terminal. This cancels any running terminal command.
+To stop `quarto preview`, press `Ctrl + c` in the bash Terminal. This cancels any running terminal command.
 
 Press `Ctrl + c`.
 
@@ -706,7 +706,7 @@ Press `Ctrl + c`.
 
 To make your website publicly visible, you need to "publish" it to the web. The Quarto documentation provides a [thorough discussion](https://quarto.org/docs/publishing/). We will be using [GitHub Pages](https://quarto.org/docs/publishing/github-pages.html).
 
-In later projects, you will often just ask AI to create a website's files and put the site on the web. That is OK! But, at least for now, issue the `quarto publish gh-pages` command yourself, at the Terminal. It is guaranteed to handle the subtle Git branching issues, and their interaction with GitHub Pages, that AI sometimes messes up. By the end of this section you will know exactly what the command does behind the scenes --- which is how you audit anyone, human or AI, who publishes on your behalf.
+In later projects, you will often just ask AI to create a website's files and put the site on the web. That is OK! But, at least for now, issue the `quarto publish gh-pages` command yourself, at the bash Terminal. It is guaranteed to handle the subtle Git branching issues, and their interaction with GitHub Pages, that AI sometimes messes up. By the end of this section you will know exactly what the command does behind the scenes --- which is how you audit anyone, human or AI, who publishes on your behalf.
 
 
 ### Exercise 1
@@ -748,7 +748,7 @@ Sam Csik provides an [excellent overview](https://ucsb-meds.github.io/creating-q
 
 We won't edit the GitHub Pages settings by hand — Quarto will handle that. Publishing a website works the same way as publishing a single document.
 
-At the Terminal, run `quarto publish gh-pages`. 
+At the bash Terminal, run `quarto publish gh-pages`. 
 
 You will then need to type "Y" to accept the default settings. 
 
@@ -863,7 +863,7 @@ When using GitHub Pages, the URL always follows the same pattern: your GitHub us
 
 ### Exercise 6
 
-Publishing left your source untouched --- but it did add something to the repo. From the Terminal, run `git branch -a`. CP/CR.
+Publishing left your source untouched --- but it did add something to the repo. From the bash Terminal, run `git branch -a`. CP/CR.
 
 ```{r publishing-6}
 question_text(NULL,
@@ -890,7 +890,7 @@ websites-1 $ git branch -a
 
 ### Exercise 7
 
-What is on that other branch? From the Terminal, run `git ls-tree --name-only gh-pages`. CP/CR.
+What is on that other branch? From the bash Terminal, run `git ls-tree --name-only gh-pages`. CP/CR.
 
 ```{r publishing-7}
 question_text(NULL,
@@ -944,7 +944,7 @@ The publish command changed these settings for you: the deployment source is now
 
 If you look closely in the Explorer pane, you will see a new directory, `.quarto`. Neither this directory, nor any of the files within it, appear in the Source Control pane because of the `/.quarto/` line in the `.gitignore` file.
 
-From the Terminal, run `ls .quarto`. CP/CR.
+From the bash Terminal, run `ls .quarto`. CP/CR.
 
 ```{r publishing-9}
 question_text(NULL,
@@ -1000,7 +1000,7 @@ The project title now exists in three places. We changed it in `_quarto.yml`, bu
 
 ### Exercise 11
 
-From the Terminal, run `quarto preview`. Copy and paste the text from the home page once it comes up on your browser.
+From the bash Terminal, run `quarto preview`. Copy and paste the text from the home page once it comes up on your browser.
 
 ```{r publishing-11}
 question_text(NULL,
@@ -1028,7 +1028,7 @@ But, if you look at the Github Pages version of your website, it still uses the 
 
 ### Exercise 12
 
-From the Terminal, stop the `quarto preview` command with `Ctrl + c`. Run `quarto publish`. You may need to hit `Enter` to confirm that you still want to use GitHub Pages. Refresh once after you are on your website.
+From the bash Terminal, stop the `quarto preview` command with `Ctrl + c`. Run `quarto publish`. You may need to hit `Enter` to confirm that you still want to use GitHub Pages. Refresh once after you are on your website.
 
 CP/CR.
 
@@ -1078,7 +1078,7 @@ The `gh-pages` branch is a special branch in GitHub repositories used to host st
 
 ### Exercise 13
 
-Commit and push all the files in the project. Run `git log -n 2` in the Terminal. CP/CR. 
+Commit and push all the files in the project. Run `git log -n 2` in the bash Terminal. CP/CR. 
 
 The `-n 2` option causes Git to just provide the information on the last two commits.
 

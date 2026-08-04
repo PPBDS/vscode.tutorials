@@ -183,6 +183,34 @@ every other tutorial package. In particular:
   setup chunk and the `child = ...` argument on info-section / download-answers
   child chunks.
 
+### Terminal terminology
+
+VS Code's own terminal vocabulary is confusing, so the tutorials use one fixed
+system, taught in Getting Started (`tutorial.helpers`) and Terminal 1 and applied
+everywhere (including the primer's Getting Started chapter):
+
+- **Panel** --- the bottom region of the VS Code window, holding several *views*
+  (Problems, Output, Terminal, Ports). Never call the region "the Terminal" or
+  "the Terminal panel."
+- **the Terminal** (bare, capital T) --- the Terminal *view* in the Panel, and only
+  that. Not "Terminal pane," "Terminal panel," or (for the view) "Terminal tab."
+- **terminal** (lowercase) --- the generic noun: one interactive session inside the
+  Terminal view, or the concept in general ("a terminal-based assistant"). Each
+  terminal is selected by its **tab** on the right side of the Panel; "tab" refers
+  to those instance tabs only, never to the Panel's view labels.
+- **bash Terminal** / **R Terminal** --- a terminal running the bash shell /
+  running R. **Instructions must always name which one** --- "In the bash Terminal,
+  run `ls`" --- never bare "From the Terminal, run ...". (Typing bash commands
+  into the R Terminal is the classic student error this prevents.)
+- Bold verbatim UI strings (**TERMINAL**, **bash**, **R Terminal**,
+  **R Interactive**) only when pointing the student at something on screen. Wrinkle
+  worth a parenthetical where it bites: the drop-down item is labeled "R Terminal"
+  but the resulting terminal's tab is "R Interactive."
+- The conceptual key, taught in Terminal 1: a terminal is a window for typing text
+  to a program; the program is usually the bash **shell**; an R Terminal is the
+  same kind of window running R. Use "shell" (not "Terminal") for shell-owned
+  things: the environment, `PATH` lookup, command history.
+
 ## Consistency rules: prompts, repo names, and tutorial titles
 
 These rules keep every example transcript in every tutorial consistent with what a

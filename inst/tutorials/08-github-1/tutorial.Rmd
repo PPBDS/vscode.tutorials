@@ -104,7 +104,7 @@ You should be in a directory named `github-introduction`. `connect-repo` created
 
 ### Exercise 3
 
-At the Terminal, run `ls`. CP/CR.
+At the bash Terminal, run `ls`. CP/CR.
 
 ```{r using-git-3}
 question_text(NULL,
@@ -129,7 +129,7 @@ The only visible file is `AGENTS.md`, which `connect-repo` copied in when it cre
 
 ### Exercise 4
 
-At the Terminal, run `ls -a`. The `a` option tells `ls` to show all directories and files, including hidden ones, which start with a dot (`.`). CP/CR.
+At the bash Terminal, run `ls -a`. The `a` option tells `ls` to show all directories and files, including hidden ones, which start with a dot (`.`). CP/CR.
 
 ```{r using-git-4}
 question_text(NULL,
@@ -339,7 +339,7 @@ Look back at the token scopes from Exercise 6: `delete_repo` was not among them.
 
 Delete `scratch-repo` from the website. Go to its page on GitHub (`https://github.com/your-username/scratch-repo`), click **Settings** in the top menu, and scroll all the way to the bottom, to the **Danger Zone**. Click **Delete this repository**, and follow the prompts --- GitHub will make you type the repository's full name to confirm.
 
-Then, back in the Terminal, confirm it is gone and clean up the local clone. Run these commands, one at a time:
+Then, back in the bash Terminal, confirm it is gone and clean up the local clone. Run these commands, one at a time:
 
 ````
 cd /workspaces
@@ -379,7 +379,7 @@ Two lessons. First, the Danger Zone's type-the-full-name ritual is friction by d
 
 ### Exercise 11
 
-At the Terminal, create a new Quarto document. From the three horizontal bar icon in the Activity Bar, select `File -> New File...`, then select `Quarto Document` from the drop-down menu. This opens the new file in the Editor.
+Create a new Quarto document. From the three horizontal bar icon in the Activity Bar, select `File -> New File...`, then select `Quarto Document` from the drop-down menu. This opens the new file in the Editor.
 
 ```{r}
 include_graphics("images/create-analysis.png")
@@ -436,7 +436,7 @@ The top part of the pane shows the files that have been added or modified. This 
 
 Render `analysis-1.qmd` with `Cmd/Ctrl + Shift + K`.
 
-The Terminal tab is filled with a bunch of commands. Copy/paste the last few lines.
+The Terminal fills with a bunch of output. Copy/paste the last few lines.
 
 ```{r using-git-12}
 question_text(NULL,
@@ -466,12 +466,12 @@ Browse at http://localhost:7383/
 
 ### Exercise 13
 
-The VS Code window has changed quite a bit. The Viewer tab has appeared, showing the HTML. The Source Control pane now includes many new files. The Terminal tab is not showing a prompt.
+The VS Code window has changed quite a bit. The Viewer tab has appeared, showing the HTML. The Source Control pane now includes many new files. The Terminal is not showing a prompt.
 
 
 We can stop the preview of `analysis-1.qmd` by pressing `Ctrl + c` on your keyboard in the Terminal. Once we do, the Viewer tab is empty, so we can close the entire Secondary Activity Bar.
 
-From the Terminal, run `ls`. CP/CR.
+From the bash Terminal, run `ls`. CP/CR.
 
 ```{r using-git-13}
 question_text(NULL,
@@ -504,7 +504,7 @@ include_graphics("images/analysis-git-2.png")
 
 We have many new files, like `analysis-1.html`, created when we rendered `analysis-1.qmd`. They have "U" indicators because, according to Git, they are **U**ntracked. Many of these files are weird and confusing. It turns out that all these files live in the `analysis-1_files` directory.
 
-From the Terminal, run `ls -R analysis-1_files`. The `-R` option means **r**ecursive. CP/CR.
+From the bash Terminal, run `ls -R analysis-1_files`. The `-R` option means **r**ecursive. CP/CR.
 
 
 ```{r using-git-14}
@@ -552,7 +552,7 @@ Whenever you render a document using Quarto, it creates a directory called `base
 
 From the three horizontal bar icon, `File -> New Text File`. Save this new file as `.gitignore`. (Don't forget the leading period.) 
 
-From the Terminal, run `ls -a`. CP/CR.
+From the bash Terminal, run `ls -a`. CP/CR.
 
 ```{r using-git-15}
 question_text(NULL,
@@ -579,7 +579,7 @@ Because `.gitignore` begins with a `.`, it is a hidden file. It would not appear
 
 The purpose of the `.gitignore` file is to specify the files and directories that **Git** should **ignore**. Add a new line to the file, `analysis-1_files`, followed by an empty line. Save your changes.
 
-From the Terminal, run `cat .gitignore`. CP/CR.
+From the bash Terminal, run `cat .gitignore`. CP/CR.
 
 ```{r using-git-16}
 question_text(NULL,
@@ -621,7 +621,7 @@ include_graphics("images/commit-stage-changes-pop-up.png")
 
 Press "Yes". In the future, you might click on "Always" so that this dialog stops appearing. It will be months, at least, before you make active use of staging in your Git workflow.
 
-From the Terminal, run `git log`. CP/CR.
+From the bash Terminal, run `git log`. CP/CR.
 
 ```{r using-git-17}
 question_text(NULL,
@@ -789,7 +789,7 @@ include_graphics("images/analysis-1-post-sync.png")
 
 Notice how the purple cloud icon, representing the remote tracking branch on GitHub called "origin/main", has moved to the most recent commit along with the local main branch.
 
-From the Terminal, run `git log` again. CP/CR.
+From the bash Terminal, run `git log` again. CP/CR.
 
 ```{r using-git-23}
 question_text(NULL,
@@ -975,7 +975,7 @@ include_graphics("images/analysis-1-git-post-graph.png")
 
 Commit your files and push them to GitHub. Don't forget the commit message. Don't forget that "push" means the same thing as "sync."
 
-Use `Ctrl + c` to stop the Quarto watching process. From the Terminal, run `git log -n 1`. CP/CR.
+Use `Ctrl + c` to stop the Quarto watching process. From the bash Terminal, run `git log -n 1`. CP/CR.
 
 ```{r publishing-with-github-pages-2}
 question_text(NULL,
@@ -1010,7 +1010,7 @@ include_graphics("images/repo-settings-pages.png")
 
 We won't modify these options by hand. But it is useful to know where the details are located.
 
-From the Terminal, run `quarto publish gh-pages analysis-1.qmd`. Respond with "Y" when it asks whether you want to publish. (This might take a minute to run.) 
+From the bash Terminal, run `quarto publish gh-pages analysis-1.qmd`. Respond with "Y" when it asks whether you want to publish. (This might take a minute to run.) 
 
 CP/CR just the first 10 or so lines of the output.
 

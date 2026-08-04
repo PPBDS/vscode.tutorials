@@ -90,7 +90,7 @@ aider 0.86.2
 
 ###
 
-**[aider](https://aider.chat/)** is an AI coding assistant that runs in the Terminal. It is already installed in your Codespace --- you saw the line that installs it back in `12-docker`.
+**[aider](https://aider.chat/)** is an AI coding assistant that runs in the terminal. It is already installed in your Codespace --- you saw the line that installs it back in `12-docker`.
 
 Here is what makes it useful today. The other AI tools each belong to one company: `claude` wants an Anthropic account, `codex` wants an OpenAI account, `agy` wants a Google account. `aider` just wants a key, and it does not care whose.
 
@@ -116,7 +116,7 @@ openrouter $ which aider
 
 ###
 
-`which` tells you where a command lives. `/usr/local/bin` is one of the folders the Terminal searches whenever you type a command, which is why `aider` works from any directory without you doing anything first.
+`which` tells you where a command lives. `/usr/local/bin` is one of the folders the shell searches whenever you type a command, which is why `aider` works from any directory without you doing anything first.
 
 ## Your OpenRouter Key
 ###
@@ -243,9 +243,9 @@ sk-or-v1
 
 ###
 
-`export` stores a name and a value in the Terminal's **environment**. Every program you start from that Terminal can read it. That is how `aider` will find your key in a minute --- you never hand it over, `aider` looks up `OPENROUTER_API_KEY` by itself.
+`export` stores a name and a value in the shell's **environment**. Every program you start from that bash Terminal can read it. That is how `aider` will find your key in a minute --- you never hand it over, `aider` looks up `OPENROUTER_API_KEY` by itself.
 
-We printed only the first eight characters on purpose. Printing the whole key would put it in your Terminal history and in the answers file this tutorial saves. Small conveniences like that are how most secrets leak.
+We printed only the first eight characters on purpose. Printing the whole key would put it in your shell history and in the answers file this tutorial saves. Small conveniences like that are how most secrets leak.
 
 ### Exercise 5
 
@@ -284,7 +284,7 @@ The reply comes back as **JSON**, a format that packs a lot of fields into one l
 
 ### Exercise 6
 
-Open a **new** bash Terminal (the `+` in the Terminal panel). In that new Terminal, run:
+Open a **new** bash Terminal (the `+` in the top-right corner of the Panel). In that new bash Terminal, run:
 
 <pre><code>echo ${OPENROUTER_API_KEY:0:8}
 </code></pre>
@@ -309,7 +309,7 @@ openrouter $ echo ${OPENROUTER_API_KEY:0:8}
 
 ###
 
-Empty. Your `export` only changed the Terminal you typed it in. The new Terminal started fresh and knows nothing about it.
+Empty. Your `export` only changed the terminal you typed it in. The new one started fresh and knows nothing about it.
 
 This is the same lesson as QMD World and R World: two things running side by side do not share what you set up in the other one.
 
@@ -719,7 +719,7 @@ You have an OpenRouter account and an API key. Neither cost anything, and neithe
 
 ###
 
-Along the way you learned that an `export` only affects the Terminal you typed it in, that `Authorization: Bearer` is how APIs check who you are, and that a leaked key gets deleted rather than hidden.
+Along the way you learned that an `export` only affects the terminal you typed it in, that `Authorization: Bearer` is how APIs check who you are, and that a leaked key gets deleted rather than hidden.
 
 You also ran `aider` on a free model, watched it write a file, saw how tokens are counted, and switched to another company's model mid-conversation without losing your work.
 

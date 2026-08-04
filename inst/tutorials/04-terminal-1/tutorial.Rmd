@@ -48,9 +48,9 @@ You should be doing this tutorial in a repo named `terminal-1`. If you are not, 
 ## Terminal
 ###
 
-The lower section of the VS Code window is the "Panel," which is composed of a collection of "views," including Outputs, Problems, and Terminal. Another term for "view" is "tab."
+The lower section of the VS Code window is the "Panel," which is composed of a collection of "views," including Output, Problems, Ports, and Terminal. (Their labels appear in capitals --- **TERMINAL** --- across the top of the Panel.)
 
-The Terminal view or tab is, by far, the part of the Panel which we use most often. We employ terminals to talk directly with the computer. Different types of terminals use different languages to do this. The initial terminal uses the Bash language.
+The Terminal view is, by far, the part of the Panel which we use most often. Within it you can run several *terminals* at once, each with its own tab on the right side of the Panel. A terminal is just a window for typing text to a program and reading the program's replies. The program is usually the bash **shell** --- a program whose whole job is to interpret your commands --- and that combination is what we call a bash Terminal. But a terminal can host other programs instead: an R Terminal is the same kind of window running R.
 
 ```{r}
 include_graphics("images/terminal-on-open.png")
@@ -58,7 +58,7 @@ include_graphics("images/terminal-on-open.png")
 
 ### Exercise 1
 
-You met the bash Terminal in the Getting Started and Introduction tutorials; this is recall. Open a new bash Terminal. Hit the `Enter` key twice --- the string that reappears each time is the **prompt**, telling you the Terminal is ready. Then run `pwd`. CP/CR.
+You met the bash Terminal in the Getting Started and Introduction tutorials; this is recall. Open a new bash Terminal. Hit the `Enter` key twice --- the string that reappears each time is the **prompt**, telling you bash is ready for your next command. Then run `pwd`. CP/CR.
 
 ```{r terminal-1}
 question_text(NULL,
@@ -85,7 +85,7 @@ The prompt is the name of the directory you are currently in --- `terminal-1` --
 
 ###
 
-You only get this short prompt in a bash Terminal which you open yourself. A Terminal that was already open when the Codespace started shows GitHub's long default prompt, something like:
+You only get this short prompt in a bash Terminal which you open yourself. A bash Terminal that was already open when the Codespace started shows GitHub's long default prompt, something like:
 
 ````
 @davekane-student ➜ /workspaces/terminal-1 (main) $
@@ -243,7 +243,7 @@ my_2.txt
 example $
 ````
 
-Be careful with the `rm` command in the Terminal. Unlike moving files to Trash on your computer, it is (usually) irreversible.
+Be careful with the `rm` command in the bash Terminal. Unlike moving files to Trash on your computer, it is (usually) irreversible.
 
 ### Exercise 8
 
@@ -905,7 +905,7 @@ terminal-1 $
 ## Summary
 ###
 
-This tutorial introduced the structure and uses of the Terminal from within VS Code running on GitHub Codespaces.
+This tutorial introduced the structure and uses of the bash Terminal from within VS Code running on GitHub Codespaces.
 
 The older, more general term for the terminal is the "command line." All modern operating systems provide a command line, which sophisticated users can use to modify files and directories with commands like `pwd`, `ls`, `echo`, `mkdir`, `mv`, `rm`, and `cd`. Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 

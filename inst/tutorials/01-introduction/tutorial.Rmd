@@ -38,7 +38,7 @@ This is the first tutorial you should complete after **Getting Started**. It bui
 
 You will:
 
-* Move around VS Code and use its Terminal tab.
+* Move around VS Code and work in its Terminal.
 * Create your own GitHub repository.
 * Create and run R scripts by hand and with AI.
 * Make two plots using the `diamonds` data.
@@ -50,7 +50,7 @@ Every tutorial begins in the same place: a Codespace on the `main` branch of [`P
 
 <!-- DK: Cut or add images. -->
 
-The tutorial itself runs in an R process displayed in a Terminal tab named something like **R Tutorial**. Leave that Terminal alone. Closing it stops the tutorial.
+The tutorial itself runs in an R process displayed in a terminal whose tab is named something like **R Tutorial**. Leave that terminal alone. Closing it stops the tutorial.
 
 <!-- DK: Change all prompts and responses. Ie.
 
@@ -83,7 +83,7 @@ VS Code is split into a few parts:
 * The **Activity Bar** is the row of small icons on the far left.
 * The **Side Bar** is the box next to those icons. Click the Explorer icon to see your files. Click the Source Control icon to work with Git.
 * The **Editor** is the big space in the middle. This is where you read and change files.
-* The **Terminal** is usually at the bottom. This is where you type commands.
+* The **Panel** is usually at the bottom. Its most important view is the **Terminal**, where you type commands.
 * The **Status Bar** is the thin bar across the very bottom.
 
 Here is the whole VS Code window. The Explorer Side Bar is on the left. The Editor is in the middle. The Terminal is inside the red box at the bottom.
@@ -107,7 +107,7 @@ The Terminal is a place where you type commands and the computer answers. In thi
 
 ###
 
-First, make sure you can see the Terminal. It is the panel across the bottom of the window. If it is not there, open it from the menu bar: click **View**, then choose **Terminal**.
+First, make sure you can see the Terminal. It lives in the Panel across the bottom of the window. If it is not there, open it from the menu bar: click **View**, then choose **Terminal**.
 
 ```{r}
 include_graphics("images/open-terminal-menu.png")
@@ -117,13 +117,13 @@ You can also open it with the keyboard shortcut shown in the menu, `` Ctrl+` `` 
 
 ###
 
-You want a **bash** Terminal. Look at the top-right corner of the Terminal panel. Click the small down arrow beside the `+`, then choose **bash**. The picture below shows an open bash Terminal: the **TERMINAL** tab is selected, the red box marks the `bash` label, and the `+` and down-arrow buttons for opening more Terminals sit just to its right.
+You want a **bash** Terminal. Look at the top-right corner of the Panel. Click the small down arrow beside the `+`, then choose **bash**. The picture below shows an open bash Terminal: the **TERMINAL** view is selected, the red box marks the **bash** tab, and the `+` and down-arrow buttons for opening more terminals sit just to its right.
 
 ```{r}
 include_graphics("images/terminal-on-open.png")
 ```
 
-You should now have at least two Terminal tabs: **R Tutorial**, which is busy running this tutorial, and **bash**, where you will work. Leave the **R Tutorial** tab alone.
+You should now have at least two terminal tabs: **R Tutorial**, which is busy running this tutorial, and **bash**, where you will work. Leave the **R Tutorial** tab alone.
 
 One thing to watch for: a bash Terminal that was already open when the Codespace started shows a long prompt like
 
@@ -432,7 +432,7 @@ Seeing the repository in your browser proves two things: the repository really e
 
 You met **GitHub Copilot** --- the AI assistant built right into VS Code --- in Getting Started, where it wrote small files for you. Now give it real work. We use Copilot here because it is always available and works out of the box.
 
-Open a new R Terminal from the Terminal menu. Keep the **R Tutorial** Terminal running, and use this new R Terminal for the R commands below. Click the small arrow beside the `+`, then choose **R Terminal**. The red boxes show where to click.
+Open a new R Terminal. Keep the **R Tutorial** terminal running, and use this new R Terminal for the R commands below. Click the small arrow beside the `+` in the top-right corner of the Panel, then choose **R Terminal**. (The new terminal's tab is labeled **R Interactive**.) The red boxes show where to click.
 
 ```{r}
 include_graphics("images/new-terminal.png")
