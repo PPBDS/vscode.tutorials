@@ -2,6 +2,15 @@
 
 ## vscode.tutorials (development version)
 
+- Terminology sweep: adopted one fixed vocabulary for the VS Code
+  terminal machinery — the **Panel** (bottom region) holds the
+  **Terminal** view; lowercase “terminal” is one session inside it,
+  selected by its tab; a **bash Terminal** / **R Terminal** is a
+  terminal running that program. Instructions now always name which
+  terminal to type in (“In the bash Terminal, run …”), the Introduction
+  and Terminal 1 definitional passages now agree, and Terminal 1 teaches
+  the terminal-vs-shell distinction. Convention recorded in CLAUDE.md.
+
 - Split `10-infrastructure` into three tutorials. `10-devcontainer`
   (**Devcontainers**) keeps the introduction, the Jupyter Notebook
   devcontainer tour, and building an R devcontainer.json from scratch.

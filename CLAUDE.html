@@ -114,7 +114,21 @@
 <p>```</p>
 <p>not <code>{r section-name-N-test, echo = TRUE}</code>. This works in both <code>.Rmd</code> and <code>.qmd</code> via modern knitr (≥ 1.35) and is the canonical style across every tutorial package in the project (the Primer, <code>misc.tutorials</code>, and this one). Use it for <code>echo</code>, <code>message</code>, <code>warning</code>, <code>cache</code>, <code>eval</code>, and every other chunk option. The only inline options that remain on the header line are <code>include = FALSE</code> on the setup chunk and the <code>child = ...</code> argument on info-section / download-answers child chunks.</p>
 </li>
+</ul><div class="section level3">
+<h3 id="terminal-terminology">Terminal terminology<a class="anchor" aria-label="anchor" href="#terminal-terminology"></a></h3>
+<p>VS Code’s own terminal vocabulary is confusing, so the tutorials use one fixed system, taught in Getting Started (<code>tutorial.helpers</code>) and Terminal 1 and applied everywhere (including the primer’s Getting Started chapter):</p>
+<ul><li>
+<strong>Panel</strong> — the bottom region of the VS Code window, holding several <em>views</em> (Problems, Output, Terminal, Ports). Never call the region “the Terminal” or “the Terminal panel.”</li>
+<li>
+<strong>the Terminal</strong> (bare, capital T) — the Terminal <em>view</em> in the Panel, and only that. Not “Terminal pane,” “Terminal panel,” or (for the view) “Terminal tab.”</li>
+<li>
+<strong>terminal</strong> (lowercase) — the generic noun: one interactive session inside the Terminal view, or the concept in general (“a terminal-based assistant”). Each terminal is selected by its <strong>tab</strong> on the right side of the Panel; “tab” refers to those instance tabs only, never to the Panel’s view labels.</li>
+<li>
+<strong>bash Terminal</strong> / <strong>R Terminal</strong> — a terminal running the bash shell / running R. <strong>Instructions must always name which one</strong> — “In the bash Terminal, run <code>ls</code>” — never bare “From the Terminal, run …”. (Typing bash commands into the R Terminal is the classic student error this prevents.)</li>
+<li>Bold verbatim UI strings (<strong>TERMINAL</strong>, <strong>bash</strong>, <strong>R Terminal</strong>, <strong>R Interactive</strong>) only when pointing the student at something on screen. Wrinkle worth a parenthetical where it bites: the drop-down item is labeled “R Terminal” but the resulting terminal’s tab is “R Interactive.”</li>
+<li>The conceptual key, taught in Terminal 1: a terminal is a window for typing text to a program; the program is usually the bash <strong>shell</strong>; an R Terminal is the same kind of window running R. Use “shell” (not “Terminal”) for shell-owned things: the environment, <code>PATH</code> lookup, command history.</li>
 </ul></div>
+</div>
 <div class="section level2">
 <h2 id="consistency-rules-prompts-repo-names-and-tutorial-titles">Consistency rules: prompts, repo names, and tutorial titles<a class="anchor" aria-label="anchor" href="#consistency-rules-prompts-repo-names-and-tutorial-titles"></a></h2>
 <p>These rules keep every example transcript in every tutorial consistent with what a student actually sees. They interlock: <strong>changing a tutorial’s title fans out into many required edits</strong>, listed below. Do not change one piece without the others.</p>
