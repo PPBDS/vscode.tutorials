@@ -325,7 +325,7 @@ include_graphics("images/gs-3.png")
 
 * Stop the tutorial by pressing `Ctrl + C` in that terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
 
-* To restart the tutorial, press the triangle button next to the "Getting Start" tutorial via the R Tutorials VS Code extension.
+* To restart the tutorial, press the triangle button next to the "Workspace" tutorial via the R Tutorials VS Code extension.
 
 * Finally, open the tutorial.
 
