@@ -36,11 +36,11 @@ reference. Two things set this package apart:
     teach the mechanics directly, run commands in the Terminal because
     the Terminal is the lesson, and use the generic infrastructure
     knowledge drops collected below. This is **not** a blanket property
-    of the package: the exception covers exactly the first three
-    tutorials — Introduction, Code, and Quarto — and **ends with
-    Quarto**. Do not invoke it for any later tutorial just because the
-    file happens to live in this package. (It may yet be removed
-    entirely.)
+    of the package: the exception covers exactly the first four
+    tutorials — Getting Started (00), Introduction, Code, and Quarto —
+    and **ends with Quarto**. Do not invoke it for any later tutorial
+    just because the file happens to live in this package. (It may yet
+    be removed entirely.)
 
 (The `tutorial.helpers` package’s tutorials are the other home of this
 mechanics exception, for the same reason.)
