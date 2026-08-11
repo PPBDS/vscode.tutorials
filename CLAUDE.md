@@ -186,7 +186,7 @@ every other tutorial package. In particular:
 ### Terminal terminology
 
 VS Code's own terminal vocabulary is confusing, so the tutorials use one fixed
-system, taught in the Tutorials tutorial (`tutorial.helpers`), Workspace, and Terminal 1 and applied
+system, taught in Getting Started (`tutorial.helpers`), Workspace, and Terminal 1 and applied
 everywhere (including the primer's Getting Started chapter):
 
 - **Panel** --- the bottom region of the VS Code window, holding several *views*

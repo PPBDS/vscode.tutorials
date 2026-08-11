@@ -33,7 +33,7 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-This tutorial, intended for beginners, tours the workspace you will use for everything that follows: the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant, ending with the different ways to run R code. Complete it inside a [GitHub Codespace](https://github.com/features/codespaces), as set up [here](https://ppbds.github.io/primer/getting-started.html). You should already have completed the **Tutorials** tutorial from the [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package.
+This tutorial, intended for beginners, tours the workspace you will use for everything that follows: the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant, ending with the different ways to run R code. Complete it inside a [GitHub Codespace](https://github.com/features/codespaces), as set up [here](https://ppbds.github.io/primer/getting-started.html). You should already have completed the **Getting Started** tutorial from the [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package.
 
 ###
 

@@ -96,7 +96,7 @@ You can make a part bigger or smaller by dragging its edge. If you close somethi
 
 ###
 
-Most questions ask for **CP/CR** --- **C**opy/**P**aste the **C**ommand and **R**esponse --- as you learned in the Tutorials tutorial.
+Most questions ask for **CP/CR** --- **C**opy/**P**aste the **C**ommand and **R**esponse --- as you learned in Getting Started.
 
 Your answer may look a little different from ours. That is OK. Usernames, version numbers, and the exact look of the prompt can be different. In our examples we shorten the prompt to just the folder name and a `$`, like `codespace-starter $`. Your real prompt is usually longer, but it means the same thing.
 
