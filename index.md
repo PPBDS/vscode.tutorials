@@ -42,8 +42,8 @@ development environment.
 
 - *Workspace* (“00-workspace”). A tour of the workspace: the bash
   Terminal, the R Terminal, GitHub Copilot, and the ways to run R code.
-  Moved here from **tutorial.helpers** (where it was “Getting Started”),
-  whose five-minute *Tutorials* tutorial now handles first contact.
+  Moved here from **tutorial.helpers**, whose five-minute *Getting
+  Started* tutorial now handles first contact.
 
 - *Workflow* (“01-workflow”). The first tutorial after **Workspace**:
   move around VS Code, use the Terminal, create a GitHub repo, run R
