@@ -37,10 +37,10 @@ reference. Two things set this package apart:
     the Terminal is the lesson, and use the generic infrastructure
     knowledge drops collected below. This is **not** a blanket property
     of the package: the exception covers exactly the first four
-    tutorials — Getting Started (00), Introduction, Code, and Quarto —
-    and **ends with Quarto**. Do not invoke it for any later tutorial
-    just because the file happens to live in this package. (It may yet
-    be removed entirely.)
+    tutorials — Workspace, Workflow, Code, and Quarto — and **ends with
+    Quarto**. Do not invoke it for any later tutorial just because the
+    file happens to live in this package. (It may yet be removed
+    entirely.)
 
 (The `tutorial.helpers` package’s tutorials are the other home of this
 mechanics exception, for the same reason.)
@@ -222,9 +222,9 @@ base guide and every other tutorial package. In particular:
 ### Terminal terminology
 
 VS Code’s own terminal vocabulary is confusing, so the tutorials use one
-fixed system, taught in Getting Started (`tutorial.helpers`) and
-Terminal 1 and applied everywhere (including the primer’s Getting
-Started chapter):
+fixed system, taught in the Tutorials tutorial (`tutorial.helpers`),
+Workspace, and Terminal 1 and applied everywhere (including the primer’s
+Getting Started chapter):
 
 - **Panel** — the bottom region of the VS Code window, holding several
   *views* (Problems, Output, Terminal, Ports). Never call the region
@@ -280,18 +280,17 @@ basename of the current working directory, a space, and a dollar sign**:
   Blank template Codespaces (toured in the Devcontainers tutorial) show
   GitHub’s stock long prompt. Those transcripts are correct as-is; leave
   them.
-- **Subtlety, taught in Introduction and Terminal 1:** only a *newly
-  opened* bash Terminal gets the short prompt. The terminal already open
-  when the Codespace starts shows the stock long prompt (the `PS1`
-  override lands at the end of `~/.bashrc` and only affects shells
-  started afterward). Tutorials tell students to open a fresh bash
-  Terminal.
+- **Subtlety, taught in Workflow and Terminal 1:** only a *newly opened*
+  bash Terminal gets the short prompt. The terminal already open when
+  the Codespace starts shows the stock long prompt (the `PS1` override
+  lands at the end of `~/.bashrc` and only affects shells started
+  afterward). Tutorials tell students to open a fresh bash Terminal.
 
 ### Repo names derive from tutorial titles
 
-**Every tutorial, starting with Introduction, requires its own work
-repo**, named after the **tutorial’s title**: lowercase, with spaces and
-other non-alphanumeric characters replaced by dashes. “Terminal 1” →
+**Every tutorial, starting with Workflow, requires its own work repo**,
+named after the **tutorial’s title**: lowercase, with spaces and other
+non-alphanumeric characters replaced by dashes. “Terminal 1” →
 `terminal-1`; “Our Codespace Starter” → `our-codespace-starter`. The
 reason is ownership: students cannot push to `codespace-starter` (it is
 not their repo), nor publish GitHub Pages from it. Some tutorials (the
@@ -343,10 +342,10 @@ keeps most references immune to renumbering and shrinks the fan-out
 below.
 
 When a title is written out as a title, quote it: *the next tutorial,
-“Models And Money,” teaches…*; *the “Getting Started” tutorial*.
-Following American style, commas and periods go inside the closing
-quote. Short attributive references (the Quarto tutorial, the Code
-tutorial) stay unquoted.
+“Models And Money,” teaches…*; *the “Workspace” tutorial*. Following
+American style, commas and periods go inside the closing quote. Short
+attributive references (the Quarto tutorial, the Code tutorial) stay
+unquoted.
 
 ### Renumbering tutorials (directory renames)
 
