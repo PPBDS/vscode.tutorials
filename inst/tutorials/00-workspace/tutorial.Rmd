@@ -46,9 +46,7 @@ include_graphics("images/gs-1.png")
 ## Bash Terminal
 ###
 
-###
-
-The **bash** Terminal is a text-based interface in which you type commands to tell your Codespace what to do. The pattern is always the same: you send a command, the terminal executes it, and it gives you something back. In this section you will practice the most common bash commands. (In the next section you will see that the R Terminal works exactly the same way.)
+The **bash Terminal** is a text-based interface in which you type commands to tell your Codespace what to do. You send a command, the terminal executes it, and it (usually) gives you something back. In this section you will practice the most common bash commands. (In the next section you will see that the R Terminal works exactly the same way.)
 
 ###
 
@@ -62,12 +60,6 @@ include_graphics("images/gs-2.png")
 ### Exercise 1
 
 In the bash Terminal, run `whoami`. CP/CR.
-
-###
-
-The other Mac/Windows issue to be aware of is the Command key (Mac) versus Control key (Windows). 
-
-Many shortcut key commands use the Command key --- abbreviated to `Cmd` --- or the Control key --- abbreviated to `Ctrl` --- to perform various actions, depending on the operating system you are using. We will use `Cmd/Ctrl` to mean either key, as appropriate.
 
 ```{r bash-terminal-1}
 question_text(NULL,
@@ -92,7 +84,7 @@ codespace-starter $
 
 ### Exercise 2
 
-In the bash Terminal, run `echo $0`. (Again, "run" means to type the command and then press `Enter`.)
+In the bash Terminal, run `echo $0`. ("Run" means to type the command and then press `Enter`, which is the `return` key on a Mac and the `enter` on Windows/Linux. "Execute" means the same thing is "run" in this context.)
 
 CP/CR.
 
@@ -142,7 +134,7 @@ codespace-starter $
 
 ###
 
-`pwd` stands for **p**rint **w**orking **d**irectory --- the folder the shell is currently "in." GitHub Codespaces place your repository under `/workspaces/`, so that is where you begin. Almost every command you run acts on this directory unless you tell it otherwise.
+`pwd` stands for **p**rint **w**orking **d**irectory --- the folder the shell is currently "in." GitHub Codespaces place your starting repository, which is `codebase-starter` in this case, under `/workspaces/`, so that is where you begin. Almost every command you run acts in this directory unless you tell it otherwise.
 
 ### Exercise 4
 
@@ -515,11 +507,8 @@ question_text(NULL,
 
 ````
 tutorial.helpers
-0.6.2.9008
-Reference
-Articles
-Changelog
-Search for
+0.7.0.9003
+
 Tutorial Helper Functions
 About this package
 tutorial.helpers provides functions to help you write R tutorials, especially if you follow my advice about the best way to do so.
@@ -585,13 +574,23 @@ Copilot can do much more than chat. In Agent mode, which is the default, it can 
 Make a file called presidents.txt which includes the names of the first 5 US Presidents.
 ```
 
-Copilot might just create the file in your working directory without checking with you. 
+Copilot might just create the file in your working directory without checking with you. Click on the Explorer icon to check.
+
+```{r}
+include_graphics("images/pres.png")
+```
+
+Note the dark circle inside the box next to `presidents.txt`. A dark circle alone indicates a file that has been changed *by you* but not saved. A file created (or edited) by AI also shows a dark circle, but within a box to indicate AI involvement.
+
+###
 
 Or, Copilot might open the new file in the Editor and display a **Keep** button. Click **Keep** to accept the file.
 
 ```{r}
 include_graphics("images/cs-copilot-keep-editor.png")
 ```
+
+###
 
 The **Keep** button may also appear in a smaller change summary near the Copilot chat box.
 
@@ -603,7 +602,7 @@ Or maybe not. AI is changing all the time!
 
 ###
 
-From the R Terminal, run:
+From the *R Terminal* (not the bash Terminal), run:
 
 ```
 tutorial.helpers::show_file("presidents.txt")
@@ -632,7 +631,7 @@ James Monroe
 
 ###
 
-You can also see the new file without using the Terminal. Click the Explorer icon at the top of the Activity Bar. The Explorer lists every file in your working directory, and `presidents.txt` should now appear there. Click on it to open the file in the Editor and see its contents directly. The Explorer is useful whenever you want to inspect a file that AI created or edited.
+Click the Explorer icon at the top of the Activity Bar. The Explorer lists every file in your working directory, and `presidents.txt` should now appear there. Click on it to open the file in the Editor and see its contents directly. The Explorer is useful whenever you want to inspect a file that AI created or edited.
 
 The Explorer icon is marked with a red square below.
 
