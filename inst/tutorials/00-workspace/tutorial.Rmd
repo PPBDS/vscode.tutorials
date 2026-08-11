@@ -311,29 +311,7 @@ codespace-starter $
 
 ###
 
-`Ctrl + C` interrupts whatever process is currently running in the terminal and returns you to the prompt; the `^C` marks where you pressed it. When a command hangs or you change your mind, `Ctrl + C` stops it. You will use it again in the next exercise to stop the tutorial itself.
-
-### Exercise 10
-
-Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
-
-* Return to your Codespace and click the terminal tab titled **R Tutorial** on the right side of the Panel.
-
-```{r}
-include_graphics("images/gs-3.png")
-```
-
-* Stop the tutorial by pressing `Ctrl + C` in that terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
-
-* To restart the tutorial, press the triangle button next to the "Workspace" tutorial via the R Tutorials VS Code extension.
-
-* Finally, open the tutorial.
-
-Now that you have read all the instructions, go ahead and follow them.
-
-###
-
-Notice that all of your answers to previous questions have been saved. It is not a problem to quit a tutorial. In fact, if you leave a tutorial idle, it will eventually quit automatically.
+`Ctrl + C` interrupts whatever process is currently running in the terminal and returns you to the prompt; the `^C` marks where you pressed it. When a command hangs or you change your mind, `Ctrl + C` stops it.
 
 ## R Terminal
 ###
