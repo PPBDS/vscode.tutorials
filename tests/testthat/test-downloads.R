@@ -1,5 +1,5 @@
 # Tests that URLs students are instructed to download from in the terminal
-# tutorials (05-terminal-2, 06-terminal-3) are still reachable. We check for text/plain content-type to catch cases where a
+# tutorials (06-terminal-2, 07-terminal-3) are still reachable. We check for text/plain content-type to catch cases where a
 # URL silently redirects to an HTML error page instead of the raw file.
 # GitHub rate-limits anonymous requests from CI runners, so retry 429s and, if
 # still throttled, skip: a rate limit is not evidence the URL is broken.
@@ -51,17 +51,17 @@ test_that("terminal tutorials: TODO.txt is downloadable", {
   )
 })
 
-test_that("06-terminal-3: grepping.txt is downloadable", {
+test_that("07-terminal-3: grepping.txt is downloadable", {
   testthat::skip_on_cran()
   testthat::skip_if_offline()
   check_url_is_plain_text(
-    "https://raw.githubusercontent.com/PPBDS/vscode.tutorials/refs/heads/main/inst/tutorials/06-terminal-3/images/grepping.txt",
-    local_path = system.file("tutorials/06-terminal-3/images/grepping.txt",
+    "https://raw.githubusercontent.com/PPBDS/vscode.tutorials/refs/heads/main/inst/tutorials/07-terminal-3/images/grepping.txt",
+    local_path = system.file("tutorials/07-terminal-3/images/grepping.txt",
                              package = "vscode.tutorials")
   )
 })
 
-test_that("05-terminal-2: penguins.csv is downloadable", {
+test_that("06-terminal-2: penguins.csv is downloadable", {
   testthat::skip_on_cran()
   testthat::skip_if_offline()
   check_url_is_plain_text(

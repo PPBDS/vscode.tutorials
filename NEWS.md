@@ -1,5 +1,21 @@
 # vscode.tutorials (development version)
 
+* Renamed the first two tutorials for content, matching Code and Quarto:
+  `00-getting-started` (recently moved in from `tutorial.helpers`) is now
+  **Workspace** (`00-workspace`) and `01-introduction` is now **Workflow**
+  (`01-workflow`). The Workflow tutorial's work repo is accordingly named
+  `workflow`. Cross-references in other tutorials, README, package docs, and
+  CLAUDE.md updated.
+
+* Moved Antigravity to position 04, directly after Quarto. `07-antigravity` is
+  now `04-antigravity`, and the terminal trio shifted down one:
+  `05-terminal-1`, `06-terminal-2`, `07-terminal-3` (YAML ids renumbered to
+  match, per the one-id-one-directory rule). Tutorials 08 and later keep their
+  numbers. Also refreshed README.Rmd/README.md and the package-level
+  documentation --- both still described the previous renumbering --- and
+  replaced leftover `NN-slug` cross-references in tutorial prose with tutorial
+  titles.
+
 * Terminology sweep: adopted one fixed vocabulary for the VS Code terminal
   machinery --- the **Panel** (bottom region) holds the **Terminal** view;
   lowercase "terminal" is one session inside it, selected by its tab; a

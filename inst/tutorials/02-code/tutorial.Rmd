@@ -29,13 +29,13 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-This tutorial teaches you how to use [**Codespaces**](https://github.com/features/codespaces) with [**R**](https://www.r-project.org/about.html) scripts. It assumes that you have completed the "Getting Started" tutorial from the [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package.
+This tutorial teaches you how to use [**Codespaces**](https://github.com/features/codespaces) with [**R**](https://www.r-project.org/about.html) scripts. It assumes that you have completed the "Workspace" tutorial.
 
 This tutorial includes some information from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
 ###
 
-You should be doing this tutorial in a repo called `code`. Recall from the Introduction tutorial: a repo is a folder that Git watches, with a copy kept on GitHub. If your Explorer already shows a `code` folder, you are all set. If it shows `codespace-starter`, the next two exercises will get you connected. Either way, they only take a minute.
+You should be doing this tutorial in a repo called `code`. Recall from the Workflow tutorial: a repo is a folder that Git watches, with a copy kept on GitHub. If your Explorer already shows a `code` folder, you are all set. If it shows `codespace-starter`, the next two exercises will get you connected. Either way, they only take a minute.
 
 ### Exercise 1
 
@@ -123,7 +123,7 @@ Now, you have a fresh R Terminal where you can run commands. You can switch betw
 ## Checking your setup
 ###
 
-Again, you should have completed the "Getting Started" tutorial from the [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package. If not, this section may be difficult.
+Again, you should have completed the "Workspace" tutorial. If not, this section may be difficult.
 
 ### Exercise 1
 
@@ -308,7 +308,7 @@ So far, we have only worked in the R Terminal, but it is difficult to type more 
 
 ### Exercise 1
 
-Create a new R script, as you learned in the Introduction tutorial: `File -> New File ...` from the Application Menu, then select `R Document`. Type two lines into the file: `5 + 5` on the first, `6 * 3` on the second. Save it as `script-1.R`, at the top level of the `code` repo. (The default directory that VS Code suggests when saving is not necessarily where you should save. Be intentional.)
+Create a new R script, as you learned in the Workflow tutorial: `File -> New File ...` from the Application Menu, then select `R Document`. Type two lines into the file: `5 + 5` on the first, `6 * 3` on the second. Save it as `script-1.R`, at the top level of the `code` repo. (The default directory that VS Code suggests when saving is not necessarily where you should save. Be intentional.)
 
 ###
 
@@ -351,7 +351,7 @@ R scripts are permanent copies of your code. You can save them and also work wit
 
 ### Exercise 2
 
-You met the Source button and its keyboard shortcuts in the Getting Started tutorial. Practice them again now --- the goal is to make them habit.
+You met the Source button and its keyboard shortcuts in the Workspace tutorial. Practice them again now --- the goal is to make them habit.
 
 Press the **Source** button in the top-right corner of the Editor. (We will sometimes shorten the instruction "press the Source button" to just "source" the script.)
 
@@ -488,7 +488,7 @@ In this case, the object `x`, which has a value of 10, exists in your workspace.
 
 ### Exercise 6
 
-`script-1.R` exists only in this Codespace. Recall from the Introduction tutorial: a **commit** is a snapshot of your work, and a **push** copies that snapshot to GitHub. Let's do both. In a bash Terminal, run these three commands, one at a time:
+`script-1.R` exists only in this Codespace. Recall from the Workflow tutorial: a **commit** is a snapshot of your work, and a **push** copies that snapshot to GitHub. Let's do both. In a bash Terminal, run these three commands, one at a time:
 
 ````
 git add script-1.R
@@ -530,7 +530,7 @@ Your script now exists in two places: this Codespace and GitHub. Professionals k
 
 ### Exercise 7
 
-In the Introduction tutorial, you read `git log`'s full output, one multi-line entry per commit. Professionals more often use the compact form. Run `git log --oneline`. CP/CR.
+In the Workflow tutorial, you read `git log`'s full output, one multi-line entry per commit. Professionals more often use the compact form. Run `git log --oneline`. CP/CR.
 
 ```{r script-1-7}
 question_text(NULL,
@@ -552,7 +552,7 @@ code $
 
 ###
 
-`--oneline` gives one line per commit: a shortened commit ID and the message. This compact history is the form you will glance at most often. You learned to read the `(HEAD -> main, origin/main)` marker in the Introduction tutorial --- when the newest commit carries both names, your Codespace and GitHub agree.
+`--oneline` gives one line per commit: a shortened commit ID and the message. This compact history is the form you will glance at most often. You learned to read the `(HEAD -> main, origin/main)` marker in the Workflow tutorial --- when the newest commit carries both names, your Codespace and GitHub agree.
 
 ## Script 2
 ###
@@ -653,7 +653,7 @@ character(0)
 
 `x` is gone! The environment --- the place in the computer where R creates and uses objects --- is cleaned, by default, each time R restarts. This is a good thing. For our work to be "reproducible," we want to be able to start from nothing except our code and raw data.
 
-You first saw this in Getting Started, when the `x` created by Copilot's `Rscript` never appeared in your open R session: every R process has its own environment, and a restarted R Terminal is a new process.
+You first saw this in Workspace, when the `x` created by Copilot's `Rscript` never appeared in your open R session: every R process has its own environment, and a restarted R Terminal is a new process.
 
 ### Exercise 4
 
@@ -741,7 +741,7 @@ x <- x + 1    # Account for borders
 
 ### Exercise 6
 
-In the Introduction tutorial, you asked AI for *a* nice plot --- any nice plot. This time the job is different: match this exact one, and run the code yourself, line by line.
+In the Workflow tutorial, you asked AI for *a* nice plot --- any nice plot. This time the job is different: match this exact one, and run the code yourself, line by line.
 
 ```{r}
 hist_p
@@ -892,7 +892,7 @@ code $
 
 ### Exercise 2
 
-In your browser, go to your `code` repository on github.com, as you learned in the Introduction tutorial. Confirm that `script-1.R`, `script-2.R`, and `diamonds.png` are all listed. Copy/paste the URL of your repository.
+In your browser, go to your `code` repository on github.com, as you learned in the Workflow tutorial. Confirm that `script-1.R`, `script-2.R`, and `diamonds.png` are all listed. Copy/paste the URL of your repository.
 
 ```{r summary-2}
 question_text(NULL,

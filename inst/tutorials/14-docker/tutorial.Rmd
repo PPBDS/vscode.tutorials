@@ -533,7 +533,7 @@ RUN set -eux; \
     cd /; rm -rf "$d"
 
 # (c) The course tutorials must be discoverable (catches a broken tutorial pkg).
-RUN R --vanilla -e 'ts <- learnr::available_tutorials("tutorial.helpers"); if (!("getting-started" %in% ts$name)) stop("getting-started tutorial not found"); cat("TUTORIALS OK:", paste(ts$name, collapse = ", "), "\n")'
+RUN R --vanilla -e 'ts <- learnr::available_tutorials("tutorial.helpers"); if (!("tutorials" %in% ts$name)) stop("tutorials tutorial not found"); cat("TUTORIALS OK:", paste(ts$name, collapse = ", "), "\n")'
 # ─────────────────────────────────────────────────────────────────────────────
 
 # Locale (en_US.UTF-8) and timezone (Etc/UTC) are inherited from the rocker base.
@@ -543,7 +543,7 @@ RUN R --vanilla -e 'ts <- learnr::available_tutorials("tutorial.helpers"); if (!
 
 Find the `FROM` line near the top of the Dockerfile. Copy and paste it.
 
-```{r docker-1}
+```{r the-devcontainer-image-1}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -573,7 +573,7 @@ CMD ["echo", "Hello from my first Docker image!"]
 
 Feel free to use a different base image or command, as long as it is your own short, working Dockerfile. Paste the full contents of your `Dockerfile` below.
 
-```{r docker-2}
+```{r the-devcontainer-image-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -596,7 +596,7 @@ docker build -t my-first-image .
 
 This builds (`docker build`) the Dockerfile in the current directory (`.`) and tags (`-t`) the resulting image `my-first-image`. Once it finishes, run `docker images` to confirm your new image is listed, then paste the output of `docker images` below.
 
-```{r docker-3}
+```{r the-devcontainer-image-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -626,7 +626,7 @@ docker push ghcr.io/YOUR_GITHUB_USERNAME/my-first-image:latest
 
 On github.com, open the new package's settings and change its visibility to public. Paste the public URL of your image below (it will look like `https://github.com/YOUR_GITHUB_USERNAME/my-first-image/pkgs/container/my-first-image`).
 
-```{r docker-4}
+```{r the-devcontainer-image-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -643,7 +643,7 @@ question_text(NULL,
 
 Find the sentence in the header comment that explains why the old base/dev/student image trio was removed. Copy and paste it.
 
-```{r docker-5}
+```{r the-devcontainer-image-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -669,7 +669,7 @@ There's now one image for everyone --- students launched via `codespace-starter`
 
 Find the comment describing the Dockerfile's overall layer order. Copy and paste it.
 
-```{r docker-6}
+```{r the-devcontainer-image-6}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -695,7 +695,7 @@ Docker caches each instruction as its own layer, reusing every cached layer unti
 
 Find the five `ARG` lines that pin tool versions (`QUARTO_VERSION`, `ARF_VERSION`, `NODE_MAJOR`, `CLAUDE_CODE_VERSION`, `CODEX_VERSION`). Copy and paste them, and note which CLI mentioned nearby is the *exception* to this pinning approach.
 
-```{r docker-7}
+```{r the-devcontainer-image-7}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -724,7 +724,7 @@ Pinning versions with `ARG` means every build installs the *exact same* Quarto, 
 
 Find the bullet point in the system-libraries comment that explains why `libuv1-dev` is baked into the image even though the R package that needs it doesn't strictly require it. Copy and paste that bullet.
 
-```{r docker-8}
+```{r the-devcontainer-image-8}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -751,7 +751,7 @@ The `fs` package's binary already works fine without `libuv1-dev` --- but `pak` 
 
 Find the line inside the `libnode-dev-virtual` package's control file that lists what it `Provides`. Copy and paste it, and explain in one sentence why this trick exists.
 
-```{r docker-9}
+```{r the-devcontainer-image-9}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -774,7 +774,7 @@ question_text(NULL,
 
 Find the two-part comment (in the "hardenings" block and the "Everything below installs as rstudio" block) that explains why a `pak` run as root can break later installs by the non-root user. Copy and paste the sentence describing what happens to `filelock`.
 
-```{r docker-10}
+```{r the-devcontainer-image-10}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -800,7 +800,7 @@ broke the student build (2026-07).
 
 Find the `ENV` line that turns off `pak`'s system-requirement auto-install behavior. Copy and paste it.
 
-```{r docker-11}
+```{r the-devcontainer-image-11}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -823,7 +823,7 @@ Without this, `pak` would try `sudo apt-get install` whenever it thinks a system
 
 Find the `RUN` block that installs the four PPBDS course packages from GitHub. Copy and paste it, and note the one argument to `pak::pkg_install()` that is not just the package list.
 
-```{r docker-12}
+```{r the-devcontainer-image-12}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -853,7 +853,7 @@ Installing straight from each package's GitHub default branch (instead of CRAN o
 
 Find the `remotes::install_url()` line that installs **CatBoost**. Copy and paste it, and explain in one sentence why **CatBoost** needs this special install method instead of a normal `pak::pkg_install()` call.
 
-```{r docker-13}
+```{r the-devcontainer-image-13}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -876,7 +876,7 @@ R -q -e 'remotes::install_url("https://github.com/catboost/catboost/releases/dow
 
 Find the `ENV` line that sets `RETICULATE_PYTHON`, and the comment just above the Python venv block explaining why it is set even though nothing installed in this Dockerfile uses it directly. Copy and paste the `ENV` line.
 
-```{r docker-14}
+```{r the-devcontainer-image-14}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -900,7 +900,7 @@ Quarto renders Python chunks through the Jupyter engine (`ipykernel`), which nee
 
 Find the line that installs Observable Framework. Copy and paste it, and explain when a student actually needs this CLI versus when Quarto already has them covered.
 
-```{r docker-15}
+```{r the-devcontainer-image-15}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -923,7 +923,7 @@ Interactive Observable charts *inside* an existing Quarto document need nothing 
 
 Find the "Modeling smoke test 3" `RUN` line near the bottom of the file, the one that fits a `brms` model. Copy and paste it, and explain why this test needs to actually fit a model rather than just checking that the `brms` package loads.
 
-```{r docker-16}
+```{r the-devcontainer-image-16}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,

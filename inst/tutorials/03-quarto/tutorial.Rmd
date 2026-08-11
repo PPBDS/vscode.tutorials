@@ -34,7 +34,7 @@ You should be running this tutorial from a Codespace created from the [Codespace
 
 ###
 
-You should be doing this tutorial in a repo called `quarto`. Recall from the Introduction tutorial: a repo is a folder that Git watches, with a copy kept on GitHub. If your Explorer already shows a `quarto` folder, you are all set. If it shows something else --- `codespace-starter`, or the `code` repo from the last tutorial --- the next two exercises will get you connected. Either way, they only take a minute.
+You should be doing this tutorial in a repo called `quarto`. Recall from the Workflow tutorial: a repo is a folder that Git watches, with a copy kept on GitHub. If your Explorer already shows a `quarto` folder, you are all set. If it shows something else --- `codespace-starter`, or the `code` repo from the last tutorial --- the next two exercises will get you connected. Either way, they only take a minute.
 
 ### Exercise 1
 

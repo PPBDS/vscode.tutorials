@@ -58,7 +58,7 @@ include_graphics("images/terminal-on-open.png")
 
 ### Exercise 1
 
-You met the bash Terminal in the Getting Started and Introduction tutorials; this is recall. Open a new bash Terminal. Hit the `Enter` key twice --- the string that reappears each time is the **prompt**, telling you bash is ready for your next command. Then run `pwd`. CP/CR.
+You met the bash Terminal in the Workspace and Workflow tutorials; this is recall. Open a new bash Terminal. Hit the `Enter` key twice --- the string that reappears each time is the **prompt**, telling you bash is ready for your next command. Then run `pwd`. CP/CR.
 
 ```{r terminal-1}
 question_text(NULL,

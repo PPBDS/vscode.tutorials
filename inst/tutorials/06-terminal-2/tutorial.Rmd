@@ -378,7 +378,7 @@ You have been running programs all along --- `ls`, `curl`, and `git` are program
 
 ### Exercise 1
 
-Make a one-line R script and run it, as you did back in the Getting Started tutorial. Run these commands, one at a time:
+Make a one-line R script and run it, as you did back in the Workspace tutorial. Run these commands, one at a time:
 
 ````
 echo 'print(2 + 2)' > add.R
@@ -407,7 +407,7 @@ terminal-2 $
 
 ###
 
-`Rscript` starts a fresh R process, runs the file, prints the result, and exits. Nothing is left running --- and nothing you define in the script exists afterward, as you saw with the vanishing `x` in Getting Started.
+`Rscript` starts a fresh R process, runs the file, prints the result, and exits. Nothing is left running --- and nothing you define in the script exists afterward, as you saw with the vanishing `x` in Workspace.
 
 ### Exercise 2
 

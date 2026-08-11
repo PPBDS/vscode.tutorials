@@ -51,7 +51,7 @@ You should be doing this tutorial in a repo named `github-introduction`. If you 
 
 Copy and paste the URLs for:
 
-1. Your `github-introduction` repository on GitHub. Find it under **Your repositories**, as you learned in the Introduction tutorial.
+1. Your `github-introduction` repository on GitHub. Find it under **Your repositories**, as you learned in the Workflow tutorial.
 
 2. This Codespace --- the address in your browser's address bar, ending in `.github.dev`.
 
@@ -205,7 +205,7 @@ The key part of the output:
 
 ###
 
-There is no magic here --- the script says so itself. `connect-repo` is a convenience wrapper around a handful of commands, and `--help` is the same convention you met with `ls --help` in the Introduction tutorial: a safe way to learn what a program does without running it. The two programs doing the real work are `git` (tracking changes) and `gh`, GitHub's official command-line program (talking to github.com). You will now run the important commands yourself.
+There is no magic here --- the script says so itself. `connect-repo` is a convenience wrapper around a handful of commands, and `--help` is the same convention you met with `ls --help` in the Workflow tutorial: a safe way to learn what a program does without running it. The two programs doing the real work are `git` (tracking changes) and `gh`, GitHub's official command-line program (talking to github.com). You will now run the important commands yourself.
 
 ### Exercise 6
 

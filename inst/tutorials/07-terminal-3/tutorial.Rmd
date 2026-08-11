@@ -832,7 +832,7 @@ grepping $
 
 ###
 
-You just used a pipe to interrogate a dangerous command: `--help` (safe, remember, from the Introduction tutorial) printed `rm`'s documentation, and `grep` pulled out the one line you cared about. So `rm -rf` means: delete **r**ecursively, **f**orcing past every safeguard, never prompting. When an AI agent asks to run a command, read it before approving. Check three things: what is `rm` (or `mv`, or `>`) actually targeting; does any path point outside your repo; and does the command download-and-run code (a pattern like `curl ... | sh`). Approving an agent's command means exactly what typing it yourself means.
+You just used a pipe to interrogate a dangerous command: `--help` (safe, remember, from the Workflow tutorial) printed `rm`'s documentation, and `grep` pulled out the one line you cared about. So `rm -rf` means: delete **r**ecursively, **f**orcing past every safeguard, never prompting. When an AI agent asks to run a command, read it before approving. Check three things: what is `rm` (or `mv`, or `>`) actually targeting; does any path point outside your repo; and does the command download-and-run code (a pattern like `curl ... | sh`). Approving an agent's command means exactly what typing it yourself means.
 
 ### Exercise 5
 
