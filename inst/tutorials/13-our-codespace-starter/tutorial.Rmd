@@ -29,7 +29,7 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-In `11-devcontainers` you examined a generic Python devcontainer and wrote a minimal R devcontainer from scratch. Now you will look at the devcontainer behind the Codespace you are working in right now. `codespace-starter` uses a custom image built specifically for this course, plus a detailed `settings` block that configures all of it.
+In the Devcontainers tutorial you examined a generic Python devcontainer and wrote a minimal R devcontainer from scratch. Now you will look at the devcontainer behind the Codespace you are working in right now. `codespace-starter` uses a custom image built specifically for this course, plus a detailed `settings` block that configures all of it.
 
 ### Exercise 1
 
@@ -109,7 +109,7 @@ Your new repo and `codespace-starter` sit side by side under `/workspaces` in th
 ## Codespace Starter Devcontainer
 ###
 
-This section walks through `codespace-starter’`s `.devcontainer/devcontainer.json` field by field, examining the custom image, VS Code extensions, settings, and `postCreateCommand`. Unlike the minimal configurations from `11-devcontainers`, this setup customizes almost everything to guarantee an identical experience for every student. By the end, you'll understand each top-level field and manually install a package to see exactly what `postCreateCommand` automates versus what you still do by hand.
+This section walks through `codespace-starter’`s `.devcontainer/devcontainer.json` field by field, examining the custom image, VS Code extensions, settings, and `postCreateCommand`. Unlike the minimal configurations from the Devcontainers tutorial, this setup customizes almost everything to guarantee an identical experience for every student. By the end, you'll understand each top-level field and manually install a package to see exactly what `postCreateCommand` automates versus what you still do by hand.
 
 ### Exercise 1
  
@@ -619,7 +619,7 @@ A good AI agent in this Codespace targets `/opt/venv/bin/pip` rather than plain 
 ## Summary
 ###
 
-This tutorial toured the `devcontainer.json` behind `codespace-starter` itself: its pinned custom PPBDS image, its VS Code extensions array, the settings that control the R Terminal, plot rendering, Git commits, autosave, word wrap, tab behavior, and the Python interpreter, and the `postCreateCommand` that keeps the four fast-moving course packages current. The next tutorial, `13-docker`, goes one level deeper and reads through the Dockerfile that actually builds the `ghcr.io/ppbds/devcontainer` image this `devcontainer.json` points at.
+This tutorial toured the `devcontainer.json` behind `codespace-starter` itself: its pinned custom PPBDS image, its VS Code extensions array, the settings that control the R Terminal, plot rendering, Git commits, autosave, word wrap, tab behavior, and the Python interpreter, and the `postCreateCommand` that keeps the four fast-moving course packages current. The next tutorial, "The Devcontainer Dockerfile," goes one level deeper and reads through the Dockerfile that actually builds the `ghcr.io/ppbds/devcontainer` image this `devcontainer.json` points at.
 
 ### Exercise 1
 

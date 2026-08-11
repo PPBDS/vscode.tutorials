@@ -2,7 +2,7 @@
 title: "Terminal 3"
 author: David Kane
 tutorial:
-  id: "06-terminal-3"
+  id: "07-terminal-3"
 output:
   learnr::tutorial:
     progressive: yes
@@ -568,7 +568,7 @@ grepping $
 Now, we'll download another text file. You can view the file on the following webpage:
 
 ````
-https://github.com/PPBDS/vscode.tutorials/blob/main/inst/tutorials/06-terminal-3/images/grepping.txt
+https://github.com/PPBDS/vscode.tutorials/blob/main/inst/tutorials/07-terminal-3/images/grepping.txt
 ````
 Then navigate to the URL for the raw text file.
 
@@ -602,7 +602,7 @@ question_text(NULL,
 My answer looks like:
 
 ````
-terminal-3 $ curl -o grepping/grepping.txt https://raw.githubusercontent.com/PPBDS/vscode.tutorials/refs/heads/main/inst/tutorials/06-terminal-3/images/grepping.txt
+terminal-3 $ curl -o grepping/grepping.txt https://raw.githubusercontent.com/PPBDS/vscode.tutorials/refs/heads/main/inst/tutorials/07-terminal-3/images/grepping.txt
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100    38  100    38    0     0    455      0 --:--:-- --:--:-- --:--:--   457

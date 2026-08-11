@@ -2,7 +2,7 @@
 title: "Terminal 2"
 author: David Kane
 tutorial:
-  id: "05-terminal-2"
+  id: "06-terminal-2"
 output:
   learnr::tutorial:
     progressive: yes

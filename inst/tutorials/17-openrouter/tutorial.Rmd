@@ -90,7 +90,7 @@ aider 0.86.2
 
 ###
 
-**[aider](https://aider.chat/)** is an AI coding assistant that runs in the terminal. It is already installed in your Codespace --- you saw the line that installs it back in `12-docker`.
+**[aider](https://aider.chat/)** is an AI coding assistant that runs in the terminal. It is already installed in your Codespace --- you saw the line that installs it back in "The Devcontainer Dockerfile" tutorial.
 
 Here is what makes it useful today. The other AI tools each belong to one company: `claude` wants an Anthropic account, `codex` wants an OpenAI account, `agy` wants a Google account. `aider` just wants a key, and it does not care whose.
 

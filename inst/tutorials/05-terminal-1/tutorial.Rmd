@@ -2,7 +2,7 @@
 title: Terminal 1
 author: David Kane
 tutorial:
-  id: "04-terminal-1"
+  id: "05-terminal-1"
 output:
   learnr::tutorial:
     progressive: yes

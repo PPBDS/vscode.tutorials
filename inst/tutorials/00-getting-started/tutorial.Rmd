@@ -2,13 +2,13 @@
 title: Getting Started
 author: David Kane
 tutorial:
-  id: getting-started
+  id: 00-getting-started
 output:
   learnr::tutorial:
     progressive: yes
     allow_skip: yes
 runtime: shiny_prerendered
-description: Tutorial for introducing students to tutorials when using Visual Studio Code via GitHub Codespaces.
+description: A tour of the working environment - the bash Terminal, the R Terminal, and GitHub Copilot, ending with the ways to run R code.
 ---
 
 ```{r setup, include = FALSE}
@@ -22,14 +22,18 @@ options(tutorial.exercise.timelimit = 60,
         tutorial.storage = "local")
 ```
 
+```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
+```
+
+```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```
+
 <!-- Get rid of the images which use dark mode. They are unreadable! -->
 
 ## Introduction
 ###
 
-This tutorial, intended for beginners, teaches students how to use [VS Code](https://code.visualstudio.com/) within [GitHub Codespaces](https://github.com/features/codespaces) to run R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. We also introduce students to the use of the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant.
-
-Most students begin this tutorial after completing the setup steps outlined [here](https://ppbds.github.io/primer/getting-started.html). If you have not done that yet, do so now.
+This tutorial, intended for beginners, tours the working environment you will use for everything that follows: the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant, ending with the different ways to run R code. Complete it inside a [GitHub Codespace](https://github.com/features/codespaces), as set up [here](https://ppbds.github.io/primer/getting-started.html). You should already have completed the **Tutorials** tutorial from the [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package.
 
 ###
 
@@ -39,23 +43,8 @@ After starting the tutorial, your Codespace looks something like this:
 include_graphics("images/gs-1.png")
 ```
 
-###
-
-Complete the tutorial in your Codespace. At the end, you will press a button to download a copy of your answers to the `Downloads` folder on your computer. Downloading only saves the file on your computer. If your instructor wants a copy, they will tell you how to send it to them.
-
-###
-
-Most tutorials begin by asking for your name and email. Your instructor might also ask you to fill in the "ID" field so that your work can be matched to a grading database. If not, leave the "ID" field blank. Click "Continue," then enter your name and email. Click the **"Submit Answer"** button each time. If you make a mistake, click **"Try Again"** and submit a new answer.
-
-If you are completing this tutorial as part of a class, use the same email address for every tutorial.
-
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
-```
-
 ## Bash Terminal
 ###
-
-Each tutorial includes exercises for you to complete. Most exercises ask you to run a command in a terminal and then copy the result into the answer box. After writing your answer, click the "Submit Answer" button, as you did above for your name and email address.
 
 ###
 
@@ -63,7 +52,7 @@ The **bash** Terminal is a text-based interface in which you type commands to te
 
 ###
 
-To do the exercises, you need a bash Terminal in which to type commands. Press the plus button (`+`) on the right side of the Panel to open one.
+You need a bash Terminal in which to type commands. The Panel at the bottom of VS Code already shows one. To open another at any time, press the plus button (`+`) on the right side of the Panel.
 
 
 ```{r}
@@ -72,19 +61,13 @@ include_graphics("images/gs-2.png")
 
 ### Exercise 1
 
-In the bash Terminal, type `whoami` and then press `return` (on Mac) or `enter` (on Windows). To "run" a command means to type it and then press this key. To avoid repeating both terms in every question, we use `Enter` to mean either the `return` or `enter` key, as appropriate.
+In the bash Terminal, run `whoami`. CP/CR.
 
 ###
 
 The other Mac/Windows issue to be aware of is the Command key (Mac) versus Control key (Windows). 
 
 Many shortcut key commands use the Command key --- abbreviated to `Cmd` --- or the Control key --- abbreviated to `Ctrl` --- to perform various actions, depending on the operating system you are using. We will use `Cmd/Ctrl` to mean either key, as appropriate.
-
-###
-
-**Do not just type the command into the answer box!** You must run the command in the bash Terminal and then copy the result.
-
-**C**opy and **P**aste both the **C**ommand *and* the **R**esponse from the bash Terminal into the box below. We will abbreviate this instruction in the future as **CP**/**CR**.
 
 ```{r bash-terminal-1}
 question_text(NULL,
@@ -96,8 +79,6 @@ question_text(NULL,
 ```
 
 ###
-
-We typically provide example answers, like the one below, after you submit your own response. Do not be concerned if your answer differs from the example we show.
 
 ````
 codespace-starter $ whoami
@@ -599,7 +580,7 @@ Hello! My name is <your-name>
 
 Copy Copilot's response into the box below. This is the only exercise in which we ask you to copy what the AI says back. Usually, we will confirm its work by checking the file which it has edited.
 
-```{r ai-assistant-1}
+```{r github-copilot-1}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -652,7 +633,7 @@ tutorial.helpers::show_file("presidents.txt")
 
 CP/CR.
 
-```{r ai-assistant-2}
+```{r github-copilot-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -697,7 +678,7 @@ tutorial.helpers::show_file("script.R")
 
 CP/CR.
 
-```{r ai-assistant-3}
+```{r github-copilot-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -728,7 +709,7 @@ include_graphics("images/gs-6-b.png")
 
 CP/CR.
 
-```{r ai-assistant-4}
+```{r github-copilot-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -757,7 +738,7 @@ Make sure `script.R` is still open. Place your cursor on the line `2 + 2` and pr
 
 CP/CR.
 
-```{r ai-assistant-5}
+```{r github-copilot-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -782,7 +763,7 @@ The Editor must have focus so VS Code knows which line to send to the active R T
 
 Keep your cursor in the `script.R` Editor and press `Cmd/Ctrl + Shift + Enter`. This sources the entire file with echo, just like the Run Source button. CP/CR.
 
-```{r ai-assistant-6}
+```{r github-copilot-6}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -815,7 +796,7 @@ Rscript script.R
 
 CP/CR.
 
-```{r ai-assistant-7}
+```{r github-copilot-7}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -846,7 +827,7 @@ Run script.R
 
 Copilot will usually choose a command such as `Rscript script.R`. If it asks for permission, provide it. Copilot should report the result in the Chat view. Enter that result in the box below.
 
-```{r ai-assistant-8}
+```{r github-copilot-8}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -881,7 +862,7 @@ exists("x")
 
 CP/CR.
 
-```{r ai-assistant-9}
+```{r github-copilot-9}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -912,7 +893,7 @@ x
 
 CP/CR.
 
-```{r ai-assistant-10}
+```{r github-copilot-10}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -946,25 +927,14 @@ The five ways to run the script do not all use the same R session:
 | `Rscript script.R` in bash | A new process that closes afterward |
 | Ask Copilot to use `Rscript` | A new process that closes afterward |
 
-## Your answers
-###
-
-At the end of every tutorial, you will download a copy of your answers. We will do this in the next topic, labeled "Download answers." Follow the instructions there.
-
-Make sure to answer the question about how many **minutes** you spent on the tutorial and to click "Submit Answer."
-
-After clicking the "Download" button, you will be prompted to save a file named `getting-started_answers.html`. By default, this file will be saved in the `Downloads` folder on your computer. This action only downloads the file; it does not send the file to anyone.
-
-Unless your instructor tells you otherwise, you should use the default file name, which will usually be of the form `short-name-of-tutorial` + `_answers` + `.html`.
-
-```{r your-answers-0, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
-```
-
 ## Summary
 ###
 
-You now understand how tutorials work, how to use the bash and R Terminals, how to ask GitHub Copilot to create and edit files, and five ways to run R code. You also know how to download a copy of your answers. Good luck with your data science journey!
+You now know how to use the bash and R Terminals, how to ask GitHub Copilot to create and edit files, and five ways to run R code. Good luck with your data science journey!
 
 <p>
   <img src="images/neo-cs.gif" alt="Neo learns codespaces" width="320">
 </p>
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
