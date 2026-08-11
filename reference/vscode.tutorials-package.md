@@ -15,8 +15,11 @@ tools in the tutorial.helpers package.
 The package includes tutorials focused on VS Code and modern R
 development:
 
-- **Introduction** (01-introduction): First tutorial after Getting
-  Started — VS Code, the Terminal, repos, R scripts, plots, and Git
+- **Workspace** (00-workspace): A tour of the workspace — the bash and R
+  Terminals, GitHub Copilot, and the ways to run R code
+
+- **Workflow** (01-workflow): First tutorial after Workspace — VS Code,
+  the Terminal, repos, R scripts, plots, and Git
 
 - **Code** (02-code): Introduction to VS Code and writing R code in
   simple scripts
@@ -24,45 +27,62 @@ development:
 - **Quarto** (03-quarto): Advanced R coding tricks in VS Code and Quarto
   document creation
 
-- **Terminal Introduction** (04-terminal-1): Command line fundamentals
-
-- **Terminal Advanced** (05-terminal-2): More command line: paths,
-  options, wildcards, and regular expressions
-
-- **Antigravity** (06-antigravity): Meeting the Antigravity CLI agent
+- **Antigravity** (04-antigravity): Meeting the Antigravity CLI agent
   (agy) and using it to create and render a Quarto analysis
 
-- **GitHub Introduction** (07-github-1): Git and GitHub basics within VS
+- **Terminal 1** (05-terminal-1): First of three bash Terminal
+  tutorials: core commands, paths, and output redirection
+
+- **Terminal 2** (06-terminal-2): Command options, environment
+  variables, looking inside files, and running R and Python programs
+
+- **Terminal 3** (07-terminal-3): Wildcards, regular expressions, grep,
+  and pipes
+
+- **GitHub Introduction** (08-github-1): Git and GitHub basics within VS
   Code
 
-- **VS Code and GitHub Advanced** (08-github-2): Advanced Git/GitHub
-  workflows and GitHub Pages
+- **GitHub Advanced** (09-github-2): Advanced Git/GitHub workflows and
+  GitHub Pages
 
-- **Quarto Websites Introduction** (09-websites-1): Basic website
-  construction using Quarto projects
+- **Websites 1** (10-websites-1): Basic website construction using
+  Quarto projects
 
-- **Quarto Websites Advanced** (10-websites-2): Advanced Quarto websites
-  with modular data analysis
+- **Websites 2** (11-websites-2): Advanced Quarto websites with modular
+  data analysis
 
-- **Devcontainers** (11-devcontainers): An introduction to
+- **Devcontainers** (12-devcontainers): An introduction to
   devcontainers, touring a pre-built Jupyter devcontainer.json and
   building an R devcontainer.json from scratch
 
-- **Our Codespace Starter** (12-our-codespace-starter): A tour of the
+- **Our Codespace Starter** (13-our-codespace-starter): A tour of the
   devcontainer.json behind codespace-starter itself
 
-- **The Devcontainer Dockerfile** (13-docker): A reading tour of the
+- **The Devcontainer Dockerfile** (14-docker): A reading tour of the
   Dockerfile that builds the PPBDS devcontainer image
+
+- **Your Starter** (15-your-starter): Build your own version of
+  codespace-starter (under construction)
+
+- **Dotfiles** (16-dotfiles): Personalize every Codespace with a
+  dotfiles repo (under construction)
+
+- **OpenRouter** (17-openrouter): Get an OpenRouter API key, store it
+  safely, and drive aider with it
+
+- **Models And Money** (18-models): Call OpenRouter directly from bash
+  and R, and compare model prices
 
 ## Running Tutorials
 
 To run a tutorial, use:
 `learnr::run_tutorial(name = "short_tutorial_name", package = "vscode.tutorials")`
 
-Available tutorial names include: 01-introduction, 02-code, 03-quarto,
-04-terminal-1, 05-terminal-2, 06-antigravity, 07-github-1, 08-github-2,
-09-websites-1, 10-websites-2, 11-devcontainers,
-12-our-codespace-starter, and 13-docker.
+Available tutorial names include: 00-workspace, 01-workflow, 02-code,
+03-quarto, 04-antigravity, 05-terminal-1, 06-terminal-2, 07-terminal-3,
+08-github-1, 09-github-2, 10-websites-1, 11-websites-2,
+12-devcontainers, 13-our-codespace-starter, 14-docker, 15-your-starter,
+16-dotfiles, 17-openrouter, and 18-models.
 
 ## See also
 
