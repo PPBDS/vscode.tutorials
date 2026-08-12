@@ -5,10 +5,11 @@ tutorial:
   id: "16-dotfiles"
 output:
   learnr::tutorial:
-    progressive: yes
-    'allow_skip:': yes
+    df_print: default
+    progressive: true
+    allow_skip: true
 runtime: shiny_prerendered
-description: Personalize every Codespace you ever open with a dotfiles repo. Under construction.
+description: "Build a private `dotfiles` repo that GitHub reads every time it makes you a machine, so a brand new Codespace already knows your Git identity."
 ---
 
 ```{r setup, include = FALSE}
@@ -28,9 +29,437 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-This tutorial is under construction.
+Every Codespace you have opened arrived identical to every other one. That is the point --- you have spent three tutorials learning how we guarantee it.
 
-A dotfiles repo lets you carry your personal configuration --- shell settings, environment variables, Git preferences --- into every Codespace you ever open, automatically.
+But *identical for everyone* is not the same as *set up for you*. A machine built from `codespace-starter` knows nothing about you personally, and it forgets everything the moment you delete it.
+
+###
+
+A **dotfile** is a configuration file whose name starts with a dot, which is how Unix hides it from an ordinary `ls`. `.bashrc` configures the bash shell. `.gitconfig` configures Git. Today you put yours in a repo that GitHub reads every time it builds you a machine.
+
+Two things make this tutorial unusual. The repo you make is **permanent** --- every other repo in this course is scratch work, this one you keep. And you will **not** open it as your workspace: everything happens in the bash Terminal, with no `connect-repo`.
+
+### Exercise 1
+
+Open a **new** bash Terminal (the `+` in the top-right corner of the Panel) and run:
+
+<pre><code>echo $COOLEST_TEACHER
+</code></pre>
+
+CP/CR.
+
+```{r introduction-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+codespace-starter $ echo $COOLEST_TEACHER
+
+```
+
+###
+
+Nothing. A blank line, and then your prompt again.
+
+Read that carefully, because most students read it wrong. **It did not fail.** Bash treats a variable nobody has set as the empty string, so `echo` printed the empty string and finished happily. Run `echo $?` next and you will get `0`, which is bash for *success*.
+
+That distinction costs people hours: *no output* and *an error* look similar and are not the same thing.
+
+By the end of this tutorial, that command will print `Preceptor` on a machine which does not exist yet.
+
+### Exercise 2
+
+Now look at the file that runs every time you open a bash Terminal:
+
+<pre><code>tail -3 ~/.bashrc
+</code></pre>
+
+CP/CR.
+
+```{r introduction-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+<!-- VERIFY: that the PS1 override really is the last thing in ~/.bashrc in the
+     current ghcr.io/ppbds/devcontainer image, and what the surrounding lines
+     say. CLAUDE.md records that welcome.sh appends it. -->
+
+```
+codespace-starter $ tail -3 ~/.bashrc
+
+# Keep the prompt short: current directory, then a dollar sign.
+PS1='\W \$ '
+```
+
+###
+
+There is the reason your prompt says `codespace-starter $` instead of the long `@user ➜ /workspaces/... (main) $` that GitHub gives everybody else. `PS1` holds your prompt, and `\W` means *the name of the current directory*, which is why it changes as you `cd` around.
+
+Our image appends those lines when it is built. Note that word --- **appends**. `.bashrc` already belongs to somebody, and in a few minutes you are going to add a line after theirs rather than replace the file.
+
+## Your Dotfiles Repo
+###
+
+You need a repo, and you need a way to get files out of it and into your home directory. Both are simpler than they sound.
+
+### Exercise 1
+
+In the bash Terminal, run `gh auth status`. CP/CR.
+
+```{r repo-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+###
+
+<!-- VERIFY: the exact wording and scope list gh reports inside a Codespace
+     built from codespace-starter. -->
+
+```
+codespace-starter $ gh auth status
+github.com
+  ✓ Logged in to github.com account ppbds-student (GITHUB_TOKEN)
+  - Active account: true
+  - Git operations protocol: https
+  - Token: ghu_************************
+  - Token scopes: 'repo', 'workflow'
+```
+
+###
+
+You are already logged in, and you never logged in.
+
+`gh` is GitHub's own command line program, and it is not the same thing as `git`. **`git`** is version control --- commits, branches, history --- and it works on any repo anywhere, having never heard of GitHub. **`gh`** talks to github.com specifically: repos, pull requests, issues, secrets, Codespaces. `git commit` is Git. Creating a repo is GitHub.
+
+When GitHub built this Codespace it put a **token** --- a temporary password for programs --- into the environment, and `gh` found it. That token is also what Git uses when you push, which answers a question you may have wondered about: why has `git push` never once asked you for a password?
+
+### Exercise 2
+
+Make the repo. In the bash Terminal:
+
+<pre><code>cd /workspaces
+gh repo create dotfiles --private --clone
+cd dotfiles
+</code></pre>
+
+CP/CR.
+
+```{r repo-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+<!-- VERIFY: whether the Codespace GITHUB_TOKEN carries enough scope to create a
+     new repo. If gh reports missing scopes, students make it at
+     https://github.com/new and clone it instead; that fallback is in the prose
+     below and works identically. -->
+
+```
+codespace-starter $ cd /workspaces
+workspaces $ gh repo create dotfiles --private --clone
+✓ Created repository ppbds-student/dotfiles on GitHub
+  https://github.com/ppbds-student/dotfiles
+✓ Initialized repository in "/workspaces/dotfiles"
+workspaces $ cd dotfiles
+dotfiles $
+```
+
+###
+
+One command did what is normally six clicks: created the repo on GitHub and cloned it down beside `codespace-starter`. If instead you got a complaint about missing **scopes**, make the repo by hand at <https://github.com/new> --- private, named `dotfiles`, no README --- and clone it. Everything after this is the same.
+
+`--private` matters. GitHub reads this repo using your own permissions, so a private one works exactly as well as a public one, and there is no reason to publish your settings to the world.
+
+The name is a convention, not a rule. GitHub lets you pick any repo you own from a dropdown, but essentially every dotfiles repo you will ever meet is called `dotfiles`, so ours is too.
+
+### Exercise 3
+
+GitHub sets up your machine in one of two ways, and you pick by what you put in the repo. If it finds an **install script** --- `install.sh` is the first name it looks for --- it runs that and stops. If there is no install script, it instead **symlinks** every dotted file in the repo into your home directory.
+
+Use a script. Ask AI to create two files in `/workspaces/dotfiles`.
+
+First, `install.sh`:
+
+<pre><code>#!/bin/bash
+set -e
+cd "$(dirname "$0")"
+
+echo 'export COOLEST_TEACHER=Preceptor' >> ~/.bashrc
+cp .gitconfig ~/.gitconfig
+</code></pre>
+
+Second, `.gitconfig`, with your real name and your own GitHub username:
+
+<pre><code>[user]
+	name = Your Name
+	email = YOUR-USERNAME@users.noreply.github.com
+[init]
+	defaultBranch = main
+[alias]
+	s = status --short --branch
+	l = log --oneline --graph --decorate -20
+</code></pre>
+
+In the R Terminal, run `show_file("/workspaces/dotfiles/.gitconfig")`. CP/CR.
+
+```{r repo-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+
+<pre><code>[user]
+	name = David Kane
+	email = ppbds-student@users.noreply.github.com
+[init]
+	defaultBranch = main
+[alias]
+	s = status --short --branch
+	l = log --oneline --graph --decorate -20
+</code></pre>
+
+###
+
+If that failed, it is probably because you have not loaded `library(tutorial.helpers)` in the R Terminal.
+
+`.gitconfig` is the payload; everything else here is machinery for delivering it. `[user]` is the part that matters, because Git refuses to commit until it knows who you are, and on a fresh machine it does not. Every student has seen `Please tell me who you are` at least once. After today you will not.
+
+Use the `@users.noreply.github.com` address rather than your real one. Your commits carry that email into every public repo you ever push to, and published email addresses get scraped.
+
+###
+
+Now look at `install.sh`, because one character in it is doing more work than the rest of the file.
+
+`>>` **appends** to a file. A single `>` would overwrite it.
+
+Most dotfiles repos on the internet contain a `.bashrc`, and with no install script GitHub would symlink theirs straight over the top of the one you looked at in the Introduction. Your prompt would become GitHub's long default, in every Codespace you ever opened, and every example in every one of these tutorials would stop matching your screen with nothing to tell you why.
+
+The rule generalises: **when you do not own a file, add to it rather than replace it.** Ask AI to change your shell configuration and it will cheerfully hand you a complete `.bashrc`. Now you know why not to paste it.
+
+(`set -e` means stop at the first command that fails. `cd "$(dirname "$0")"` moves to wherever the script happens to live, since you do not know what directory GitHub will run it from.)
+
+### Exercise 4
+
+A script GitHub cannot run is no use. Make it executable, then commit and push everything:
+
+<pre><code>chmod +x install.sh
+</code></pre>
+
+Then run `ls -l install.sh`. CP/CR.
+
+```{r repo-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+```
+dotfiles $ ls -l install.sh
+-rwxr-xr-x 1 rstudio rstudio 118 Jul 30 14:22 install.sh
+```
+
+###
+
+Look at the `x` characters in `-rwxr-xr-x`. That is the **executable bit**, and it is what changed --- before `chmod +x` the line read `-rw-r--r--` and the file was just text that happened to contain commands.
+
+This is the most common way a dotfiles repo silently does nothing. The script is there, the contents are perfect, GitHub declines to run it, and there is no error anywhere you would think to look. Git stores this bit, which is the only reason it survives the trip to a new machine.
+
+Make sure you have committed and pushed. GitHub reads this repo from *its* servers when it builds a machine, not from your Codespace, so work that is only committed locally does not exist as far as this feature is concerned.
+
+## Turning It On
+###
+
+The repo exists and so far does nothing at all. GitHub will not go looking for it until you say so, and the switch is not in the repo --- it is in your account.
+
+### Exercise 1
+
+Go to <https://github.com/settings/codespaces>.
+
+Under **Dotfiles**, tick **Automatically install dotfiles**, and use the dropdown to choose your `dotfiles` repository.
+
+Copy and paste the name of the setting you turned on and the repository you chose.
+
+```{r switch-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+```
+Automatically install dotfiles
+ppbds-student/dotfiles
+```
+
+###
+
+Remember this page. It is an **account** setting, not a repo setting: it now applies to every Codespace you create from here on, in any repo, in any organisation, whether you own that repo or not.
+
+You will come back to this exact page in the OpenRouter tutorial, for the box below this one.
+
+###
+
+Check the bash Terminal you are sitting in and `$COOLEST_TEACHER` is still empty, and it will stay empty here no matter how long you wait.
+
+**Dotfiles are installed when a Codespace is created.** This one was created before you had a dotfiles repo, and nothing goes back to revisit it. You have met this rule twice already without it being named: editing `devcontainer.json` does nothing until you rebuild, and changing an image does nothing to a container already running the old one. **Settings that apply at build time do not reach a machine that already exists.**
+
+So the only way to see this work is to build a new machine.
+
+### Exercise 2
+
+Open a **second browser tab** and go to <https://github.com/codespaces>.
+
+Click **New codespace**, choose repository `PPBDS/codespace-starter` and branch `main`, and create it. Wait for it to start.
+
+**Leave this tab open** --- the tutorial and all your answers live in this Codespace.
+
+In the *new* Codespace, open a bash Terminal and run `echo $COOLEST_TEACHER`. Copy the output, come back to this tab, and paste it.
+
+```{r switch-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+codespace-starter $ echo $COOLEST_TEACHER
+Preceptor
+```
+
+###
+
+That machine did not exist when you started this tutorial, you have never touched it, and it already agrees with you about who the coolest teacher is.
+
+Trace what happened. GitHub built a container from our image. Then, because your account said to, it cloned your private `dotfiles` repo onto the machine, found `install.sh`, saw it was executable, and ran it. The script appended one line to `~/.bashrc`. When you opened a bash Terminal, bash read `.bashrc`, and the variable was there.
+
+Nothing in that chain knows anything about this tutorial or this course. It is a general mechanism, and you now own one end of it.
+
+### Exercise 3
+
+`COOLEST_TEACHER` was the toy. This is the actual point.
+
+Still in the **new** Codespace, run:
+
+<pre><code>git config --get user.name
+tail -2 ~/.bashrc
+</code></pre>
+
+CP/CR back here.
+
+```{r switch-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+```
+codespace-starter $ git config --get user.name
+David Kane
+codespace-starter $ tail -2 ~/.bashrc
+PS1='\W \$ '
+export COOLEST_TEACHER=Preceptor
+```
+
+###
+
+A brand new machine already knows your Git identity. You can create a repo and commit to it without Git stopping to ask a single question.
+
+And look at the last two lines. The image's `PS1` line survived, with yours after it --- which is why your prompt still reads `codespace-starter $`. That is `>>` earning its keep. Had you shipped a whole `.bashrc` instead, the first line would be gone.
+
+Think about what else could go in there as you get more comfortable: a `.gitignore_global` so junk files never reach a repo again, shell aliases, R options. Everything you would otherwise re-do on every machine, done once and kept.
+
+### Exercise 4
+
+Clean up. Go back to <https://github.com/codespaces>, find the Codespace you just created, and delete it from the `...` menu.
+
+Copy and paste the name of the Codespace you deleted.
+
+```{r switch-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+fuzzy-space-doodle-7q9v4wpx
+```
+
+###
+
+Delete it for a practical reason: Codespaces are billed by the hour and two running machines burn your allowance twice as fast.
+
+But notice what deleting it cost you, which is nothing. Everything that made that machine yours was on GitHub, not on the machine. That is the arrangement to aim for with all your work: the computer is disposable, and nothing important lives only there.
+
+## Summary
+###
+
+You started with `echo $COOLEST_TEACHER` printing nothing --- successfully, because an unset variable in bash is empty rather than broken. You finished with the same command printing `Preceptor` on a machine that did not exist when you began.
+
+###
+
+In between you built a private repo called `dotfiles`, put an executable `install.sh` in it, and had that script **append** to `~/.bashrc` rather than replace it, protecting the `PS1` line our image puts there. The real cargo was `.gitconfig`: every Codespace you create from now on already knows your name and your email, so Git will never stop to ask again.
+
+###
+
+You also met `gh`. `git` is version control and works anywhere; `gh` talks to github.com and knows about repos, issues and secrets. Inside a Codespace it is already authenticated with a token GitHub put there when it built the machine --- which is why `git push` has never asked you for a password.
+
+###
+
+One rule to carry forward: **settings that apply at build time do not reach a machine that already exists.** Dotfiles, devcontainer changes, images --- all the same rule, and you will meet it once more in the OpenRouter tutorial, on the same settings page you used today.
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```

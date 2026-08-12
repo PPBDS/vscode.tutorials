@@ -9,7 +9,7 @@ output:
     progressive: true
     allow_skip: true
 runtime: shiny_prerendered
-description: "What is underneath a coding agent --- one HTTP request. Call OpenRouter directly from bash and from R with `ellmer`, compare what open weights and frontier models cost per million tokens, and decide whether to buy $10 of credits."
+description: "What is underneath a coding agent --- one HTTP request. Buy $10 of OpenRouter credits with a real credit card, call the API from bash and from R with `ellmer`, and find out how much of the hundred-fold gap between a free model and a frontier one is quality and how much is ownership."
 ---
 
 ```{r setup, include = FALSE}
@@ -41,7 +41,27 @@ Two reasons this is worth doing.
 
 ###
 
-By the last exercise you will know what a model costs, why some cost a hundred times less than others, and whether $10 is worth spending.
+By the last exercise you will know what a model costs, why some cost a hundred times less than others, and how much of that gap is quality rather than ownership.
+
+###
+
+One thing to settle before you start, because this tutorial is different from every other one in the course.
+
+**You need a real credit card.** Partway through you will buy $10 of credits on OpenRouter. The OpenRouter tutorial was careful to keep you at zero and promised you would never need a card for it, and that promise held. This tutorial is the exception, and here is why it has to be.
+
+A free account cannot run a paid model at all. Not slowly, not in a limited way --- the request is refused. So on a free account there is no way to answer the question this tutorial exists to ask: is the expensive model actually better, and by how much? You would be reading our word for it instead of finding out.
+
+###
+
+Be clear about what the $10 is, because it is easy to imagine something worse than it is.
+
+It is a **one-off purchase of credits**. Not a subscription. Nothing renews, nothing needs cancelling, and there is no monthly charge to forget about. You buy $10 once, spend it slowly, and when it eventually runs out you decide again from scratch.
+
+The work in this tutorial costs a few cents. Almost all of the $10 is still sitting there when you finish, and it buys you two things that outlast today: your free-model limit goes from 50 requests a day to 1,000, and you can turn back off the data-training switches you had to turn on last time.
+
+###
+
+If you would rather not spend it, decide that now rather than halfway through. Talk to your instructor about running this tutorial from a shared account or watching it as a demonstration. Do not start it and stop at the paywall --- half of this tutorial is the half after the purchase.
 
 ### Exercise 1
 
@@ -95,9 +115,9 @@ sk-or-v1
 
 ###
 
-If that came back empty, the secret has not reached this Terminal. Either this is the same Codespace as last time --- secrets only arrive when a Codespace is *created* --- or the secret was never given access to `PPBDS/codespace-starter`. Fix it at <https://github.com/settings/codespaces>, or just `export` the key again like last time.
+If that came back empty, the secret has not reached this terminal. Either this is the same Codespace as last time --- secrets only arrive when a Codespace is *created* --- or the secret was never given access to `PPBDS/codespace-starter`. Fix it at <https://github.com/settings/codespaces>, or just `export` the key again like last time.
 
-That rule is worth remembering: settings applied when a machine is built do not appear on a machine that already exists. It is the same reason editing `devcontainer.json` does nothing until you rebuild.
+That rule is worth remembering, and by now you have met it three times: settings applied when a machine is built do not appear on a machine that already exists. It is why editing `devcontainer.json` does nothing until you rebuild, and why `COOLEST_TEACHER` stayed empty in the Dotfiles tutorial until you opened a new Codespace.
 
 ## The Request Underneath
 ###
@@ -361,11 +381,113 @@ So you are usually not paying ninety-three times more for something ninety-three
 
 ### Exercise 3
 
+Now fix the `402`. This is the credit card exercise.
+
+Go to <https://openrouter.ai/settings/credits> and buy **$10** of credits. Ten dollars is the minimum, and it is far more than this tutorial will spend. Do not buy more.
+
+When the purchase has gone through, check it from the bash Terminal:
+
+<pre><code>curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -c "import sys, json; d = json.load(sys.stdin)['data']; print('spent so far:', d['usage']); print('free tier:', d['is_free_tier'])"
+</code></pre>
+
+CP/CR.
+
+```{r weights-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+```
+spent so far: 0
+free tier: False
+```
+
+###
+
+`is_free_tier` has flipped to `False`. That is the whole change, and it is the switch every paid model checks before it agrees to run.
+
+Look at the other number, though. You have spent **nothing**. Buying credits is not spending them --- it is putting money in an account you now draw down a fraction of a cent at a time. `usage` will still be a very small number when you finish this tutorial.
+
+OpenRouter keeps about 5.5% of what you put in, so your $10 buys roughly $9.45 of model time. That is the fee for having one account and one key instead of five.
+
+###
+
+Two things you can now do, neither of which is on today's list, both worth knowing.
+
+Your daily free-model limit went from 50 requests to 1,000. Everything you did in the OpenRouter tutorial on free models just got twenty times more room.
+
+And you can go back to <https://openrouter.ai/settings/privacy> and turn **off** the two data-training switches you turned on last time. Paid models do not want your prompts as payment, so you no longer have to offer them. For many professionals that alone is what the $10 is for.
+
+### Exercise 4
+
+Now run the request that was refused. Same model as Exercise 2, and this time pull out the answer and the cost rather than the whole reply:
+
+<pre><code>curl -s https://openrouter.ai/api/v1/chat/completions \
+  -H "Authorization: Bearer $OPENROUTER_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "anthropic/claude-opus-4.8", "max_tokens": 400, "messages": [{"role": "user", "content": "Write R code to count rows per cut in the diamonds data set."}]}' \
+  | python -c "import sys, json; d = json.load(sys.stdin); print(d['choices'][0]['message']['content']); print('--- cost:', d['usage']['cost'])"
+</code></pre>
+
+CP/CR.
+
+```{r weights-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 16)
+```
+
+###
+
+Ours:
+
+```
+library(ggplot2)
+library(dplyr)
+
+diamonds |>
+  count(cut)
+
+# Base R alternative:
+# table(diamonds$cut)
+
+--- cost: 0.0057375
+```
+
+###
+
+Two things to notice, and the second one matters more.
+
+**It cost half a cent.** Not half a cent per hour --- half a cent for that one question. Your $10 buys somewhere around seventeen hundred of them.
+
+**It did not tell you what the answer is.** Go back and look at what the free model did with this identical prompt in Exercise 1: it invented a table of counts, under a heading saying "What you'll see," and every number in it was wrong. Opus wrote the code and stopped. It cannot run R either, and it did not pretend otherwise.
+
+That is a real quality difference, and it is not the one people expect. The expensive model is not better at *knowing* how many Ideal diamonds there are. It is better at **not making something up when it does not know**. On a task where being confidently wrong is expensive, that is most of what you are buying.
+
+###
+
+One more detail in that command. We added `"max_tokens": 400`.
+
+That is Exercise 2's error message put to work. OpenRouter reserves the cost of the worst case before it starts, so a request that allows 65,536 tokens of output needs you to be able to afford 65,536 tokens of output. Capping it means you reserve less, and it also means a model cannot run away and write you three thousand words you did not want.
+
+Set `max_tokens` on anything you run in a loop. It is the cheapest insurance there is.
+
+### Exercise 5
+
 Work out what a real hour of work costs. A busy hour with a coding assistant uses roughly 500,000 input tokens (remember, the whole conversation is resent every message) and 50,000 output tokens.
 
 Using the prices you printed earlier, have AI work out the cost of that hour on `qwen/qwen3-coder-30b-a3b-instruct` and on `anthropic/claude-opus-4.8`. Copy and paste both figures.
 
-```{r weights-3}
+```{r weights-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -388,6 +510,178 @@ Five cents against three dollars and seventy-five. For one hour. Over a semester
 This does not mean always pick the cheap one. It means you now have a real number to decide with. What professionals actually do is use a cheap model for most of the work --- renaming things, writing tests, the tenth version of a plot --- and an expensive model for the problem they are genuinely stuck on.
 
 That is exactly what `aider`'s `/architect` mode does for you, and now you can see why it is worth the trouble.
+
+## Cheap Models
+###
+
+"Cheap" so far has meant one model, `qwen/qwen3-coder-30b-a3b-instruct`, because we picked it for you. Now find the cheap end of the market yourself, and then see what you actually give up by working there.
+
+### Exercise 1
+
+Have AI write you a command that reads <https://openrouter.ai/api/v1/models> and prints the ten **cheapest models that are not free**, sorted by output price, showing input and output price per million tokens.
+
+Run it. CP/CR.
+
+```{r cheap-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 14)
+```
+
+###
+
+Yours will differ from ours --- prices move and models come and go:
+
+```
+    0.01     0.03  meta-llama/llama-3.2-1b-instruct
+    0.02     0.04  google/gemma-4-4b-it
+    0.02     0.05  qwen/qwen3-1.7b-instruct
+    0.03     0.09  mistralai/ministral-3b
+    0.04     0.14  nvidia/nemotron-3-nano-30b-a3b
+    0.05     0.18  inclusionai/ling-3.0-flash
+    0.06     0.22  openai/gpt-oss-20b
+    0.07     0.27  qwen/qwen3-coder-30b-a3b-instruct
+    0.09     0.35  deepseek/deepseek-v3.2-lite
+    0.11     0.40  google/gemma-4-31b-it
+```
+
+###
+
+Read the top line properly, because the number is easy to skim past. **One cent per million input tokens.** A million tokens is roughly three-quarters of a million words --- about ten novels. For a penny.
+
+Now look at *which* models these are. Llama, Gemma, Qwen, Mistral, Nemotron, DeepSeek, `gpt-oss`. Every one of them is open weights. That is the point the last section made, showing up as a sorted list: the cheap end of this market is entirely made of models that more than one company is allowed to sell.
+
+Notice too that output costs roughly three or four times input, everywhere, at every price level. Models read cheaply and write expensively. That is worth knowing before you ask for a long answer you were not going to read.
+
+### Exercise 2
+
+Give the cheap model the same job you gave Opus. In the bash Terminal:
+
+<pre><code>curl -s https://openrouter.ai/api/v1/chat/completions \
+  -H "Authorization: Bearer $OPENROUTER_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "qwen/qwen3-coder-30b-a3b-instruct", "max_tokens": 400, "messages": [{"role": "user", "content": "Write R code to count rows per cut in the diamonds data set."}]}' \
+  | python -c "import sys, json; d = json.load(sys.stdin); print(d['choices'][0]['message']['content']); print('--- cost:', d['usage']['cost'])"
+</code></pre>
+
+CP/CR.
+
+```{r cheap-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 14)
+```
+
+###
+
+```
+library(ggplot2)
+library(dplyr)
+
+diamonds %>%
+  count(cut)
+
+--- cost: 0.0000237
+```
+
+###
+
+The same answer as Opus, for **one two-hundred-and-fortieth of the price**.
+
+Say that back plainly, because it is the most useful sentence in this tutorial: on this task, the model costing a fraction of a cent and the model costing half a cent produced work you cannot tell apart. Paying more bought you nothing at all.
+
+That is not a trick or a fluke. Most of what anyone asks a model to do all day is this easy --- rename a variable, write the boilerplate, remind me of the argument order, turn this into a function. For that work the cheap models have been good enough for a while now, and the price difference between "good enough" and "the best there is" is a hundredfold.
+
+### Exercise 3
+
+You have now had three models write essentially the same code, and not one of them ran it. Do that part yourself.
+
+In the R Terminal:
+
+<pre><code>library(ggplot2)
+library(dplyr)
+
+diamonds |> count(cut)
+</code></pre>
+
+CP/CR.
+
+```{r cheap-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+
+```
+# A tibble: 5 × 2
+  cut           n
+  <ord>     <int>
+1 Fair       1610
+2 Good       4906
+3 Very Good 12082
+4 Premium   13791
+5 Ideal     21551
+```
+
+###
+
+There are the real counts, and they took less than a second to get.
+
+Compare them once more against the free model's invented table from the last section, which claimed 68,146 Premium diamonds in a data set with 53,940 rows altogether. The cheap paid model did not make that mistake. Neither did Opus. But the reason you *know* none of them did is that you just ran the code.
+
+**The habit is the deliverable here.** A model writes code; you run it. No price point removes that step, and no model is expensive enough to be trusted with it.
+
+### Exercise 4
+
+One last question, and it is the one that decides how you spend money for the rest of your career.
+
+If the cheap model matched Opus on that task, why would anyone pay two hundred times more? Write down what you think, in a sentence or two. There is no wrong answer here --- we are after your guess before we give you ours.
+
+```{r cheap-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+Ours:
+
+```
+Because the task was easy. The gap probably shows up on hard problems,
+long files, or when you need it to follow instructions exactly.
+```
+
+###
+
+That is essentially right, and it is worth being precise about where the money goes. Roughly, as tasks get harder:
+
+- **Free models** (`:free`) handle boilerplate and short scripts. They are rate limited, run by whichever company is giving them away today, and paid for with your prompts. Fine for practice, wrong for anything private.
+- **Cheap open weights**, a few cents per million tokens. The workhorse tier, and where most of your work should live. Correct code for ordinary tasks, at a price you can stop thinking about.
+- **Mid-priced models**, a few tens of cents. Better when the context is long, when a change spans several files, or when you need the output in an exact shape every single time.
+- **Frontier models**, dollars per million tokens. Worth it for the problem you are genuinely stuck on, for reasoning that has to hold together over many steps, and for anything where being confidently wrong is expensive.
+
+The gap between the ends of that list is real. It is just nothing like proportional to the price. You are not getting a hundred times more; you are getting somewhat better answers on the hardest tenth of your work, and paying for exclusivity on the rest.
+
+###
+
+So do not choose a model by reputation, and do not choose one from a benchmark table. Both of those are answering a different question than yours.
+
+Choose it the way you just did. Take a task you actually have, run it on something cheap, and look at the result. Move up only when you can point at what the cheap model got wrong. That test costs a fraction of a cent and takes a minute, and it is the only evidence about *your* work that exists.
 
 ## Models From R
 ###
@@ -519,10 +813,12 @@ But a column containing `perhatian positif` is not data, it is a bug. Two habits
 
 Neither is optional once the data is big. With four reviews you can spot the bad one. With four hundred thousand you cannot.
 
-## Paying
+You have credits now, so you can test the other half of that claim rather than take our word for it. Run the same thing again with `model = "qwen/qwen3-coder-30b-a3b-instruct"`. On a task this small it will cost you well under a hundredth of a cent, and `perhatian positif` will almost certainly not come back. Cheap is not the same as free, and this is one of the places you can see the difference.
+
+## What It Cost
 ###
 
-You have done everything in two tutorials without spending anything. This section is about whether to stop there.
+You spent money today for the first time in this course. This section is the bill.
 
 ### Exercise 1
 
@@ -545,31 +841,60 @@ question_text(NULL,
 ###
 
 ```
-spent so far: 0
-free tier: True
+spent so far: 0.0061
+free tier: False
 ```
 
 ###
 
-Zero, and that is where this course expects you to stay. **Nothing in this course needs a credit card.** A free account with 50 requests a day covers every tutorial we will ask you to do.
+Six tenths of a cent. Yours will differ a little, but not by much.
+
+That is the entire cost of running a frontier model, a cheap model, and a pile of free ones, plus everything you did from R. Of the $9.45 the purchase actually bought you, you have used well under one percent. At this rate the balance outlives the course by a wide margin.
 
 Notice the habit in that command, too: the reply had fourteen fields and we asked for two. An API hands you everything it has. A good program takes only what it came for.
 
-Still, you should know what $10 would buy, so the choice is yours rather than ours. Buying credits once --- the minimum is $10, and OpenRouter keeps about 5.5% --- changes three things for good:
-
-- your free-model limit goes from 50 requests a day to 1,000
-- every paid model becomes available at the prices you printed earlier
-- you can turn those privacy switches back **off**, because paid models do not want your prompts as payment
-
-That last one is why a professional might buy credits even if they never touch an expensive model. Ten dollars is the price of no longer paying with your data. Whether that is worth it is your call, and you now have every number you need to make it.
-
 ### Exercise 2
+
+Protect the balance before you leave. Go back to <https://openrouter.ai/workspaces/default/keys>, edit your `codespace` key, and set a **credit limit** of `$2`.
+
+Copy and paste the name of the key and the limit you set.
+
+```{r paying-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+<!-- VERIFY: that an existing key can have a credit limit added after creation on
+     the current OpenRouter keys page. If the limit can only be set at creation
+     time, this exercise becomes "delete the key and make a new one with a
+     limit," and Exercise 3's key rotation note must move up. -->
+
+```
+codespace
+$2
+```
+
+###
+
+Once a key has real money behind it, a key that leaks costs you real money. A limit turns the worst case from "my balance" into "two dollars."
+
+It also protects you from yourself, which is the more likely accident. You now know that everything sent to a model is re-sent with every message; put that inside a loop over a data frame with four hundred thousand rows and a mistake gets expensive quickly. Professionals cap keys as a matter of course, and they cap the ones agents use hardest.
+
+The habit generalises well past OpenRouter. Any credential that can spend money should have the smallest limit that still lets it do its job.
+
+### Exercise 3
 
 Commit and push your work.
 
 In the bash Terminal, run `git log --oneline`. CP/CR.
 
-```{r paying-2}
+```{r paying-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -602,9 +927,23 @@ That is why the sensible habit is a cheap model for most work and an expensive o
 
 ###
 
+Then you tested it rather than believing it. The same prompt went to a frontier model and to a model costing a fraction of a cent, and the answers were indistinguishable --- one at half a cent, one at two hundred-and-fortieth of that.
+
+What the expensive model was better at turned out to be something else entirely. Given a question it could not answer, it declined instead of inventing a table of numbers the way the free model did. On work where being confidently wrong is expensive, that is most of what the money buys.
+
+So pick a model the way you picked one today: run your own task on something cheap, and move up only when you can point at what it got wrong.
+
+###
+
 You called a model from R with **ellmer** and used it for the job nothing else can do: turning ordinary writing into a column of data. You also saw it get one of four labels wrong, which is why checking the output is part of the job.
 
-And you finished where you started --- at zero dollars, now knowing exactly what $10 would buy.
+###
+
+And you spent, in total, well under a cent.
+
+The credit card was a real requirement and this was the only place in the course that asks for it. What it bought was not the tutorial --- it was the ability to check our claims instead of taking them. The remaining balance is yours, it is capped at $2 per key, and it will outlast this course.
+
+You now know what a model costs, what it costs to be careless with one, and how to find out whether the expensive one is worth it for the work you actually do. That last one is the skill. The model names in this tutorial will all be gone in a year.
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```

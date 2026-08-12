@@ -103,16 +103,18 @@ development environment.
   `codespace-starter`, with your own Dockerfile, image, and
   devcontainer.json. Under construction.
 
-- *Dotfiles* (“16-dotfiles”). Personalize every Codespace you open with
-  a dotfiles repo. Under construction.
+- *Dotfiles* (“16-dotfiles”). Build a private `dotfiles` repo that
+  GitHub reads every time it makes you a machine, so a brand new
+  Codespace already knows your Git identity.
 
 - *OpenRouter* (“17-openrouter”). Get an OpenRouter account and API key,
   store the key so it survives a rebuild, and use it to drive `aider` on
   free and cheap models.
 
-- *Models And Money* (“18-models”). Call OpenRouter directly from bash
-  and from R with `ellmer`, and compare what open weights and frontier
-  models cost per million tokens.
+- *Models And Money* (“18-models”). Buy \$10 of OpenRouter credits — the
+  only credit card in the course — call the API from bash and from R
+  with `ellmer`, and find out what the hundred-fold price gap between
+  free and frontier models actually buys.
 
 The *R for Data Science* and *Analyzing US Census Data* tutorials now
 live in the separate

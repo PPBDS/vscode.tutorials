@@ -35,9 +35,9 @@ The package includes tutorials focused on VS Code and modern R development:
 \item \strong{Our Codespace Starter} (13-our-codespace-starter): A tour of the devcontainer.json behind codespace-starter itself
 \item \strong{The Devcontainer Dockerfile} (14-docker): A reading tour of the Dockerfile that builds the PPBDS devcontainer image
 \item \strong{Your Starter} (15-your-starter): Build your own version of codespace-starter (under construction)
-\item \strong{Dotfiles} (16-dotfiles): Personalize every Codespace with a dotfiles repo (under construction)
+\item \strong{Dotfiles} (16-dotfiles): Build a private dotfiles repo GitHub installs into every new Codespace, carrying your Git identity and shell settings
 \item \strong{OpenRouter} (17-openrouter): Get an OpenRouter API key, store it safely, and drive aider with it
-\item \strong{Models And Money} (18-models): Call OpenRouter directly from bash and R, and compare model prices
+\item \strong{Models And Money} (18-models): Buy $10 of OpenRouter credits (the only credit card in the course), call the API from bash and R, and compare what the price gap between free and frontier models buys
 }
 }
 

@@ -1,5 +1,19 @@
 # vscode.tutorials (development version)
 
+* Adopted the content of PR #73 (thanks @JacobKhay) by hand, since the PR
+  predated two renumberings and the terminal-terminology sweep. The Dotfiles
+  tutorial (`16-dotfiles`) is no longer a stub: students build a private
+  `dotfiles` repo with an appending `install.sh` and a `.gitconfig`, turn it on
+  in account settings, and verify it in a second Codespace. OpenRouter now
+  leans on it (same settings page, a three-way comparison of where a key could
+  live, "settings in a repo, secrets in a secret store") and warns that "Models
+  And Money" needs a credit card. Models And Money now actually buys the $10
+  mid-tutorial --- right after the `402 Payment Required` failure --- adds a
+  Cheap Models section (the ten cheapest paid models, same prompt at 1/240th of
+  Opus's price, running the code yourself in R), renames Paying to What It
+  Cost, and caps the key at $2. Cross-references converted from `NN-slug` to
+  titles; prompts and terminology aligned with current conventions.
+
 * Renamed the first two tutorials for content, matching Code and Quarto:
   `00-getting-started` (recently moved in from `tutorial.helpers`) is now
   **Workspace** (`00-workspace`) and `01-introduction` is now **Workflow**
