@@ -329,7 +329,13 @@ directory name under `inst/tutorials/`, or chunk labels.
   `/workspaces` — in particular, a title that would map to
   `codespace-starter` is forbidden (that folder is always present).
 - There are currently no exceptions to one-title-one-repo: every
-  tutorial uses exactly one repo, named from its title.
+  tutorial uses exactly one repo, named from its title. The Dotfiles
+  tutorial stretches the pattern without breaking it: its repo is still
+  named from its title (`dotfiles`), but it is **private**, created with
+  `gh repo create dotfiles --private --clone` rather than
+  `connect-repo`, never opened as the workspace, and — unlike every
+  other tutorial repo — permanent: students keep it, and the OpenRouter
+  tutorial builds on it.
 
 ### Refer to tutorials by title, not number
 

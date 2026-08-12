@@ -64,14 +64,16 @@ development:
 - **Your Starter** (15-your-starter): Build your own version of
   codespace-starter (under construction)
 
-- **Dotfiles** (16-dotfiles): Personalize every Codespace with a
-  dotfiles repo (under construction)
+- **Dotfiles** (16-dotfiles): Build a private dotfiles repo GitHub
+  installs into every new Codespace, carrying your Git identity and
+  shell settings
 
 - **OpenRouter** (17-openrouter): Get an OpenRouter API key, store it
   safely, and drive aider with it
 
-- **Models And Money** (18-models): Call OpenRouter directly from bash
-  and R, and compare model prices
+- **Models And Money** (18-models): Buy \$10 of OpenRouter credits (the
+  only credit card in the course), call the API from bash and R, and
+  compare what the price gap between free and frontier models buys
 
 ## Running Tutorials
 

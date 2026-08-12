@@ -157,7 +157,7 @@ example $</code></pre>
 <li>Rows copied from the github.com/codespaces list (they show repo names).</li>
 </ol><p>Do <strong>not</strong> change: the tutorial’s <code>id:</code> in the YAML (it equals the directory name, which a title change does not touch), the tutorial’s directory name under <code>inst/tutorials/</code>, or chunk labels.</p>
 <ul><li>A title must not collide with a directory that already exists under <code>/workspaces</code> — in particular, a title that would map to <code>codespace-starter</code> is forbidden (that folder is always present).</li>
-<li>There are currently no exceptions to one-title-one-repo: every tutorial uses exactly one repo, named from its title.</li>
+<li>There are currently no exceptions to one-title-one-repo: every tutorial uses exactly one repo, named from its title. The Dotfiles tutorial stretches the pattern without breaking it: its repo is still named from its title (<code>dotfiles</code>), but it is <strong>private</strong>, created with <code>gh repo create dotfiles --private --clone</code> rather than <code>connect-repo</code>, never opened as the workspace, and — unlike every other tutorial repo — permanent: students keep it, and the OpenRouter tutorial builds on it.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="refer-to-tutorials-by-title-not-number">Refer to tutorials by title, not number<a class="anchor" aria-label="anchor" href="#refer-to-tutorials-by-title-not-number"></a></h3>
