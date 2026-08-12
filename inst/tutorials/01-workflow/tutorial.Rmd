@@ -34,8 +34,6 @@ options(tutorial.exercise.timelimit = 60,
 
 This is the first tutorial you should complete after **Workspace**. It builds directly on that tutorial, deliberately repeating its most important ideas --- repetition is how these habits stick. We move slowly and explain every step.
 
-
-
 You will:
 
 * Move around VS Code and work in its Terminal.
@@ -46,37 +44,17 @@ You will:
 
 ###
 
-Every tutorial begins in the same place: a Codespace on the `main` branch of [`PPBDS/codespace-starter`](https://github.com/PPBDS/codespace-starter). You then start the tutorial from the R Tutorials view in VS Code. That is where you should be now.
+Every tutorial begins in the same place: a Codespace on the `main` branch of [`PPBDS/codespace-starter`](https://github.com/PPBDS/codespace-starter). You then start the tutorial from the R Tutorials extension in the Activity Bar in VS Code. That is, presumably, how you got here.
 
-<!-- DK: Cut or add images. -->
-
-The tutorial itself runs in an R process displayed in a terminal whose tab is named something like **R Tutorial**. Leave that terminal alone. Closing it stops the tutorial.
-
-<!-- DK: Change all prompts and responses. Ie.
-
-codespace-starter $ pwd
-/workspaces/codespace-starter
-codespace-starter $  -->
+```{r}
+include_graphics("images/wf-1.png")
+```
 
 ###
 
-<!-- DK: Give URL for Codebase-starter -->
+The tutorial itself runs in an R process displayed in a terminal whose tab is named something like **R Tutorial**. Leave that terminal alone. Closing it stops the tutorial.
 
-<!-- DK: Sections to have, in order
-
-    Terminal
-    Git and GitHub
-        starting with connect-repo.
-    Script 1
-        Using Copilot (show images)
-        Commit and push at end. View on web. 
-    Script 2
-        AI agnostic
-        Commit/push at end. Maybe git log question.
-    Summary
-        URL for repo     -->
-
- <!-- DK: revisit the start of code/quarto/terminal. First, the starting info is like later tutorials that we have: "You should be in a repo called . . ."  Second, make them shorter by deleting questions you stole for introduction. -->
+###
 
 VS Code is split into a few parts:
 
@@ -88,6 +66,8 @@ VS Code is split into a few parts:
 
 Here is the whole VS Code window. The Explorer Side Bar is on the left. The Editor is in the middle. The Terminal is inside the red box at the bottom.
 
+###
+
 ```{r}
 include_graphics("images/vscode-overview.png")
 ```
@@ -96,9 +76,9 @@ You can make a part bigger or smaller by dragging its edge. If you close somethi
 
 ###
 
-Most questions ask for **CP/CR** --- **C**opy/**P**aste the **C**ommand and **R**esponse --- as you learned in Getting Started.
+Most questions ask for you to **CP/CR** --- **C**opy/**P**aste the **C**ommand and **R**esponse --- as you have seen in earlier tutorials.
 
-Your answer may look a little different from ours. That is OK. Usernames, version numbers, and the exact look of the prompt can be different. In our examples we shorten the prompt to just the folder name and a `$`, like `codespace-starter $`. Your real prompt is usually longer, but it means the same thing.
+Your answer may look a little different from ours. That is OK. Usernames, version numbers, and the exact look of the prompt can be different. In our examples we shorten the prompt to just the folder name and a `$`, like `codespace-starter $`. Your real prompt may be longer, but it means the same thing.
 
 ## The Terminal
 ###
@@ -125,13 +105,13 @@ include_graphics("images/terminal-on-open.png")
 
 You should now have at least two terminal tabs: **R Tutorial**, which is busy running this tutorial, and **bash**, where you will work. Leave the **R Tutorial** tab alone.
 
-One thing to watch for: a bash Terminal that was already open when the Codespace started shows a long prompt like
+Beware: a new bash Terminal will sometimes show a long prompt like
 
 ````
 @davekane-student ➜ /workspaces/codespace-starter (main) $
 ````
 
-with your GitHub username in place of `davekane-student`. Only a **new** bash Terminal --- one you open yourself, like you just did --- gets our short prompt: the name of the directory you are in, a space, and a dollar sign, like `codespace-starter $`. The two prompts behave identically; the short one just wastes less space. All our examples show the short prompt, so if you see the long one, open a fresh bash Terminal.
+with your GitHub username in place of `davekane-student`. The exact content of your prompt is something you can control. We set up `codebase-starter` so that, by default, the prompt just shows the current directory, followed by a space and a dollar sign, like `codespace-starter $`. 
 
 ### Exercise 1
 
@@ -160,52 +140,8 @@ codespace-starter $
 
 `pwd` means **print working directory**. It tells you which folder you are in. Right now, you should be in the `codespace-starter` folder.
 
+
 ### Exercise 2
-
-Run `ls`. CP/CR.
-
-```{r the-terminal-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
-```
-
-###
-
-````
-codespace-starter $ ls
-codespace-starter $
-````
-
-`ls` shows the files in your folder. Nothing appears because this folder does not have any regular files yet.
-
-### Exercise 3
-
-Run `ls -a`. CP/CR.
-
-```{r the-terminal-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
-```
-
-###
-
-````
-codespace-starter $ ls -a
-.  ..  .devcontainer  .git
-codespace-starter $
-````
-
-The `-a` part is an **option**. It tells `ls` to show **all** files, including hidden files. Hidden file names start with a dot. Do not change anything inside the `.git` folder.
-
-### Exercise 4
 
 Options change what a command does. Many commands also have a `--help` option that explains how they work without doing anything.
 
@@ -217,7 +153,7 @@ ls --help
 
 CP/CR. The response is long, so paste just the first several lines.
 
-```{r the-terminal-4}
+```{r the-terminal-2}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -237,11 +173,11 @@ List information about the FILEs (the current directory by default).
 Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
 ````
 
-`--help` is a safe way to learn what a command does. It just prints a description; it never changes your files. Almost every command you meet has a `--help` option, so this is a good habit whenever you see a new one.
+`--help` is a safe way to learn what a command does. It just prints a description; it never changes your files. Almost every command you meet has a `--help` option.
 
-### Exercise 5
+### Exercise 3
 
-Now make a file by hand, just to see how it works. Open the Application Menu from the three horizontal bars at the top left. Choose `File -> New File...`.
+Let's make a file by hand, just to see how it works. Open the Application Menu from the three horizontal bars at the top left on the VS Code widnow. Choose `File -> New File...`.
 
 ```{r}
 include_graphics("images/create-new-file.png")
@@ -259,15 +195,19 @@ Type this single line into the new file:
 1 + 2
 ````
 
+Add a blank line after it.
+
 Save the file as `warmup.R` at the top level of `codespace-starter`. Press `Cmd/Ctrl + S`; in the Save dialog, make sure the path ends in `codespace-starter/warmup.R`, then press **OK**. A black dot on an Editor tab means the file has unsaved changes; saving makes the dot disappear.
 
 ```{r}
 include_graphics("images/save-warmup.png")
 ```
 
+Be careful. Sometimes VS Code seems to prefer a small `r` suffix. Either `r` or `R` is fine, but the file must be named exactly `warmup.R` (capital `R`) for the next step to work.
+
 In the bash Terminal, run `Rscript warmup.R`. CP/CR.
 
-```{r the-terminal-5}
+```{r the-terminal-3}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -286,11 +226,11 @@ codespace-starter $
 
 An R script is a text file containing R commands. `Rscript warmup.R` asks R to run every command in the file. The code stays in the script after it runs, so you can look at it, change it, and run it again.
 
-### Exercise 6
+### Exercise 4
 
 Run `ls` again. CP/CR.
 
-```{r the-terminal-6}
+```{r the-terminal-4}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -307,7 +247,7 @@ warmup.R
 codespace-starter $
 ````
 
-Your new file now appears. The problem is that this file lives inside the `PPBDS/codespace-starter` working copy, which you do **not** own. You cannot save your work to that repository on GitHub. Closing the browser does not erase the file right away, but deleting or rebuilding the Codespace will. You need a repository that belongs to you. That is what the next section sets up.
+Your new file now appears. The problem is that this file lives inside the `PPBDS/codespace-starter` working copy, which you do **not** own. You cannot save your work to that repository on GitHub. Closing the browser does not erase the file right away, but deleting the Codespace will. You need a repository that belongs to you. That is what the next section sets up.
 
 ## Git and GitHub
 ###
@@ -320,15 +260,38 @@ We give you a shortcut for this called `connect-repo.sh`. It signs you in to Git
 
 ### Exercise 1
 
-Run:
+<!-- DK: Split this up into several questions? Add the saved images? -->
+
+In the bash Terminal, run:
 
 ````
 .devcontainer/connect-repo.sh workflow
 ````
 
-If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/workflow`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
+###
 
-CP/CR the useful part of the script's response. If the window reload cleared the output, paste the first prompt you see in the new `workflow` Terminal instead.
+You should see something like this, assuming you answer `Y` to the first question:
+
+````
+codespace-starter $ .devcontainer/connect-repo.sh workflow
+→ Sign in to GitHub: authorize in the browser/code prompt, then come back here.
+? Authenticate Git with your GitHub credentials? Yes
+
+! First copy your one-time code: 5887-E310
+Press Enter to open https://github.com/login/device in your browser... 
+````
+
+You should copy the entire one-time code. You will then be able to just paste the whole thing in at once, when GitHub asks for it. 
+
+Press `Enter` to open the link in your browser, authorize GitHub, then return to VS Code. 
+
+```{r}
+include_graphics("images/authorize.png")
+```
+
+###
+
+Run `ls`. CP/CR.
 
 ```{r git-and-github-1}
 question_text(NULL,
@@ -341,7 +304,15 @@ question_text(NULL,
 
 ###
 
-Your output may say that the repository was created, cloned, or was already present. All three are fine. The result is a GitHub repository named `workflow` and a folder at `/workspaces/workflow`.
+```
+workflow $ ls
+AGENTS.md
+workflow $ 
+```
+
+The result of `connect-repo.sh` is a GitHub repository named `workflow` and a folder at `/workspaces/workflow`.
+
+###
 
 The two folders now sit beside each other:
 
@@ -373,7 +344,9 @@ workflow $ pwd
 workflow $
 ````
 
-Stop and fix the open folder if your result still ends in `codespace-starter`. All remaining work belongs in `/workspaces/workflow`.
+##
+
+If your result still ends in `codespace-starter`, you have a problem. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/workflow`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
 
 ### Exercise 3
 
@@ -392,11 +365,13 @@ question_text(NULL,
 
 ````
 workflow $ ls -a
-.  ..  .git
-workflow $
+.  ..  AGENTS.md  .git
+workflow $ 
 ````
 
-The hidden `.git` directory is what defines a Git repository. Git fill it with your work as you proceed. You never use directly, or even examine, the `.git` folder.
+The hidden `.git` directory is what defines a Git repository. Git fills it with your work as you proceed. You never use directly, or even examine, the `.git` folder.
+
+`AGENTS.md` is a file we created which tries to guide AI in how best to help beginners. Check it out, if you like! If you don't like it, you can delete it and tell your AI to ignore it. 
 
 ### Exercise 4
 
@@ -405,6 +380,8 @@ Check your repository on GitHub.
 Open a new browser tab and go to [github.com](https://github.com). Sign in with the same account if you are asked. Click your profile picture in the top-right corner, choose **Your repositories**, and find the one named **workflow**. Click it.
 
 You are now on your repository's page. Near the top-right of the box that lists your files, there is a **Commits** link showing how many commits the repository has. The red box in the picture below marks it.
+
+<!-- DK: get rid of dark images. -->
 
 ```{r}
 include_graphics("images/analysis-1-gh-1.png")
@@ -423,6 +400,8 @@ question_text(NULL,
 
 ###
 
+<!-- DK: This is unclear. -->
+
 The picture shows a different repository, `04-github-1` with several files, so it has `3 Commits`. Yours might just say `1 Commit` right now. That is fine.
 
 Seeing the repository in your browser proves two things: the repository really exists on GitHub, and it belongs to **you** (your username appears in the address bar, like `github.com/your-username/workflow`). This is the online home where your work will live. Later in this tutorial you will push files here and watch the commit count grow.
@@ -430,17 +409,19 @@ Seeing the repository in your browser proves two things: the repository really e
 ## Script 1: GitHub Copilot
 ###
 
-You met **GitHub Copilot** --- the AI assistant built right into VS Code --- in Workspace, where it wrote small files for you. Now give it real work. We use Copilot here because it is always available and works out of the box.
+You met **GitHub Copilot** --- the AI assistant built right into VS Code --- in the Workspace tutorial, where it wrote small files for you. Now give it real work. We use Copilot here because it is always available and works out of the box.
 
-Open a new R Terminal. Keep the **R Tutorial** terminal running, and use this new R Terminal for the R commands below. Click the small arrow beside the `+` in the top-right corner of the Panel, then choose **R Terminal**. (The new terminal's tab is labeled **R Interactive**.) The red boxes show where to click.
+Open a new R Terminal by click the small arrow beside the `+` in the top-right corner of the Panel, then choosing **R Terminal**. (The new terminal's tab is labeled **R Interactive**.) The red boxes show where to click.
 
 ```{r}
 include_graphics("images/new-terminal.png")
 ```
 
+Keep the **R Tutorial** terminal running, and use this new R Terminal for the R commands below. 
+
 ###
 
-Click the Chat button in the title bar, then click **Open Chat**. The red box in the picture shows the Chat button. If Copilot asks you to sign in, use the same GitHub account you used for the Codespace.
+If the Chat window --- normally the secondary sidebar on the right of the VS Code main screen --- is not open, open it now. Click the Chat button in the title bar, then click **Open Chat**. The red box in the picture shows the Chat button. If Copilot asks you to sign in, use the same GitHub account you used for the Codespace.
 
 ```{r}
 include_graphics("images/copilot-chat-icon.png")
