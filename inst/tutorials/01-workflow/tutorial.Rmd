@@ -260,7 +260,7 @@ We give you a shortcut for this called `connect-repo.sh`. It signs you in to Git
 
 ### Exercise 1
 
-<!-- DK: Split this up into several questions? Add the saved images? -->
+<!-- DK: Split this up into several questions? Add an image for every step, including messages from GitHub? -->
 
 In the bash Terminal, run:
 
@@ -281,13 +281,17 @@ codespace-starter $ .devcontainer/connect-repo.sh workflow
 Press Enter to open https://github.com/login/device in your browser... 
 ````
 
-You should copy the entire one-time code. You will then be able to just paste the whole thing in at once, when GitHub asks for it. 
+Your code will be different from this one, and different each time. You should copy the entire one-time code. You will then be able to just paste the whole thing in at once, when GitHub asks for it. 
 
 Press `Enter` to open the link in your browser, authorize GitHub, then return to VS Code. 
 
 ```{r}
 include_graphics("images/authorize.png")
 ```
+
+###
+
+Note that the browser may open up what appears to be a new version of this tutorial. In truth, it is just a new window onto the same tutorial. Delete one of these tutorial tabs. It does not matter which one.
 
 ###
 
@@ -377,17 +381,26 @@ The hidden `.git` directory is what defines a Git repository. Git fills it with 
 
 Check your repository on GitHub.
 
-Open a new browser tab and go to [github.com](https://github.com). Sign in with the same account if you are asked. Click your profile picture in the top-right corner, choose **Your repositories**, and find the one named **workflow**. Click it.
-
-You are now on your repository's page. Near the top-right of the box that lists your files, there is a **Commits** link showing how many commits the repository has. The red box in the picture below marks it.
-
-<!-- DK: get rid of dark images. -->
+Open a new browser tab and go to [github.com](https://github.com). Sign in with the same account if you are asked. Click your profile picture in the top-right corner, choose **Your repositories**.
 
 ```{r}
-include_graphics("images/analysis-1-gh-1.png")
+include_graphics("images/repo-1.png")
 ```
 
-Your repository is brand new, so it will have far fewer files than this example and only a commit or two — but the page layout and the **Commits** link are in the same place. Copy and paste the text of the **Commits** link (for example, `1 Commit`).
+###
+
+Find the repo named **workflow**. Click it.
+
+```{r}
+include_graphics("images/repo-2.png")
+```
+
+This is your repository's page. There is nothing going on yet because we have not made any changes.
+
+###
+
+Go back to the bash Terminal in your Codespace and run `git status`. CP/CR.
+
 
 ```{r git-and-github-4}
 question_text(NULL,
@@ -395,43 +408,47 @@ question_text(NULL,
     allow_retry = TRUE,
     try_again_button = "Edit Answer",
     incorrect = NULL,
-    rows = 3)
+    rows = 8)
 ```
 
 ###
 
-<!-- DK: This is unclear. -->
+```
+workflow $ git status
+On branch main
 
-The picture shows a different repository, `04-github-1` with several files, so it has `3 Commits`. Yours might just say `1 Commit` right now. That is fine.
+No commits yet
 
-Seeing the repository in your browser proves two things: the repository really exists on GitHub, and it belongs to **you** (your username appears in the address bar, like `github.com/your-username/workflow`). This is the online home where your work will live. Later in this tutorial you will push files here and watch the commit count grow.
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        AGENTS.md
+
+nothing added to commit but untracked files present (use "git add" to track)
+workflow $ 
+```
+
+Seeing the repository in your browser proves two things: the repository really exists on GitHub, and it belongs to **you** (your username appears in the address bar, like `github.com/your-username/workflow`). This is the online home where your work will live. 
 
 ## Script 1: GitHub Copilot
 ###
 
-You met **GitHub Copilot** --- the AI assistant built right into VS Code --- in the Workspace tutorial, where it wrote small files for you. Now give it real work. We use Copilot here because it is always available and works out of the box.
+You met **GitHub Copilot** --- the AI assistant built right into VS Code --- in the Workspace tutorial, where it wrote small files for you. We use Copilot here because it is always available and works out of the box.
 
-Open a new R Terminal by click the small arrow beside the `+` in the top-right corner of the Panel, then choosing **R Terminal**. (The new terminal's tab is labeled **R Interactive**.) The red boxes show where to click.
+Open a new R Terminal by clicking the small arrow beside the `+` in the top-right corner of the Panel, then choosing **R Terminal**. (The new terminal's tab is labeled **R Interactive**.) 
 
-```{r}
-include_graphics("images/new-terminal.png")
-```
-
-Keep the **R Tutorial** terminal running, and use this new R Terminal for the R commands below. 
+Keep the **R Tutorial** terminal running, and use this new R Terminal for the R commands below. You may need to select the **R Interactive** terminal by clicking on it in order to move it to the front.
 
 ###
 
-If the Chat window --- normally the secondary sidebar on the right of the VS Code main screen --- is not open, open it now. Click the Chat button in the title bar, then click **Open Chat**. The red box in the picture shows the Chat button. If Copilot asks you to sign in, use the same GitHub account you used for the Codespace.
+If the Chat window --- normally the secondary sidebar on the right of the VS Code main screen --- is not open, open it now by clicking the "Toggle Secondary Sidebar" icon in the top-right corner of the window. 
 
 ```{r}
-include_graphics("images/copilot-chat-icon.png")
+include_graphics("images/toggle-chat.png")
 ```
+
 
 Before starting any AI agent, check that its Terminal or workspace is `/workspaces/workflow`. An agent reads and writes files relative to the folder it starts in. An agent accidentally started in `codespace-starter` can create files that never show up in your `workflow` Explorer and never reach your repository.
 
-###
-
-AI agents may offer a **Full Access**, **Always Allow**, or similarly named mode. Do **not** use it in this course. Keep the agent in a review or permission-based mode. Read each proposed command or file change, approve it once if it makes sense, and reject or question anything surprising. Never paste passwords, tokens, private data, or secrets into an AI prompt.
 
 ### Exercise 1
 
@@ -439,7 +456,7 @@ Give Copilot this prompt, adjusting the wording if needed:
 
 > Create an R script named script-1.R. It should add the integers from 1 through 10 and print the result. Run the script with Rscript and tell me the result. Do not install any packages.
 
-Review and approve the file write and the `Rscript` command one at a time. Then, in the R Terminal, run:
+Review and approve the creation of `script-1.R` and the `Rscript` command one at a time. Then, in the R Terminal, run:
 
 ````
 tutorial.helpers::show_file("script-1.R")
@@ -468,17 +485,66 @@ print(total)
 
 ### Exercise 2
 
+The Copilot interface and default changes all the time, like everything associated with AI. So, these images may be out of date. However, it is likely that the Explorer shows you something like this:
+
+```{r}
+include_graphics("images/sc-1.png")
+```
+
+###
+
+The black dot surrounded by the square next to `script-1.R` indicates a file that has been created/edited by an AI but not yet saved. To save it, you will need to take some action, like selecting "Keep":
+
+```{r}
+include_graphics("images/sc-2.png")
+```
+
+###
+
+Doing so, makes the black-dot-square disappear. It should be replaced with a `U` to indicate that the file is **untracked** by Git. 
+
+In the bash Terminal, run `ls`. CP/CR.
+
+
+```{r script-1-github-copilot-2}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 18)
+```
+
+###
+
+```
+workflow $ ls
+AGENTS.md  script-1.R
+workflow $ 
+```
+
+The file is now saved, but it is not yet part of your repository. You will add it to the repository later. 
+
+### Exercise 3
+
 Finish the script with a plot. Ask Copilot:
 
 > Update script-1.R so that it keeps the addition example and then makes a beautiful plot using the diamonds data set from ggplot2. Use library(tidyverse) and no other library calls or data sets. Save the plot as diamonds-1.png. Run the script and fix any errors. Do not install packages.
 
-Review the changes and allow the agent to run the script. Then run the following in the R Terminal and CP/CR:
+You should see something like:
+
+```{r}
+include_graphics("images/sc-3.png")
+```
+
+
+Keep the changes and allow the agent to run the script. Then run the following in the R Terminal and CP/CR:
 
 ````
 tutorial.helpers::show_file("script-1.R")
 ````
 
-```{r script-1-github-copilot-2}
+```{r script-1-github-copilot-3}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -515,11 +581,11 @@ ggsave("diamonds-1.png", diamonds_plot, width = 8, height = 5)
 
 This solution loads only **tidyverse**, uses only `diamonds`, assigns the plot to an object, and saves a PNG. Click `diamonds-1.png` in Explorer to inspect your own result.
 
-### Exercise 3
+### Exercise 4
 
 Time to save your work. **Git** records a snapshot of your files, called a **commit**. A **push** sends your commits up to GitHub. Do both by hand through the Source Control view.
 
-Click the Source Control icon (the branching icon) in the Activity Bar on the left. Your new files appear under **Changes**. Each one has a `U`, which means **untracked**: Git can see the file, but it is not yet part of any commit.
+Click the Source Control icon (the branching icon) in the Activity Bar on the left. Your new files appear under **Changes**. (Don't worry about `AGENTS.md`. We created this file to help with teaching.) Each one has a `U`, which means **untracked**: Git can see the file, but it is not yet part of any commit.
 
 ```{r}
 include_graphics("images/source-control.png")
@@ -530,23 +596,23 @@ Now commit and push:
 1. Review the files under **Changes**. Do not commit secrets, tokens, or files you do not understand.
 2. Type `Add script-1 and diamonds plot` as the commit message.
 3. Press **Commit**. The Codespace is set up to include all the displayed changes.
-4. Press **Sync Changes** to push the commit to GitHub.
+4. Press **Publish Branch** to push the commit to GitHub.
 
-After you commit, the green button becomes **Sync Changes**, like this:
+###
 
-```{r}
-include_graphics("images/analysis-1-post-commit.png")
-```
+When the sync finishes, view your work on the web. Open your `workflow` repository on GitHub and refresh the page. 
 
-When the sync finishes, view your work on the web. Open your `workflow` repository on GitHub and refresh the page. Copy/paste the file names shown on the repository's main page.
-
-The GitHub page looks like this. This older example has a different repo name and different files, but the layout is the same.
+The GitHub page looks like this. 
 
 ```{r}
 include_graphics("images/github-repository.png")
 ```
 
-```{r script-1-github-copilot-3}
+###
+
+From the bach Terminal, run `git log`. CP/CR.    
+
+```{r script-1-github-copilot-4}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -560,11 +626,16 @@ question_text(NULL,
 You should see at least:
 
 ````
-diamonds-1.png
-script-1.R
+workflow $ git log
+commit b65be73dbdf149c48b4cbc177e9d0a996caa6797 (HEAD -> main, origin/main)
+Author: davekane-student <dave.kane+student@gmail.com>
+Date:   Thu Aug 13 05:44:10 2026 +0000
+
+    Add script-1 and diamonds plot
+workflow $ 
 ````
 
-This GitHub page is the online copy of your work. The Codespace is where you work. The GitHub repo is where you keep and share it. If your computer stopped working right now, your commit would still be safe on GitHub.
+This GitHub repo is the online copy of your work. The Codespace is where you work. The GitHub repo is where you keep and share it. If your computer stopped working right now, your commit would still be safe on GitHub.
 
 ###
 
@@ -579,7 +650,7 @@ Copilot is only one option. The Codespace may also provide command-line agents f
 ## Script 2: AI agnostic
 ###
 
-From this point forward, this course is **AI agnostic**. "Ask AI" means use whichever AI you prefer — Copilot, Antigravity, or any other agent the Codespace provides. We will generally show prompts and results, not tool-specific buttons or screenshots. 
+From this point forward, we are **AI agnostic**. "Ask AI" means use whichever AI you prefer — Copilot, Antigravity, or any other agent the Codespace provides. We will generally show prompts and results, not tool-specific buttons or screenshots. 
 
 ### Exercise 1
 
@@ -603,10 +674,14 @@ question_text(NULL,
 One possible answer is:
 
 ````
-numbers <- c(3, 5, 8, 13, 21, 34, 55, 89, 144, 233)
+numbers <- c(5, 12, 8, 23, 15, 7, 19, 11, 31, 9)
 
-print(sum(numbers))
-print(mean(numbers))
+sum_result <- sum(numbers)
+mean_result <- mean(numbers)
+
+print(paste("Vector:", paste(numbers, collapse = ", ")))
+print(paste("Sum:", sum_result))
+print(paste("Mean:", mean_result))
 ````
 
 The particular numbers and results do not matter. The important result is a saved, reproducible script that runs successfully.
@@ -615,7 +690,27 @@ The particular numbers and results do not matter. The important result is a save
 
 Finish the second script with another plot. Ask your AI:
 
-> Update script-2.R so that it keeps the number example and then makes a beautiful plot using the diamonds data set from ggplot2. Use library(tidyverse) and no other library calls or data sets. Make a different kind of plot from the one in script-1.R, save it as diamonds-2.png, run the script, and fix any errors. Do not install packages.
+> Update script-2.R so that it deletes the number example and then makes a beautiful plot using the diamonds data set from ggplot2. Use library(tidyverse) and no other library calls or data sets. Make a different kind of plot from the one in script-1.R, save it as diamonds-2.png, run the script, and fix any errors. Do not install packages.
+
+Note how confusing your screen can become!
+
+```{r}
+include_graphics("images/confuse.png")
+```
+
+* The black-dot-square next to `script-2.R` in the Explorer view indicates a file that has been created/edited by an AI but not yet saved. 
+
+* The black-dot-square also appears next to `script-2.R` in the name of the tab in the Editor.
+
+* To save `script-2.R`, you will need to take some action, like selecting "Keep". VS Code wants you to do that, so it offers 3 (!) different "Keep" buttons, all of which do the same thing. 
+
+* The red shaded portion of `script-2.R` in the Editor indicates code that the AI wants to remove. The green shaded portion indicates code that the AI wants to add. 
+
+* Click any one of the "Keep" buttons to save the file. Both black-dot-squares should disappear. The one in the Explorer should be replaced with a `U` to indicate that the file is **untracked** by Git.
+
+* The AI is asking your permission to run the script using `Rscript script-2.R` in the bash Terminal. You can approve or reject that command. If you approve, the AI will run the script and show you the result. If you reject it, you can run the script yourself in the bash Terminal. As you get more experienced, you will tell the AI to stop asking you for permission to do every little thing. 
+
+###
 
 In the R Terminal, run `tutorial.helpers::show_file("script-2.R")`. CP/CR.
 
@@ -655,9 +750,23 @@ ggsave("diamonds-2.png", diamonds_plot, width = 8, height = 5)
 
 ### Exercise 3
 
-Save this work too. Through the Source Control view, commit your new files with the message `Add script-2 and second diamonds plot`, then press **Sync Changes** to push.
+Save this work too. Through the Source Control view, commit your new files with the message `Add script-2 and second diamonds plot`
 
-Then, in the bash Terminal, run `git log`. CP/CR the most recent entry.
+```{r}
+include_graphics("images/commit-2.png")
+```
+
+Then press **Sync Changes 1** to push.
+
+```{r}
+include_graphics("images/push-2.png")
+```
+
+The `1` in "Sync Changes 1" indicates that you have one commit to push. This label is "Sync Changes" rather than "Publish Branch" because you have already pushed once. The first push is always "Publish Branch". Subsequent pushes are "Sync Changes".
+
+###
+
+In the bash Terminal, run `git log -1`. CP/CR.
 
 ```{r script-2-ai-agnostic-3}
 question_text(NULL,
@@ -673,19 +782,16 @@ question_text(NULL,
 Your answer should look something like:
 
 ````
-workflow $ git log
-commit be56bbaedd692a6d29bba410f0a6fd5b1d844a64 (HEAD -> main, origin/main, origin/HEAD)
-Author: ppbds-student <ppbds-student@users.noreply.github.com>
-Date:   Thu Jul 23 16:57:38 2026 +0000
+workflow $ git log -1
+commit 757d4dfd030339a67d164b0c846c5152c559a544 (HEAD -> main, origin/main)
+Author: davekane-student <dave.kane+student@gmail.com>
+Date:   Thu Aug 13 06:21:02 2026 +0000
 
     Add script-2 and second diamonds plot
+workflow $ 
 ````
 
-`git log` lists your commits, newest first. When the newest line shows both `main` and `origin/main`, your Codespace and GitHub agree on the latest commit — your push worked. You can also see the same history on GitHub by clicking the commit-count link on the repo page.
-
-```{r}
-include_graphics("images/analysis-1-gh-2.png")
-```
+`git log -1` shows the last commit. When the top line shows both `main` and `origin/main`, your Codespace and GitHub agree on the latest commit — your push worked. You can also see the same history on GitHub.
 
 ## Summary
 ###
@@ -695,8 +801,8 @@ You used the major parts of VS Code, practiced bash commands, created and connec
 From now on, begin course work with the same routine:
 
 1. Start the `codespace-starter` Codespace.
-2. Create or connect to the requested repository and open its folder.
-3. Start whichever AI you want to use, in review mode.
+2. Use `connect-repo.sh` to create and connect with a new repo, generally given the same name as the tutorial which you are about to start.
+3. Start whichever AI you want to use, in review mode. GitHub Copilot is always available, but you may prefer another agent. 
 4. Start the tutorial.
 
 Future tutorials will often say only "create and connect to a repo," "ask AI," "run," or "commit and push." You now know the choices behind those instructions. We leave the choice of AI and the exact mechanics to you, but you must always review the results.
@@ -717,7 +823,7 @@ question_text(NULL,
 ###
 
 ````
-https://github.com/ppbds-student/workflow
+https://github.com/davekane-student/workflow
 ````
 
 The `github.com/...` URL is the repository. A `github.dev` or `githubpreview.dev` URL points to a temporary working interface, not the repository page you should submit.
