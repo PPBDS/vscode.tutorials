@@ -738,7 +738,7 @@ The Editor must have focus so VS Code knows which line to send to the active R T
 
 ### Exercise 6
 
-Keep your cursor in the `script.R` Editor and press `Cmd/Ctrl + Shift + Enter`. This sources the entire file with echo, just like the Run Source button. CP/CR.
+Keep your cursor in the `script.R` Editor and press `Cmd/Ctrl + Shift + S`. This sources the entire file with echo, just like the Run Source button. CP/CR.
 
 ```{r github-copilot-6}
 question_text(NULL,
@@ -862,7 +862,7 @@ Copilot used `Rscript`, which created `x` in a separate R process and then close
 
 ### Exercise 10
 
-Open `script.R` in the Editor. It should now contain `x <- 2 + 2`. Keep your cursor in the Editor and press `Cmd/Ctrl + Shift + Enter` to source the file in your open R session. Then run this command in the R Terminal:
+Open `script.R` in the Editor. It should now contain `x <- 2 + 2`. Keep your cursor in the Editor and press `Cmd/Ctrl + Shift + S` to source the file in your open R session. Then run this command in the R Terminal:
 
 ```
 x
@@ -900,7 +900,7 @@ The five ways to run the script do not all use the same R session:
 |---|---|
 | Click Source button | Your open R Terminal |
 | `Cmd/Ctrl + Enter` | Your open R Terminal; current line only |
-| `Cmd/Ctrl + Shift + Enter` | Your open R Terminal; entire file |
+| `Cmd/Ctrl + Shift + S` | Your open R Terminal; entire file |
 | `Rscript script.R` in bash | A new process that closes afterward |
 | Ask Copilot to use `Rscript` | A new process that closes afterward |
 

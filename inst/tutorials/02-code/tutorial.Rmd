@@ -371,7 +371,7 @@ R scripts are permanent copies of your code. You can save them and also work wit
 
 ### Exercise 2
 
-You met the Source button and its keyboard shortcuts in the Workspace tutorial. Practice them again now --- the goal is to make them habit.
+You met the Source button and its keyboard shortcut in the Workspace tutorial. Practice them again now --- the goal is to make them habit.
 
 Press the **Source** button in the top-right corner of the Editor. (We will sometimes shorten the instruction "press the Source button" to just "source" the script.)
 
@@ -510,15 +510,19 @@ In this case, the object `x`, which has a value of 10, exists in your workspace.
 
 ### Exercise 6
 
-<!-- DK: Should we really be doing this by hand so early? -->
+`script-1.R` exists only in this Codespace. Recall from the Workflow tutorial: a **commit** is a snapshot of your work, and a **push** copies that snapshot to GitHub. Let's do both. Click on the Source Control icon in the Activity Bar. You should see `script-1.R` (and `AGENTS.md`) listed under **Changes**. Type a commit message, such as "Add script-1", and click to commit. 
 
-`script-1.R` exists only in this Codespace. Recall from the Workflow tutorial: a **commit** is a snapshot of your work, and a **push** copies that snapshot to GitHub. Let's do both. In a bash Terminal, run these three commands, one at a time:
+```{r}
+include_graphics("images/git-1.png")
+```
 
-````
-git add script-1.R
-git commit -m "Add script-1"
-git push
-````
+Click "Publish Branch" copy your commit to GitHub. In general only the first "push" to a repo is labelled "Publish Branch." Subsequent pushes are labelled "Sync Changes" or "Push."
+
+Your script now exists in two places: this Codespace and GitHub. Professionals keep their work in the cloud because laptops --- and Codespaces --- fail.
+
+### 
+
+From the bash Terminal, run the `git log`. 
 
 CP/CR.
 
@@ -534,49 +538,20 @@ question_text(NULL,
 ###
 
 ````
-code $ git add script-1.R
-code $ git commit -m "Add script-1"
-[main 1a2b3c4] Add script-1
- 1 file changed, 3 insertions(+)
- create mode 100644 script-1.R
-code $ git push
-Enumerating objects: 4, done.
-Counting objects: 100% (4/4), done.
-Writing objects: 100% (3/3), 310 bytes | 310.00 KiB/s, done.
-To https://github.com/your-username/code.git
-   9d8c7b6..1a2b3c4  main -> main
+code $ git log
+commit 0f0eed547148739b625ec8e3c4db91ac076d96e5 (HEAD -> main, origin/main)
+Author: davekane-student <dave.kane+student@gmail.com>
+Date:   Thu Aug 13 14:40:51 2026 +0000
+
+    Add script-1
 code $
 ````
 
 ###
 
-Your script now exists in two places: this Codespace and GitHub. Professionals keep their work in the cloud because laptops --- and Codespaces --- fail.
+<!-- DK: Really ought to make this pop-up disappear in the VS Code or Git settings. -->
 
-### Exercise 7
-
-In the Workflow tutorial, you read `git log`'s full output, one multi-line entry per commit. Professionals more often use the compact form. Run `git log --oneline`. CP/CR.
-
-```{r script-1-7}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 4)
-```
-
-###
-
-````
-code $ git log --oneline
-1a2b3c4 (HEAD -> main, origin/main) Add script-1
-9d8c7b6 Initial commit
-code $
-````
-
-###
-
-`--oneline` gives one line per commit: a shortened commit ID and the message. This compact history is the form you will glance at most often. You learned to read the `(HEAD -> main, origin/main)` marker in the Workflow tutorial --- when the newest commit carries both names, your Codespace and GitHub agree.
+You will often see a pop-up asking if you want to automatically "fetch" changes from your GitHub repo. Feel free to dismiss. Since no one else is working on this repo, there are no changes to fetch. If you are working with others, you will want to fetch changes from GitHub before you push your own changes.
 
 ## Script 2
 ###
@@ -600,7 +575,7 @@ hist_p
 
 ### Exercise 1
 
-Click `File -> New File ... -> R File`. At the top of the Editor, the file should be called *`Untitled-1`* (or something similar).
+Click `File -> New File ... -> R File`. At the top of the Editor, the file will be called *`Untitled-1`* (or something similar) by default.
 
 ###
 
@@ -621,11 +596,10 @@ question_text(NULL,
 
 ````
 > list.files()
-[1] "script-1.R" "script-2.R"
+[1] "AGENTS.md""script-1.R" "script-2.R"
 ````
 
-Save your scripts, with informative names, in the folder. Edit them and run them line by line or in their entirety. Restart R frequently to make sure you have captured everything in your scripts.
-
+Save your scripts in the folder. Edit them and run them line by line or in their entirety. Restart R frequently to make sure you have captured everything in your scripts.
 
 ### Exercise 2
 
@@ -645,14 +619,12 @@ question_text(NULL,
 ###
 
 ```
-R 4.6.1 exited (preparing for restart)
-R 4.6.1 restarted.
 > list.files()
-[1] "script-1.R" "script-2.R"
+[1] "AGENTS.md" "script-1.R" "script-2.R"
 >
 ```
 
-The two files we had from before --- `script-1.R` and `script-2.R` --- still exist. Our work, if we have saved it, is preserved even when R or the Codespace restarts.
+The three files we had from before still exist. Our work, if we have saved it, is preserved even when R or the Codespace restarts.
 
 ### Exercise 3
 
@@ -677,7 +649,7 @@ character(0)
 
 `x` is gone! The environment --- the place in the computer where R creates and uses objects --- is cleaned, by default, each time R restarts. This is a good thing. For our work to be "reproducible," we want to be able to start from nothing except our code and raw data.
 
-You first saw this in Workspace, when the `x` created by Copilot's `Rscript` never appeared in your open R session: every R process has its own environment, and a restarted R Terminal is a new process.
+You first saw this in Workspace, when the `x` created by Copilot's `Rscript` never appeared in your open R session. Every R process has its own environment, and a restarted R Terminal is a new process.
 
 ### Exercise 4
 
@@ -691,7 +663,7 @@ You will see, in the top bar of the Editor, that the file name `script-2.R` has 
 
 ###
 
-Run the entire file with `Cmd/Ctrl + Enter`. Note how much material --- the "Attaching core tidyverse packages" and so on --- is produced in the R Terminal.
+Run the entire file with `Cmd/Ctrl + Shift + S`. Note how much material --- the "Attaching core tidyverse packages" and so on --- is produced in the R Terminal.
 
 ###
 
@@ -858,7 +830,7 @@ question_text(NULL,
 
 ````
 > list.files()
-[1] "diamonds.png" "script-1.R"   "script-2.R"
+[1] "AGENTS.md" "diamonds.png" "script-1.R"   "script-2.R"
 >
 ````
 
@@ -869,11 +841,15 @@ You should see the `diamonds.png` file, which contains your plot. Click it in th
 ## Summary
 ###
 
-You have made more files since your first push --- `script-2.R` and `diamonds.png`. Let's send them all to GitHub.
+This tutorial taught you how to use [**Codespaces**](https://github.com/features/codespaces) with [**R**](https://www.r-project.org/about.html) scripts. It included some information from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
 ### Exercise 1
 
-In a bash Terminal, run these three commands, one at a time:
+You have made more files since your first push --- `script-2.R` and `diamonds.png`. Let's send them all to GitHub.
+
+So far, we have used the UI from the Source Control icon in the Activity Bar. Now, let's use the bash Terminal.
+
+In a bash Terminal, run these three commands, one at a time, hitting `Enter` after each. The first command stages all changed files, the second commits them with a message, and the third pushes the commit to GitHub.
 
 ````
 git add .
@@ -912,7 +888,9 @@ code $
 
 ###
 
-`git add .` stages every changed file at once, rather than naming one file as you did before. Committing in sensible batches, each with a clear message, is the professional habit. Nearly every tutorial from now on ends this way: commit and push.
+`git add .` stages every changed file at once. When using the UI, as you did before, clicking the "Commit" button stages and commits the file in one step. 
+
+For the most part, we just click the buttons, but it is important to understand that, behind the button, there are actual commands. When the AI does things, it is running commands, not clicking buttons. 
 
 ### Exercise 2
 
@@ -936,11 +914,6 @@ https://github.com/your-username/code
 ###
 
 This URL is the permanent, shareable home of your work --- it outlives this Codespace. Note the Commits link near the top of the file listing: it now records the history you built, from the initial commit through your final push.
-
-###
-
-This tutorial taught you how to use [**Codespaces**](https://github.com/features/codespaces) with [**R**](https://www.r-project.org/about.html) scripts. It assumed that you have some knowledge of R code, perhaps at the level of the "Introduction" tutorial from the [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) package. It included some information from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
-
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```

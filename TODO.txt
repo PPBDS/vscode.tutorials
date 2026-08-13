@@ -17,6 +17,9 @@ Looks fine in the Rmd but then prints out wrapped ugly in the HTML.
 
 * What should repo names be now that tutorial titles (i.e., the "name" of the tutorial) are things like "Getting Started" and "Terminal Introduction"? Perhaps the answer is all lower case with spaces (and other weird characters) replaced with dashes.
 
+* Get the "Want to automatically fetch" pop-up to not appear.
+
+* Get rid of warnings on bash and Codespace terminals at Codebase start up.
 
 
 Might have some other ones, especially ones which begin by forking a PPBDS repo with various problems and then work on disagnosing/solving them.

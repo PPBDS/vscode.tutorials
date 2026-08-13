@@ -93,7 +93,7 @@ First, make sure you can see the Terminal. It lives in the Panel across the bott
 include_graphics("images/open-terminal-menu.png")
 ```
 
-You can also open it with the keyboard shortcut shown in the menu, `` Ctrl+` `` (the key just above `Tab`).
+You can also open it with the keyboard shortcut shown in the menu, `` Ctrl + ` `` (the key just above `Tab`).
 
 ###
 
