@@ -94,22 +94,18 @@ question_text(NULL,
 
 ###
 
-<!-- VERIFY: that the PS1 override really is the last thing in ~/.bashrc in the
-     current ghcr.io/ppbds/devcontainer image, and what the surrounding lines
-     say. CLAUDE.md records that welcome.sh appends it. -->
-
 ```
 codespace-starter $ tail -3 ~/.bashrc
-
-# Keep the prompt short: current directory, then a dollar sign.
+# codespace-starter:short-prompt — short prompt for beginners (folder name + $).
+PROMPT_COMMAND=''
 PS1='\W \$ '
 ```
 
 ###
 
-There is the reason your prompt says `codespace-starter $` instead of the long `@user ➜ /workspaces/... (main) $` that GitHub gives everybody else. `PS1` holds your prompt, and `\W` means *the name of the current directory*, which is why it changes as you `cd` around.
+There is the reason your prompt says `codespace-starter $` instead of the long `@user ➜ /workspaces/... (main) $` that GitHub gives everybody else. `PS1` holds your prompt, and `\W` means *the name of the current directory*, which is why it changes as you `cd` around. (`PROMPT_COMMAND` is cleared first because the stock Codespaces prompt rebuilds itself through it on every render --- clearing it is what lets the simple `PS1` stick.)
 
-Our image appends those lines when it is built. Note that word --- **appends**. `.bashrc` already belongs to somebody, and in a few minutes you are going to add a line after theirs rather than replace the file.
+`codespace-starter`'s `welcome.sh` appends those lines to the end of `~/.bashrc` when you first attach to a new Codespace. Note that word --- **appends**. `.bashrc` already belongs to somebody, and in a few minutes you are going to add a line after theirs rather than replace the file.
 
 ## Your Dotfiles Repo
 ###
@@ -401,6 +397,13 @@ question_text(NULL,
 
 ###
 
+<!-- VERIFY in a live Codespace: the ORDER of these two lines. Dotfiles'
+     install.sh runs at create, but welcome.sh appends its short-prompt block
+     at first attach, so the block (PROMPT_COMMAND=''/PS1=...) most likely
+     lands AFTER the export — i.e. tail -2 shows the prompt block, and the
+     export sits a few lines above it. Adjust this transcript and the
+     knowledge drop below to whatever a real new Codespace shows. -->
+
 ```
 codespace-starter $ git config --get user.name
 David Kane
@@ -451,7 +454,7 @@ You started with `echo $COOLEST_TEACHER` printing nothing --- successfully, beca
 
 ###
 
-In between you built a private repo called `dotfiles`, put an executable `install.sh` in it, and had that script **append** to `~/.bashrc` rather than replace it, protecting the `PS1` line our image puts there. The real cargo was `.gitconfig`: every Codespace you create from now on already knows your name and your email, so Git will never stop to ask again.
+In between you built a private repo called `dotfiles`, put an executable `install.sh` in it, and had that script **append** to `~/.bashrc` rather than replace it, protecting the short-prompt lines `codespace-starter`'s `welcome.sh` puts there. The real cargo was `.gitconfig`: every Codespace you create from now on already knows your name and your email, so Git will never stop to ask again.
 
 ###
 

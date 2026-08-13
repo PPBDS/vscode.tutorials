@@ -267,9 +267,9 @@ question_text(NULL,
 ### 
 
 ```
-R 4.5.3> list.files()
+R 4.6.1> list.files()
 [1] "quarto-1_files" "quarto-1.html"  "quarto-1.qmd"  
-R 4.5.3> 
+R 4.6.1> 
 ```
 
 In the Explorer, you should see a new file, `quarto-1.html`. This is the file created by rendering. The Browser/Viewer tab in the Secondary Side Bar should also display the file.
@@ -846,10 +846,10 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> unlink(list.files(), recursive = TRUE)
-R 4.5.3> list.files()
+R 4.6.1> unlink(list.files(), recursive = TRUE)
+R 4.6.1> list.files()
 character(0)
-R 4.5.3>
+R 4.6.1>
 ````
 
 `character(0)` means the vector is empty --- there are no files left in your `quarto` repo. The `recursive = TRUE` argument is needed here because `unlink()` must also remove the `_files` directories created when rendering Quarto documents. (`unlink()` does not touch hidden files, so the `.git` directory --- the repo itself --- survives.)

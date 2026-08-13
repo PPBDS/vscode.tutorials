@@ -106,11 +106,11 @@ Stop and fix the open folder if your result still ends in `codespace-starter`. A
 
 ###
 
-Your repo lives in two places: this folder and github.com. `connect-repo` created (or found) both. The `codespace-starter` folder still sits beside yours at `/workspaces/codespace-starter` --- it belongs to the course, and nothing you did to it in earlier tutorials matters here. Everything you make in this tutorial will be kept.
+Your repo lives in two places: this folder and `github.com`. `connect-repo` created (or found) both. The `codespace-starter` folder still sits beside yours at `/workspaces/codespace-starter` --- it belongs to the course Everything you make in this tutorial will be kept.
 
 ###
 
-After starting the tutorial, your R Terminal is "busy" running the tutorial.
+After starting the tutorial, your R Terminal is "busy" running the tutorial. It will be labeled "R Tutorial" in the top right of the Panel. 
 
 You will want to run R commands while completing the tutorial. You can do this in a second R Terminal. Click the small down arrow in the top right of the Panel, next to the `+` button. From the drop-down menu, select **R Terminal**.
 
@@ -171,12 +171,13 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> library(tutorial.helpers)
-R 4.5.3> search()
- [1] ".GlobalEnv"               "package:tutorial.helpers" "tools:vscode"             "package:stats"            "package:graphics"
- [6] "package:grDevices"        "package:utils"            "package:datasets"         "package:methods"          "Autoloads"
-[11] "package:base"
-R 4.5.3>
+✗ R 4.6.1> library(tutorial.helpers)
+R 4.6.1> search()
+ [1] ".GlobalEnv"               "package:tutorial.helpers" "tools:vscode"            
+ [4] "package:stats"            "package:graphics"         "package:grDevices"       
+ [7] "package:utils"            "package:datasets"         "package:methods"         
+[10] "Autoloads"                "package:base"            
+R 4.6.1> 
 ````
 
 The string "package:tutorial.helpers" should be in the output. Don't worry if your answer does not match our answer exactly, either in this question or in any other question.
@@ -236,7 +237,7 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> show_file(file.path(R.home(), "COPYING"), end = 7)
+R 4.6.1> show_file(file.path(R.home(), "COPYING"), end = 7)
 Error in show_file(file.path(R.home(), "COPYING"), end = 7) :
   could not find function "show_file"
 ````
@@ -261,8 +262,8 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> library(tutorial.helpers)
-R 4.5.3>
+R 4.6.1> library(tutorial.helpers)
+R 4.6.1>
 ````
 
 Loading some packages prints a bunch of messages to the R Terminal. But most packages, like **tutorial.helpers**, print nothing.
@@ -285,18 +286,18 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> library(tidyverse)
-── Attaching core tidyverse packages ───────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.2.0     ✔ readr     2.2.0
+R 4.6.1> library(tidyverse)
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
 ✔ forcats   1.0.1     ✔ stringr   1.6.0
-✔ ggplot2   4.0.2     ✔ tibble    3.3.1
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
 ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
-✔ purrr     1.2.1
-── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-R 4.5.3>
+R 4.6.1> 
 ````
 
 The **tidyverse** package is warning us about various conflicts. Don't worry about those conflicts for now.
@@ -304,11 +305,28 @@ The **tidyverse** package is warning us about various conflicts. Don't worry abo
 ## Script 1
 ###
 
-So far, we have only worked in the R Terminal, but it is difficult to type more than a few lines of code into the R Terminal at once. One solution is to use [R scripts](https://r4ds.hadley.nz/workflow-scripts.html#scripts), files that contain a permanent copy of our code.
+It is difficult to type more than a few lines of code into the R Terminal at once. One solution is to use [R scripts](https://r4ds.hadley.nz/workflow-scripts.html#scripts), files that contain a permanent copy of our code.
 
 ### Exercise 1
 
-Create a new R script, as you learned in the Workflow tutorial: `File -> New File ...` from the Application Menu, then select `R Document`. Type two lines into the file: `5 + 5` on the first, `6 * 3` on the second. Save it as `script-1.R`, at the top level of the `code` repo. (The default directory that VS Code suggests when saving is not necessarily where you should save. Be intentional.)
+Create a new R script, as you learned in the Workflow tutorial: `File -> New File ...` from the Application Menu (see red arrow).
+
+```{r}
+include_graphics("images/create.png")
+```
+
+Select `R Document`. 
+
+Type two lines into the file: `5 + 5` on the first, `6 * 3` on the second. Save it as `script-1.R`, inside the `code` repo. 
+
+
+```{r}
+include_graphics("images/save-as.png")
+```
+
+Be careful of the suffix for R script files. Either `.R` or `.r` is acceptable, but the file should have one of those suffixes and you need to pay attention to the case. 
+
+The default directory that VS Code suggests when saving is not necessarily where you should save. Be intentional.
 
 ###
 
@@ -332,8 +350,10 @@ question_text(NULL,
 ###
 
 ````
+✗ R 4.6.1> tutorial.helpers::show_file("script-1.R")
 5 + 5
 6 * 3
+R 4.6.1> 
 ````
 
 ###
@@ -359,7 +379,7 @@ Press the **Source** button in the top-right corner of the Editor. (We will some
 include_graphics("images/source-button.png")
 ```
 
-Then place your cursor inside the script and press `Cmd/Ctrl + Shift + Enter`, which sources the file and adds the option `echo = TRUE`. CP/CR both results.
+CP/CR.
 
 ```{r script-1-2}
 question_text(NULL,
@@ -373,20 +393,23 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> source("/workspaces/code/script-1.R", encoding = "UTF-8")
-R 4.5.3> source("/workspaces/code/script-1.R", encoding = "UTF-8", echo = TRUE)
+R 4.6.1> source("/workspaces/code/script-1.R", encoding = "UTF-8", echo = TRUE)
 
 > 5 + 5
 [1] 10
 
 > 6 * 3
 [1] 18
-R 4.5.3>
+R 4.6.1>
 ````
 
 ###
 
-Both send every line of the file to the R Terminal. The difference is `echo = TRUE`: the plain Source button runs the code silently, while the shortcut "echoes" each line, so you see both the code and its result --- exactly what you would see if you copied each line into the R Terminal yourself. Using keyboard shortcuts is quicker and more professional than clicking buttons.
+This sends every line of the file to the R Terminal. Without the `echo = TRUE` argument, the code is run silently, and you only see the results. With `echo = TRUE`, you see both the code and its results --- exactly what you would see if you copied each line into the R Terminal yourself. 
+
+<!-- DK: Should be a new question. -->
+
+Using the keyboard shortcut `Cmd/Ctrl + Shift + S` does the same thing. Try it! Keyboard shortcuts are quicker and more professional than clicking buttons.
 
 ### Exercise 3
 
@@ -406,13 +429,13 @@ question_text(NULL,
 You should get:
 
 ````
-R 4.5.3> 6 * 3
+R 4.6.1> 6 * 3
 [1] 18
-R 4.5.3> 5 + 5
+R 4.6.1> 5 + 5
 +  6 * 3
 [1] 10
 [1] 18
-R 4.5.3>
+R 4.6.1>
 ````
 
 ###
@@ -421,7 +444,7 @@ R 4.5.3>
 
 ### Exercise 4
 
-Go back to the first line in your R script. Change `5 + 5` to `x <- 5 + 5`, thereby creating an object named `x` with a value of 10. Save the file. Click the "Source R File with Echo" option. CP/CR.
+Go back to the first line in your R script. Change `5 + 5` to `x <- 5 + 5`, thereby creating an object named `x` with a value of 10. Save the file. Source the file, either by pressing the "Source" triangle or with `Cmd/Ctrl+ Shift + S`. CP/CR.
 
 ```{r script-1-4}
 question_text(NULL,
@@ -437,20 +460,18 @@ question_text(NULL,
 Your answer should look like this:
 
 ````
-> source("/workspaces/code/script-1.R", echo=TRUE)
+R 4.6.1> source("/workspaces/code/script-1.R", encoding = "UTF-8", echo = TRUE)
 
 > x <- 5 + 5
 
 > 6 * 3
 [1] 18
->
+R 4.6.1> 
 ````
 
 ###
 
 Note how the `x <- 5 + 5` is executed (and echoed) but nothing is printed. The assignment operator, `<-`, does not generate a return value.
-
-<!-- Being a little sloppy in using the (correct?) term "return value" here but not above. -->
 
 ### Exercise 5
 
@@ -468,15 +489,16 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> ls()
-[1] "env"  "prev" "x"
-R 4.5.3>
+R 4.6.1> ls()
+[1] "x"
+R 4.6.1> 
 ````
 
 ###
 
 `ls()` returns a list of objects present in your environment.
 
+<!-- DK: Should be a separate question. -->
 
 In this case, the object `x`, which has a value of 10, exists in your workspace. You can confirm this by typing `x` at the R Terminal and pressing `Enter`.
 
@@ -487,6 +509,8 @@ In this case, the object `x`, which has a value of 10, exists in your workspace.
 ````
 
 ### Exercise 6
+
+<!-- DK: Should we really be doing this by hand so early? -->
 
 `script-1.R` exists only in this Codespace. Recall from the Workflow tutorial: a **commit** is a snapshot of your work, and a **push** copies that snapshot to GitHub. Let's do both. In a bash Terminal, run these three commands, one at a time:
 
@@ -621,8 +645,8 @@ question_text(NULL,
 ###
 
 ```
-R 4.5.0 exited (preparing for restart)
-R 4.5.0 restarted.
+R 4.6.1 exited (preparing for restart)
+R 4.6.1 restarted.
 > list.files()
 [1] "script-1.R" "script-2.R"
 >

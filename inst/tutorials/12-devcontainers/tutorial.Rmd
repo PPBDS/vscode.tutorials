@@ -763,7 +763,7 @@ question_text(NULL,
 Your output should begin with something like:
 
 ````
-R version 4.5.3 (2026-03-11) -- "Reassured Reassurer"
+R version 4.6.1 (2026-06-13) -- "Reassured Reassurer"
 ````
 Note that your R version may differ as R releases new versions regularly.
 

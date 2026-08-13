@@ -29,7 +29,7 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-In a previous tutorial, you found the line `"image": "ghcr.io/ppbds/devcontainer:1.0.5"` inside `codespace-starter`'s `devcontainer.json`. That image does not appear out of nowhere --- it is built from a Dockerfile maintained by PPBDS. This tutorial reads through that real, current Dockerfile, section by section, to understand what it does and why it is written the way it is.
+In a previous tutorial, you found the line `"image": "ghcr.io/ppbds/devcontainer:1.1.2"`inside `codespace-starter`'s `devcontainer.json`. That image does not appear out of nowhere --- it is built from a Dockerfile maintained by PPBDS. This tutorial reads through that real, current Dockerfile, section by section, to understand what it does and why it is written the way it is.
 
 ###
 
@@ -58,24 +58,46 @@ Here is the complete Dockerfile that builds `ghcr.io/ppbds/devcontainer`. Skim i
 # then course packages and per-user installs (rstudio), then Python/JS
 # (root), then the end-to-end smoke tests.
 
-# Pinned by digest. The :4.5 tag floats as Rocker patches the image; the
-# digest freezes us at a known build. To bump: pull :4.5 fresh, copy the
-# new digest in, commit deliberately. Do not switch to :4.5 unpinned.
-# R version note: this base is R 4.5 (rocker's newest devcontainer image).
-# R 4.6.0 shipped 2026-04-24 but rocker has not yet published a :4.6
-# devcontainer image; revisit once it exists and its P3M binaries settle.
-FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.5@sha256:289c5d02d8115aa209f4a8a49ee9378dccbf623897eed9cc46c87dfbbca9015b
+# Pinned by digest. The :4.6 tag floats as Rocker patches the image; the
+# digest freezes us at a known build. To bump: pull :4.6 fresh, copy the
+# new digest in, commit deliberately. Do not switch to :4.6 unpinned.
+# R version note: this base is R 4.6.1 on ubuntu:noble (verified from the
+# image config, 2026-08-09, before the 4.5 → 4.6 migration in v1.1.0; P3M
+# noble binaries for R 4.6 were confirmed mature at the same time). The
+# R-version smoke test near the bottom fails the build if a digest bump
+# ever changes the R minor version unnoticed.
+FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.6@sha256:3a9ecbed900f17da528cdb17c3ddc43045fc9b4be7dbd8c61cb7b8a6439bfa6b
 
-ARG QUARTO_VERSION=1.9.38
-ARG ARF_VERSION=0.3.4
-ARG NODE_MAJOR=22
+# Dated P3M snapshot for the R stacks we take NEWER than rocker's frozen
+# repo (modeling + inference/presentation blocks below). Was "latest", which
+# made rebuilds of the same tag day-dependent; a dated snapshot makes every
+# release reproducible. Bump this date (any recent date; P3M snapshots are
+# daily) when a release should pick up newer CRAN versions of those stacks.
+ARG P3M_SNAPSHOT=2026-08-08
+
+ARG QUARTO_VERSION=1.10.18
+# (arf was wrongly suspected of the 2026-08 Rplots.pdf regression and briefly
+# rolled back to 0.3.4 on a branch; exonerated by a version matrix — the real
+# culprit is R 4.6's startup no longer calling a globalenv .First.sys
+# override. See the .First shim + smoke test after the arf install.)
+ARG ARF_VERSION=0.4.5
+ARG NODE_MAJOR=24
 
 # AI CLI versions. Pinned so builds are reproducible and the baked version
 # doesn't silently drift behind the registry. Bump deliberately, like
 # Quarto/arf. (Antigravity CLI is the exception — its installer offers no
 # version pin, so `agy` floats; see the agy install block below.)
-ARG CLAUDE_CODE_VERSION=2.1.181
-ARG CODEX_VERSION=0.141.0
+ARG CLAUDE_CODE_VERSION=2.1.226
+ARG CODEX_VERSION=0.147.0
+ARG GROK_VERSION=1.0.0
+# aider is pip-distributed; pinned like the npm CLIs (it floated unpinned
+# until v1.0.8 — the one exception with a pin mechanism available).
+ARG AIDER_VERSION=0.86.2
+
+# PPBDS.vscode-r-tutorials extension version, baked from Open VSX (see the
+# extension block near the bottom). Bump deliberately; a bump is an image
+# release.
+ARG RT_EXT_VERSION=1.0.0
 
 # System libraries needed by the R stacks below.
 #  - Geospatial: sf, terra, etc.
@@ -126,6 +148,7 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
 #   - claude  (Claude Code, Anthropic)  — sign in with a Claude plan, or ANTHROPIC_API_KEY
 #   - codex   (Codex CLI, OpenAI)        — sign in with a ChatGPT plan, or `codex login`
 #   - agy     (Antigravity CLI, Google)  — sign in with a Google account, or ANTIGRAVITY_API_KEY
+#   - grok    (Grok Build, xAI)          — sign in with a SuperGrok / X Premium+ plan (`grok login`)
 #   - aider   (multi-provider)           — key-only: DeepSeek/OpenRouter/OpenAI/Anthropic
 #
 # NOTE: Google's Gemini CLI was REMOVED. Google EOL'd the consumer Gemini CLI
@@ -133,7 +156,7 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
 # everyone to Antigravity. The Google slot is now the Antigravity CLI (`agy`,
 # installed further below via Google's curl installer, alongside arf).
 #
-# Node hosts the npm-distributed CLIs (claude, codex). We install from
+# Node hosts the npm-distributed CLIs (claude, codex, grok). We install from
 # NodeSource rather than apt: Ubuntu Noble ships Node 18.x, which is past end of
 # life — we want a current Node LTS for the npm CLIs. NodeSource gives us one
 # (pinned via NODE_MAJOR above). pipx installs aider into an isolated venv with
@@ -181,7 +204,8 @@ ENV PIPX_HOME=/opt/pipx \
 RUN npm install -g \
         "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" \
         "@openai/codex@${CODEX_VERSION}" \
-    && pipx install aider-chat
+        "@xai-official/grok@${GROK_VERSION}" \
+    && pipx install "aider-chat==${AIDER_VERSION}"
 
 # Pre-seed Codex CLI config for the runtime user (rstudio). The one setting
 # that matters for an immutable image:
@@ -229,12 +253,74 @@ USER root
 RUN ln -s /home/rstudio/.cargo/bin/arf /usr/local/bin/arf \
     && ln -s /home/rstudio/.local/bin/agy /usr/local/bin/agy
 
+# ---- vscode-R session-watcher repair for R >= 4.6 ----------------------
+# The vscode-R extension's session watcher attaches by shadowing `.First.sys`
+# in globalenv (its init.R arms the shadow; R's startup is expected to call
+# it after default packages load — the deferred call attaches the watcher and
+# points plot() at httpgd). R 4.6 changed startup to no longer call a
+# globalenv `.First.sys` override (verified empirically 2026-08-13: identical
+# shadow fires on R 4.5.3, never on R 4.6.1 — plain R, no console involved;
+# arf was wrongly suspected first). Without the call, the watcher silently
+# never attaches and every student plot() falls back to the pdf device —
+# Rplots.pdf and no error anywhere.
+#
+# The shim: R still honors the documented `.First()` user hook, which runs
+# after all profiles (site, then user — where vscode-R arms its shadow). So
+# the site profile defines a `.First` that fires an armed globalenv
+# `.First.sys` if present. Non-VS-Code sessions have no armed shadow and the
+# shim is a no-op. A student defining .First in their own .Rprofile would
+# override this (acceptable: intro students don't). Remove when vscode-R
+# ships its own R-4.6 fix (watch REditorSupport/vscode-R).
+RUN cat >> /usr/local/lib/R/etc/Rprofile.site <<'EOF'
+
+# vscode-R session watcher on R >= 4.6: fire the globalenv .First.sys shadow
+# that init.R arms — R 4.6 startup no longer calls it (see the PPBDS/
+# devcontainers Dockerfile). No-op outside VS Code R sessions.
+.First <- function() {
+    fs <- globalenv()$.First.sys
+    if (is.function(fs)) fs()
+}
+EOF
+
+# Smoke test for the shim + the full watcher contract, run against the REAL
+# baked Rprofile.site: a user profile arms a vscode-like .First.sys shadow
+# that sets an httpgd device and plots; `arf headless` (built for CI — the
+# interactive TUI dies in a build querying the cursor position, and `arf -e`
+# skips the full R startup sequence entirely, so neither is a usable harness)
+# must fire the shadow via the site-profile shim. Marker file must appear and
+# no Rplots.pdf may be written. Verified red without the shim on R 4.6.1
+# (3× independently: plain R, arf -e, arf headless) and green with it.
+USER rstudio
+RUN printf '%s\n' \
+        'first_sys_orig <- .First.sys' \
+        '.First.sys <- function() {' \
+        '    first_sys_orig()' \
+        '    options(device = function(...) httpgd::hgd())' \
+        '    plot(1:10)' \
+        '    writeLines("fired", "/tmp/first-sys-fired")' \
+        '}' \
+        > /tmp/vscode-like-profile.R \
+ && cd /tmp \
+ && rm -f /tmp/first-sys-fired /tmp/Rplots.pdf \
+ && { R_PROFILE_USER=/tmp/vscode-like-profile.R timeout 90 arf headless --ipc-bind /tmp/smoke.sock & } \
+ && ARF_PID=$! \
+ && i=0; while [ $i -lt 45 ] && ! test -f /tmp/first-sys-fired; do sleep 1; i=$((i+1)); done; \
+    kill $ARF_PID 2>/dev/null || true; \
+    { test -f /tmp/first-sys-fired \
+        || { echo "WATCHER SMOKE FAIL: globalenv .First.sys shadow never fired (R 4.6 shim broken?)"; exit 1; }; } \
+ && { ! test -e /tmp/Rplots.pdf \
+        || { echo "WATCHER SMOKE FAIL: plot() fell back to the pdf device (Rplots.pdf exists)"; exit 1; }; } \
+ && echo "vscode-R watcher contract OK (shim fired, plot routed to httpgd)" \
+ && rm -f /tmp/vscode-like-profile.R /tmp/first-sys-fired
+USER root
+# ---- end session-watcher repair ----------------------------------------
+
 # pak: fast parallel R package installer, used for every R install below.
 RUN R -q -e 'install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))'
 
-# tidymodels + a set of modeling engines. All of these are pulled from the
-# CURRENT P3M snapshot (overriding rocker's frozen one) so we get versions
-# recent enough for the CatBoost engine (parsnip >= 1.4.0, bonsai >= 0.4.1)
+# tidymodels + a set of modeling engines. All of these are pulled from a
+# DATED P3M snapshot (P3M_SNAPSHOT arg — newer than rocker's frozen repo,
+# reproducible across rebuilds) so we get versions recent enough for the CatBoost engine (parsnip >= 1.4.0, bonsai >= 0.4.1)
 # and current everything else. None of the engine packages ship inside the
 # tidymodels meta-package — parsnip only provides the interface, so each
 # backend is installed explicitly here:
@@ -251,13 +337,16 @@ RUN R -q -e 'install.packages("pak", repos = sprintf("https://r-lib.github.io/p/
 # is amd64-only (build.yml sets no platforms), so the x86_64 binary suffices. The
 # end-to-end fit smoke test near the bottom proves the engine actually works —
 # important, since we install it with --no-test-load.
-RUN R -q -e 'options(repos = c(P3M = "https://packagemanager.posit.co/cran/__linux__/noble/latest")); pak::pkg_install(c("tidymodels", "bonsai", "remotes", "xgboost", "lightgbm", "randomForest", "ranger", "glmnet", "brms", "BH", "RcppEigen", "RcppParallel"))' \
+RUN R -q -e "options(repos = c(P3M = 'https://packagemanager.posit.co/cran/__linux__/noble/${P3M_SNAPSHOT}')); pak::pkg_install(c('tidymodels', 'bonsai', 'remotes', 'xgboost', 'lightgbm', 'randomForest', 'ranger', 'glmnet', 'brms', 'BH', 'RcppEigen', 'RcppParallel'))" \
  && R -q -e 'remotes::install_url("https://github.com/catboost/catboost/releases/download/v1.2.10/catboost-R-linux-x86_64-1.2.10.tgz", INSTALL_opts = c("--no-multiarch", "--no-test-load", "--no-staged-install"))'
 
-# Inference-reporting + presentation packages. These are used pervasively in
-# BOTH PPBDS/primer's book/ and its tutorials (audited 2026-07), but pak never
-# installed them because primer.tutorials only lists them as Suggests —
-# students hit an install wall at the first library() call:
+# Inference-reporting + presentation packages. Used pervasively in BOTH
+# PPBDS/primer's book/ and its tutorials (audited 2026-07). Since the
+# course-package install below moved to dependencies = TRUE (2026-07),
+# gt/marginaleffects/easystats also arrive via the tutorial packages'
+# Imports/Suggests; this explicit block stays for patchwork (book-only,
+# in no tutorial package's Suggests) and as belt-and-suspenders for the
+# rest:
 #   - gt              : presentation-quality tables (1,100+ gt:: calls in the
 #                       book; was previously present only transitively via
 #                       primer.tutorials' Imports — now a deliberate choice)
@@ -266,7 +355,48 @@ RUN R -q -e 'options(repos = c(P3M = "https://packagemanager.posit.co/cran/__lin
 #   - patchwork       : ggplot composition ("p1 + p2")
 #   - easystats       : meta-package (parameters/performance/effectsize/see/…)
 #                       used across the tutorials
-RUN R -q -e 'options(repos = c(P3M = "https://packagemanager.posit.co/cran/__linux__/noble/latest")); pak::pkg_install(c("gt", "marginaleffects", "patchwork", "easystats"))'
+RUN R -q -e "options(repos = c(P3M = 'https://packagemanager.posit.co/cran/__linux__/noble/${P3M_SNAPSHOT}')); pak::pkg_install(c('gt', 'marginaleffects', 'patchwork', 'easystats'))"
+
+# Silence easystats' on-attach update nag. easystats' .onAttach queries CRAN
+# LIVE on every library(easystats) (up to a 10 s network wait) and prints a
+# red "✖ needs update / Restart the R-Session and update" banner whenever any
+# of its ten component packages is behind CRAN's newest SOURCE version. In an
+# immutable image built from P3M binaries (which lag CRAN by days, by design)
+# that banner is a permanent false alarm — same class as the libnode-dev
+# phantom — and it goads students into ad-hoc easystats_update() runs that
+# churn the baked library.
+#
+# TRAP (do not "simplify" this to EASYSTATS_QUIET=1): easystats' kill switch
+# returns from .onAttach BEFORE the code that attaches the ten component
+# packages (they are Imports, attached manually inside .onAttach). The env
+# var alone would silently stop library(easystats) from attaching
+# parameters/effectsize/…, breaking the tutorials' usage pattern. So we set
+# the quiet option AND register an attach hook that re-attaches the
+# components ourselves: same attach behavior, no banner, no CRAN round-trip.
+# Lives in Rprofile.site, so it applies to every non-vanilla R session (the
+# smoke test below runs WITHOUT --vanilla for exactly that reason).
+RUN cat >> /usr/local/lib/R/etc/Rprofile.site <<'EOF'
+
+# easystats: no on-attach CRAN check/update nag; keep component auto-attach.
+# See the easystats block in the PPBDS/devcontainers Dockerfile.
+options(easystats.quiet = TRUE)
+setHook(packageEvent("easystats", "attach"), function(pkgname, libpath) {
+  for (p in c("insight", "datawizard", "bayestestR", "correlation",
+              "effectsize", "modelbased", "parameters", "performance",
+              "report", "see")) {
+    suppressPackageStartupMessages(
+      library(p, character.only = TRUE, warn.conflicts = FALSE)
+    )
+  }
+})
+EOF
+
+# Smoke test: attaching easystats (site profile active, hence no --vanilla)
+# must attach the component packages and print NO update nag.
+RUN out="$(R -q -e 'library(easystats); stopifnot(all(paste0("package:", c("effectsize", "parameters", "performance", "see")) %in% search())); cat("easystats attach OK\n")' 2>&1)" \
+    && echo "$out" \
+    && echo "$out" | grep -q "easystats attach OK" \
+    && ! echo "$out" | grep -q "Restart the R-Session"
 
 # httpgd (graphics device for the VS Code R extension) is intentionally
 # NOT installed here: the rocker devcontainer base already bakes it in via
@@ -337,33 +467,60 @@ RUN R -q -e 'pak::pkg_install(c("devtools", "pkgdown", "roxygen2", "testthat", "
 # the development version, not whatever an r-universe build cycle (or
 # CRAN) most recently blessed.
 #
-# These four are also refreshed to the latest commit on every Codespace
-# create via codespace-starter's postCreateCommand; baking them here pre-
-# installs the whole dependency tree (so that refresh is a quick update, not
-# a cold build) and leaves a working fallback if GitHub is unreachable. Note
-# primer.tutorials was SPLIT OUT of the primer repo (2026-07): as a subdir
-# install ("PPBDS/primer/primer.tutorials") every install downloaded the
-# full ~183 MB primer tarball — book, class exercises — to deliver a ~4 MB
-# package, at every image build AND every Codespace create. Do not point
-# this back at the subdir path. Add further "PPBDS/<name>" entries
-# (in BOTH places) when the syllabus needs them.
+# NONE of these four are refreshed at Codespace create anymore (the live
+# primer.tutorials refresh was retired 2026-07-30; codespace-starter keeps
+# the recipe dormant in its devcontainer.json). All four ship at whatever
+# versions this image baked; updates reach students via the next image
+# release + pin bump. If the dormant refresh is ever revived, the baked
+# copies keep it a quick single-package update (deps pre-installed) and
+# remain the fallback if GitHub is unreachable at create time.
+# Note primer.tutorials was SPLIT OUT of the primer repo
+# (2026-07): as a subdir install ("PPBDS/primer/primer.tutorials") every
+# install downloaded the full ~183 MB primer tarball — book, class
+# exercises — to deliver a ~4 MB package, at every image build AND every
+# Codespace create. Do not point this back at the subdir path.
 #
 # upgrade = TRUE forces pak to pull the latest version of every
 # transitive dep (learnr, knitr, rmarkdown, xfun, ...). Without this, a
 # binary dep built against a newer version of xfun than what rocker
 # shipped fails to load with "object 'attr' is not exported by
 # 'namespace:xfun'".
-RUN R -q -e 'pak::pkg_install(c( \
+#
+# dependencies = TRUE additionally installs each of the four packages'
+# Suggests (top-level only, not Suggests-of-Suggests). This is the
+# contract (2026-07): a tutorial package's Suggests list IS the set of
+# packages students need at tutorial runtime. Tutorials load them with
+# library() or reference them as tidymodels engine strings
+# (set_engine("LiblineaR")), so pak's hard-deps-only default left
+# students hitting install walls that those repos' all-Suggests CI
+# could not see (the katex incident, 2026-07). Keep Suggests curated
+# in those repos: every entry ships in this image. Smoke test 1b
+# below loads each one.
+# CACHE-BUST KNOB. Docker caches RUN layers by instruction text, so a rebuild
+# with no Dockerfile change reuses this layer and silently ships STALE course
+# packages — a "refresh primer.tutorials" release completed in 28 s as a full
+# cache hit (2026-07-27) and delivered bit-identical bits. Bump this date in
+# any release whose purpose is picking up new course-package commits from
+# GitHub HEAD; layers above stay cached, this one and everything after rebuild.
+ARG COURSE_PKG_REFRESH=2026-08-11
+RUN echo "course-package refresh: ${COURSE_PKG_REFRESH}" \
+ && R -q -e 'pak::pkg_install(c( \
         "PPBDS/tutorial.helpers", \
         "PPBDS/vscode.tutorials", \
         "PPBDS/misc.tutorials", \
         "PPBDS/primer.tutorials" \
-    ), upgrade = TRUE)'
+    ), upgrade = TRUE, dependencies = TRUE)'
 
 # Smoke test 1: every baked-in package and the learnr/knitr/rmarkdown
 # chain must all load. The original learnr/xfun ABI mismatch failure
 # would have been caught here at build time.
 RUN R --vanilla -e 'for (p in c("tutorial.helpers", "vscode.tutorials", "misc.tutorials", "primer.tutorials", "learnr", "knitr", "rmarkdown")) if (!requireNamespace(p, quietly = TRUE)) stop("smoke test failed to load: ", p)'
+
+# Smoke test 1b: every Suggests of the four course packages must load —
+# Suggests is the ships-to-students contract (see the install block
+# above). Reads the lists from the installed DESCRIPTIONs, so it
+# self-maintains as those repos curate their Suggests.
+RUN R --vanilla -e 'for (p in c("tutorial.helpers", "vscode.tutorials", "misc.tutorials", "primer.tutorials")) { s <- utils::packageDescription(p, fields = "Suggests"); if (is.na(s)) next; deps <- trimws(sub("[(].*", "", strsplit(s, ",")[[1]])); for (d in deps[nzchar(deps)]) if (!requireNamespace(d, quietly = TRUE)) stop("Suggests smoke test: ", d, " (suggested by ", p, ") failed to load") }'
 
 # Smoke test 2: rstudio can install a fresh package into site-library
 # without permission errors. Catches the "root-built image leaves
@@ -427,7 +584,7 @@ USER root
 # We still set RETICULATE_PYTHON so that IF someone installs R's reticulate
 # (not baked in) it bridges to this same venv rather than a separate Python.
 # uv's own binary is copied from its official pinned image (pinned, unlike agy).
-COPY --from=ghcr.io/astral-sh/uv:0.11.23 /uv /usr/local/bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.12.3 /uv /usr/local/bin/uv
 COPY requirements.lock /tmp/requirements.lock
 COPY requirements.txt /tmp/requirements.txt
 
@@ -479,7 +636,67 @@ RUN su rstudio -c "/opt/venv/bin/pip install --no-cache-dir --quiet cowsay" \
 RUN npm install -g @observablehq/framework@1.13.4 && observable --version
 # ─────────────────────────────────────────────────────────────────────────────
 
+# ── R Tutorials VS Code extension (PPBDS.vscode-r-tutorials) ─────────────────
+# Baked into the image, pre-extracted into the VS Code server's extensions
+# dir, so the editor loads it from the very first window paint.
+#  - Why not devcontainer.json's "extensions" list: that list only installs
+#    from the Microsoft Marketplace, and we publish this extension to Open
+#    VSX only (Marketplace publishing is too painful — David, 2026-07).
+#  - Why not a vsix install at attach time (tried, in welcome.sh): an
+#    extension installed into an already-running window doesn't surface its
+#    Activity Bar icon until the window reloads — bad first-run UX.
+# A .vsix is a zip with the payload under extension/; the dir name follows
+# VS Code's publisher.name-version convention, which its scanner picks up.
+# NOTE: deliberate exception to "keep the image editor-agnostic" — non-VS-Code
+# consumers simply ignore ~/.vscode-remote. To ship a new extension version:
+# publish to Open VSX, bump RT_EXT_VERSION (top of file), release the image.
+RUN set -eux; \
+    url="https://open-vsx.org/api/PPBDS/vscode-r-tutorials/${RT_EXT_VERSION}/file/PPBDS.vscode-r-tutorials-${RT_EXT_VERSION}.vsix"; \
+    dest="/home/rstudio/.vscode-remote/extensions/ppbds.vscode-r-tutorials-${RT_EXT_VERSION}"; \
+    curl -fsSL -o /tmp/rt.vsix "$url"; \
+    python3 -m zipfile -e /tmp/rt.vsix /tmp/rt-ext; \
+    mkdir -p "$dest"; \
+    cp -R /tmp/rt-ext/extension/. "$dest/"; \
+    chown -R rstudio:rstudio /home/rstudio/.vscode-remote; \
+    rm -rf /tmp/rt.vsix /tmp/rt-ext; \
+    test -f "$dest/package.json"; \
+    python3 -c "import json, sys; v = json.load(open('$dest/package.json'))['version']; sys.exit(0 if v == '$RT_EXT_VERSION' else ('unexpected extension version: ' + v))"; \
+    echo "R-TUTORIALS EXTENSION ${RT_EXT_VERSION} OK"
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── First-run terminal notice ────────────────────────────────────────────────
+# The text the devcontainers base prints in the FIRST terminal of a new
+# Codespace (via its bash.bashrc hook; shown once per codespace, tracked by a
+# marker in ~/.config/vscode-dev-containers/). We replace the stock "Welcome
+# to Codespaces" blurb because it fires at the START of a ~30 s silent gap —
+# extensions installing, postAttach still queued — during which students
+# wonder if setup is done and start typing. This text bridges the gap: it
+# says setup is still running and names the exact banner (welcome.sh's
+# "YOUR CODESPACE IS READY", from codespace-starter) that means "go". The
+# wording deliberately tolerates the fast case where the banner is already
+# visible. Keep the banner text here in sync with welcome.sh.
+COPY <<'NOTICE' /usr/local/etc/vscode-dev-containers/first-run-notice.txt
+👋 Welcome! This is your data-science workshop for Preceptor's Primer.
+
+⏳ SETUP IS STILL FINISHING — usually about half a minute more.
+
+   Please don't type anything yet. Setup is done only when a banner
+   saying "✅  YOUR CODESPACE IS READY" appears below, and that banner
+   will tell you what to do next. (Already see it? Then you're all set.)
+NOTICE
+
+# Smoke test: the notice is in place and names the ready banner.
+RUN test -s /usr/local/etc/vscode-dev-containers/first-run-notice.txt \
+    && grep -q "YOUR CODESPACE IS READY" /usr/local/etc/vscode-dev-containers/first-run-notice.txt \
+    && echo "FIRST-RUN NOTICE OK"
+# ─────────────────────────────────────────────────────────────────────────────
+
 # ── Image-wide smoke tests ───────────────────────────────────────────────────
+# R version guard: the base digest encodes the R version; this fails the
+# build if a digest bump ever changes the R minor version unnoticed (R minor
+# bumps break package ABI image-wide, so they must be deliberate migrations).
+RUN R --vanilla -e 'v <- getRversion(); stopifnot(v >= "4.6.0", v < "4.7.0"); cat("R", as.character(v), "OK\n")'
+
 # R smoke test: foundational packages must load. Catches binary-ABI
 # mismatches at build time instead of at Codespace-launch time.
 # --vanilla skips Rprofile so this isolates the package-load path itself.
@@ -503,7 +720,7 @@ RUN R --vanilla -e 'suppressPackageStartupMessages({library(tidymodels); library
 RUN R --vanilla -e 'fit <- brms::brm(mpg ~ wt, data = mtcars, chains = 1, iter = 100, refresh = 0, silent = 2); stopifnot(inherits(fit, "brmsfit")); cat("brms + Stan end-to-end OK\n")'
 
 # CLI smoke test: every shell tool must be on PATH and runnable.
-RUN claude --version && codex --version && agy --version && aider --version
+RUN claude --version && codex --version && agy --version && grok --version && aider --version
 
 # ── End-to-end authoring smoke tests ─────────────────────────────────────────
 # These run last, once R + Python + Quarto are all in place, so they exercise
@@ -555,12 +772,12 @@ question_text(NULL,
 ###
 
 ```
-FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.5@sha256:289c5d02d8115aa209f4a8a49ee9378dccbf623897eed9cc46c87dfbbca9015b
+FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.6@sha256:3a9ecbed900f17da528cdb17c3ddc43045fc9b4be7dbd8c61cb7b8a6439bfa6b
 ```
 
 ###
 
-This image is pinned by **digest** (the long `sha256:...` hash), not just by the `:4.5` tag. A tag like `:4.5` floats: Rocker can push a new build under that same tag any time, silently changing what future builds pull in. The digest locks the base to one exact, unchanging build. Bumping it is deliberate --- pull `:4.5` fresh, copy in the new digest, and commit the change on purpose, instead of being surprised by an upstream update.
+This image is pinned by **digest** (the long `sha256:...` hash), not just by the `:4.6` tag. A tag like `:4.6` floats: Rocker can push a new build under that same tag any time, silently changing what future builds pull in. The digest locks the base to one exact, unchanging build. Bumping it is deliberate --- pull `:4.6` fresh, copy in the new digest, and commit the change on purpose, instead of being surprised by an upstream update. And because the digest quietly encodes the R version too, an R-version smoke test near the bottom of the file fails the build if a digest bump ever changes the R minor version unnoticed.
 
 ### Exercise 2
 
@@ -693,7 +910,7 @@ Docker caches each instruction as its own layer, reusing every cached layer unti
 
 ### Exercise 7
 
-Find the five `ARG` lines that pin tool versions (`QUARTO_VERSION`, `ARF_VERSION`, `NODE_MAJOR`, `CLAUDE_CODE_VERSION`, `CODEX_VERSION`). Copy and paste them, and note which CLI mentioned nearby is the *exception* to this pinning approach.
+Find the seven `ARG` lines that pin tool versions (`QUARTO_VERSION`, `ARF_VERSION`, `NODE_MAJOR`, `CLAUDE_CODE_VERSION`, `CODEX_VERSION`, `GROK_VERSION`, `AIDER_VERSION`). Copy and paste them, and note which CLI mentioned nearby is the *exception* to this pinning approach.
 
 ```{r the-devcontainer-image-7}
 question_text(NULL,
@@ -707,18 +924,20 @@ question_text(NULL,
 ###
 
 ```
-ARG QUARTO_VERSION=1.9.38
-ARG ARF_VERSION=0.3.4
-ARG NODE_MAJOR=22
-ARG CLAUDE_CODE_VERSION=2.1.181
-ARG CODEX_VERSION=0.141.0
+ARG QUARTO_VERSION=1.10.18
+ARG ARF_VERSION=0.4.5
+ARG NODE_MAJOR=24
+ARG CLAUDE_CODE_VERSION=2.1.226
+ARG CODEX_VERSION=0.147.0
+ARG GROK_VERSION=1.0.0
+ARG AIDER_VERSION=0.86.2
 ```
 
 The exception is the Antigravity CLI (`agy`) --- its installer offers no version pin, so it always installs whatever is latest.
 
 ###
 
-Pinning versions with `ARG` means every build installs the *exact same* Quarto, `arf`, Node, Claude Code, and Codex --- until someone deliberately bumps a number. That's what makes the build reproducible. `agy` is the lone exception: its installer has no version-pin option, so it floats with every rebuild. That's accepted as a known gap --- the CLI smoke test near the bottom still fails the build if a future `agy` release breaks something.
+Pinning versions with `ARG` means every build installs the *exact same* Quarto, `arf`, Node, Claude Code, Codex, Grok, and aider --- until someone deliberately bumps a number. That's what makes the build reproducible. Note the comment above `AIDER_VERSION`: aider floated unpinned for a while, the one tool with a pin mechanism nobody was using, until v1.0.8 closed that gap. `agy` is the lone remaining exception: its installer has no version-pin option, so it floats with every rebuild. That's accepted as a known gap --- the CLI smoke test near the bottom still fails the build if a future `agy` release breaks something.
 
 ### Exercise 8
 
@@ -821,7 +1040,7 @@ Without this, `pak` would try `sudo apt-get install` whenever it thinks a system
 
 ### Exercise 12
 
-Find the `RUN` block that installs the four PPBDS course packages from GitHub. Copy and paste it, and note the one argument to `pak::pkg_install()` that is not just the package list.
+Find the `RUN` block that installs the four PPBDS course packages from GitHub. Copy and paste it, and note the two arguments to `pak::pkg_install()` that are not just the package list.
 
 ```{r the-devcontainer-image-12}
 question_text(NULL,
@@ -835,19 +1054,24 @@ question_text(NULL,
 ###
 
 ```
-RUN R -q -e 'pak::pkg_install(c( \
+RUN echo "course-package refresh: ${COURSE_PKG_REFRESH}" \
+ && R -q -e 'pak::pkg_install(c( \
         "PPBDS/tutorial.helpers", \
         "PPBDS/vscode.tutorials", \
         "PPBDS/misc.tutorials", \
         "PPBDS/primer.tutorials" \
-    ), upgrade = TRUE)'
+    ), upgrade = TRUE, dependencies = TRUE)'
 ```
 
-The extra argument is `upgrade = TRUE`.
+The extra arguments are `upgrade = TRUE` and `dependencies = TRUE`.
 
 ###
 
 Installing straight from each package's GitHub default branch (instead of CRAN or an r-universe build) matches PPBDS practice --- the ecosystem expects the development version. `upgrade = TRUE` makes `pak` also pull the latest version of every transitive dependency: `learnr`, `knitr`, `rmarkdown`, `xfun`, and more. Skip it, and a dependency built against a newer `xfun` than Rocker shipped can fail with an error like `object 'attr' is not exported by 'namespace:xfun'` --- exactly the ABI mismatch the smoke test right below this block is built to catch.
+
+`dependencies = TRUE` reaches further: it also installs each course package's **Suggests**. That is a deliberate contract --- a tutorial package's Suggests list *is* the set of packages students need at tutorial runtime, loaded with `library()` or named as tidymodels engine strings --- and "smoke test 1b" below re-reads those lists from the installed packages and loads every entry, so the contract is checked on every build.
+
+Notice also the `echo` line and the `COURSE_PKG_REFRESH` date `ARG` just above the block. Docker caches layers by instruction text, so a rebuild with an unchanged Dockerfile would reuse this layer and silently ship stale course packages. Bumping the date changes the instruction text, which busts the cache for this layer and everything after it --- that is the whole job of that line.
 
 ### Exercise 13
 

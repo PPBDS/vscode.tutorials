@@ -9,7 +9,7 @@ output:
     progressive: true
     allow_skip: true
 runtime: shiny_prerendered
-description: "A tour of the devcontainer.json behind codespace-starter itself --- the custom PPBDS image, the VS Code extensions array, the settings that control auto-save, plots, and Git commits, and the postCreateCommand that keeps course packages fresh."
+description: "A tour of the devcontainer.json behind codespace-starter itself --- the custom PPBDS image, the VS Code extensions array, the settings that control auto-save, plots, and Git commits, and the retired postCreateCommand whose recipe is kept dormant in a comment."
 ---
 
 ```{r setup, include = FALSE}
@@ -109,11 +109,11 @@ Your new repo and `codespace-starter` sit side by side under `/workspaces` in th
 ## Codespace Starter Devcontainer
 ###
 
-This section walks through `codespace-starter’`s `.devcontainer/devcontainer.json` field by field, examining the custom image, VS Code extensions, settings, and `postCreateCommand`. Unlike the minimal configurations from the Devcontainers tutorial, this setup customizes almost everything to guarantee an identical experience for every student. By the end, you'll understand each top-level field and manually install a package to see exactly what `postCreateCommand` automates versus what you still do by hand.
+This section walks through `codespace-starter’`s `.devcontainer/devcontainer.json` field by field, examining the custom image, VS Code extensions, settings, and the retired `postCreateCommand`. Unlike the minimal configurations from the Devcontainers tutorial, this setup customizes almost everything to guarantee an identical experience for every student. By the end, you'll understand each top-level field and manually install a package to see what installing by hand looks like now that everything the course needs ships baked into the image.
 
 ### Exercise 1
  
-In the bash Terminal, run `cd /workspaces/codespace-starter`. In the Explorer, open `devcontainer/devcontainer.json` to see the whole file on your screen. Find the line beginning with `"name"`. Copy and paste it.
+In the bash Terminal, run `cd /workspaces/codespace-starter`. In the Explorer, open `.devcontainer/devcontainer.json` to see the whole file on your screen. Find the line beginning with `"name"`. Copy and paste it.
 
 ```{r codespace-starter-1}
 question_text(NULL,
@@ -127,7 +127,7 @@ question_text(NULL,
 ###
 
 ```
-"name": "PPBDS Codespace",
+"name": "Preceptor's Primer",
 ```
 
 ###
@@ -150,7 +150,7 @@ question_text(NULL,
 ###
 
 ```
-"image": "ghcr.io/ppbds/devcontainer:1.0.5",
+"image": "ghcr.io/ppbds/devcontainer:1.1.2",
 ```
 
 ###
@@ -205,7 +205,7 @@ question_text(NULL,
 
 ### Exercise 5
 
-Find the line containing `"PPBDS.vscode-r-tutorials"`. Copy and paste it.
+One extension is conspicuously missing from the `"extensions"` array: `PPBDS.vscode-r-tutorials`, the panel this very tutorial is running in. Find the `NOTE` comment just above the array that explains why it is not listed. Copy and paste the comment's first two lines.
 
 ```{r codespace-starter-5}
 question_text(NULL,
@@ -213,18 +213,19 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 3)
+	rows = 4)
 ```
 
 ###
 
 ```
-"PPBDS.vscode-r-tutorials",
+// NOTE — PPBDS.vscode-r-tutorials is deliberately NOT in this list.
+// We publish it to Open VSX, and this list can only install from the
 ```
 
 ###
 
-`PPBDS.vscode-r-tutorials` is the one extension unique to this course --- it's the panel this tutorial itself is running in right now.
+`PPBDS.vscode-r-tutorials` is the one extension unique to this course --- and it is deliberately absent from this list. The `"extensions"` array can only install from the Microsoft Marketplace, but we publish the extension to Open VSX. So it is baked into the image instead (the `RT_EXT_VERSION` build argument in the PPBDS/devcontainers Dockerfile), pre-extracted so its Activity Bar icon exists from the very first window paint. You are using it right now all the same.
 
 ### Exercise 6
 
@@ -432,7 +433,7 @@ question_text(NULL,
 ###
 
 ```
-"workbench.editor.enablePreview": false,
+"workbench.editor.enablePreview": false
 ```
 
 ###
@@ -464,7 +465,7 @@ question_text(NULL,
 
 ### Exercise 16
 
-Find the line beginning with `"postCreateCommand"`. Copy and paste it.
+You might expect a `"postCreateCommand"` field --- a command that runs every time a Codespace is created. There isn't one. Find the comment that begins `NO postCreateCommand right now`. Copy and paste its first five lines.
 
 ```{r codespace-starter-16}
 question_text(NULL,
@@ -472,18 +473,24 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 5)
+	rows = 7)
 ```
 
 ###
 
 ```
-"postCreateCommand": "R -q -e 'pak::pkg_install(c(\"PPBDS/tutorial.helpers\", \"PPBDS/vscode.tutorials\", \"PPBDS/misc.tutorials\", \"PPBDS/primer.tutorials\"), ask = FALSE)'",
+// NO postCreateCommand right now — RETIRED 2026-07-30. All course
+// packages, including primer.tutorials, ship at whatever versions the
+// image baked; the live at-create refresh of primer.tutorials was removed
+// because the baked version is recent enough, making creates faster and
+// GitHub-independent.
 ```
 
 ###
 
-This runs automatically when your Codespace opens, refreshing the four course packages to their latest versions even though the image itself stays pinned. It only ever reinstalls these four packages, though --- anything else you need, you install yourself, by hand or by asking AI, which is exactly what the next few exercises do.
+There *used* to be a `postCreateCommand` here that refreshed the course packages from GitHub every time a Codespace was created. It was retired: the four course packages now ship at whatever versions the image baked, and updates reach students through a new image release plus a pin bump --- the same `"image"` line you found in Exercise 2. That makes Codespace creation faster and independent of GitHub being reachable.
+
+Read the rest of the comment, though. The recipe was kept on purpose, dormant, in case course content ever again needs to move faster than image releases --- along with hard-won notes on *why* it must be `postCreateCommand` rather than `onCreateCommand` if revived. Deleting working knowledge is cheap; re-learning it is not. Either way, the packages only cover the course --- anything else you need, you install yourself, by hand or by asking AI, which is exactly what the next few exercises do.
 
 ### Exercise 17
 
@@ -523,7 +530,7 @@ downloaded 6431 bytes
 
 ###
 
-`install.packages()` is base R's package manager: it downloads one package from CRAN and compiles or unpacks it into your library, one call at a time. Contrast this with **pak** (Exercise 2 and 16): pak resolves and installs entire dependency trees in parallel, which is why `postCreateCommand` uses `pak::pkg_install()` for the four course packages.
+`install.packages()` is base R's package manager: it downloads one package from CRAN and compiles or unpacks it into your library, one call at a time. Contrast this with **pak**: pak resolves and installs entire dependency trees in parallel, which is why the image build (and the dormant refresh recipe you read in Exercise 16) uses `pak::pkg_install()` for the four course packages.
 
 ### Exercise 18
 
@@ -619,7 +626,7 @@ A good AI agent in this Codespace targets `/opt/venv/bin/pip` rather than plain 
 ## Summary
 ###
 
-This tutorial toured the `devcontainer.json` behind `codespace-starter` itself: its pinned custom PPBDS image, its VS Code extensions array, the settings that control the R Terminal, plot rendering, Git commits, autosave, word wrap, tab behavior, and the Python interpreter, and the `postCreateCommand` that keeps the four fast-moving course packages current. The next tutorial, "The Devcontainer Dockerfile," goes one level deeper and reads through the Dockerfile that actually builds the `ghcr.io/ppbds/devcontainer` image this `devcontainer.json` points at.
+This tutorial toured the `devcontainer.json` behind `codespace-starter` itself: its pinned custom PPBDS image, its VS Code extensions array, the settings that control the R Terminal, plot rendering, Git commits, autosave, word wrap, tab behavior, and the Python interpreter, and the retired `postCreateCommand` --- course packages now ship baked into the image, with the refresh recipe kept dormant in a comment. The next tutorial, "The Devcontainer Dockerfile," goes one level deeper and reads through the Dockerfile that actually builds the `ghcr.io/ppbds/devcontainer` image this `devcontainer.json` points at.
 
 ### Exercise 1
 

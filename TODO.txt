@@ -1,38 +1,25 @@
 ## topics
 
-What should repo names be now that tutorial titles (i.e., the "name" of the tutorial) are things like "Getting Started" and "Terminal Introduction"? Perhaps the answer is all lower case with spaces (and other weird characters) replaced with dashes.
+* Seems like the default width for our answer boxes does not match the display width in a rendered tutorial. Example:
 
-## Notes for infrastructure tutorials
+````
+✗ R 4.6.1> library(tutorial.helpers)
+R 4.6.1> search()
+ [1] ".GlobalEnv"               "package:tutorial.helpers" "tools:vscode"            
+ [4] "package:stats"            "package:graphics"         "package:grDevices"       
+ [7] "package:utils"            "package:datasets"         "package:methods"         
+[10] "Autoloads"                "package:base"            
+R 4.6.1> 
+````
 
-### Skills to cover 
+Looks fine in the Rmd but then prints out wrapped ugly in the HTML.
 
-Install VS Code extension
 
-Create a repo/.devcontainer/ from scratch and start a codespace from it.
+* What should repo names be now that tutorial titles (i.e., the "name" of the tutorial) are things like "Getting Started" and "Terminal Introduction"? Perhaps the answer is all lower case with spaces (and other weird characters) replaced with dashes.
 
-Create their own images. How can we check these?
 
-### Outline
-
-11-devcontainer
-12-our-codebase-starter
-13-docker
-14-your-starter
-15-dotfiles
-16-openrouter
-17-models
 
 Might have some other ones, especially ones which begin by forking a PPBDS repo with various problems and then work on disagnosing/solving them.
-
-
-
-## 10-devcontainer
-## 11-codebase-starter
-## 12-docker
-
-
-
-## 14-your-starter
 
 This is a graduation exercise for the last three tutorials. Students now understand devcontainers, dockerfiles and images. So, they can now create their own version of `codebase-starter`, called `starter`. This will, obviously, look a lot like ours. But it won't have all our junk, the stuff we just include for teaching purposes, like all the PPBDS tutorial packages. 
 
