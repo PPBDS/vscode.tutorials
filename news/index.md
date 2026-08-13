@@ -2,6 +2,21 @@
 
 ## vscode.tutorials (development version)
 
+- Synced the infrastructure tutorials with the current upstream state of
+  PPBDS/devcontainers and PPBDS/codespace-starter. The Devcontainer
+  Dockerfile tutorial’s embedded Dockerfile copy was refreshed (R 4.6
+  base, Grok CLI, pinned aider, dated P3M snapshots, vscode-R watcher
+  shim, easystats attach-hook, baked-in R Tutorials extension, first-run
+  notice, R-version guard) and its affected exercises updated (FROM
+  line, now-seven version-pin ARGs, course-package install with
+  `dependencies = TRUE` and the cache-bust knob). Our Codespace Starter
+  now matches the current devcontainer.json: image pin 1.1.2, name
+  “Preceptor’s Primer”, the R Tutorials extension’s deliberate absence
+  from the extensions list, and the retired-but-dormant
+  postCreateCommand (two exercises reworked to read the explanatory
+  comments instead of vanished lines). R-version strings in example
+  transcripts (prompts, banner, restart messages) updated to 4.6.1.
+
 - Adopted the content of PR
   [\#73](https://github.com/PPBDS/vscode.tutorials/issues/73) (thanks
   [@JacobKhay](https://github.com/JacobKhay)) by hand, since the PR
