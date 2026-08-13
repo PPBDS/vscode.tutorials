@@ -850,7 +850,7 @@ terminal-1 $
 
 ### Exercise 2
 
-Now redirect that output into a file instead. Run `echo "Your First and Last Name Here" > me.txt` (with your actual name). Then run `cat me.txt` --- `cat` prints a file's contents; you will use it more in Terminal 2. CP/CR.
+Now redirect that output into a file instead. Run `echo "Your First and Last Name Here" > me.txt` (with your actual name). Then run `cat me.txt` --- `cat` prints a file's contents, as you have seen in earlier tutorials; Terminal 2 gives it a fuller treatment. CP/CR.
 
 ```{r redirection-2}
 question_text(NULL,

@@ -221,7 +221,7 @@ Second, `.gitconfig`, with your real name and your own GitHub username:
 	l = log --oneline --graph --decorate -20
 </code></pre>
 
-In the R Terminal, run `show_file("/workspaces/dotfiles/.gitconfig")`. CP/CR.
+In the bash Terminal, run `cat /workspaces/dotfiles/.gitconfig`. CP/CR.
 
 ```{r repo-3}
 question_text(NULL,
@@ -245,8 +245,6 @@ question_text(NULL,
 </code></pre>
 
 ###
-
-If that failed, it is probably because you have not loaded `library(tutorial.helpers)` in the R Terminal.
 
 `.gitconfig` is the payload; everything else here is machinery for delivering it. `[user]` is the part that matters, because Git refuses to commit until it knows who you are, and on a fresh machine it does not. Every student has seen `Please tell me who you are` at least once. After today you will not.
 

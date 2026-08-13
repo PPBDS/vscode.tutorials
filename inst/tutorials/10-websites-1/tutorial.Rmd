@@ -289,10 +289,10 @@ The `css` line tells Quarto to use the `styles.css` file, located in the same di
 
 ### Exercise 4
 
-In the R Terminal, run:
+In the bash Terminal, run:
 
 ````
-show_file("index.qmd")
+cat index.qmd
 ````
 
 CP/CR.
@@ -331,10 +331,10 @@ If you skip the title prompt titles will be set to `.`.
 
 ### Exercise 5
 
-In the R Terminal, run:
+In the bash Terminal, run:
 
 ````
-show_file(".gitignore")
+cat .gitignore
 ````
 
 CP/CR.
@@ -489,10 +489,10 @@ Look at the Source Control button. Note how many new files there are. Most of th
 
 Add `_site` to the `.gitignore`. Don't forget that the last line of `.gitignore` should always be blank. Save the file. 
 
-In the R Terminal, run:
+In the bash Terminal, run:
 
 ````
-show_file(".gitignore")
+cat .gitignore
 ````
 
 CP/CR.

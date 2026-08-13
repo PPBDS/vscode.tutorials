@@ -402,7 +402,7 @@ In the Quarto tutorial you wrote a `.gitignore` by hand. This time, delegate the
 Create a .gitignore file.
 ```
 
-Run `show_file(".gitignore")` in the R Terminal. CP/CR.
+In the bash Terminal, run `cat .gitignore`. CP/CR.
 
 ```{r gemini-cli-10}
 question_text(NULL,
@@ -471,10 +471,10 @@ In future tutorials you will spend most of your time prompting an AI agent to ed
 
 ### Exercise 1
 
-In the R Terminal, run:
+In the bash Terminal, run:
 
 ```
-show_file("analysis.qmd")
+cat analysis.qmd
 ```
 
 CP/CR.
@@ -550,7 +550,7 @@ Keep chunks clean as you work. Code chunks should contain clean code that we'd l
 
 ### Exercise 2
 
-Ask Antigravity to consolidate `analysis.qmd` so it contains only the setup chunk and the named-storms-per-year line chart. Delete any other chunks. Render. In the R Terminal, run `show_file("analysis.qmd")`. CP/CR.
+Ask Antigravity to consolidate `analysis.qmd` so it contains only the setup chunk and the named-storms-per-year line chart. Delete any other chunks. Render. In the bash Terminal, run `cat analysis.qmd`. CP/CR.
 
 Throughout this tutorial we will often say "ask Antigravity to" when we want you to use AI.
 
@@ -635,7 +635,7 @@ Caching is a render-time feature. The first render writes the chunk's result to 
 
 ### Exercise 4
 
-Ask Antigravity to add `analysis_cache` to `.gitignore`. Note that the Source Control badge count in VS Code has increased because the cache directory is now visible to git --- adding `analysis_cache` to `.gitignore` makes it drop back. In the R Terminal, run `show_file(".gitignore")`. CP/CR.
+Ask Antigravity to add `analysis_cache` to `.gitignore`. Note that the Source Control badge count in VS Code has increased because the cache directory is now visible to git --- adding `analysis_cache` to `.gitignore` makes it drop back. In the bash Terminal, run `cat .gitignore`. CP/CR.
 
 ```{r gemini-in-tutorials-4}
 question_text(NULL,
@@ -815,7 +815,7 @@ Chunks in the same document share an R session --- `flights_jfk` is created in t
 
 ### Exercise 11
 
-In the R Terminal, run `show_file("analysis.qmd")`. CP/CR.
+In the bash Terminal, run `cat analysis.qmd`. CP/CR.
 
 ```{r gemini-in-tutorials-11}
 question_text(NULL,
@@ -1108,10 +1108,10 @@ This tutorial introduced the [Antigravity CLI](DK: fix) as an AI *agent* --- a t
 
 ### Exercise 1
 
-Quit Antigravity with `/quit` if you haven't already. From the bash Terminal, run `quarto render analysis.qmd` to regenerate the HTML. Then, in the R Terminal, run:
+Quit Antigravity with `/quit` if you haven't already. From the bash Terminal, run `quarto render analysis.qmd` to regenerate the HTML. Then, still in the bash Terminal, run:
 
 ```
-tutorial.helpers::show_file("analysis.qmd")
+cat analysis.qmd
 ```
 
 CP/CR.

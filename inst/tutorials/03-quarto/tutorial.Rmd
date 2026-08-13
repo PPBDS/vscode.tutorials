@@ -30,11 +30,11 @@ options(tutorial.exercise.timelimit = 60,
 
 This tutorial covers how to create Quarto documents using Visual Studio Code in [GitHub Codespaces](https://github.com/features/codespaces). For help with setting this up, see [Getting Started](https://ppbds.github.io/primer/getting-started.html). Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
-You should be running this tutorial from a Codespace created from the [Codespace starter](https://github.com/PPBDS/codespace-starter). You may reuse the Codespace that you used for the Code tutorial.
+You should be running this tutorial from a Codespace created from the [Codespace starter](https://github.com/PPBDS/codespace-starter). 
 
 ###
 
-You should be doing this tutorial in a repo called `quarto`. Recall from the Workflow tutorial: a repo is a folder that Git watches, with a copy kept on GitHub. If your Explorer already shows a `quarto` folder, you are all set. If it shows something else --- `codespace-starter`, or the `code` repo from the last tutorial --- the next two exercises will get you connected. Either way, they only take a minute.
+You should be doing this tutorial in a repo called `quarto`. Recall from the Workflow tutorial: a repo is a folder that Git watches, with a copy kept on GitHub. If your Explorer already shows a `quarto` folder, you are all set. If it shows something else --- `codespace-starter`, or the `code` repo from the last tutorial --- the next two exercises will get you connected. 
 
 ### Exercise 1
 
@@ -69,7 +69,7 @@ codespace-starter $
 
 ###
 
-If your result ends in `quarto`, you are all set --- **do not run the connect-repo commands in the next exercise**; just do its last step. Otherwise, the next exercise connects you.
+If your result ends in `quarto`, you are all set. **Do not run the connect-repo commands in the next exercise**. Otherwise, the next exercise connects you.
 
 ### Exercise 2
 
@@ -80,7 +80,7 @@ cd /workspaces/codespace-starter
 .devcontainer/connect-repo.sh quarto
 ````
 
-The `connect-repo` script lives in `codespace-starter`, so the first command moves you there; running the script from anywhere else --- including the `code` repo from the last tutorial --- fails. If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer does not show `quarto`, use `File -> Open Folder...` and open `/workspaces/quarto`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
+The `connect-repo.sh` script lives in `codespace-starter`, so the first command moves you there; running the script from anywhere else --- including the `code` repo from the last tutorial --- fails. If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer does not show `quarto`, use `File -> Open Folder...` and open `/workspaces/quarto`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
 
 **Everyone**: open a new bash Terminal and run `pwd`. CP/CR.
 
@@ -128,7 +128,7 @@ format: html
 
 Change the title to “My First Quarto Document”.
 
-Run `list.files()` in the R Terminal. CP/CR.
+In the bash Terminal, run `ls`. CP/CR.
 
 ```{r quarto-1-1}
 question_text(NULL,
@@ -136,18 +136,18 @@ question_text(NULL,
     allow_retry = TRUE,
     try_again_button = "Edit Answer",
     incorrect = NULL,
-    rows = 2)
+    rows = 3)
 ```
 
-### 
+###
 
 ````
-> list.files()
-character(0)
->
+quarto $ ls
+AGENTS.md
+quarto $
 ````
 
-Since we have not saved the file yet, it does not appear in this listing.
+The only file is `AGENTS.md`, which `connect-repo` copied in when it created the repo --- it holds guidance for AI assistants working with you. Since we have not saved the new document yet, it does not appear in this listing.
 
 Quarto is a command line interface tool, not an R package. Therefore, its commands are largely run in a bash Terminal. As you work through this tutorial, and use Quarto in the future, you should refer to the [Quarto documentation](https://quarto.org/). Of course, in the modern world, we can also ask an AI when we have a problem.
 
@@ -247,13 +247,13 @@ This command splits the Editor and opens a new tab titled "Quarto Preview" on th
 
 ###
 
-Professionals don't click buttons. They save time by using keyboard shortcuts!
+Professionals don't click buttons. They save time by using keyboard shortcuts.
 
-Under the hood, this shortcut opens a new bash Terminal titled "Quarto Preview". There, it executes the `quarto preview` command. You don't need to worry about this now; just use `Cmd/Ctrl + Shift + K` to preview your Quarto documents.
+Under the hood, this shortcut opens a new bash Terminal titled "Quarto Preview". There, it executes the `quarto preview` command. You don't need to worry about this now. Just use `Cmd/Ctrl + Shift + K` to preview your Quarto documents.
 
 ###
 
-Run `list.files()`. CP/CR.
+In the bash Terminal, run `ls`. CP/CR.
 
 ```{r quarto-1-3}
 question_text(NULL,
@@ -264,12 +264,12 @@ question_text(NULL,
 	rows = 3)
 ```
 
-### 
+###
 
 ```
-R 4.6.1> list.files()
-[1] "quarto-1_files" "quarto-1.html"  "quarto-1.qmd"  
-R 4.6.1> 
+quarto $ ls
+AGENTS.md  quarto-1.html  quarto-1.qmd  quarto-1_files
+quarto $
 ```
 
 In the Explorer, you should see a new file, `quarto-1.html`. This is the file created by rendering. The Browser/Viewer tab in the Secondary Side Bar should also display the file.
@@ -343,10 +343,10 @@ Paste that URL into a browser, or `Cmd + click` it, and you will be able to see 
 
 Delete the first code cell. Add `This is my first Markdown text.` two lines below the YAML header. Save the file.
 
-In the R Terminal, run:
+In the bash Terminal, run:
 
 ````
-tutorial.helpers::show_file("quarto-1.qmd")
+cat quarto-1.qmd
 ````
 
 CP/CR.
@@ -400,10 +400,10 @@ Render the file again. Does everything look good in the Viewer/browser?
 
 ### 
 
-In the R Terminal, run:
+In the bash Terminal, run:
 
 ````
-tutorial.helpers::show_file("quarto-1.qmd")
+cat quarto-1.qmd
 ````
 
 CP/CR.
@@ -490,7 +490,7 @@ Let's create another Quarto document so that we can explore how to include R cod
 
 Follow the same procedure as last time to create a new Quarto document. `File -> New File... -> Quarto Document`. Use "My Second Quarto Document" as the title and add your name as the author. Save the document as `quarto-2.qmd`. `Cmd/Ctrl + Shift + K`.
 
-Run `list.files()`. CP/CR.
+In the bash Terminal, run `ls`. CP/CR.
 
 ```{r quarto-2-1}
 question_text(NULL,
@@ -503,7 +503,7 @@ question_text(NULL,
 
 ### 
 
-The listing should include `quarto-2.qmd`, `quarto-2.html`, and the `quarto-2_files` directory.
+The listing should include `quarto-2.qmd`, `quarto-2.html`, and the `quarto-2_files` directory, alongside `AGENTS.md` and the `quarto-1` files from earlier.
 
 ### Exercise 2
 
@@ -513,10 +513,10 @@ The newly created code cell will be empty.
 
 Save the file.
 
-In the R Terminal, run:
+In the bash Terminal, run:
 
 ````
-tutorial.helpers::show_file("quarto-2.qmd")
+cat quarto-2.qmd
 ````
 
 CP/CR.
@@ -832,7 +832,7 @@ Before moving on, delete the practice files you created in this tutorial. They w
 
 ### Exercise 1
 
-In the R Terminal, run `unlink(list.files(), recursive = TRUE)` to delete all files and directories in your `quarto` repo. Then run `list.files()` to confirm the directory is empty. CP/CR.
+In the bash Terminal, run `rm -rf quarto-*` to delete the practice files and directories in your `quarto` repo. Then run `ls` to confirm that only `AGENTS.md` remains. CP/CR.
 
 ```{r cleanup-1}
 question_text(NULL,
@@ -840,19 +840,19 @@ question_text(NULL,
     allow_retry = TRUE,
     try_again_button = "Edit Answer",
     incorrect = NULL,
-    rows = 3)
+    rows = 4)
 ```
 
 ###
 
 ````
-R 4.6.1> unlink(list.files(), recursive = TRUE)
-R 4.6.1> list.files()
-character(0)
-R 4.6.1>
+quarto $ rm -rf quarto-*
+quarto $ ls
+AGENTS.md
+quarto $
 ````
 
-`character(0)` means the vector is empty --- there are no files left in your `quarto` repo. The `recursive = TRUE` argument is needed here because `unlink()` must also remove the `_files` directories created when rendering Quarto documents. (`unlink()` does not touch hidden files, so the `.git` directory --- the repo itself --- survives.)
+`rm` removes files; the `-r` option lets it descend into directories, which is needed for the `_files` directories that rendering created; `-f` skips any are-you-sure prompts. The `quarto-*` pattern is a **wildcard**: it matches everything whose name begins with `quarto-`, so one short command removes all the practice files at once --- while leaving `AGENTS.md`, and the hidden `.git` directory that is the repo itself, untouched. Be careful with `rm`: unlike moving files to the Trash, it is (usually) irreversible. Wildcards get a full treatment in a later Terminal tutorial; for now, notice how much one small pattern accomplishes.
 
 ## Publishing
 ###
@@ -880,10 +880,10 @@ quarto render analysis.qmd
 
 Then, in the Explorer, right-click `analysis.html` and choose **Open with Live Server**. Keep that tab open --- it refreshes every time you render.
 
-In the R Terminal, run:
+In the bash Terminal, run:
 
 ````
-tutorial.helpers::show_file("analysis.qmd")
+cat analysis.qmd
 ````
 
 CP/CR.
@@ -939,7 +939,7 @@ Create a new file named `.gitignore` --- note the leading dot --- containing thi
 
 Save it, and watch the badge drop.
 
-In the R Terminal, run `tutorial.helpers::show_file(".gitignore")`. CP/CR.
+In the bash Terminal, run `cat .gitignore`. CP/CR.
 
 ```{r publishing-2}
 question_text(NULL,

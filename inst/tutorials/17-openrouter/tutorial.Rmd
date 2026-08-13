@@ -361,7 +361,7 @@ One catch, and you already know this one: GitHub only hands over secrets when a 
 
 Ask AI to create a `.gitignore` in your `openrouter` repo containing `.env` on its own line.
 
-In the R Terminal, run `show_file(".gitignore")`. CP/CR.
+In the bash Terminal, run `cat .gitignore`. CP/CR.
 
 ```{r key-8}
 question_text(NULL,
@@ -378,8 +378,6 @@ question_text(NULL,
 </code></pre>
 
 ###
-
-If that failed, it is probably because you have not loaded `library(tutorial.helpers)` in the R Terminal.
 
 `.env` is the usual name for a file that holds keys, so it is the first thing to hide from Git. You have used `.gitignore` before to keep clutter out of a repo. Here it is doing security work.
 
@@ -530,7 +528,7 @@ At the `aider` prompt, ask for a script:
 <pre><code>Create hello.R which prints the number of rows in the diamonds data set from ggplot2.
 </code></pre>
 
-When it finishes, in the R Terminal run `show_file("hello.R")`. CP/CR.
+When it finishes, in the bash Terminal run `cat hello.R`. CP/CR.
 
 ```{r aider-4}
 question_text(NULL,

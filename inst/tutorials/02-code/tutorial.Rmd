@@ -330,10 +330,10 @@ The default directory that VS Code suggests when saving is not necessarily where
 
 ###
 
-In the R Terminal, run:
+In the bash Terminal, run:
 
 ````
-tutorial.helpers::show_file("script-1.R")
+cat script-1.R
 ````
 
 CP/CR.
@@ -350,22 +350,21 @@ question_text(NULL,
 ###
 
 ````
-✗ R 4.6.1> tutorial.helpers::show_file("script-1.R")
+code $ cat script-1.R
 5 + 5
 6 * 3
-R 4.6.1> 
+code $
 ````
 
 ###
 
-You might have gotten this warning:
+Look closely at the end of your output. If it instead finished like this:
 
 ````
-Warning message:
-In readLines("script-1.R") : incomplete final line found on 'script-1.R'
+6 * 3code $
 ````
 
-This means that your file needs a blank line at the end. As a rule of thumb, it is always a good idea to have the last line of any text file be blank.
+with the prompt glued onto your last line of code, then your file is missing a final newline. As a rule of thumb, it is always a good idea to have the last line of any text file be blank.
 
 R scripts are permanent copies of your code. You can save them and also work with them interactively.
 
@@ -581,7 +580,7 @@ Click `File -> New File ... -> R File`. At the top of the Editor, the file will 
 
 Use the shortcut `Cmd/Ctrl + S` to save the script. Let's call this file `script-2.R`. The `.R` suffix is not always added automatically. Make sure it is there.
 
-In the R Terminal, run `list.files()`. CP/CR.
+In the bash Terminal, run `ls`. CP/CR.
 
 ```{r script-2-1}
 question_text(NULL,
@@ -589,14 +588,15 @@ question_text(NULL,
     allow_retry = TRUE,
     try_again_button = "Edit Answer",
     incorrect = NULL,
-    rows = 2)
+    rows = 3)
 ```
 
 ###
 
 ````
-> list.files()
-[1] "AGENTS.md""script-1.R" "script-2.R"
+code $ ls
+AGENTS.md  script-1.R  script-2.R
+code $
 ````
 
 Save your scripts in the folder. Edit them and run them line by line or in their entirety. Restart R frequently to make sure you have captured everything in your scripts.
@@ -605,7 +605,7 @@ Save your scripts in the folder. Edit them and run them line by line or in their
 
 Restart your R session by deleting your current R Terminal and opening a new one.
 
-From the R Terminal, run `list.files()`. CP/CR.
+From the bash Terminal, run `ls`. CP/CR.
 
 ```{r script-2-2}
 question_text(NULL,
@@ -619,9 +619,9 @@ question_text(NULL,
 ###
 
 ```
-> list.files()
-[1] "AGENTS.md" "script-1.R" "script-2.R"
->
+code $ ls
+AGENTS.md  script-1.R  script-2.R
+code $
 ```
 
 The three files we had from before still exist. Our work, if we have saved it, is preserved even when R or the Codespace restarts.
@@ -646,6 +646,8 @@ question_text(NULL,
 character(0)
 >
 ````
+
+Do not confuse R's `ls()` with the bash `ls` you just ran: same name, different worlds. Bash's `ls` lists files on disk; R's `ls()` lists objects in R's memory.
 
 `x` is gone! The environment --- the place in the computer where R creates and uses objects --- is cleaned, by default, each time R restarts. This is a good thing. For our work to be "reproducible," we want to be able to start from nothing except our code and raw data.
 
@@ -692,10 +694,10 @@ Skip a line and add a comment to the file: a one-sentence description of one of 
 
 Save the file.
 
-In the R Terminal, run:
+In the bash Terminal, run:
 
 ````
-tutorial.helpers::show_file("script-2.R")
+cat script-2.R
 ````
 
 CP/CR.
@@ -720,7 +722,7 @@ library(tidyverse)
 
 ###
 
-Did you remember to have a blank line at the end of the file? If not, you got a warning. Always have a blank line at the end of any text file.
+Did you remember to have a blank line at the end of the file? If not, the closing prompt appeared glued to the end of your last line. Always have a blank line at the end of any text file.
 
 ###
 
@@ -753,10 +755,10 @@ Skip a line after your comment. Ask AI to recreate this chart in `script-2.R` --
 
 Run the script interactively, line by line, using `Cmd/Ctrl + Enter`. If there are problems, show AI the errors and let it fix them. It will probably take a few iterations to get something close.
 
-In the R Terminal, run:
+In the bash Terminal, run:
 
 ````
-tutorial.helpers::show_file("script-2.R")
+cat script-2.R
 ````
 
 CP/CR.
@@ -815,7 +817,7 @@ question_text(NULL,
 
 Tell AI to save your plot as an image file: assign the plot to an object named `hist_p`, and then use `ggsave()`, setting `plot` to `hist_p` and `file` to `"diamonds.png"`. Run the script.
 
-In the R Terminal, run `list.files()`. CP/CR.
+In the bash Terminal, run `ls`. CP/CR.
 
 ```{r script-2-8}
 question_text(NULL,
@@ -829,9 +831,9 @@ question_text(NULL,
 ###
 
 ````
-> list.files()
-[1] "AGENTS.md" "diamonds.png" "script-1.R"   "script-2.R"
->
+code $ ls
+AGENTS.md  diamonds.png  script-1.R  script-2.R
+code $
 ````
 
 ###

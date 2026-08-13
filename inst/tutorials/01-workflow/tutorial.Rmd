@@ -111,7 +111,7 @@ Beware: a new bash Terminal will sometimes show a long prompt like
 @davekane-student ➜ /workspaces/codespace-starter (main) $
 ````
 
-with your GitHub username in place of `davekane-student`. The exact content of your prompt is something you can control. We set up `codebase-starter` so that, by default, the prompt just shows the current directory, followed by a space and a dollar sign, like `codespace-starter $`. 
+with your GitHub username in place of `davekane-student`. The exact content of your prompt is something you can control. We set up `codespace-starter` so that, by default, the prompt just shows the current directory, followed by a space and a dollar sign, like `codespace-starter $`. 
 
 ### Exercise 1
 
@@ -456,11 +456,13 @@ Give Copilot this prompt, adjusting the wording if needed:
 
 > Create an R script named script-1.R. It should add the integers from 1 through 10 and print the result. Run the script with Rscript and tell me the result. Do not install any packages.
 
-Review and approve the creation of `script-1.R` and the `Rscript` command one at a time. Then, in the R Terminal, run:
+Review and approve the creation of `script-1.R` and the `Rscript` command one at a time. Then, in the bash Terminal, run:
 
 ````
-tutorial.helpers::show_file("script-1.R")
+cat script-1.R
 ````
+
+`cat` prints a file's contents in the Terminal. It is the quickest way to show us --- and any AI you are working with --- exactly what is in a file. You will use it constantly.
 
 CP/CR.
 
@@ -538,10 +540,10 @@ include_graphics("images/sc-3.png")
 ```
 
 
-Keep the changes and allow the agent to run the script. Then run the following in the R Terminal and CP/CR:
+Keep the changes and allow the agent to run the script. Then run the following in the bash Terminal and CP/CR:
 
 ````
-tutorial.helpers::show_file("script-1.R")
+cat script-1.R
 ````
 
 ```{r script-1-github-copilot-3}
@@ -658,7 +660,7 @@ Use any AI to complete this task:
 
 > Create script-2.R. Choose ten positive numbers, store them in a vector, and print their sum and mean. Run the script with Rscript and fix any errors. Do not install packages.
 
-In the R Terminal, run `tutorial.helpers::show_file("script-2.R")`. CP/CR.
+In the bash Terminal, run `cat script-2.R`. CP/CR.
 
 ```{r script-2-ai-agnostic-1}
 question_text(NULL,
@@ -712,7 +714,7 @@ include_graphics("images/confuse.png")
 
 ###
 
-In the R Terminal, run `tutorial.helpers::show_file("script-2.R")`. CP/CR.
+In the bash Terminal, run `cat script-2.R`. CP/CR.
 
 ```{r script-2-ai-agnostic-2}
 question_text(NULL,
@@ -725,7 +727,7 @@ question_text(NULL,
 
 ###
 
-Here is one possible plot portion:
+Here is one possible plot:
 
 ````
 library(tidyverse)
