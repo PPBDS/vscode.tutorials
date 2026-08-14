@@ -120,7 +120,7 @@ include_graphics("images/new-r-terminal.png")
 
 Now, you have a fresh R Terminal where you can run commands. You can switch between terminals by clicking their tabs on the right side of the Panel, such as **bash** or **R Tutorial**, to bring a different terminal into view. (The tab for the R Terminal you just opened is labeled **R Interactive**.)
 
-## Checking your setup
+## Packages
 ###
 
 Again, you should have completed the "Workspace" tutorial. If not, this section may be difficult.
@@ -129,7 +129,7 @@ Again, you should have completed the "Workspace" tutorial. If not, this section 
 
 At the R Terminal, type `show_file()`. CP/CR.
 
-```{r checking-your-setup-1}
+```{r packages-1}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -159,7 +159,7 @@ Run `search()` in the R Terminal to see the libraries that you have currently lo
 
 CP/CR.
 
-```{r checking-your-setup-2}
+```{r packages-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -190,7 +190,7 @@ At the R Terminal, run:
 show_file(file.path(R.home(), "COPYING"), end = 7)
 ````
 
-```{r checking-your-setup-3}
+```{r packages-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -225,7 +225,7 @@ include_graphics("images/delete-r-terminal.png")
 
 Run the `show_file()` command from the previous exercise again. (Press the up arrow in the R Terminal to bring back a command you ran earlier.) CP/CR.
 
-```{r checking-your-setup-4}
+```{r packages-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -250,7 +250,7 @@ It failed, even though it had just worked before. The reason is that, whenever y
 
 In the R Terminal, run `library(tutorial.helpers)` again. CP/CR.
 
-```{r checking-your-setup-5}
+```{r packages-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -274,7 +274,7 @@ Load the **tidyverse** package into your R Terminal using the `library()` functi
 
 CP/CR.
 
-```{r checking-your-setup-6}
+```{r packages-6}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -736,8 +736,38 @@ x <- x + 1    # Increment x
 x <- x + 1    # Account for borders
 ````
 
-
 ### Exercise 6
+
+`script-2.R` has reached a state worth keeping, and that is the signal to commit. As before: click the Source Control icon, check that `script-2.R` is listed under **Changes**, type `Add script-2` as the commit message, press **Commit**, then press **Sync Changes**.
+
+In the bash Terminal, run `git log -1`. CP/CR.
+
+```{r script-2-6}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 8)
+```
+
+###
+
+````
+code $ git log -1
+commit 8c41f7b2a9e05d3c6f1b8e2d4a7c9f0e1b3d5a68 (HEAD -> main, origin/main)
+Author: Your Name <your-username@users.noreply.github.com>
+Date:   Fri Aug 14 15:03:41 2026 +0000
+
+    Add script-2
+code $
+````
+
+###
+
+Commit whenever a piece of work reaches a state worth keeping --- a script that runs, a document that renders. Small, frequent commits make your history easy to read and your work hard to lose. This rhythm --- work, commit, sync --- is the one you will follow for the rest of the course.
+
+### Exercise 7
 
 In the Workflow tutorial, you asked AI for *a* nice plot --- any nice plot. This time the job is different: match this exact one, and run the code yourself, line by line.
 
@@ -763,7 +793,7 @@ cat script-2.R
 
 CP/CR.
 
-```{r script-2-6}
+```{r script-2-7}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -794,7 +824,7 @@ ggplot(data = diamonds,
 
 Your AI's code will differ from ours; what matters is the result. In many ways, the `subtitle` is the most important part of any graphic. People are busy. You cannot expect them to study your plot closely. Help them by highlighting the one key lesson, the one fact that you hope people will remember. Spell it out clearly.
 
-### Exercise 7
+### Exercise 8
 
 Now we have the code that creates a plot in `script-2.R`. How do we use this plot for other things? Right now, we have to run `script-2.R` every time we want to see the plot, which is inconvenient.
 
@@ -802,7 +832,7 @@ Now we have the code that creates a plot in `script-2.R`. How do we use this plo
 
 We can use the `ggsave()` function. Type `?ggsave` in the R Terminal. This will open the help page for `ggsave()`. Copy and paste the description from the help page into the space below.
 
-```{r script-2-7}
+```{r script-2-8}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -813,13 +843,13 @@ question_text(NULL,
 
 `ggsave()` is used to save a plot as an individual file that is separate from the code that created the plot. In this case, we will use the PNG format.
 
-### Exercise 8
+### Exercise 9
 
 Tell AI to save your plot as an image file: assign the plot to an object named `hist_p`, and then use `ggsave()`, setting `plot` to `hist_p` and `file` to `"diamonds.png"`. Run the script.
 
 In the bash Terminal, run `ls`. CP/CR.
 
-```{r script-2-8}
+```{r script-2-9}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -847,19 +877,9 @@ This tutorial taught you how to use [**Codespaces**](https://github.com/features
 
 ### Exercise 1
 
-You have made more files since your first push --- `script-2.R` and `diamonds.png`. Let's send them all to GitHub.
+You have made more files since your last commit --- the plot code in `script-2.R` and `diamonds.png`. Commit and push. Use the commit message `Finish code tutorial`.
 
-So far, we have used the UI from the Source Control icon in the Activity Bar. Now, let's use the bash Terminal.
-
-In a bash Terminal, run these three commands, one at a time, hitting `Enter` after each. The first command stages all changed files, the second commits them with a message, and the third pushes the commit to GitHub.
-
-````
-git add .
-git commit -m "Finish code tutorial"
-git push
-````
-
-CP/CR.
+Then, in the bash Terminal, run `git log -1`. CP/CR.
 
 ```{r summary-1}
 question_text(NULL,
@@ -867,32 +887,26 @@ question_text(NULL,
     allow_retry = TRUE,
     try_again_button = "Edit Answer",
     incorrect = NULL,
-    rows = 10)
+    rows = 8)
 ```
 
 ###
 
 ````
-code $ git add .
-code $ git commit -m "Finish code tutorial"
-[main 5d6e7f8] Finish code tutorial
- 2 files changed, 28 insertions(+)
- create mode 100644 diamonds.png
- create mode 100644 script-2.R
-code $ git push
-Enumerating objects: 7, done.
-Counting objects: 100% (7/7), done.
-Writing objects: 100% (5/5), 128.40 KiB | 12.84 MiB/s, done.
-To https://github.com/your-username/code.git
-   1a2b3c4..5d6e7f8  main -> main
+code $ git log -1
+commit 5d6e7f8a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e (HEAD -> main, origin/main)
+Author: Your Name <your-username@users.noreply.github.com>
+Date:   Fri Aug 14 15:41:22 2026 +0000
+
+    Finish code tutorial
 code $
 ````
 
 ###
 
-`git add .` stages every changed file at once. When using the UI, as you did before, clicking the "Commit" button stages and commits the file in one step. 
+Notice how little we told you this time: just "commit and push," and you knew what to do. That is the goal --- assignments in later tutorials will say exactly that, and nothing more.
 
-For the most part, we just click the buttons, but it is important to understand that, behind the button, there are actual commands. When the AI does things, it is running commands, not clicking buttons. 
+For the most part, we just click the buttons, but it is important to understand that, behind the buttons, there are actual Git commands. When an AI commits and pushes for you, it runs those commands rather than clicking anything. You will learn the commands yourself in the GitHub Introduction tutorial.
 
 ### Exercise 2
 
