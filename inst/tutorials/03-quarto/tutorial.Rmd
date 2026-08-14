@@ -80,7 +80,17 @@ cd /workspaces/codespace-starter
 .devcontainer/connect-repo.sh quarto
 ````
 
-The `connect-repo.sh` script lives in `codespace-starter`, so the first command moves you there; running the script from anywhere else --- including the `code` repo from the last tutorial --- fails. If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer does not show `quarto`, use `File -> Open Folder...` and open `/workspaces/quarto`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
+The `connect-repo.sh` script lives in `codespace-starter`, so the first command moves you there; running the script from anywhere else --- including the `code` repo from the last tutorial --- fails. If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer does not show `quarto`, use `File -> Open Folder...` and open `/workspaces/quarto`. 
+
+###
+
+The reload will often start a new copy of the tutorial, with your answers already filled in. You know have two tabs open to the same tutorial. Don't fret! These are just two windows open to the same object. You can close one of them. Doesn't matter which.The other will continue to work.
+
+The reload might also just stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. 
+
+All of your saved answers will still be there.
+
+###
 
 **Everyone**: open a new bash Terminal and run `pwd`. CP/CR.
 
@@ -115,18 +125,31 @@ Quarto is a file format for making dynamic documents with R and other languages,
 
 ### Exercise 1
 
-Click `File -> New File ...` in the Application Menu (the three-horizontal-line icon) at the top left of your screen. Select `Quarto Document` from the drop-down menu.
+Click `File -> New File ...` in the Application Menu (the three-horizontal-line icon) at the top left of your screen. 
+
+```{r}
+include_graphics("images/q-1.png")
+```
+
+###
+
+Select `Quarto Document` from the drop-down menu.
+
+```{r}
+include_graphics("images/q-2.png")
+```
+
+###
 
 The top of the new document is called the YAML header. It should look like:
 
-```
----
-title: "Untitled"
-format: html
----
+```{r}
+include_graphics("images/q-2.png")
 ```
 
 Change the title to “My First Quarto Document”.
+
+###
 
 In the bash Terminal, run `ls`. CP/CR.
 
@@ -149,7 +172,19 @@ quarto $
 
 The only file is `AGENTS.md`, which `connect-repo` copied in when it created the repo --- it holds guidance for AI assistants working with you. Since we have not saved the new document yet, it does not appear in this listing.
 
-Quarto is a command line interface tool, not an R package. Therefore, its commands are largely run in a bash Terminal. As you work through this tutorial, and use Quarto in the future, you should refer to the [Quarto documentation](https://quarto.org/). Of course, in the modern world, we can also ask an AI when we have a problem.
+The black dot next to the name indicates that the file has unsaved changes. The dot disappears when you save the file.
+
+```{r}
+include_graphics("images/q-3.png")
+```
+
+###
+
+If you did save the file, no worries! **It is never a problem if your answer to a tutorial exercise differs from ours.** What matters is that you made an honest effort to follow the instructions. 
+
+###
+
+Quarto is a command line interface tool, not an R package. Therefore, its commands are largely run in a bash Terminal. As you work through this tutorial, and use Quarto in the future, you should refer to the [Quarto documentation](https://quarto.org/). Of course, in the modern world, we ask an AI when we have a problem.
 
 ### Exercise 2
 
@@ -157,11 +192,15 @@ Save the Quarto document with `File -> Save`. You can also use the shortcut `Cmd
 
 Name the file `quarto-1.qmd`.
 
-Now that the document is saved, run:
+```{r}
+include_graphics("images/q-4.png")
+```
 
-````
-tutorial.helpers::show_file("quarto-1.qmd", end = 4)
-````
+Now that the file is saved, the black dot has disappeared. The file is now part of the repo, and will be tracked by Git. The `U` next to the name means that, according to Git, the file is **untracked**. Git does not yet recognize it, because we have not added it to the repo. 
+
+###
+
+Run `cat quarto-1.qmd` in the bash Terminal.
 
 CP/CR.
 
@@ -240,16 +279,52 @@ The [YAML header](https://bookdown.org/yihui/rmarkdown-cookbook/rmarkdown-anatom
 To "render" our Quarto document, use the shortcut `Cmd/Ctrl + Shift + K`. Your screen should look something like this:
 
 ```{r}
-include_graphics("images/quarto-preview-keyboard-shortcut.png")
+include_graphics("images/q-5.png")
 ```
 
-This command splits the Editor and opens a new tab titled "Quarto Preview" on the right. This displays the rendered document. It's often better to preview the document in a separate browser window. To do this, either click the green "Open in Browser" button in the bottom right, or `Cmd/Ctrl + click` the green URL in the bottom left. You can close the "Quarto Preview" viewer in the editor and still view the preview in the browser, if you prefer.
+This command splits the Editor and opens a new tab titled "Quarto Preview" on the right. This displays the rendered document. It's often better to preview the document in a separate browser window. VS Code should have offered you the opportunity to open the HTML file in a browser. Ignore that for now.
 
 ###
 
-Professionals don't click buttons. They save time by using keyboard shortcuts.
+There is a lot going on, so we will consider different parts of the window. Please pay attention.
 
-Under the hood, this shortcut opens a new bash Terminal titled "Quarto Preview". There, it executes the `quarto preview` command. You don't need to worry about this now. Just use `Cmd/Ctrl + Shift + K` to preview your Quarto documents.
+```{r}
+include_graphics("images/q-5-a.png")
+```
+
+The Quarto Preview window shows what your Quarto document looks like now that it has been rendered as HTML. The first red arrow indicates the "refresh" button, which re-renders the document, although this refresh generally happens automatically. 
+
+The second red arrow indicates the URL at which the rendered page is actually available (at least to you), via your Codespace.
+
+The third red arrow indicates the "Open in Browser" button, which opens the rendered document, using that same URL, in a browser window. 
+
+###
+
+The list of terminals on the righthand side of the window shows four entries. The first is the bash Terminal which initialized the Codespace. The second is the bash Terminal associated with running `connect-repo`. The third is the bash Terminal that we opened to run `pwd` and `ls`. 
+
+```{r}
+include_graphics("images/q-5-b.png")
+```
+
+The fourth is the bash Terminal associated with the Quarto Preview. This last terminal is where the `quarto preview` command is running, which is what generates the rendered document.
+
+###
+
+Using the `Cmd/Ctrl + Shift + K` shortcut, causes VS Code to open a new bash Terminal and issue the `quarto render` command, along with some options, as you can see below.
+
+```{r}
+include_graphics("images/q-5-c.png")
+```
+
+You don't need to worry about this now. Just use `Cmd/Ctrl + Shift + K` to preview your Quarto documents. Remember: Professionals don't click buttons. They save time by using keyboard shortcuts.
+
+###
+
+Lastly, note that you also open the HTML file in a browser window by using `Cmd/Ctrl + click` on the "Browse at" link. 
+
+```{r}
+include_graphics("images/q-5-d.png")
+```
 
 ###
 
@@ -272,7 +347,7 @@ AGENTS.md  quarto-1.html  quarto-1.qmd  quarto-1_files
 quarto $
 ```
 
-In the Explorer, you should see a new file, `quarto-1.html`. This is the file created by rendering. The Browser/Viewer tab in the Secondary Side Bar should also display the file.
+In the Explorer, you should see a new file, `quarto-1.html`. This is the file created by rendering. 
 
 ### 
 
