@@ -179,7 +179,7 @@ Count what you have now reproduced by hand: the sign-in, the repo creation, the 
 
 ### Exercise 5
 
-Give the repo something worth keeping, set up the way you learned in the Quarto tutorial: create `analysis.qmd` with the title "GitHub Advanced", your name as author, `execute: echo: false` in the YAML, a setup chunk loading **tidyverse** with `#| message: false`, and a second chunk holding an AI-generated plot using a built-in data set. Also create a `.gitignore` containing `*_files`. Render with `Cmd/Ctrl + Shift + K`.
+Give the repo something worth keeping, set up the way you learned in the Quarto tutorial: create `analysis.qmd` with the title "GitHub Advanced", your name as author, `execute: echo: false` in the YAML, a setup chunk loading **tidyverse** with `#| message: false`, and a second chunk holding an AI-generated plot using a built-in data set. Also create a `.gitignore` containing `analysis_files`. Render with `Cmd/Ctrl + Shift + K`.
 
 In the R Terminal, run `tutorial.helpers::show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 

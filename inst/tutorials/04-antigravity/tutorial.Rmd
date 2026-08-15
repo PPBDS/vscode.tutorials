@@ -416,12 +416,12 @@ question_text(NULL,
 ###
 
 ````
-*_files/
+analysis_files
 ````
 
 ###
 
-Same principle as in the Quarto tutorial: if a file can be *regenerated* from your source, it doesn't belong in the commit history. The agent may write a more thorough `.gitignore` than your hand-made one --- extra patterns are harmless. Delegating housekeeping files like this is the normal workflow from now on.
+Same principle as in the Quarto tutorial: if a file can be *regenerated* from your source, it doesn't belong in the commit history. The agent may write a more thorough `.gitignore` than your hand-made one --- extra entries, or wildcard patterns like `*_files`, are harmless. Delegating housekeeping files like this is the normal workflow from now on.
 
 ### Exercise 11
 
@@ -649,7 +649,7 @@ question_text(NULL,
 ###
 
 ````
-*_files/
+analysis_files
 analysis_cache
 ````
 

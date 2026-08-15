@@ -360,7 +360,7 @@ Look at the Source Control icon in the Activity Bar --- the one that looks like 
 Create a new file named `.gitignore` --- note the leading dot --- containing this single line:
 
 ````
-*_files
+quarto-1_files
 ````
 
 Don't forget the blank line at the end. Save it, and watch the badge drop.
@@ -380,13 +380,13 @@ question_text(NULL,
 
 ````
 quarto $ cat .gitignore
-*_files
+quarto-1_files
 quarto $
 ````
 
 ###
 
-`.gitignore` tells Git which files to leave alone. The `*` makes the rule cover the support directory of *any* rendered document, including ones you have not created yet. The rendered HTML itself stays tracked --- unlike the `_files` directory, it is the artifact your readers will eventually see.
+`.gitignore` tells Git which files to leave alone: one name per line, matched against the files and folders in your repo. Our single line names the `quarto-1_files` directory exactly. The rendered HTML itself stays tracked --- unlike the `_files` directory, it is the artifact your readers will eventually see.
 
 ### Exercise 5
 
@@ -967,11 +967,41 @@ One more warning about AI code: **you should never include `install.packages()` 
 
 ### Exercise 11
 
+Rendering `quarto-2.qmd` created a new support directory, `quarto-2_files`, and the Source Control badge has jumped again. Your `.gitignore` names `quarto-1_files` exactly, so this new directory is not covered.
+
+Add `quarto-2_files` to `.gitignore` on its own line. Save the file, and watch the badge drop.
+
+In the bash Terminal, run `cat .gitignore`. CP/CR.
+
+```{r quarto-2-11}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 4)
+```
+
+###
+
+````
+quarto $ cat .gitignore
+quarto-1_files
+quarto-2_files
+quarto $
+````
+
+###
+
+A `.gitignore` grows one line at a time as a project accumulates generated files. Git also accepts wildcard patterns --- a single line reading `*_files` would cover both directories at once --- but exact names are easier to read and to reason about. You will meet wildcards later.
+
+### Exercise 12
+
 Commit and push. Use the commit message `Add quarto-2`.
 
 Then, in the bash Terminal, run `git status`. CP/CR.
 
-```{r quarto-2-11}
+```{r quarto-2-12}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
