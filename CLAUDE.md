@@ -60,6 +60,15 @@ last two skills the base guide’s standard Introduction/Summary sequences
 lean on. Antigravity and GitHub Introduction teach them again later;
 that repetition is deliberate reinforcement.
 
+The dependency runs both ways. The standard class workflow sends
+students from these four tutorials directly into `misc.tutorials`’
+`r4ds-1`–`r4ds-5`, so the first four must supply **every** piece of
+background that sequence relies on. When a downstream tutorial needs a
+skill not taught through Quarto, the fix lands here (or the downstream
+tutorial scaffolds it explicitly) — it is never assumed silently.
+Cutting material from Workspace, Workflow, Code, or Quarto therefore
+requires checking what downstream leans on it.
+
 ### The universal entry point
 
 Outside any single tutorial, students learn one fixed way to begin, the

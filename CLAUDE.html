@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">vscode.tutorials</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.9009</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.9010</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,6 +45,7 @@
 <h3 id="what-downstream-packages-assume">What downstream packages assume<a class="anchor" aria-label="anchor" href="#what-downstream-packages-assume"></a></h3>
 <p>Later packages (<code>misc.tutorials</code>, the Primer) do <strong>not</strong> assume a student has done <em>all</em> of <code>vscode.tutorials</code> — only the foundational material <strong>through the Quarto tutorial</strong>, the same boundary as the mechanics exception above. Nothing after Quarto is part of that assumed base. (This is about what downstream tutorials may rely on, not a claim about which tutorials students finish — many do reach the later ones.)</p>
 <p>The Quarto tutorial’s Publishing section is what completes this boundary: it teaches <code>.gitignore</code> and <code>quarto publish gh-pages</code>, the last two skills the base guide’s standard Introduction/Summary sequences lean on. Antigravity and GitHub Introduction teach them again later; that repetition is deliberate reinforcement.</p>
+<p>The dependency runs both ways. The standard class workflow sends students from these four tutorials directly into <code>misc.tutorials</code>’ <code>r4ds-1</code>–<code>r4ds-5</code>, so the first four must supply <strong>every</strong> piece of background that sequence relies on. When a downstream tutorial needs a skill not taught through Quarto, the fix lands here (or the downstream tutorial scaffolds it explicitly) — it is never assumed silently. Cutting material from Workspace, Workflow, Code, or Quarto therefore requires checking what downstream leans on it.</p>
 </div>
 <div class="section level3">
 <h3 id="the-universal-entry-point">The universal entry point<a class="anchor" aria-label="anchor" href="#the-universal-entry-point"></a></h3>
