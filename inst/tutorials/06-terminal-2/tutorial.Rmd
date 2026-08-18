@@ -145,6 +145,61 @@ options $
 
 In a long list, names are in the last column and file type is in the first: a leading `d` means **d**irectory, a leading `-` means file, a leading `l` means **l**ink. The middle columns give permissions, owner, size in bytes, and the date last modified. When an agent runs `ls -l` in a transcript, this is what it is reading.
 
+### Exercise 5
+
+So far you have only *read* environment variables. Now set one. Run `export FAVORITE_ANIMAL=duck`, then `echo $FAVORITE_ANIMAL`. CP/CR.
+
+```{r options-5}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 4)
+```
+
+###
+
+````
+options $ export FAVORITE_ANIMAL=duck
+options $ echo $FAVORITE_ANIMAL
+duck
+options $
+````
+
+###
+
+`export` stores a name and a value in the shell's environment, right next to `HOME` and `PATH`. Note the syntax: no spaces around the `=`, no `$` when setting, `$` when reading.
+
+### Exercise 6
+
+Where does that variable live? Find out: open a **new** bash Terminal (the `+` in the top-right corner of the Panel). In that new terminal, run `echo $FAVORITE_ANIMAL`. CP/CR.
+
+```{r options-6}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 3)
+```
+
+###
+
+````
+terminal-2 $ echo $FAVORITE_ANIMAL
+
+terminal-2 $
+````
+
+###
+
+A blank line. The variable is gone --- and note that this is *not* an error. Bash treats a variable nobody has set as the empty string, so `echo` printed nothing and finished happily.
+
+An `export` belongs to the one shell you typed it in. The new terminal is a new shell, started fresh, and it has never heard of `FAVORITE_ANIMAL`. This matters more than it looks: later in the course you will store an API key --- a kind of password --- in an environment variable, and this per-terminal behavior is the first thing that will bite you if you forget it.
+
+Close the new terminal (the trash-can icon) and click back to your original tab, which is still sitting in `options` with the variable still set.
+
 ## Looking inside files
 ###
 
@@ -249,7 +304,75 @@ question_text(NULL,
 
 `cat` prints an entire file; the `-n` option adds line numbers. (`cat` stands for con**cat**enate --- given two files, it prints them together.) For a short file, `cat` beats opening an editor. For a long one, `head` and `tail` are kinder to your screen.
 
-You will also see agents use `find` (locate files by name), `sed` (edit text in a stream), and `awk` (slice columns from text). You do not need to write those --- you need to not be scared of them when they scroll past. Recognize the name, and if a command matters, ask AI or `--help` what it does.
+You will also see agents use `sed` (edit text in a stream) and `awk` (slice columns from text). You do not need to write those --- you need to not be scared of them when they scroll past. Recognize the name, and if a command matters, ask AI or `--help` what it does.
+
+### Exercise 5
+
+For a file too long for `cat` but that you want to actually read, there is `less`, a **pager**. Run `less AUTHORS`. The file takes over the Terminal: press the space bar to page down, the arrow keys to scroll, and `q` to **q**uit. Do all three, then CP/CR whatever your Terminal shows after quitting.
+
+```{r looking-inside-files-5}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 3)
+```
+
+###
+
+````
+options $ less AUTHORS
+options $
+````
+
+###
+
+Not much to paste --- when you quit, `less` puts the screen back the way it was. That is the point of a pager: it shows without touching.
+
+Remember `q`. Other programs open a pager *for* you without asking: `git log`, `gh`, and the manual pages all dump long output into `less`. If your Terminal ever seems stuck displaying a file, with a `:` or `(END)` at the bottom, you are in a pager --- press `q` and you are free.
+
+### Exercise 6
+
+One more inspection command, and it may be the most important one for working with AI: `diff`, which shows how two files differ. Build a second file that differs by one line, then compare. Run these commands, one at a time:
+
+````
+cp AUTHORS AUTHORS-edited
+echo "Preceptor also helped." >> AUTHORS-edited
+diff AUTHORS AUTHORS-edited
+````
+
+CP/CR.
+
+```{r looking-inside-files-6}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 6)
+```
+
+###
+
+````
+options $ cp AUTHORS AUTHORS-edited
+options $ echo "Preceptor also helped." >> AUTHORS-edited
+options $ diff AUTHORS AUTHORS-edited
+39a40
+> Preceptor also helped.
+options $
+````
+
+Your line numbers may differ.
+
+###
+
+Read the output: `39a40` means "after line 39 of the first file, line 40 of the second file was **a**dded," and the `>` marks a line that exists only in the second file. Lines only in the *first* file would get `<`. Two identical files produce no output at all --- silence means "same."
+
+This is the skill underneath auditing AI work: an agent edits a file, and `diff` shows you exactly what changed and nothing else. In the GitHub tutorials you will meet `git diff`, which applies this same idea to your whole repo's history.
+
+Clean up: run `rm AUTHORS-edited`.
 
 ## Files in and out
 ###
@@ -370,6 +493,35 @@ Your numbers may differ slightly; what matters is a header row of column names f
 ###
 
 Make a `data/` directory, fetch a file into it, `head` it to confirm it is what you expect: this exact sequence opens nearly every data science project you will ever do, whether you type it or an AI agent does. The first line of a CSV file names the columns; every following line is one observation.
+
+### Exercise 4
+
+Your repo now has files scattered across several directories. When you know a file's name but not where you put it, `find` is the answer. From `/workspaces/terminal-2`, run `find . -name AUTHORS` and then `find . -name penguins.csv`. CP/CR.
+
+```{r files-in-and-out-4}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 5)
+```
+
+###
+
+````
+terminal-2 $ find . -name AUTHORS
+./options/AUTHORS
+terminal-2 $ find . -name penguins.csv
+./data/penguins.csv
+terminal-2 $
+````
+
+###
+
+`find` searches a directory --- here `.`, the current one --- and everything beneath it, printing the path of every match. Where `ls` shows you one directory at a time, `find` sweeps the whole tree.
+
+Watch for it in agent transcripts: `find` is one of the first commands an AI runs in an unfamiliar project, because it answers "what is here and where?" in one stroke. In Terminal 3, wildcards will let you search for patterns --- every `.csv` file, say --- instead of exact names.
 
 ## Running programs
 ###
@@ -619,10 +771,86 @@ Your version number may differ.
 
 **pandas** is Python's rough equivalent of the tidyverse's data-manipulation tools, and it was already installed --- along with **numpy**, **matplotlib**, **seaborn**, **scikit-learn**, and the rest of the standard Python data science stack --- because uv baked them into the venv when the image was built. On a random laptop, `python -c 'import pandas'` might fail with `ModuleNotFoundError`; in our Codespaces it just works. That difference --- and knowing it exists --- is most of what you need to understand about Python environments for now.
 
+### Exercise 9
+
+One more program you already rely on: `quarto`, the tool that rendered your documents in the Quarto tutorial, is an ordinary command-line program like `Rscript` and `python`. Run `quarto check`. CP/CR the first ten or so lines.
+
+```{r running-programs-9}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 10)
+```
+
+###
+
+Your output should begin something like:
+
+````
+terminal-2 $ quarto check
+Quarto 1.10.18
+[✓] Checking environment information...
+[✓] Checking versions of quarto binary dependencies...
+      Pandoc version 3.4.0: OK
+      Dart Sass version 1.70.0: OK
+      Deno version 1.46.3: OK
+[✓] Checking Quarto installation......OK
+````
+
+Your version numbers will differ.
+
+###
+
+`quarto check` inspects the whole Quarto installation --- the rendering engines, R, Python --- and reports what works. It is the first thing to run (or to let an AI run) when rendering breaks mysteriously. The larger point: `Cmd/Ctrl + Shift + K` was never magic. It runs this same `quarto` program, which you can drive yourself --- and the Websites tutorials will do exactly that, with `quarto create`, `quarto preview`, and `quarto publish`.
+
+### Exercise 10
+
+Every program on this machine is a file that someone marked as runnable. See what that means. Run these commands, one at a time:
+
+````
+echo 'echo "I am a program."' > hello.sh
+./hello.sh
+chmod +x hello.sh
+./hello.sh
+````
+
+CP/CR.
+
+```{r running-programs-10}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 8)
+```
+
+###
+
+````
+terminal-2 $ echo 'echo "I am a program."' > hello.sh
+terminal-2 $ ./hello.sh
+bash: ./hello.sh: Permission denied
+terminal-2 $ chmod +x hello.sh
+terminal-2 $ ./hello.sh
+I am a program.
+terminal-2 $
+````
+
+###
+
+Two lessons in one transcript. First, `Permission denied`: a fresh file is just text, even if it contains commands. `chmod +x` sets the **executable bit** --- the `x` you saw in `ls -l`'s permission strings --- and only then will the shell run it. A script that exists but was never `chmod`ed is a classic silent failure, and it will come up again in a later tutorial.
+
+Second, the `./` prefix: your current directory is deliberately *not* on `$PATH` (a security choice --- imagine a malicious `ls` planted in a folder you `cd` into), so you must point at the script explicitly.
+
+Clean up: run `rm hello.sh`.
+
 ## Summary
 ###
 
-This tutorial covered command options, environment variables (`$HOME`, `$PATH`), looking inside files with `head`, `tail`, and `cat`, moving files in and out of a Codespace (drag-and-drop, `Upload...`, and `curl` into a `data/` directory), and running programs: `Rscript` and `Rscript -e` for R, `python` and `python -c` for Python. You also saw how our Codespaces arrange the two languages differently --- R installed system-wide, Python in a uv-built virtual environment at `/opt/venv` that comes first on `$PATH`, stocked with the data science stack.
+This tutorial covered command options, environment variables (reading `$HOME` and `$PATH`, setting your own with `export`, and why an `export` dies with its terminal), looking inside files with `head`, `tail`, `cat`, the `less` pager, and `diff`, finding files with `find`, moving files in and out of a Codespace (drag-and-drop, `Upload...`, and `curl` into a `data/` directory), and running programs: `Rscript` and `Rscript -e` for R, `python` and `python -c` for Python, `quarto check` for Quarto, and your own `hello.sh` --- once `chmod +x` marked it executable. You also saw how our Codespaces arrange the two languages differently --- R installed system-wide, Python in a uv-built virtual environment at `/opt/venv` that comes first on `$PATH`, stocked with the data science stack.
 
 You will type some of these commands yourself. But mostly you will *read* them, in the transcripts of AI agents working on your behalf --- and now you can.
 

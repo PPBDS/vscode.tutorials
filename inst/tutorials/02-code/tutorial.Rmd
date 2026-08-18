@@ -906,7 +906,7 @@ code $
 
 Notice how little we told you this time: just "commit and push," and you knew what to do. That is the goal --- assignments in later tutorials will say exactly that, and nothing more.
 
-For the most part, we just click the buttons, but it is important to understand that, behind the buttons, there are actual Git commands. When an AI commits and pushes for you, it runs those commands rather than clicking anything. You will learn the commands yourself in the GitHub Introduction tutorial.
+For the most part, we just click the buttons, but it is important to understand that, behind the buttons, there are actual Git commands. When an AI commits and pushes for you, it runs those commands rather than clicking anything. You will learn the commands yourself in the GitHub Advanced tutorial.
 
 ### Exercise 2
 

@@ -727,7 +727,42 @@ grepping $
 
 `egrep` is an even more powerful version of `grep`. Learning more about `egrep` is beyond the scope of this tutorial.
 
-## Pipes
+### Exercise 10
+
+So far, `grep` has searched one file that you named. Its real power --- and the way AI agents almost always use it --- is searching *every* file at once. Run these commands, one at a time:
+
+````
+cd ..
+grep -rn Robert .
+cd grepping
+````
+
+CP/CR.
+
+```{r grep-10}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 5)
+```
+
+###
+
+````
+grepping $ cd ..
+terminal-3 $ grep -rn Robert .
+./grepping/grepping.txt:12:Robert
+terminal-3 $ cd grepping
+grepping $
+````
+
+Your line number may differ.
+
+###
+
+The `-r` option makes `grep` **r**ecursive: starting from `.`, it descends into every directory and searches every file, printing each match as `file:line:text` (the `-n` adds the line number). Together with Terminal 2's `find`, this completes the pair every agent leans on in an unfamiliar project: `find` locates files by *name*, `grep -r` locates them by *content*. When an AI seems to magically know which file defines something, `grep -rn` is usually the trick --- watch for it the next time you read an agent's transcript.
 ###
 
 Every command you have met is a program that reads text and spits out text. The **pipe** symbol --- `|` --- connects them: it feeds the output of one program straight into the next. Pipes are everywhere in the commands AI agents run, so you need to read them fluently. We are still in the `grepping` directory.
