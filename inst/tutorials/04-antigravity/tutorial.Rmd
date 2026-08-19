@@ -32,13 +32,11 @@ options(tutorial.exercise.timelimit = 60,
 
 <!-- DK: Change default answers prompt. -->
 
-<!-- DK: Check the that antigravity produces the same responses as gemini. -->
+<!-- DK: Check that antigravity produces the same responses as gemini. -->
 
 <!-- DK: Need to change sign in workflow to use Google Cloud and get the right project name. Or, better, to cover both cases. -->
 
 <!-- DK: Do weird characters like &#96;&#96;&#96; show up correctly? -->
-
-<!-- Fix Antigravity CLI links -->
 
 <!-- Fix ending since you actually know Git. -->
 
@@ -58,11 +56,83 @@ The [Antigravity CLI](https://antigravity.google/product/antigravity-cli) is a f
 
 ### Exercise 1
 
-Start the Antigravity CLI by running `agy` in the bash Terminal. It will ask whether you want to connect and whether you trust the current working directory --- answer yes to both.
+Start the Antigravity CLI by running `agy` in the bash Terminal. Select "Use a Google Cloud Project"
 
-CP/CR the first several lines of terminal output --- enough to show the authentication prompt and the `>` prompt that appears after you successfully log in.
 
-```{r gemini-cli-1}
+```{r}
+include_graphics("images/agy-1.png")
+```
+
+and hit `Enter`. New College of Florida is providing some funding for your use of Antigravity. But, after the course is over, you can get the same sort of access for $20 or so per month. Select "Continue with Google Cloud."
+
+```{r}
+include_graphics("images/agy-2.png")
+```
+
+NCF has set up a Google Cloud Project for us. The resulting authentication screen is a bit overwhelming.
+
+```{r}
+include_graphics("images/agy-3.png")
+```
+
+The basic idea is that Google needs to ensure that we have the right to use this account. Your next step is to `Cmd/Ctrl + Click` that big URL. 
+
+```{r}
+include_graphics("images/agy-4.png")
+```
+
+Doing will probably bring up this screen. Obviously, you should click "Open."
+
+```{r}
+include_graphics("images/agy-5.png")
+```
+
+The next step might ask you to confirm the your GitHub account. **You must use your NCF email account.** 
+
+As Google changes things, this sequence of images won't match exactly what you see. Common sense should go you through it all. The most important point was the to choose 
+
+
+
+
+Eventually, Google will give you a verification code.
+
+```{r}
+include_graphics("images/agy-6.png")
+```
+
+Copy that code and go back to the authorization window in your terminal. You may want to expand the Panel upward so that you can better see what is happening. Either way, you paste in the code where the cursor left you by default.
+
+```{r}
+include_graphics("images/agy-7.png")
+```
+
+		You will now be asked for your Google Cloud Project ID. Enter `techne-fall-2026` and hit `Enter`. 
+
+
+```{r}
+include_graphics("images/agy-8.png")
+```
+
+You will then be asked to select a region. Select `us` and hit `Enter`. 
+
+```{r}
+include_graphics("images/agy-9.png")
+```
+
+You will then be asked a series of questions. These are just two more examples. In general, you just select the defaults.
+
+```{r}
+include_graphics("images/agy-10.png")
+```
+
+```{r}
+include_graphics("images/agy-11.png")
+```
+
+
+When you are done, CP/CR the first several lines of terminal output --- enough to show the `>` prompt that appears after you successfully log in.
+
+```{r antigravity-cli-1}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -75,66 +145,29 @@ question_text(NULL,
 
 ````
 antigravity $ agy
-? Do you want to connect to Antigravity? Yes
-? Do you trust the files in this folder? Yes
 
-╭─────────────────────────────────────────────────────╮
-│  Welcome to Antigravity CLI                              │
-│  Your AI-powered terminal assistant                 │
-╰─────────────────────────────────────────────────────╯
 
-To get started, authenticate with your Google account.
-Visit the URL below, sign in, and paste the code here.
+      ▄▀▀▄        Antigravity CLI 1.1.11
+     ▀▀▀▀▀▀       dakane@ncf.edu
+    ▀▀▀▀▀▀▀▀      Gemini 3.6 Flash (High)
+   ▄▀▀    ▀▀▄     /workspaces/antigravity
+  ▄▀▀      ▀▀▄
 
-https://accounts.google.com/o/oauth2/auth?...
-
+───────────────────────────────────────────────────────────────────────────────────────────────────
 >
+───────────────────────────────────────────────────────────────────────────────────────────────────
+? for shortcuts                                                             Gemini 3.6 Flash · high
 ````
 
-You may notice that VS Code renames the terminal tab from "bash" to "node" once Antigravity starts. This is because the Antigravity CLI is built on [Node.js](https://nodejs.org/en/about), and VS Code detects this and updates the tab name.
-
-
-```{r}
-include_graphics("images/node-terminal.png")
-```
+Again, you mostly just accepted the defaults. The main exceptions were "Use a Google Cloud Project" at the beginning and then the project ID `techne-fall-2026`. 
 
 ### Exercise 2
-
-It will then ask you to authenticate with your Google account. You will see a URL printed in the terminal. 
-
-```{r}
-include_graphics("images/gemini-CLI-auth-link.png")
-```
-
-Open that URL in your browser, sign in with your Google account, and copy the authorization code that appears on the page. Paste it back into the terminal and press `Enter`. Then, Copy and Paste the tips to get started which will appear once Antigravity is done authenticating.
-
-
-```{r gemini-cli-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
-```
-
-###
-
-```{r}
-include_graphics("images/gemini-CLI-auth-done.png")
-```
-
-###
-
-This uses [OAuth 2.0](https://oauth.net/2/), the same standard behind "Sign in with Google" buttons --- you grant a temporary permission token rather than sharing your password. The token is saved in this Codespace, but a new Codespace will require a fresh sign-in.
-
-### Exercise 3
 
 You are now inside the Antigravity CLI interactive session. The `>` prompt means Antigravity is waiting for your input. Type `/help` and press `Enter` to see the list of available commands.
 
 CP/CR.
 
-```{r gemini-cli-3}
+```{r antigravity-cli-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -166,11 +199,11 @@ Note that your output may be different than what is shown here, as the Antigravi
 
 Slash commands control the program itself, not Antigravity --- the command `/help` tells the *program* to print its options, while a plain sentence talks to *Antigravity*. For factual session data like usage statistics, always use slash commands rather than asking Antigravity, which will only guess.
 
-### Exercise 4
+### Exercise 3
 
 Type `/model` to see which Antigravity model is currently active. CP/CR.
 
-```{r gemini-cli-4}
+```{r antigravity-cli-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -191,7 +224,7 @@ You may see something different here depending on your Antigravity CLI version �
 
 The Antigravity model family has several tiers: **Pro** for complex reasoning and coding tasks, **Flash** for speed and lower usage. You can switch mid-session with `/model model-name` if you want to save your daily limit for simpler work or use a more powerful model.
 
-### Exercise 5
+### Exercise 4
 
 Ask Antigravity to describe what files are in the repository. Type something like:
 
@@ -208,7 +241,7 @@ include_graphics("images/gemini-CLI-git-permission.png")
 Press `1` or hit enter where it says allow once to allow the command to run. You could press `2` to allow Antigravity to run the same command without asking again in this session. CP/CR the authorization prompt and Antigravity's response.
 
 
-```{r gemini-cli-5}
+```{r antigravity-cli-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -225,7 +258,7 @@ include_graphics("images/gemini-explore-repo.png")
 
 Antigravity decomposes your prompt into tool calls dynamically --- the exact commands it runs depend on how it interprets your request, so what you see may differ from the example. The authorization step keeps you in control regardless of which commands it chooses.
 
-### Exercise 6
+### Exercise 5
 
 Ask Antigravity to create an `analysis.qmd` file, set up the way you learned in the Quarto tutorial. Tell it you want:
 
@@ -236,7 +269,7 @@ Ask Antigravity to create an `analysis.qmd` file, set up the way you learned in 
 
 Allow the file to be written when Antigravity asks for permission. CP/CR the tool authorization and Antigravity's explanation of what it created.
 
-```{r gemini-cli-6}
+```{r antigravity-cli-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -271,7 +304,7 @@ I've created `analysis.qmd` with:
 
 When you ask Antigravity to create a file, it generates the entire contents in one step and writes it for you. Instead of typing the YAML header, chunk settings, and library calls yourself, you describe what you want and refine the result --- editing is almost always faster than composing from scratch.
 
-### Exercise 7
+### Exercise 6
 
 Still inside Antigravity, ask it to render `analysis.qmd` for you. Type something like:
 
@@ -281,7 +314,7 @@ Render analysis.qmd using quarto render and tell me what files were created afte
 
 Antigravity will issue two tool calls: one to render the document and one to list the resulting files. Press `y` for each. CP/CR the output.
 
-```{r gemini-cli-7}
+```{r antigravity-cli-6}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -300,7 +333,7 @@ include_graphics("images/gemini-render.png")
 
 Antigravity ran two commands to answer one question, using the result of each step to decide what to do next. This is what makes it an AI *agent* --- it takes actions and reasons about results, rather than just producing text.
 
-### Exercise 8
+### Exercise 7
 
 Let's view the rendered file in a browser, the way you learned in the Quarto tutorial: in the Explorer, find `analysis.html`, right-click it, and select **"Open with Live Server"**.
 
@@ -312,7 +345,7 @@ This opens `analysis.html` in a new browser tab served through your Codespace. T
 
 Copy/paste that URL below.
 
-```{r gemini-cli-8}
+```{r antigravity-cli-7}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -341,7 +374,7 @@ include_graphics("images/first-render.png")
 
 You met Live Server in the Quarto tutorial; nothing here is new except that an agent, rather than you, is triggering the renders.
 
-### Exercise 9
+### Exercise 8
 
 Ask Antigravity: Add a plot to a new code chunk in `analysis.qmd` using the `storms` dataset. Visualize something like a boxplot showing the distribution of wind speeds by storm category. Include a meaningful title and subtitle, and then render the file.
 
@@ -359,7 +392,7 @@ tutorial.helpers::show_file("analysis.qmd", chunk = "Last")
 
 CP/CR.
 
-```{r gemini-cli-9}
+```{r antigravity-cli-8}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -370,7 +403,7 @@ question_text(NULL,
 
 ###
 
-```{r gemini-cli-9-test}
+```{r antigravity-cli-8-test}
 #| echo: true
 storms |>
   filter(!is.na(category)) |>
@@ -394,7 +427,7 @@ Your answer will be different from ours, but it should show **ggplot2** code usi
 
 When Antigravity adds a plot and re-renders, two things happen automatically: Quarto updates `analysis.html`, and Live Server detects the change and refreshes your browser. This loop --- ask Antigravity, render, view --- is the same workflow you would use throughout a real project.
 
-### Exercise 10
+### Exercise 9
 
 In the Quarto tutorial you wrote a `.gitignore` by hand. This time, delegate the job: ask Antigravity to create a `.gitignore` file suitable for a Quarto R project. Type something like:
 
@@ -404,7 +437,7 @@ Create a .gitignore file.
 
 In the bash Terminal, run `cat .gitignore`. CP/CR.
 
-```{r gemini-cli-10}
+```{r antigravity-cli-9}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -423,7 +456,7 @@ analysis_files
 
 Same principle as in the Quarto tutorial: if a file can be *regenerated* from your source, it doesn't belong in the commit history. The agent may write a more thorough `.gitignore` than your hand-made one --- extra entries, or wildcard patterns like `*_files`, are harmless. Delegating housekeeping files like this is the normal workflow from now on.
 
-### Exercise 11
+### Exercise 10
 
 Before moving on, let's deliberately quit and restart Antigravity to see what happens to the conversation history. Type `/quit`.
 
@@ -437,7 +470,7 @@ Without reading any files, Antigravity will have no memory of the previous sessi
 
 CP/CR Antigravity's full response.
 
-```{r gemini-cli-11}
+```{r antigravity-cli-10}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -479,7 +512,7 @@ cat analysis.qmd
 
 CP/CR.
 
-```{r gemini-in-tutorials-1}
+```{r antigravity-in-tutorials-1}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -606,11 +639,11 @@ Each code chunk should produce **one** final artifact --- either cleaned data or
 
 Sometimes a code chunk takes a long time to run. We can **cache** a code chunk to save its results and avoid re-running it on subsequent renders.
 
-### Exercise 3
+### Exercise 1
 
 Add `#| cache: true` to the storms chunk. Render. In the bash Terminal, run `ls`. CP/CR.
 
-```{r gemini-in-tutorials-3}
+```{r named-storms-per-year-1}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -633,11 +666,11 @@ antigravity $
 
 Caching is a render-time feature. The first render writes the chunk's result to disk. Later renders skip re-running the chunk and load from disk instead. `analysis_cache/` appearing in `ls` confirms it is wired up.
 
-### Exercise 4
+### Exercise 2
 
 Ask Antigravity to add `analysis_cache` to `.gitignore`. Note that the Source Control badge count in VS Code has increased because the cache directory is now visible to git --- adding `analysis_cache` to `.gitignore` makes it drop back. In the bash Terminal, run `cat .gitignore`. CP/CR.
 
-```{r gemini-in-tutorials-4}
+```{r named-storms-per-year-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -657,11 +690,11 @@ analysis_cache
 
 Cache files are regenerated from source and do not belong in git. Rule of thumb: if a file can be (easily) recreated from other components, do not commit it.
 
-### Exercise 5
+### Exercise 3
 
 Ask Antigravity to add a **new chunk** at the bottom of `analysis.qmd` that prints the `flights` dataset. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
-```{r gemini-in-tutorials-5}
+```{r named-storms-per-year-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -672,7 +705,7 @@ question_text(NULL,
 
 ###
 
-```{r gemini-in-tutorials-5-test}
+```{r named-storms-per-year-3-test}
 #| echo: true
 flights
 ```
@@ -681,11 +714,11 @@ flights
 
 `flights` is a dataset from the **nycflights13** package with 336,776 rows --- every flight that departed from one of New York City's three airports (JFK, LGA, EWR) in 2013, with departure and arrival times, delays, carrier, destination, and more.
 
-### Exercise 6
+### Exercise 4
 
 Ask Antigravity to update the last chunk to pipe `flights` through `glimpse()`. Render and inspect the output. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
-```{r gemini-in-tutorials-6}
+```{r named-storms-per-year-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -696,7 +729,7 @@ question_text(NULL,
 
 ###
 
-```{r gemini-in-tutorials-6-test}
+```{r named-storms-per-year-4-test}
 #| echo: true
 flights |> 
 glimpse()
@@ -706,11 +739,11 @@ glimpse()
 
 `glimpse()` gives a column-level overview of a dataset --- every variable name, its type, and a few example values on one screen. Use this and/or other similar functions like `summary()` to initially explore any unfamiliar dataset.
 
-### Exercise 7
+### Exercise 5
 
 Ask Antigravity to update the working chunk to filter `flights` to `origin == "JFK"` and select `dep_delay`, `arr_delay`, and `carrier`. Leave the result as the final expression so it prints. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
-```{r gemini-in-tutorials-7}
+```{r named-storms-per-year-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -721,7 +754,7 @@ question_text(NULL,
 
 ###
 
-```{r gemini-in-tutorials-7-test}
+```{r named-storms-per-year-5-test}
 #| echo: true
 flights |>
   filter(origin == "JFK") |>
@@ -732,11 +765,11 @@ flights |>
 
 The pipe `|>` passes the left side's result directly to the next function. Reading it as "and then" helps: take `flights`, **and then** keep only JFK departures, **and then** keep these three columns. The result prints because the final expression is a value, not an assignment.
 
-### Exercise 8
+### Exercise 6
 
 Ask Antigravity to save the filtered tibble to a variable called `flights_jfk` instead of printing it directly. Render and notice the table disappears from the HTML. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
-```{r gemini-in-tutorials-8}
+```{r named-storms-per-year-6}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -747,7 +780,7 @@ question_text(NULL,
 
 ###
 
-```{r gemini-in-tutorials-8-test}
+```{r named-storms-per-year-6-test}
 #| echo: true
 flights_jfk <- flights |>
   filter(origin == "JFK") |>
@@ -758,11 +791,11 @@ flights_jfk <- flights |>
 
 Assignment captures the result silently --- a chunk that only uses `<-` to assign a value to an object produces no output in the render. A blank section in the HTML is not an error; it means the chunk built an object without displaying it.
 
-### Exercise 9
+### Exercise 7
 
 Ask Antigravity to add a line to the chunk that prints `flights_jfk`. Render and confirm the table reappears. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
-```{r gemini-in-tutorials-9}
+```{r named-storms-per-year-7}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -773,7 +806,7 @@ question_text(NULL,
 
 ###
 
-```{r gemini-in-tutorials-9-test}
+```{r named-storms-per-year-7-test}
 #| echo: true
 flights_jfk <- flights |>
   filter(origin == "JFK") |>
@@ -786,11 +819,11 @@ flights_jfk
 
 Calling a variable by name on the last line of a chunk is all it takes to print it. Ending a data-preparation chunk with the variable name is a standard way to confirm its shape before building a plot.
 
-### Exercise 10
+### Exercise 8
 
 Ask Antigravity to add a new code chunk with a **ggplot2** scatter plot of `dep_delay` vs. `arr_delay`, colored by `carrier`. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
-```{r gemini-in-tutorials-10}
+```{r named-storms-per-year-8}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -801,7 +834,7 @@ question_text(NULL,
 
 ###
 
-```{r gemini-in-tutorials-10-test}
+```{r named-storms-per-year-8-test}
 #| echo: true
 ggplot(flights_jfk, aes(x = dep_delay, y = arr_delay, color = carrier)) +
   geom_point(alpha = 0.1) +
@@ -813,11 +846,11 @@ ggplot(flights_jfk, aes(x = dep_delay, y = arr_delay, color = carrier)) +
 
 Chunks in the same document share an R session --- `flights_jfk` is created in the first chunk and available to the second without redefining it. The two-chunk pattern here --- one to prepare data, one to plot it --- is a common pattern.
 
-### Exercise 11
+### Exercise 9
 
 In the bash Terminal, run `cat analysis.qmd`. CP/CR.
 
-```{r gemini-in-tutorials-11}
+```{r named-storms-per-year-9}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1104,7 +1137,7 @@ AI models have **context windows** --- a limit on how much text they can process
 ## Summary
 ###
 
-This tutorial introduced the [Antigravity CLI](DK: fix) as an AI *agent* --- a terminal-based assistant that reads your files, runs commands, and writes files on your behalf, asking permission at each step. You authenticated with your Google account, let Antigravity explore the repository, and used it to create and render a Quarto analysis. You then practiced the core `analysis.qmd` workflow: maintaining one working chunk per artifact, iteratively rewriting it, suppressing output, and caching results.
+This tutorial introduced the [Antigravity CLI](https://antigravity.google/product/antigravity-cli as an AI *agent* --- a terminal-based assistant that reads your files, runs commands, and writes files on your behalf, asking permission at each step. You authenticated with your Google account, let Antigravity explore the repository, and used it to create and render a Quarto analysis. You then practiced the core `analysis.qmd` workflow: maintaining one working chunk per artifact, iteratively rewriting it, suppressing output, and caching results.
 
 ### Exercise 1
 
@@ -1159,7 +1192,7 @@ storms |>
 
 You did not write any of this code yourself --- you described the goal and Antigravity produced it. The skill you practiced is reviewing what the agent wrote and confirming that it does what you asked.
 
-### Exercise 2
+### Exercise 10
 
 Publish your rendered QMD to GitHub Pages. In the bash Terminal, run:
 
@@ -1169,7 +1202,7 @@ quarto publish gh-pages analysis.qmd
 
 Respond with `Y` when prompted. Copy/paste the resulting URL below.
 
-```{r summary-2}
+```{r named-storms-per-year-10}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1186,11 +1219,11 @@ https://ppbds-student.github.io/antigravity/
 
 GitHub Pages takes a minute or two to deploy after `quarto publish` runs. If the link doesn't load immediately, wait and refresh.
 
-### Exercise 3
+### Exercise 11
 
 Commit and push any remaining uncommitted files. Copy/paste the URL to your GitHub repo.
 
-```{r summary-3}
+```{r named-storms-per-year-11}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1206,4 +1239,3 @@ Other AI coding tools include [Claude Code](https://claude.ai/claude-code) (Anth
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
-
