@@ -34,8 +34,6 @@ options(tutorial.exercise.timelimit = 60,
 
 <!-- DK: Check that antigravity produces the same responses as gemini. -->
 
-<!-- DK: Need to change sign in workflow to use Google Cloud and get the right project name. Or, better, to cover both cases. -->
-
 <!-- DK: Do weird characters like &#96;&#96;&#96; show up correctly? -->
 
 <!-- Fix ending since you actually know Git. -->
@@ -45,14 +43,14 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-You have used GitHub Copilot.  The [Antigravity CLI](https://antigravity.google/product/antigravity-cli) another terminal-based assistant that can read your files, run commands in the terminal, and write new files directly, asking your permission at each step. In this tutorial you will set it up and use it to explore a project and to create and render a Quarto analysis. A second section then reinforces the core `analysis.qmd` workflow: one working chunk per artifact, iterative rewrites, and caching.
+You have used GitHub Copilot.  The [Antigravity CLI](https://antigravity.google/product/antigravity-cli) is another terminal-based assistant that can read your files, run commands in the terminal, and write new files directly, asking your permission at each step. In this tutorial you will set it up and use it to explore a project and to create and render a Quarto analysis. Later sections then reinforce the core `analysis.qmd` workflow: one working chunk per artifact, iterative rewrites, and caching.
 
 You should be doing this tutorial in a repo named `antigravity`. If you are not, create one and connect to it, as you learned in earlier tutorials.
 
 ## Antigravity CLI
 ###
 
-The [Antigravity CLI](https://antigravity.google/product/antigravity-cli) is a free, open AI assistant built by Google that runs in your terminal. Unlike a web chat interface, it can take actions on your behalf: reading files, running terminal commands, and writing new files. Each time it wants to take an action, it asks for your permission first, at least by default.
+The [Antigravity CLI](https://antigravity.google/product/antigravity-cli) is an AI assistant from Google that runs in your terminal. Unlike a web chat interface, it can take actions on your behalf: reading files, running terminal commands, and writing new files. Each time it wants to take an action, it asks for your permission first, at least by default.
 
 ### Exercise 1
 
@@ -63,7 +61,7 @@ Start the Antigravity CLI by running `agy` in the bash Terminal. Select "Use a G
 include_graphics("images/agy-1.png")
 ```
 
-and hit `Enter`. New College of Florida is providing some funding for your use of Antigravity. But, after the course is over, you can get the same sort of access for $20 or so per month. Select "Continue with Google Cloud."
+and hit `Enter`. New College of Florida is providing some funding for your use of Antigravity. But, after the course is over, you can get the same sort of access for $20 or so per month. (If you are not an NCF student, choose the plain "Login with Google" option instead and use your own Google account; the rest of the tutorial works the same.) Select "Continue with Google Cloud."
 
 ```{r}
 include_graphics("images/agy-2.png")
@@ -81,18 +79,15 @@ The basic idea is that Google needs to ensure that we have the right to use this
 include_graphics("images/agy-4.png")
 ```
 
-Doing will probably bring up this screen. Obviously, you should click "Open."
+Doing so will probably bring up this screen. Obviously, you should click "Open."
 
 ```{r}
 include_graphics("images/agy-5.png")
 ```
 
-The next step might ask you to confirm the your GitHub account. **You must use your NCF email account.** 
+The next step might ask you to confirm your Google account. **You must use your NCF email account.**
 
-As Google changes things, this sequence of images won't match exactly what you see. Common sense should go you through it all. The most important point was the to choose 
-
-
-
+As Google changes things, this sequence of images won't match exactly what you see. Common sense should get you through it all. The most important step is choosing "Use a Google Cloud Project" at the start.
 
 Eventually, Google will give you a verification code.
 
@@ -106,8 +101,7 @@ Copy that code and go back to the authorization window in your terminal. You may
 include_graphics("images/agy-7.png")
 ```
 
-		You will now be asked for your Google Cloud Project ID. Enter `techne-fall-2026` and hit `Enter`. 
-
+You will now be asked for your Google Cloud Project ID. Enter `techne-fall-2026` and hit `Enter`. 
 
 ```{r}
 include_graphics("images/agy-8.png")
@@ -262,7 +256,7 @@ Antigravity decomposes your prompt into tool calls dynamically --- the exact com
 
 Ask Antigravity to create an `analysis.qmd` file, set up the way you learned in the Quarto tutorial. Tell it you want:
 
-- A YAML header with the title `"Exploring Storms and Flights"` and your name as author
+- A YAML header with the title `"Exploring Storms"` and your name as author
 - `execute: echo: false` in the YAML
 - A setup chunk loading `library(tidyverse)`, with `#| message: false`
 - A plot using the `storms` dataset from **dplyr** --- for example, a line chart showing the number of named storms per year
@@ -293,7 +287,7 @@ Allow this tool call? (1=once, 2=always, n=no): 1
 ✔ Created analysis.qmd
 
 I've created `analysis.qmd` with:
-- YAML header titled "Exploring Storms and Flights" and `execute: echo: false`
+- YAML header titled "Exploring Storms" and `execute: echo: false`
 - Setup chunk loading `library(tidyverse)` with `#| message: false`
 - A line chart showing the number of named storms per year using the `storms` dataset
 
@@ -484,13 +478,13 @@ question_text(NULL,
 ````
 Based on the current state of the repository, the project is in its early stages. Here is a summary of what has been done:
 
-   1. Initial Setup: The project has been initialized with a basic Quarto structure, including a .devcontainer for development and a .gitignore file.
+   1. Initial Setup: The project contains an AGENTS.md instructions file and a .gitignore file.
    2. Storms Analysis: You have created analysis.qmd, which uses R and the tidyverse to explore the storms dataset. It currently includes:
        * Named Storms per Year: A line and point plot showing the count of unique named storms from year to year.
        * Wind Speed Distribution: A boxplot visualizing how wind speeds vary across different storm categories.
    3. Output Generation: The analysis has been rendered into analysis.html.
 
-  There are no other project-specific instructions (GEMINI.md) or memory records yet. Would you like to continue the analysis or add new features to this report?
+  There are no memory records from previous sessions. Would you like to continue the analysis or add new features to this report?
 ````
 
 ###
@@ -524,7 +518,7 @@ question_text(NULL,
 ###
 
 <pre><code>---
-title: "Exploring Storms and Flights"
+title: "Exploring Storms"
 author: "PPBDS Student"
 format: html
 execute:
@@ -587,7 +581,7 @@ Ask Antigravity to consolidate `analysis.qmd` so it contains only the setup chun
 
 Throughout this tutorial we will often say "ask Antigravity to" when we want you to use AI.
 
-```{r gemini-in-tutorials-2}
+```{r antigravity-in-tutorials-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -599,7 +593,7 @@ question_text(NULL,
 ###
 
 <pre><code>---
-title: "Exploring Storms and Flights"
+title: "Exploring Storms"
 author: "PPBDS Student"
 format: html
 execute:
@@ -635,6 +629,7 @@ storms |>
 
 Each code chunk should produce **one** final artifact --- either cleaned data or a plot. A chunk that mixes exploratory steps with its final output needs to be cleaned up.
 
+## Named Storms per Year
 ###
 
 Sometimes a code chunk takes a long time to run. We can **cache** a code chunk to save its results and avoid re-running it on subsequent renders.
@@ -713,6 +708,8 @@ flights
 ###
 
 `flights` is a dataset from the **nycflights13** package with 336,776 rows --- every flight that departed from one of New York City's three airports (JFK, LGA, EWR) in 2013, with departure and arrival times, delays, carrier, destination, and more.
+
+Notice that our document is titled "Exploring Storms" while we poke at `flights`. That is fine. A document's title describes its *deliverable*, not everything you try along the way --- these exploration chunks are temporary, and we will delete them before publishing.
 
 ### Exercise 4
 
@@ -864,7 +861,7 @@ question_text(NULL,
 Your answer should look something like:
 
 <pre><code>---
-title: "Exploring Storms and Flights"
+title: "Exploring Storms"
 author: Your Name
 execute:
   echo: false
@@ -920,7 +917,7 @@ Run git status and explain what each part of the output means.
 
 Press `y`, 1, or hit Enter on allow once to allow the shell command. CP/CR the full response including Antigravity's explanation.
 
-```{r git-with-gemini-1}
+```{r git-with-antigravity-1}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -978,7 +975,7 @@ Explain the difference between git add and git commit. Then give me the exact co
 
 CP/CR Antigravity's full response.
 
-```{r git-with-gemini-2}
+```{r git-with-antigravity-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1012,7 +1009,7 @@ git log --oneline
 
 CP/CR.
 
-```{r git-with-gemini-3}
+```{r git-with-antigravity-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1039,7 +1036,7 @@ The `(HEAD -> main)` indicator confirms your local branch is current, but the mi
 Ask Antigravity to improve the storms-per-year chart. Type something like:
 
 ```
-Update the storms-per-year chart in analysis.qmd to be a stacked area chart showing the count of each storm type per year. Filter to just tropical depressions, tropical storms, and hurricanes. Use a color scale that goes from light blue for tropical depressions through orange for tropical storms to dark red for hurricanes. Re-render the file when done.
+Update the storms-per-year chart in analysis.qmd to be a stacked area chart showing the count of each storm type per year. Filter to just tropical depressions, tropical storms, and hurricanes. Use a color scale that goes from light blue for tropical depressions through orange for tropical storms to dark red for hurricanes. Also delete the two flights chunks --- that exploration is done. Re-render the file when done.
 ```
 
 Press `y` to authorize each tool call. Once the Live Server tab has refreshed and you are happy with the result, ask Antigravity to handle the entire Git workflow:
@@ -1050,7 +1047,7 @@ Please commit analysis.qmd and analysis.html with a good message, and push to Gi
 
 Press `y` to authorize each tool call as Antigravity works through the steps. CP/CR the complete output.
 
-```{r git-with-gemini-4}
+```{r git-with-antigravity-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1088,13 +1085,13 @@ Allow this tool call? [y/n/a]: y
 
 ###
 
-Antigravity issued three separate tool calls --- `git add`, `git commit`, and `git push` --- mapping directly to the three stages of staging, recording, and sharing. In Exercise 3 you ran these yourself using the Source Control sidebar; here you delegated them to gemini.
+Antigravity issued three separate tool calls --- `git add`, `git commit`, and `git push` --- mapping directly to the three stages of staging, recording, and sharing. In Exercise 3 you ran these yourself using the Source Control sidebar; here you delegated them to Antigravity.
 
 ### Exercise 5
 
 Still in Antigravity, type `/stats session` and then `/stats model`. CP/CR both outputs.
 
-```{r git-with-gemini-5}
+```{r git-with-antigravity-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1120,7 +1117,7 @@ Session Statistics:
 
 > /stats model
 
-Model: gemini-2.5-pro
+Model: gemini-3.6-flash
   Context window:    1,000,000 tokens
   Free tier limit:   1,000,000 tokens/day
   Used today:        ~23,500 tokens
@@ -1137,7 +1134,7 @@ AI models have **context windows** --- a limit on how much text they can process
 ## Summary
 ###
 
-This tutorial introduced the [Antigravity CLI](https://antigravity.google/product/antigravity-cli as an AI *agent* --- a terminal-based assistant that reads your files, runs commands, and writes files on your behalf, asking permission at each step. You authenticated with your Google account, let Antigravity explore the repository, and used it to create and render a Quarto analysis. You then practiced the core `analysis.qmd` workflow: maintaining one working chunk per artifact, iteratively rewriting it, suppressing output, and caching results.
+This tutorial introduced the [Antigravity CLI](https://antigravity.google/product/antigravity-cli) as an AI *agent* --- a terminal-based assistant that reads your files, runs commands, and writes files on your behalf, asking permission at each step. You authenticated with your Google account, let Antigravity explore the repository, and used it to create and render a Quarto analysis. You then practiced the core `analysis.qmd` workflow: maintaining one working chunk per artifact, iteratively rewriting it, suppressing output, and caching results.
 
 ### Exercise 1
 
@@ -1192,7 +1189,7 @@ storms |>
 
 You did not write any of this code yourself --- you described the goal and Antigravity produced it. The skill you practiced is reviewing what the agent wrote and confirming that it does what you asked.
 
-### Exercise 10
+### Exercise 2
 
 Publish your rendered QMD to GitHub Pages. In the bash Terminal, run:
 
@@ -1202,7 +1199,7 @@ quarto publish gh-pages analysis.qmd
 
 Respond with `Y` when prompted. Copy/paste the resulting URL below.
 
-```{r named-storms-per-year-10}
+```{r summary-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1214,16 +1211,16 @@ question_text(NULL,
 ###
 
 ```
-https://ppbds-student.github.io/antigravity/
+https://ppbds-student.github.io/antigravity/analysis.html
 ```
 
 GitHub Pages takes a minute or two to deploy after `quarto publish` runs. If the link doesn't load immediately, wait and refresh.
 
-### Exercise 11
+### Exercise 3
 
 Commit and push any remaining uncommitted files. Copy/paste the URL to your GitHub repo.
 
-```{r named-storms-per-year-11}
+```{r summary-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
