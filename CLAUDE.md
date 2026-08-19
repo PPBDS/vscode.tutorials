@@ -85,11 +85,14 @@ How much the intro spells out scales with where the tutorial sits:
   what it does, show the two folders that now sit side by side under `/workspaces`, and
   so on. This is teaching content, not boilerplate, and naming `codespace-starter` /
   `connect-repo` here is correct because the environment is the subject.
-- **Later tutorials (and downstream packages):** just say *"create and connect to a
-  repo called `whatever`."* The mechanics were taught earlier, so the standard repo
-  line carries the whole setup. Downstream normal tutorials keep this
-  environment-agnostic per the base guide — the student executes "create and connect"
-  the same way regardless of where they are.
+- **Later tutorials (and downstream packages):** just use the standard repo line:
+  *"You should be doing this tutorial in a repo named `whatever`. If you are not,
+  create one and connect to it, as you learned in earlier tutorials."* The
+  mechanics were taught earlier, so this one sentence carries the whole setup —
+  and its phrasing correctly covers the student who already connected before
+  launching the tutorial. Downstream normal tutorials keep this
+  environment-agnostic per the base guide — the student executes "create one and
+  connect to it" the same way regardless of where they are.
 
 ### Running locally
 

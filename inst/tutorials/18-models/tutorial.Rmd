@@ -65,7 +65,7 @@ If you would rather not spend it, decide that now rather than halfway through. T
 
 ### Exercise 1
 
-Create and connect to a repo called `models-and-money`, then open it as your workspace.
+You should be doing this tutorial in a repo named `models-and-money`. If you are not, create one and connect to it, as you learned in earlier tutorials.
 
 Copy and paste the URL for your `models-and-money` repository.
 

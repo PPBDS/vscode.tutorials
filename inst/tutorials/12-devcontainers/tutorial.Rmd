@@ -33,7 +33,7 @@ This tutorial explores devcontainers --- configuration files that define how a G
 
 ### Exercise 1
 
-Create and connect to a repo called `devcontainers`, then open it as your workspace.
+You should be doing this tutorial in a repo named `devcontainers`. If you are not, create one and connect to it, as you learned in earlier tutorials.
 
 Copy and paste the URL for your `devcontainers` repository.
 

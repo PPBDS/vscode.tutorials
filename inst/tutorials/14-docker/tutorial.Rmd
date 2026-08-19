@@ -29,11 +29,15 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-In a previous tutorial, you found the line `"image": "ghcr.io/ppbds/devcontainer:1.1.2"`inside `codespace-starter`'s `devcontainer.json`. That image does not appear out of nowhere --- it is built from a Dockerfile maintained by PPBDS. This tutorial reads through that real, current Dockerfile, section by section, to understand what it does and why it is written the way it is.
+In a previous tutorial, you found the line `"image": "ghcr.io/ppbds/devcontainer:1.1.2"` inside `codespace-starter`'s `devcontainer.json`. That image does not appear out of nowhere --- it is built from a Dockerfile maintained by PPBDS. This tutorial reads through that real, current Dockerfile, section by section, to understand what it does and why it is written the way it is.
 
 ###
 
-This is a **reading tour, not a building exercise**. You will not build this image yourself --- it is not buildable inside the course Codespace, and doing so is not the point. Instead, each exercise shows you a piece of the Dockerfile and asks you to find and quote a specific line or block from it, then explains what that piece does and why it exists.
+This is a **reading tour, not a building exercise**. You will not build this image yourself --- it is not buildable inside the course Codespace, and doing so is not the point. Instead, each exercise shows you a piece of the Dockerfile and asks you to find and quote a specific line or block from it, then explains what that piece does and why it exists. (You *will* build one tiny image of your own along the way, just to feel the mechanics.)
+
+###
+
+You should be doing this tutorial in a repo named `the-devcontainer-dockerfile`. If you are not, create one and connect to it, as you learned in earlier tutorials.
 
 ## The Devcontainer Image
 ###
@@ -781,7 +785,7 @@ This image is pinned by **digest** (the long `sha256:...` hash), not just by the
 
 ### Exercise 2
 
-Time to build something of your own. In the bash Terminal, create a new file called `Dockerfile` (no extension) in your project folder, and write a simple Dockerfile that starts from a small base image and runs one command. For example:
+Time to build something of your own. In the bash Terminal, create a new file called `Dockerfile` (no extension) at the top level of your `the-devcontainer-dockerfile` repo, and write a simple Dockerfile that starts from a small base image and runs one command. For example:
 
 ```
 FROM alpine:3.20

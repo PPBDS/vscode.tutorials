@@ -47,7 +47,7 @@ The next tutorial, "Models And Money," is a different story. That one asks you t
 
 ### Exercise 1
 
-Create and connect to a repo called `openrouter`, then open it as your workspace.
+You should be doing this tutorial in a repo named `openrouter`. If you are not, create one and connect to it, as you learned in earlier tutorials.
 
 Copy and paste the URL for your `openrouter` repository.
 

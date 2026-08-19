@@ -33,7 +33,7 @@ In the Devcontainers tutorial you examined a generic Python devcontainer and wro
 
 ### Exercise 1
 
-You should be in a repo called `our-codespace-starter`, or something like it. If not, create it and then open it as your workspace.
+You should be doing this tutorial in a repo named `our-codespace-starter`. If you are not, create one and connect to it, as you learned in earlier tutorials.
 
 Copy and paste the URL for your `our-codespace-starter` repository.
 
