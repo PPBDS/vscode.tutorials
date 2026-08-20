@@ -34,7 +34,7 @@ This tutorial introduces the process of creating and organizing [Quarto websites
 
 ### 
 
-You should be doing this tutorial in a repo named `websites-1`. If you are not, create one and connect to it, as you learned in earlier tutorials.
+You should be doing this tutorial in a repo named `websites-1`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
 
 ## Creating files
 ### 

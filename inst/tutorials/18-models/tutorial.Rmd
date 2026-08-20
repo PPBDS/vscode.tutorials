@@ -65,7 +65,7 @@ If you would rather not spend it, decide that now rather than halfway through. T
 
 ### Exercise 1
 
-You should be doing this tutorial in a repo named `models-and-money`. If you are not, create one and connect to it, as you learned in earlier tutorials.
+You should be doing this tutorial in a repo named `models-and-money`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
 
 Copy and paste the URL for your `models-and-money` repository.
 

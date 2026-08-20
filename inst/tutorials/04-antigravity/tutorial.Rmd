@@ -34,18 +34,16 @@ options(tutorial.exercise.timelimit = 60,
 
 <!-- DK: Check that antigravity produces the same responses as gemini. -->
 
-<!-- DK: Do weird characters like &#96;&#96;&#96; show up correctly? -->
-
 <!-- Fix ending since you actually know Git. -->
 
-<!-- DL: Replace or delete a lot of the images, which are Gemini. -->
+<!-- Replace or delete a lot of the images, which are Gemini. -->
 
 ## Introduction
 ###
 
 You have used GitHub Copilot.  The [Antigravity CLI](https://antigravity.google/product/antigravity-cli) is another terminal-based assistant that can read your files, run commands in the terminal, and write new files directly, asking your permission at each step. In this tutorial you will set it up and use it to explore a project and to create and render a Quarto analysis. Later sections then reinforce the core `analysis.qmd` workflow: one working chunk per artifact, iterative rewrites, and caching.
 
-You should be doing this tutorial in a repo named `antigravity`. If you are not, create one and connect to it, as you learned in earlier tutorials.
+You should be doing this tutorial in a repo named `antigravity`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
 
 ## Antigravity CLI
 ###

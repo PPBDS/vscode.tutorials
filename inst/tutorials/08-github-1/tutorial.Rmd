@@ -47,7 +47,7 @@ Until now, `connect-repo` has done all the GitHub work for you. In this tutorial
 
 ### Exercise 1
 
-You should be doing this tutorial in a repo named `github-introduction`. If you are not, create one and connect to it, as you learned in earlier tutorials.
+You should be doing this tutorial in a repo named `github-introduction`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
 
 Copy and paste the URLs for:
 

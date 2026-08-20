@@ -37,7 +37,7 @@ This tutorial practices creating and organizing [Quarto websites](https://quarto
 
 ### 
 
-You should be doing this tutorial in a repo named `websites-2`. If you are not, create one and connect to it, as you learned in earlier tutorials.
+You should be doing this tutorial in a repo named `websites-2`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
 
 ## The website
 ### 

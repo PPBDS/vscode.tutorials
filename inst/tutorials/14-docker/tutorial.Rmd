@@ -37,7 +37,7 @@ This is a **reading tour, not a building exercise**. You will not build this ima
 
 ###
 
-You should be doing this tutorial in a repo named `the-devcontainer-dockerfile`. If you are not, create one and connect to it, as you learned in earlier tutorials.
+You should be doing this tutorial in a repo named `the-devcontainer-dockerfile`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
 
 ## The Devcontainer Image
 ###
