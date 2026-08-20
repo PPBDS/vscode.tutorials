@@ -47,6 +47,8 @@ Restarting the tutorial will almost always work.
 
 * W/W need a cool image that shows the filesystem. 
 
+* Does Antigravity need to go a bit slower, building the QMD file step-by-step?
+
 * Should Terminal tutorials start in a repo? Maybe not. But then maybe the beginning of every tutorial starts up a repo? But then you always need to restart the tutorial afterwards? 
 
 * Seems like the default width for our answer boxes does not match the display width in a rendered tutorial. Example:

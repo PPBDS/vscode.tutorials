@@ -152,7 +152,7 @@ Again, you mostly just accepted the defaults. The main exceptions were "Use a Go
 
 ### Exercise 2
 
-You are now inside the Antigravity CLI interactive session. The `>` prompt means Antigravity is waiting for your input. Type `/help` and press `Enter` to see the list of available commands.
+You are now inside the Antigravity CLI interactive session. The `>` prompt means Antigravity is waiting for your input. Type `/help` and press `Enter`.
 
 CP/CR.
 
@@ -168,21 +168,27 @@ question_text(NULL,
 ###
 
 ````
-> /help
-
-Available commands:
-  /help              Show this help message
-  /quit or /exit     Exit the Antigravity CLI
-  /model             Show or change the current model
-  /stats session     Show usage statistics for this session
-  /stats model       Show model token limits and current usage
-  /clear             Clear the current conversation history
-  /chat              List and restore saved chats
-...
 >
+───────────────────────────────────────────────────────────────────────────────────────────
+Antigravity CLI   general    commands    shortcuts   (←/→ or tab to cycle)
+Antigravity CLI understands your codebase, makes edits with your permission,
+and executes commands — right from your terminal.
+
+Version 1.1.11
+dakane@ncf.edu
+Workspace:      /workspaces/antigravity
+Project Config: ~/.gemini/config/projects/default-cli-project.json
+Log File:       ~/.gemini/antigravity-cli/log/cli-20260820_140552.log
+
+Quick Reference
+  /  Type / to see available commands
+
+Keyboard: ↑/↓ Navigate  ←/→ Switch View  esc Close
 ````
 
-Note that your output may be different than what is shown here, as the Antigravity CLI adds new commands regularly.
+Note that your output may be different than what is shown here. In the world of AI tools, things change all the time.
+
+Note that you need to click the `esc` (escape) key to exit the help screen and return to the `>` prompt. You can also use the up and down arrow keys to scroll through previous commands.
 
 ###
 
@@ -190,7 +196,7 @@ Slash commands control the program itself. The command `/help` tells the *progra
 
 ### Exercise 3
 
-Type `/model` to see which Antigravity model is currently active. CP/CR.
+After hitting the escape key to get access to the prompt again, type `/model` to see which Antigravity model is currently active. CP/CR.
 
 ```{r antigravity-cli-3}
 question_text(NULL,
@@ -203,15 +209,29 @@ question_text(NULL,
 
 ###
 
-```{r}
-include_graphics("images/gemini-model.png")
-```
+````
+>
+───────────────────────────────────────────────────────────────────────────────────────────
+Switch Model
 
-You may see something different here depending on your Antigravity CLI version — that's fine, don't worry about it.
+> Gemini 3.6 Flash (current)
+  Gemini 3.5 Flash
+  Gemini 3.1 Pro
+
+  Effort  ◂        ●━━━━━━━━━━━━━━●━━━━━━━━━━━━━━◉        ▸
+                  low          medium          high      
+            Deepest reasoning for complex problems — slower but strongest
+
+Keyboard: ↑/↓ Navigate  ←/→ Effort  enter Select  esc Go Back
+
+                                                                    Gemini 3.6 Flash · high
+````
+
+Again, to exit this view, hit the escape key. 
 
 ###
 
-The Antigravity model family has several tiers: **Pro** for complex reasoning and coding tasks, **Flash** for speed and lower usage. You can switch mid-session with `/model model-name` if you want to save your daily limit for simpler work or use a more powerful model.
+The Antigravity model family has several tiers which vary in terms of speed and cost.
 
 ### Exercise 4
 
@@ -221,13 +241,39 @@ Ask Antigravity to describe what files are in the repository. Type something lik
 Please explain the contents of this repository. Run ls -a to check the contents.
 ```
 
-Antigravity will display a **tool authorization prompt** before running commands. It should look something like this:
+###
 
-```{r}
-include_graphics("images/gemini-CLI-git-permission.png")
-```
+I get this:
 
-Press `1` or hit enter where it says allow once to allow the command to run. You could press `2` to allow Antigravity to run the same command without asking again in this session. CP/CR the authorization prompt and Antigravity's response.
+````
+> Please explain the contents of this repository. Run ls -a to check the contents.
+
+▸ Thought for 18s, 299 tokens
+  Exploring Repository Contents
+  I'll check the repository contents using ls -a to see what files and directories are
+  present.
+
+● Bash(ls -la) (ctrl+o to expand)
+
+Command
+───────────────────────────────────────────────────────────────────────────────────────────
+
+Requesting permission for:
+   ls -la
+
+Do you want to proceed?
+> 1. Yes
+  2. Yes, and always allow in this conversation for commands that start with 'ls'
+  3. Yes, and always allow for commands that start with 'ls' (Persist to settings.json)
+  4. No
+
+  ↑/↓ Navigate · tab Amend · ctrl+g edit/expand command
+esc to cancel                                                       Gemini 3.6 Flash · high
+````
+
+
+Select `2`. (If your screen looks different, just select the option that allows Antigravity to run `ls` without asking again.) CP/CR the output.
+
 
 
 ```{r antigravity-cli-4}
@@ -241,22 +287,73 @@ question_text(NULL,
 
 ###
 
-```{r}
-include_graphics("images/gemini-explore-repo.png")
-```
+````
+> Please explain the contents of this repository. Run ls -a to check the contents.
 
-Antigravity decomposes your prompt into tool calls dynamically --- the exact commands it runs depend on how it interprets your request, so what you see may differ from the example. The authorization step keeps you in control regardless of which commands it chooses.
+▸ Thought for 18s, 299 tokens
+  Exploring Repository Contents
+  I'll check the repository contents using ls -a to see what files and directories are
+  present.
+
+● Bash(ls -la) (ctrl+o to expand)
+
+▸ Thought for 9s, 122 tokens
+  Reviewing Repository Contents
+  Here is what is currently in this repository:
+
+  1. AGENTS.md – A configuration file containing rules and guidelines for AI assistants
+  helping out in this course (covering R, Quarto, tidyverse, and data-science workflow
+  conventions).
+  2. .git – The hidden directory where Git tracks version control history for your
+  project.
+
+  It looks like a fresh workspace ready for your analysis files or Quarto (.qmd)
+  documents! What are you working on today?
+````
+
+Antigravity decomposes your prompt into tool calls dynamically --- the exact commands it runs depend on how it interprets your request, so what you see may differ from the example. 
 
 ### Exercise 5
 
-Ask Antigravity to create an `analysis.qmd` file, set up the way you learned in the Quarto tutorial. Tell it you want:
+Escape again. Now ask Antigravity to create an `analysis.qmd` file, set up the way you learned in the Quarto tutorial. Tell it you want:
 
-- A YAML header with the title `"Exploring Storms"` and your name as author
-- `execute: echo: false` in the YAML
-- A setup chunk loading `library(tidyverse)`, with `#| message: false`
-- A plot using the `storms` dataset from **dplyr** --- for example, a line chart showing the number of named storms per year
+- A YAML header with the title `"Exploring Storms"` and your name as author.
+- `execute: echo: false` in the YAML.
+- A setup chunk loading `library(tidyverse)`, with `#| message: false`.
+- A plot using the `storms` dataset from **dplyr** --- for example, a line chart showing the number of named storms per year.
+- To not render `analysis.qmd` yet.
 
-Allow the file to be written when Antigravity asks for permission. CP/CR the tool authorization and Antigravity's explanation of what it created.
+To be honest, I just copy/pasted the above. AI is smart enough to work with this.
+
+###
+
+Allow the file to be written when Antigravity asks for permission. Along the way, you may also be asked questions like this:
+
+````
+Thought for 1s, 380 tokens
+  Refining YAML Header
+
+● Bash(git config user.name) (ctrl+o to expand)
+
+Command
+──────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Requesting permission for:
+   git config user.name
+
+Do you want to proceed?
+  1. Yes
+> 2. Yes, and always allow in this conversation for commands that start with 'git config'
+  3. Yes, and always allow for commands that start with 'git config' (Persist to settings.json)
+  4. No
+
+  ↑/↓ Navigate · tab Amend · ctrl+g edit/expand command
+esc to cancel                                                                  Gemini 3.6 Flash · high                                                    Gemini 3.6 Flash · high
+````
+
+Use your best judgment.
+
+CP/CR Antigravity's explanation of what it created.
 
 ```{r antigravity-cli-5}
 question_text(NULL,
@@ -269,24 +366,30 @@ question_text(NULL,
 
 ###
 
+AI is always changing and, even when it is not changing, it is non-deterministic. Your output may differ from ours. The important thing is that you have an `analysis.qmd` file with a YAML header, a setup chunk, and a plot of named storms per year.
 
 ````
-> Create an analysis.qmd with a title, author, execute echo false, a setup chunk loading tidyverse with message false, and a ggplot2 plot using a built-in dataset.
+ListDir(/workspaces/antigravity) (ctrl+o to expand)
 
-╔ Tool Use: write_file ════════════════════╗
-║  Path: analysis.qmd                      ║
-╚══════════════════════════════════════════╝
+▸ Thought for 1s, 318 tokens
+  Developing Analysis Quarto
+● Create(/workspaces/antigravity/analysis.qmd) (ctrl+o to expand)
 
-Allow this tool call? (1=once, 2=always, n=no): 1
+  I have created analysis.qmd in your project workspace.
 
-✔ Created analysis.qmd
+  It includes:
 
-I've created `analysis.qmd` with:
-- YAML header titled "Exploring Storms" and `execute: echo: false`
-- Setup chunk loading `library(tidyverse)` with `#| message: false`
-- A line chart showing the number of named storms per year using the `storms` dataset
+  • YAML header with title "Exploring Storms", author "davekane-student", and execute: echo: false
+  • Setup chunk loading tidyverse with #| message: false
+  • R chunk generating a line plot of named storms per year using base pipe |> and ggplot2
 
+  As requested, I have held off on rendering the document. Let me know when you'd like to render or
+  make any adjustments!
+
+──────────────────────────────────────────────────────────────────────────────────────────────────────
 >
+──────────────────────────────────────────────────────────────────────────────────────────────────────
+? for shortcuts                                                                Gemini 3.6 Flash · high
 ````
 
 ###
@@ -295,13 +398,13 @@ When you ask Antigravity to create a file, it generates the entire contents in o
 
 ### Exercise 6
 
-Still inside Antigravity, ask it to render `analysis.qmd` for you. Type something like:
+Ask AI to render the `analysis.qmd`. Type something like:
 
 ```
 Render analysis.qmd using quarto render and tell me what files were created afterward.
 ```
 
-Antigravity will issue two tool calls: one to render the document and one to list the resulting files. Press `y` for each. CP/CR the output.
+Antigravity may issue two tool calls: one to render the document and one to list the resulting files. Press `y` for each. CP/CR the output.
 
 ```{r antigravity-cli-6}
 question_text(NULL,
@@ -314,9 +417,37 @@ question_text(NULL,
 
 ###
 
-```{r}
-include_graphics("images/gemini-render.png")
-```
+````
+> Render analysis.qmd using quarto render and tell me what files were created afterward.
+● Bash(quarto render analysis.qmd) (ctrl+o to expand)
+
+▸ Thought for 1s, 111 tokens
+  Monitoring Task Progress
+
+● ManageTask(status b8b8c62b-3daa-4518-add4-8c57703f589d/task-12)
+● Schedule(10s: Check if quarto render finished) (ctrl+o to expand)
+
+  I have started rendering analysis.qmd using quarto render. It is currently processing in the
+  background, and I will report back as soon as it completes.
+
+● ManageTask(status b8b8c62b-3daa-4518-add4-8c57703f589d/task-12)
+● Schedule(15s: Check if render task-12 finished) (ctrl+o to expand)
+
+  The render command is currently executing chunk execution and plot rendering. I will notify you
+  as soon as it completes.
+
+● ListDir(/workspaces/antigravity) (ctrl+o to expand)
+
+  The rendering completed successfully!
+
+  ### Created Files / Folders:
+
+  1. **analysis.html** — The HTML output generated from your .qmd file.
+  2. **analysis_files** — A directory containing supporting site assets (such as HTML/CSS
+  dependencies and generated plot figures).
+
+  You can preview analysis.html using the Live Server extension in VS Code.
+````
 
 ###
 
@@ -324,13 +455,19 @@ Antigravity ran two commands to answer one question, using the result of each st
 
 ### Exercise 7
 
-Let's view the rendered file in a browser, the way you learned in the Quarto tutorial: in the Explorer, find `analysis.html`, right-click it, and select **"Open with Live Server"**.
+Let's view the rendered file in a browser, the way you learned in the Quarto tutorial: in the Explorer, find `analysis.html`, right-click (or two-finger click) it, and select **"Open with Live Server"**.
 
 ```{r}
 include_graphics("images/live-server.png")
 ```
 
-This opens `analysis.html` in a new browser tab served through your Codespace. The URL will look something like `https://[codespace-name]-5500.app.github.dev/analysis.html`.
+This will generally open a view of the entire directory, with all the generated files and folders.
+
+```{r}
+include_graphics("images/li-1.png")
+```
+
+You can then open `analysis.html` in a new browser tab served through your Codespace. The URL will look something like `https://[codespace-name]-5500.app.github.dev/analysis.html`.
 
 Copy/paste that URL below.
 
@@ -353,10 +490,23 @@ Keep this tab open. Every time `analysis.html` is updated in your Codespace --- 
 
 ###
 
-Your rendered file should look something like this:
+Your code and rendered graphic should look something like this:
 
 ```{r}
-include_graphics("images/first-render.png")
+#| echo: true
+
+storms |> 
+  distinct(year, name) |> 
+  count(year) |> 
+  ggplot(aes(x = year, y = n)) +
+    geom_line() +
+    geom_point() +
+    labs(
+      title = "Number of Named Storms per Year",
+      x = "Year",
+      y = "Number of Storms"
+    ) +
+    theme_minimal()
 ```
 
 ###
@@ -367,13 +517,23 @@ You met Live Server in the Quarto tutorial; nothing here is new except that an a
 
 Ask Antigravity: Add a plot to a new code chunk in `analysis.qmd` using the `storms` dataset. Visualize something like a boxplot showing the distribution of wind speeds by storm category. Include a meaningful title and subtitle, and then render the file.
 
-After Antigravity finishes, check your Live Server tab --- it should have refreshed automatically to show the plot. Open a new R Terminal. 
+Antogravity might ask:
 
-```{r}
-include_graphics("images/new-R-term.png")
-```
+````
+  shift+tab to auto-approve file edits
+Accept this file edit?
+> 1. Yes, accept this change
+  2. No, reject this change
 
-Then, in the new R Terminal, run:
+  ↑/↓ Navigate · tab Amend · f full diff
+esc to cancel                            Gemini 3.6 Flash · high
+````
+
+Obviously, you should accept.
+
+If Antigravity does not render the file, ask it to. After Antigravity finishes, check your Live Server tab --- it should have refreshed automatically to show the plot. However, if you are viewing the HTML in a browser, you will probably have to refresh the tab.
+
+Open a new R Terminal, if you don't have one open already. 
 
 ```
 tutorial.helpers::show_file("analysis.qmd", chunk = "Last")
@@ -392,36 +552,34 @@ question_text(NULL,
 
 ###
 
-```{r antigravity-cli-8-test}
-#| echo: true
-storms |>
-  filter(!is.na(category)) |>
-  mutate(category = as.factor(category)) |>
-  ggplot(aes(x = category, y = wind, fill = category)) +
-  geom_boxplot() +
-  labs(
-    title = "Distribution of Wind Speeds by Storm Category",
-    subtitle = "Higher categories correspond to significantly higher median wind speeds",
-    x = "Storm Category",
-    y = "Wind Speed (knots)",
-    fill = "Category"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
+````
+storms |> 
+  drop_na(category) |> 
+  ggplot(aes(x = factor(category), y = wind, fill = factor(category))) +
+    geom_boxplot(show.legend = FALSE, alpha = 0.7) +
+    labs(
+      title = "Distribution of Wind Speeds by Storm Category",
+      subtitle = "Maximum sustained wind speed (knots) across Saffir-Simpson categories",
+      x = "Storm Category",
+      y = "Wind Speed (knots)"
+    ) +
+    theme_minimal()
+````
 
 Your answer will be different from ours, but it should show **ggplot2** code using the `storms` dataset --- something like a boxplot of wind speed by storm category. The chunk should not have `#| echo: true` --- since you set `execute: echo: false` in the YAML header, all chunks use that setting by default.
 
 ###
 
-When Antigravity adds a plot and re-renders, two things happen automatically: Quarto updates `analysis.html`, and Live Server detects the change and refreshes your browser. This loop --- ask Antigravity, render, view --- is the same workflow you would use throughout a real project.
+When Antigravity adds a plot and re-renders, two things happen automatically: Quarto updates `analysis.html`, and Live Server detects the change and refreshes your browser, although you may need to refresh the tab.
+
+This loop --- ask Antigravity, render, view --- is the same workflow you would use throughout a real project.
 
 ### Exercise 9
 
 In the Quarto tutorial you wrote a `.gitignore` by hand. This time, delegate the job: ask Antigravity to create a `.gitignore` file suitable for a Quarto R project. Type something like:
 
 ```
-Create a .gitignore file.
+Create a .gitignore file suitable for a Quarto R project. Include common R and Quarto files that should not be tracked by Git.
 ```
 
 In the bash Terminal, run `cat .gitignore`. CP/CR.
@@ -438,141 +596,42 @@ question_text(NULL,
 ###
 
 ````
-analysis_files
+# History files
+.Rhistory
+.RData
+.Ruserdata
+
+# Example code in working directory
+.Rapp.history
+
+# User-specific files
+.Rproj.user/
+
+# Quarto execution artifacts
+.quarto/
+*_files/
+*_cache/
+
+# OS generated files
+.DS_Store
+Thumbs.db
 ````
 
 ###
 
-Same principle as in the Quarto tutorial: if a file can be *regenerated* from your source, it doesn't belong in the commit history. The agent may write a more thorough `.gitignore` than your hand-made one --- extra entries, or wildcard patterns like `*_files`, are harmless. Delegating housekeeping files like this is the normal workflow from now on.
+Same principle as in the Quarto tutorial: if a file can be *regenerated* from your source, it doesn't belong in the commit history. Delegating housekeeping files like this to AI is the normal workflow from now on.
 
-### Exercise 10
 
-Before moving on, let's deliberately quit and restart Antigravity to see what happens to the conversation history. Type `/quit`.
-
-Now run `agy` to start a fresh session. Once you're at the `>` prompt, ask:
-
-```
-What have we done in this project so far?
-```
-
-Without reading any files, Antigravity will have no memory of the previous session. Allow it to read the repo and watch it reconstruct the context from the filesystem.
-
-CP/CR Antigravity's full response.
-
-```{r antigravity-cli-10}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 15)
-```
-
+## Working Code Chunk
 ###
 
-````
-Based on the current state of the repository, the project is in its early stages. Here is a summary of what has been done:
+Real analysis is exploratory. Before we can build anything worth publishing, we poke at the data: print it, check its columns, count things, filter it down. Rather than scattering those attempts across many chunks, we keep **one working code chunk** at the bottom of the document and rewrite it over and over.
 
-   1. Initial Setup: The project contains an AGENTS.md instructions file and a .gitignore file.
-   2. Storms Analysis: You have created analysis.qmd, which uses R and the tidyverse to explore the storms dataset. It currently includes:
-       * Named Storms per Year: A line and point plot showing the count of unique named storms from year to year.
-       * Wind Speed Distribution: A boxplot visualizing how wind speeds vary across different storm categories.
-   3. Output Generation: The analysis has been rendered into analysis.html.
-
-  There are no memory records from previous sessions. Would you like to continue the analysis or add new features to this report?
-````
-
-###
-
-Antigravity's **conversation history** is gone the moment you type `/quit`, but the **files on disk** are permanent --- this is why it can pick up where you left off after a restart just by reading the files. The `/chat save <name>` command lets you preserve a conversation so you can resume it later with `/chat resume <name>`.
-
-## Antigravity in tutorials
-###
-
-In future tutorials you will spend most of your time prompting an AI agent to edit `analysis.qmd`, as well as rendering, and inspecting the resulting HTML. This section and the three that follow introduce key aspects of creating `analysis.qmd` files including: maintaining one working chunk per final artifact, iteratively rewriting that chunk to keep only necessary code, managing code chunk outputs in your rendered file, and caching results. Throughout this section we will explicitly tell you to use AI. In future tutorials, use of AI is simply assumed.
+In working with AI, it is smart to maintain one working chunk per final artifact, iteratively rewriting that chunk to keep only necessary code, managing code chunk outputs in your rendered file, and caching results. Throughout this section we will explicitly tell you to use AI. In future tutorials, use of AI is simply assumed.
 
 ### Exercise 1
 
-In the bash Terminal, run:
-
-```
-cat analysis.qmd
-```
-
-CP/CR.
-
-```{r antigravity-in-tutorials-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 25)
-```
-
-###
-
-<pre><code>---
-title: "Exploring Storms"
-author: "PPBDS Student"
-format: html
-execute:
-  echo: false
----
-
-&#96;&#96;&#96;{r}
-#| include: false
-suppressPackageStartupMessages(library(tidyverse))
-&#96;&#96;&#96;
-
-## Named Storms per Year
-
-The following chart displays the number of unique named storms recorded each year in the `storms` dataset.
-
-&#96;&#96;&#96;{r}
-storms |>
-  distinct(year, name) |>
-  count(year) |>
-  ggplot(aes(x = year, y = n)) +
-  geom_line() +
-  geom_point() +
-  labs(
-    title = "Number of Named Storms per Year",
-    x = "Year",
-    y = "Count of Storms"
-  ) +
-  theme_minimal()
-&#96;&#96;&#96;
-
-## Wind Speed Distribution by Category
-
-This boxplot shows the distribution of maximum wind speeds for each category of storm. It highlights how intensity increases across the categories defined in the dataset.
-
-&#96;&#96;&#96;{r}
-storms |>
-  filter(!is.na(category)) |>
-  mutate(category = as.factor(category)) |>
-  ggplot(aes(x = category, y = wind, fill = category)) +
-  geom_boxplot() +
-  labs(
-    title = "Distribution of Wind Speeds by Storm Category",
-    subtitle = "Higher categories correspond to significantly higher median wind speeds",
-    x = "Storm Category",
-    y = "Wind Speed (knots)",
-    fill = "Category"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "none")
-&#96;&#96;&#96;
-</code></pre>
-
-###
-
-Keep chunks clean as you work. Code chunks should contain clean code that we'd like to keep or should be the working chunk in which we are iteratively rewriting as we do our work.
-
-### Exercise 2
-
-Ask Antigravity to consolidate `analysis.qmd` so it contains only the setup chunk and the named-storms-per-year line chart. Delete any other chunks. Render. In the bash Terminal, run `cat analysis.qmd`. CP/CR.
+Ask Antigravity to edit `analysis.qmd` so it contains only the setup chunk and the named-storms-per-year line chart. Delete any other chunks. Render. In the bash Terminal, run `cat analysis.qmd`. CP/CR.
 
 Throughout this tutorial we will often say "ask Antigravity to" when we want you to use AI.
 
@@ -624,16 +683,13 @@ storms |>
 
 Each code chunk should produce **one** final artifact --- either cleaned data or a plot. A chunk that mixes exploratory steps with its final output needs to be cleaned up.
 
-## The Working Code Chunk
-###
 
-Real analysis is exploratory. Before we can build anything worth publishing, we poke at the data: print it, check its columns, count things, filter it down. Rather than scattering those attempts across many chunks, we keep **one working code chunk** at the bottom of the document and rewrite it over and over.
 
 ### Exercise 1
 
 Ask Antigravity to add a **new chunk** at the bottom of `analysis.qmd` that prints the `storms` dataset. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
-```{r the-working-code-chunk-1}
+```{r named-storms-per-year-1}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -644,7 +700,7 @@ question_text(NULL,
 
 ###
 
-```{r the-working-code-chunk-1-test}
+```{r named-storms-per-year-1-test}
 #| echo: true
 storms
 ```
@@ -659,7 +715,7 @@ Printing a raw tibble like this would never survive into a published document. T
 
 Ask Antigravity to update the last chunk to pipe `storms` through `glimpse()`. Render and inspect the output. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
-```{r the-working-code-chunk-2}
+```{r named-storms-per-year-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -670,7 +726,7 @@ question_text(NULL,
 
 ###
 
-```{r the-working-code-chunk-2-test}
+```{r named-storms-per-year-2-test}
 #| echo: true
 storms |>
   glimpse()
@@ -684,7 +740,7 @@ storms |>
 
 Ask Antigravity to update the working chunk to count the observations in `storms` by `status`. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
-```{r the-working-code-chunk-3}
+```{r named-storms-per-year-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -695,7 +751,7 @@ question_text(NULL,
 
 ###
 
-```{r the-working-code-chunk-3-test}
+```{r named-storms-per-year-3-test}
 #| echo: true
 storms |>
   count(status)
@@ -709,7 +765,7 @@ storms |>
 
 Ask Antigravity to update the working chunk to filter `storms` to observations with `year >= 2000` and select the `year`, `name`, `status`, `wind`, and `pressure` columns. Leave the result as the final expression so it prints. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
-```{r the-working-code-chunk-4}
+```{r named-storms-per-year-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -720,7 +776,7 @@ question_text(NULL,
 
 ###
 
-```{r the-working-code-chunk-4-test}
+```{r named-storms-per-year-4-test}
 #| echo: true
 storms |>
   filter(year >= 2000) |>
@@ -1256,7 +1312,7 @@ ggplot(storms_recent, aes(x = wind, y = pressure, color = status)) +
 
 You did not write any of this code yourself --- you described the goal and Antigravity produced it. The skill you practiced is reviewing what the agent wrote and confirming that it does what you asked.
 
-### Exercise 2
+### Exercise 4
 
 Publish your rendered QMD to GitHub Pages. In the bash Terminal, run:
 
@@ -1266,7 +1322,7 @@ quarto publish gh-pages analysis.qmd
 
 Respond with `Y` when prompted. Copy/paste the resulting URL below.
 
-```{r summary-2}
+```{r plotting-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -1283,11 +1339,11 @@ https://ppbds-student.github.io/antigravity/analysis.html
 
 GitHub Pages takes a minute or two to deploy after `quarto publish` runs. If the link doesn't load immediately, wait and refresh.
 
-### Exercise 3
+### Exercise 5
 
 Commit and push any remaining uncommitted files. Copy/paste the URL to your GitHub repo.
 
-```{r summary-3}
+```{r plotting-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
