@@ -225,7 +225,9 @@ An R script is a text file containing R commands. `Rscript warmup.R` asks R to r
 
 ### Exercise 4
 
-Run `ls` again. CP/CR.
+Run `ls`. (Again, this is the lowercase letter `L` followed by the lowercase letter `S`.)
+
+CP/CR.
 
 ```{r the-terminal-4}
 question_text(NULL,

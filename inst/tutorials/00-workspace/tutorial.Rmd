@@ -135,7 +135,7 @@ codespace-starter $
 
 ### Exercise 4
 
-In the bash Terminal, run `ls`.
+In the bash Terminal, run `ls`. (This is the lowercase letter `L` followed by the lowercase letter `S`.)
 
 CP/CR.
 

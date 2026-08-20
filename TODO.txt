@@ -1,5 +1,52 @@
 ## topics
 
+### Orientation
+
+Copy over Getting Started tutorial. Rename it "Orientation." 
+
+* Download button should be visible the first time the word download is used. Otherwise, students are looking for a button which is not there yet.
+
+* R Tutorials icon is often hidden in the `...`. Show this.
+
+* Copy and paste question is unclear. Change so that we set out a little poem (First stanza of If) and then tell students to copy and paste that. (Is that in workspace?)
+
+* Explain trash cans next to terminal symbols. Use that to kill the tutorial. Perhaps mention the split symbol. Try it? How do you unsplit? Probably should just mention and not use.
+
+* Discuss Reload/Restart options for tutorials. Grey them out in purpose. Show some images. Show other broken images. See the text below.
+
+* Advice on how to copy/paste images from PNG files to discord?
+
+Update the Getting Started chapter to be consistent with the above. Plan going forward is that this will be the first lecture/session of the class.
+
+### Reload/Restart/Re-Codespace
+
+Not sure where this goes, but . . .
+
+2) If a tutorial ever "greys out" or doesn't display fully or just doesn't work, there are three possible solutions:
+
+a) Reload the tutorial by clicking the swirling-arrow image: 
+image.png
+That is the image for Chrome (which you should be using, or Edge).
+
+2) Restart the tutorial the usual way:
+
+image.png
+
+You should probably also delete the broken tab, either by closing it or by using the "Garbage Can" icon in the Terminal list:
+
+image.png
+
+Restarting the tutorial will almost always work.
+
+3) Delete the codespace and start a new one. The first two options will definitely preserve your answers. This one might or might not. If it does not, no worries! Fill in the name and email boxes, but then skip all the questions you already did and just start where you left off.
+
+
+### Other Stuff
+
+* Workspace and workflow need to make the `Ctrl + S` method of saving the script easier to handle.
+
+* W/W need a cool image that shows the filesystem. 
+
 * Should Terminal tutorials start in a repo? Maybe not. But then maybe the beginning of every tutorial starts up a repo? But then you always need to restart the tutorial afterwards? 
 
 * Seems like the default width for our answer boxes does not match the display width in a rendered tutorial. Example:
