@@ -102,7 +102,9 @@ You will now be asked for your Google Cloud Project ID. Enter `techne-fall-2026`
 include_graphics("images/agy-8.png")
 ```
 
-You will then be asked to select a region. Select `us` and hit `Enter`. 
+<!-- DK: Image is for `us`. -->
+
+You will then be asked to select a region. Select `global` and hit `Enter`. 
 
 ```{r}
 include_graphics("images/agy-9.png")
@@ -631,11 +633,11 @@ In working with AI, it is smart to maintain one working chunk per final artifact
 
 ### Exercise 1
 
-Ask Antigravity to edit `analysis.qmd` so it contains only the setup chunk and the named-storms-per-year line chart. Delete any other chunks. Render. In the bash Terminal, run `cat analysis.qmd`. CP/CR.
+Ask Antigravity to edit `analysis.qmd` so it contains only the setup chunk and the named-storms-per-year line chart. Delete any other chunks. Render. 
 
-Throughout this tutorial we will often say "ask Antigravity to" when we want you to use AI.
+Refresh Live Sever. Copy/paste the most recent messages from Antigravity.
 
-```{r antigravity-in-tutorials-2}
+```{r working-code-chunk-1}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -646,50 +648,37 @@ question_text(NULL,
 
 ###
 
-<pre><code>---
-title: "Exploring Storms"
-author: "PPBDS Student"
-format: html
-execute:
-  echo: false
----
+````
+  I've removed the extra boxplot chunk from analysis.qmd so only the setup chunk and the named storms per year line
+  plot remain.
 
-&#96;&#96;&#96;{r}
-#| include: false
-suppressPackageStartupMessages(library(tidyverse))
-&#96;&#96;&#96;
+  I am currently running quarto render analysis.qmd in the background to update the HTML output.
 
-## Named Storms per Year
+▸ Thought for 3s, 122 tokens
+  Analyzing Task Completion
+  analysis.qmd has been updated and rendered successfully to analysis.html.
 
-The following chart displays the number of unique named storms recorded each year in the `storms` dataset.
+  You can view the updated page using Live Server, or commit and push your changes to save your work.
 
-&#96;&#96;&#96;{r}
-storms |>
-  distinct(year, name) |>
-  count(year) |>
-  ggplot(aes(x = year, y = n)) +
-  geom_line() +
-  geom_point() +
-  labs(
-    title = "Number of Named Storms per Year",
-    x = "Year",
-    y = "Count of Storms"
-  ) +
-  theme_minimal()
-&#96;&#96;&#96;
-</code></pre>
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+>
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+? for shortcuts                                                                                    Gemini 3.7 Flash · high
+````
 
 ###
 
 Each code chunk should produce **one** final artifact --- either cleaned data or a plot. A chunk that mixes exploratory steps with its final output needs to be cleaned up.
 
+### Exercise 2
 
+Ask Antigravity to add a **new chunk** at the bottom of `analysis.qmd` that prints the `storms` dataset. Render. 
 
-### Exercise 1
+In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. 
 
-Ask Antigravity to add a **new chunk** at the bottom of `analysis.qmd` that prints the `storms` dataset. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+CP/CR.
 
-```{r named-storms-per-year-1}
+```{r working-code-chunk-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -700,7 +689,7 @@ question_text(NULL,
 
 ###
 
-```{r named-storms-per-year-1-test}
+```{r working-code-chunk-2-test}
 #| echo: true
 storms
 ```
@@ -709,13 +698,19 @@ storms
 
 `storms` comes from **dplyr**, so `library(tidyverse)` is all the document needs. It contains every six-hour observation of Atlantic tropical storms since 1975: each row records one storm's position, wind speed, and air pressure at a single moment, so a hurricane that lasts a week accounts for dozens of rows.
 
-Printing a raw tibble like this would never survive into a published document. That is fine --- the working chunk's output is for *you*, not your readers, and we will clean it up before publishing.
+###
 
-### Exercise 2
+Printing a raw tibble like this would never remain a published document. That is fine --- the working chunk's output is for *you*, not your readers, and we will clean it up before publishing.
 
-Ask Antigravity to update the last chunk to pipe `storms` through `glimpse()`. Render and inspect the output. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+### Exercise 3
 
-```{r named-storms-per-year-2}
+Ask Antigravity to update the last chunk to pipe `storms` through `glimpse()`. Render and inspect the output. 
+
+In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. 
+
+CP/CR.
+
+```{r working-code-chunk-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -726,7 +721,7 @@ question_text(NULL,
 
 ###
 
-```{r named-storms-per-year-2-test}
+```{r working-code-chunk-3-test}
 #| echo: true
 storms |>
   glimpse()
@@ -736,11 +731,15 @@ storms |>
 
 `glimpse()` gives a column-level overview of a dataset --- every variable name, its type, and a few example values on one screen. Use this and/or other similar functions like `summary()` to initially explore any unfamiliar dataset.
 
-### Exercise 3
+### Exercise 4
 
-Ask Antigravity to update the working chunk to count the observations in `storms` by `status`. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+Ask Antigravity to update the working chunk to count the observations in `storms` by `status`. Render. 
 
-```{r named-storms-per-year-3}
+In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. 
+
+CP/CR.
+
+```{r working-code-chunk-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -751,7 +750,7 @@ question_text(NULL,
 
 ###
 
-```{r named-storms-per-year-3-test}
+```{r working-code-chunk-4-test}
 #| echo: true
 storms |>
   count(status)
@@ -761,11 +760,15 @@ storms |>
 
 `count()` tallies how many rows fall into each value of a variable. Because each row of `storms` is a six-hour observation, these numbers measure *time spent* at each status, not the number of storms. That distinction is why the chart at the top of our document pipes through `distinct(year, name)` before counting storms per year.
 
-### Exercise 4
+### Exercise 5
 
-Ask Antigravity to update the working chunk to filter `storms` to observations with `year >= 2000` and select the `year`, `name`, `status`, `wind`, and `pressure` columns. Leave the result as the final expression so it prints. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+Ask Antigravity to update the working chunk to filter `storms` to observations with `year >= 2000` and select the `year`, `name`, `status`, `wind`, and `pressure` columns. Leave the result as the final expression so it prints. Render. 
 
-```{r named-storms-per-year-4}
+In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. 
+
+CP/CR.
+
+```{r working-code-chunk-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -776,7 +779,7 @@ question_text(NULL,
 
 ###
 
-```{r named-storms-per-year-4-test}
+```{r working-code-chunk-5-test}
 #| echo: true
 storms |>
   filter(year >= 2000) |>
@@ -794,7 +797,11 @@ Our exploration has settled on the data we want: observations since 2000, five c
 
 ### Exercise 1
 
-Ask Antigravity to save the filtered tibble to a variable called `storms_recent` instead of printing it directly. Render and notice the table disappears from the HTML. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+Ask Antigravity to save the filtered tibble to a variable called `storms_recent` instead of printing it directly. Render. Notice the table disappears from the HTML. 
+
+In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. 
+
+CP/CR.
 
 ```{r cache-1}
 question_text(NULL,
@@ -820,7 +827,11 @@ Assignment captures the result silently --- a chunk that only uses `<-` to assig
 
 ### Exercise 2
 
-Add `#| cache: true` to the `storms_recent` chunk. Render. In the bash Terminal, run `ls`. CP/CR.
+Add `#| cache: true` to the `storms_recent` code chunk by hand. That is, open `analysis.qmd` in the Editor. Add that line to the top of the `storms_recent` code chunk. Render. 
+
+In the bash Terminal, run `ls`. 
+
+CP/CR.
 
 ```{r cache-2}
 question_text(NULL,
@@ -837,17 +848,23 @@ Your answer should look something like:
 
 ````
 antigravity $ ls
-analysis.html  analysis_cache  analysis_files  analysis.qmd
-antigravity $
+AGENTS.md  analysis_cache  analysis_files  analysis.html  analysis.qmd
+antigravity $ 
 ````
 
 ###
 
-Caching is a render-time feature. The first render writes the chunk's result to disk. Later renders skip re-running the chunk and load from disk instead. `analysis_cache/` appearing in `ls` confirms it is wired up. Data preparation is the natural chunk to cache: in real projects it is often the slow part --- downloading files, joining tables, fitting models --- and its result rarely changes. Filtering `storms` is fast, but the habit scales.
+Caching is a render-time feature. The first render writes the chunk's result to disk. Later renders skip re-running the chunk and load from disk instead. `analysis_cache/` appearing via `ls` confirms it is wired up. 
+
+Data preparation is the natural chunk to cache: in real projects it is often the slow part --- downloading files, joining tables, fitting models --- and its result rarely changes. 
 
 ### Exercise 3
 
-Ask Antigravity to add `analysis_cache` to `.gitignore`. Note that the Source Control badge count in VS Code has increased because the cache directory is now visible to git --- adding `analysis_cache` to `.gitignore` makes it drop back. In the bash Terminal, run `cat .gitignore`. CP/CR.
+Ask Antigravity to add `analysis_cache` to `.gitignore`. Note that the Source Control badge count in VS Code has increased because the cache directory is now visible to git --- adding `analysis_cache` to `.gitignore` makes it drop back. 
+
+In the bash Terminal, run `cat .gitignore`. 
+
+CP/CR.
 
 ```{r cache-3}
 question_text(NULL,
@@ -855,14 +872,33 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 6)
+	rows = 12)
 ```
 
 ###
 
 ````
-analysis_files
-analysis_cache
+antigravity $ cat .gitignore
+# History files
+.Rhistory
+.RData
+.Ruserdata
+
+# Example code in working directory
+.Rapp.history
+
+# User-specific files
+.Rproj.user/
+
+# Quarto execution artifacts
+.quarto/
+*_files/
+*_cache/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+antigravity $ 
 ````
 
 ###
@@ -876,7 +912,11 @@ Cache files are regenerated from source and do not belong in git. Rule of thumb:
 
 ### Exercise 1
 
-Ask Antigravity to add a new code chunk with a **ggplot2** scatter plot of `pressure` vs. `wind`, using `storms_recent`. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+Ask Antigravity to add a new code chunk with a **ggplot2** scatter plot of `pressure` vs. `wind`, using `storms_recent`. Render. 
+
+In the R Terminal, run `tutorial.helpers::show_file("analysis.qmd", chunk = "Last")`. 
+
+CP/CR.
 
 ```{r plotting-1}
 question_text(NULL,
@@ -890,9 +930,16 @@ question_text(NULL,
 ###
 
 ```{r plotting-1-test}
-#| echo: true
-ggplot(storms_recent, aes(x = wind, y = pressure)) +
-  geom_point()
+#| label: plot-pressure-wind
+storms_recent |> 
+  ggplot(aes(x = wind, y = pressure)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Pressure vs. Wind Speed",
+    x = "Wind Speed (knots)",
+    y = "Pressure (millibars)"
+  ) +
+  theme_minimal()
 ```
 
 ###
@@ -901,7 +948,11 @@ Chunks in the same document share an R session --- `storms_recent` is created in
 
 ### Exercise 2
 
-The first version of a plot is rarely the last. Ask Antigravity to improve the working chunk: color the points by `status`, make them semi-transparent so overlapping observations show, and add a meaningful title, subtitle, and axis labels. Render and check the Live Server tab. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+The first version of a plot is rarely the last. Ask Antigravity to improve the working chunk: color the points by `status`, make them semi-transparent so overlapping observations show, and add a meaningful title, subtitle, and axis labels. Render and check the Live Server tab. 
+
+In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. 
+
+CP/CR.
 
 ```{r plotting-2}
 question_text(NULL,
@@ -1019,7 +1070,7 @@ Ask Antigravity to check the Git status and explain what the output means:
 Run git status and explain what each part of the output means.
 ```
 
-Press `y`, 1, or hit Enter on allow once to allow the shell command. CP/CR the full response including Antigravity's explanation.
+Press `y`, 1, or hit Enter on allow once to allow the shell command. CP/CR the full response, including Antigravity's explanation.
 
 ```{r git-with-antigravity-1}
 question_text(NULL,
@@ -1099,7 +1150,7 @@ git commit -m "initial version with analysis and gitignore"
 
 ###
 
-The two-step design lets you choose exactly which files go into each commit --- useful when you want to record related changes separately with different messages. In `codespace-starter`, the Source Control sidebar handles both steps at once, but knowing they are separate matters when collaborating on larger projects.
+The two-step design lets you choose exactly which files go into each commit --- useful when you want to record related changes separately with different messages. In any repo derived from `codespace-starter`, the Source Control sidebar handles both steps at once, but knowing they are separate matters when collaborating on larger projects.
 
 ### Exercise 3
 
@@ -1140,7 +1191,7 @@ The `(HEAD -> main)` indicator confirms your local branch is current, but the mi
 Ask Antigravity to improve the storms-per-year chart. Type something like:
 
 ```
-Update the storms-per-year chart in analysis.qmd to be a stacked area chart showing the count of each storm type per year. Filter to just tropical depressions, tropical storms, and hurricanes. Use a color scale that goes from light blue for tropical depressions through orange for tropical storms to dark red for hurricanes. Re-render the file when done.
+Update the storms-per-year chart in `analysis.qmd` to be a stacked area chart showing the count of each storm type per year. Filter to just tropical depressions, tropical storms, and hurricanes. Use a color scale that goes from light blue for tropical depressions through orange for tropical storms to dark red for hurricanes. Re-render the file when done.
 ```
 
 Press `y` to authorize each tool call. Once the Live Server tab has refreshed and you are happy with the result, ask Antigravity to handle the entire Git workflow:
@@ -1190,49 +1241,6 @@ Allow this tool call? [y/n/a]: y
 ###
 
 Antigravity issued three separate tool calls --- `git add`, `git commit`, and `git push` --- mapping directly to the three stages of staging, recording, and sharing. In Exercise 3 you ran these yourself using the Source Control sidebar; here you delegated them to Antigravity.
-
-### Exercise 5
-
-Still in Antigravity, type `/stats session` and then `/stats model`. CP/CR both outputs.
-
-```{r git-with-antigravity-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 18)
-```
-
-###
-
-Your output should look something like:
-
-````
-> /stats session
-
-Session Statistics:
-  Messages:           14
-  Tool calls made:    10
-  Tool calls allowed: 10
-  Input tokens:       ~18,400
-  Output tokens:      ~5,100
-  Total tokens:       ~23,500
-
-> /stats model
-
-Model: gemini-3.6-flash
-  Context window:    1,000,000 tokens
-  Free tier limit:   1,000,000 tokens/day
-  Used today:        ~23,500 tokens
-  Remaining:         ~976,500 tokens
-
->
-````
-
-###
-
-AI models have **context windows** --- a limit on how much text they can process in one session. Antigravity's are very large (up to 1 million tokens), but `/stats` lets you track usage in real time; on the free tier, your daily limit resets every day.
 
 
 ## Summary
