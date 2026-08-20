@@ -27,7 +27,7 @@ Code](https://open-vsx.org/extension/PPBDS/vscode-r-tutorials), which
 lists every installed tutorial and lets you start one with a click.
 
 As a backup, you can launch a tutorial from the R console with
-[`learnr::run_tutorial()`](https://pkgs.rstudio.com/learnr/reference/run_tutorial.html),
+[`learnr::run_tutorial()`](https://rdrr.io/pkg/learnr/man/run_tutorial.html),
 providing the short name of the tutorial and the package name.
 
 ``` R
