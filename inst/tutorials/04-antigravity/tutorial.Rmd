@@ -17,7 +17,6 @@ library(learnr)
 library(tutorial.helpers)
 library(knitr)
 library(tidyverse)
-library(nycflights13)
 
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(out.width = '90%')
@@ -27,8 +26,6 @@ options(tutorial.exercise.timelimit = 60,
 
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
-
-<!-- DK: Ought to replace `flights` examination with `storms` examination. -->
 
 <!-- DK: Change default answers prompt. -->
 
@@ -59,7 +56,7 @@ Start the Antigravity CLI by running `agy` in the bash Terminal. Select "Use a G
 include_graphics("images/agy-1.png")
 ```
 
-and hit `Enter`. New College of Florida is providing some funding for your use of Antigravity. But, after the course is over, you can get the same sort of access for $20 or so per month. (If you are not an NCF student, choose the plain "Login with Google" option instead and use your own Google account; the rest of the tutorial works the same.) Select "Continue with Google Cloud."
+and hit `Enter`. New College of Florida is providing some funding for your use of Antigravity. But, after the course is over, you can get the same sort of access for $20 or so per month. (If you are not an NCF student, choose the plain "Google 0Auth" option instead and use your own Google account; the rest of the tutorial works the same.) Select "Continue with Google Cloud."
 
 ```{r}
 include_graphics("images/agy-2.png")
@@ -189,7 +186,7 @@ Note that your output may be different than what is shown here, as the Antigravi
 
 ###
 
-Slash commands control the program itself, not Antigravity --- the command `/help` tells the *program* to print its options, while a plain sentence talks to *Antigravity*. For factual session data like usage statistics, always use slash commands rather than asking Antigravity, which will only guess.
+Slash commands control the program itself. The command `/help` tells the *program* to print its options, while a plain sentence talks to *Antigravity*. For factual session data like usage statistics, always use slash commands rather than asking Antigravity, which will only guess.
 
 ### Exercise 3
 
@@ -492,7 +489,7 @@ Antigravity's **conversation history** is gone the moment you type `/quit`, but 
 ## Antigravity in tutorials
 ###
 
-In future tutorials you will spend most of your time prompting an AI agent to edit `analysis.qmd`, as well as rendering, and inspecting the resulting HTML. This section introduces key aspects of creating `analysis.qmd` files including: maintaining one working chunk per final artifact, iteratively rewriting that chunk to keep only necessary code, managing code chunk outputs in your rendered file, and caching results. Throughout this section we will explicitly tell you to use AI. In future tutorials, use of AI is simply assumed.
+In future tutorials you will spend most of your time prompting an AI agent to edit `analysis.qmd`, as well as rendering, and inspecting the resulting HTML. This section and the three that follow introduce key aspects of creating `analysis.qmd` files including: maintaining one working chunk per final artifact, iteratively rewriting that chunk to keep only necessary code, managing code chunk outputs in your rendered file, and caching results. Throughout this section we will explicitly tell you to use AI. In future tutorials, use of AI is simply assumed.
 
 ### Exercise 1
 
@@ -627,16 +624,149 @@ storms |>
 
 Each code chunk should produce **one** final artifact --- either cleaned data or a plot. A chunk that mixes exploratory steps with its final output needs to be cleaned up.
 
-## Named Storms per Year
+## The Working Code Chunk
 ###
 
-Sometimes a code chunk takes a long time to run. We can **cache** a code chunk to save its results and avoid re-running it on subsequent renders.
+Real analysis is exploratory. Before we can build anything worth publishing, we poke at the data: print it, check its columns, count things, filter it down. Rather than scattering those attempts across many chunks, we keep **one working code chunk** at the bottom of the document and rewrite it over and over.
 
 ### Exercise 1
 
-Add `#| cache: true` to the storms chunk. Render. In the bash Terminal, run `ls`. CP/CR.
+Ask Antigravity to add a **new chunk** at the bottom of `analysis.qmd` that prints the `storms` dataset. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
-```{r named-storms-per-year-1}
+```{r the-working-code-chunk-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+```{r the-working-code-chunk-1-test}
+#| echo: true
+storms
+```
+
+###
+
+`storms` comes from **dplyr**, so `library(tidyverse)` is all the document needs. It contains every six-hour observation of Atlantic tropical storms since 1975: each row records one storm's position, wind speed, and air pressure at a single moment, so a hurricane that lasts a week accounts for dozens of rows.
+
+Printing a raw tibble like this would never survive into a published document. That is fine --- the working chunk's output is for *you*, not your readers, and we will clean it up before publishing.
+
+### Exercise 2
+
+Ask Antigravity to update the last chunk to pipe `storms` through `glimpse()`. Render and inspect the output. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+
+```{r the-working-code-chunk-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```{r the-working-code-chunk-2-test}
+#| echo: true
+storms |>
+  glimpse()
+```
+
+###
+
+`glimpse()` gives a column-level overview of a dataset --- every variable name, its type, and a few example values on one screen. Use this and/or other similar functions like `summary()` to initially explore any unfamiliar dataset.
+
+### Exercise 3
+
+Ask Antigravity to update the working chunk to count the observations in `storms` by `status`. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+
+```{r the-working-code-chunk-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```{r the-working-code-chunk-3-test}
+#| echo: true
+storms |>
+  count(status)
+```
+
+###
+
+`count()` tallies how many rows fall into each value of a variable. Because each row of `storms` is a six-hour observation, these numbers measure *time spent* at each status, not the number of storms. That distinction is why the chart at the top of our document pipes through `distinct(year, name)` before counting storms per year.
+
+### Exercise 4
+
+Ask Antigravity to update the working chunk to filter `storms` to observations with `year >= 2000` and select the `year`, `name`, `status`, `wind`, and `pressure` columns. Leave the result as the final expression so it prints. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+
+```{r the-working-code-chunk-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+```{r the-working-code-chunk-4-test}
+#| echo: true
+storms |>
+  filter(year >= 2000) |>
+  select(year, name, status, wind, pressure)
+```
+
+###
+
+The pipe `|>` passes the left side's result directly to the next function. Reading it as "and then" helps: take `storms`, **and then** keep only observations since 2000, **and then** keep these five columns. The result prints because the final expression is a value, not an assignment.
+
+## Cache
+###
+
+Our exploration has settled on the data we want: observations since 2000, five columns. The next steps are to save that data in an object which later chunks can use, and then to **cache** the chunk that builds it, so that later renders can skip re-running it.
+
+### Exercise 1
+
+Ask Antigravity to save the filtered tibble to a variable called `storms_recent` instead of printing it directly. Render and notice the table disappears from the HTML. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+
+```{r cache-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+```{r cache-1-test}
+#| echo: true
+storms_recent <- storms |>
+  filter(year >= 2000) |>
+  select(year, name, status, wind, pressure)
+```
+
+###
+
+Assignment captures the result silently --- a chunk that only uses `<-` to assign a value to an object produces no output in the render. A blank section in the HTML is not an error; it means the chunk built an object without displaying it.
+
+### Exercise 2
+
+Add `#| cache: true` to the `storms_recent` chunk. Render. In the bash Terminal, run `ls`. CP/CR.
+
+```{r cache-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -657,13 +787,13 @@ antigravity $
 
 ###
 
-Caching is a render-time feature. The first render writes the chunk's result to disk. Later renders skip re-running the chunk and load from disk instead. `analysis_cache/` appearing in `ls` confirms it is wired up.
+Caching is a render-time feature. The first render writes the chunk's result to disk. Later renders skip re-running the chunk and load from disk instead. `analysis_cache/` appearing in `ls` confirms it is wired up. Data preparation is the natural chunk to cache: in real projects it is often the slow part --- downloading files, joining tables, fitting models --- and its result rarely changes. Filtering `storms` is fast, but the habit scales.
 
-### Exercise 2
+### Exercise 3
 
 Ask Antigravity to add `analysis_cache` to `.gitignore`. Note that the Source Control badge count in VS Code has increased because the cache directory is now visible to git --- adding `analysis_cache` to `.gitignore` makes it drop back. In the bash Terminal, run `cat .gitignore`. CP/CR.
 
-```{r named-storms-per-year-2}
+```{r cache-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -683,169 +813,75 @@ analysis_cache
 
 Cache files are regenerated from source and do not belong in git. Rule of thumb: if a file can be (easily) recreated from other components, do not commit it.
 
+## Plotting
+###
+
+`storms_recent` is built and cached, but nothing is displayed. Now we want a plot --- a new artifact, and therefore a **new** working code chunk at the bottom of the document. We will iterate on it until the plot is worth publishing.
+
+### Exercise 1
+
+Ask Antigravity to add a new code chunk with a **ggplot2** scatter plot of `pressure` vs. `wind`, using `storms_recent`. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+
+```{r plotting-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+```{r plotting-1-test}
+#| echo: true
+ggplot(storms_recent, aes(x = wind, y = pressure)) +
+  geom_point()
+```
+
+###
+
+Chunks in the same document share an R session --- `storms_recent` is created in the cached chunk and available to this one without being redefined. The two-chunk pattern here --- one to prepare data, one to plot it --- is a common pattern. And even this bare first draft shows the key fact about storms: the lower the central air pressure, the faster the wind.
+
+### Exercise 2
+
+The first version of a plot is rarely the last. Ask Antigravity to improve the working chunk: color the points by `status`, make them semi-transparent so overlapping observations show, and add a meaningful title, subtitle, and axis labels. Render and check the Live Server tab. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+
+```{r plotting-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 12)
+```
+
+###
+
+```{r plotting-2-test}
+#| echo: true
+ggplot(storms_recent, aes(x = wind, y = pressure, color = status)) +
+  geom_point(alpha = 0.3) +
+  labs(
+    title = "Wind Speed and Air Pressure in Atlantic Storms",
+    subtitle = "Stronger storms combine faster winds with lower pressure",
+    x = "Wind Speed (knots)",
+    y = "Air Pressure (millibars)",
+    color = "Status"
+  )
+```
+
+Your answer will be different from ours, but it should color by `status`, use transparency, and carry real labels.
+
+###
+
+This is what iterating in a working chunk looks like: you never retyped the plot, you described the changes. When the Live Server tab shows a plot you are happy with, iteration is over --- the chunk stops being a scratchpad and becomes the document's final artifact. We are ready to publish.
+
 ### Exercise 3
-
-Ask Antigravity to add a **new chunk** at the bottom of `analysis.qmd` that prints the `flights` dataset. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
-
-```{r named-storms-per-year-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
-```
-
-###
-
-```{r named-storms-per-year-3-test}
-#| echo: true
-flights
-```
-
-###
-
-`flights` is a dataset from the **nycflights13** package with 336,776 rows --- every flight that departed from one of New York City's three airports (JFK, LGA, EWR) in 2013, with departure and arrival times, delays, carrier, destination, and more.
-
-Notice that our document is titled "Exploring Storms" while we poke at `flights`. That is fine. A document's title describes its *deliverable*, not everything you try along the way --- these exploration chunks are temporary, and we will delete them before publishing.
-
-### Exercise 4
-
-Ask Antigravity to update the last chunk to pipe `flights` through `glimpse()`. Render and inspect the output. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
-
-```{r named-storms-per-year-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
-```
-
-###
-
-```{r named-storms-per-year-4-test}
-#| echo: true
-flights |> 
-glimpse()
-```
-
-###
-
-`glimpse()` gives a column-level overview of a dataset --- every variable name, its type, and a few example values on one screen. Use this and/or other similar functions like `summary()` to initially explore any unfamiliar dataset.
-
-### Exercise 5
-
-Ask Antigravity to update the working chunk to filter `flights` to `origin == "JFK"` and select `dep_delay`, `arr_delay`, and `carrier`. Leave the result as the final expression so it prints. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
-
-```{r named-storms-per-year-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
-```
-
-###
-
-```{r named-storms-per-year-5-test}
-#| echo: true
-flights |>
-  filter(origin == "JFK") |>
-  select(dep_delay, arr_delay, carrier)
-```
-
-###
-
-The pipe `|>` passes the left side's result directly to the next function. Reading it as "and then" helps: take `flights`, **and then** keep only JFK departures, **and then** keep these three columns. The result prints because the final expression is a value, not an assignment.
-
-### Exercise 6
-
-Ask Antigravity to save the filtered tibble to a variable called `flights_jfk` instead of printing it directly. Render and notice the table disappears from the HTML. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
-
-```{r named-storms-per-year-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
-```
-
-###
-
-```{r named-storms-per-year-6-test}
-#| echo: true
-flights_jfk <- flights |>
-  filter(origin == "JFK") |>
-  select(dep_delay, arr_delay, carrier)
-```
-
-###
-
-Assignment captures the result silently --- a chunk that only uses `<-` to assign a value to an object produces no output in the render. A blank section in the HTML is not an error; it means the chunk built an object without displaying it.
-
-### Exercise 7
-
-Ask Antigravity to add a line to the chunk that prints `flights_jfk`. Render and confirm the table reappears. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
-
-```{r named-storms-per-year-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
-```
-
-###
-
-```{r named-storms-per-year-7-test}
-#| echo: true
-flights_jfk <- flights |>
-  filter(origin == "JFK") |>
-  select(dep_delay, arr_delay, carrier)
-
-flights_jfk
-```
-
-###
-
-Calling a variable by name on the last line of a chunk is all it takes to print it. Ending a data-preparation chunk with the variable name is a standard way to confirm its shape before building a plot.
-
-### Exercise 8
-
-Ask Antigravity to add a new code chunk with a **ggplot2** scatter plot of `dep_delay` vs. `arr_delay`, colored by `carrier`. Render. In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`. CP/CR.
-
-```{r named-storms-per-year-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
-```
-
-###
-
-```{r named-storms-per-year-8-test}
-#| echo: true
-ggplot(flights_jfk, aes(x = dep_delay, y = arr_delay, color = carrier)) +
-  geom_point(alpha = 0.1) +
-  labs(title = "Departure vs. Arrival Delay for JFK Flights",
-       x = "Departure Delay (min)", y = "Arrival Delay (min)")
-```
-
-###
-
-Chunks in the same document share an R session --- `flights_jfk` is created in the first chunk and available to the second without redefining it. The two-chunk pattern here --- one to prepare data, one to plot it --- is a common pattern.
-
-### Exercise 9
 
 In the bash Terminal, run `cat analysis.qmd`. CP/CR.
 
-```{r named-storms-per-year-9}
+```{r plotting-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -860,39 +896,53 @@ Your answer should look something like:
 
 <pre><code>---
 title: "Exploring Storms"
-author: Your Name
+author: "PPBDS Student"
+format: html
 execute:
   echo: false
 ---
 
 &#96;&#96;&#96;{r}
-#| message: false
+#| include: false
 suppressPackageStartupMessages(library(tidyverse))
-library(nycflights13)
+&#96;&#96;&#96;
+
+## Named Storms per Year
+
+The following chart displays the number of unique named storms recorded each year in the `storms` dataset.
+
+&#96;&#96;&#96;{r}
+storms |>
+  distinct(year, name) |>
+  count(year) |>
+  ggplot(aes(x = year, y = n)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Number of Named Storms per Year",
+    x = "Year",
+    y = "Count of Storms"
+  ) +
+  theme_minimal()
 &#96;&#96;&#96;
 
 &#96;&#96;&#96;{r}
 #| cache: true
-storms |>
-  count(year) |>
-  ggplot(aes(x = year, y = n)) +
-  geom_line() +
-  labs(title = "Named Storms per Year", x = "Year", y = "Number of Storms")
+storms_recent <- storms |>
+  filter(year >= 2000) |>
+  select(year, name, status, wind, pressure)
 &#96;&#96;&#96;
 
 &#96;&#96;&#96;{r}
-flights_jfk <- flights |>
-  filter(origin == "JFK") |>
-  select(dep_delay, arr_delay, carrier)
-
-flights_jfk
-&#96;&#96;&#96;
-
-&#96;&#96;&#96;{r}
-ggplot(flights_jfk, aes(x = dep_delay, y = arr_delay, color = carrier)) +
-  geom_point(alpha = 0.1) +
-  labs(title = "Departure vs. Arrival Delay for JFK Flights",
-       x = "Departure Delay (min)", y = "Arrival Delay (min)")
+ggplot(storms_recent, aes(x = wind, y = pressure, color = status)) +
+  geom_point(alpha = 0.3) +
+  labs(
+    title = "Wind Speed and Air Pressure in Atlantic Storms",
+    subtitle = "Stronger storms combine faster winds with lower pressure",
+    x = "Wind Speed (knots)",
+    y = "Air Pressure (millibars)",
+    color = "Status"
+  )
 &#96;&#96;&#96;
 </code></pre>
 
@@ -1034,7 +1084,7 @@ The `(HEAD -> main)` indicator confirms your local branch is current, but the mi
 Ask Antigravity to improve the storms-per-year chart. Type something like:
 
 ```
-Update the storms-per-year chart in analysis.qmd to be a stacked area chart showing the count of each storm type per year. Filter to just tropical depressions, tropical storms, and hurricanes. Use a color scale that goes from light blue for tropical depressions through orange for tropical storms to dark red for hurricanes. Also delete the two flights chunks --- that exploration is done. Re-render the file when done.
+Update the storms-per-year chart in analysis.qmd to be a stacked area chart showing the count of each storm type per year. Filter to just tropical depressions, tropical storms, and hurricanes. Use a color scale that goes from light blue for tropical depressions through orange for tropical storms to dark red for hurricanes. Re-render the file when done.
 ```
 
 Press `y` to authorize each tool call. Once the Live Server tab has refreshed and you are happy with the result, ask Antigravity to handle the entire Git workflow:
@@ -1155,7 +1205,7 @@ question_text(NULL,
 
 ###
 
-It should look something like this --- a YAML header with `execute: echo: false`, a setup chunk loading the **tidyverse**, and the stacked-area storm chart Antigravity built. Your plotting code will differ:
+It should look something like this --- a YAML header with `execute: echo: false`, a setup chunk loading the **tidyverse**, the stacked-area storm chart Antigravity built, the cached `storms_recent` chunk, and your wind-and-pressure plot. Your plotting code will differ:
 
 <pre><code>---
 title: "Exploring Storms"
@@ -1181,6 +1231,25 @@ storms |>
        x = "Year",
        y = "Number of Storms",
        fill = "Storm Type")
+&#96;&#96;&#96;
+
+&#96;&#96;&#96;{r}
+#| cache: true
+storms_recent <- storms |>
+  filter(year >= 2000) |>
+  select(year, name, status, wind, pressure)
+&#96;&#96;&#96;
+
+&#96;&#96;&#96;{r}
+ggplot(storms_recent, aes(x = wind, y = pressure, color = status)) +
+  geom_point(alpha = 0.3) +
+  labs(
+    title = "Wind Speed and Air Pressure in Atlantic Storms",
+    subtitle = "Stronger storms combine faster winds with lower pressure",
+    x = "Wind Speed (knots)",
+    y = "Air Pressure (millibars)",
+    color = "Status"
+  )
 &#96;&#96;&#96;</code></pre>
 
 ###
