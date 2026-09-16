@@ -1,5 +1,21 @@
 ## topics
 
+There are a couple of tricks that we need to teach before milestone 4, either in current tutorials or in a special 'tricks' tutorial. Key topics:
+
+  * Running `connect-repo' several times. You can actually just have a codespace named `Tutorials` and then use it for tutorials. Each time you run connect-repo, it makes a new folder in /workspaces/, and then pops the session into it. It is OK if you have a dozen different folders under /workspaces.
+
+  * Renaming repos. This should walk a student through the creation and then renaming process. Key to explain the need to push everything first and then run connect-repo. Note that it is good practice to delete the /workspaces/old-name directory since it no longer connects to anything. But, at the same time, it does not matter because connect-repo will make the new folder, corresponding to the changed repo name, without complaint.
+
+  * Show how to find/open a file like 'devcontainer.json' even though 
+
+After doing the below, we need to renumber things.
+
+Workflow and Workspace are too similar. Rename one of them.
+
+Move uploading/downloading file exercise into an earlier tutorial, maybe orientation.
+
+Terminal 2 needs to some clean up.
+
 ### Orientation
 
 Copy over Getting Started tutorial. Rename it "Orientation." 
@@ -39,6 +55,14 @@ image.png
 Restarting the tutorial will almost always work.
 
 3) Delete the codespace and start a new one. The first two options will definitely preserve your answers. This one might or might not. If it does not, no worries! Fill in the name and email boxes, but then skip all the questions you already did and just start where you left off.
+
+### Antigravity
+
+Probably belongs in misc.tutorials. After all, we open it in class together, and that provides a good occasion to show that, in addition to vscode.tutorials, there are other packages as well which might have tutorials.
+
+Should shorten Antigravity. Its only purpose is to get you set with Antigravity. Then you might also use it a bit, doing various things. But R4DS-1 is where we do the first teaching of the workflow of ask AI to change the qmd, render, look at HTML and so on.
+
+
 
 
 ### Other Stuff
