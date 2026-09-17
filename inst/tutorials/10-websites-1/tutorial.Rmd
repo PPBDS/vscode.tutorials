@@ -68,7 +68,7 @@ Always start a new data science project with a new Github repo.
 
 <!-- DK: Show images of how you can this by hand, just as an FYI. -->
 
-In the bash Terminal, run `quarto create project website .`. Don't forget the `.` at the end of the command — it tells Quarto to place the new files in the current directory.
+In the bash Terminal, run `quarto create project website . --no-open`. Don't forget the `.` — it tells Quarto to place the new files in the current directory.
 
 You can also do this using the Application Menu. Start by clicking the hamburger icon (three horizontal bars) in the Activity Bar:
 
@@ -94,7 +94,7 @@ question_text(NULL,
 Your answer should look like this:
 
 ````
-websites-1 $ quarto create project website .
+websites-1 $ quarto create project website . --no-open
 ? Title (website) › A New Website
 Creating project at /workspaces/websites-1:
   - Created _quarto.yml
@@ -106,6 +106,8 @@ websites-1 $
 ````
 
 Quarto created 5 new files in the current directory. On the command line, `.` always refers to the current directory.
+
+Why `--no-open`? By default, when you run `quarto create` from inside a VS Code terminal, Quarto finishes by asking VS Code to open the new project. In a Codespace, "open the project" means "open a new browser tab" — pointed at the very same Codespace and folder you are already looking at. Nothing is broken, but you end up with two tabs of the same workspace, which is confusing. The `--no-open` flag tells Quarto to create the files and stop. We may have set up your Codespace to add this flag automatically even when you forget it, but type it anyway: you should know what your commands do.
 
 ### Exercise 3
 

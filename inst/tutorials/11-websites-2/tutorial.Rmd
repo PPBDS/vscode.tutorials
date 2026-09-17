@@ -69,7 +69,7 @@ Each website gets its own GitHub repo. This keeps projects independent: separate
 
 ### Exercise 2
 
-In the bash Terminal, run `quarto create project website .`.  Use "Websites 2" as the title, if asked.
+In the bash Terminal, run `quarto create project website . --no-open`. Use "Websites 2" as the title, if asked.
 
 CP/CR.
 
@@ -85,7 +85,7 @@ question_text(NULL,
 ### 
 
 ````
-websites-2 $ quarto create project website .
+websites-2 $ quarto create project website . --no-open
 ? Title (website) › Websites 2
 Creating project at /workspaces/websites-2:
   - Created _quarto.yml
@@ -95,6 +95,8 @@ Creating project at /workspaces/websites-2:
   - Created styles.css
 websites-2 $ 
 ````
+
+Recall from the Websites 1 tutorial why we add `--no-open`: without it, Quarto asks VS Code to open the new project, which in a Codespace means a second browser tab showing the same Codespace you are already in. Your Codespace may add the flag for you if you forget, but do not rely on that.
 
 We are moving faster than in the Websites 1 tutorial because you are already familiar with these steps. Later, we will also learn how to save analysis results to files so the site does not re-run all its code on every render.
 
