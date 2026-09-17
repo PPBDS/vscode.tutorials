@@ -99,7 +99,7 @@ question_text(NULL,
 ```
 our-codespace-starter $ cd ../codespace-starter
 codespace-starter $ ls .devcontainer
-AGENTS.md  STUDENT_WORKFLOW.md  connect-repo.sh  devcontainer.json  welcome.sh
+AGENTS.md  STUDENT_WORKFLOW.md  connect-repo.sh  devcontainer.json  tests  welcome.sh
 ```
 
 ###
@@ -109,7 +109,7 @@ Your new repo and `codespace-starter` sit side by side under `/workspaces` in th
 ## Codespace Starter Devcontainer
 ###
 
-This section walks through `codespace-starter’`s `.devcontainer/devcontainer.json` field by field, examining the custom image, VS Code extensions, settings, and the retired `postCreateCommand`. Unlike the minimal configurations from the Devcontainers tutorial, this setup customizes almost everything to guarantee an identical experience for every student. By the end, you'll understand each top-level field and manually install a package to see what installing by hand looks like now that everything the course needs ships baked into the image.
+This section walks through `codespace-starter’`s `.devcontainer/devcontainer.json` field by field, examining the custom image, VS Code extensions, settings, the `postAttachCommand` behind the ready banner, and the retired `postCreateCommand`. Unlike the minimal configurations from the Devcontainers tutorial, this setup customizes almost everything to guarantee an identical experience for every student. By the end, you'll understand each top-level field and manually install a package to see what installing by hand looks like now that everything the course needs ships baked into the image.
 
 ### Exercise 1
  
@@ -150,7 +150,7 @@ question_text(NULL,
 ###
 
 ```
-"image": "ghcr.io/ppbds/devcontainer:1.1.2",
+"image": "ghcr.io/ppbds/devcontainer:1.1.4",
 ```
 
 ###
@@ -173,12 +173,12 @@ question_text(NULL,
 ###
 
 ```
-"reditorsupport.r",
+"reditorsupport.r@2.8.8",
 ```
 
 ###
 
-`reditorsupport.r` is the extension that gives VS Code R syntax highlighting, code completion, and the R Terminal integration you've been using all course.
+`reditorsupport.r` is the extension that gives VS Code R syntax highlighting, code completion, and the R Terminal integration you've been using all course. The `@2.8.8` **pins** it to one exact version. Without a pin, the Marketplace would silently update every student's Codespace the day a new release appeared --- and the comment directly above this line explains that the next major version of this extension changes how plots reach the plot pane, so an unpinned update would have broken plotting mid-semester. Pinning is how the course decides *when* to take that change, rather than letting the Marketplace decide for it.
 
 ### Exercise 4
 
@@ -229,7 +229,7 @@ question_text(NULL,
 
 ### Exercise 6
 
-Find the two lines containing `"ms-python.python"` and `"ms-toolsai.jupyter"`, along with the comment directly above them. Copy and paste all of it.
+Just below `"mechatroner.rainbow-csv"`, find the comment that begins `ALSO DELIBERATELY ABSENT`. Copy and paste its first five lines.
 
 ```{r codespace-starter-6}
 question_text(NULL,
@@ -243,16 +243,16 @@ question_text(NULL,
 ###
 
 ```
-// Python data science: language support + notebooks. Unlike the AI
-// assistant panels above, these are ordinary language tooling that
-// renders fine in the web Codespaces client.
-"ms-python.python",
-"ms-toolsai.jupyter"
+// ALSO DELIBERATELY ABSENT (dropped 2026-08-20, David): the Python
+// extensions (ms-python.python, ms-toolsai.jupyter). Students use
+// only a handful of Activity Bar icons, and these two added Python/
+// Jupyter icons plus Welcome-page walkthrough cards for tooling the
+// course doesn't teach interactively. Removing them does NOT break
 ```
 
 ###
 
-Standard JSON doesn't allow comments, but `devcontainer.json` is actually **JSONC** (JSON with Comments) --- that's what lets the `//` note above explain why these two extensions are grouped separately. `ms-python.python` and `ms-toolsai.jupyter` add Python language support and Jupyter notebook support.
+Standard JSON doesn't allow comments, but `devcontainer.json` is actually **JSONC** (JSON with Comments) --- that's what lets a `//` note like this one record a decision right next to the code it affects. This one explains an *absence*: the Python and Jupyter extensions used to be in the list, and were removed to keep the Activity Bar down to the few icons the course actually uses. Read the rest of the comment and notice what it promises: Python still works. `quarto render` runs the Python chunks in a `.qmd` through the image's Jupyter engine from the command line, with no editor extension involved. What went away is only the in-editor layer --- notebook tabs, run buttons, and code completion for Python.
 
 ### Exercise 7
 
@@ -272,7 +272,7 @@ question_text(NULL,
 ```
 "ritwickdey.LiveServer",
 "tomoki1207.pdf",
-"mechatroner.rainbow-csv",
+"mechatroner.rainbow-csv"
 ```
 
 ###
@@ -442,7 +442,7 @@ By default, VS Code opens files in "preview" mode --- clicking a second file rep
 
 ### Exercise 15
 
-Find the line beginning with `"python.defaultInterpreterPath"`. Copy and paste it.
+Now leave the `"settings"` block and scroll back up. Find the `"postAttachCommand"` field. Copy and paste it together with the two lines that follow it --- the whole three-line block.
 
 ```{r codespace-starter-15}
 question_text(NULL,
@@ -456,12 +456,14 @@ question_text(NULL,
 ###
 
 ```
-"python.defaultInterpreterPath": "/opt/venv/bin/python",
+"postAttachCommand": {
+  "Welcome!": "bash ${containerWorkspaceFolder}/.devcontainer/welcome.sh"
+},
 ```
 
 ###
 
-`/opt/venv` is a **virtual environment**: a self-contained folder of Python packages --- numpy, pandas, matplotlib, and more --- kept separate from the rest of the machine. This setting points VS Code's Python extension at that environment, so `import pandas` works immediately with no setup.
+You have already met this field --- it is what printed the "✅ YOUR CODESPACE IS READY" banner the first time you opened this Codespace. A `postAttachCommand` runs every time the editor **attaches** to the container, in a terminal you can see, which is why the banner shows up in a terminal tab. That tab is named "Codespaces: Welcome!" because Codespaces labels it with the key, `"Welcome!"`, and adds its own prefix. The value is the command: `bash` running `welcome.sh`, with `${containerWorkspaceFolder}` standing in for the absolute path of the checkout, so the script is still found after you switch your open folder to your own repo.
 
 ### Exercise 16
 
@@ -557,7 +559,7 @@ Successfully installed emoji-2.14.0
 
 ###
 
-That's the same `/opt/venv` from Exercise 15. Calling `/opt/venv/bin/pip` directly, instead of just `pip`, guarantees the package lands in the same environment `python.defaultInterpreterPath` points VS Code at, so `import emoji` works immediately with no restart.
+`/opt/venv` is a **virtual environment**: a self-contained folder of Python packages --- numpy, pandas, matplotlib, and more --- baked into the image and kept separate from the system Python. It is also first on your `PATH`, so plain `pip` already resolves to `/opt/venv/bin/pip`; naming the full path just makes the target explicit, a habit that pays off on machines with more than one Python. Either way the package lands in the environment `quarto render` uses for Python chunks, so `import emoji` works immediately.
 
 ### Exercise 19
 
@@ -621,12 +623,12 @@ Successfully installed pyfiglet-1.0.2
 
 ###
 
-A good AI agent in this Codespace targets `/opt/venv/bin/pip` rather than plain `pip`, because that's the interpreter `python.defaultInterpreterPath` (Exercise 15) points VS Code at --- an assistant without that context might install into the wrong environment and leave `import pyfiglet` failing silently later. Checking which `pip` actually ran is worth doing before trusting the result, not after.
+A good AI agent in this Codespace targets `/opt/venv/bin/pip` --- the environment `quarto render` uses for Python chunks (Exercise 18) --- rather than guessing. An assistant without that context might install into some other Python and leave `import pyfiglet` failing silently later. Checking which `pip` actually ran is worth doing before trusting the result, not after.
 
 ## Summary
 ###
 
-This tutorial toured the `devcontainer.json` behind `codespace-starter` itself: its pinned custom PPBDS image, its VS Code extensions array, the settings that control the R Terminal, plot rendering, Git commits, autosave, word wrap, tab behavior, and the Python interpreter, and the retired `postCreateCommand` --- course packages now ship baked into the image, with the refresh recipe kept dormant in a comment. The next tutorial, "The Devcontainer Dockerfile," goes one level deeper and reads through the Dockerfile that actually builds the `ghcr.io/ppbds/devcontainer` image this `devcontainer.json` points at.
+This tutorial toured the `devcontainer.json` behind `codespace-starter` itself: its pinned custom PPBDS image, its VS Code extensions array, the settings that control the R Terminal, plot rendering, Git commits, autosave, word wrap, and tab behavior, the `postAttachCommand` behind the ready banner, and the retired `postCreateCommand` --- course packages now ship baked into the image, with the refresh recipe kept dormant in a comment. The next tutorial, "The Devcontainer Dockerfile," goes one level deeper and reads through the Dockerfile that actually builds the `ghcr.io/ppbds/devcontainer` image this `devcontainer.json` points at.
 
 ### Exercise 1
 

@@ -1,6 +1,6 @@
 Package: vscode.tutorials
 Title: Tutorials for Learning 'VS Code' in GitHub Codespaces
-Version: 0.1.0.9000
+Version: 0.1.0.9001
 Authors@R:
     c(
     person(given = "David",
@@ -25,6 +25,7 @@ Imports:
     tutorial.helpers,
     usethis
 Suggests:
+    ellmer (>= 0.4.2),
     gitcreds,
     httr2,
     knitr,
