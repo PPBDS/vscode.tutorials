@@ -29,11 +29,11 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-In a previous tutorial, you found the line `"image": "ghcr.io/ppbds/devcontainer:1.1.2"` inside `codespace-starter`'s `devcontainer.json`. That image does not appear out of nowhere --- it is built from a Dockerfile maintained by PPBDS. This tutorial reads through that real, current Dockerfile, section by section, to understand what it does and why it is written the way it is.
+In a previous tutorial, you found the `"image"` line inside `codespace-starter`'s `devcontainer.json` --- `ghcr.io/ppbds/devcontainer`, pinned to an exact version. That image does not appear out of nowhere --- it is built from a Dockerfile maintained by PPBDS. This tutorial reads through that real, current Dockerfile, section by section, to understand what it does and why it is written the way it is.
 
 ###
 
-This is a **reading tour, not a building exercise**. You will not build this image yourself --- it is not buildable inside the course Codespace, and doing so is not the point. Instead, each exercise shows you a piece of the Dockerfile and asks you to find and quote a specific line or block from it, then explains what that piece does and why it exists. (You *will* build one tiny image of your own along the way, just to feel the mechanics.)
+This is a **reading tour, not a building exercise**. You will not build this image yourself --- it is not buildable inside the course Codespace, and doing so is not the point. Instead, each exercise shows you a piece of the Dockerfile and asks you to find and quote a specific line or block from it, then explains what that piece does and why it exists. (You *will* write one tiny Dockerfile of your own along the way, just to feel the shape of one --- and then read the workflow that turns Dockerfiles like it into published images.)
 
 ###
 
@@ -805,19 +805,101 @@ question_text(NULL,
 
 ###
 
-A Dockerfile is just a short recipe: a `FROM` line picks a starting image (here, `alpine:3.20`, a tiny ~5 MB Linux distribution often used as a lightweight base), and each instruction after it adds one more layer on top. `CMD` sets the command that runs when a container starts from the image --- in this example, printing a greeting. It's the same shape as the much longer devcontainer Dockerfile you just read, just doing more work: more `FROM`, `RUN`, `COPY`, and `ENV` lines.
+A Dockerfile is just a short recipe: a `FROM` line picks a starting image (here, `alpine:3.20`, a tiny ~5 MB Linux distribution often used as a lightweight base), and each instruction after it adds one more layer on top. `CMD` sets the command that runs when a container starts from the image --- in this example, printing a greeting. It's the same shape as the much longer devcontainer Dockerfile you just read, just doing more work: more `FROM`, `RUN`, `COPY`, and `ENV` lines. You will not build this one yourself --- nobody at PPBDS builds the big one by hand either. The next two exercises show who does.
+
+###
+
+Your Dockerfile is a recipe; something still has to cook it. For `ghcr.io/ppbds/devcontainer`, that something is not a person typing commands --- it is a **GitHub Actions workflow** that lives in the same repo as the Dockerfile. Here is the part of it that matters, from `.github/workflows/build.yml`:
+
+````
+name: build-and-push
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE: ppbds/devcontainer
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: docker/setup-buildx-action@v4
+
+      - name: Login to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
+
+      - name: Build and push
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+````
 
 ### Exercise 3
 
-Now build your Dockerfile into an image. In the bash Terminal, in the same folder as your `Dockerfile`, run:
-
-```
-docker build -t my-first-image .
-```
-
-This builds (`docker build`) the Dockerfile in the current directory (`.`) and tags (`-t`) the resulting image `my-first-image`. Once it finishes, run `docker images` to confirm your new image is listed, then paste the output of `docker images` below.
+Find the step named `Build and push`. Copy and paste its `with:` block --- from `with:` through the two `cache-` lines.
 
 ```{r the-devcontainer-image-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+###
+
+```
+with:
+  context: .
+  push: true
+  tags: ${{ steps.meta.outputs.tags }}
+  labels: ${{ steps.meta.outputs.labels }}
+  cache-from: type=gha
+  cache-to: type=gha,mode=max
+```
+
+###
+
+That one step is two `docker` commands in a trench coat. `docker build -t NAME .` reads the Dockerfile in the current directory (`context: .`), runs each instruction in order, and saves the result as a local image --- a self-contained snapshot that can run as a container on any machine with Docker installed. `docker push` uploads that image to a registry (`push: true`). Two smaller verbs round out the family: `docker images` lists the images on a machine, and `docker tag` gives an image a second name without rebuilding it. The `cache-` lines are why a rebuild that changes one late line of the Dockerfile takes minutes instead of an hour: every unchanged layer is reused.
+
+Notice who runs this: a GitHub Actions machine, on every push to `main` and every `v*` tag (look back at the `on:` block). Nobody at PPBDS types `docker build`. That is how essentially every real image gets made --- by a runner, from a Dockerfile in a repo, on a trigger. If you ever want your Exercise 2 Dockerfile built and published for real, you would not run these commands either: you would ask an AI to add a workflow like this one to your repo, and the runner would do the rest.
+
+### Exercise 4
+
+Find the `tags: |` block inside the `Extract metadata` step. Copy and paste its four `type=` lines.
+
+```{r the-devcontainer-image-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -828,37 +910,18 @@ question_text(NULL,
 
 ###
 
-`docker build` reads your Dockerfile, runs each instruction in order, and saves the result as a local image --- a self-contained snapshot that can run as a container on any machine with Docker installed. The `-t` tag (`my-first-image`) is just a friendly name; underneath, the image is still identified by a digest, the same kind of `sha256:...` hash that pins the devcontainer's base image in Exercise 1.
-
-### Exercise 4
-
-Finally, make your image public so it has a real URL anyone can pull it from. GitHub Container Registry (GHCR) is a convenient option, since it uses the same GitHub account and `gh` CLI you already have. First authenticate Docker with GHCR:
-
 ```
-docker login ghcr.io
-```
-
-Then tag your image for GHCR and push it:
-
-```
-docker tag my-first-image ghcr.io/YOUR_GITHUB_USERNAME/my-first-image:latest
-docker push ghcr.io/YOUR_GITHUB_USERNAME/my-first-image:latest
-```
-
-On github.com, open the new package's settings and change its visibility to public. Paste the public URL of your image below (it will look like `https://github.com/YOUR_GITHUB_USERNAME/my-first-image/pkgs/container/my-first-image`).
-
-```{r the-devcontainer-image-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+type=raw,value=latest,enable={{is_default_branch}}
+type=semver,pattern={{version}}
+type=semver,pattern={{major}}.{{minor}}
+type=sha
 ```
 
 ###
 
-`docker tag` gives your local image a second name that matches where it's headed --- `ghcr.io/...` --- without rebuilding anything. `docker push` uploads it to GHCR, the exact same registry that hosts `ghcr.io/ppbds/devcontainer` itself. Once a package is public, its URL works like any other public download: anyone can `docker pull` it, or reference it in a `devcontainer.json`'s `image` line, the same way `codespace-starter` references the PPBDS devcontainer image.
+These four patterns decide the **names** the image is published under. A release tagged `v1.1.5` produces `1.1.5` and `1.1`; every build of `main` also refreshes `latest`; and every build gets a `sha-` tag naming the exact commit. All of them live on GHCR, the same registry as any public image. This is the other half of a lesson from the previous tutorial: `codespace-starter` pins `ghcr.io/ppbds/devcontainer` to an exact `X.Y.Z`, never `latest`, because `latest` moves every time this workflow runs on `main` --- and a floating pin would change every student's Codespace without anyone deciding it should.
+
+One more thing the workflow does that no student ever will: it logs in. `permissions: packages: write` plus `secrets.GITHUB_TOKEN` give the runner a temporary token that can push to GHCR, and the `Login to GHCR` step uses it. No personal token, no password, nothing to remember --- which is exactly why publishing an image is a job for a workflow rather than a person.
 
 ### Exercise 5
 
@@ -1173,7 +1236,7 @@ RUN R --vanilla -e 'fit <- brms::brm(mpg ~ wt, data = mtcars, chains = 1, iter =
 ## Summary
 ###
 
-This tutorial read through the real Dockerfile behind `ghcr.io/ppbds/devcontainer`, the image `codespace-starter`'s `devcontainer.json` points at. You saw why the base image is pinned by digest rather than a floating tag, why one image now serves both students and package developers, why layer order matters for Docker's build cache, and how deliberate `ARG` version pins keep builds reproducible. You also traced the permissions story that runs through the R package installs --- system libraries baked in as root, `PKG_SYSREQS=false` to stop `pak` from trying to `sudo`, and the switch to `USER rstudio` so lock files never poison the library for later installs --- and saw how the Python venv and the image-wide smoke tests each guard against a specific class of failure at build time, before a student ever opens a Codespace.
+This tutorial read through the real Dockerfile behind `ghcr.io/ppbds/devcontainer`, the image `codespace-starter`'s `devcontainer.json` points at. You saw why the base image is pinned by digest rather than a floating tag, why one image now serves both students and package developers, why layer order matters for Docker's build cache, and how deliberate `ARG` version pins keep builds reproducible. You also traced the permissions story that runs through the R package installs --- system libraries baked in as root, `PKG_SYSREQS=false` to stop `pak` from trying to `sudo`, and the switch to `USER rstudio` so lock files never poison the library for later installs --- and saw how the Python venv and the image-wide smoke tests each guard against a specific class of failure at build time, before a student ever opens a Codespace. Finally, you read the GitHub Actions workflow that builds and publishes the image --- `docker build` and `docker push` run by a machine on every push and every release, tagged by pattern, logged in with a token no human ever handles.
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```

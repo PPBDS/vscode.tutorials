@@ -5,10 +5,11 @@ tutorial:
   id: "15-your-starter"
 output:
   learnr::tutorial:
-    progressive: yes
-    'allow_skip:': yes
+    df_print: default
+    progressive: true
+    allow_skip: true
 runtime: shiny_prerendered
-description: Graduation exercise for the devcontainer tutorials. Build your own version of codespace-starter, with your own Dockerfile, image, and devcontainer.json. Under construction.
+description: "Graduation exercise for the devcontainer tutorials. Build your own working version of codespace-starter: a repo named my-starter with your own Dockerfile, an image built and published by a GitHub Actions workflow, and a devcontainer.json that pins it --- then launch a Codespace from it and prove it works."
 ---
 
 ```{r setup, include = FALSE}
@@ -28,9 +29,452 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-This tutorial is under construction.
+In the last three tutorials you read a real `devcontainer.json`, a real Dockerfile, and the workflow that turns that Dockerfile into a published image. Now you build the whole chain yourself, in miniature: a repo called `my-starter` that you can launch a Codespace from --- your own `codespace-starter`, without the teaching material you no longer need.
 
-You now understand devcontainers, Dockerfiles, and images. Here, you will put that knowledge to work: building your own version of `codespace-starter` --- a starter repo that belongs to you, without the teaching material you no longer need.
+"Miniature" means one base image, one extra R package, one extension, and three settings. But every piece is real, and the shape is identical to the PPBDS version: a Dockerfile describes the image, a GitHub Actions workflow builds and publishes it, and a `devcontainer.json` pins it by exact version.
+
+Two rules of the road. First, you never run `docker` yourself; a machine does, exactly as in the previous tutorial. Second, you keep this repo. Every other tutorial repo was disposable. This one is a tool you will use.
+
+### Exercise 1
+
+You should be doing this tutorial in a repo named `my-starter`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
+
+Copy and paste the URL for your `my-starter` repository.
+
+```{r introduction-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+https://github.com/ppbds-student/my-starter
+```
+
+###
+
+That repo is the product. Everything you make in this tutorial --- the Dockerfile, the workflow, the `devcontainer.json` --- lives inside it, and at the end you will turn it into a **template** so new projects can start from it with one click.
+
+## Your Starter
+###
+
+Build from the bottom up, in the order the pieces depend on each other: the Dockerfile first, then the workflow that builds it, then the `devcontainer.json` that uses the result.
+
+### Exercise 1
+
+In the bash Terminal, at the top level of your `my-starter` repo, create a file called `Dockerfile` (no extension) with exactly this content:
+
+```
+FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.5
+
+# One package of your own, so this is provably YOUR image.
+RUN R -q -e 'install.packages("praise")'
+
+# Smoke test: fail the build if the package did not install.
+RUN R -q -e 'stopifnot(requireNamespace("praise"))'
+```
+
+Then run `cat Dockerfile`. CP/CR.
+
+```{r your-starter-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 9)
+```
+
+###
+
+```
+my-starter $ cat Dockerfile
+FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.5
+
+# One package of your own, so this is provably YOUR image.
+RUN R -q -e 'install.packages("praise")'
+
+# Smoke test: fail the build if the package did not install.
+RUN R -q -e 'stopifnot(requireNamespace("praise"))'
+```
+
+###
+
+Three lines of real content. The `FROM` line starts from the same Rocker family as the PPBDS image --- but at `:4.5`, not `:4.6`. That is deliberate: R 4.6 changed how R starts up in a way that breaks the R extension's plot pane unless the image patches around it. The PPBDS Dockerfile carries exactly such a patch (the `.First` shim you can find near its arf section); you sidestep the whole problem by starting one version back. Pinning by tag rather than by digest is fine for a first version --- the digest is the professional upgrade you read about in Exercise 1 of the previous tutorial.
+
+The two `RUN` lines are the PPBDS discipline in miniature: install something, then **test** that it installed, so a broken build fails loudly instead of shipping a broken image.
+
+### Exercise 2
+
+Now the workflow. Create the folders and file `.github/workflows/build.yml` with this content, **replacing `YOUR_USERNAME` with your GitHub username in lowercase** (registry names must be lowercase):
+
+```
+name: build-and-push
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: docker/setup-buildx-action@v4
+      - uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ghcr.io/YOUR_USERNAME/my-starter
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=semver,pattern={{version}}
+      - uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+```
+
+Run `cat .github/workflows/build.yml`. CP/CR.
+
+```{r your-starter-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+
+```
+my-starter $ cat .github/workflows/build.yml
+name: build-and-push
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+```
+
+###
+
+This is a shortened copy of the workflow you read in the previous tutorial --- the same actions at the same versions, minus the caching. Nothing here is new: it checks out your repo, logs in to GHCR with the temporary `GITHUB_TOKEN` (that is what `permissions: packages: write` allows), computes the image tags, then builds and pushes. Two triggers: every push to `main` refreshes `latest`, and a tag like `v1.0.0` publishes `1.0.0` --- which is the one your `devcontainer.json` will pin.
+
+### Exercise 3
+
+Commit and push. Then, in the bash Terminal, run `gh run list --limit 1`. CP/CR.
+
+```{r your-starter-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+my-starter $ gh run list --limit 1
+*  Add Dockerfile and build workflow  build-and-push  main  push  31812345678  1m2s  1m
+```
+
+###
+
+The `*` means it is still running. The first build is slow --- five minutes or so --- because the runner has to download the ~4 GB Rocker base image before it can add your one package. Re-run the command until the leading symbol turns into a `✓`. If it ever turns into an `X`, click through to the Actions tab on github.com: the log names the exact step that failed, and the cause is almost always a typo in one of the two files you just wrote.
+
+### Exercise 4
+
+Once the build is green, publish a versioned image by creating a release. In the bash Terminal, run `gh release create v1.0.0 --title "v1.0.0" --notes "First image."`. CP/CR.
+
+```{r your-starter-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+my-starter $ gh release create v1.0.0 --title "v1.0.0" --notes "First image."
+https://github.com/ppbds-student/my-starter/releases/tag/v1.0.0
+```
+
+###
+
+Creating the release pushes a git tag `v1.0.0`, which matches the workflow's `tags: ['v*']` trigger, which starts a second build --- and that build's `type=semver` rule names the result `1.0.0`. This is the exact release dance PPBDS performs for every image version. `gh run list --limit 2` will show both builds; wait for the second `✓`.
+
+### Exercise 5
+
+Images pushed by a workflow start out **private**, and a Codespace pulls its image before you are logged in to anything, so a private image would fail. Make yours public. On github.com, open your profile, click **Packages**, open `my-starter`, then **Package settings** (right side), scroll to **Danger Zone**, and **Change visibility** to Public.
+
+Copy and paste the URL of the package page.
+
+```{r your-starter-5}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+https://github.com/ppbds-student/my-starter/pkgs/container/my-starter
+```
+
+###
+
+While you are on that page, notice the tags listed for the package: `latest` from the push build and `1.0.0` from the release build. That is the tag family you read about in the previous tutorial, now with your name on it.
+
+### Exercise 6
+
+Now the file that ties it together. Create `.devcontainer/devcontainer.json` with this content, again **replacing `YOUR_USERNAME` with your lowercase GitHub username**:
+
+```
+{
+  "name": "my-starter",
+  "image": "ghcr.io/YOUR_USERNAME/my-starter:1.0.0",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "reditorsupport.r@2.8.8"
+      ],
+      "settings": {
+        "r.plot.useHttpgd": true,
+        "files.autoSave": "afterDelay",
+        "editor.wordWrap": "on"
+      }
+    }
+  },
+  "postAttachCommand": "echo 'my-starter is ready'"
+}
+```
+
+Run `cat .devcontainer/devcontainer.json`. CP/CR.
+
+```{r your-starter-6}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 12)
+```
+
+###
+
+```
+my-starter $ cat .devcontainer/devcontainer.json
+{
+  "name": "my-starter",
+  "image": "ghcr.io/ppbds-student/my-starter:1.0.0",
+```
+
+###
+
+Every field maps to something you read in the Our Codespace Starter tutorial. `"image"` pins **your** image at an exact version, never `latest`, for the reason that tutorial hammered on: a floating tag would change your environment without you deciding it should. The R extension is pinned at `@2.8.8` for the same reason PPBDS pins it. `r.plot.useHttpgd` works because the Rocker base already includes `httpgd`; `files.autoSave` and `editor.wordWrap` are the two beginner-protection settings. And `postAttachCommand` is the simplest possible ready signal --- a one-line `echo` in place of `welcome.sh`.
+
+### Exercise 7
+
+Commit and push. Then run `git log --oneline -n 3`. CP/CR.
+
+```{r your-starter-7}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```
+my-starter $ git log --oneline -n 3
+a1b2c3d Add devcontainer.json
+e4f5a6b Add Dockerfile and build workflow
+0f1e2d3 Initial commit
+```
+
+###
+
+Three commits, three layers of the same idea: what the image contains, how it gets built, and how a Codespace uses it. Notice that this push triggered one more `latest` build --- harmless, since `devcontainer.json` is not part of the image and nothing in the Dockerfile changed.
+
+### Exercise 8
+
+Time to launch it. On github.com, open your `my-starter` repo, click the green **Code** button, choose the **Codespaces** tab, and click **Create codespace on main**. It will take several minutes: your repo has no prebuild, so the container is built from scratch, pulling your image from GHCR. When the terminal appears, a line should print. Copy and paste it.
+
+```{r your-starter-8}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 2)
+```
+
+###
+
+```
+my-starter is ready
+```
+
+###
+
+That line came from your `postAttachCommand`, which means the whole chain held: GitHub read your `devcontainer.json`, pulled `ghcr.io/…/my-starter:1.0.0` from the registry, started it, attached the editor, and ran your command. The slow start is what `codespace-starter` avoids with a prebuild (Settings → Codespaces on github.com); it costs storage, so leave it off until you use this starter often enough to care.
+
+### Exercise 9
+
+In your new Codespace, open an R Terminal (**Cmd/Ctrl + Shift + P**, then "R: Create R Terminal"). Run `library(praise)` and then `praise()`. CP/CR.
+
+```{r your-starter-9}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+```
+> library(praise)
+> praise()
+[1] "You are wonderful!"
+```
+
+###
+
+`praise` is not part of any Rocker image. It exists in this Codespace for exactly one reason: your Dockerfile installed it. This is the proof that you are running **your** image, not one that happened to be lying around.
+
+### Exercise 10
+
+Still in the new Codespace, in its bash Terminal, run `R --version | head -n 1`. CP/CR.
+
+```{r your-starter-10}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+my-starter $ R --version | head -n 1
+R version 4.5.3 (2026-03-11) -- "Reassured Reassurer"
+```
+
+###
+
+R 4.5, as you chose in the `FROM` line. When you are ready to move to 4.6, you now know exactly what has to change and why: bump the tag, add the startup shim the PPBDS Dockerfile uses, rebuild, release `v1.1.0`, repin. Same loop, one version at a time.
+
+### Exercise 11
+
+Back in your original Codespace, make `my-starter` a template. On github.com, open the repo's **Settings**, and near the top of **General**, check **Template repository**. Then, in the bash Terminal, run `gh repo view my-starter --json isTemplate`. CP/CR.
+
+```{r your-starter-11}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+my-starter $ gh repo view my-starter --json isTemplate
+{"isTemplate":true}
+```
+
+###
+
+This is how you will actually use it. A template repo gains a green **Use this template** button; each project you start that way gets its own repo, owned by you, that inherits `.devcontainer/` --- so launching a Codespace from any of them gives you your environment. That also retires `connect-repo`: that script exists only because students launch from a repo they do not own. Your projects are yours from the first commit.
+
+### Exercise 12
+
+Run `gh release list`. CP/CR.
+
+```{r your-starter-12}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+```
+my-starter $ gh release list
+TITLE   TYPE    TAG NAME  PUBLISHED
+v1.0.0  Latest  v1.0.0    about 20 minutes ago
+```
+
+###
+
+The release is the durable record of what you published, and the loop for every future change runs through it: edit the Dockerfile, push, `gh release create v1.0.1`, wait for the build, change the `1.0.0` in your `devcontainer.json` to `1.0.1`, push again. One last piece of housekeeping: the test Codespace you launched in Exercise 8 is still running. Go to https://github.com/codespaces, find the one on `my-starter`, and stop or delete it --- you will start fresh ones from your template projects rather than reusing this test.
+
+## Summary
+###
+
+You built the entire chain you spent three tutorials reading: a Dockerfile that adds one package to a pinned base and tests it; a GitHub Actions workflow that builds and publishes the image on every push and every `v*` release, tagged by pattern, logged in with a token no human handles; a `devcontainer.json` that pins the published image at an exact version and configures the editor; and a Codespace launched from all of it, with your package inside. Turning the repo into a template makes it your `codespace-starter` from here on. To change the environment, edit the Dockerfile, push, release `v1.0.1`, and repin --- the same loop PPBDS runs for every version you have used in this course.
+
+### Exercise 1
+
+In the bash Terminal, in your `my-starter` repo, run `git status`. CP/CR.
+
+```{r summary-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```
+my-starter $ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+```
+
+###
+
+Clean, pushed, and reusable. That is what a starter is.
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
