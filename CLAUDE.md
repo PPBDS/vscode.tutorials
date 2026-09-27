@@ -37,9 +37,9 @@ reference. Two things set this package apart:
     the Terminal is the lesson, and use the generic infrastructure
     knowledge drops collected below. This is **not** a blanket property
     of the package: the exception covers exactly the first four
-    tutorials — Workspace, Workflow, Code, and Quarto — and **ends with
-    Quarto**. Do not invoke it for any later tutorial just because the
-    file happens to live in this package. (It may yet be removed
+    tutorials — Orientation, Workflow, Code, and Quarto — and **ends
+    with Quarto**. Do not invoke it for any later tutorial just because
+    the file happens to live in this package. (It may yet be removed
     entirely.)
 
 (The `tutorial.helpers` package’s tutorials are the other home of this
@@ -66,7 +66,7 @@ students from these four tutorials directly into `misc.tutorials`’
 background that sequence relies on. When a downstream tutorial needs a
 skill not taught through Quarto, the fix lands here (or the downstream
 tutorial scaffolds it explicitly) — it is never assumed silently.
-Cutting material from Workspace, Workflow, Code, or Quarto therefore
+Cutting material from Orientation, Workflow, Code, or Quarto therefore
 requires checking what downstream leans on it.
 
 ### The universal entry point
@@ -235,9 +235,9 @@ base guide and every other tutorial package. In particular:
 ### Terminal terminology
 
 VS Code’s own terminal vocabulary is confusing, so the tutorials use one
-fixed system, taught in Getting Started (`tutorial.helpers`), Workspace,
-and Terminal 1 and applied everywhere (including the primer’s Getting
-Started chapter):
+fixed system, taught in Getting Started (`tutorial.helpers`),
+Orientation, and Terminal 1 and applied everywhere (including the
+primer’s Getting Started chapter):
 
 - **Panel** — the bottom region of the VS Code window, holding several
   *views* (Problems, Output, Terminal, Ports). Never call the region
@@ -361,7 +361,7 @@ keeps most references immune to renumbering and shrinks the fan-out
 below.
 
 When a title is written out as a title, quote it: *the next tutorial,
-“Models And Money,” teaches…*; *the “Workspace” tutorial*. Following
+“Models And Money,” teaches…*; *the “Orientation” tutorial*. Following
 American style, commas and periods go inside the closing quote. Short
 attributive references (the Quarto tutorial, the Code tutorial) stay
 unquoted.
@@ -401,10 +401,10 @@ repo** (find them with
 `grep -rn 'ghcr.io/ppbds/devcontainer:' --include='*.Rmd' --include='*.yaml' .`):
 
 1.  The Our Codespace Starter tutorial (currently
-    `inst/tutorials/13-our-codespace-starter/tutorial.Rmd`) — the
+    `inst/tutorials/14-our-codespace-starter/tutorial.Rmd`) — the
     expected answer for the find-the-`"image"`-line exercise.
 2.  The Devcontainer Dockerfile tutorial (currently
-    `inst/tutorials/14-docker/tutorial.Rmd`) — the intro’s
+    `inst/tutorials/15-docker/tutorial.Rmd`) — the intro’s
     back-reference to that line.
 3.  `.github/workflows/R-CMD-check.yaml` — the CI `container: image:`
     tag (this one is normally bumped as part of the codespace-starter

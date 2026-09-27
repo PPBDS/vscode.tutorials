@@ -15,63 +15,63 @@ tools in the tutorial.helpers package.
 The package includes tutorials focused on VS Code and modern R
 development:
 
-- **Workspace** (00-workspace): A tour of the workspace — the bash and R
-  Terminals, GitHub Copilot, and the ways to run R code
+- **Orientation** (01-orientation): A tour of the workspace — the bash
+  and R Terminals, GitHub Copilot, and the ways to run R code
 
-- **Workflow** (01-workflow): First tutorial after Workspace — VS Code,
-  the Terminal, repos, R scripts, plots, and Git
+- **Workflow** (02-workflow): First tutorial after Orientation — VS
+  Code, the Terminal, repos, R scripts, plots, and Git
 
-- **Code** (02-code): Introduction to VS Code and writing R code in
+- **Code** (03-code): Introduction to VS Code and writing R code in
   simple scripts
 
-- **Quarto** (03-quarto): Advanced R coding tricks in VS Code and Quarto
+- **Quarto** (04-quarto): Advanced R coding tricks in VS Code and Quarto
   document creation
 
-- **Antigravity** (04-antigravity): Meeting the Antigravity CLI agent
+- **Antigravity** (05-antigravity): Meeting the Antigravity CLI agent
   (agy) and using it to create and render a Quarto analysis
 
-- **Terminal 1** (05-terminal-1): First of three bash Terminal
+- **Terminal 1** (06-terminal-1): First of three bash Terminal
   tutorials: core commands, paths, and output redirection
 
-- **Terminal 2** (06-terminal-2): Command options, environment
+- **Terminal 2** (07-terminal-2): Command options, environment
   variables, looking inside files, and running R and Python programs
 
-- **Terminal 3** (07-terminal-3): Wildcards, regular expressions, grep,
+- **Terminal 3** (08-terminal-3): Wildcards, regular expressions, grep,
   and pipes
 
-- **GitHub Introduction** (08-github-1): Git and GitHub basics within VS
+- **GitHub Introduction** (09-github-1): Git and GitHub basics within VS
   Code
 
-- **GitHub Advanced** (09-github-2): Advanced Git/GitHub workflows and
+- **GitHub Advanced** (10-github-2): Advanced Git/GitHub workflows and
   GitHub Pages
 
-- **Websites 1** (10-websites-1): Basic website construction using
+- **Websites 1** (11-websites-1): Basic website construction using
   Quarto projects
 
-- **Websites 2** (11-websites-2): Advanced Quarto websites with modular
+- **Websites 2** (12-websites-2): Advanced Quarto websites with modular
   data analysis
 
-- **Devcontainers** (12-devcontainers): An introduction to
+- **Devcontainers** (13-devcontainers): An introduction to
   devcontainers, touring a pre-built Jupyter devcontainer.json and
   building an R devcontainer.json from scratch
 
-- **Our Codespace Starter** (13-our-codespace-starter): A tour of the
+- **Our Codespace Starter** (14-our-codespace-starter): A tour of the
   devcontainer.json behind codespace-starter itself
 
-- **The Devcontainer Dockerfile** (14-docker): A reading tour of the
+- **The Devcontainer Dockerfile** (15-docker): A reading tour of the
   Dockerfile that builds the PPBDS devcontainer image
 
-- **Your Starter** (15-your-starter): Build your own version of
+- **Your Starter** (16-your-starter): Build your own version of
   codespace-starter (under construction)
 
-- **Dotfiles** (16-dotfiles): Build a private dotfiles repo GitHub
+- **Dotfiles** (17-dotfiles): Build a private dotfiles repo GitHub
   installs into every new Codespace, carrying your Git identity and
   shell settings
 
-- **OpenRouter** (17-openrouter): Get an OpenRouter API key, store it
+- **OpenRouter** (18-openrouter): Get an OpenRouter API key, store it
   safely, and drive aider with it
 
-- **Models And Money** (18-models): Buy \$10 of OpenRouter credits (the
+- **Models And Money** (19-models): Buy \$10 of OpenRouter credits (the
   only credit card in the course), call the API from bash and R, and
   compare what the price gap between free and frontier models buys
 
@@ -80,11 +80,11 @@ development:
 To run a tutorial, use:
 `learnr::run_tutorial(name = "short_tutorial_name", package = "vscode.tutorials")`
 
-Available tutorial names include: 00-workspace, 01-workflow, 02-code,
-03-quarto, 04-antigravity, 05-terminal-1, 06-terminal-2, 07-terminal-3,
-08-github-1, 09-github-2, 10-websites-1, 11-websites-2,
-12-devcontainers, 13-our-codespace-starter, 14-docker, 15-your-starter,
-16-dotfiles, 17-openrouter, and 18-models.
+Available tutorial names include: 01-orientation, 02-workflow, 03-code,
+04-quarto, 05-antigravity, 06-terminal-1, 07-terminal-2, 08-terminal-3,
+09-github-1, 10-github-2, 11-websites-1, 12-websites-2,
+13-devcontainers, 14-our-codespace-starter, 15-docker, 16-your-starter,
+17-dotfiles, 18-openrouter, and 19-models.
 
 ## See also
 

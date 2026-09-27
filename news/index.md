@@ -2,6 +2,11 @@
 
 ## vscode.tutorials (development version)
 
+- Renamed the Workspace tutorial to Orientation and renumbered every
+  tutorial directory to start from 01 (`01-orientation` through
+  `19-models`). Tutorial ids changed with the directories, so stored
+  answers for earlier ids do not carry over.
+
 - Rebuilt the curriculum into nineteen tutorials, after several rounds
   of splitting, renaming, and renumbering: Workspace, Workflow, Code,
   Quarto, Antigravity, Terminal 1-3, GitHub Introduction/Advanced,
