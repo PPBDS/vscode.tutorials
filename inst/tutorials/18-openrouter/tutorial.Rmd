@@ -2,7 +2,7 @@
 title: "OpenRouter"
 author: David Kane
 tutorial:
-  id: "17-openrouter"
+  id: "18-openrouter"
 output:
   learnr::tutorial:
     df_print: default

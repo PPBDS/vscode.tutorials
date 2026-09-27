@@ -102,7 +102,7 @@ jobs:
           paths <- tutorial.helpers::return_tutorial_paths(package = "vscode.tutorials")
           tutorial.helpers::knit_tutorials(paths)
         shell: Rscript {0}
-  # Cross-repo drift guard. Tutorial 13 quotes codespace-starter's
+  # Cross-repo drift guard. Tutorial 14 quotes codespace-starter's
   # devcontainer.json line by line ("find this line, paste it"), and nothing
   # else notices when that file changes under the tutorial — it did on
   # 2026-08-22 and was found by hand weeks later. Fetches the LIVE file and
@@ -110,7 +110,7 @@ jobs:
   # See .github/scripts/check-config-drift.R (runs locally too).
   config-drift:
     runs-on: ubuntu-latest
-    name: tutorial 13 still matches codespace-starter's devcontainer.json
+    name: tutorial 14 still matches codespace-starter's devcontainer.json
     steps:
       - uses: actions/checkout@v5
       - uses: r-lib/actions/setup-r@v2

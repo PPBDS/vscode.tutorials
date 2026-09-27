@@ -2,7 +2,7 @@
 title: "Workflow"
 author: David Kane
 tutorial:
-  id: "01-workflow"
+  id: "02-workflow"
 output:
   learnr::tutorial:
     df_print: default
@@ -29,7 +29,7 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-This is the first tutorial you should complete after **Workspace**. It builds directly on that tutorial, deliberately repeating its most important ideas --- repetition is how these habits stick. We move slowly and explain every step.
+This is the first tutorial you should complete after **Orientation**. It builds directly on that tutorial, deliberately repeating its most important ideas --- repetition is how these habits stick. We move slowly and explain every step.
 
 You will:
 
@@ -80,7 +80,7 @@ Your answer may look a little different from ours. That is OK. Usernames, versio
 ## The Terminal
 ###
 
-The Terminal is a place where you type commands and the computer answers. In this section you will run a handful of simple, safe commands. You ran several of them --- `pwd`, `ls`, `ls -a` --- in Workspace. Running them again is deliberate: these commands should live in your fingers, not your notes. Every question is just CP/CR.
+The Terminal is a place where you type commands and the computer answers. In this section you will run a handful of simple, safe commands. You ran several of them --- `pwd`, `ls`, `ls -a` --- in Orientation. Running them again is deliberate: these commands should live in your fingers, not your notes. Every question is just CP/CR.
 
 ###
 
@@ -431,7 +431,7 @@ Seeing the repository in your browser proves two things: the repository really e
 ## Script 1: GitHub Copilot
 ###
 
-You met **GitHub Copilot** --- the AI assistant built right into VS Code --- in the Workspace tutorial, where it wrote small files for you. We use Copilot here because it is always available and works out of the box.
+You met **GitHub Copilot** --- the AI assistant built right into VS Code --- in the Orientation tutorial, where it wrote small files for you. We use Copilot here because it is always available and works out of the box.
 
 Open a new R Terminal by clicking the small arrow beside the `+` in the top-right corner of the Panel, then choosing **R Terminal**. (The new terminal's tab is labeled **R Interactive**.) 
 

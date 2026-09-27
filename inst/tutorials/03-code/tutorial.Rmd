@@ -2,7 +2,7 @@
 title: Code
 author: David Kane
 tutorial:
-  id: "02-code"
+  id: "03-code"
 output:
   learnr::tutorial:
     progressive: yes
@@ -29,7 +29,7 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-This tutorial teaches you how to use [**Codespaces**](https://github.com/features/codespaces) with [**R**](https://www.r-project.org/about.html) scripts. It assumes that you have completed the "Workspace" tutorial.
+This tutorial teaches you how to use [**Codespaces**](https://github.com/features/codespaces) with [**R**](https://www.r-project.org/about.html) scripts. It assumes that you have completed the "Orientation" tutorial.
 
 This tutorial includes some information from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
@@ -123,7 +123,7 @@ Now, you have a fresh R Terminal where you can run commands. You can switch betw
 ## Packages
 ###
 
-Again, you should have completed the "Workspace" tutorial. If not, this section may be difficult.
+Again, you should have completed the "Orientation" tutorial. If not, this section may be difficult.
 
 ### Exercise 1
 
@@ -370,7 +370,7 @@ R scripts are permanent copies of your code. You can save them and also work wit
 
 ### Exercise 2
 
-You met the Source button and its keyboard shortcut in the Workspace tutorial. Practice them again now --- the goal is to make them habit.
+You met the Source button and its keyboard shortcut in the Orientation tutorial. Practice them again now --- the goal is to make them habit.
 
 Press the **Source** button in the top-right corner of the Editor. (We will sometimes shorten the instruction "press the Source button" to just "source" the script.)
 
@@ -651,7 +651,7 @@ Do not confuse R's `ls()` with the bash `ls` you just ran: same name, different 
 
 `x` is gone! The environment --- the place in the computer where R creates and uses objects --- is cleaned, by default, each time R restarts. This is a good thing. For our work to be "reproducible," we want to be able to start from nothing except our code and raw data.
 
-You first saw this in Workspace, when the `x` created by Copilot's `Rscript` never appeared in your open R session. Every R process has its own environment, and a restarted R Terminal is a new process.
+You first saw this in Orientation, when the `x` created by Copilot's `Rscript` never appeared in your open R session. Every R process has its own environment, and a restarted R Terminal is a new process.
 
 ### Exercise 4
 

@@ -2,7 +2,7 @@
 title: "Terminal 2"
 author: David Kane
 tutorial:
-  id: "06-terminal-2"
+  id: "07-terminal-2"
 output:
   learnr::tutorial:
     progressive: yes
@@ -530,7 +530,7 @@ You have been running programs all along --- `ls`, `curl`, and `git` are program
 
 ### Exercise 1
 
-Make a one-line R script and run it, as you did back in the Workspace tutorial. Run these commands, one at a time:
+Make a one-line R script and run it, as you did back in the Orientation tutorial. Run these commands, one at a time:
 
 ````
 echo 'print(2 + 2)' > add.R
@@ -559,7 +559,7 @@ terminal-2 $
 
 ###
 
-`Rscript` starts a fresh R process, runs the file, prints the result, and exits. Nothing is left running --- and nothing you define in the script exists afterward, as you saw with the vanishing `x` in Workspace.
+`Rscript` starts a fresh R process, runs the file, prints the result, and exits. Nothing is left running --- and nothing you define in the script exists afterward, as you saw with the vanishing `x` in Orientation.
 
 ### Exercise 2
 

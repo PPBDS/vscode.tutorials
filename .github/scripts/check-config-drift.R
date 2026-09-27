@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 # check-config-drift.R — cross-repo drift guard.
 #
-# Tutorial 13 ("Our Codespace Starter") tours codespace-starter's
+# Tutorial 14 ("Our Codespace Starter") tours codespace-starter's
 # devcontainer.json line by line: "find this line, copy and paste it", with the
 # expected paste shown in a fenced block. Nothing else notices when that file
 # changes underneath the tutorial — on 2026-08-22 two exercises started pointing
@@ -17,7 +17,7 @@
 # Exit 1 with a list of missing lines on drift; base R only, no packages.
 
 args     <- commandArgs(trailingOnly = TRUE)
-tutorial <- if (length(args) >= 1) args[1] else "inst/tutorials/13-our-codespace-starter/tutorial.Rmd"
+tutorial <- if (length(args) >= 1) args[1] else "inst/tutorials/14-our-codespace-starter/tutorial.Rmd"
 source   <- if (length(args) >= 2) args[2] else
   "https://raw.githubusercontent.com/PPBDS/codespace-starter/main/.devcontainer/devcontainer.json"
 

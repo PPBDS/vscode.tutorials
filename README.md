@@ -38,7 +38,7 @@ As a backup, you can launch a tutorial from the R console with
 `learnr::run_tutorial()`, providing the short name of the tutorial and
 the package name.
 
-    learnr::run_tutorial(name = "01-workflow",
+    learnr::run_tutorial(name = "02-workflow",
                          package = "vscode.tutorials")
 
 ### VS Code Tutorials
@@ -46,72 +46,72 @@ the package name.
 The core tutorials introduce students to the VS Code integrated
 development environment.
 
-- *Workspace* (“00-workspace”). A tour of the workspace: the bash
+- *Orientation* (“01-orientation”). A tour of the workspace: the bash
   Terminal, the R Terminal, GitHub Copilot, and the ways to run R code.
   Moved here from **tutorial.helpers**, whose five-minute *Getting
   Started* tutorial now handles first contact.
 
-- *Workflow* (“01-workflow”). The first tutorial after **Workspace**:
+- *Workflow* (“02-workflow”). The first tutorial after **Orientation**:
   move around VS Code, use the Terminal, create a GitHub repo, run R
   scripts, make plots, and commit and push with Git.
 
-- *Code* (“02-code”). Introduce students to VS Code and to writing R
+- *Code* (“03-code”). Introduce students to VS Code and to writing R
   code in simple scripts.
 
-- *Quarto* (“03-quarto”). Demonstrate more tricks for working with R
+- *Quarto* (“04-quarto”). Demonstrate more tricks for working with R
   code using VS Code, and also explain Quarto documents.
 
-- *Antigravity* (“04-antigravity”). Meet the Antigravity CLI agent
+- *Antigravity* (“05-antigravity”). Meet the Antigravity CLI agent
   (`agy`) and use it to create and render a Quarto analysis.
 
-- *Terminal 1* (“05-terminal-1”). First of three bash Terminal
+- *Terminal 1* (“06-terminal-1”). First of three bash Terminal
   tutorials: the core commands, paths, and output redirection.
 
-- *Terminal 2* (“06-terminal-2”). Command options, environment
+- *Terminal 2* (“07-terminal-2”). Command options, environment
   variables, looking inside files, moving files in and out of a
   Codespace, and running R and Python programs.
 
-- *Terminal 3* (“07-terminal-3”). Wildcards, regular expressions, grep,
+- *Terminal 3* (“08-terminal-3”). Wildcards, regular expressions, grep,
   and pipes.
 
-- *GitHub Introduction* (“08-github-1”). Explain the basics of Git and
+- *GitHub Introduction* (“09-github-1”). Explain the basics of Git and
   GitHub, mostly in the context of VS Code.
 
-- *GitHub Advanced* (“09-github-2”). More practice with Git/GitHub:
+- *GitHub Advanced* (“10-github-2”). More practice with Git/GitHub:
   create a repo by hand with `gh`, clone it onto a fresh machine, pull
   changes back, and delete a Codespace while your work survives on
   GitHub.
 
-- *Websites 1* (“10-websites-1”). Use the quarto CLI to create, render,
+- *Websites 1* (“11-websites-1”). Use the quarto CLI to create, render,
   preview, and publish a multi-page website to GitHub Pages.
 
-- *Websites 2* (“11-websites-2”). Build a site with multi-page
+- *Websites 2* (“12-websites-2”). Build a site with multi-page
   navigation and drop-down menus, then refactor analysis code into
   scripts that save results as RDS and PNG files.
 
-- *Devcontainers* (“12-devcontainers”). Introduce devcontainers, touring
+- *Devcontainers* (“13-devcontainers”). Introduce devcontainers, touring
   a pre-built Jupyter devcontainer.json and building an R
   devcontainer.json from scratch.
 
-- *Our Codespace Starter* (“13-our-codespace-starter”). Tour the
+- *Our Codespace Starter* (“14-our-codespace-starter”). Tour the
   devcontainer.json behind `codespace-starter` itself.
 
-- *The Devcontainer Dockerfile* (“14-docker”). Read through the
+- *The Devcontainer Dockerfile* (“15-docker”). Read through the
   Dockerfile that builds the PPBDS devcontainer image.
 
-- *Your Starter* (“15-your-starter”). Build your own version of
+- *Your Starter* (“16-your-starter”). Build your own version of
   `codespace-starter`, with your own Dockerfile, image, and
   devcontainer.json. Under construction.
 
-- *Dotfiles* (“16-dotfiles”). Build a private `dotfiles` repo that
+- *Dotfiles* (“17-dotfiles”). Build a private `dotfiles` repo that
   GitHub reads every time it makes you a machine, so a brand new
   Codespace already knows your Git identity.
 
-- *OpenRouter* (“17-openrouter”). Get an OpenRouter account and API key,
+- *OpenRouter* (“18-openrouter”). Get an OpenRouter account and API key,
   store the key so it survives a rebuild, and use it to drive `aider` on
   free and cheap models.
 
-- *Models And Money* (“18-models”). Buy \$10 of OpenRouter credits — the
+- *Models And Money* (“19-models”). Buy \$10 of OpenRouter credits — the
   only credit card in the course — call the API from bash and from R
   with `ellmer`, and find out what the hundred-fold price gap between
   free and frontier models actually buys.

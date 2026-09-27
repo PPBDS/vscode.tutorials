@@ -1,6 +1,21 @@
 ## topics
 
-Too many students are coming to a question, not answering it, clicking Continue, and then copy/pasting our answer in for their answer. No good! We could embed white text in our answer to catch them. We could not provide answer. We could not allow you to hit continue until you hit submit on a question.
+Too many students are coming to a question, not answering it, clicking Continue, and then copy/pasting our answer in for their answer. No good! We could embed white text in our answer to catch them. We could not provide answer. We could not allow you to hit continue until you hit submit on a question. Best answer is probably to provide the answer, but in a wordy way which does not allow for easy copy/pasting. Example:
+
+If the real answer is:
+
+---
+workflow$ pwd
+/workspaces/workflow
+---
+
+Our answer could be:
+
+---
+You should have entered `pwd` at the `workflow$` prompt. If you did so, the response should have been `/workspaces/workflow`. 
+---
+
+
 
 There are a couple of tricks that we need to teach before milestone 4, either in current tutorials or in a special 'tricks' tutorial. Key topics:
 
@@ -10,7 +25,7 @@ There are a couple of tricks that we need to teach before milestone 4, either in
 
   * Renaming repos. This should walk a student through the creation and then renaming process. Key to explain the need to push everything first and then run connect-repo. Note that it is good practice to delete the /workspaces/old-name directory since it no longer connects to anything. But, at the same time, it does not matter because connect-repo will make the new folder, corresponding to the changed repo name, without complaint.
 
-  * Show how to find/open a file like 'devcontainer.json' even though 
+  * Show how to find/open a file like 'devcontainer.json' even though it is not in the current directory.
 
 After doing the below, we need to renumber things.
 

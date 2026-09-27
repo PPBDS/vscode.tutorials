@@ -1,8 +1,8 @@
 ---
-title: Workspace
+title: Orientation
 author: David Kane
 tutorial:
-  id: 00-workspace
+  id: 01-orientation
 output:
   learnr::tutorial:
     progressive: yes

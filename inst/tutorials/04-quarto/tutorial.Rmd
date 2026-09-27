@@ -2,7 +2,7 @@
 title: Quarto
 author: David Kane
 tutorial:
-  id: "03-quarto"
+  id: "04-quarto"
 output:
   learnr::tutorial:
     progressive: yes
