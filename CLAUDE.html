@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">vscode.tutorials</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -170,8 +170,7 @@ example $</code></pre>
 <p>Tutorial directory names (<code>inst/tutorials/NN-slug/</code>) embed a sequence number. Renaming a directory fans out; update all of these together:</p>
 <ol style="list-style-type: decimal"><li>
 <code>learnr::run_tutorial(name = "NN-slug", ...)</code> calls — <code>name</code> is the <strong>directory</strong> name. They appear in README.Rmd/README.md and inside tutorials (“if you quit, restart with…”).</li>
-<li>
-<code>raw.githubusercontent.com/...</code> and <code>github.com/.../blob/main/...</code> URLs that embed <code>inst/tutorials/NN-slug/</code> — in tutorials (download exercises) and in <code>tests/testthat/test-downloads.R</code>. These point at GitHub <code>main</code>, so they 404 (locally and for students) until the rename is pushed.</li>
+<li>Files students download from GitHub (the <code>raw.githubusercontent.com/...</code> and <code>github.com/.../blob/main/...</code> URLs in download exercises and in <code>tests/testthat/test-downloads.R</code>) must <strong>not</strong> live under a numbered tutorial directory. Keep them in <code>inst/extdata/</code> (<code>grepping.txt</code>) or at the repo root (<code>TODO.txt</code>), so a rename never changes the URL. A URL that embeds <code>inst/tutorials/NN-slug/</code> breaks in both directions: it 404s until the rename is pushed, and once pushed it 404s for every student still on the previously installed package (how the Terminal 3 <code>grepping.txt</code> link broke in September 2026).</li>
 <li>Cross-references in prose: “the next tutorial, <code>NN-slug</code>”, README.Rmd’s tutorial list (re-render README.md after editing), and this file.</li>
 <li>The YAML <code>id:</code> field — <strong>the id must always equal the directory name.</strong> Renumbering a directory therefore means renumbering its id in the same commit. (Changing an id invalidates students’ stored answers for that tutorial; that cost is accepted — consistency wins.)</li>
 </ol><p>NEWS.md entries are historical records — never retro-renumber them.</p>
