@@ -55,8 +55,8 @@ test_that("08-terminal-3: grepping.txt is downloadable", {
   testthat::skip_on_cran()
   testthat::skip_if_offline()
   check_url_is_plain_text(
-    "https://raw.githubusercontent.com/PPBDS/vscode.tutorials/refs/heads/main/inst/tutorials/08-terminal-3/images/grepping.txt",
-    local_path = system.file("tutorials/08-terminal-3/images/grepping.txt",
+    "https://raw.githubusercontent.com/PPBDS/vscode.tutorials/refs/heads/main/inst/extdata/grepping.txt",
+    local_path = system.file("extdata/grepping.txt",
                              package = "vscode.tutorials")
   )
 })

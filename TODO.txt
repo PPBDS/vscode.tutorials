@@ -27,10 +27,6 @@ There are a couple of tricks that we need to teach before milestone 4, either in
 
   * Show how to find/open a file like 'devcontainer.json' even though it is not in the current directory.
 
-After doing the below, we need to renumber things.
-
-Workflow and Workspace are too similar. Rename one of them.
-
 Move uploading/downloading file exercise into an earlier tutorial, maybe orientation.
 
 Terminal 2 needs to some clean up.

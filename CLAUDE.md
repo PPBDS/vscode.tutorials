@@ -323,10 +323,15 @@ Renaming a directory fans out; update all of these together:
 1. `learnr::run_tutorial(name = "NN-slug", ...)` calls — `name` is the
    **directory** name. They appear in README.Rmd/README.md and inside
    tutorials ("if you quit, restart with...").
-2. `raw.githubusercontent.com/...` and `github.com/.../blob/main/...` URLs
-   that embed `inst/tutorials/NN-slug/` — in tutorials (download exercises)
-   and in `tests/testthat/test-downloads.R`. These point at GitHub `main`, so
-   they 404 (locally and for students) until the rename is pushed.
+2. Files students download from GitHub (the `raw.githubusercontent.com/...`
+   and `github.com/.../blob/main/...` URLs in download exercises and in
+   `tests/testthat/test-downloads.R`) must **not** live under a numbered
+   tutorial directory. Keep them in `inst/extdata/` (`grepping.txt`) or at the
+   repo root (`TODO.txt`), so a rename never changes the URL. A URL that embeds
+   `inst/tutorials/NN-slug/` breaks in both directions: it 404s until the
+   rename is pushed, and once pushed it 404s for every student still on the
+   previously installed package (how the Terminal 3 `grepping.txt` link broke
+   in September 2026).
 3. Cross-references in prose: "the next tutorial, `NN-slug`", README.Rmd's
    tutorial list (re-render README.md after editing), and this file.
 4. The YAML `id:` field — **the id must always equal the directory name.**
