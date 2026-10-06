@@ -99,7 +99,7 @@ question_text(NULL,
 ```
 our-codespace-starter $ cd ../codespace-starter
 codespace-starter $ ls .devcontainer
-AGENTS.md  STUDENT_WORKFLOW.md  connect-repo.sh  devcontainer.json  tests  welcome.sh
+AGENTS.md  STUDENT_WORKFLOW.md  connect-repo.sh  devcontainer.json  setup.sh  tests  welcome.sh
 ```
 
 ###
@@ -109,7 +109,7 @@ Your new repo and `codespace-starter` sit side by side under `/workspaces` in th
 ## Codespace Starter Devcontainer
 ###
 
-This section walks through `codespace-starter’`s `.devcontainer/devcontainer.json` field by field, examining the custom image, VS Code extensions, settings, the `postAttachCommand` behind the ready banner, and the retired `postCreateCommand`. Unlike the minimal configurations from the Devcontainers tutorial, this setup customizes almost everything to guarantee an identical experience for every student. By the end, you'll understand each top-level field and manually install a package to see what installing by hand looks like now that everything the course needs ships baked into the image.
+This section walks through `codespace-starter’`s `.devcontainer/devcontainer.json` field by field, examining the custom image, VS Code extensions, settings, the `onCreateCommand` behind the ready banner, and the retired `postCreateCommand`. Unlike the minimal configurations from the Devcontainers tutorial, this setup customizes almost everything to guarantee an identical experience for every student. By the end, you'll understand each top-level field and manually install a package to see what installing by hand looks like now that everything the course needs ships baked into the image.
 
 ### Exercise 1
  
@@ -173,12 +173,12 @@ question_text(NULL,
 ###
 
 ```
-"reditorsupport.r@2.8.8",
+"reditorsupport.r@3.0.1",
 ```
 
 ###
 
-`reditorsupport.r` is the extension that gives VS Code R syntax highlighting, code completion, and the R Terminal integration you've been using all course. The `@2.8.8` **pins** it to one exact version. Without a pin, the Marketplace would silently update every student's Codespace the day a new release appeared --- and the comment directly above this line explains that the next major version of this extension changes how plots reach the plot pane, so an unpinned update would have broken plotting mid-semester. Pinning is how the course decides *when* to take that change, rather than letting the Marketplace decide for it.
+`reditorsupport.r` is the extension that gives VS Code R syntax highlighting, code completion, and the R Terminal integration you've been using all course. The `@3.0.1` **pins** it to one exact version. Without a pin, the Marketplace would silently update every student's Codespace the day a new release appeared --- and the comment directly above this line explains why that matters here: version 3.0 of this extension changed how it attaches to a running R session (which is what gets plots into the plot pane), and it needs a matching R package, `sess`, that the course's image bakes in alongside this exact version. An uninvited update would have broken plotting mid-semester. Pinning is how the course decides *when* to take a change like that, rather than letting the Marketplace decide for it.
 
 ### Exercise 4
 
@@ -281,7 +281,7 @@ Three quality-of-life extensions: `ritwickdey.LiveServer` previews HTML files, `
 
 ### Exercise 8
 
-Find the line containing `"r.rterm.linux"`. Copy and paste it.
+Find the line containing `"r.consolePath"`. Copy and paste it.
 
 ```{r codespace-starter-8}
 question_text(NULL,
@@ -295,7 +295,7 @@ question_text(NULL,
 ###
 
 ```
-"r.rterm.linux": "/usr/local/bin/arf",
+"r.consolePath": "/usr/local/bin/arf",
 ```
 
 ###
@@ -304,7 +304,7 @@ question_text(NULL,
 
 ### Exercise 9
 
-Find the line containing `"r.plot.useHttpgd"`. Copy and paste it.
+Find the line containing `"r.plot.backend"`. Copy and paste it.
 
 ```{r codespace-starter-9}
 question_text(NULL,
@@ -318,12 +318,12 @@ question_text(NULL,
 ###
 
 ```
-"r.plot.useHttpgd": true,
+"r.plot.backend": "httpgd",
 ```
 
 ###
 
-By default, R opens plots in a separate window that would be invisible in a Codespace. Setting this to `true` sends plots to the **httpgd** tool instead, which streams them into a panel inside VS Code.
+By default, R opens plots in a separate window that would be invisible in a Codespace. Naming `httpgd` here sends plots to the **httpgd** tool instead, which streams them into a panel inside VS Code. (The extension's own default, `auto`, would pick whichever plot device it happens to find; naming one keeps every student on the same device.)
 
 ### Exercise 10
 
@@ -442,7 +442,7 @@ By default, VS Code opens files in "preview" mode --- clicking a second file rep
 
 ### Exercise 15
 
-Now leave the `"settings"` block and scroll back up. Find the `"postAttachCommand"` field. Copy and paste it together with the two lines that follow it --- the whole three-line block.
+Now leave the `"settings"` block and scroll back up. Find the `"onCreateCommand"` field. Copy and paste that one line.
 
 ```{r codespace-starter-15}
 question_text(NULL,
@@ -450,20 +450,18 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 3)
+	rows = 2)
 ```
 
 ###
 
 ```
-"postAttachCommand": {
-  "Welcome!": "bash ${containerWorkspaceFolder}/.devcontainer/welcome.sh"
-},
+"onCreateCommand": "bash ${containerWorkspaceFolder}/.devcontainer/setup.sh",
 ```
 
 ###
 
-You have already met this field --- it is what printed the "✅ YOUR CODESPACE IS READY" banner the first time you opened this Codespace. A `postAttachCommand` runs every time the editor **attaches** to the container, in a terminal you can see, which is why the banner shows up in a terminal tab. That tab is named "Codespaces: Welcome!" because Codespaces labels it with the key, `"Welcome!"`, and adds its own prefix. The value is the command: `bash` running `welcome.sh`, with `${containerWorkspaceFolder}` standing in for the absolute path of the checkout, so the script is still found after you switch your open folder to your own repo.
+You have already met the result of this line --- it is behind the "✅ YOUR CODESPACE IS READY" banner that greeted you in your first terminal. An `onCreateCommand` runs once, when the container is first built; for this repo that happens during the prebuild, before you ever see the Codespace. The value is the command: `bash` running `setup.sh`, with `${containerWorkspaceFolder}` standing in for the absolute path of the checkout. Open `setup.sh` and you will find it does three small things: installs the `connect-repo` command, sets the short prompt you have been typing at all along, and adds a few lines to `~/.bashrc` that print the banner the first time a terminal opens. Nothing prints during the build itself --- its output goes to a log nobody reads --- which is why the banner is printed by your shell, later, rather than by this command directly. (Earlier versions of the starter used a `postAttachCommand` instead, which runs in a *visible* terminal every time the editor attaches. It worked, but it opened a second terminal next to the one Codespaces already gives you, and students kept asking why there were two.)
 
 ### Exercise 16
 
@@ -492,7 +490,7 @@ question_text(NULL,
 
 There *used* to be a `postCreateCommand` here that refreshed the course packages from GitHub every time a Codespace was created. It was retired: the four course packages now ship at whatever versions the image baked, and updates reach students through a new image release plus a pin bump --- the same `"image"` line you found in Exercise 2. That makes Codespace creation faster and independent of GitHub being reachable.
 
-Read the rest of the comment, though. The recipe was kept on purpose, dormant, in case course content ever again needs to move faster than image releases --- along with hard-won notes on *why* it must be `postCreateCommand` rather than `onCreateCommand` if revived. Deleting working knowledge is cheap; re-learning it is not. Either way, the packages only cover the course --- anything else you need, you install yourself, by hand or by asking AI, which is exactly what the next few exercises do.
+Read the rest of the comment, though. The recipe was kept on purpose, dormant, in case course content ever again needs to move faster than image releases --- along with hard-won notes on *why* it must be `postCreateCommand` rather than `onCreateCommand` if revived --- the opposite choice from the setup script above, and for a reason: setup can be frozen into the prebuild, a package refresh must not be. Deleting working knowledge is cheap; re-learning it is not. Either way, the packages only cover the course --- anything else you need, you install yourself, by hand or by asking AI, which is exactly what the next few exercises do.
 
 ### Exercise 17
 
@@ -628,7 +626,7 @@ A good AI agent in this Codespace targets `/opt/venv/bin/pip` --- the environmen
 ## Summary
 ###
 
-This tutorial toured the `devcontainer.json` behind `codespace-starter` itself: its pinned custom PPBDS image, its VS Code extensions array, the settings that control the R Terminal, plot rendering, Git commits, autosave, word wrap, and tab behavior, the `postAttachCommand` behind the ready banner, and the retired `postCreateCommand` --- course packages now ship baked into the image, with the refresh recipe kept dormant in a comment. The next tutorial, "The Devcontainer Dockerfile," goes one level deeper and reads through the Dockerfile that actually builds the `ghcr.io/ppbds/devcontainer` image this `devcontainer.json` points at.
+This tutorial toured the `devcontainer.json` behind `codespace-starter` itself: its pinned custom PPBDS image, its VS Code extensions array, the settings that control the R Terminal, plot rendering, Git commits, autosave, word wrap, and tab behavior, the `onCreateCommand` behind the ready banner, and the retired `postCreateCommand` --- course packages now ship baked into the image, with the refresh recipe kept dormant in a comment. The next tutorial, "The Devcontainer Dockerfile," goes one level deeper and reads through the Dockerfile that actually builds the `ghcr.io/ppbds/devcontainer` image this `devcontainer.json` points at.
 
 ### Exercise 1
 

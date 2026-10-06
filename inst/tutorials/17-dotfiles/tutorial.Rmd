@@ -76,9 +76,9 @@ By the end of this tutorial, that command will print `Preceptor` on a machine wh
 
 ### Exercise 2
 
-Now look at the file that runs every time you open a bash Terminal:
+Now look at the file that runs every time you open a bash Terminal. The starter put several blocks in it; show the one about your prompt:
 
-<pre><code>tail -3 ~/.bashrc
+<pre><code>grep -A 2 short-prompt ~/.bashrc
 </code></pre>
 
 CP/CR.
@@ -95,7 +95,7 @@ question_text(NULL,
 ###
 
 ```
-codespace-starter $ tail -3 ~/.bashrc
+codespace-starter $ grep -A 2 short-prompt ~/.bashrc
 # codespace-starter:short-prompt — short prompt for beginners (folder name + $).
 PROMPT_COMMAND=''
 PS1='\W \$ '
@@ -105,7 +105,7 @@ PS1='\W \$ '
 
 There is the reason your prompt says `codespace-starter $` instead of the long `@user ➜ /workspaces/... (main) $` that GitHub gives everybody else. `PS1` holds your prompt, and `\W` means *the name of the current directory*, which is why it changes as you `cd` around. (`PROMPT_COMMAND` is cleared first because the stock Codespaces prompt rebuilds itself through it on every render --- clearing it is what lets the simple `PS1` stick.)
 
-`codespace-starter`'s `welcome.sh` appends those lines to the end of `~/.bashrc` when you first attach to a new Codespace. Note that word --- **appends**. `.bashrc` already belongs to somebody, and in a few minutes you are going to add a line after theirs rather than replace the file.
+`codespace-starter`'s `setup.sh` appends those lines to the end of `~/.bashrc` while the Codespace is being built, before you ever open a terminal (the lines after them, which `grep` did not show, are the starter's ready banner and, once you have run `connect-repo`, its bookkeeping). Note that word --- **appends**. `.bashrc` already belongs to somebody, and in a few minutes you are going to add a line after theirs rather than replace the file.
 
 ## Your Dotfiles Repo
 ###
@@ -379,7 +379,7 @@ Nothing in that chain knows anything about this tutorial or this course. It is a
 Still in the **new** Codespace, run:
 
 <pre><code>git config --get user.name
-tail -2 ~/.bashrc
+tail -1 ~/.bashrc
 </code></pre>
 
 CP/CR back here.
@@ -395,18 +395,10 @@ question_text(NULL,
 
 ###
 
-<!-- VERIFY in a live Codespace: the ORDER of these two lines. Dotfiles'
-     install.sh runs at create, but welcome.sh appends its short-prompt block
-     at first attach, so the block (PROMPT_COMMAND=''/PS1=...) most likely
-     lands AFTER the export — i.e. tail -2 shows the prompt block, and the
-     export sits a few lines above it. Adjust this transcript and the
-     knowledge drop below to whatever a real new Codespace shows. -->
-
 ```
 codespace-starter $ git config --get user.name
 David Kane
-codespace-starter $ tail -2 ~/.bashrc
-PS1='\W \$ '
+codespace-starter $ tail -1 ~/.bashrc
 export COOLEST_TEACHER=Preceptor
 ```
 
@@ -414,7 +406,7 @@ export COOLEST_TEACHER=Preceptor
 
 A brand new machine already knows your Git identity. You can create a repo and commit to it without Git stopping to ask a single question.
 
-And look at the last two lines. The image's `PS1` line survived, with yours after it --- which is why your prompt still reads `codespace-starter $`. That is `>>` earning its keep. Had you shipped a whole `.bashrc` instead, the first line would be gone.
+And look at the last line: it is yours. The starter's lines --- the prompt block, the banner --- went in while the Codespace was being built, your `install.sh` ran when the Codespace was created, and `>>` put your line after theirs. That is why your prompt still reads `codespace-starter $`: the image's `PS1` survived (run `grep -A 2 short-prompt ~/.bashrc` again if you want to see it). That is `>>` earning its keep. Had you shipped a whole `.bashrc` instead, the starter's lines would be gone.
 
 Think about what else could go in there as you get more comfortable: a `.gitignore_global` so junk files never reach a repo again, shell aliases, R options. Everything you would otherwise re-do on every machine, done once and kept.
 
@@ -452,7 +444,7 @@ You started with `echo $COOLEST_TEACHER` printing nothing --- successfully, beca
 
 ###
 
-In between you built a private repo called `dotfiles`, put an executable `install.sh` in it, and had that script **append** to `~/.bashrc` rather than replace it, protecting the short-prompt lines `codespace-starter`'s `welcome.sh` puts there. The real cargo was `.gitconfig`: every Codespace you create from now on already knows your name and your email, so Git will never stop to ask again.
+In between you built a private repo called `dotfiles`, put an executable `install.sh` in it, and had that script **append** to `~/.bashrc` rather than replace it, protecting the short-prompt lines `codespace-starter`'s `setup.sh` puts there. The real cargo was `.gitconfig`: every Codespace you create from now on already knows your name and your email, so Git will never stop to ask again.
 
 ###
 
