@@ -11,7 +11,7 @@ Git, GitHub, and Quarto websites."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">vscode.tutorials</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,8 +47,8 @@ Git, GitHub, and Quarto websites.</p>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>A comprehensive collection of interactive tutorials covering VS Code and modern
-development workflows. This package makes extensive use of the tools in the
-tutorial.helpers package.</p>
+development workflows. The tutorials are built with the learnr2 package, which
+renders each one to a static page whose code runs in the browser via WebR.</p>
     </div>
     <div class="section level2">
     <h2 id="vs-code-and-development-tools-tutorials">VS Code and Development Tools Tutorials<a class="anchor" aria-label="anchor" href="#vs-code-and-development-tools-tutorials"></a></h2>
@@ -79,7 +79,7 @@ tutorial.helpers package.</p>
 
 
 <p>To run a tutorial, use:
-<code>learnr::run_tutorial(name = "short_tutorial_name", package = "vscode.tutorials")</code></p>
+<code>learnr2::run_tutorial(name = "short_tutorial_name", package = "vscode.tutorials")</code></p>
 <p>Available tutorial names include: 01-orientation, 02-workflow, 03-code, 04-quarto,
 05-antigravity, 06-terminal-1, 07-terminal-2, 08-terminal-3, 09-github-1,
 10-github-2, 11-websites-1, 12-websites-2, 13-devcontainers,

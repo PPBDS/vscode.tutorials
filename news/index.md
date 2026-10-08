@@ -2,6 +2,15 @@
 
 ## vscode.tutorials (development version)
 
+- Rebuilt every tutorial on **learnr2**, which renders each one to a
+  static Quarto page whose code runs in the browser via WebR.
+  **learnr2** is the package’s only tutorial dependency (it also
+  supplies `show_file()`), and the tests and CI render tutorials with
+  [`learnr2::check_tutorial()`](https://ppbds.github.io/learnr2/reference/check_tutorial.html)
+  and
+  [`learnr2::render_tutorials()`](https://ppbds.github.io/learnr2/reference/render_tutorials.html).
+  The previous version is tagged `last-learnr-version`.
+
 - Renamed the Workspace tutorial to Orientation and renumbered every
   tutorial directory to start from 01 (`01-orientation` through
   `19-models`). Tutorial ids changed with the directories, so stored

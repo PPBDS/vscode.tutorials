@@ -7,8 +7,9 @@ documents, the terminal, Git, GitHub, and Quarto websites.
 ## Details
 
 A comprehensive collection of interactive tutorials covering VS Code and
-modern development workflows. This package makes extensive use of the
-tools in the tutorial.helpers package.
+modern development workflows. The tutorials are built with the learnr2
+package, which renders each one to a static page whose code runs in the
+browser via WebR.
 
 ## VS Code and Development Tools Tutorials
 
@@ -78,7 +79,7 @@ development:
 ## Running Tutorials
 
 To run a tutorial, use:
-`learnr::run_tutorial(name = "short_tutorial_name", package = "vscode.tutorials")`
+`learnr2::run_tutorial(name = "short_tutorial_name", package = "vscode.tutorials")`
 
 Available tutorial names include: 01-orientation, 02-workflow, 03-code,
 04-quarto, 05-antigravity, 06-terminal-1, 07-terminal-2, 08-terminal-3,

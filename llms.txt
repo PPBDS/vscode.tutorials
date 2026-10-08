@@ -6,9 +6,9 @@ Package website: <https://ppbds.github.io/vscode.tutorials/>
 
 **vscode.tutorials** is a collection of tutorials for working with VS
 Code. Covers scripts, Quarto documents, git, Github, and Quarto
-websites. Makes extensive use of the tools in the
-**[tutorial.helpers](https://ppbds.github.io/tutorial.helpers/)**
-package.
+websites. Tutorials are built with the
+**[learnr2](https://ppbds.github.io/learnr2/)** package and run in the
+browser via Quarto and WebR.
 
 ## Installation
 
@@ -16,7 +16,7 @@ Install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 
-remotes::install_github("PPBDS/vscode.tutorials")
+pak::pak("PPBDS/vscode.tutorials")
 ```
 
 ## Tutorials
@@ -27,12 +27,12 @@ Code](https://open-vsx.org/extension/PPBDS/vscode-r-tutorials), which
 lists every installed tutorial and lets you start one with a click.
 
 As a backup, you can launch a tutorial from the R console with
-[`learnr::run_tutorial()`](https://pkgs.rstudio.com/learnr/reference/run_tutorial.html),
+[`learnr2::run_tutorial()`](https://ppbds.github.io/learnr2/reference/run_tutorial.html),
 providing the short name of the tutorial and the package name.
 
 ``` R
-learnr::run_tutorial(name = "02-workflow",
-                     package = "vscode.tutorials")
+learnr2::run_tutorial(name = "02-workflow",
+                      package = "vscode.tutorials")
 ```
 
 ### VS Code Tutorials
@@ -42,8 +42,6 @@ development environment.
 
 - *Orientation* (“01-orientation”). A tour of the workspace: the bash
   Terminal, the R Terminal, GitHub Copilot, and the ways to run R code.
-  Moved here from **tutorial.helpers**, whose five-minute *Getting
-  Started* tutorial now handles first contact.
 
 - *Workflow* (“02-workflow”). The first tutorial after **Orientation**:
   move around VS Code, use the Terminal, create a GitHub repo, run R

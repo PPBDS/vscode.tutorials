@@ -42,8 +42,30 @@ reference. Two things set this package apart:
     the file happens to live in this package. (It may yet be removed
     entirely.)
 
-(The `tutorial.helpers` package’s tutorials are the other home of this
-mechanics exception, for the same reason.)
+### Tutorial format: learnr2
+
+Every tutorial is a **learnr2** Quarto document,
+`inst/tutorials/NN-slug/NN-slug.qmd`, rendered to a static page. The
+mechanics — YAML, labels, `echo: false` on widget chunks, question
+types, screenshot questions, `{verbatim}` blocks — are in learnr2’s
+vignettes “Translating learnr Tutorials” and “Tutorials in the Age of
+AI”; follow them. Two house choices on top of those: each question’s
+prompt stays in the prose above its chunk, with a plain-text copy in
+`text` and `show_text = FALSE`, and the boilerplate sits under
+`## Information` (`information-1`) and `## Download answers`
+(`download-answers-1`, `download-answers-2`). Check with
+[`learnr2::check_tutorial()`](https://ppbds.github.io/learnr2/reference/check_tutorial.html)
+and
+[`learnr2::render_tutorials()`](https://ppbds.github.io/learnr2/reference/render_tutorials.html).
+The version before the move to learnr2 is the git tag
+`last-learnr-version`.
+
+**Never mention learnr or tutorial.helpers** — in tutorial prose,
+examples, README, or package docs. Students know only learnr2:
+`show_file()` comes from **learnr2**, and a translated passage that
+named either old package is rewritten around learnr2 or dropped. The one
+exception is the Devcontainer Dockerfile tutorial’s embedded copy of the
+PPBDS Dockerfile, which must match the real file line for line.
 
 ### What downstream packages assume
 
@@ -217,27 +239,24 @@ base guide and every other tutorial package. In particular:
   inside the chunk, not inline `, key = value` on the header.** So an
   answer chunk is
 
-      ```{r section-name-N-test}
+      ```{r}
+      #| label: section-name-N-answer
       #| echo: true
       # our code
 
   \`\`\`
 
-  not `{r section-name-N-test, echo = TRUE}`. This works in both `.Rmd`
-  and `.qmd` via modern knitr (≥ 1.35) and is the canonical style across
-  every tutorial package in the project (the Primer, `misc.tutorials`,
-  and this one). Use it for `echo`, `message`, `warning`, `cache`,
-  `eval`, and every other chunk option. The only inline options that
-  remain on the header line are `include = FALSE` on the setup chunk and
-  the `child = ...` argument on info-section / download-answers child
-  chunks.
+  not `{r section-name-N-answer, echo = TRUE}`. The label, too, goes on
+  a `#| label:` line, and nothing stays inline on the header. This is
+  the canonical style across every tutorial package in the project (the
+  Primer, `misc.tutorials`, and this one). Use it for `label`, `echo`,
+  `message`, `warning`, `cache`, `eval`, and every other chunk option.
 
 ### Terminal terminology
 
 VS Code’s own terminal vocabulary is confusing, so the tutorials use one
-fixed system, taught in Getting Started (`tutorial.helpers`),
-Orientation, and Terminal 1 and applied everywhere (including the
-primer’s Getting Started chapter):
+fixed system, taught in Getting Started, Orientation, and Terminal 1 and
+applied everywhere (including the primer’s Getting Started chapter):
 
 - **Panel** — the bottom region of the VS Code window, holding several
   *views* (Problems, Output, Terminal, Ports). Never call the region
@@ -313,11 +332,14 @@ transcript’s prompt shows the repo name (`terminal-1 $`) whenever the
 working directory is the repo root, and `codespace-starter $` appears
 only when a transcript genuinely has the student located in that folder.
 
-`connect-repo` must be run from `/workspaces/codespace-starter` — the
-script lives there and fails when run from inside another repo. The
-canonical fix-it instruction is therefore two commands:
-`cd /workspaces/codespace-starter`, then
-`.devcontainer/connect-repo.sh <name>`.
+`connect-repo` is a command on the `PATH` (`codespace-starter`’s
+`setup.sh` installs it in `~/.local/bin`) and works from any directory.
+The canonical fix-it instruction is the single command
+`connect-repo <name>`. **Always call it `connect-repo`** — never
+`connect-repo.sh` or `.devcontainer/connect-repo.sh`, and never with a
+preceding `cd /workspaces/codespace-starter`. The only exception is real
+output that lists the file itself, such as `ls .devcontainer` showing
+`connect-repo.sh`.
 
 Consequently, **when a tutorial’s title changes, update all of these**
 (they all embed the repo name):
@@ -334,9 +356,10 @@ Consequently, **when a tutorial’s title changes, update all of these**
 5.  Rows copied from the github.com/codespaces list (they show repo
     names).
 
-Do **not** change: the tutorial’s `id:` in the YAML (it equals the
-directory name, which a title change does not touch), the tutorial’s
-directory name under `inst/tutorials/`, or chunk labels.
+Do **not** change: the tutorial’s directory name under `inst/tutorials/`
+(it also names the `.qmd` and the page URL that saved answers are keyed
+on, and a title change does not touch it), or chunk labels (a question’s
+label is the key its saved answer is stored under).
 
 - A title must not collide with a directory that already exists under
   `/workspaces` — in particular, a title that would map to
@@ -371,7 +394,7 @@ unquoted.
 Tutorial directory names (`inst/tutorials/NN-slug/`) embed a sequence
 number. Renaming a directory fans out; update all of these together:
 
-1.  `learnr::run_tutorial(name = "NN-slug", ...)` calls — `name` is the
+1.  `learnr2::run_tutorial(name = "NN-slug", ...)` calls — `name` is the
     **directory** name. They appear in README.Rmd/README.md and inside
     tutorials (“if you quit, restart with…”).
 2.  Files students download from GitHub (the
@@ -387,11 +410,14 @@ number. Renaming a directory fans out; update all of these together:
 3.  Cross-references in prose: “the next tutorial, `NN-slug`”,
     README.Rmd’s tutorial list (re-render README.md after editing), and
     this file.
-4.  The YAML `id:` field — **the id must always equal the directory
-    name.** Renumbering a directory therefore means renumbering its id
-    in the same commit. (Changing an id invalidates students’ stored
-    answers for that tutorial; that cost is accepted — consistency
-    wins.)
+4.  The `.qmd` file name and the `filename_prefix` of
+    [`learnr2::download_answers_button()`](https://ppbds.github.io/learnr2/reference/download_answers_button.html)
+    — **both must always equal the directory name**
+    (`NN-slug/NN-slug.qmd`). Renumbering a directory therefore means
+    renaming its `.qmd` and updating the prefix in the same commit. (The
+    rename changes the page URL that students’ saved answers are keyed
+    on, so those answers do not carry over; that cost is accepted —
+    consistency wins.)
 
 NEWS.md entries are historical records — never retro-renumber them.
 
@@ -403,13 +429,13 @@ The version tag students see when they read `codespace-starter`’s
 `.devcontainer/devcontainer.json`](https://github.com/PPBDS/codespace-starter/blob/main/.devcontainer/devcontainer.json).
 **Whenever that pin is bumped, update every versioned copy in this
 repo** (find them with
-`grep -rn 'ghcr.io/ppbds/devcontainer:' --include='*.Rmd' --include='*.yaml' .`):
+`grep -rn 'ghcr.io/ppbds/devcontainer:' --include='*.qmd' --include='*.yaml' .`):
 
 1.  The Our Codespace Starter tutorial (currently
-    `inst/tutorials/14-our-codespace-starter/tutorial.Rmd`) — the
-    expected answer for the find-the-`"image"`-line exercise.
+    `inst/tutorials/14-our-codespace-starter/14-our-codespace-starter.qmd`)
+    — the expected answer for the find-the-`"image"`-line exercise.
 2.  The Devcontainer Dockerfile tutorial (currently
-    `inst/tutorials/15-docker/tutorial.Rmd`) — the intro’s
+    `inst/tutorials/15-docker/15-docker.qmd`) — the intro’s
     back-reference to that line.
 3.  `.github/workflows/R-CMD-check.yaml` — the CI `container: image:`
     tag (this one is normally bumped as part of the codespace-starter
