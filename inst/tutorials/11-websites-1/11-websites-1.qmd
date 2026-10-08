@@ -1,30 +1,22 @@
 ---
 title: Websites 1
 author: David Kane
-tutorial:
-  id: "11-websites-1"
-output:
-  learnr::tutorial:
-    progressive: yes
-    'allow_skip:': yes
-runtime: shiny_prerendered
 description: 'Tutorial for Chapter 28: Quarto and Chapter 29: Quarto formats, with a focus on Quarto websites. Uses the quarto CLI to create, render, preview, and publish a multi-page site to GitHub Pages.'
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 240, 
-        tutorial.storage = "local") 
-
-library(learnr)
-library(tutorial.helpers)
-library(knitr)
-library(tidyverse)
-```
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+## Information
+###
+
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 ## Introduction
@@ -45,13 +37,14 @@ Let's make a [Quarto website](https://quarto.org/docs/websites/).
 
 Copy/paste the URL for your `websites-1` repository on GitHub.
 
-```{r creating-files-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: creating-files-1
+#| echo: false
+learnr2::question(
+  "Copy/paste the URL for your websites-1 repository on GitHub.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -72,21 +65,20 @@ In the bash Terminal, run `quarto create project website . --no-open`. Don't for
 
 You can also do this using the Application Menu. Start by clicking the hamburger icon (three horizontal bars) in the Activity Bar:
 
-```{r}
-knitr::include_graphics("images/make-quarto-website.gif")
-```
+![](images/make-quarto-website.gif){width=90%}
 
 If you are asked for a "Title," use `A New Website`.
 
 CP/CR.
 
-```{r creating-files-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: creating-files-2
+#| echo: false
+learnr2::question(
+  "If you are asked for a \"Title,\" use A New Website. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -113,13 +105,14 @@ Why `--no-open`? By default, when you run `quarto create` from inside a VS Code 
 
 In the bash Terminal, run `ls`. CP/CR.
 
-```{r creating-files-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: creating-files-3
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -136,13 +129,14 @@ These are the basic files needed to build a Quarto website. Note that `ls` does 
 
 In the bash Terminal, run `ls -a`. CP/CR. 
 
-```{r creating-files-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: creating-files-4
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run ls -a. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -172,16 +166,17 @@ show_file("_quarto.yml")
 
 CP/CR.
 
-Did you get an error along the lines of 'could not find function "show_file"'? You need to run `library(tutorial.helpers)` in the R Terminal first to load `show_file()`. You could also use `tutorial.helpers::show_file("_quarto.yml")`, as in previous tutorials, but at this stage we want you to practice loading packages explicitly.
+Did you get an error along the lines of 'could not find function "show_file"'? You need to run `library(learnr2)` in the R Terminal first to load `show_file()`. You could also use `learnr2::show_file("_quarto.yml")`, as in previous tutorials, but at this stage we want you to practice loading packages explicitly.
 
 
-```{r examining-files-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: examining-files-1
+#| echo: false
+learnr2::question(
+  "Did you get an error along the lines of 'could not find function \"show_file\"'? You need to run library(learnr2) in the R Terminal first to load show_file(). You could also use learnr2::show_file(\"_quarto.yml\"), as in previous tutorials, but at this stage we want you to practice loading packages explicitly.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -226,13 +221,14 @@ show_file("_quarto.yml", start = 4, end = 10)
 
 CP/CR.
 
-```{r examining-files-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: examining-files-2
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -264,13 +260,14 @@ show_file("_quarto.yml", start = 12, end = 16)
 
 CP/CR.
 
-```{r examining-files-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: examining-files-3
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -300,13 +297,14 @@ cat index.qmd
 CP/CR.
 
 
-```{r examining-files-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: examining-files-4
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -342,13 +340,14 @@ cat .gitignore
 CP/CR.
 
 
-```{r examining-files-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: examining-files-5
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -372,13 +371,14 @@ Commit and push all files with the message "initial version".
 
 Run `git log -n 1` in the bash Terminal. CP/CR.
 
-```{r examining-files-6}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: examining-files-6
+#| echo: false
+learnr2::question(
+  "Run git log -n 1 in the bash Terminal. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -405,13 +405,14 @@ We now have the infrastructure for our website. Next, we will "render" the web p
 
 From the bash Terminal, run `quarto render`. CP/CR.
 
-```{r rendering-and-previewing-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: rendering-and-previewing-1
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run quarto render. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -436,13 +437,14 @@ If you look at the `_site` directory in the Explorer pane, you will see many new
 
 From the bash Terminal, run `ls`. CP/CR.
 
-```{r rendering-and-previewing-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: rendering-and-previewing-2
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -460,13 +462,14 @@ Note the addition of a `_site` directory. This is where the HTML files that make
 
 From the bash Terminal, run `ls _site`. CP/CR.
 
-```{r rendering-and-previewing-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: rendering-and-previewing-3
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run ls _site. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -499,13 +502,14 @@ cat .gitignore
 
 CP/CR.
 
-```{r rendering-and-previewing-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: rendering-and-previewing-4
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -524,13 +528,14 @@ Ignoring `_site` is [recommended](https://quarto.org/docs/publishing/github-page
 
 From the bash Terminal, run `quarto preview`. CP/CR.
 
-```{r rendering-and-previewing-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: rendering-and-previewing-5
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run quarto preview. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -556,13 +561,14 @@ Look at your website in the browser. Click on the "About" link.
 
 Go to the bash Terminal. Copy and paste all the output from `quarto preview`.
 
-```{r rendering-and-previewing-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: rendering-and-previewing-6
+#| echo: false
+learnr2::question(
+  "Go to the bash Terminal. Copy and paste all the output from quarto preview.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -581,15 +587,17 @@ Quarto continues running in the background, watching your files. When you clicke
 
 ### Exercise 7
 
-Look again at your website in the browser. Click on the "Home" link and then copy/paste the entire HTML screen.
+Look again at your website in the browser. Click on the "Home" link and then paste a screenshot of the entire HTML screen.
 
-```{r rendering-and-previewing-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: rendering-and-previewing-7
+#| echo: false
+learnr2::question(
+  "Look again at your website in the browser. Click on the \"Home\" link and then paste a screenshot of the entire HTML screen.",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -605,19 +613,18 @@ To learn more about Quarto websites visit https://quarto.org/docs/websites.
 
 The site title ("A New Website"), from `_quarto.yml`, appears in the upper-left corner. The page title ("A New Website"), from `index.qmd`, appears at the top of the home page.
 
-(Depending on your browser and settings, the copy/paste may also capture the "Home" and "About" links. Either way is fine.)
-
 ### Exercise 8
 
 Copy/paste the URL for your previewed website.
 
-```{r rendering-and-previewing-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: rendering-and-previewing-8
+#| echo: false
+learnr2::question(
+  "Copy/paste the URL for your previewed website.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -636,13 +643,14 @@ The advantage of using `quarto preview` is that the website is automatically upd
 
 At the bash Terminal, you should see a new message. Copy and paste it here.
 
-```{r rendering-and-previewing-9}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: rendering-and-previewing-9
+#| echo: false
+learnr2::question(
+  "At the bash Terminal, you should see a new message. Copy and paste it here.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -677,15 +685,17 @@ Quarto has noticed that you changed/saved the `about.qmd` file. It rendered the 
 
 ### Exercise 10
 
-Copy/paste the About page from your browser.
+Paste a screenshot of the About page from your browser.
 
-```{r rendering-and-previewing-10}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: rendering-and-previewing-10
+#| echo: false
+learnr2::question(
+  "Paste a screenshot of the About page from your browser.",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -721,13 +731,14 @@ Click "Pages" on the left-hand menu.
 
 Copy/paste the resulting URL.
 
-```{r publishing-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: publishing-1
+#| echo: false
+learnr2::question(
+  "Copy/paste the resulting URL.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -740,9 +751,7 @@ https://github.com/ppbds-student/websites-1/settings/pages
 
 This page shows the settings that control GitHub Pages. It should look something like this:
 
-```{r}
-knitr::include_graphics("images/pages.png")
-```
+![](images/pages.png){width=90%}
 
 Sam Csik provides an [excellent overview](https://ucsb-meds.github.io/creating-quarto-websites/) of the entire process of creating Quarto websites. 
 
@@ -756,13 +765,14 @@ You will then need to type "Y" to accept the default settings.
 
 CP/CR the first 10 or so lines of the output.
 
-```{r publishing-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: publishing-2
+#| echo: false
+learnr2::question(
+  "CP/CR the first 10 or so lines of the output.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -792,13 +802,14 @@ Quarto creates a new git branch named `gh-pages` when publishing.
 
 Copy/paste the 5 or so lines of the output which include the phrase "Rendering for publish".
 
-```{r publishing-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: publishing-3
+#| echo: false
+learnr2::question(
+  "Copy/paste the 5 or so lines of the output which include the phrase \"Rendering for publish\".",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -819,13 +830,14 @@ The publishing process may take a minute or two to complete. The URL for your we
 Copy/paste the last 8 or so lines of the output from running `quarto publish gh-pages`. CP/CR.
 
 
-```{r publishing-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: publishing-4
+#| echo: false
+learnr2::question(
+  "Copy/paste the last 8 or so lines of the output from running quarto publish gh-pages. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -846,13 +858,14 @@ There are other publishing options besides GitHub Pages. You would replace `gh-p
 
 View your website in the browser. Copy/paste its URL.
 
-```{r publishing-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: publishing-5
+#| echo: false
+learnr2::question(
+  "View your website in the browser. Copy/paste its URL.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -867,13 +880,14 @@ When using GitHub Pages, the URL always follows the same pattern: your GitHub us
 
 Publishing left your source untouched --- but it did add something to the repo. From the bash Terminal, run `git branch -a`. CP/CR.
 
-```{r publishing-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: publishing-6
+#| echo: false
+learnr2::question(
+  "Publishing left your source untouched -- but it did add something to the repo. From the bash Terminal, run git branch -a. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -894,13 +908,14 @@ websites-1 $ git branch -a
 
 What is on that other branch? From the bash Terminal, run `git ls-tree --name-only gh-pages`. CP/CR.
 
-```{r publishing-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: publishing-7
+#| echo: false
+learnr2::question(
+  "What is on that other branch? From the bash Terminal, run git ls-tree --name-only gh-pages. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -921,15 +936,17 @@ No QMD files at all. The `gh-pages` branch holds the *rendered site* --- the sam
 
 ### Exercise 8
 
-Earlier, you visited your repo's Pages settings *before* publishing. Go back: from your repo's page on GitHub, click **Settings**, then **Pages**. Copy/paste the sentence at the top which describes your site.
+Earlier, you visited your repo's Pages settings *before* publishing. Go back: from your repo's page on GitHub, click **Settings**, then **Pages**. Paste a screenshot of the sentence at the top which describes your site.
 
-```{r publishing-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: publishing-8
+#| echo: false
+learnr2::question(
+  "Earlier, you visited your repo's Pages settings before publishing. Go back: from your repo's page on GitHub, click Settings, then Pages. Paste a screenshot of the sentence at the top which describes your site.",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -948,13 +965,14 @@ If you look closely in the Explorer pane, you will see a new directory, `.quarto
 
 From the bash Terminal, run `ls .quarto`. CP/CR.
 
-```{r publishing-9}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: publishing-9
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run ls .quarto. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -980,13 +998,14 @@ show_file("_quarto.yml", start = 4, end = 5)
 CP/CR.
 
 
-```{r publishing-10}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: publishing-10
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1002,15 +1021,17 @@ The project title now exists in three places. We changed it in `_quarto.yml`, bu
 
 ### Exercise 11
 
-From the bash Terminal, run `quarto preview`. Copy and paste the text from the home page once it comes up on your browser.
+From the bash Terminal, run `quarto preview`. Paste a screenshot of the home page once it comes up on your browser.
 
-```{r publishing-11}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: publishing-11
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run quarto preview. Paste a screenshot of the home page once it comes up on your browser.",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -1034,13 +1055,14 @@ From the bash Terminal, stop the `quarto preview` command with `Ctrl + c`. Run `
 
 CP/CR.
 
-```{r publishing-12}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: publishing-12
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, stop the quarto preview command with Ctrl + c. Run quarto publish. You may need to hit Enter to confirm that you still want to use GitHub Pages. Refresh once after you are on your website. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -1084,13 +1106,14 @@ Commit and push all the files in the project. Run `git log -n 2` in the bash Ter
 
 The `-n 2` option causes Git to just provide the information on the last two commits.
 
-```{r publishing-13}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: publishing-13
+#| echo: false
+learnr2::question(
+  "The -n 2 option causes Git to just provide the information on the last two commits.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -1104,5 +1127,23 @@ This tutorial introduced the process of creating and publishing [Quarto websites
 
 Sam Csik provides an [excellent overview](https://ucsb-meds.github.io/creating-quarto-websites/) of the entire process of creating Quarto websites.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "11-websites-1")
 ```

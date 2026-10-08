@@ -1,33 +1,23 @@
 ---
 title: Terminal 1
 author: David Kane
-tutorial:
-  id: "06-terminal-1"
-output:
-  learnr::tutorial:
-    progressive: yes
-    'allow_skip:': yes
-runtime: shiny_prerendered
 description: First of three bash Terminal tutorials. Covers the core commands (pwd, ls, mkdir, cp, mv, rm, cd), paths and the symbols . / .. / ~, and output redirection with > and >>.
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(tidyverse)
-library(knitr)
-
-library(pkgbuild)
-
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60,
-        tutorial.storage = "local")
-```
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+## Information
+###
+
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 <!-- Some diagrams which show directory structure would be nice. -->
@@ -52,21 +42,20 @@ The lower section of the VS Code window is the "Panel," which is composed of a c
 
 The Terminal view is, by far, the part of the Panel which we use most often. Within it you can run several *terminals* at once, each with its own tab on the right side of the Panel. A terminal is just a window for typing text to a program and reading the program's replies. The program is usually the bash **shell** --- a program whose whole job is to interpret your commands --- and that combination is what we call a bash Terminal. But a terminal can host other programs instead: an R Terminal is the same kind of window running R.
 
-```{r}
-include_graphics("images/terminal-on-open.png")
-```
+![](images/terminal-on-open.png){width=90%}
 
 ### Exercise 1
 
 You met the bash Terminal in the Orientation and Workflow tutorials; this is recall. Open a new bash Terminal. Hit the `Enter` key twice --- the string that reappears each time is the **prompt**, telling you bash is ready for your next command. Then run `pwd`. CP/CR.
 
-```{r terminal-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 5)
+```{r}
+#| label: terminal-1
+#| echo: false
+learnr2::question(
+  "You met the bash Terminal in the Orientation and Workflow tutorials; this is recall. Open a new bash Terminal. Hit the Enter key twice -- the string that reappears each time is the prompt, telling you bash is ready for your next command. Then run pwd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -97,13 +86,14 @@ with your GitHub username in place of `davekane-student`. The two prompts behave
 
 Let's **m**a**k**e a **dir**ectory called `example`. Run `mkdir example`. Run `ls` to confirm that the new directory exists inside the current working directory. CP/CR.
 
-```{r terminal-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: terminal-2
+#| echo: false
+learnr2::question(
+  "Let's make a directory called example. Run mkdir example. Run ls to confirm that the new directory exists inside the current working directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -115,13 +105,14 @@ question_text(NULL,
 Move into the `example` directory by running `cd example`. Run `pwd`. CP/CR.
 
 
-```{r terminal-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: terminal-3
+#| echo: false
+learnr2::question(
+  "Move into the example directory by running cd example. Run pwd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -144,13 +135,14 @@ Let's create a file called `my.txt`. Run `echo "" > my.txt`.
 
 Run `ls` to confirm that the new file exists inside the current directory. CP/CR.
 
-```{r terminal-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: terminal-4
+#| echo: false
+learnr2::question(
+  "Run ls to confirm that the new file exists inside the current directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -169,13 +161,14 @@ example $
 
 Make a copy of `my.txt` called `my_2.txt` by using the `cp` command. That is, run `cp my.txt my_2.txt`. Confirm that this worked by running `ls`. CP/CR.
 
-```{r terminal-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: terminal-5
+#| echo: false
+learnr2::question(
+  "Make a copy of my.txt called my_2.txt by using the cp command. That is, run cp my.txt my_2.txt. Confirm that this worked by running ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -195,13 +188,14 @@ We rename files with the `mv` command, which is derived from **m**o**v**e. The f
 
 Rename `my.txt` to `fake.txt` by running `mv my.txt fake.txt`. Run `ls` to confirm. CP/CR.
 
-```{r terminal-6}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: terminal-6
+#| echo: false
+learnr2::question(
+  "Rename my.txt to fake.txt by running mv my.txt fake.txt. Run ls to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -223,13 +217,14 @@ From the computer's point of view, **renaming** a file is the same thing as **mo
 
 Let's **r**e**m**ove the file `fake.txt`. Run `rm fake.txt`. Run `ls` to confirm. CP/CR.
 
-```{r terminal-7}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: terminal-7
+#| echo: false
+learnr2::question(
+  "Let's remove the file fake.txt. Run rm fake.txt. Run ls to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -251,13 +246,14 @@ We want to remove the `example` directory. But we can't do that while we are "lo
 
 Run `cd ..`. The "dot-dot" symbol --- `..` --- references the directory that contains the current directory. Run `pwd` to confirm. CP/CR.
 
-```{r terminal-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: terminal-8
+#| echo: false
+learnr2::question(
+  "Run cd ... The \"dot-dot\" symbol -- .. -- references the directory that contains the current directory. Run pwd to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -277,13 +273,14 @@ Again, note how the prompt changed because we moved directories. The `..` symbol
 
 Run `rm -r example` to remove the directory `example`. Then run `ls` to confirm. CP/CR.
 
-```{r terminal-9}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: terminal-9
+#| echo: false
+learnr2::question(
+  "Run rm -r example to remove the directory example. Then run ls to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ````
@@ -307,13 +304,14 @@ By default, a new Terminal in VS Code starts in the folder you have open: `/work
 
 Run `pwd` to show your current working directory. CP/CR.
 
-```{r paths-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: paths-1
+#| echo: false
+learnr2::question(
+  "Run pwd to show your current working directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -326,13 +324,14 @@ The top button is the Explorer. Pressing it opens the Explorer pane, also called
 
 Use `mkdir` to make a directory named `paths` inside your current working directory. CP/CR.
 
-```{r paths-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: paths-2
+#| echo: false
+learnr2::question(
+  "Use mkdir to make a directory named paths inside your current working directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -343,13 +342,14 @@ The new directory is created directly inside the working directory.
 
 Let's **c**hange the working **d**irectory to `paths`. Run `cd paths`. Run `pwd` to confirm that you have changed the working directory. CP/CR.
 
-```{r paths-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: paths-3
+#| echo: false
+learnr2::question(
+  "Let's change the working directory to paths. Run cd paths. Run pwd to confirm that you have changed the working directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -369,13 +369,14 @@ Note how the prompt changed after I ran the `cd paths` command. Before, the prom
 
 Use `mkdir` to make a directory called `lessons` inside `paths` by running `mkdir lessons`. Confirm that this worked by running `ls`. CP/CR.
 
-```{r paths-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: paths-4
+#| echo: false
+learnr2::question(
+  "Use mkdir to make a directory called lessons inside paths by running mkdir lessons. Confirm that this worked by running ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -395,13 +396,14 @@ Make a directory within `lessons` called `fruits` by running `mkdir lessons/frui
 
 Run `ls lessons` to check to see if `fruits` exists inside the `lessons` directory. CP/CR.
 
-```{r paths-5}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: paths-5
+#| echo: false
+learnr2::question(
+  "Run ls lessons to check to see if fruits exists inside the lessons directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -425,13 +427,14 @@ As you are typing this command, type only the `f` in `fruits` and then press the
 
 CP/CR.
 
-```{r paths-6}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: paths-6
+#| echo: false
+learnr2::question(
+  "As you are typing this command, type only the f in fruits and then press the tab key (twice may be necessary on some computers). Pressing tab autocompletes the name of a file or directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -442,13 +445,14 @@ Get in the habit of using the tab key. Avoid typing whenever possible. Be lazy!
 
 Use `echo "" >` to make a text file inside `fruits`, named `pineapple.txt`. Recall that your current location --- i.e., your working directory --- is now `fruits`. So, to make a new file within `fruits`, you just need `echo "" > pineapple.txt`. Run `ls` to confirm. CP/CR.
 
-```{r paths-7}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: paths-7
+#| echo: false
+learnr2::question(
+  "Use echo \"\" > to make a text file inside fruits, named pineapple.txt. Recall that your current location -- i.e., your working directory -- is now fruits. So, to make a new file within fruits, you just need echo \"\" > pineapple.txt. Run ls to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -469,13 +473,14 @@ Read this paragraph again. No skimming!
 
 Use `echo` to make two more text files inside `fruits`, named `pear.txt` and `does-not-belong`. That is, run `echo "" > pear.txt & echo "" > does-not-belong`. Confirm by running `ls`. CP/CR.
 
-```{r paths-8}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: paths-8
+#| echo: false
+learnr2::question(
+  "Use echo to make two more text files inside fruits, named pear.txt and does-not-belong. That is, run echo \"\" > pear.txt & echo \"\" > does-not-belong. Confirm by running ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -493,13 +498,14 @@ The `&` symbol tells the operating system to run both the command that came befo
 
 Let's change our working directory to `lessons`. Run `cd ..` to go to the folder immediately above the working directory. Use `pwd` to confirm that you are in the right directory. CP/CR.
 
-```{r paths-9}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: paths-9
+#| echo: false
+learnr2::question(
+  "Let's change our working directory to lessons. Run cd .. to go to the folder immediately above the working directory. Use pwd to confirm that you are in the right directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 Your answer should look like this:
@@ -519,13 +525,14 @@ lessons $
 
 Use `mkdir` to make a directory within `lessons`, named `tbd`. Run `ls` to confirm. CP/CR.
 
-```{r paths-10}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: paths-10
+#| echo: false
+learnr2::question(
+  "Use mkdir to make a directory within lessons, named tbd. Run ls to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -545,13 +552,14 @@ Use `mv` to **m**o**v**e the file `does-not-belong` from the `fruits` directory 
 
 CP/CR.
 
-```{r paths-11}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: paths-11
+#| echo: false
+learnr2::question(
+  "Use mv to move the file does-not-belong from the fruits directory to the tbd directory by running mv fruits/does-not-belong tbd. Run ls tbd to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -571,13 +579,14 @@ We can act on files that are not in the working directory as long as we provide 
 
 Use `cd` to change the working directory up to `paths` by running `cd ..`. Confirm with `pwd`. Use `mv` and the `.` shorthand to move the directory `tbd` directly inside of `paths` by running `mv lessons/tbd .`. Confirm with `ls`. CP/CR.
 
-```{r paths-12}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: paths-12
+#| echo: false
+learnr2::question(
+  "Use cd to change the working directory up to paths by running cd ... Confirm with pwd. Use mv and the . shorthand to move the directory tbd directly inside of paths by running mv lessons/tbd .. Confirm with ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -598,13 +607,14 @@ When using `mv`, there is no difference between moving a directory and moving a 
 
 Move up one more directory, back to the original working directory, by running `cd ..`. Confirm with `pwd`. Run `rm -r paths` to remove all the directories and files that we have been working with. CP/CR.
 
-```{r paths-13}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: paths-13
+#| echo: false
+learnr2::question(
+  "Move up one more directory, back to the original working directory, by running cd ... Confirm with pwd. Run rm -r paths to remove all the directories and files that we have been working with. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -634,13 +644,14 @@ Use `mkdir symbols` to create a new directory called `symbols`. `cd` into that d
 
 CP/CR.
 
-```{r important-symbols-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: important-symbols-1
+#| echo: false
+learnr2::question(
+  "Use mkdir symbols to create a new directory called symbols. cd into that directory by running cd symbols. Confirm the change with pwd. Confirm that the directory is empty by running ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -662,13 +673,14 @@ But is the `symbols` directory really empty? Run `ls -a` to check. The `-` indic
 
 CP/CR.
 
-```{r important-symbols-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: important-symbols-2
+#| echo: false
+learnr2::question(
+  "But is the symbols directory really empty? Run ls -a to check. The - indicates an option to the ls command. The a option tells ls to return *a*ll the members of the directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -687,13 +699,14 @@ Every directory, even an "empty" one, includes `.` and `..`. The `.` is a link t
 
 Run `ls ..` to examine the contents of the directory one level above the current directory. Then run `ls ../..` to look two levels up. CP/CR.
 
-```{r important-symbols-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: important-symbols-3
+#| echo: false
+learnr2::question(
+  "Run ls .. to examine the contents of the directory one level above the current directory. Then run ls ../.. to look two levels up. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -716,13 +729,14 @@ One level up is your repo, where `symbols` is currently the only visible item. (
 
 Run `pwd` again. This returns the current working directory. Note that the return value is an **absolute path**. It tells you exactly where you --- meaning your Terminal session or instance --- are located on your computer.
 
-```{r important-symbols-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: important-symbols-4
+#| echo: false
+learnr2::question(
+  "Run pwd again. This returns the current working directory. Note that the return value is an absolute path. It tells you exactly where you -- meaning your Terminal session or instance -- are located on your computer.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -747,13 +761,14 @@ The absolute path for my current working directory breaks down into these compon
 
 Run `cd` without any argument. Doing so changes your current directory to your home directory because that is the default behavior for `cd`. Run `pwd` to confirm where you are. CP/CR.
 
-```{r important-symbols-5}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: important-symbols-5
+#| echo: false
+learnr2::question(
+  "Run cd without any argument. Doing so changes your current directory to your home directory because that is the default behavior for cd. Run pwd to confirm where you are. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 My answer looks like this:
@@ -771,13 +786,14 @@ In Codespaces, the home directory is usually `/home/rstudio`. Note how, after we
 
 Use `cd`, along with the full path to the `symbols` directory that you determined above, to change the working directory back to the `symbols` directory. Run `pwd` to confirm. CP/CR.
 
-```{r important-symbols-6}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: important-symbols-6
+#| echo: false
+learnr2::question(
+  "Use cd, along with the full path to the symbols directory that you determined above, to change the working directory back to the symbols directory. Run pwd to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -795,13 +811,14 @@ This is an example of using an absolute path to change locations.
 
 Confirm that you are currently located in the `symbols` directory by running `pwd`. Run `cd ..` to move one directory up, out of the `symbols` directory. Delete the `symbols` directory with `rm -rf symbols`. CP/CR.
 
-```{r important-symbols-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: important-symbols-7
+#| echo: false
+learnr2::question(
+  "Confirm that you are currently located in the symbols directory by running pwd. Run cd .. to move one directory up, out of the symbols directory. Delete the symbols directory with rm -rf symbols. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -827,13 +844,14 @@ You have been creating files with `echo "" > my.txt` since the start of this tut
 
 Run `echo`, giving it a quoted string with your first and last name as its argument. For me, that is `echo "David Kane"`. CP/CR.
 
-```{r redirection-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: redirection-1
+#| echo: false
+learnr2::question(
+  "Run echo, giving it a quoted string with your first and last name as its argument. For me, that is echo \"David Kane\". CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -852,13 +870,14 @@ terminal-1 $
 
 Now redirect that output into a file instead. Run `echo "Your First and Last Name Here" > me.txt` (with your actual name). Then run `cat me.txt` --- `cat` prints a file's contents, as you have seen in earlier tutorials; Terminal 2 gives it a fuller treatment. CP/CR.
 
-```{r redirection-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 4)
+```{r}
+#| label: redirection-2
+#| echo: false
+learnr2::question(
+  "Now redirect that output into a file instead. Run echo \"Your First and Last Name Here\" > me.txt (with your actual name). Then run cat me.txt -- cat prints a file's contents, as you have seen in earlier tutorials; Terminal 2 gives it a fuller treatment. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -878,13 +897,14 @@ Nothing appeared on screen after the first command because `>` sent the output i
 
 To add to a file rather than overwrite it, use `>>`. Run `echo "I am learning bash." >> me.txt`, then `cat me.txt`, then clean up with `rm me.txt`. CP/CR.
 
-```{r redirection-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 6)
+```{r}
+#| label: redirection-3
+#| echo: false
+learnr2::question(
+  "To add to a file rather than overwrite it, use >>. Run echo \"I am learning bash.\" >> me.txt, then cat me.txt, then clean up with rm me.txt. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -911,5 +931,23 @@ The older, more general term for the terminal is the "command line." All modern 
 
 Learn more about the command line and related topics by reading [*The Unix Workbench*](https://seankross.com/the-unix-workbench/) by Sean Kross.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "06-terminal-1")
 ```

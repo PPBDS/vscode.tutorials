@@ -1,33 +1,23 @@
 ---
 title: "Terminal 3"
 author: David Kane
-tutorial:
-  id: "08-terminal-3"
-output:
-  learnr::tutorial:
-    progressive: yes
-    'allow_skip:': yes
-runtime: shiny_prerendered
 description: Third bash Terminal tutorial. Covers wildcards, regular expressions, grep, and pipes --- the pattern language you will constantly read in the commands AI agents run on your behalf.
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(tidyverse)
-library(knitr)
-
-library(pkgbuild)
-
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60,
-        tutorial.storage = "local")
-```
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+## Information
+###
+
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 <!-- Explain more often that these are all programs that spit out stuff, which can often be chained together or just allowed to dump. -->
@@ -59,13 +49,14 @@ You will learn how to search for files by using **wildcards** to form **regular 
 
 Use `pwd` to confirm that you are in your default working directory. Use `mkdir` to create a directory named `wildcards`. CP/CR.
 
-```{r wildcards-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: wildcards-1
+#| echo: false
+learnr2::question(
+  "Use pwd to confirm that you are in your default working directory. Use mkdir to create a directory named wildcards. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -83,13 +74,14 @@ The `mkdir` command does not produce any output. To confirm that it had the desi
 
 Change your working directory to `wildcards` using `cd`. Confirm the change with `pwd`. CP/CR.
 
-```{r wildcards-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: wildcards-2
+#| echo: false
+learnr2::question(
+  "Change your working directory to wildcards using cd. Confirm the change with pwd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -117,13 +109,14 @@ Confirm that you have done so by running `ls`. (No worries if you make a mistake
 
 CP/CR.
 
-```{r wildcards-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 5)
+```{r}
+#| label: wildcards-3
+#| echo: false
+learnr2::question(
+  "Confirm that you have done so by running ls. (No worries if you make a mistake. Just fix it by removing the misnamed file.) CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -149,13 +142,14 @@ Terminal commands allow the use of **wildcards**. A wildcard `*` represents zero
 
 Let's generate a list of all our files whose names contain the letter `a`. First, try to run `ls a`. You will get an error message --- "No such file or directory" --- because there is no file named `a` in the working directory. CP/CR.
 
-```{r wildcards-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: wildcards-4
+#| echo: false
+learnr2::question(
+  "Let's generate a list of all our files whose names contain the letter a. First, try to run ls a. You will get an error message -- \"No such file or directory\" -- because there is no file named a in the working directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -172,13 +166,14 @@ Although we have been using `ls` to return all the contents of a directory, `ls`
 
 Let's try again. Run `ls a*`. The only return will be `ate.txt`. Because you put `*` after `a`, `ls` returns only files that begin with `a`. The "star" wildcard --- `*` --- matches anything. CP/CR.
 
-```{r wildcards-5}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: wildcards-5
+#| echo: false
+learnr2::question(
+  "Let's try again. Run ls a*. The only return will be ate.txt. Because you put after a, ls returns only files that begin with a. The \"star\" wildcard -- -- matches anything. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -195,13 +190,14 @@ Although `*` will match strings of any length, its positioning matters. `a*` is 
 
 Now run `ls *a*`. This should return all three files. CP/CR.
 
-```{r wildcards-6}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: wildcards-6
+#| echo: false
+learnr2::question(
+  "Now run ls a. This should return all three files. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -218,13 +214,14 @@ Note that these **regular expressions** are case-sensitive. A regular expression
 
 Make a list of all the files with names, before the suffix, that end in `t` by running `ls *t.*`. CP/CR.
 
-```{r wildcards-7}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: wildcards-7
+#| echo: false
+learnr2::question(
+  "Make a list of all the files with names, before the suffix, that end in t by running ls t.. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -245,13 +242,14 @@ Then, run `ls` to confirm that it worked.
 
 CP/CR.
 
-```{r wildcards-8}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: wildcards-8
+#| echo: false
+learnr2::question(
+  "Then, run ls to confirm that it worked. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -273,13 +271,14 @@ First, make a new directory called `seuss` within the `wildcards` directory, whe
 
 Run `ls` to confirm. CP/CR.
 
-```{r wildcards-9}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: wildcards-9
+#| echo: false
+learnr2::question(
+  "First, make a new directory called seuss within the wildcards directory, where you are currently located. Run ls to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -299,13 +298,14 @@ The `wildcards` directory, in which you are currently located, now includes five
 
 Run `ls -l`. CP/CR.
 
-```{r wildcards-10}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: wildcards-10
+#| echo: false
+learnr2::question(
+  "Run ls -l. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -327,13 +327,14 @@ The `-l` option provides a **l**ong-format listing of the contents of the direct
 
 Run `ls *t.*`. CP/CR.
 
-```{r wildcards-11}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: wildcards-11
+#| echo: false
+learnr2::question(
+  "Run ls t.. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -350,13 +351,14 @@ Before moving or otherwise acting on a group of files, we often want to ensure t
 
 Use the previous command (since we have confirmed that it generates the list of files we want to move), but replace `ls` with `mv` and then add `seuss`, which indicates where we want to move the files. In other words, run `mv *t.* seuss`. CP/CR.
 
-```{r wildcards-12}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: wildcards-12
+#| echo: false
+learnr2::question(
+  "Use the previous command (since we have confirmed that it generates the list of files we want to move), but replace ls with mv and then add seuss, which indicates where we want to move the files. In other words, run mv t. seuss. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -372,13 +374,14 @@ The `mv` command, like `mkdir`, does not produce any output. You need to check b
 
 Run `ls -R`. CP/CR.
 
-```{r wildcards-13}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: wildcards-13
+#| echo: false
+learnr2::question(
+  "Run ls -R. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -400,13 +403,14 @@ The `-R` option to the `ls` command stands for **r**ecursive. We see not simply 
 
 Use `cd ..` to move out of the `wildcards` directory, one level up. Run `pwd`. CP/CR.
 
-```{r wildcards-14}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: wildcards-14
+#| echo: false
+learnr2::question(
+  "Use cd .. to move out of the wildcards directory, one level up. Run pwd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -424,13 +428,14 @@ In order to delete a directory, you cannot be located within that directory. We 
 
 Run `rm wildcards`. That command will fail because `wildcards` is a directory. You can't just `rm` directories in the same way that you `rm` files. Instead, you need to use `rm -r`, where the `-r` indicates **r**ecursive. Run `rm -r wildcards`. CP/CR.
 
-```{r wildcards-15}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: wildcards-15
+#| echo: false
+learnr2::question(
+  "Run rm wildcards. That command will fail because wildcards is a directory. You can't just rm directories in the same way that you rm files. Instead, you need to use rm -r, where the -r indicates recursive. Run rm -r wildcards. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -453,13 +458,14 @@ In a previous section, we used **wildcards** to generate lists of file names tha
 
 Make a directory called `grepping` using `mkdir`. Run `ls`. CP/CR.
 
-```{r grep-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: grep-1
+#| echo: false
+learnr2::question(
+  "Make a directory called grepping using mkdir. Run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -478,13 +484,14 @@ The trick with this command is that `>` redirects the results into a file, delet
 
 Run `cat files.txt`. CP/CR.
 
-```{r grep-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: grep-2
+#| echo: false
+learnr2::question(
+  "The trick with this command is that > redirects the results into a file, deleting anything already in the file, while >> appends to an existing file. So, we are creating files.txt line by line. Run cat files.txt. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -515,13 +522,14 @@ The extra `""` at the end of the command ensures that there is a blank line at t
 
 Let's search the text file for lines containing the letter "a". Run `grep a files.txt`. CP/CR.
 
-```{r grep-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: grep-3
+#| echo: false
+learnr2::question(
+  "Let's search the text file for lines containing the letter \"a\". Run grep a files.txt. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -544,13 +552,14 @@ This should return all three lines from the file, which are the names of the thr
 
 Let's search through `files.txt` for lines that begin with the letter "a". Run `grep ^a files.txt`. CP/CR.
 
-```{r grep-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: grep-4
+#| echo: false
+learnr2::question(
+  "Let's search through files.txt for lines that begin with the letter \"a\". Run grep ^a files.txt. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -572,9 +581,7 @@ https://github.com/PPBDS/vscode.tutorials/blob/main/inst/extdata/grepping.txt
 ````
 Then navigate to the URL for the raw text file.
 
-```{r}
-include_graphics("images/grepping-gh-webpage.png")
-```
+![](images/grepping-gh-webpage.png){width=90%}
 
 Copy the URL in your address bar. It should begin with `https://raw.githubusercontent.com/`.
 
@@ -588,13 +595,14 @@ Then run `ls grepping` to verify that the file has been downloaded to the correc
 
 CP/CR.
 
-```{r grep-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: grep-5
+#| echo: false
+learnr2::question(
+  "Then run ls grepping to verify that the file has been downloaded to the correct location. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -621,13 +629,14 @@ The `-o` (lowercase "o") option lets you specify the **o**utput name. By renamin
 
 Move back into the `grepping` directory with `cd grepping`. Then run `wc grepping.txt`. The `wc` command stands for **w**ord **c**ount. CP/CR.
 
-```{r grep-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: grep-6
+#| echo: false
+learnr2::question(
+  "Move back into the grepping directory with cd grepping. Then run wc grepping.txt. The wc command stands for word count. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -649,13 +658,14 @@ Use `grep` to search `grepping.txt` for lines that contain `R`. That is, run:
 
 CP/CR.
 
-```{r grep-7}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: grep-7
+#| echo: false
+learnr2::question(
+  "grep R grepping.txt CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -678,13 +688,14 @@ Use `grep` and `^` to search `grepping.txt` for lines that **begin** with `R`. T
 
 CP/CR.
 
-```{r grep-8}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: grep-8
+#| echo: false
+learnr2::question(
+  "grep ^R grepping.txt CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -706,13 +717,14 @@ Use `grep` and `$` to search `grepping.txt` for lines that end with `e`. That is
 
 CP/CR.
 
-```{r grep-9}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: grep-9
+#| echo: false
+learnr2::question(
+  "grep e$ grepping.txt CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -739,13 +751,14 @@ cd grepping
 
 CP/CR.
 
-```{r grep-10}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 5)
+```{r}
+#| label: grep-10
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -771,13 +784,14 @@ Every command you have met is a program that reads text and spits out text. The 
 
 Run `cat grepping.txt | wc -l`. CP/CR.
 
-```{r pipes-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: pipes-1
+#| echo: false
+learnr2::question(
+  "Run cat grepping.txt | wc -l. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -796,13 +810,14 @@ grepping $
 
 Run `grep t.txt$ grepping.txt | wc -l`. CP/CR.
 
-```{r pipes-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: pipes-2
+#| echo: false
+learnr2::question(
+  "Run grep t.txt$ grepping.txt | wc -l. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -821,13 +836,14 @@ A filter feeding a counter: `grep` kept only the lines ending in `t.txt` (`hat.t
 
 Pipelines can be as long as you like. Run `cat grepping.txt | grep ^a | wc -l`. CP/CR.
 
-```{r pipes-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: pipes-3
+#| echo: false
+learnr2::question(
+  "Pipelines can be as long as you like. Run cat grepping.txt | grep ^a | wc -l. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -848,13 +864,14 @@ A related symbol is `&&`, which chains commands *sequentially*: `mkdir data && c
 
 One more pipeline --- this one about safety. Run `rm --help | grep -w force`. CP/CR.
 
-```{r pipes-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: pipes-4
+#| echo: false
+learnr2::question(
+  "One more pipeline -- this one about safety. Run rm --help | grep -w force. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -873,13 +890,14 @@ You just used a pipe to interrogate a dangerous command: `--help` (safe, remembe
 
 Use `cd ..` to change the working directory to the directory that is one level above your current location. This should be the default working directory from which we started. Run `pwd`. CP/CR.
 
-```{r pipes-5}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: pipes-5
+#| echo: false
+learnr2::question(
+  "Use cd .. to change the working directory to the directory that is one level above your current location. This should be the default working directory from which we started. Run pwd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -897,13 +915,14 @@ This tutorial uses `/workspaces/terminal-3` as the default working directory.
 
 Use `rm -r` to remove `grepping`. CP/CR.
 
-```{r pipes-6}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: pipes-6
+#| echo: false
+learnr2::question(
+  "Use rm -r to remove grepping. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -924,5 +943,23 @@ This tutorial covered **wildcards**, **grep**, and **pipes**, and through them y
 
 Learn more about the command line and related topics by reading [*The Unix Workbench*](https://seankross.com/the-unix-workbench/) by Sean Kross.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "08-terminal-3")
 ```

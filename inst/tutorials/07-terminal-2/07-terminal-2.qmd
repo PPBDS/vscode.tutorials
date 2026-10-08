@@ -1,28 +1,21 @@
 ---
 title: "Terminal 2"
 author: David Kane
-tutorial:
-  id: "07-terminal-2"
-output:
-  learnr::tutorial:
-    progressive: yes
-    'allow_skip:': yes
-runtime: shiny_prerendered
 description: Second bash Terminal tutorial. Covers command options, environment variables, looking inside files, moving files in and out of a Codespace, and running R and Python programs --- including how our Codespaces set up Python with uv.
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(knitr)
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60,
-        tutorial.storage = "local")
-```
+## Information
+###
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 ## Introduction
@@ -45,13 +38,14 @@ Options modify the behavior of command-line programs, as you saw with `ls -a` an
 
 Use `pwd` to confirm that you are in your default working directory. Make a directory named `options` with `mkdir options`. `cd` into it. Run `ls` to confirm that it is empty. CP/CR.
 
-```{r options-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 5)
+```{r}
+#| label: options-1
+#| echo: false
+learnr2::question(
+  "Use pwd to confirm that you are in your default working directory. Make a directory named options with mkdir options. cd into it. Run ls to confirm that it is empty. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -71,13 +65,14 @@ Note how easy it is to string together several commands in order to accomplish o
 
 You have *seen* hidden files with `ls -a`. Now make one. Run `echo "" > .my-hidden.txt` --- the leading `.` in the file name is what hides it. Then run `ls`, and then `ls -a`. CP/CR.
 
-```{r options-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 6)
+```{r}
+#| label: options-2
+#| echo: false
+learnr2::question(
+  "You have seen hidden files with ls -a. Now make one. Run echo \"\" > .my-hidden.txt -- the leading . in the file name is what hides it. Then run ls, and then ls -a. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -98,13 +93,14 @@ Plain `ls` shows nothing; `ls -a` reveals the file. Any file whose name starts w
 
 An **environment variable** is a named value that the shell carries around. The variable `HOME` holds the path to your home directory. Run `echo $HOME`. CP/CR.
 
-```{r options-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: options-3
+#| echo: false
+learnr2::question(
+  "An environment variable is a named value that the shell carries around. The variable HOME holds the path to your home directory. Run echo $HOME. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -123,13 +119,14 @@ The `$` prefix means "the value of." Environment variables let commands refer to
 
 Run `ls -l $HOME`. The `-l` option asks for a **l**ong list. CP/CR.
 
-```{r options-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 4)
+```{r}
+#| label: options-4
+#| echo: false
+learnr2::question(
+  "Run ls -l $HOME. The -l option asks for a long list. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -149,13 +146,14 @@ In a long list, names are in the last column and file type is in the first: a le
 
 So far you have only *read* environment variables. Now set one. Run `export FAVORITE_ANIMAL=duck`, then `echo $FAVORITE_ANIMAL`. CP/CR.
 
-```{r options-5}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 4)
+```{r}
+#| label: options-5
+#| echo: false
+learnr2::question(
+  "So far you have only read environment variables. Now set one. Run export FAVORITE_ANIMAL=duck, then echo $FAVORITE_ANIMAL. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -175,13 +173,14 @@ options $
 
 Where does that variable live? Find out: open a **new** bash Terminal (the `+` in the top-right corner of the Panel). In that new terminal, run `echo $FAVORITE_ANIMAL`. CP/CR.
 
-```{r options-6}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: options-6
+#| echo: false
+learnr2::question(
+  "Where does that variable live? Find out: open a new bash Terminal (the + in the top-right corner of the Panel). In that new terminal, run echo $FAVORITE_ANIMAL. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -215,13 +214,14 @@ curl -O https://raw.githubusercontent.com/wch/r-source/refs/heads/trunk/doc/AUTH
 
 Recall from Terminal 1 that the `-O` option names the downloaded file with its **O**riginal name. Then run `ls`. CP/CR.
 
-```{r looking-inside-files-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 6)
+```{r}
+#| label: looking-inside-files-1
+#| echo: false
+learnr2::question(
+  "Recall from Terminal 1 that the -O option names the downloaded file with its Original name. Then run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -244,13 +244,14 @@ options $
 
 Run `head AUTHORS`. CP/CR.
 
-```{r looking-inside-files-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 10)
+```{r}
+#| label: looking-inside-files-2
+#| echo: false
+learnr2::question(
+  "Run head AUTHORS. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -274,13 +275,14 @@ source, currently consisting of
 
 Run `tail -n 5 AUTHORS`. The `-n` option, with its argument `5`, controls how many final lines you see. CP/CR.
 
-```{r looking-inside-files-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
+```{r}
+#| label: looking-inside-files-3
+#| echo: false
+learnr2::question(
+  "Run tail -n 5 AUTHORS. The -n option, with its argument 5, controls how many final lines you see. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -291,13 +293,14 @@ Your output shows the last five lines of the file. `tail` is `head`'s mirror ima
 
 Run `cat -n AUTHORS`. CP/CR just the first 10 or so lines of the output.
 
-```{r looking-inside-files-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 12)
+```{r}
+#| label: looking-inside-files-4
+#| echo: false
+learnr2::question(
+  "Run cat -n AUTHORS. CP/CR just the first 10 or so lines of the output.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -310,13 +313,14 @@ You will also see agents use `sed` (edit text in a stream) and `awk` (slice colu
 
 For a file too long for `cat` but that you want to actually read, there is `less`, a **pager**. Run `less AUTHORS`. The file takes over the Terminal: press the space bar to page down, the arrow keys to scroll, and `q` to **q**uit. Do all three, then CP/CR whatever your Terminal shows after quitting.
 
-```{r looking-inside-files-5}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: looking-inside-files-5
+#| echo: false
+learnr2::question(
+  "For a file too long for cat but that you want to actually read, there is less, a pager. Run less AUTHORS. The file takes over the Terminal: press the space bar to page down, the arrow keys to scroll, and q to quit. Do all three, then CP/CR whatever your Terminal shows after quitting.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -344,13 +348,14 @@ diff AUTHORS AUTHORS-edited
 
 CP/CR.
 
-```{r looking-inside-files-6}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 6)
+```{r}
+#| label: looking-inside-files-6
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -389,9 +394,7 @@ https://github.com/PPBDS/vscode.tutorials/blob/main/TODO.txt
 
 Click the "Download raw file" symbol to download `TODO.txt` to your computer's `Downloads` folder.
 
-```{r}
-knitr::include_graphics("images/download-file.png")
-```
+![](images/download-file.png){width=90%}
 
 Then, back in your Codespace, drag and drop `TODO.txt` from your computer's file manager (Finder on Mac, File Explorer on Windows) into the `options` directory in the Explorer.
 
@@ -399,13 +402,14 @@ Then, back in your Codespace, drag and drop `TODO.txt` from your computer's file
 
 Run `ls` to confirm that it arrived. CP/CR.
 
-```{r files-in-and-out-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: files-in-and-out-1
+#| echo: false
+learnr2::question(
+  "Run ls to confirm that it arrived. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -436,13 +440,14 @@ Delete the file by running `rm TODO.txt`. There is a second way to upload:
 
 Run `ls` to confirm. CP/CR.
 
-```{r files-in-and-out-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: files-in-and-out-2
+#| echo: false
+learnr2::question(
+  "4. Select TODO.txt from the file selection window. Run ls to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -470,13 +475,14 @@ curl -o data/penguins.csv https://raw.githubusercontent.com/allisonhorst/palmerp
 
 The lowercase `-o` option, unlike `-O`, lets you choose the downloaded file's name --- including a path, so the file lands directly in `data/`. Then run `head -n 3 data/penguins.csv`. CP/CR.
 
-```{r files-in-and-out-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
+```{r}
+#| label: files-in-and-out-3
+#| echo: false
+learnr2::question(
+  "The lowercase -o option, unlike -O, lets you choose the downloaded file's name -- including a path, so the file lands directly in data/. Then run head -n 3 data/penguins.csv. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -498,13 +504,14 @@ Make a `data/` directory, fetch a file into it, `head` it to confirm it is what 
 
 Your repo now has files scattered across several directories. When you know a file's name but not where you put it, `find` is the answer. From `/workspaces/terminal-2`, run `find . -name AUTHORS` and then `find . -name penguins.csv`. CP/CR.
 
-```{r files-in-and-out-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 5)
+```{r}
+#| label: files-in-and-out-4
+#| echo: false
+learnr2::question(
+  "Your repo now has files scattered across several directories. When you know a file's name but not where you put it, find is the answer. From /workspaces/terminal-2, run find . -name AUTHORS and then find . -name penguins.csv. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -539,13 +546,14 @@ Rscript add.R
 
 CP/CR.
 
-```{r running-programs-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 4)
+```{r}
+#| label: running-programs-1
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -571,13 +579,14 @@ Rscript -e 'sqrt(144)'
 
 CP/CR.
 
-```{r running-programs-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: running-programs-2
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -603,13 +612,14 @@ python add.py
 
 CP/CR.
 
-```{r running-programs-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 4)
+```{r}
+#| label: running-programs-3
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -635,13 +645,14 @@ python -c 'print(2 ** 10)'
 
 CP/CR.
 
-```{r running-programs-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: running-programs-4
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -660,13 +671,14 @@ terminal-2 $
 
 Where do these programs live? Run `which Rscript` and then `which python`. CP/CR.
 
-```{r running-programs-5}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 5)
+```{r}
+#| label: running-programs-5
+#| echo: false
+learnr2::question(
+  "Where do these programs live? Run which Rscript and then which python. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -687,13 +699,14 @@ Look closely: these are different kinds of places. `Rscript` lives in `/usr/loca
 
 How does the shell know to use *that* `python`? Run `echo $PATH`. CP/CR.
 
-```{r running-programs-6}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 4)
+```{r}
+#| label: running-programs-6
+#| echo: false
+learnr2::question(
+  "How does the shell know to use that python? Run echo $PATH. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -714,13 +727,14 @@ Your exact list may differ. What matters is what comes first.
 
 Who built that venv? Run `uv --version`. CP/CR.
 
-```{r running-programs-7}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: running-programs-7
+#| echo: false
+learnr2::question(
+  "Who built that venv? Run uv --version. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -747,13 +761,14 @@ python -c 'import pandas; print(pandas.__version__)'
 
 Then clean up your scripts: run `rm add.R add.py`. CP/CR.
 
-```{r running-programs-8}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 4)
+```{r}
+#| label: running-programs-8
+#| echo: false
+learnr2::question(
+  "Then clean up your scripts: run rm add.R add.py. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -775,13 +790,14 @@ Your version number may differ.
 
 One more program you already rely on: `quarto`, the tool that rendered your documents in the Quarto tutorial, is an ordinary command-line program like `Rscript` and `python`. Run `quarto check`. CP/CR the first ten or so lines.
 
-```{r running-programs-9}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 10)
+```{r}
+#| label: running-programs-9
+#| echo: false
+learnr2::question(
+  "One more program you already rely on: quarto, the tool that rendered your documents in the Quarto tutorial, is an ordinary command-line program like Rscript and python. Run quarto check. CP/CR the first ten or so lines.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -818,13 +834,14 @@ chmod +x hello.sh
 
 CP/CR.
 
-```{r running-programs-10}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
+```{r}
+#| label: running-programs-10
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -854,5 +871,23 @@ This tutorial covered command options, environment variables (reading `$HOME` an
 
 You will type some of these commands yourself. But mostly you will *read* them, in the transcripts of AI agents working on your behalf --- and now you can.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "07-terminal-2")
 ```

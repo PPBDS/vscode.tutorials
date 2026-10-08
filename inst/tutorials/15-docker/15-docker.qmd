@@ -1,29 +1,21 @@
 ---
 title: "The Devcontainer Dockerfile"
 author: David Kane
-tutorial:
-  id: "15-docker"
-output:
-  learnr::tutorial:
-    df_print: default
-    progressive: true
-    allow_skip: true
-runtime: shiny_prerendered
 description: "A reading tour of the real Dockerfile that builds ghcr.io/ppbds/devcontainer --- the image codespace-starter's devcontainer.json points at. Covers digest pinning, layer ordering, system libraries, permissions, R and Python package installs, and the smoke tests that guard the build."
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(knitr)
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60,
-        tutorial.storage = "local")
-```
+## Information
+###
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 ## Introduction
@@ -764,13 +756,14 @@ RUN R --vanilla -e 'ts <- learnr::available_tutorials("tutorial.helpers"); if (!
 
 Find the `FROM` line near the top of the Dockerfile. Copy and paste it.
 
-```{r the-devcontainer-image-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-devcontainer-image-1
+#| echo: false
+learnr2::question(
+  "Find the FROM line near the top of the Dockerfile. Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -794,13 +787,14 @@ CMD ["echo", "Hello from my first Docker image!"]
 
 Feel free to use a different base image or command, as long as it is your own short, working Dockerfile. Paste the full contents of your `Dockerfile` below.
 
-```{r the-devcontainer-image-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: the-devcontainer-image-2
+#| echo: false
+learnr2::question(
+  "Feel free to use a different base image or command, as long as it is your own short, working Dockerfile. Paste the full contents of your Dockerfile below.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -868,13 +862,14 @@ jobs:
 
 Find the step named `Build and push`. Copy and paste its `with:` block --- from `with:` through the two `cache-` lines.
 
-```{r the-devcontainer-image-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: the-devcontainer-image-3
+#| echo: false
+learnr2::question(
+  "Find the step named Build and push. Copy and paste its with: block -- from with: through the two cache- lines.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -899,13 +894,14 @@ Notice who runs this: a GitHub Actions machine, on every push to `main` and ever
 
 Find the `tags: |` block inside the `Extract metadata` step. Copy and paste its four `type=` lines.
 
-```{r the-devcontainer-image-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: the-devcontainer-image-4
+#| echo: false
+learnr2::question(
+  "Find the tags: | block inside the Extract metadata step. Copy and paste its four type= lines.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -927,13 +923,14 @@ One more thing the workflow does that no student ever will: it logs in. `permiss
 
 Find the sentence in the header comment that explains why the old base/dev/student image trio was removed. Copy and paste it.
 
-```{r the-devcontainer-image-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: the-devcontainer-image-5
+#| echo: false
+learnr2::question(
+  "Find the sentence in the header comment that explains why the old base/dev/student image trio was removed. Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -953,13 +950,14 @@ There's now one image for everyone --- students launched via `codespace-starter`
 
 Find the comment describing the Dockerfile's overall layer order. Copy and paste it.
 
-```{r the-devcontainer-image-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: the-devcontainer-image-6
+#| echo: false
+learnr2::question(
+  "Find the comment describing the Dockerfile's overall layer order. Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -979,13 +977,14 @@ Docker caches each instruction as its own layer, reusing every cached layer unti
 
 Find the seven `ARG` lines that pin tool versions (`QUARTO_VERSION`, `ARF_VERSION`, `NODE_MAJOR`, `CLAUDE_CODE_VERSION`, `CODEX_VERSION`, `GROK_VERSION`, `AIDER_VERSION`). Copy and paste them, and note which CLI mentioned nearby is the *exception* to this pinning approach.
 
-```{r the-devcontainer-image-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: the-devcontainer-image-7
+#| echo: false
+learnr2::question(
+  "Find the seven ARG lines that pin tool versions (QUARTO_VERSION, ARF_VERSION, NODE_MAJOR, CLAUDE_CODE_VERSION, CODEX_VERSION, GROK_VERSION, AIDER_VERSION). Copy and paste them, and note which CLI mentioned nearby is the exception to this pinning approach.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1010,13 +1009,14 @@ Pinning versions with `ARG` means every build installs the *exact same* Quarto, 
 
 Find the bullet point in the system-libraries comment that explains why `libuv1-dev` is baked into the image even though the R package that needs it doesn't strictly require it. Copy and paste that bullet.
 
-```{r the-devcontainer-image-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: the-devcontainer-image-8
+#| echo: false
+learnr2::question(
+  "Find the bullet point in the system-libraries comment that explains why libuv1-dev is baked into the image even though the R package that needs it doesn't strictly require it. Copy and paste that bullet.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1037,13 +1037,14 @@ The `fs` package's binary already works fine without `libuv1-dev` --- but `pak` 
 
 Find the line inside the `libnode-dev-virtual` package's control file that lists what it `Provides`. Copy and paste it, and explain in one sentence why this trick exists.
 
-```{r the-devcontainer-image-9}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: the-devcontainer-image-9
+#| echo: false
+learnr2::question(
+  "Find the line inside the libnode-dev-virtual package's control file that lists what it Provides. Copy and paste it, and explain in one sentence why this trick exists.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1060,13 +1061,14 @@ question_text(NULL,
 
 Find the two-part comment (in the "hardenings" block and the "Everything below installs as rstudio" block) that explains why a `pak` run as root can break later installs by the non-root user. Copy and paste the sentence describing what happens to `filelock`.
 
-```{r the-devcontainer-image-10}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: the-devcontainer-image-10
+#| echo: false
+learnr2::question(
+  "Find the two-part comment (in the \"hardenings\" block and the \"Everything below installs as rstudio\" block) that explains why a pak run as root can break later installs by the non-root user. Copy and paste the sentence describing what happens to filelock.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1086,13 +1088,14 @@ broke the student build (2026-07).
 
 Find the `ENV` line that turns off `pak`'s system-requirement auto-install behavior. Copy and paste it.
 
-```{r the-devcontainer-image-11}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-devcontainer-image-11
+#| echo: false
+learnr2::question(
+  "Find the ENV line that turns off pak's system-requirement auto-install behavior. Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1109,13 +1112,14 @@ Without this, `pak` would try `sudo apt-get install` whenever it thinks a system
 
 Find the `RUN` block that installs the four PPBDS course packages from GitHub. Copy and paste it, and note the two arguments to `pak::pkg_install()` that are not just the package list.
 
-```{r the-devcontainer-image-12}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: the-devcontainer-image-12
+#| echo: false
+learnr2::question(
+  "Find the RUN block that installs the four PPBDS course packages from GitHub. Copy and paste it, and note the two arguments to pak::pkg_install() that are not just the package list.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1144,13 +1148,14 @@ Notice also the `echo` line and the `COURSE_PKG_REFRESH` date `ARG` just above t
 
 Find the `remotes::install_url()` line that installs **CatBoost**. Copy and paste it, and explain in one sentence why **CatBoost** needs this special install method instead of a normal `pak::pkg_install()` call.
 
-```{r the-devcontainer-image-13}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: the-devcontainer-image-13
+#| echo: false
+learnr2::question(
+  "Find the remotes::install_url() line that installs CatBoost. Copy and paste it, and explain in one sentence why CatBoost needs this special install method instead of a normal pak::pkg_install() call.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1167,13 +1172,14 @@ R -q -e 'remotes::install_url("https://github.com/catboost/catboost/releases/dow
 
 Find the `ENV` line that sets `RETICULATE_PYTHON`, and the comment just above the Python venv block explaining why it is set even though nothing installed in this Dockerfile uses it directly. Copy and paste the `ENV` line.
 
-```{r the-devcontainer-image-14}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: the-devcontainer-image-14
+#| echo: false
+learnr2::question(
+  "Find the ENV line that sets RETICULATE_PYTHON, and the comment just above the Python venv block explaining why it is set even though nothing installed in this Dockerfile uses it directly. Copy and paste the ENV line.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1191,13 +1197,14 @@ Quarto renders Python chunks through the Jupyter engine (`ipykernel`), which nee
 
 Find the line that installs Observable Framework. Copy and paste it, and explain when a student actually needs this CLI versus when Quarto already has them covered.
 
-```{r the-devcontainer-image-15}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: the-devcontainer-image-15
+#| echo: false
+learnr2::question(
+  "Find the line that installs Observable Framework. Copy and paste it, and explain when a student actually needs this CLI versus when Quarto already has them covered.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1214,13 +1221,14 @@ Interactive Observable charts *inside* an existing Quarto document need nothing 
 
 Find the "Modeling smoke test 3" `RUN` line near the bottom of the file, the one that fits a `brms` model. Copy and paste it, and explain why this test needs to actually fit a model rather than just checking that the `brms` package loads.
 
-```{r the-devcontainer-image-16}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: the-devcontainer-image-16
+#| echo: false
+learnr2::question(
+  "Find the \"Modeling smoke test 3\" RUN line near the bottom of the file, the one that fits a brms model. Copy and paste it, and explain why this test needs to actually fit a model rather than just checking that the brms package loads.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1238,5 +1246,23 @@ RUN R --vanilla -e 'fit <- brms::brm(mpg ~ wt, data = mtcars, chains = 1, iter =
 
 This tutorial read through the real Dockerfile behind `ghcr.io/ppbds/devcontainer`, the image `codespace-starter`'s `devcontainer.json` points at. You saw why the base image is pinned by digest rather than a floating tag, why one image now serves both students and package developers, why layer order matters for Docker's build cache, and how deliberate `ARG` version pins keep builds reproducible. You also traced the permissions story that runs through the R package installs --- system libraries baked in as root, `PKG_SYSREQS=false` to stop `pak` from trying to `sudo`, and the switch to `USER rstudio` so lock files never poison the library for later installs --- and saw how the Python venv and the image-wide smoke tests each guard against a specific class of failure at build time, before a student ever opens a Codespace. Finally, you read the GitHub Actions workflow that builds and publishes the image --- `docker build` and `docker push` run by a machine on every push and every release, tagged by pattern, logged in with a token no human ever handles.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "15-docker")
 ```

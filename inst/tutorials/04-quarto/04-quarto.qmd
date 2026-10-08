@@ -1,28 +1,27 @@
 ---
 title: Quarto
 author: David Kane
-tutorial:
-  id: "04-quarto"
-output:
-  learnr::tutorial:
-    progressive: yes
-    'allow_skip:': yes
-runtime: shiny_prerendered
 description: Introduction to using Quarto documents. Covers YAML headers, code chunks with chunk options, rendering with Live Server, and publishing to the web with GitHub Pages.
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
+
+```{r}
+#| label: setup
+#| include: false
 library(tidyverse)
-library(knitr)
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60, 
-        tutorial.storage = "local")
 ```
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+## Information
+###
+
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 ## Introduction
@@ -40,13 +39,14 @@ You should be doing this tutorial in a repo called `quarto`. Recall from the Wor
 
 Open a new bash Terminal. Run `pwd`. CP/CR.
 
-```{r introduction-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: introduction-1
+#| echo: false
+learnr2::question(
+  "Open a new bash Terminal. Run pwd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -94,13 +94,14 @@ All of your saved answers will still be there.
 
 **Everyone**: open a new bash Terminal and run `pwd`. CP/CR.
 
-```{r introduction-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: introduction-2
+#| echo: false
+learnr2::question(
+  "Everyone: open a new bash Terminal and run pwd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -127,25 +128,19 @@ Quarto is a file format for making dynamic documents with R and other languages,
 
 Click `File -> New File ...` in the Application Menu (the three-horizontal-line icon) at the top left of your screen. 
 
-```{r}
-include_graphics("images/q-1.png")
-```
+![](images/q-1.png){width=90%}
 
 ###
 
 Select `Quarto Document` from the drop-down menu.
 
-```{r}
-include_graphics("images/q-2.png")
-```
+![](images/q-2.png){width=90%}
 
 ###
 
 The top of the new document is called the YAML header. It should look like:
 
-```{r}
-include_graphics("images/q-2.png")
-```
+![](images/q-2.png){width=90%}
 
 Change the title to “My First Quarto Document”.
 
@@ -153,13 +148,14 @@ Change the title to “My First Quarto Document”.
 
 In the bash Terminal, run `ls`. CP/CR.
 
-```{r quarto-1-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: quarto-1-1
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -174,9 +170,7 @@ The only file is `AGENTS.md`, which `connect-repo` copied in when it created the
 
 The black dot next to the name indicates that the file has unsaved changes. The dot disappears when you save the file.
 
-```{r}
-include_graphics("images/q-3.png")
-```
+![](images/q-3.png){width=90%}
 
 ###
 
@@ -192,9 +186,7 @@ Save the Quarto document with `File -> Save`. You can also use the shortcut `Cmd
 
 Name the file `quarto-1.qmd`.
 
-```{r}
-include_graphics("images/q-4.png")
-```
+![](images/q-4.png){width=90%}
 
 Now that the file is saved, the black dot has disappeared. The file is now part of the repo, and will be tracked by Git. The `U` next to the name means that, according to Git, the file is **untracked**. Git does not yet recognize it, because we have not added it to the repo. 
 
@@ -204,13 +196,14 @@ Run `cat quarto-1.qmd` in the bash Terminal.
 
 CP/CR.
 
-```{r quarto-1-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 6)
+```{r}
+#| label: quarto-1-2
+#| echo: false
+learnr2::question(
+  "Run cat quarto-1.qmd in the bash Terminal. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -264,9 +257,11 @@ The `echo: false` option disables the printing of code (only output is displayed
 
 As you can see, a lot of the text is regular plain text, not code. However, there are code chunks (denoted by triple backticks on both ends, \`\`\`[code here]\`\`\`) that allow us to execute code when the document is "rendered." To "render" a Quarto document is to transform it into an HTML, PDF, DOCX, or other output file format while also running any embedded code. Here's an example of an R code chunk:
 
-<pre><code>```{r}
+````{verbatim}
+```{r}
 1+1
-```</code></pre>
+```
+````
 
 Quarto documents use Markdown, an easy-to-write plain text format that can contain chunks of embedded code. These code chunks can be written in many languages, including R and Python. Code chunks allow you to use a programming language to create plots and other graphics.
 
@@ -278,9 +273,7 @@ The [YAML header](https://bookdown.org/yihui/rmarkdown-cookbook/rmarkdown-anatom
 
 To "render" our Quarto document, use the shortcut `Cmd/Ctrl + Shift + K`. Your screen should look something like this:
 
-```{r}
-include_graphics("images/q-5.png")
-```
+![](images/q-5.png){width=90%}
 
 This command splits the Editor and opens a new tab titled "Quarto Preview" on the right. This displays the rendered document. It's often better to preview the document in a separate browser window. VS Code should have offered you the opportunity to open the HTML file in a browser. Ignore that for now.
 
@@ -288,9 +281,7 @@ This command splits the Editor and opens a new tab titled "Quarto Preview" on th
 
 There is a lot going on, so we will consider different parts of the window. Please pay attention.
 
-```{r}
-include_graphics("images/q-5-a.png")
-```
+![](images/q-5-a.png){width=90%}
 
 The Quarto Preview window shows what your Quarto document looks like now that it has been rendered as HTML. The first red arrow indicates the "refresh" button, which re-renders the document, although this refresh generally happens automatically. 
 
@@ -302,9 +293,7 @@ The third red arrow indicates the "Open in Browser" button, which opens the rend
 
 The list of terminals on the righthand side of the window shows four entries. The first is the bash Terminal which initialized the Codespace. The second is the bash Terminal associated with running `connect-repo`. The third is the bash Terminal that we opened to run `pwd` and `ls`. 
 
-```{r}
-include_graphics("images/q-5-b.png")
-```
+![](images/q-5-b.png){width=90%}
 
 The fourth is the bash Terminal associated with the Quarto Preview. This last terminal is where the `quarto preview` command is running, which is what generates the rendered document.
 
@@ -312,9 +301,7 @@ The fourth is the bash Terminal associated with the Quarto Preview. This last te
 
 Using the `Cmd/Ctrl + Shift + K` shortcut, causes VS Code to open a new bash Terminal and issue the `quarto render` command, along with some options, as you can see below.
 
-```{r}
-include_graphics("images/q-5-c.png")
-```
+![](images/q-5-c.png){width=90%}
 
 You don't need to worry about this now. Just use `Cmd/Ctrl + Shift + K` to preview your Quarto documents. Remember: Professionals don't click buttons. They save time by using keyboard shortcuts.
 
@@ -322,21 +309,20 @@ You don't need to worry about this now. Just use `Cmd/Ctrl + Shift + K` to previ
 
 Lastly, note that you also open the HTML file in a browser window by using `Cmd/Ctrl + click` on the "Browse at" link. 
 
-```{r}
-include_graphics("images/q-5-d.png")
-```
+![](images/q-5-d.png){width=90%}
 
 ###
 
 In the bash Terminal, run `ls`. CP/CR.
 
-```{r quarto-1-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: quarto-1-3
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -367,13 +353,14 @@ Don't forget the blank line at the end. Save it, and watch the badge drop.
 
 In the bash Terminal, run `cat .gitignore`. CP/CR.
 
-```{r quarto-1-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: quarto-1-4
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat .gitignore. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -394,15 +381,11 @@ The HTML document created from a QMD file will, by default, show both the code a
 
 Add a couple of blank lines to the bottom of `quarto-1.qmd`. Then, add an R code chunk by selecting the `More Actions ...` button --- the three dots in the top-right of the editor. 
 
-```{r}
-include_graphics("images/cs-insert-code-chunk.png")
-```
+![](images/cs-insert-code-chunk.png){width=90%}
 
 Then, choose `Insert Code Cell`, selecting `r` from the list of options. Within the code cell, add `6 + 3`.
 
-```{r}
-include_graphics("images/cs-add-numbers.png")
-```
+![](images/cs-add-numbers.png){width=90%}
 
 You can also insert a code cell with the shortcut key: `Cmd/Ctrl + Shift + i`. 
 
@@ -411,19 +394,20 @@ Save the file. Render it again.
 In the R Terminal, run:
 
 ````
-tutorial.helpers::show_file("quarto-1.qmd", pattern = "6")
+learnr2::show_file("quarto-1.qmd", pattern = "6")
 ````
 
 CP/CR.
 
 
-```{r quarto-1-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 17)
+```{r}
+#| label: quarto-1-5
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -461,13 +445,14 @@ cat quarto-1.qmd
 
 CP/CR.
 
-```{r quarto-1-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: quarto-1-6
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -519,13 +504,14 @@ cat quarto-1.qmd
 CP/CR.
 
 
-```{r quarto-1-7}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 6)
+```{r}
+#| label: quarto-1-7
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -556,21 +542,20 @@ So far you have viewed your rendered document in the "Quarto Preview" pane insid
 
 In the Explorer (the file tree on the left side of VS Code), find `quarto-1.html`. Right-click it and select **"Open with Live Server"**.
 
-```{r}
-include_graphics("images/live-server.png")
-```
+![](images/live-server.png){width=90%}
 
 This opens `quarto-1.html` in a new browser tab served through your Codespace. The URL will look something like `https://[codespace-name]-5500.app.github.dev/quarto-1.html`.
 
 Copy/paste that URL below.
 
-```{r quarto-1-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: quarto-1-8
+#| echo: false
+learnr2::question(
+  "Copy/paste that URL below.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -595,13 +580,14 @@ Your first Quarto document is done, so commit it. Through the Source Control vie
 
 In the bash Terminal, run `git log -1`. CP/CR.
 
-```{r quarto-1-9}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
+```{r}
+#| label: quarto-1-9
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run git log -1. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -633,13 +619,14 @@ Follow the same procedure as last time to create a new Quarto document. `File ->
 
 In the bash Terminal, run `ls`. CP/CR.
 
-```{r quarto-2-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: quarto-2-1
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -662,26 +649,28 @@ cat quarto-2.qmd
 
 CP/CR.
 
-```{r quarto-2-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 6)
+```{r}
+#| label: quarto-2-2
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
-<pre><code>---
+````{verbatim}
+---
 title: "My Second Quarto Document"
 author: "Your Name"
 format: html
 ---
 
-&#96;&#96;&#96;{r}
-&#96;&#96;&#96;
-</code></pre>
+```{r}
+```
+````
 
 ###
 
@@ -691,15 +680,17 @@ In this tutorial, we will only include R code within our code chunks. But code c
 
 ### Exercise 3
 
-Put `2 * 2` within the code chunk. `Cmd/Ctrl + Shift + K`. Copy and paste the entire rendered document, below. (This allows us to confirm that your file rendered correctly.)
+Put `2 * 2` within the code chunk. `Cmd/Ctrl + Shift + K`. Take a screenshot of the entire rendered document and paste it below. (This allows us to confirm that your file rendered correctly.)
 
-```{r quarto-2-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: quarto-2-3
+#| echo: false
+learnr2::question(
+  "Put 2 * 2 within the code chunk. Cmd/Ctrl + Shift + K. Take a screenshot of the entire rendered document and paste it below. (This allows us to confirm that your file rendered correctly.)",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -721,19 +712,19 @@ You can add options to code chunks. In Quarto, code chunk options are always pre
 
 Add two options above the `2 * 2` calculation: `#| echo: false` and `#| label: calculation`.
 
+![](images/echo-false.png){width=90%}
+
+`Cmd/Ctrl + Shift + K`. Paste a screenshot of the HTML below.
+
 ```{r}
-include_graphics("images/echo-false.png")
-```
-
-`Cmd/Ctrl + Shift + K`. Copy/paste the HTML below.
-
-```{r quarto-2-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+#| label: quarto-2-4
+#| echo: false
+learnr2::question(
+  "Cmd/Ctrl + Shift + K. Paste a screenshot of the HTML below.",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ###
@@ -747,16 +738,18 @@ My Second Quarto Document
 
 ### Exercise 5
 
-Delete the current code chunk. Add a new one. In this new code chunk, put `library(tidyverse)`. `Cmd/Ctrl + Shift + K`. A message about "Attaching core tidyverse packages" should appear in the HTML file. Copy/paste the contents of the rendered file below.
+Delete the current code chunk. Add a new one. In this new code chunk, put `library(tidyverse)`. `Cmd/Ctrl + Shift + K`. A message about "Attaching core tidyverse packages" should appear in the HTML file. Paste a screenshot of the rendered file below.
 
 
-```{r quarto-2-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: quarto-2-5
+#| echo: false
+learnr2::question(
+  "Delete the current code chunk. Add a new one. In this new code chunk, put library(tidyverse). Cmd/Ctrl + Shift + K. A message about \"Attaching core tidyverse packages\" should appear in the HTML file. Paste a screenshot of the rendered file below.",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -781,15 +774,17 @@ We will include the **tidyverse** package in almost every Quarto document that w
 
 ### Exercise 6
 
-Add `#| message: false` to the code chunk. `Cmd/Ctrl + Shift + K`. Copy/paste the entire rendered file below.
+Add `#| message: false` to the code chunk. `Cmd/Ctrl + Shift + K`. Paste a screenshot of the entire rendered file below.
 
-```{r quarto-2-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: quarto-2-6
+#| echo: false
+learnr2::question(
+  "Add #| message: false to the code chunk. Cmd/Ctrl + Shift + K. Paste a screenshot of the entire rendered file below.",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -818,13 +813,14 @@ YAML is very fussy about formatting. Let's confirm this by breaking it: edit the
 
 Copy/paste the error that appears.
 
-```{r quarto-2-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 7)
+```{r}
+#| label: quarto-2-7
+#| echo: false
+learnr2::question(
+  "Copy/paste the error that appears.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -851,15 +847,17 @@ Indent `echo: false` again. `Cmd/Ctrl + Shift + K` to confirm that everything wo
 
 Add another code chunk option: `label: setup`. Don't forget to preface it with the hash-pipe: `#|`. It is conventional to label the code chunk that loads libraries and takes care of other housekeeping as the "setup" code chunk.
 
-`Cmd/Ctrl + Shift + K`. Copy/paste the HTML below.
+`Cmd/Ctrl + Shift + K`. Paste a screenshot of the HTML below.
 
-```{r quarto-2-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: quarto-2-8
+#| echo: false
+learnr2::question(
+  "Cmd/Ctrl + Shift + K. Paste a screenshot of the HTML below.",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -884,13 +882,14 @@ Right now, the **tidyverse** package has not been loaded into the current R sess
 
 Run the code chunk. Then, run `pull(mtcars, 1)` in the R Terminal. CP/CR.
 
-```{r quarto-2-9}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: quarto-2-9
+#| echo: false
+learnr2::question(
+  "Run the code chunk. Then, run pull(mtcars, 1) in the R Terminal. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -902,6 +901,8 @@ If you run this command without running `library(tidyverse)` in the R Terminal, 
 Let's create the following scatterplot in our Quarto document:
 
 ```{r}
+#| label: quarto-2-10-plot
+#| echo: false
 scat_p <- ggplot(data = iris,
                  mapping = aes(x = Sepal.Width,
                                y = Sepal.Length,
@@ -928,18 +929,19 @@ Preview the file. You should see your plot --- but not the code that made it. Th
 In the R Terminal, run:
 
 ````
-tutorial.helpers::show_file("quarto-2.qmd", chunk = "Last")
+learnr2::show_file("quarto-2.qmd", chunk = "Last")
 ````
 
 CP/CR.
 
-```{r quarto-2-10}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 10)
+```{r}
+#| label: quarto-2-10
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -973,13 +975,14 @@ Add `quarto-2_files` to `.gitignore` on its own line. Save the file, and watch t
 
 In the bash Terminal, run `cat .gitignore`. CP/CR.
 
-```{r quarto-2-11}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 4)
+```{r}
+#| label: quarto-2-11
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat .gitignore. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1001,13 +1004,14 @@ Commit and push. Use the commit message `Add quarto-2`.
 
 Then, in the bash Terminal, run `git status`. CP/CR.
 
-```{r quarto-2-12}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 6)
+```{r}
+#| label: quarto-2-12
+#| echo: false
+learnr2::question(
+  "Then, in the bash Terminal, run git status. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1042,13 +1046,14 @@ Then, in the Explorer, right-click `quarto-2.html` and choose **Open with Live S
 
 CP/CR the render command and its output.
 
-```{r publishing-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 6)
+```{r}
+#| label: publishing-1
+#| echo: false
+learnr2::question(
+  "CP/CR the render command and its output.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1078,13 +1083,14 @@ Publishing should always start from committed work. In the bash Terminal, run `g
 
 Then run `quarto publish gh-pages quarto-2.qmd`. Respond with "Y" when it asks whether you want to publish. (This might take a minute.) CP/CR.
 
-```{r publishing-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 12)
+```{r}
+#| label: publishing-2
+#| echo: false
+learnr2::question(
+  "Then run quarto publish gh-pages quarto-2.qmd. Respond with \"Y\" when it asks whether you want to publish. (This might take a minute.) CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1113,13 +1119,14 @@ quarto $
 
 The publish command printed (and may have opened in your browser) the address of your page. It can take a minute or two for the page to appear. Copy/paste the URL of your published page.
 
-```{r publishing-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: publishing-3
+#| echo: false
+learnr2::question(
+  "The publish command printed (and may have opened in your browser) the address of your page. It can take a minute or two for the page to appear. Copy/paste the URL of your published page.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1138,5 +1145,23 @@ That page is live on the internet --- anyone you send the URL to can read it. Th
 This tutorial covered how to create [Quarto documents](https://docs.posit.co/ide/user/ide/guide/documents/quarto-project.html#creating-new-documents) using [GitHub Codespaces](https://github.com/features/codespaces), finishing with a document published to the web via GitHub Pages. Some material was from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "04-quarto")
 ```

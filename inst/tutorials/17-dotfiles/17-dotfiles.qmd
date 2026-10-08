@@ -1,29 +1,21 @@
 ---
 title: "Dotfiles"
 author: David Kane
-tutorial:
-  id: "17-dotfiles"
-output:
-  learnr::tutorial:
-    df_print: default
-    progressive: true
-    allow_skip: true
-runtime: shiny_prerendered
 description: "Build a private `dotfiles` repo that GitHub reads every time it makes you a machine, so a brand new Codespace already knows your Git identity."
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(knitr)
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60,
-        tutorial.storage = "local")
-```
+## Information
+###
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 ## Introduction
@@ -43,18 +35,20 @@ Two things make this tutorial unusual. The repo you make is **permanent** --- ev
 
 Open a **new** bash Terminal (the `+` in the top-right corner of the Panel) and run:
 
-<pre><code>echo $COOLEST_TEACHER
-</code></pre>
+````
+echo $COOLEST_TEACHER
+````
 
 CP/CR.
 
-```{r introduction-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: introduction-1
+#| echo: false
+learnr2::question(
+  "echo $COOLEST_TEACHER CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -78,18 +72,20 @@ By the end of this tutorial, that command will print `Preceptor` on a machine wh
 
 Now look at the file that runs every time you open a bash Terminal. The starter put several blocks in it; show the one about your prompt:
 
-<pre><code>grep -A 2 short-prompt ~/.bashrc
-</code></pre>
+````
+grep -A 2 short-prompt ~/.bashrc
+````
 
 CP/CR.
 
-```{r introduction-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: introduction-2
+#| echo: false
+learnr2::question(
+  "grep -A 2 short-prompt ~/.bashrc CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -116,13 +112,14 @@ You need a repo, and you need a way to get files out of it and into your home di
 
 In the bash Terminal, run `gh auth status`. CP/CR.
 
-```{r repo-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: repo-1
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run gh auth status. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -152,20 +149,22 @@ When GitHub built this Codespace it put a **token** --- a temporary password for
 
 Make the repo. In the bash Terminal:
 
-<pre><code>cd /workspaces
+````
+cd /workspaces
 gh repo create dotfiles --private --clone
 cd dotfiles
-</code></pre>
+````
 
 CP/CR.
 
-```{r repo-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: repo-2
+#| echo: false
+learnr2::question(
+  "cd /workspaces gh repo create dotfiles --private --clone cd dotfiles CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -201,17 +200,19 @@ Use a script. Ask AI to create two files in `/workspaces/dotfiles`.
 
 First, `install.sh`:
 
-<pre><code>#!/bin/bash
+````
+#!/bin/bash
 set -e
 cd "$(dirname "$0")"
 
 echo 'export COOLEST_TEACHER=Preceptor' >> ~/.bashrc
 cp .gitconfig ~/.gitconfig
-</code></pre>
+````
 
 Second, `.gitconfig`, with your real name and your own GitHub username:
 
-<pre><code>[user]
+````
+[user]
 	name = Your Name
 	email = YOUR-USERNAME@users.noreply.github.com
 [init]
@@ -219,22 +220,24 @@ Second, `.gitconfig`, with your real name and your own GitHub username:
 [alias]
 	s = status --short --branch
 	l = log --oneline --graph --decorate -20
-</code></pre>
+````
 
 In the bash Terminal, run `cat /workspaces/dotfiles/.gitconfig`. CP/CR.
 
-```{r repo-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: repo-3
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat /workspaces/dotfiles/.gitconfig. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
-<pre><code>[user]
+````
+[user]
 	name = David Kane
 	email = ppbds-student@users.noreply.github.com
 [init]
@@ -242,7 +245,7 @@ question_text(NULL,
 [alias]
 	s = status --short --branch
 	l = log --oneline --graph --decorate -20
-</code></pre>
+````
 
 ###
 
@@ -266,18 +269,20 @@ The rule generalises: **when you do not own a file, add to it rather than replac
 
 A script GitHub cannot run is no use. Make it executable, then commit and push everything:
 
-<pre><code>chmod +x install.sh
-</code></pre>
+````
+chmod +x install.sh
+````
 
 Then run `ls -l install.sh`. CP/CR.
 
-```{r repo-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: repo-4
+#| echo: false
+learnr2::question(
+  "Then run ls -l install.sh. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -308,13 +313,14 @@ Under **Dotfiles**, tick **Automatically install dotfiles**, and use the dropdow
 
 Copy and paste the name of the setting you turned on and the repository you chose.
 
-```{r switch-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: switch-1
+#| echo: false
+learnr2::question(
+  "Copy and paste the name of the setting you turned on and the repository you chose.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -348,13 +354,14 @@ Click **New codespace**, choose repository `PPBDS/codespace-starter` and branch 
 
 In the *new* Codespace, open a bash Terminal and run `echo $COOLEST_TEACHER`. Copy the output, come back to this tab, and paste it.
 
-```{r switch-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: switch-2
+#| echo: false
+learnr2::question(
+  "In the new Codespace, open a bash Terminal and run echo $COOLEST_TEACHER. Copy the output, come back to this tab, and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -378,19 +385,21 @@ Nothing in that chain knows anything about this tutorial or this course. It is a
 
 Still in the **new** Codespace, run:
 
-<pre><code>git config --get user.name
+````
+git config --get user.name
 tail -1 ~/.bashrc
-</code></pre>
+````
 
 CP/CR back here.
 
-```{r switch-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: switch-3
+#| echo: false
+learnr2::question(
+  "git config --get user.name tail -1 ~/.bashrc CP/CR back here.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -416,13 +425,14 @@ Clean up. Go back to <https://github.com/codespaces>, find the Codespace you jus
 
 Copy and paste the name of the Codespace you deleted.
 
-```{r switch-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: switch-4
+#| echo: false
+learnr2::question(
+  "Copy and paste the name of the Codespace you deleted.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -454,5 +464,23 @@ You also met `gh`. `git` is version control and works anywhere; `gh` talks to gi
 
 One rule to carry forward: **settings that apply at build time do not reach a machine that already exists.** Dotfiles, devcontainer changes, images --- all the same rule, and you will meet it once more in the OpenRouter tutorial, on the same settings page you used today.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "17-dotfiles")
 ```

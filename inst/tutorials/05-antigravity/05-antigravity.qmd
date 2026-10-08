@@ -1,30 +1,27 @@
 ---
 title: "Antigravity"
 author: David Kane
-tutorial:
-  id: "05-antigravity"
-output:
-  learnr::tutorial:
-    df_print: default
-    progressive: true
-    allow_skip: true
-runtime: shiny_prerendered
 description: "This tutorial introduces the Antigravity CLI for AI-assisted data science work in GitHub Codespaces. Covers authentication and using it to create and render a Quarto analysis. The tutorial also covers the core `analysis.qmd` workflow: one working chunk per artifact, iterative rewrites, and caching."
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(knitr)
-library(tidyverse)
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60,
-        tutorial.storage = "local")
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
 ```
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+## Information
+###
+
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 <!-- DK: Change default answers prompt. -->
@@ -52,33 +49,23 @@ The [Antigravity CLI](https://antigravity.google/product/antigravity-cli) is an 
 Start the Antigravity CLI by running `agy` in the bash Terminal. Select "Use a Google Cloud Project"
 
 
-```{r}
-include_graphics("images/agy-1.png")
-```
+![](images/agy-1.png){width=90%}
 
 and hit `Enter`. New College of Florida is providing some funding for your use of Antigravity. But, after the course is over, you can get the same sort of access for $20 or so per month. (If you are not an NCF student, choose the plain "Google 0Auth" option instead and use your own Google account; the rest of the tutorial works the same.) Select "Continue with Google Cloud."
 
-```{r}
-include_graphics("images/agy-2.png")
-```
+![](images/agy-2.png){width=90%}
 
 NCF has set up a Google Cloud Project for us. The resulting authentication screen is a bit overwhelming.
 
-```{r}
-include_graphics("images/agy-3.png")
-```
+![](images/agy-3.png){width=90%}
 
 The basic idea is that Google needs to ensure that we have the right to use this account. Your next step is to `Cmd/Ctrl + Click` that big URL. 
 
-```{r}
-include_graphics("images/agy-4.png")
-```
+![](images/agy-4.png){width=90%}
 
 Doing so will probably bring up this screen. Obviously, you should click "Open."
 
-```{r}
-include_graphics("images/agy-5.png")
-```
+![](images/agy-5.png){width=90%}
 
 The next step might ask you to confirm your Google account. **You must use your NCF email account.**
 
@@ -86,50 +73,39 @@ As Google changes things, this sequence of images won't match exactly what you s
 
 Eventually, Google will give you a verification code.
 
-```{r}
-include_graphics("images/agy-6.png")
-```
+![](images/agy-6.png){width=90%}
 
 Copy that code and go back to the authorization window in your terminal. You may want to expand the Panel upward so that you can better see what is happening. Either way, you paste in the code where the cursor left you by default.
 
-```{r}
-include_graphics("images/agy-7.png")
-```
+![](images/agy-7.png){width=90%}
 
 You will now be asked for your Google Cloud Project ID. Enter `techne-fall-2026` and hit `Enter`. 
 
-```{r}
-include_graphics("images/agy-8.png")
-```
+![](images/agy-8.png){width=90%}
 
 <!-- DK: Image is for `us`. -->
 
 You will then be asked to select a region. Select `global` and hit `Enter`. 
 
-```{r}
-include_graphics("images/agy-9.png")
-```
+![](images/agy-9.png){width=90%}
 
 You will then be asked a series of questions. These are just two more examples. In general, you just select the defaults.
 
-```{r}
-include_graphics("images/agy-10.png")
-```
+![](images/agy-10.png){width=90%}
 
-```{r}
-include_graphics("images/agy-11.png")
-```
+![](images/agy-11.png){width=90%}
 
 
 When you are done, CP/CR the first several lines of terminal output --- enough to show the `>` prompt that appears after you successfully log in.
 
-```{r antigravity-cli-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: antigravity-cli-1
+#| echo: false
+learnr2::question(
+  "When you are done, CP/CR the first several lines of terminal output -- enough to show the > prompt that appears after you successfully log in.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -158,13 +134,14 @@ You are now inside the Antigravity CLI interactive session. The `>` prompt means
 
 CP/CR.
 
-```{r antigravity-cli-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 18)
+```{r}
+#| label: antigravity-cli-2
+#| echo: false
+learnr2::question(
+  "You are now inside the Antigravity CLI interactive session. The > prompt means Antigravity is waiting for your input. Type /help and press Enter. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -200,13 +177,14 @@ Slash commands control the program itself. The command `/help` tells the *progra
 
 After hitting the escape key to get access to the prompt again, type `/model` to see which Antigravity model is currently active. CP/CR.
 
-```{r antigravity-cli-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: antigravity-cli-3
+#| echo: false
+learnr2::question(
+  "After hitting the escape key to get access to the prompt again, type /model to see which Antigravity model is currently active. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -278,13 +256,14 @@ Select `2`. (If your screen looks different, just select the option that allows 
 
 
 
-```{r antigravity-cli-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 15)
+```{r}
+#| label: antigravity-cli-4
+#| echo: false
+learnr2::question(
+  "Select 2. (If your screen looks different, just select the option that allows Antigravity to run ls without asking again.) CP/CR the output.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -357,13 +336,14 @@ Use your best judgment.
 
 CP/CR Antigravity's explanation of what it created.
 
-```{r antigravity-cli-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: antigravity-cli-5
+#| echo: false
+learnr2::question(
+  "CP/CR Antigravity's explanation of what it created.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -408,13 +388,14 @@ Render analysis.qmd using quarto render and tell me what files were created afte
 
 Antigravity may issue two tool calls: one to render the document and one to list the resulting files. Press `y` for each. CP/CR the output.
 
-```{r antigravity-cli-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 15)
+```{r}
+#| label: antigravity-cli-6
+#| echo: false
+learnr2::question(
+  "Antigravity may issue two tool calls: one to render the document and one to list the resulting files. Press y for each. CP/CR the output.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -459,27 +440,24 @@ Antigravity ran two commands to answer one question, using the result of each st
 
 Let's view the rendered file in a browser, the way you learned in the Quarto tutorial: in the Explorer, find `analysis.html`, right-click (or two-finger click) it, and select **"Open with Live Server"**.
 
-```{r}
-include_graphics("images/live-server.png")
-```
+![](images/live-server.png){width=90%}
 
 This will generally open a view of the entire directory, with all the generated files and folders.
 
-```{r}
-include_graphics("images/li-1.png")
-```
+![](images/li-1.png){width=90%}
 
 You can then open `analysis.html` in a new browser tab served through your Codespace. The URL will look something like `https://[codespace-name]-5500.app.github.dev/analysis.html`.
 
 Copy/paste that URL below.
 
-```{r antigravity-cli-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: antigravity-cli-7
+#| echo: false
+learnr2::question(
+  "Copy/paste that URL below.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -495,6 +473,7 @@ Keep this tab open. Every time `analysis.html` is updated in your Codespace --- 
 Your code and rendered graphic should look something like this:
 
 ```{r}
+#| label: antigravity-cli-7-answer
 #| echo: true
 
 storms |> 
@@ -538,18 +517,19 @@ If Antigravity does not render the file, ask it to. After Antigravity finishes, 
 Open a new R Terminal, if you don't have one open already. 
 
 ```
-tutorial.helpers::show_file("analysis.qmd", chunk = "Last")
+learnr2::show_file("analysis.qmd", chunk = "Last")
 ```
 
 CP/CR.
 
-```{r antigravity-cli-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 20)
+```{r}
+#| label: antigravity-cli-8
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -586,13 +566,14 @@ Create a .gitignore file suitable for a Quarto R project. Include common R and Q
 
 In the bash Terminal, run `cat .gitignore`. CP/CR.
 
-```{r antigravity-cli-9}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: antigravity-cli-9
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat .gitignore. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -637,13 +618,14 @@ Ask Antigravity to edit `analysis.qmd` so it contains only the setup chunk and t
 
 Refresh Live Sever. Copy/paste the most recent messages from Antigravity.
 
-```{r working-code-chunk-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 20)
+```{r}
+#| label: working-code-chunk-1
+#| echo: false
+learnr2::question(
+  "Refresh Live Sever. Copy/paste the most recent messages from Antigravity.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -678,18 +660,20 @@ In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`.
 
 CP/CR.
 
-```{r working-code-chunk-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: working-code-chunk-2
+#| echo: false
+learnr2::question(
+  "In the R Terminal, run show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
-```{r working-code-chunk-2-test}
+```{r}
+#| label: working-code-chunk-2-answer
 #| echo: true
 storms
 ```
@@ -710,18 +694,20 @@ In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`.
 
 CP/CR.
 
-```{r working-code-chunk-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: working-code-chunk-3
+#| echo: false
+learnr2::question(
+  "In the R Terminal, run show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
-```{r working-code-chunk-3-test}
+```{r}
+#| label: working-code-chunk-3-answer
 #| echo: true
 storms |>
   glimpse()
@@ -739,18 +725,20 @@ In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`.
 
 CP/CR.
 
-```{r working-code-chunk-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: working-code-chunk-4
+#| echo: false
+learnr2::question(
+  "In the R Terminal, run show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
-```{r working-code-chunk-4-test}
+```{r}
+#| label: working-code-chunk-4-answer
 #| echo: true
 storms |>
   count(status)
@@ -768,18 +756,20 @@ In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`.
 
 CP/CR.
 
-```{r working-code-chunk-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: working-code-chunk-5
+#| echo: false
+learnr2::question(
+  "In the R Terminal, run show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
-```{r working-code-chunk-5-test}
+```{r}
+#| label: working-code-chunk-5-answer
 #| echo: true
 storms |>
   filter(year >= 2000) |>
@@ -803,18 +793,20 @@ In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`.
 
 CP/CR.
 
-```{r cache-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: cache-1
+#| echo: false
+learnr2::question(
+  "In the R Terminal, run show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
-```{r cache-1-test}
+```{r}
+#| label: cache-1-answer
 #| echo: true
 storms_recent <- storms |>
   filter(year >= 2000) |>
@@ -833,13 +825,14 @@ In the bash Terminal, run `ls`.
 
 CP/CR.
 
-```{r cache-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: cache-2
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -866,13 +859,14 @@ In the bash Terminal, run `cat .gitignore`.
 
 CP/CR.
 
-```{r cache-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: cache-3
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat .gitignore. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -914,22 +908,24 @@ Cache files are regenerated from source and do not belong in git. Rule of thumb:
 
 Ask Antigravity to add a new code chunk with a **ggplot2** scatter plot of `pressure` vs. `wind`, using `storms_recent`. Render. 
 
-In the R Terminal, run `tutorial.helpers::show_file("analysis.qmd", chunk = "Last")`. 
+In the R Terminal, run `learnr2::show_file("analysis.qmd", chunk = "Last")`. 
 
 CP/CR.
 
-```{r plotting-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: plotting-1
+#| echo: false
+learnr2::question(
+  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
-```{r plotting-1-test}
+```{r}
+#| echo: false
 #| label: plot-pressure-wind
 storms_recent |> 
   ggplot(aes(x = wind, y = pressure)) +
@@ -954,18 +950,20 @@ In the R Terminal, run `show_file("analysis.qmd", chunk = "Last")`.
 
 CP/CR.
 
-```{r plotting-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: plotting-2
+#| echo: false
+learnr2::question(
+  "In the R Terminal, run show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
-```{r plotting-2-test}
+```{r}
+#| label: plotting-2-answer
 #| echo: true
 ggplot(storms_recent, aes(x = wind, y = pressure, color = status)) +
   geom_point(alpha = 0.3) +
@@ -988,20 +986,22 @@ This is what iterating in a working chunk looks like: you never retyped the plot
 
 In the bash Terminal, run `cat analysis.qmd`. CP/CR.
 
-```{r plotting-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 30)
+```{r}
+#| label: plotting-3
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat analysis.qmd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
 Your answer should look something like:
 
-<pre><code>---
+````{verbatim}
+---
 title: "Exploring Storms"
 author: "PPBDS Student"
 format: html
@@ -1009,16 +1009,16 @@ execute:
   echo: false
 ---
 
-&#96;&#96;&#96;{r}
+```{r}
 #| include: false
 suppressPackageStartupMessages(library(tidyverse))
-&#96;&#96;&#96;
+```
 
 ## Named Storms per Year
 
 The following chart displays the number of unique named storms recorded each year in the `storms` dataset.
 
-&#96;&#96;&#96;{r}
+```{r}
 storms |>
   distinct(year, name) |>
   count(year) |>
@@ -1031,16 +1031,16 @@ storms |>
     y = "Count of Storms"
   ) +
   theme_minimal()
-&#96;&#96;&#96;
+```
 
-&#96;&#96;&#96;{r}
+```{r}
 #| cache: true
 storms_recent <- storms |>
   filter(year >= 2000) |>
   select(year, name, status, wind, pressure)
-&#96;&#96;&#96;
+```
 
-&#96;&#96;&#96;{r}
+```{r}
 ggplot(storms_recent, aes(x = wind, y = pressure, color = status)) +
   geom_point(alpha = 0.3) +
   labs(
@@ -1050,8 +1050,8 @@ ggplot(storms_recent, aes(x = wind, y = pressure, color = status)) +
     y = "Air Pressure (millibars)",
     color = "Status"
   )
-&#96;&#96;&#96;
-</code></pre>
+```
+````
 
 ###
 
@@ -1072,13 +1072,14 @@ Run git status and explain what each part of the output means.
 
 Press `y`, 1, or hit Enter on allow once to allow the shell command. CP/CR the full response, including Antigravity's explanation.
 
-```{r git-with-antigravity-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 18)
+```{r}
+#| label: git-with-antigravity-1
+#| echo: false
+learnr2::question(
+  "Press y, 1, or hit Enter on allow once to allow the shell command. CP/CR the full response, including Antigravity's explanation.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1130,13 +1131,14 @@ Explain the difference between git add and git commit. Then give me the exact co
 
 CP/CR Antigravity's full response.
 
-```{r git-with-antigravity-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 20)
+```{r}
+#| label: git-with-antigravity-2
+#| echo: false
+learnr2::question(
+  "CP/CR Antigravity's full response.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1164,13 +1166,14 @@ git log --oneline
 
 CP/CR.
 
-```{r git-with-antigravity-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: git-with-antigravity-3
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1202,13 +1205,14 @@ Please commit analysis.qmd and analysis.html with a good message, and push to Gi
 
 Press `y` to authorize each tool call as Antigravity works through the steps. CP/CR the complete output.
 
-```{r git-with-antigravity-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 20)
+```{r}
+#| label: git-with-antigravity-4
+#| echo: false
+learnr2::question(
+  "Press y to authorize each tool call as Antigravity works through the steps. CP/CR the complete output.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1258,31 +1262,33 @@ cat analysis.qmd
 
 CP/CR.
 
-```{r summary-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 30)
+```{r}
+#| label: summary-1
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
 It should look something like this --- a YAML header with `execute: echo: false`, a setup chunk loading the **tidyverse**, the stacked-area storm chart Antigravity built, the cached `storms_recent` chunk, and your wind-and-pressure plot. Your plotting code will differ:
 
-<pre><code>---
+````{verbatim}
+---
 title: "Exploring Storms"
 author: "PPBDS Student"
 execute:
   echo: false
 ---
 
-&#96;&#96;&#96;{r}
+```{r}
 suppressPackageStartupMessages(library(tidyverse))
-&#96;&#96;&#96;
+```
 
-&#96;&#96;&#96;{r}
+```{r}
 storms |>
   filter(status %in% c("tropical depression", "tropical storm", "hurricane")) |>
   count(year, status) |>
@@ -1295,16 +1301,16 @@ storms |>
        x = "Year",
        y = "Number of Storms",
        fill = "Storm Type")
-&#96;&#96;&#96;
+```
 
-&#96;&#96;&#96;{r}
+```{r}
 #| cache: true
 storms_recent <- storms |>
   filter(year >= 2000) |>
   select(year, name, status, wind, pressure)
-&#96;&#96;&#96;
+```
 
-&#96;&#96;&#96;{r}
+```{r}
 ggplot(storms_recent, aes(x = wind, y = pressure, color = status)) +
   geom_point(alpha = 0.3) +
   labs(
@@ -1314,7 +1320,8 @@ ggplot(storms_recent, aes(x = wind, y = pressure, color = status)) +
     y = "Air Pressure (millibars)",
     color = "Status"
   )
-&#96;&#96;&#96;</code></pre>
+```
+````
 
 ###
 
@@ -1330,13 +1337,14 @@ quarto publish gh-pages analysis.qmd
 
 Respond with `Y` when prompted. Copy/paste the resulting URL below.
 
-```{r plotting-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: plotting-4
+#| echo: false
+learnr2::question(
+  "Respond with Y when prompted. Copy/paste the resulting URL below.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1351,13 +1359,14 @@ GitHub Pages takes a minute or two to deploy after `quarto publish` runs. If the
 
 Commit and push any remaining uncommitted files. Copy/paste the URL to your GitHub repo.
 
-```{r plotting-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: plotting-5
+#| echo: false
+learnr2::question(
+  "Commit and push any remaining uncommitted files. Copy/paste the URL to your GitHub repo.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1365,5 +1374,23 @@ question_text(NULL,
 Other AI coding tools include [Claude Code](https://claude.ai/claude-code) (Anthropic), [GitHub Copilot](https://github.com/features/copilot) (Microsoft), and [Cursor](https://cursor.sh/) (Anysphere). The workflow is the same across all of them: describe what you want, review the result, and iterate.
 
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "05-antigravity")
 ```

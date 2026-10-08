@@ -1,29 +1,27 @@
 ---
 title: Code
 author: David Kane
-tutorial:
-  id: "03-code"
-output:
-  learnr::tutorial:
-    progressive: yes
-    'allow_skip:': yes
-runtime: shiny_prerendered
 description: Introduction to using Codespaces with R scripts. Walks through writing your first script, sourcing it from a second window, and using show_file() to share output with the tutorial.
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(tidyverse)
-library(knitr)
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60,
-        tutorial.storage = "local")
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
 ```
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+## Information
+###
+
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 ## Introduction
@@ -41,13 +39,14 @@ You should be doing this tutorial in a repo called `code`. Recall from the Workf
 
 Open a new bash Terminal. Run `pwd`. CP/CR.
 
-```{r introduction-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: introduction-1
+#| echo: false
+learnr2::question(
+  "Open a new bash Terminal. Run pwd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -85,13 +84,14 @@ The `connect-repo` script lives in `codespace-starter`, so the first command mov
 
 **Everyone**: open a new bash Terminal and run `pwd`. CP/CR.
 
-```{r introduction-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: introduction-2
+#| echo: false
+learnr2::question(
+  "Everyone: open a new bash Terminal and run pwd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -114,9 +114,7 @@ After starting the tutorial, your R Terminal is "busy" running the tutorial. It 
 
 You will want to run R commands while completing the tutorial. You can do this in a second R Terminal. Click the small down arrow in the top right of the Panel, next to the `+` button. From the drop-down menu, select **R Terminal**.
 
-```{r}
-include_graphics("images/new-r-terminal.png")
-```
+![](images/new-r-terminal.png){width=90%}
 
 Now, you have a fresh R Terminal where you can run commands. You can switch between terminals by clicking their tabs on the right side of the Panel, such as **bash** or **R Tutorial**, to bring a different terminal into view. (The tab for the R Terminal you just opened is labeled **R Interactive**.)
 
@@ -129,13 +127,14 @@ Again, you should have completed the "Orientation" tutorial. If not, this sectio
 
 At the R Terminal, type `show_file()`. CP/CR.
 
-```{r packages-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: packages-1
+#| echo: false
+learnr2::question(
+  "At the R Terminal, type show_file(). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -149,38 +148,39 @@ Error in `show_file()`:
 
 Going forward, we will not include boilerplate like "Your answer should look like this." Instead, you can assume that any quote directly after a question is our answer to the question.
 
-In this case, the error occurs because we have not yet loaded the **tutorial.helpers** package, where `show_file()` is located. If we had specified the package as part of the function call, as with `tutorial.helpers::show_file()`, R would have found the function.
+In this case, the error occurs because we have not yet loaded the **learnr2** package, where `show_file()` is located. If we had specified the package as part of the function call, as with `learnr2::show_file()`, R would have found the function.
 
 ### Exercise 2
 
-Load the **tutorial.helpers** package into your R Terminal using the `library()` function.
+Load the **learnr2** package into your R Terminal using the `library()` function.
 
 Run `search()` in the R Terminal to see the libraries that you have currently loaded.
 
 CP/CR.
 
-```{r packages-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: packages-2
+#| echo: false
+learnr2::question(
+  "Run search() in the R Terminal to see the libraries that you have currently loaded. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
 ````
-✗ R 4.6.1> library(tutorial.helpers)
+✗ R 4.6.1> library(learnr2)
 R 4.6.1> search()
- [1] ".GlobalEnv"               "package:tutorial.helpers" "tools:vscode"            
- [4] "package:stats"            "package:graphics"         "package:grDevices"       
- [7] "package:utils"            "package:datasets"         "package:methods"         
-[10] "Autoloads"                "package:base"            
+ [1] ".GlobalEnv"        "package:learnr2"   "tools:vscode"     
+ [4] "package:stats"     "package:graphics"  "package:grDevices"
+ [7] "package:utils"     "package:datasets"  "package:methods"  
+[10] "Autoloads"         "package:base"     
 R 4.6.1> 
 ````
 
-The string "package:tutorial.helpers" should be in the output. Don't worry if your answer does not match our answer exactly, either in this question or in any other question.
+The string "package:learnr2" should be in the output. Don't worry if your answer does not match our answer exactly, either in this question or in any other question.
 
 ### Exercise 3
 
@@ -190,13 +190,14 @@ At the R Terminal, run:
 show_file(file.path(R.home(), "COPYING"), end = 7)
 ````
 
-```{r packages-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: packages-3
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -213,25 +214,24 @@ question_text(NULL,
 
 ###
 
-This command would have failed if we had not loaded the **tutorial.helpers** package already.
+This command would have failed if we had not loaded the **learnr2** package already.
 
 ### Exercise 4
 
 To restart R, close the current R Terminal by pressing the trash icon in the menu sidebar. Then, open a new R Terminal.
 
-```{r}
-include_graphics("images/delete-r-terminal.png")
-```
+![](images/delete-r-terminal.png){width=90%}
 
 Run the `show_file()` command from the previous exercise again. (Press the up arrow in the R Terminal to bring back a command you ran earlier.) CP/CR.
 
-```{r packages-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: packages-4
+#| echo: false
+learnr2::question(
+  "Run the show_file() command from the previous exercise again. (Press the up arrow in the R Terminal to bring back a command you ran earlier.) CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -248,25 +248,26 @@ It failed, even though it had just worked before. The reason is that, whenever y
 
 ### Exercise 5
 
-In the R Terminal, run `library(tutorial.helpers)` again. CP/CR.
+In the R Terminal, run `library(learnr2)` again. CP/CR.
 
-```{r packages-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: packages-5
+#| echo: false
+learnr2::question(
+  "In the R Terminal, run library(learnr2) again. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
 ````
-R 4.6.1> library(tutorial.helpers)
+R 4.6.1> library(learnr2)
 R 4.6.1>
 ````
 
-Loading some packages prints a bunch of messages to the R Terminal. But most packages, like **tutorial.helpers**, print nothing.
+Loading some packages prints a bunch of messages to the R Terminal. But most packages, like **learnr2**, print nothing.
 
 ### Exercise 6
 
@@ -274,13 +275,14 @@ Load the **tidyverse** package into your R Terminal using the `library()` functi
 
 CP/CR.
 
-```{r packages-6}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 12)
+```{r}
+#| label: packages-6
+#| echo: false
+learnr2::question(
+  "Load the tidyverse package into your R Terminal using the library() function. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -311,18 +313,14 @@ It is difficult to type more than a few lines of code into the R Terminal at onc
 
 Create a new R script, as you learned in the Workflow tutorial: `File -> New File ...` from the Application Menu (see red arrow).
 
-```{r}
-include_graphics("images/create.png")
-```
+![](images/create.png){width=90%}
 
 Select `R Document`. 
 
 Type two lines into the file: `5 + 5` on the first, `6 * 3` on the second. Save it as `script-1.R`, inside the `code` repo. 
 
 
-```{r}
-include_graphics("images/save-as.png")
-```
+![](images/save-as.png){width=90%}
 
 Be careful of the suffix for R script files. Either `.R` or `.r` is acceptable, but the file should have one of those suffixes and you need to pay attention to the case. 
 
@@ -338,13 +336,14 @@ cat script-1.R
 
 CP/CR.
 
-```{r script-1-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: script-1-1
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -374,19 +373,18 @@ You met the Source button and its keyboard shortcut in the Orientation tutorial.
 
 Press the **Source** button in the top-right corner of the Editor. (We will sometimes shorten the instruction "press the Source button" to just "source" the script.)
 
-```{r}
-include_graphics("images/source-button.png")
-```
+![](images/source-button.png){width=90%}
 
 CP/CR.
 
-```{r script-1-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
+```{r}
+#| label: script-1-2
+#| echo: false
+learnr2::question(
+  "Press the Source button in the top-right corner of the Editor. (We will sometimes shorten the instruction \"press the Source button\" to just \"source\" the script.) CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -414,13 +412,14 @@ Using the keyboard shortcut `Cmd/Ctrl + Shift + S` does the same thing. Try it! 
 
 Instead of sourcing the entire file, we can execute (or "run") just part of it. In `script-1.R`, place your cursor on the same line as `6 * 3` and press `Cmd/Ctrl + Enter`. Then highlight both lines and press `Cmd/Ctrl + Enter` again. CP/CR.
 
-```{r script-1-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 5)
+```{r}
+#| label: script-1-3
+#| echo: false
+learnr2::question(
+  "Instead of sourcing the entire file, we can execute (or \"run\") just part of it. In script-1.R, place your cursor on the same line as 6 * 3 and press Cmd/Ctrl + Enter. Then highlight both lines and press Cmd/Ctrl + Enter again. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -445,13 +444,14 @@ R 4.6.1>
 
 Go back to the first line in your R script. Change `5 + 5` to `x <- 5 + 5`, thereby creating an object named `x` with a value of 10. Save the file. Source the file, either by pressing the "Source" triangle or with `Cmd/Ctrl+ Shift + S`. CP/CR.
 
-```{r script-1-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: script-1-4
+#| echo: false
+learnr2::question(
+  "Go back to the first line in your R script. Change 5 + 5 to x <- 5 + 5, thereby creating an object named x with a value of 10. Save the file. Source the file, either by pressing the \"Source\" triangle or with Cmd/Ctrl+ Shift + S. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -476,13 +476,14 @@ Note how the `x <- 5 + 5` is executed (and echoed) but nothing is printed. The a
 
 In the R Terminal, run `ls()`. CP/CR.
 
-```{r script-1-5}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 2)
+```{r}
+#| label: script-1-5
+#| echo: false
+learnr2::question(
+  "In the R Terminal, run ls(). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -511,9 +512,7 @@ In this case, the object `x`, which has a value of 10, exists in your workspace.
 
 `script-1.R` exists only in this Codespace. Recall from the Workflow tutorial: a **commit** is a snapshot of your work, and a **push** copies that snapshot to GitHub. Let's do both. Click on the Source Control icon in the Activity Bar. You should see `script-1.R` (and `AGENTS.md`) listed under **Changes**. Type a commit message, such as "Add script-1", and click to commit. 
 
-```{r}
-include_graphics("images/git-1.png")
-```
+![](images/git-1.png){width=90%}
 
 Click "Publish Branch" copy your commit to GitHub. In general only the first "push" to a repo is labelled "Publish Branch." Subsequent pushes are labelled "Sync Changes" or "Push."
 
@@ -525,13 +524,14 @@ From the bash Terminal, run the `git log`.
 
 CP/CR.
 
-```{r script-1-6}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
+```{r}
+#| label: script-1-6
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run the git log. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -557,7 +557,9 @@ You will often see a pop-up asking if you want to automatically "fetch" changes 
 
 Let's create a plot like this one:
 
-```{r diamond-hist}
+```{r}
+#| label: diamond-hist
+#| echo: false
 hist_p <- ggplot(data = diamonds,
                  mapping = aes(x = carat)) +
   geom_histogram(bins = 100,
@@ -582,13 +584,14 @@ Use the shortcut `Cmd/Ctrl + S` to save the script. Let's call this file `script
 
 In the bash Terminal, run `ls`. CP/CR.
 
-```{r script-2-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: script-2-1
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -607,13 +610,14 @@ Restart your R session by deleting your current R Terminal and opening a new one
 
 From the bash Terminal, run `ls`. CP/CR.
 
-```{r script-2-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: script-2-2
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -630,13 +634,14 @@ The three files we had from before still exist. Our work, if we have saved it, i
 
 From the R Terminal, run `ls()`. CP/CR.
 
-```{r script-2-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: script-2-3
+#| echo: false
+learnr2::question(
+  "From the R Terminal, run ls(). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -671,13 +676,14 @@ Run the entire file with `Cmd/Ctrl + Shift + S`. Note how much material --- the 
 
 Run `search()` in the R Terminal. CP/CR.
 
-```{r script-2-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 2)
+```{r}
+#| label: script-2-4
+#| echo: false
+learnr2::question(
+  "Run search() in the R Terminal. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -703,13 +709,14 @@ cat script-2.R
 CP/CR.
 
 
-```{r script-2-5}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 2)
+```{r}
+#| label: script-2-5
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -742,13 +749,14 @@ x <- x + 1    # Account for borders
 
 In the bash Terminal, run `git log -1`. CP/CR.
 
-```{r script-2-6}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
+```{r}
+#| label: script-2-6
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run git log -1. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -772,6 +780,8 @@ Commit whenever a piece of work reaches a state worth keeping --- a script that 
 In the Workflow tutorial, you asked AI for *a* nice plot --- any nice plot. This time the job is different: match this exact one, and run the code yourself, line by line.
 
 ```{r}
+#| label: script-2-7-plot
+#| echo: false
 hist_p
 ```
 
@@ -793,13 +803,14 @@ cat script-2.R
 
 CP/CR.
 
-```{r script-2-7}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 12)
+```{r}
+#| label: script-2-7
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -832,13 +843,14 @@ Now we have the code that creates a plot in `script-2.R`. How do we use this plo
 
 We can use the `ggsave()` function. Type `?ggsave` in the R Terminal. This will open the help page for `ggsave()`. Copy and paste the description from the help page into the space below.
 
-```{r script-2-8}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 5)
+```{r}
+#| label: script-2-8
+#| echo: false
+learnr2::question(
+  "We can use the ggsave() function. Type ?ggsave in the R Terminal. This will open the help page for ggsave(). Copy and paste the description from the help page into the space below.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 `ggsave()` is used to save a plot as an individual file that is separate from the code that created the plot. In this case, we will use the PNG format.
@@ -849,13 +861,14 @@ Tell AI to save your plot as an image file: assign the plot to an object named `
 
 In the bash Terminal, run `ls`. CP/CR.
 
-```{r script-2-9}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: script-2-9
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -881,13 +894,14 @@ You have made more files since your last commit --- the plot code in `script-2.R
 
 Then, in the bash Terminal, run `git log -1`. CP/CR.
 
-```{r summary-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
+```{r}
+#| label: summary-1
+#| echo: false
+learnr2::question(
+  "Then, in the bash Terminal, run git log -1. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -912,13 +926,14 @@ For the most part, we just click the buttons, but it is important to understand 
 
 In your browser, go to your `code` repository on github.com, as you learned in the Workflow tutorial. Confirm that `script-1.R`, `script-2.R`, and `diamonds.png` are all listed. Copy/paste the URL of your repository.
 
-```{r summary-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: summary-2
+#| echo: false
+learnr2::question(
+  "In your browser, go to your code repository on github.com, as you learned in the Workflow tutorial. Confirm that script-1.R, script-2.R, and diamonds.png are all listed. Copy/paste the URL of your repository.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -931,5 +946,23 @@ https://github.com/your-username/code
 
 This URL is the permanent, shareable home of your work --- it outlives this Codespace. Note the Commits link near the top of the file listing: it now records the history you built, from the initial commit through your final push.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "03-code")
 ```

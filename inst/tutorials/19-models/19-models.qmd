@@ -1,29 +1,21 @@
 ---
 title: "Models And Money"
 author: David Kane
-tutorial:
-  id: "19-models"
-output:
-  learnr::tutorial:
-    df_print: default
-    progressive: true
-    allow_skip: true
-runtime: shiny_prerendered
 description: "What is underneath a coding agent --- one HTTP request. Buy $10 of OpenRouter credits with a real credit card, call the API from bash and from R with `ellmer`, and find out how much of the hundred-fold gap between a free model and a frontier one is quality and how much is ownership."
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(knitr)
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60,
-        tutorial.storage = "local")
-```
+## Information
+###
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 ## Introduction
@@ -69,13 +61,14 @@ You should be doing this tutorial in a repo named `models-and-money`. If you are
 
 Copy and paste the URL for your `models-and-money` repository.
 
-```{r introduction-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: introduction-1
+#| echo: false
+learnr2::question(
+  "Copy and paste the URL for your models-and-money repository.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -92,18 +85,20 @@ You need the OpenRouter key from the OpenRouter tutorial for everything here. If
 
 In the bash Terminal, check that your key is present:
 
-<pre><code>echo ${OPENROUTER_API_KEY:0:8}
-</code></pre>
+````
+echo ${OPENROUTER_API_KEY:0:8}
+````
 
 CP/CR.
 
-```{r introduction-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: introduction-2
+#| echo: false
+learnr2::question(
+  "echo ${OPENROUTER_API_KEY:0:8} CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -128,18 +123,20 @@ Every AI product you have used --- the chat window, the editor sidebar, `aider`,
 
 Ask OpenRouter how many models it offers. In the bash Terminal:
 
-<pre><code>curl -s https://openrouter.ai/api/v1/models | python -c "import sys, json; print(len(json.load(sys.stdin)['data']))"
-</code></pre>
+````
+curl -s https://openrouter.ai/api/v1/models | python -c "import sys, json; print(len(json.load(sys.stdin)['data']))"
+````
 
 CP/CR.
 
-```{r api-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: api-1
+#| echo: false
+learnr2::question(
+  "curl -s https://openrouter.ai/api/v1/models | python -c \"import sys, json; print(len(json.load(sys.stdin)['data']))\" CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -161,22 +158,24 @@ And notice what a router gets you, now that you can count it. Several hundred mo
 
 Now send an actual prompt. Replace the model with any free one from the list you made in the OpenRouter tutorial if this one is gone:
 
-<pre><code>curl -s https://openrouter.ai/api/v1/chat/completions \
+````
+curl -s https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "openai/gpt-oss-20b:free", "messages": [{"role": "user", "content": "In one sentence, what is a tibble?"}]}' \
   | python -m json.tool
-</code></pre>
+````
 
 CP/CR.
 
-```{r api-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 30)
+```{r}
+#| label: api-2
+#| echo: false
+learnr2::question(
+  "curl -s https://openrouter.ai/api/v1/chat/completions \\ -H \"Authorization: Bearer $OPENROUTER_API_KEY\" \\ -H \"Content-Type: application/json\" \\ -d '{\"model\": \"openai/gpt-oss-20b:free\", \"messages\": [{\"role\": \"user\", \"content\": \"In one sentence, what is a tibble?\"}]}' \\ | python -m json.tool CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -236,20 +235,22 @@ Four fields in the reply are worth a look.
 
 Prices are published in that same catalogue. Have AI write you a command that reads <https://openrouter.ai/api/v1/models> and prints the input and output price per million tokens for these three models:
 
-<pre><code>qwen/qwen3-coder-30b-a3b-instruct
+````
+qwen/qwen3-coder-30b-a3b-instruct
 deepseek/deepseek-v3.2
 anthropic/claude-opus-4.8
-</code></pre>
+````
 
 Run it. CP/CR.
 
-```{r api-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: api-3
+#| echo: false
+learnr2::question(
+  "qwen/qwen3-coder-30b-a3b-instruct deepseek/deepseek-v3.2 anthropic/claude-opus-4.8 Run it. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -277,22 +278,24 @@ Ask the same question of a cheap open weights model and of an expensive frontier
 
 First the cheap one:
 
-<pre><code>curl -s https://openrouter.ai/api/v1/chat/completions \
+````
+curl -s https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "openai/gpt-oss-20b:free", "messages": [{"role": "user", "content": "Write R code to count rows per cut in the diamonds data set."}]}' \
   | python -c "import sys, json; print(json.load(sys.stdin)['choices'][0]['message']['content'])"
-</code></pre>
+````
 
 CP/CR.
 
-```{r weights-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 20)
+```{r}
+#| label: weights-1
+#| echo: false
+learnr2::question(
+  "curl -s https://openrouter.ai/api/v1/chat/completions \\ -H \"Authorization: Bearer $OPENROUTER_API_KEY\" \\ -H \"Content-Type: application/json\" \\ -d '{\"model\": \"openai/gpt-oss-20b:free\", \"messages\": [{\"role\": \"user\", \"content\": \"Write R code to count rows per cut in the diamonds data set.\"}]}' \\ | python -c \"import sys, json; print(json.load(sys.stdin)['choices'][0]['message']['content'])\" CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -337,13 +340,14 @@ Run the same request against `anthropic/claude-opus-4.8`, piping through `python
 
 This one is **not** free, and your account has no credits, so it will fail. Copy and paste the error.
 
-```{r weights-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: weights-2
+#| echo: false
+learnr2::question(
+  "This one is not free, and your account has no credits, so it will fail. Copy and paste the error.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -387,18 +391,20 @@ Go to <https://openrouter.ai/settings/credits> and buy **$10** of credits. Ten d
 
 When the purchase has gone through, check it from the bash Terminal:
 
-<pre><code>curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -c "import sys, json; d = json.load(sys.stdin)['data']; print('spent so far:', d['usage']); print('free tier:', d['is_free_tier'])"
-</code></pre>
+````
+curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -c "import sys, json; d = json.load(sys.stdin)['data']; print('spent so far:', d['usage']); print('free tier:', d['is_free_tier'])"
+````
 
 CP/CR.
 
-```{r weights-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: weights-3
+#| echo: false
+learnr2::question(
+  "curl -s https://openrouter.ai/api/v1/key -H \"Authorization: Bearer $OPENROUTER_API_KEY\" | python -c \"import sys, json; d = json.load(sys.stdin)['data']; print('spent so far:', d['usage']); print('free tier:', d['is_free_tier'])\" CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -428,22 +434,24 @@ And you can go back to <https://openrouter.ai/settings/privacy> and turn **off**
 
 Now run the request that was refused. Same model as Exercise 2, and this time pull out the answer and the cost rather than the whole reply:
 
-<pre><code>curl -s https://openrouter.ai/api/v1/chat/completions \
+````
+curl -s https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "anthropic/claude-opus-4.8", "max_tokens": 400, "messages": [{"role": "user", "content": "Write R code to count rows per cut in the diamonds data set."}]}' \
   | python -c "import sys, json; d = json.load(sys.stdin); print(d['choices'][0]['message']['content']); print('--- cost:', d['usage']['cost'])"
-</code></pre>
+````
 
 CP/CR.
 
-```{r weights-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 16)
+```{r}
+#| label: weights-4
+#| echo: false
+learnr2::question(
+  "curl -s https://openrouter.ai/api/v1/chat/completions \\ -H \"Authorization: Bearer $OPENROUTER_API_KEY\" \\ -H \"Content-Type: application/json\" \\ -d '{\"model\": \"anthropic/claude-opus-4.8\", \"max_tokens\": 400, \"messages\": [{\"role\": \"user\", \"content\": \"Write R code to count rows per cut in the diamonds data set.\"}]}' \\ | python -c \"import sys, json; d = json.load(sys.stdin); print(d['choices'][0]['message']['content']); print('-- cost:', d['usage']['cost'])\" CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -487,13 +495,14 @@ Work out what a real hour of work costs. A busy hour with a coding assistant use
 
 Using the prices you printed earlier, have AI work out the cost of that hour on `qwen/qwen3-coder-30b-a3b-instruct` and on `anthropic/claude-opus-4.8`. Copy and paste both figures.
 
-```{r weights-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: weights-5
+#| echo: false
+learnr2::question(
+  "Using the prices you printed earlier, have AI work out the cost of that hour on qwen/qwen3-coder-30b-a3b-instruct and on anthropic/claude-opus-4.8. Copy and paste both figures.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -522,13 +531,14 @@ Have AI write you a command that reads <https://openrouter.ai/api/v1/models> and
 
 Run it. CP/CR.
 
-```{r cheap-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 14)
+```{r}
+#| label: cheap-1
+#| echo: false
+learnr2::question(
+  "Have AI write you a command that reads <https://openrouter.ai/api/v1/models> and prints the ten cheapest models that are not free, sorted by output price, showing input and output price per million tokens. Run it. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -560,22 +570,24 @@ Notice too that output costs roughly three or four times input, everywhere, at e
 
 Give the cheap model the same job you gave Opus. In the bash Terminal:
 
-<pre><code>curl -s https://openrouter.ai/api/v1/chat/completions \
+````
+curl -s https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "qwen/qwen3-coder-30b-a3b-instruct", "max_tokens": 400, "messages": [{"role": "user", "content": "Write R code to count rows per cut in the diamonds data set."}]}' \
   | python -c "import sys, json; d = json.load(sys.stdin); print(d['choices'][0]['message']['content']); print('--- cost:', d['usage']['cost'])"
-</code></pre>
+````
 
 CP/CR.
 
-```{r cheap-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 14)
+```{r}
+#| label: cheap-2
+#| echo: false
+learnr2::question(
+  "curl -s https://openrouter.ai/api/v1/chat/completions \\ -H \"Authorization: Bearer $OPENROUTER_API_KEY\" \\ -H \"Content-Type: application/json\" \\ -d '{\"model\": \"qwen/qwen3-coder-30b-a3b-instruct\", \"max_tokens\": 400, \"messages\": [{\"role\": \"user\", \"content\": \"Write R code to count rows per cut in the diamonds data set.\"}]}' \\ | python -c \"import sys, json; d = json.load(sys.stdin); print(d['choices'][0]['message']['content']); print('-- cost:', d['usage']['cost'])\" CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -604,21 +616,23 @@ You have now had three models write essentially the same code, and not one of th
 
 In the R Terminal:
 
-<pre><code>library(ggplot2)
+````
+library(ggplot2)
 library(dplyr)
 
 diamonds |> count(cut)
-</code></pre>
+````
 
 CP/CR.
 
-```{r cheap-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: cheap-3
+#| echo: false
+learnr2::question(
+  "diamonds |> count(cut) CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -648,13 +662,14 @@ One last question, and it is the one that decides how you spend money for the re
 
 If the cheap model matched Opus on that task, why would anyone pay two hundred times more? Write down what you think, in a sentence or two. There is no wrong answer here --- we are after your guess before we give you ours.
 
-```{r cheap-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: cheap-4
+#| echo: false
+learnr2::question(
+  "If the cheap model matched Opus on that task, why would anyone pay two hundred times more? Write down what you think, in a sentence or two. There is no wrong answer here -- we are after your guess before we give you ours.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -692,13 +707,14 @@ Everything so far has been about writing code. But the reason a data scientist c
 
 In the R Terminal, run `library(ellmer)`. CP/CR.
 
-```{r ellmer-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: ellmer-1
+#| echo: false
+learnr2::question(
+  "In the R Terminal, run library(ellmer). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -722,19 +738,21 @@ It is not the only choice. **[httr2](https://httr2.r-lib.org/)** would let you b
 
 Still in the R Terminal, create a chat and ask it something:
 
-<pre><code>chat <- chat_openrouter(model = "openai/gpt-oss-20b:free")
+````
+chat <- chat_openrouter(model = "openai/gpt-oss-20b:free")
 chat$chat("In one sentence, what is a tibble?")
-</code></pre>
+````
 
 CP/CR.
 
-```{r ellmer-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: ellmer-2
+#| echo: false
+learnr2::question(
+  "chat <- chat_openrouter(model = \"openai/gpt-oss-20b:free\") chat$chat(\"In one sentence, what is a tibble?\") CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -764,23 +782,25 @@ Always name the model. `ellmer` has a default, and its own documentation warns t
 
 Now the thing you could not do by hand. In the R Terminal:
 
-<pre><code>reviews <- c("the room was filthy", "staff went out of their way for us",
+````
+reviews <- c("the room was filthy", "staff went out of their way for us",
              "fine, but overpriced", "would absolutely stay again")
 
 chat <- chat_openrouter(model = "openai/gpt-oss-20b:free")
 chat$chat(paste("Label each line positive, negative, or mixed. One label per line, nothing else:",
                 paste(reviews, collapse = "\n")))
-</code></pre>
+````
 
 CP/CR.
 
-```{r ellmer-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: ellmer-3
+#| echo: false
+learnr2::question(
+  "chat <- chat_openrouter(model = \"openai/gpt-oss-20b:free\") chat$chat(paste(\"Label each line positive, negative, or mixed. One label per line, nothing else:\", paste(reviews, collapse = \"\\n\"))) CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -824,18 +844,20 @@ You spent money today for the first time in this course. This section is the bil
 
 In the bash Terminal, check what you have spent:
 
-<pre><code>curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -c "import sys, json; d = json.load(sys.stdin)['data']; print('spent so far:', d['usage']); print('free tier:', d['is_free_tier'])"
-</code></pre>
+````
+curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -c "import sys, json; d = json.load(sys.stdin)['data']; print('spent so far:', d['usage']); print('free tier:', d['is_free_tier'])"
+````
 
 CP/CR.
 
-```{r paying-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: paying-1
+#| echo: false
+learnr2::question(
+  "curl -s https://openrouter.ai/api/v1/key -H \"Authorization: Bearer $OPENROUTER_API_KEY\" | python -c \"import sys, json; d = json.load(sys.stdin)['data']; print('spent so far:', d['usage']); print('free tier:', d['is_free_tier'])\" CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -859,13 +881,14 @@ Protect the balance before you leave. Go back to <https://openrouter.ai/workspac
 
 Copy and paste the name of the key and the limit you set.
 
-```{r paying-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: paying-2
+#| echo: false
+learnr2::question(
+  "Copy and paste the name of the key and the limit you set.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -894,13 +917,14 @@ Commit and push your work.
 
 In the bash Terminal, run `git log --oneline`. CP/CR.
 
-```{r paying-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: paying-3
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run git log --oneline. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -945,5 +969,23 @@ The credit card was a real requirement and this was the only place in the course
 
 You now know what a model costs, what it costs to be careless with one, and how to find out whether the expensive one is worth it for the work you actually do. That last one is the skill. The model names in this tutorial will all be gone in a year.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "19-models")
 ```

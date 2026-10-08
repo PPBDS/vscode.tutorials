@@ -1,29 +1,21 @@
 ---
 title: "Your Starter"
 author: David Kane
-tutorial:
-  id: "16-your-starter"
-output:
-  learnr::tutorial:
-    df_print: default
-    progressive: true
-    allow_skip: true
-runtime: shiny_prerendered
 description: "Graduation exercise for the devcontainer tutorials. Build your own working version of codespace-starter: a repo named my-starter with your own Dockerfile, an image built and published by a GitHub Actions workflow, and a devcontainer.json that pins it --- then launch a Codespace from it and prove it works."
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(knitr)
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60,
-        tutorial.storage = "local")
-```
+## Information
+###
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 ## Introduction
@@ -41,13 +33,14 @@ You should be doing this tutorial in a repo named `my-starter`. If you are not, 
 
 Copy and paste the URL for your `my-starter` repository.
 
-```{r introduction-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: introduction-1
+#| echo: false
+learnr2::question(
+  "Copy and paste the URL for your my-starter repository.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -81,13 +74,14 @@ RUN R -q -e 'stopifnot(requireNamespace("praise"))'
 
 Then run `cat Dockerfile`. CP/CR.
 
-```{r your-starter-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 9)
+```{r}
+#| label: your-starter-1
+#| echo: false
+learnr2::question(
+  "Then run cat Dockerfile. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -151,13 +145,14 @@ jobs:
 
 Run `cat .github/workflows/build.yml`. CP/CR.
 
-```{r your-starter-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: your-starter-2
+#| echo: false
+learnr2::question(
+  "Run cat .github/workflows/build.yml. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -180,13 +175,14 @@ This is a shortened copy of the workflow you read in the previous tutorial --- t
 
 Commit and push. Then, in the bash Terminal, run `gh run list --limit 1`. CP/CR.
 
-```{r your-starter-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: your-starter-3
+#| echo: false
+learnr2::question(
+  "Commit and push. Then, in the bash Terminal, run gh run list --limit 1. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -204,13 +200,14 @@ The `*` means it is still running. The first build is slow --- five minutes or s
 
 Once the build is green, publish a versioned image by creating a release. In the bash Terminal, run `gh release create v1.0.0 --title "v1.0.0" --notes "First image."`. CP/CR.
 
-```{r your-starter-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: your-starter-4
+#| echo: false
+learnr2::question(
+  "Once the build is green, publish a versioned image by creating a release. In the bash Terminal, run gh release create v1.0.0 --title \"v1.0.0\" --notes \"First image.\". CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -230,13 +227,14 @@ Images pushed by a workflow start out **private**, and a Codespace pulls its ima
 
 Copy and paste the URL of the package page.
 
-```{r your-starter-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: your-starter-5
+#| echo: false
+learnr2::question(
+  "Copy and paste the URL of the package page.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -275,13 +273,14 @@ Now the file that ties it together. Create `.devcontainer/devcontainer.json` wit
 
 Run `cat .devcontainer/devcontainer.json`. CP/CR.
 
-```{r your-starter-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: your-starter-6
+#| echo: false
+learnr2::question(
+  "Run cat .devcontainer/devcontainer.json. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -301,13 +300,14 @@ Every field maps to something you read in the Our Codespace Starter tutorial. `"
 
 Commit and push. Then run `git log --oneline -n 3`. CP/CR.
 
-```{r your-starter-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: your-starter-7
+#| echo: false
+learnr2::question(
+  "Commit and push. Then run git log --oneline -n 3. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -327,13 +327,14 @@ Three commits, three layers of the same idea: what the image contains, how it ge
 
 Time to launch it. On github.com, open your `my-starter` repo, click the green **Code** button, choose the **Codespaces** tab, and click **Create codespace on main**. It will take several minutes: your repo has no prebuild, so the container is built from scratch, pulling your image from GHCR. When the terminal appears, a line should print. Copy and paste it.
 
-```{r your-starter-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 2)
+```{r}
+#| label: your-starter-8
+#| echo: false
+learnr2::question(
+  "Time to launch it. On github.com, open your my-starter repo, click the green Code button, choose the Codespaces tab, and click Create codespace on main. It will take several minutes: your repo has no prebuild, so the container is built from scratch, pulling your image from GHCR. When the terminal appears, a line should print. Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -350,13 +351,14 @@ That line came from your `postAttachCommand`, which means the whole chain held: 
 
 In your new Codespace, open an R Terminal (**Cmd/Ctrl + Shift + P**, then "R: Create R Terminal"). Run `library(praise)` and then `praise()`. CP/CR.
 
-```{r your-starter-9}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: your-starter-9
+#| echo: false
+learnr2::question(
+  "In your new Codespace, open an R Terminal (Cmd/Ctrl + Shift + P, then \"R: Create R Terminal\"). Run library(praise) and then praise(). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -375,13 +377,14 @@ question_text(NULL,
 
 Still in the new Codespace, in its bash Terminal, run `R --version | head -n 1`. CP/CR.
 
-```{r your-starter-10}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: your-starter-10
+#| echo: false
+learnr2::question(
+  "Still in the new Codespace, in its bash Terminal, run R --version | head -n 1. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -399,13 +402,14 @@ R 4.5, as you chose in the `FROM` line. When you are ready to move to 4.6, you n
 
 Back in your original Codespace, make `my-starter` a template. On github.com, open the repo's **Settings**, and near the top of **General**, check **Template repository**. Then, in the bash Terminal, run `gh repo view my-starter --json isTemplate`. CP/CR.
 
-```{r your-starter-11}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: your-starter-11
+#| echo: false
+learnr2::question(
+  "Back in your original Codespace, make my-starter a template. On github.com, open the repo's Settings, and near the top of General, check Template repository. Then, in the bash Terminal, run gh repo view my-starter --json isTemplate. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -423,13 +427,14 @@ This is how you will actually use it. A template repo gains a green **Use this t
 
 Run `gh release list`. CP/CR.
 
-```{r your-starter-12}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: your-starter-12
+#| echo: false
+learnr2::question(
+  "Run gh release list. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -453,13 +458,14 @@ You built the entire chain you spent three tutorials reading: a Dockerfile that 
 
 In the bash Terminal, in your `my-starter` repo, run `git status`. CP/CR.
 
-```{r summary-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: summary-1
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, in your my-starter repo, run git status. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -476,5 +482,23 @@ nothing to commit, working tree clean
 
 Clean, pushed, and reusable. That is what a starter is.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "16-your-starter")
 ```

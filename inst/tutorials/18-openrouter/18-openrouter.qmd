@@ -1,29 +1,21 @@
 ---
 title: "OpenRouter"
 author: David Kane
-tutorial:
-  id: "18-openrouter"
-output:
-  learnr::tutorial:
-    df_print: default
-    progressive: true
-    allow_skip: true
-runtime: shiny_prerendered
 description: "Get an OpenRouter account and API key without giving anyone a credit card, store the key so it survives a rebuild, and use it to drive `aider` --- switching between free and cheap models mid-session."
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(knitr)
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60,
-        tutorial.storage = "local")
-```
+## Information
+###
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 ## Introduction
@@ -51,13 +43,14 @@ You should be doing this tutorial in a repo named `openrouter`. If you are not, 
 
 Copy and paste the URL for your `openrouter` repository.
 
-```{r introduction-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: introduction-1
+#| echo: false
+learnr2::question(
+  "Copy and paste the URL for your openrouter repository.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -74,13 +67,14 @@ Everything here happens in a Terminal. There is no `analysis.qmd` and nothing to
 
 In the bash Terminal, run `aider --version`. CP/CR.
 
-```{r introduction-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: introduction-2
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run aider --version. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -100,13 +94,14 @@ Here is what makes it useful today. The other AI tools each belong to one compan
 
 In the bash Terminal, run `which aider`. CP/CR.
 
-```{r introduction-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: introduction-3
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run which aider. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -131,13 +126,14 @@ Go to [openrouter.ai](https://openrouter.ai/) and sign in. Use the **Sign in wit
 
 Once you are signed in, copy and paste the URL of the page you land on.
 
-```{r key-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: key-1
+#| echo: false
+learnr2::question(
+  "Once you are signed in, copy and paste the URL of the page you land on.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -158,13 +154,14 @@ Turn **on** the two settings that mention *free* endpoints. Leave the two about 
 
 Copy and paste the names of the two settings you turned on.
 
-```{r key-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: key-2
+#| echo: false
+learnr2::question(
+  "Copy and paste the names of the two settings you turned on.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -190,13 +187,14 @@ Copy the key when it is shown --- this is the only time you will see it --- and 
 
 **Do not paste the key into this tutorial.** Copy and paste only the *name* you gave the key.
 
-```{r key-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: key-3
+#| echo: false
+learnr2::question(
+  "Do not paste the key into this tutorial. Copy and paste only the name you gave the key.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -217,23 +215,26 @@ The site shows it once and never again. That is on purpose: OpenRouter does not 
 
 In the bash Terminal, set the key as an environment variable. Replace the placeholder with your actual key:
 
-<pre><code>export OPENROUTER_API_KEY=sk-or-v1-your-actual-key-here
-</code></pre>
+````
+export OPENROUTER_API_KEY=sk-or-v1-your-actual-key-here
+````
 
 Then run this, which prints only the first eight characters:
 
-<pre><code>echo ${OPENROUTER_API_KEY:0:8}
-</code></pre>
+````
+echo ${OPENROUTER_API_KEY:0:8}
+````
 
 CP/CR --- the second command only.
 
-```{r key-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: key-4
+#| echo: false
+learnr2::question(
+  "CP/CR -- the second command only.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -253,18 +254,20 @@ We printed only the first eight characters on purpose. Printing the whole key wo
 
 Now use the key. Ask OpenRouter what it knows about your account:
 
-<pre><code>curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool | grep -E '"label"|"usage"|"is_free_tier"'
-</code></pre>
+````
+curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool | grep -E '"label"|"usage"|"is_free_tier"'
+````
 
 CP/CR.
 
-```{r key-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: key-5
+#| echo: false
+learnr2::question(
+  "curl -s https://openrouter.ai/api/v1/key -H \"Authorization: Bearer $OPENROUTER_API_KEY\" | python -m json.tool | grep -E '\"label\"|\"usage\"|\"is_free_tier\"' CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -288,18 +291,20 @@ The reply comes back as **JSON**, a format that packs a lot of fields into one l
 
 Open a **new** bash Terminal (the `+` in the top-right corner of the Panel). In that new bash Terminal, run:
 
-<pre><code>echo ${OPENROUTER_API_KEY:0:8}
-</code></pre>
+````
+echo ${OPENROUTER_API_KEY:0:8}
+````
 
 CP/CR.
 
-```{r key-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: key-6
+#| echo: false
+learnr2::question(
+  "echo ${OPENROUTER_API_KEY:0:8} CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -327,13 +332,14 @@ Scroll past the **Dotfiles** section to **Codespaces secrets** and click **New s
 
 Copy and paste the name of the secret and the repository you granted access to.
 
-```{r key-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: key-7
+#| echo: false
+learnr2::question(
+  "Copy and paste the name of the secret and the repository you granted access to.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -363,19 +369,21 @@ Ask AI to create a `.gitignore` in your `openrouter` repo containing `.env` on i
 
 In the bash Terminal, run `cat .gitignore`. CP/CR.
 
-```{r key-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: key-8
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat .gitignore. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
-<pre><code>.env
-</code></pre>
+````
+.env
+````
 
 ###
 
@@ -404,18 +412,20 @@ Now the fun part. You have a key that cost nothing, and `aider` will use it. You
 
 You need the name of a model that is free *today*. Ask `aider` first. In the bash Terminal, in your `openrouter` repo:
 
-<pre><code>aider --list-models openrouter/ | grep ':free'
-</code></pre>
+````
+aider --list-models openrouter/ | grep ':free'
+````
 
 CP/CR.
 
-```{r aider-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: aider-1
+#| echo: false
+learnr2::question(
+  "aider --list-models openrouter/ | grep ':free' CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -440,18 +450,20 @@ Remember this feeling. A tool answered instantly, confidently, and wrongly, and 
 
 So ask OpenRouter instead of asking `aider`. In the bash Terminal:
 
-<pre><code>curl -s https://openrouter.ai/api/v1/models | python -c "import sys, json; print('\n'.join(sorted(m['id'] for m in json.load(sys.stdin)['data'] if m['id'].endswith(':free'))))"
-</code></pre>
+````
+curl -s https://openrouter.ai/api/v1/models | python -c "import sys, json; print('\n'.join(sorted(m['id'] for m in json.load(sys.stdin)['data'] if m['id'].endswith(':free'))))"
+````
 
 CP/CR.
 
-```{r aider-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 18)
+```{r}
+#| label: aider-2
+#| echo: false
+learnr2::question(
+  "curl -s https://openrouter.ai/api/v1/models | python -c \"import sys, json; print('\\n'.join(sorted(m['id'] for m in json.load(sys.stdin)['data'] if m['id'].endswith(':free'))))\" CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -486,20 +498,22 @@ Look at how a name is built. In `google/gemma-4-31b-it:free`, `google` is the co
 
 Pick any model from the list you just printed and start `aider` with it. We used `openai/gpt-oss-20b:free`; if yours is gone, substitute one of your own. Note the `openrouter/` on the front --- that part tells `aider` which service to route through.
 
-<pre><code>aider --model openrouter/openai/gpt-oss-20b:free --no-auto-commits
-</code></pre>
+````
+aider --model openrouter/openai/gpt-oss-20b:free --no-auto-commits
+````
 
 Answer `Yes` if it offers to add `.aider*` to your `.gitignore`.
 
 Copy and paste the banner `aider` prints when it starts.
 
-```{r aider-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: aider-3
+#| echo: false
+learnr2::question(
+  "Copy and paste the banner aider prints when it starts.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -525,26 +539,29 @@ The `>` at the bottom is a prompt. `aider` is now waiting for you inside your Te
 
 At the `aider` prompt, ask for a script:
 
-<pre><code>Create hello.R which prints the number of rows in the diamonds data set from ggplot2.
-</code></pre>
+````
+Create hello.R which prints the number of rows in the diamonds data set from ggplot2.
+````
 
 When it finishes, in the bash Terminal run `cat hello.R`. CP/CR.
 
-```{r aider-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: aider-4
+#| echo: false
+learnr2::question(
+  "When it finishes, in the bash Terminal run cat hello.R. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
-<pre><code>library(ggplot2)
+````
+library(ggplot2)
 
 cat(nrow(diamonds), "\n")
-</code></pre>
+````
 
 ###
 
@@ -556,13 +573,14 @@ Do not read too much into it, though. A free model handles a two-line script eas
 
 At the `aider` prompt, run `/tokens`. CP/CR.
 
-```{r aider-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: aider-5
+#| echo: false
+learnr2::question(
+  "At the aider prompt, run /tokens. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -595,18 +613,20 @@ The dollar column is all zeros because this model is free. On a paid model those
 
 Now switch models without leaving the session. Pick a *different* model from the live list you printed in Exercise 2, and put `openrouter/` on the front of it. At the `aider` prompt:
 
-<pre><code>/model openrouter/google/gemma-4-31b-it:free
-</code></pre>
+````
+/model openrouter/google/gemma-4-31b-it:free
+````
 
 CP/CR.
 
-```{r aider-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: aider-6
+#| echo: false
+learnr2::question(
+  "/model openrouter/google/gemma-4-31b-it:free CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -635,18 +655,20 @@ One warning. `aider` has a `/models` command for searching model names, and it r
 
 Ask the new model a question about the code, without letting it edit anything. At the `aider` prompt:
 
-<pre><code>/ask What would break in hello.R if ggplot2 were not installed?
-</code></pre>
+````
+/ask What would break in hello.R if ggplot2 were not installed?
+````
 
 CP/CR.
 
-```{r aider-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: aider-7
+#| echo: false
+learnr2::question(
+  "/ask What would break in hello.R if ggplot2 were not installed? CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -674,18 +696,20 @@ That last one is the money-saving trick, and it is worth understanding beyond `a
 
 Leave `aider` by typing `/quit`. Then, back in the bash Terminal, check what all that cost you:
 
-<pre><code>curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool | grep '"usage"'
-</code></pre>
+````
+curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool | grep '"usage"'
+````
 
 CP/CR.
 
-```{r aider-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: aider-8
+#| echo: false
+learnr2::question(
+  "curl -s https://openrouter.ai/api/v1/key -H \"Authorization: Bearer $OPENROUTER_API_KEY\" | python -m json.tool | grep '\"usage\"' CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -710,13 +734,14 @@ Commit and push your work --- `hello.R` and `.gitignore`.
 
 In the bash Terminal, run `git log --oneline`. CP/CR.
 
-```{r aider-9}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: aider-9
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run git log --oneline. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -751,5 +776,23 @@ In the next tutorial, "Models And Money," you will find out what those prices ac
 
 Bring a credit card to that one. It is the only tutorial in this course that needs one, and the $10 it asks for is the whole budget.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "18-openrouter")
 ```

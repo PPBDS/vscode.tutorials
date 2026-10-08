@@ -1,31 +1,23 @@
 ---
 title: Websites 2
 author: David Kane
-tutorial:
-  id: "12-websites-2"
-output:
-  learnr::tutorial:
-    progressive: yes
-    'allow_skip:': yes
-runtime: shiny_prerendered
 description: 'A second tutorial about Quarto websites. Builds a site with multi-page navigation and drop-down menus, then refactors analysis code into scripts that save results as RDS and PNG files.'
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 240, 
-        tutorial.storage = "local") 
-
-library(learnr)
-library(tutorial.helpers)
-library(knitr)
-library(tidyverse)
-```
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+## Information
+###
+
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 <!-- For later websites, show how to add a link to the website to the GitHub repo. -->
@@ -48,13 +40,14 @@ Let's create a website with a beautiful plot of the data from the `billboard` ti
 
 Copy/paste the URL for your `websites-2` repository on GitHub.
 
-```{r the-website-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-website-1
+#| echo: false
+learnr2::question(
+  "Copy/paste the URL for your websites-2 repository on GitHub.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -73,13 +66,14 @@ In the bash Terminal, run `quarto create project website . --no-open`. Use "Webs
 
 CP/CR.
 
-```{r the-websites-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-websites-2
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run quarto create project website . --no-open. Use \"Websites 2\" as the title, if asked. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -106,13 +100,14 @@ Add `_site` to the `.gitignore` files. Save it.
 
 In the bash Terminal, run `cat .gitignore`. CP/CR.
 
-```{r the-website-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-website-3
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat .gitignore. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -133,13 +128,14 @@ In `index.qmd`, delete everything outside the YAML header. Change `title` to `"B
 
 In the bash Terminal, run `cat index.qmd`. CP/CR.
 
-```{r the-website-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-website-4
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat index.qmd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -164,15 +160,16 @@ In the R Terminal, run:
 show_file("index.qmd", chunk = "Last")
 ````
 
-CP/CR. (Did you remember to `library(tutorial.helpers)` in the R Terminal so that this function is available?)
+CP/CR. (Did you remember to `library(learnr2)` in the R Terminal so that this function is available?)
 
-```{r the-website-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-website-5
+#| echo: false
+learnr2::question(
+  "CP/CR. (Did you remember to library(learnr2) in the R Terminal so that this function is available?)",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -190,15 +187,17 @@ Without `#| message: false`, the tidyverse startup messages would appear right o
 
 From the bash Terminal, run `quarto preview`. 
 
-Copy and paste the home page, leaving out the menu items.
+Paste a screenshot of the home page, leaving out the menu items.
 
-```{r the-website-6}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 10)
+```{r}
+#| label: the-website-6
+#| echo: false
+learnr2::question(
+  "Paste a screenshot of the home page, leaving out the menu items.",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -235,13 +234,14 @@ show_file("index.qmd", chunk = "Last")
 
 CP/CR.
 
-```{r the-website-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-website-7
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -349,13 +349,14 @@ In the bash Terminal, run `quarto publish gh-pages`. You may need to hit `Enter`
 
 Copy/paste the URL below:
 
-```{r the-website-8}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-website-8
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run quarto publish gh-pages. You may need to hit Enter once. Copy/paste the URL below:",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -380,13 +381,14 @@ cat about.qmd
 
 CP/CR.
 
-```{r the-website-9}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-website-9
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -419,13 +421,14 @@ cat about.qmd
 
 CP/CR.
 
-```{r the-website-10}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-website-10
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -462,13 +465,14 @@ cat about.qmd
 
 CP/CR.
 
-```{r the-website-11}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 6)
+```{r}
+#| label: the-website-11
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -528,13 +532,14 @@ show_file("about.qmd", pattern = "Bootcamp")
 CP/CR.
 
 
-```{r the-website-12}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-website-12
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -551,13 +556,14 @@ You only need a few [formatting tricks](https://quarto.org/docs/authoring/markdo
 
 Push all the changes to GitHub, and issue the `quarto publish gh-pages` command in the bash Terminal. You need to hit `Enter` at least once. CP/CR.
 
-```{r the-website-13}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-website-13
+#| echo: false
+learnr2::question(
+  "Push all the changes to GitHub, and issue the quarto publish gh-pages command in the bash Terminal. You need to hit Enter at least once. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -580,13 +586,14 @@ Go to `File -> New File...` and select `Quarto Document`. Title it "Sources". Sa
 
 In the bash Terminal, run `ls *qmd`. CP/CR.
 
-```{r the-website-14}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-website-14
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run ls *qmd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -611,13 +618,14 @@ show_file("sources.qmd", pattern = "overview")
 
 CP/CR.
 
-```{r the-website-15}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-website-15
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -646,13 +654,14 @@ cat sources.qmd
 
 CP/CR.
 
-```{r the-website-16}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-website-16
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -723,13 +732,14 @@ cat _quarto.yml
 
 CP/CR.
 
-```{r the-website-17}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
+```{r}
+#| label: the-website-17
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -765,13 +775,14 @@ Run `quarto preview` from the bash Terminal. (You may need to first use `Ctrl + 
 
 Run `ls _site/*html` in the bash Terminal. CP/CR.
 
-```{r the-website-18}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-website-18
+#| echo: false
+learnr2::question(
+  "Run ls _site/*html in the bash Terminal. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -791,13 +802,14 @@ In the `_quarto.yml` file, delete the two lines of code that create the link and
 
 In the bash Terminal, stop the preview with `Ctrl + c`. Then, use `rm` to remove `sources.qmd`. Run `ls *qmd` in the bash Terminal. CP/CR.
 
-```{r the-website-19}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-website-19
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, stop the preview with Ctrl + c. Then, use rm to remove sources.qmd. Run ls *qmd in the bash Terminal. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -812,13 +824,14 @@ You should save them both (so they're not `untitled-1` and `untitled-2`). Name t
 
 In the bash Terminal, run the command `head source-1.qmd source-2.qmd`. CP/CR.
 
-```{r the-websites-20}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-websites-20
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run the command head source-1.qmd source-2.qmd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -875,13 +888,14 @@ cat _quarto.yml
 
 CP/CR.
 
-```{r the-websites-21}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 10)
+```{r}
+#| label: the-websites-21
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -921,13 +935,14 @@ Go to the Source Control pane. Commit and push your new changes to GitHub. Inclu
 
 From the bash Terminal, run `git log -n 1`. CP/CR. 
 
-```{r the-websites-22}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-websites-22
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run git log -n 1. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ### 
@@ -960,13 +975,14 @@ In this script, add `library(tidyverse)` and then, after a blank line, the billb
 
 In the bash Terminal, run `cat process_data.R`. CP/CR.
 
-```{r the-websites-23}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: the-websites-23
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat process_data.R. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1024,13 +1040,14 @@ Because this is a script, not a Quarto document, there are no code chunks and yo
 
 "Source" the entire script with echo by clicking the dropdown arrow next to the Run button (▷) at the top right of the editor. This feeds every line of the script to the R Terminal. CP/CR.
 
-```{r the-websites-24}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: the-websites-24
+#| echo: false
+learnr2::question(
+  "\"Source\" the entire script with echo by clicking the dropdown arrow next to the Run button (▷) at the top right of the editor. This feeds every line of the script to the R Terminal. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1063,13 +1080,14 @@ Notice that the final line of the script assigns its result to `top_songs` rathe
 
 From the R Terminal, run `ls()`. CP/CR.
 
-```{r the-websites-25}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-websites-25
+#| echo: false
+learnr2::question(
+  "From the R Terminal, run ls(). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1087,13 +1105,14 @@ The script created several objects, including the one we care about, `top_songs`
 
 Restart your R session by closing your R Terminal and opening a new one. From the R Terminal, run `ls()`. CP/CR.
 
-```{r the-websites-26}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-websites-26
+#| echo: false
+learnr2::question(
+  "Restart your R session by closing your R Terminal and opening a new one. From the R Terminal, run ls(). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1111,13 +1130,14 @@ Source `process_data.R` again to recreate `top_songs` (click the Run button ▷)
 
 In the bash Terminal, run `ls clean*`. CP/CR.
 
-```{r the-websites-27}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-websites-27
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run ls clean*. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1140,13 +1160,14 @@ write_rds(top_songs, file = "clean_data.rds")
 
 In the bash Terminal, run `tail -n 3 process_data.R`. CP/CR.
 
-```{r the-websites-28}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-websites-28
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run tail -n 3 process_data.R. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1165,13 +1186,14 @@ This is a common pattern in larger projects: each script ends by saving an objec
 
 Close your R Terminal and open a new one. Run `library(tidyverse)`, then run `read_rds("clean_data.rds")`. CP/CR.
 
-```{r the-websites-29}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: the-websites-29
+#| echo: false
+learnr2::question(
+  "Close your R Terminal and open a new one. Run library(tidyverse), then run read_rds(\"clean_data.rds\"). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1202,13 +1224,14 @@ Now we do the same thing for the plot. Use `File -> New File...` to create `make
 
 In the bash Terminal, run `cat make_plot.R`. CP/CR.
 
-```{r the-website-30}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: the-website-30
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat make_plot.R. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1248,13 +1271,14 @@ The fact that the tibble was called `top_songs` in `process_data.R` is irrelevan
 
 Source `make_plot.R` (click the Run button ▷). In the bash Terminal, run `ls *.png`. CP/CR.
 
-```{r the-website-31}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: the-website-31
+#| echo: false
+learnr2::question(
+  "Source make_plot.R (click the Run button ▷). In the bash Terminal, run ls *.png. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1273,33 +1297,34 @@ Now make `index.qmd` simply display the finished image. In its setup code chunk,
 
 In the bash Terminal, run `cat index.qmd`. CP/CR.
 
-```{r the-website-32}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: the-website-32
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat index.qmd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
 
-<pre><code>---
+````{verbatim}
+---
 title: "Billboard Graphic"
 execute:
   echo: false
 ---
 
-
-<pre><code>```{r}
+```{r}
 suppressPackageStartupMessages(library(tidyverse))
 library(knitr)
-```</code></pre>
+```
 
-<pre><code>```{r}
+```{r}
 include_graphics("billboard.png")
-```</code></pre>
-</code></pre>
+```
+````
 
 ###
 
@@ -1311,13 +1336,14 @@ From the bash Terminal, run `quarto publish gh-pages`. You will need to hit `Ent
 
 From the bash Terminal, run `git show --name-status HEAD`. CP/CR.
 
-```{r the-website-33}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: the-website-33
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run git show --name-status HEAD. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1342,15 +1368,17 @@ This is the workflow professionals use. First, get something working all in one 
 
 ### Exercise 34
 
-Navigate to your `websites-2` GitHub repo. Copy and paste the repository file listing.
+Navigate to your `websites-2` GitHub repo. Paste a screenshot of the repository file listing.
 
-```{r the-website-34}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: the-website-34
+#| echo: false
+learnr2::question(
+  "Navigate to your websites-2 GitHub repo. Paste a screenshot of the repository file listing.",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1382,5 +1410,23 @@ When you ran `quarto publish gh-pages` for `website-1` and `websites-2`, Quarto 
 
 This tutorial practiced the process of creating and organizing the [Quarto websites](https://quarto.org/docs/websites/) using the [Quarto CLI](https://quarto.org/docs/get-started/) (command line interface). You learned some new skills, such as how to add a visualization, edit text, and create new pages. You also learned how to save the results of your data-manipulation code in an RDS file and how to save your plots as PNG files. Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "12-websites-2")
 ```

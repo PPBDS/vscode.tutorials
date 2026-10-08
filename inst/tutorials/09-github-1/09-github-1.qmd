@@ -1,32 +1,27 @@
 ---
 title: "GitHub Introduction"
 author: David Kane
-tutorial:
-  id: "09-github-1"
-output:
-  learnr::tutorial:
-    progressive: yes
-    'allow_skip:': yes
-runtime: shiny_prerendered
 description: Introduction to Git and GitHub. Opens up the connect-repo script, creates and deletes a repo by hand with the gh command-line program, walks through the commit/push cycle, and publishes a Quarto document with GitHub Pages.
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(knitr)
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
+```{r}
+#| label: setup
+#| include: false
 library(tidyverse)
-library(usethis)
-library(gitcreds)
-
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60, 
-        tutorial.storage = "local")
 ```
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+## Information
+###
+
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 ## Introduction
@@ -55,13 +50,14 @@ Copy and paste the URLs for:
 
 2. This Codespace --- the address in your browser's address bar, ending in `.github.dev`.
 
-```{r using-git-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: using-git-1
+#| echo: false
+learnr2::question(
+  "2. This Codespace -- the address in your browser's address bar, ending in .github.dev.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -81,13 +77,14 @@ Notice the two URLs look quite different. Your repo URL (`github.com/...`) is wh
 
 At the bash Terminal, run `pwd`. CP/CR.
 
-```{r using-git-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: using-git-2
+#| echo: false
+learnr2::question(
+  "At the bash Terminal, run pwd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -106,13 +103,14 @@ You should be in a directory named `github-introduction`. `connect-repo` created
 
 At the bash Terminal, run `ls`. CP/CR.
 
-```{r using-git-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: using-git-3
+#| echo: false
+learnr2::question(
+  "At the bash Terminal, run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -131,13 +129,14 @@ The only visible file is `AGENTS.md`, which `connect-repo` copied in when it cre
 
 At the bash Terminal, run `ls -a`. The `a` option tells `ls` to show all directories and files, including hidden ones, which start with a dot (`.`). CP/CR.
 
-```{r using-git-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: using-git-4
+#| echo: false
+learnr2::question(
+  "At the bash Terminal, run ls -a. The a option tells ls to show all directories and files, including hidden ones, which start with a dot (.). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -166,13 +165,14 @@ Time to open the black box. The `connect-repo` script has a `--help` option that
 
 Read the whole thing. Then CP/CR the numbered steps (1 through 4).
 
-```{r using-git-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 20)
+```{r}
+#| label: using-git-5
+#| echo: false
+learnr2::question(
+  "Read the whole thing. Then CP/CR the numbered steps (1 through 4).",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -211,13 +211,14 @@ There is no magic here --- the script says so itself. `connect-repo` is a conven
 
 Start with identity. Run `gh auth status`. CP/CR.
 
-```{r using-git-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: using-git-6
+#| echo: false
+learnr2::question(
+  "Start with identity. Run gh auth status. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -247,13 +248,14 @@ gh repo create scratch-repo --public --clone
 
 Then run `ls`. CP/CR.
 
-```{r using-git-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: using-git-7
+#| echo: false
+learnr2::question(
+  "Then run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -285,13 +287,14 @@ git remote -v
 
 CP/CR.
 
-```{r using-git-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: using-git-8
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -312,13 +315,14 @@ scratch-repo $
 
 We don't need `scratch-repo`. Try to delete it from the command line. Run `gh repo delete scratch-repo`. CP/CR whatever happens --- including a refusal.
 
-```{r using-git-9}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: using-git-9
+#| echo: false
+learnr2::question(
+  "We don't need scratch-repo. Try to delete it from the command line. Run gh repo delete scratch-repo. CP/CR whatever happens -- including a refusal.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -351,13 +355,14 @@ cd github-introduction
 
 CP/CR.
 
-```{r using-git-10}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: using-git-10
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -381,17 +386,13 @@ Two lessons. First, the Danger Zone's type-the-full-name ritual is friction by d
 
 Create a new Quarto document. From the three horizontal bar icon in the Activity Bar, select `File -> New File...`, then select `Quarto Document` from the drop-down menu. This opens the new file in the Editor.
 
-```{r}
-include_graphics("images/create-analysis.png")
-```
+![](images/create-analysis.png){width=90%}
 
 Notice how there is a black dot in the `analysis-1.qmd` tab in the Editor. This indicates that the file is unsaved.
 
 Change the title to "Analysis 1" and add your name as the author. Save the file with `Cmd/Ctrl + S` as `analysis-1.qmd`.
 
-```{r}
-include_graphics("images/save-analysis.png")
-```
+![](images/save-analysis.png){width=90%}
 
 Notice how after saving, the `analysis-1.qmd` tab in the Editor is now green with a "U". This indicates that the file is saved, but the file is **U**ntracked by Git.
 
@@ -399,13 +400,14 @@ Then run `cat analysis-1.qmd`.
 
 CP/CR.
 
-```{r using-git-11}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: using-git-11
+#| echo: false
+learnr2::question(
+  "Then run cat analysis-1.qmd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -428,9 +430,7 @@ github-introduction $
 
 Click the Source Control button in the Activity Bar. This opens the Source Control pane, which is an interface to using Git and GitHub.
 
-```{r}
-include_graphics("images/analysis-git.png")
-```
+![](images/analysis-git.png){width=90%}
 
 The top part of the pane shows the files that have been added or modified. This is Git telling you what it thinks has changed. Again, the "U" at the end of the line for `analysis-1.qmd` indicates that Git has noticed the file but that it is **U**ntracked.
 
@@ -438,13 +438,14 @@ Render `analysis-1.qmd` with `Cmd/Ctrl + Shift + K`.
 
 The Terminal fills with a bunch of output. Copy/paste the last few lines.
 
-```{r using-git-12}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: using-git-12
+#| echo: false
+learnr2::question(
+  "The Terminal fills with a bunch of output. Copy/paste the last few lines.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -473,13 +474,14 @@ We can stop the preview of `analysis-1.qmd` by pressing `Ctrl + c` on your keybo
 
 From the bash Terminal, run `ls`. CP/CR.
 
-```{r using-git-13}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: using-git-13
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -498,22 +500,21 @@ The bottom part of the Source Control pane shows the history of changes in this 
 
 Look more closely at the Source Control pane:
 
-```{r}
-include_graphics("images/analysis-git-2.png")
-```
+![](images/analysis-git-2.png){width=90%}
 
 We have many new files, like `analysis-1.html`, created when we rendered `analysis-1.qmd`. They have "U" indicators because, according to Git, they are **U**ntracked. Many of these files are weird and confusing. It turns out that all these files live in the `analysis-1_files` directory.
 
 From the bash Terminal, run `ls -R analysis-1_files`. The `-R` option means **r**ecursive. CP/CR.
 
 
-```{r using-git-14}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: using-git-14
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run ls -R analysis-1_files. The -R option means recursive. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -554,13 +555,14 @@ From the three horizontal bar icon, `File -> New Text File`. Save this new file 
 
 From the bash Terminal, run `ls -a`. CP/CR.
 
-```{r using-git-15}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: using-git-15
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run ls -a. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -581,13 +583,14 @@ The purpose of the `.gitignore` file is to specify the files and directories tha
 
 From the bash Terminal, run `cat .gitignore`. CP/CR.
 
-```{r using-git-16}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: using-git-16
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run cat .gitignore. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -604,9 +607,7 @@ The `analysis-1_files` line in `.gitignore` tells Git to ignore the `analysis-1_
 
 Note the change in the Source Control pane!
 
-```{r}
-include_graphics("images/analysis-git-3.png")
-```
+![](images/analysis-git-3.png){width=90%}
 
 Now, according to Git, there have been only four changes to the repo. (Of course, there have been more changes, but Git is ignoring anything that resides in `analysis-1_files`.) Four files --- `analysis-1.qmd`, `analysis-1.html`, `.gitignore`, and `AGENTS.md` --- are untracked (U).
 
@@ -615,21 +616,20 @@ Now, according to Git, there have been only four changes to the repo. (Of course
 
 In the box above the "Commit" button, add "initial version" as your commit comment. Press the "Commit" button. You will see a dialog box like this:
 
-```{r}
-include_graphics("images/commit-stage-changes-pop-up.png")
-```
+![](images/commit-stage-changes-pop-up.png){width=90%}
 
 Press "Yes". In the future, you might click on "Always" so that this dialog stops appearing. It will be months, at least, before you make active use of staging in your Git workflow.
 
 From the bash Terminal, run `git log`. CP/CR.
 
-```{r using-git-17}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: using-git-17
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run git log. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -653,13 +653,14 @@ Return to editing `analysis-1.qmd`. Add a line beginning with your actual name: 
 
 Run `cat analysis-1.qmd`. CP/CR.
 
-```{r using-git-18}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: using-git-18
+#| echo: false
+learnr2::question(
+  "Run cat analysis-1.qmd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 
@@ -684,21 +685,21 @@ github-introduction $
 
 Within the Source Control pane, press the "Open File" button for `analysis-1.qmd`, which is the first of four symbols to the right of the file name. 
 
-```{r}
-include_graphics("images/analysis-git-4.png")
-```
+![](images/analysis-git-4.png){width=90%}
 
 Notice how there is now an orange "M" next to the file name. This indicates that Git is now tracking the file's changes and that it has been **M**odified.
 
 Hold your cursor over the symbol (a curved arrow) next to the "Open File" button. What is the name for this button?
 
-```{r using-git-19}
-question_text(NULL,
-	message = "Discard Changes",
-	answer(NULL, correct = TRUE),
-	allow_retry = FALSE,
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: using-git-19
+#| echo: false
+learnr2::question(
+  "Hold your cursor over the symbol (a curved arrow) next to the \"Open File\" button. What is the name for this button?",
+  learnr2::answer("Discard Changes", correct = TRUE),
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -709,13 +710,15 @@ Clicking this button gets rid of any changes made since the last time you told G
 
 Hold your cursor over the symbol --- `+`, a plus sign --- next to the "Discard Changes" button. What is the name for this button?
 
-```{r using-git-20}
-question_text(NULL,
-	message = "Stage Changes",
-	answer(NULL, correct = TRUE),
-	allow_retry = FALSE,
-	incorrect = NULL,
-	rows = 2)
+```{r}
+#| label: using-git-20
+#| echo: false
+learnr2::question(
+  "Hold your cursor over the symbol -- +, a plus sign -- next to the \"Discard Changes\" button. What is the name for this button?",
+  learnr2::answer("Stage Changes", correct = TRUE),
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -728,13 +731,14 @@ Commit the changes with a comment like "added sentence".
 
 Run `git log`. CP/CR the latest entry.
 
-```{r using-git-21}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: using-git-21
+#| echo: false
+learnr2::question(
+  "Run git log. CP/CR the latest entry.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -754,19 +758,19 @@ Date:   Fri May 1 19:41:05 2026 +0000
 
 The Source Control pane now looks like this:
 
-```{r}
-include_graphics("images/analysis-1-post-commit.png")
-```
+![](images/analysis-1-post-commit.png){width=90%}
 
 Although you have committed your changes to Git --- i.e., the changes have been made locally --- you still need to "push" the changes to GitHub.  Hover your cursor over the "Sync Changes" button. What does the pop-up say?
 
-```{r using-git-22}
-question_text(NULL,
-	message = "Something like \"Push 2 commits to origin/main\" --- or \"Publish Branch\", if this is the repo's very first push.",
-	answer(NULL, correct = TRUE),
-	allow_retry = FALSE,
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: using-git-22
+#| echo: false
+learnr2::question(
+  "Although you have committed your changes to Git -- i.e., the changes have been made locally -- you still need to \"push\" the changes to GitHub. Hover your cursor over the \"Sync Changes\" button. What does the pop-up say?",
+  learnr2::answer("Something like \"Push 2 commits to origin/main\" --- or \"Publish Branch\", if this is the repo's very first push.", correct = TRUE),
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -783,21 +787,20 @@ Press the "Sync Changes" button.
 
 The Source Control View should now look like this:
 
-```{r}
-include_graphics("images/analysis-1-post-sync.png")
-```
+![](images/analysis-1-post-sync.png){width=90%}
 
 Notice how the purple cloud icon, representing the remote tracking branch on GitHub called "origin/main", has moved to the most recent commit along with the local main branch.
 
 From the bash Terminal, run `git log` again. CP/CR.
 
-```{r using-git-23}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 7)
+```{r}
+#| label: using-git-23
+#| echo: false
+learnr2::question(
+  "From the bash Terminal, run git log again. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -827,25 +830,23 @@ A term like "commit be56bbaedd692a6d29bba410f0a6fd5b1d844a64" gives us the addre
 
 If you look at the GitHub page for `github-introduction`, you will see that the changes have been pushed to GitHub. If your computer stops working, you won't lose any of your work.
 
-```{r}
-include_graphics("images/analysis-1-gh-1.png")
-```
+![](images/analysis-1-gh-1.png){width=90%}
 
 This page shows the files from your project that have been pushed to GitHub. Click on the commit history button (in the red box above). This will show a page with the history of commits that you have pushed to GitHub.
 
+![](images/analysis-1-gh-2.png){width=90%}
+
+Paste a screenshot of this page.
+
 ```{r}
-include_graphics("images/analysis-1-gh-2.png")
-```
-
-Copy and paste the text of this page.
-
-```{r using-git-24}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+#| label: using-git-24
+#| echo: false
+learnr2::question(
+  "Paste a screenshot of this page.",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ###
@@ -898,15 +899,16 @@ Let's make `analysis-1.qmd` worth publishing. Set it up as you learned in the Qu
 
 (In the Antigravity tutorial you met a CLI agent that can edit your files directly. Either approach is fine throughout these Git tutorials: ask an AI in a chat window and copy/paste the code by hand, or let an agent write it into your file for you. Use whichever you prefer.)
 
-In the R Terminal, run `tutorial.helpers::show_file("analysis-1.qmd", chunk = "Last")`. CP/CR.
+In the R Terminal, run `learnr2::show_file("analysis-1.qmd", chunk = "Last")`. CP/CR.
 
-```{r publishing-with-github-pages-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: publishing-with-github-pages-1
+#| echo: false
+learnr2::question(
+  "In the R Terminal, run learnr2::show_file(\"analysis-1.qmd\", chunk = \"Last\"). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -940,6 +942,8 @@ ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
 My image looks like:
 
 ```{r}
+#| label: publishing-with-github-pages-1-answer
+#| echo: false
 ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
   geom_point(alpha = 0.7) +
   scale_color_brewer(palette = "Set2") +
@@ -969,21 +973,20 @@ Nothing in this exercise was new: the YAML header, the setup chunk, `#| message:
 
 If you click the Source Control button, your Codespaces window should look something like this:
 
-```{r}
-include_graphics("images/analysis-1-git-post-graph.png")
-```
+![](images/analysis-1-git-post-graph.png){width=90%}
 
 Commit your files and push them to GitHub. Don't forget the commit message. Don't forget that "push" means the same thing as "sync."
 
 Use `Ctrl + c` to stop the Quarto watching process. From the bash Terminal, run `git log -n 1`. CP/CR.
 
-```{r publishing-with-github-pages-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: publishing-with-github-pages-2
+#| echo: false
+learnr2::question(
+  "Use Ctrl + c to stop the Quarto watching process. From the bash Terminal, run git log -n 1. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1004,9 +1007,7 @@ We are being a little sloppy to equate "pushing" with "syncing." Strictly speaki
 
 Let's publish our results to [GitHub Pages](https://pages.github.com/). Before we do, go to the GitHub repo for `github-introduction`, click on the "Settings" top menu item, and then click on the "Pages" side menu item.
 
-```{r}
-include_graphics("images/repo-settings-pages.png")
-```
+![](images/repo-settings-pages.png){width=90%}
 
 We won't modify these options by hand. But it is useful to know where the details are located.
 
@@ -1015,13 +1016,14 @@ From the bash Terminal, run `quarto publish gh-pages analysis-1.qmd`. Respond wi
 CP/CR just the first 10 or so lines of the output.
 
 
-```{r publishing-with-github-pages-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: publishing-with-github-pages-3
+#| echo: false
+learnr2::question(
+  "CP/CR just the first 10 or so lines of the output.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1045,11 +1047,11 @@ remote:      https://github.com/ppbds-student/github-introduction/pull/new/gh-pa
 remote: 
 To https://github.com/ppbds-student/github-introduction
  * [new branch]      HEAD -> gh-pages
- ````
+````
 
 By default, `quarto publish` follows the standard GitHub Pages approach of creating a new Git "branch" called `gh-pages`. Branches are lightweight pointers to specific commits. They allow you to isolate work in progress, experiment with new features, and collaborate effectively without affecting the main codebase. 
 
- ````
+````
 Switched to branch 'main'
 Your branch is up to date with 'origin/main'.
 
@@ -1071,16 +1073,18 @@ output file: analysis-1.knit.md
 
 ### Exercise 4
 
-Go to your `github-introduction` page on GitHub. Refresh the page. `quarto publish` has changed some of the items. Copy and paste all the text in the "Visit site" box.
+Go to your `github-introduction` page on GitHub. Refresh the page. `quarto publish` has changed some of the items. Paste a screenshot of the "Visit site" box.
 
 
-```{r publishing-with-github-pages-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: publishing-with-github-pages-4
+#| echo: false
+learnr2::question(
+  "Go to your github-introduction page on GitHub. Refresh the page. quarto publish has changed some of the items. Paste a screenshot of the \"Visit site\" box.",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ###
@@ -1092,9 +1096,7 @@ Last deployed by @ppbds-student ppbds-student 6 minutes ago
 
 Here is my whole page:
 
-```{r}
-include_graphics("images/gh-pages-published.png")
-```
+![](images/gh-pages-published.png){width=90%}
 
 We could have made these changes by hand, but it is much easier to let `quarto publish` handle them.
 
@@ -1108,5 +1110,23 @@ This tutorial covered [Git](https://git-scm.com/), a program for keeping track o
 
 The most useful reference for Git/GitHub is [*Happy Git and GitHub for the useR*](https://happygitwithr.com/). Refer to that book whenever you have a question.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "09-github-1")
 ```

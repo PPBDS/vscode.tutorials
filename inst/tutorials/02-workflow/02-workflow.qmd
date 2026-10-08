@@ -1,29 +1,21 @@
 ---
 title: "Workflow"
 author: David Kane
-tutorial:
-  id: "02-workflow"
-output:
-  learnr::tutorial:
-    df_print: default
-    progressive: true
-    allow_skip: true
-runtime: shiny_prerendered
 description: "A self-contained introduction to VS Code, the Terminal, R scripts, AI coding agents, Git, and GitHub."
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(knitr)
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60,
-        tutorial.storage = "local")
-```
+## Information
+###
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 ## Introduction
@@ -43,9 +35,7 @@ You will:
 
 Every tutorial begins in the same place: a Codespace on the `main` branch of [`PPBDS/codespace-starter`](https://github.com/PPBDS/codespace-starter). You then start the tutorial from the R Tutorials extension in the Activity Bar in VS Code. That is, presumably, how you got here.
 
-```{r}
-include_graphics("images/wf-1.png")
-```
+![](images/wf-1.png){width=90%}
 
 ###
 
@@ -65,9 +55,7 @@ Here is the whole VS Code window. The Explorer Side Bar is on the left. The Edit
 
 ###
 
-```{r}
-include_graphics("images/vscode-overview.png")
-```
+![](images/vscode-overview.png){width=90%}
 
 You can make a part bigger or smaller by dragging its edge. If you close something, you can open it again by clicking its icon.
 
@@ -86,9 +74,7 @@ The Terminal is a place where you type commands and the computer answers. In thi
 
 First, make sure you can see the Terminal. It lives in the Panel across the bottom of the window. If it is not there, open it from the menu bar: click **View**, then choose **Terminal**.
 
-```{r}
-include_graphics("images/open-terminal-menu.png")
-```
+![](images/open-terminal-menu.png){width=90%}
 
 You can also open it with the keyboard shortcut shown in the menu, `` Ctrl + ` `` (the key just above `Tab`).
 
@@ -96,9 +82,7 @@ You can also open it with the keyboard shortcut shown in the menu, `` Ctrl + ` `
 
 You want a **bash** Terminal. Look at the top-right corner of the Panel. Click the small down arrow beside the `+`, then choose **bash**. The picture below shows an open bash Terminal: the **TERMINAL** view is selected, the red box marks the **bash** tab, and the `+` and down-arrow buttons for opening more terminals sit just to its right.
 
-```{r}
-include_graphics("images/terminal-on-open.png")
-```
+![](images/terminal-on-open.png){width=90%}
 
 You should now have at least two terminal tabs: **R Tutorial**, which is busy running this tutorial, and **bash**, where you will work. Leave the **R Tutorial** tab alone.
 
@@ -114,17 +98,16 @@ with your GitHub username in place of `davekane-student`. The exact content of y
 
 In the bash Terminal, type `pwd` and press `Enter`. You should see something like the picture below. Then CP/CR.
 
-```{r}
-include_graphics("images/pwd-example.png")
-```
+![](images/pwd-example.png){width=90%}
 
-```{r the-terminal-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-terminal-1
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, type pwd and press Enter. You should see something like the picture below. Then CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -150,13 +133,14 @@ ls --help
 
 CP/CR. The response is long, so paste just the first several lines.
 
-```{r the-terminal-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 10)
+```{r}
+#| label: the-terminal-2
+#| echo: false
+learnr2::question(
+  "CP/CR. The response is long, so paste just the first several lines.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -176,15 +160,11 @@ Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
 
 Let's make a file by hand, just to see how it works. Open the Application Menu from the three horizontal bars at the top left on the VS Code widnow. Choose `File -> New File...`.
 
-```{r}
-include_graphics("images/create-new-file.png")
-```
+![](images/create-new-file.png){width=90%}
 
 When VS Code asks what kind of file to make, choose **R Document**.
 
-```{r}
-include_graphics("images/select-new-r-file.png")
-```
+![](images/select-new-r-file.png){width=90%}
 
 Type this single line into the new file:
 
@@ -196,21 +176,20 @@ Add a blank line after it.
 
 Save the file as `warmup.R` at the top level of `codespace-starter`. Press `Cmd/Ctrl + S`; in the Save dialog, make sure the path ends in `codespace-starter/warmup.R`, then press **OK**. A black dot on an Editor tab means the file has unsaved changes; saving makes the dot disappear.
 
-```{r}
-include_graphics("images/save-warmup.png")
-```
+![](images/save-warmup.png){width=90%}
 
 Be careful. Sometimes VS Code seems to prefer a small `r` suffix. Either `r` or `R` is fine, but the file must be named exactly `warmup.R` (capital `R`) for the next step to work.
 
 In the bash Terminal, run `Rscript warmup.R`. CP/CR.
 
-```{r the-terminal-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-terminal-3
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run Rscript warmup.R. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -229,13 +208,14 @@ Run `ls`. (Again, this is the lowercase letter `L` followed by the lowercase let
 
 CP/CR.
 
-```{r the-terminal-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: the-terminal-4
+#| echo: false
+learnr2::question(
+  "Run ls. (Again, this is the lowercase letter L followed by the lowercase letter S.) CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -284,9 +264,7 @@ Your code will be different from this one, and different each time. You should c
 
 Press `Enter` to open the link in your browser, authorize GitHub, then return to VS Code. 
 
-```{r}
-include_graphics("images/authorize.png")
-```
+![](images/authorize.png){width=90%}
 
 ###
 
@@ -296,13 +274,14 @@ Note that the browser may open up what appears to be a new version of this tutor
 
 Run `ls`. CP/CR.
 
-```{r git-and-github-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
+```{r}
+#| label: git-and-github-1
+#| echo: false
+learnr2::question(
+  "Run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -330,13 +309,14 @@ The first supplied the Codespace and the tutorial. The second is yours and will 
 
 Open a new bash Terminal if necessary. Run `pwd`. CP/CR.
 
-```{r git-and-github-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: git-and-github-2
+#| echo: false
+learnr2::question(
+  "Open a new bash Terminal if necessary. Run pwd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -355,13 +335,14 @@ If your result still ends in `codespace-starter`, you have a problem. If the Exp
 
 Run `ls -a`. CP/CR.
 
-```{r git-and-github-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: git-and-github-3
+#| echo: false
+learnr2::question(
+  "Run ls -a. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -382,17 +363,13 @@ Check your repository on GitHub.
 
 Open a new browser tab and go to [github.com](https://github.com). Sign in with the same account if you are asked. Click your profile picture in the top-right corner, choose **Your repositories**.
 
-```{r}
-include_graphics("images/repo-1.png")
-```
+![](images/repo-1.png){width=90%}
 
 ###
 
 Find the repo named **workflow**. Click it.
 
-```{r}
-include_graphics("images/repo-2.png")
-```
+![](images/repo-2.png){width=90%}
 
 This is your repository's page. There is nothing going on yet because we have not made any changes.
 
@@ -401,13 +378,14 @@ This is your repository's page. There is nothing going on yet because we have no
 Go back to the bash Terminal in your Codespace and run `git status`. CP/CR.
 
 
-```{r git-and-github-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
+```{r}
+#| label: git-and-github-4
+#| echo: false
+learnr2::question(
+  "Go back to the bash Terminal in your Codespace and run git status. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -441,9 +419,7 @@ Keep the **R Tutorial** terminal running, and use this new R Terminal for the R 
 
 If the Chat window --- normally the secondary sidebar on the right of the VS Code main screen --- is not open, open it now by clicking the "Toggle Secondary Sidebar" icon in the top-right corner of the window. 
 
-```{r}
-include_graphics("images/toggle-chat.png")
-```
+![](images/toggle-chat.png){width=90%}
 
 
 Before starting any AI agent, check that its Terminal or workspace is `/workspaces/workflow`. An agent reads and writes files relative to the folder it starts in. An agent accidentally started in `codespace-starter` can create files that never show up in your `workflow` Explorer and never reach your repository.
@@ -465,13 +441,14 @@ cat script-1.R
 
 CP/CR.
 
-```{r script-1-github-copilot-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
+```{r}
+#| label: script-1-github-copilot-1
+#| echo: false
+learnr2::question(
+  "cat prints a file's contents in the Terminal. It is the quickest way to show us -- and any AI you are working with -- exactly what is in a file. You will use it constantly. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -488,17 +465,13 @@ print(total)
 
 The Copilot interface and default changes all the time, like everything associated with AI. So, these images may be out of date. However, it is likely that the Explorer shows you something like this:
 
-```{r}
-include_graphics("images/sc-1.png")
-```
+![](images/sc-1.png){width=90%}
 
 ###
 
 The black dot surrounded by the square next to `script-1.R` indicates a file that has been created/edited by an AI but not yet saved. To save it, you will need to take some action, like selecting "Keep":
 
-```{r}
-include_graphics("images/sc-2.png")
-```
+![](images/sc-2.png){width=90%}
 
 ###
 
@@ -507,13 +480,14 @@ Doing so, makes the black-dot-square disappear. It should be replaced with a `U`
 In the bash Terminal, run `ls`. CP/CR.
 
 
-```{r script-1-github-copilot-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 18)
+```{r}
+#| label: script-1-github-copilot-2
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -534,9 +508,7 @@ Finish the script with a plot. Ask Copilot:
 
 You should see something like:
 
-```{r}
-include_graphics("images/sc-3.png")
-```
+![](images/sc-3.png){width=90%}
 
 
 Keep the changes and allow the agent to run the script. Then run the following in the bash Terminal and CP/CR:
@@ -545,13 +517,14 @@ Keep the changes and allow the agent to run the script. Then run the following i
 cat script-1.R
 ````
 
-```{r script-1-github-copilot-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 18)
+```{r}
+#| label: script-1-github-copilot-3
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -588,9 +561,7 @@ Time to save your work. **Git** records a snapshot of your files, called a **com
 
 Click the Source Control icon (the branching icon) in the Activity Bar on the left. Your new files appear under **Changes**. (Don't worry about `AGENTS.md`. We created this file to help with teaching.) Each one has a `U`, which means **untracked**: Git can see the file, but it is not yet part of any commit.
 
-```{r}
-include_graphics("images/source-control.png")
-```
+![](images/source-control.png){width=90%}
 
 Now commit and push:
 
@@ -605,21 +576,20 @@ When the sync finishes, view your work on the web. Open your `workflow` reposito
 
 The GitHub page looks like this. 
 
-```{r}
-include_graphics("images/github-repository.png")
-```
+![](images/github-repository.png){width=90%}
 
 ###
 
 From the bach Terminal, run `git log`. CP/CR.    
 
-```{r script-1-github-copilot-4}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 6)
+```{r}
+#| label: script-1-github-copilot-4
+#| echo: false
+learnr2::question(
+  "From the bach Terminal, run git log. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -661,13 +631,14 @@ Use any AI to complete this task:
 
 In the bash Terminal, run `cat script-2.R`. CP/CR.
 
-```{r script-2-ai-agnostic-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 10)
+```{r}
+#| label: script-2-ai-agnostic-1
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat script-2.R. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -695,9 +666,7 @@ Finish the second script with another plot. Ask your AI:
 
 Note how confusing your screen can become!
 
-```{r}
-include_graphics("images/confuse.png")
-```
+![](images/confuse.png){width=90%}
 
 * The black-dot-square next to `script-2.R` in the Explorer view indicates a file that has been created/edited by an AI but not yet saved. 
 
@@ -715,13 +684,14 @@ include_graphics("images/confuse.png")
 
 In the bash Terminal, run `cat script-2.R`. CP/CR.
 
-```{r script-2-ai-agnostic-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 20)
+```{r}
+#| label: script-2-ai-agnostic-2
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cat script-2.R. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -753,15 +723,11 @@ ggsave("diamonds-2.png", diamonds_plot, width = 8, height = 5)
 
 Save this work too. Through the Source Control view, commit your new files with the message `Add script-2 and second diamonds plot`
 
-```{r}
-include_graphics("images/commit-2.png")
-```
+![](images/commit-2.png){width=90%}
 
 Then press **Sync Changes 1** to push.
 
-```{r}
-include_graphics("images/push-2.png")
-```
+![](images/push-2.png){width=90%}
 
 The `1` in "Sync Changes 1" indicates that you have one commit to push. This label is "Sync Changes" rather than "Publish Branch" because you have already pushed once. The first push is always "Publish Branch". Subsequent pushes are "Sync Changes".
 
@@ -769,13 +735,14 @@ The `1` in "Sync Changes 1" indicates that you have one commit to push. This lab
 
 In the bash Terminal, run `git log -1`. CP/CR.
 
-```{r script-2-ai-agnostic-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 8)
+```{r}
+#| label: script-2-ai-agnostic-3
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run git log -1. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -812,13 +779,14 @@ Future tutorials will often say only "create and connect to a repo," "ask AI," "
 
 Copy and paste the URL for your `workflow` repository. This is the last question in the tutorial.
 
-```{r summary-1}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
+```{r}
+#| label: summary-1
+#| echo: false
+learnr2::question(
+  "Copy and paste the URL for your workflow repository. This is the last question in the tutorial.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -829,5 +797,23 @@ https://github.com/davekane-student/workflow
 
 The `github.com/...` URL is the repository. A `github.dev` or `githubpreview.dev` URL points to a temporary working interface, not the repository page you should submit.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "02-workflow")
 ```

@@ -1,29 +1,21 @@
 ---
 title: "Our Codespace Starter"
 author: David Kane
-tutorial:
-  id: "14-our-codespace-starter"
-output:
-  learnr::tutorial:
-    df_print: default
-    progressive: true
-    allow_skip: true
-runtime: shiny_prerendered
 description: "A tour of the devcontainer.json behind codespace-starter itself --- the custom PPBDS image, the VS Code extensions array, the settings that control auto-save, plots, and Git commits, and the retired postCreateCommand whose recipe is kept dormant in a comment."
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(knitr)
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60,
-        tutorial.storage = "local")
-```
+## Information
+###
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 ## Introduction
@@ -37,13 +29,14 @@ You should be doing this tutorial in a repo named `our-codespace-starter`. If yo
 
 Copy and paste the URL for your `our-codespace-starter` repository.
 
-```{r introduction-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: introduction-1
+#| echo: false
+learnr2::question(
+  "Copy and paste the URL for your our-codespace-starter repository.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -62,13 +55,14 @@ This new repo is empty except for a `.git` folder --- the `devcontainer.json` th
 
 Copy and paste the URL for your codespace.
 
-```{r introduction-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: introduction-2
+#| echo: false
+learnr2::question(
+  "Copy and paste the URL for your codespace.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -85,13 +79,14 @@ Every codespace runs on its own remote machine that GitHub provisions for you --
 
 In the bash Terminal, run `cd ../codespace-starter`, then `ls .devcontainer`. CP/CR.
 
-```{r introduction-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: introduction-3
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cd ../codespace-starter, then ls .devcontainer. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -115,13 +110,14 @@ This section walks through `codespace-starter’`s `.devcontainer/devcontainer.j
  
 In the bash Terminal, run `cd /workspaces/codespace-starter`. In the Explorer, open `.devcontainer/devcontainer.json` to see the whole file on your screen. Find the line beginning with `"name"`. Copy and paste it.
 
-```{r codespace-starter-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: codespace-starter-1
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run cd /workspaces/codespace-starter. In the Explorer, open .devcontainer/devcontainer.json to see the whole file on your screen. Find the line beginning with \"name\". Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -138,13 +134,14 @@ The `name` field is purely cosmetic --- it is the label GitHub shows for this co
 
 Find the line beginning with `"image"`. Copy and paste it.
 
-```{r codespace-starter-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: codespace-starter-2
+#| echo: false
+learnr2::question(
+  "Find the line beginning with \"image\". Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -161,13 +158,14 @@ Your `codespace-starter` uses a pinned version of a custom image, `ghcr.io/ppbds
 
 Find the `"extensions"` array. Find the line containing `"reditorsupport.r"`. Copy and paste it.
 
-```{r codespace-starter-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: codespace-starter-3
+#| echo: false
+learnr2::question(
+  "Find the \"extensions\" array. Find the line containing \"reditorsupport.r\". Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -184,13 +182,14 @@ question_text(NULL,
 
 Find the line containing `"quarto.quarto"`. Copy and paste it.
 
-```{r codespace-starter-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: codespace-starter-4
+#| echo: false
+learnr2::question(
+  "Find the line containing \"quarto.quarto\". Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -207,13 +206,14 @@ question_text(NULL,
 
 One extension is conspicuously missing from the `"extensions"` array: `PPBDS.vscode-r-tutorials`, the panel this very tutorial is running in. Find the `NOTE` comment just above the array that explains why it is not listed. Copy and paste the comment's first two lines.
 
-```{r codespace-starter-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: codespace-starter-5
+#| echo: false
+learnr2::question(
+  "One extension is conspicuously missing from the \"extensions\" array: PPBDS.vscode-r-tutorials, the panel this very tutorial is running in. Find the NOTE comment just above the array that explains why it is not listed. Copy and paste the comment's first two lines.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -231,13 +231,14 @@ question_text(NULL,
 
 Just below `"mechatroner.rainbow-csv"`, find the comment that begins `ALSO DELIBERATELY ABSENT`. Copy and paste its first five lines.
 
-```{r codespace-starter-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: codespace-starter-6
+#| echo: false
+learnr2::question(
+  "Just below \"mechatroner.rainbow-csv\", find the comment that begins ALSO DELIBERATELY ABSENT. Copy and paste its first five lines.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -258,13 +259,14 @@ Standard JSON doesn't allow comments, but `devcontainer.json` is actually **JSON
 
 Find the lines containing `"ritwickdey.LiveServer"`, `"tomoki1207.pdf"`, and `"mechatroner.rainbow-csv"`. Copy and paste all three.
 
-```{r codespace-starter-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: codespace-starter-7
+#| echo: false
+learnr2::question(
+  "Find the lines containing \"ritwickdey.LiveServer\", \"tomoki1207.pdf\", and \"mechatroner.rainbow-csv\". Copy and paste all three.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -283,13 +285,14 @@ Three quality-of-life extensions: `ritwickdey.LiveServer` previews HTML files, `
 
 Find the line containing `"r.consolePath"`. Copy and paste it.
 
-```{r codespace-starter-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: codespace-starter-8
+#| echo: false
+learnr2::question(
+  "Find the line containing \"r.consolePath\". Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -306,13 +309,14 @@ question_text(NULL,
 
 Find the line containing `"r.plot.backend"`. Copy and paste it.
 
-```{r codespace-starter-9}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: codespace-starter-9
+#| echo: false
+learnr2::question(
+  "Find the line containing \"r.plot.backend\". Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -329,13 +333,14 @@ By default, R opens plots in a separate window that would be invisible in a Code
 
 Find the line containing `"r.source.echo"`. Copy and paste it.
 
-```{r codespace-starter-10}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: codespace-starter-10
+#| echo: false
+learnr2::question(
+  "Find the line containing \"r.source.echo\". Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -352,13 +357,14 @@ The Run Source button (▷ in the editor title bar) normally runs a file silentl
 
 Find the line containing `"git.enableSmartCommit"`. Copy and paste it.
 
-```{r codespace-starter-11}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: codespace-starter-11
+#| echo: false
+learnr2::question(
+  "Find the line containing \"git.enableSmartCommit\". Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -375,13 +381,14 @@ Smart commit automatically includes all changed files in the commit when you cli
 
 Find the line containing `"files.autoSave"`. Copy and paste it.
 
-```{r codespace-starter-12}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: codespace-starter-12
+#| echo: false
+learnr2::question(
+  "Find the line containing \"files.autoSave\". Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -398,13 +405,14 @@ With `"afterDelay"`, VS Code automatically saves open files a short time after y
 
 Find the line containing `"editor.wordWrap"`. Copy and paste it.
 
-```{r codespace-starter-13}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: codespace-starter-13
+#| echo: false
+learnr2::question(
+  "Find the line containing \"editor.wordWrap\". Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -421,13 +429,14 @@ Word wrap causes long lines to wrap to the next line visually rather than extend
 
 Find the line containing `"workbench.editor.enablePreview"`. Copy and paste it.
 
-```{r codespace-starter-14}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: codespace-starter-14
+#| echo: false
+learnr2::question(
+  "Find the line containing \"workbench.editor.enablePreview\". Copy and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -444,13 +453,14 @@ By default, VS Code opens files in "preview" mode --- clicking a second file rep
 
 Now leave the `"settings"` block and scroll back up. Find the `"onCreateCommand"` field. Copy and paste that one line.
 
-```{r codespace-starter-15}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 2)
+```{r}
+#| label: codespace-starter-15
+#| echo: false
+learnr2::question(
+  "Now leave the \"settings\" block and scroll back up. Find the \"onCreateCommand\" field. Copy and paste that one line.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -467,13 +477,14 @@ You have already met the result of this line --- it is behind the "✅ YOUR CODE
 
 You might expect a `"postCreateCommand"` field --- a command that runs every time a Codespace is created. There isn't one. Find the comment that begins `NO postCreateCommand right now`. Copy and paste its first five lines.
 
-```{r codespace-starter-16}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 7)
+```{r}
+#| label: codespace-starter-16
+#| echo: false
+learnr2::question(
+  "You might expect a \"postCreateCommand\" field -- a command that runs every time a Codespace is created. There isn't one. Find the comment that begins NO postCreateCommand right now. Copy and paste its first five lines.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -496,13 +507,14 @@ Read the rest of the comment, though. The recipe was kept on purpose, dormant, i
 
 In the R Terminal, run `install.packages("praise")`. CP/CR.
 
-```{r codespace-starter-17}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 14)
+```{r}
+#| label: codespace-starter-17
+#| echo: false
+learnr2::question(
+  "In the R Terminal, run install.packages(\"praise\"). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -536,13 +548,14 @@ downloaded 6431 bytes
 
 In the bash Terminal, run `/opt/venv/bin/pip install emoji`. CP/CR.
 
-```{r codespace-starter-18}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: codespace-starter-18
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run /opt/venv/bin/pip install emoji. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -563,13 +576,14 @@ Successfully installed emoji-2.14.0
 
 Ask AI to install the R package `cowsay` for you, and to tell you exactly what command it ran. CP/CR.
 
-```{r codespace-starter-19}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: codespace-starter-19
+#| echo: false
+learnr2::question(
+  "Ask AI to install the R package cowsay for you, and to tell you exactly what command it ran. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -600,13 +614,14 @@ Whether you type `install.packages()` yourself or ask AI to install cowsay, the 
 
 Ask AI to install the Python library `pyfiglet` into this Codespace's Python environment, and to tell you exactly what command it ran. CP/CR.
 
-```{r codespace-starter-20}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 6)
+```{r}
+#| label: codespace-starter-20
+#| echo: false
+learnr2::question(
+  "Ask AI to install the Python library pyfiglet into this Codespace's Python environment, and to tell you exactly what command it ran. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -632,13 +647,14 @@ This tutorial toured the `devcontainer.json` behind `codespace-starter` itself: 
 
 In the bash Terminal, in your `our-codespace-starter` repo, run `git status`. CP/CR.
 
-```{r summary-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: summary-1
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, in your our-codespace-starter repo, run git status. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -658,13 +674,14 @@ A clean `git status` here just confirms Git isn't tracking anything you haven't 
 
 Paste the URL of your `our-codespace-starter` repository.
 
-```{r summary-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: summary-2
+#| echo: false
+learnr2::question(
+  "Paste the URL of your our-codespace-starter repository.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -681,13 +698,14 @@ This repo now exists on GitHub independent of any one Codespace --- you or a gra
 
 Stop this Codespace: open the Command Palette with `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac), type `>stop`, and select **"Codespaces: Stop Current Codespace"**. Then go to https://github.com/codespaces and paste the row for it, showing its "Stopped" status.
 
-```{r summary-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: summary-3
+#| echo: false
+learnr2::question(
+  "Stop this Codespace: open the Command Palette with Ctrl+Shift+P (or Cmd+Shift+P on Mac), type >stop, and select \"Codespaces: Stop Current Codespace\". Then go to https://github.com/codespaces and paste the row for it, showing its \"Stopped\" status.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -700,5 +718,23 @@ our-codespace-starter    ppbds-student/our-codespace-starter    main    Stopped
 
 Stopped Codespaces don't use compute hours but still occupy storage, so they can be restarted any time --- deleting one instead frees the storage but can't be undone.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "14-our-codespace-starter")
 ```

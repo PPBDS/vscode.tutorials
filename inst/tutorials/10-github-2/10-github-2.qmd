@@ -1,28 +1,21 @@
 ---
 title: "GitHub Advanced"
 author: David Kane
-tutorial:
-  id: "10-github-2"
-output:
-  learnr::tutorial:
-    progressive: yes
-    'allow_skip:': yes
-runtime: shiny_prerendered
 description: Independence from connect-repo. Create a repo by hand with gh, push with -u, clone it onto a fresh machine, pull changes back, and delete a Codespace while your work survives on GitHub.
+format: live-html
+engine: knitr
+toc: true
 ---
 
-```{r setup, include = FALSE}
-library(learnr)
-library(tutorial.helpers)
-library(knitr)
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60,
-        tutorial.storage = "local")
-```
+## Information
+###
 
-```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
 ```
 
 ## Introduction
@@ -52,13 +45,14 @@ gh auth login --hostname github.com --git-protocol https --web
 
 CP/CR.
 
-```{r a-repo-by-hand-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: a-repo-by-hand-1
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -87,13 +81,14 @@ gh repo create github-advanced --public --clone
 
 Then run `ls`. CP/CR.
 
-```{r a-repo-by-hand-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: a-repo-by-hand-2
+#| echo: false
+learnr2::question(
+  "Then run ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -119,13 +114,14 @@ Why `--public`? GitHub repos are either **public** or **private**. A public repo
 
 Run `cd github-advanced` and then `git remote -v`. CP/CR.
 
-```{r a-repo-by-hand-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
+```{r}
+#| label: a-repo-by-hand-3
+#| echo: false
+learnr2::question(
+  "Run cd github-advanced and then git remote -v. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -155,13 +151,14 @@ ls
 
 CP/CR.
 
-```{r a-repo-by-hand-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: a-repo-by-hand-4
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -181,15 +178,16 @@ Count what you have now reproduced by hand: the sign-in, the repo creation, the 
 
 Give the repo something worth keeping, set up the way you learned in the Quarto tutorial: create `analysis.qmd` with the title "GitHub Advanced", your name as author, `execute: echo: false` in the YAML, a setup chunk loading **tidyverse** with `#| message: false`, and a second chunk holding an AI-generated plot using a built-in data set. Also create a `.gitignore` containing `analysis_files`. Render with `Cmd/Ctrl + Shift + K`.
 
-In the R Terminal, run `tutorial.helpers::show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+In the R Terminal, run `learnr2::show_file("analysis.qmd", chunk = "Last")`. CP/CR.
 
-```{r a-repo-by-hand-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: a-repo-by-hand-5
+#| echo: false
+learnr2::question(
+  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -213,13 +211,14 @@ Nothing in this exercise was new, and it probably took you only a few minutes --
 
 Before committing, see what Git sees. Run `git status`. CP/CR.
 
-```{r a-repo-by-hand-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: a-repo-by-hand-6
+#| echo: false
+learnr2::question(
+  "Before committing, see what Git sees. Run git status. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -256,13 +255,14 @@ git push -u origin main
 
 CP/CR.
 
-```{r a-repo-by-hand-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: a-repo-by-hand-7
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -293,13 +293,14 @@ The new piece is `-u` (for `--set-upstream`). A brand-new repo's `main` branch d
 
 In your browser, go to your `github-advanced` repository page and confirm all four files are there. Copy and paste the URL.
 
-```{r a-repo-by-hand-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: a-repo-by-hand-8
+#| echo: false
+learnr2::question(
+  "In your browser, go to your github-advanced repository page and confirm all four files are there. Copy and paste the URL.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -325,13 +326,14 @@ Keep the tutorial tab open! You now have two Codespaces: the one running this tu
 
 Copy and paste the new Codespace's URL (from its browser tab, ending in `.github.dev`).
 
-```{r a-second-desk-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: a-second-desk-1
+#| echo: false
+learnr2::question(
+  "Copy and paste the new Codespace's URL (from its browser tab, ending in .github.dev).",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -356,13 +358,14 @@ gh auth status
 
 For the login, follow the prompts: press `Enter` to accept the browser flow, copy the one-time code, click Authorize on the GitHub page, and return. CP/CR the final `gh auth status` output.
 
-```{r a-second-desk-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: a-second-desk-2
+#| echo: false
+learnr2::question(
+  "For the login, follow the prompts: press Enter to accept the browser flow, copy the one-time code, click Authorize on the GitHub page, and return. CP/CR the final gh auth status output.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -394,13 +397,14 @@ ls
 
 CP/CR.
 
-```{r a-second-desk-3}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: a-second-desk-3
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -440,13 +444,14 @@ git push
 
 CP/CR.
 
-```{r a-second-desk-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+#| label: a-second-desk-4
+#| echo: false
+learnr2::question(
+  "CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -472,13 +477,14 @@ Plain `git push` worked --- no `-u` needed. When you clone a repo that already h
 
 Return to your **original** Codespace --- the tab running this tutorial. Its copy of `github-advanced` does not know about the new commit yet. In a bash Terminal there (make sure `pwd` says `/workspaces/github-advanced`), run `git status` and then `git pull`, one at a time. CP/CR.
 
-```{r a-second-desk-5}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
+```{r}
+#| label: a-second-desk-5
+#| echo: false
+learnr2::question(
+  "Return to your original Codespace -- the tab running this tutorial. Its copy of github-advanced does not know about the new commit yet. In a bash Terminal there (make sure pwd says /workspaces/github-advanced), run git status and then git pull, one at a time. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -512,15 +518,17 @@ Two desks, one filing cabinet. Time to prove which one matters.
 
 ### Exercise 1
 
-Go to [github.com/codespaces](https://github.com/codespaces). You should see (at least) two active Codespaces. Copy and paste the text of the table.
+Go to [github.com/codespaces](https://github.com/codespaces). You should see (at least) two active Codespaces. Paste a screenshot of the table.
 
-```{r disposable-desks-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
+```{r}
+#| label: disposable-desks-1
+#| echo: false
+learnr2::question(
+  "Go to github.com/codespaces. You should see (at least) two active Codespaces. Paste a screenshot of the table.",
+  type = "reflection",
+  allow_image = TRUE,
+  show_text = FALSE
+)
 ```
 
 ###
@@ -551,13 +559,14 @@ Delete the second Codespace --- the fresh machine from the last section. Click t
 
 Then, back in your original Codespace, run `git log --oneline` in the `github-advanced` Terminal. CP/CR.
 
-```{r disposable-desks-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 4)
+```{r}
+#| label: disposable-desks-2
+#| echo: false
+learnr2::question(
+  "Then, back in your original Codespace, run git log --oneline in the github-advanced Terminal. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -600,13 +609,14 @@ git log --oneline
 
 Copy and paste the URL for your `github-advanced` repository. This is the last question in the tutorial.
 
-```{r summary-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
+```{r}
+#| label: summary-1
+#| echo: false
+learnr2::question(
+  "Copy and paste the URL for your github-advanced repository. This is the last question in the tutorial.",
+  type = "reflection",
+  show_text = FALSE
+)
 ```
 
 ###
@@ -619,5 +629,23 @@ https://github.com/your-username/github-advanced
 
 The most useful reference for Git/GitHub is [*Happy Git and GitHub for the useR*](https://happygitwithr.com/). Refer to that book --- or ask AI, whose git knowledge is excellent --- whenever you have a problem.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "10-github-2")
 ```
