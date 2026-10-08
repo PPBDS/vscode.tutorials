@@ -23,7 +23,7 @@ learnr2::student_info()
 ## Introduction
 ###
 
-This tutorial, intended for beginners, tours the workspace you will use for everything that follows: the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant, ending with the different ways to run R code. Complete it inside a [GitHub Codespace](https://github.com/features/codespaces), as set up [here](https://ppbds.github.io/primer/getting-started.html). You should already have completed the **Getting Started** tutorial from the [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package.
+This tutorial, intended for beginners, tours the workspace you will use for everything that follows: the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant, ending with the different ways to run R code. Complete it inside a [GitHub Codespace](https://github.com/features/codespaces), as set up [here](https://ppbds.github.io/primer/getting-started.html).
 
 ###
 
@@ -59,11 +59,11 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ whoami
 rstudio
 codespace-starter $
-````
+```
 
 ###
 
@@ -87,11 +87,11 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ echo $0
 /bin/bash
 codespace-starter $
-````
+```
 
 ###
 
@@ -115,11 +115,11 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ pwd
 /workspaces/codespace-starter
 codespace-starter $
-````
+```
 
 ###
 
@@ -143,10 +143,10 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ ls
 codespace-starter $
-````
+```
 
 ###
 
@@ -170,11 +170,11 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ ls -a
 .  ..  .devcontainer  .git
 codespace-starter $
-````
+```
 
 ###
 
@@ -198,11 +198,11 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ ls .devcontainer
 AGENTS.md  STUDENT_WORKFLOW.md  connect-repo.sh  devcontainer.json  welcome.sh
 codespace-starter $
-````
+```
 
 ###
 
@@ -226,7 +226,7 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ head .devcontainer/STUDENT_WORKFLOW.md
 # Student workflow
 
@@ -239,11 +239,11 @@ tools travel with the Codespace, so your repo needs no setup of its own.
 ## 1. Create or connect to your repo (one command)
 
 codespace-starter $
-````
+```
 
 ###
 
-`head` prints the first ten lines of a file, a quick way to peek at its contents without opening it. Because `codespace-starter` is not your own repo, you will soon learn to create your own with `.devcontainer/connect-repo.sh` and save your work there.
+`head` prints the first ten lines of a file, a quick way to peek at its contents without opening it. Because `codespace-starter` is not your own repo, you will soon learn to create your own with `connect-repo` and save your work there.
 
 ### Exercise 8
 
@@ -263,10 +263,10 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ sleep 5
 codespace-starter $
-````
+```
 
 ###
 
@@ -290,11 +290,11 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ sleep 60
 ^C
 codespace-starter $
-````
+```
 
 ###
 
@@ -338,11 +338,11 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> 4 + 5
 [1] 9
 R 4.6.1>
-````
+```
 
 ###
 
@@ -366,11 +366,11 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> sqrt(16)
 [1] 4
 R 4.6.1>
-````
+```
 
 ###
 
@@ -394,11 +394,11 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> getwd()
 [1] "/workspaces/codespace-starter"
 R 4.6.1>
-````
+```
 
 ###
 
@@ -422,11 +422,11 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> R.version.string
 [1] "R version 4.6.1 (2026-06-24)"
 R 4.6.1> 
-````
+```
 
 ###
 
@@ -610,13 +610,13 @@ learnr2::question(
 
 ###
 
-````
+```
 George Washington
 John Adams
 Thomas Jefferson
 James Madison
 James Monroe
-````
+```
 
 ###
 
@@ -654,9 +654,9 @@ learnr2::question(
 
 ###
 
-````
+```
 2 + 2
-````
+```
 
 ###
 
@@ -684,13 +684,13 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
 
 > 2 + 2
 [1] 4
 R 4.6.1>
-````
+```
 
 ###
 
@@ -714,11 +714,11 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> 2 + 2
 [1] 4
 R 4.6.1>
-````
+```
 
 ###
 
@@ -740,13 +740,13 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
 
 > 2 + 2
 [1] 4
 R 4.6.1>
-````
+```
 
 ###
 
@@ -774,11 +774,11 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ Rscript script.R
 [1] 4
 codespace-starter $
-````
+```
 
 ###
 
@@ -842,11 +842,11 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> exists("x")
 [1] FALSE
 R 4.6.1>
-````
+```
 
 ###
 
@@ -874,14 +874,14 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
 
 > x <- 2 + 2
 R 4.6.1> x
 [1] 4
 R 4.6.1>
-````
+```
 
 ###
 

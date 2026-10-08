@@ -99,8 +99,8 @@ jobs:
 
       - name: Render all tutorials
         run: |
-          paths <- tutorial.helpers::return_tutorial_paths(package = "vscode.tutorials")
-          tutorial.helpers::knit_tutorials(paths)
+          paths <- learnr2::available_tutorials(package = "vscode.tutorials", type = "quarto")$path
+          learnr2::render_tutorials(paths)
         shell: Rscript {0}
   # Cross-repo drift guard. Tutorial 14 quotes codespace-starter's
   # devcontainer.json line by line ("find this line, paste it"), and nothing

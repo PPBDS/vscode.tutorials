@@ -88,9 +88,9 @@ You should now have at least two terminal tabs: **R Tutorial**, which is busy ru
 
 Beware: a new bash Terminal will sometimes show a long prompt like
 
-````
+```
 @davekane-student ➜ /workspaces/codespace-starter (main) $
-````
+```
 
 with your GitHub username in place of `davekane-student`. The exact content of your prompt is something you can control. We set up `codespace-starter` so that, by default, the prompt just shows the current directory, followed by a space and a dollar sign, like `codespace-starter $`. 
 
@@ -112,11 +112,11 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ pwd
 /workspaces/codespace-starter
 codespace-starter $
-````
+```
 
 `pwd` means **print working directory**. It tells you which folder you are in. Right now, you should be in the `codespace-starter` folder.
 
@@ -127,9 +127,9 @@ Options change what a command does. Many commands also have a `--help` option th
 
 Run:
 
-````
+```
 ls --help
-````
+```
 
 CP/CR. The response is long, so paste just the first several lines.
 
@@ -147,12 +147,12 @@ learnr2::question(
 
 The beginning should look like:
 
-````
+```
 codespace-starter $ ls --help
 Usage: ls [OPTION]... [FILE]...
 List information about the FILEs (the current directory by default).
 Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
-````
+```
 
 `--help` is a safe way to learn what a command does. It just prints a description; it never changes your files. Almost every command you meet has a `--help` option.
 
@@ -168,9 +168,9 @@ When VS Code asks what kind of file to make, choose **R Document**.
 
 Type this single line into the new file:
 
-````
+```
 1 + 2
-````
+```
 
 Add a blank line after it.
 
@@ -194,11 +194,11 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ Rscript warmup.R
 [1] 3
 codespace-starter $
-````
+```
 
 An R script is a text file containing R commands. `Rscript warmup.R` asks R to run every command in the file. The code stays in the script after it runs, so you can look at it, change it, and run it again.
 
@@ -220,11 +220,11 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ ls
 warmup.R
 codespace-starter $
-````
+```
 
 Your new file now appears. The problem is that this file lives inside the `PPBDS/codespace-starter` working copy, which you do **not** own. You cannot save your work to that repository on GitHub. Closing the browser does not erase the file right away, but deleting the Codespace will. You need a repository that belongs to you. That is what the next section sets up.
 
@@ -235,7 +235,7 @@ Your new file now appears. The problem is that this file lives inside the `PPBDS
 
 The `codespace-starter` folder you have been working in is one repo, but it belongs to the course, not to you. In this section you will create your own repo, named `workflow`, and connect to it.
 
-We give you a shortcut for this called `connect-repo.sh`. It signs you in to GitHub, creates (or finds) a repo with the name you give it, and opens that repo's folder. Later tutorials will show you the individual Git commands hiding behind this shortcut.
+We give you a shortcut for this called `connect-repo`. It signs you in to GitHub, creates (or finds) a repo with the name you give it, and opens that repo's folder. Later tutorials will show you the individual Git commands hiding behind this shortcut.
 
 ### Exercise 1
 
@@ -243,22 +243,22 @@ We give you a shortcut for this called `connect-repo.sh`. It signs you in to Git
 
 In the bash Terminal, run:
 
-````
-.devcontainer/connect-repo.sh workflow
-````
+```
+connect-repo workflow
+```
 
 ###
 
 You should see something like this, assuming you answer `Y` to the first question:
 
-````
-codespace-starter $ .devcontainer/connect-repo.sh workflow
+```
+codespace-starter $ connect-repo workflow
 → Sign in to GitHub: authorize in the browser/code prompt, then come back here.
 ? Authenticate Git with your GitHub credentials? Yes
 
 ! First copy your one-time code: 5887-E310
 Press Enter to open https://github.com/login/device in your browser... 
-````
+```
 
 Your code will be different from this one, and different each time. You should copy the entire one-time code. You will then be able to just paste the whole thing in at once, when GitHub asks for it. 
 
@@ -292,16 +292,16 @@ AGENTS.md
 workflow $ 
 ```
 
-The result of `connect-repo.sh` is a GitHub repository named `workflow` and a folder at `/workspaces/workflow`.
+The result of `connect-repo` is a GitHub repository named `workflow` and a folder at `/workspaces/workflow`.
 
 ###
 
 The two folders now sit beside each other:
 
-````
+```
 /workspaces/codespace-starter
 /workspaces/workflow
-````
+```
 
 The first supplied the Codespace and the tutorial. The second is yours and will hold your work. 
 
@@ -321,11 +321,11 @@ learnr2::question(
 
 ###
 
-````
+```
 workflow $ pwd
 /workspaces/workflow
 workflow $
-````
+```
 
 ##
 
@@ -347,11 +347,11 @@ learnr2::question(
 
 ###
 
-````
+```
 workflow $ ls -a
 .  ..  AGENTS.md  .git
 workflow $ 
-````
+```
 
 The hidden `.git` directory is what defines a Git repository. Git fills it with your work as you proceed. You never use directly, or even examine, the `.git` folder.
 
@@ -433,9 +433,9 @@ Give Copilot this prompt, adjusting the wording if needed:
 
 Review and approve the creation of `script-1.R` and the `Rscript` command one at a time. Then, in the bash Terminal, run:
 
-````
+```
 cat script-1.R
-````
+```
 
 `cat` prints a file's contents in the Terminal. It is the quickest way to show us --- and any AI you are working with --- exactly what is in a file. You will use it constantly.
 
@@ -455,11 +455,11 @@ learnr2::question(
 
 Your answer will vary, but the sum should be `55` and `script-1.R` should appear in Explorer. One reasonable answer is:
 
-````
+```
 numbers <- 1:10
 total <- sum(numbers)
 print(total)
-````
+```
 
 ### Exercise 2
 
@@ -513,9 +513,9 @@ You should see something like:
 
 Keep the changes and allow the agent to run the script. Then run the following in the bash Terminal and CP/CR:
 
-````
+```
 cat script-1.R
-````
+```
 
 ```{r}
 #| label: script-1-github-copilot-3
@@ -531,7 +531,7 @@ learnr2::question(
 
 Here is one possible answer:
 
-````
+```
 library(tidyverse)
 
 numbers <- 1:10
@@ -551,7 +551,7 @@ diamonds_plot <- diamonds |>
   theme_minimal(base_size = 14)
 
 ggsave("diamonds-1.png", diamonds_plot, width = 8, height = 5)
-````
+```
 
 This solution loads only **tidyverse**, uses only `diamonds`, assigns the plot to an object, and saves a PNG. Click `diamonds-1.png` in Explorer to inspect your own result.
 
@@ -596,7 +596,7 @@ learnr2::question(
 
 You should see at least:
 
-````
+```
 workflow $ git log
 commit b65be73dbdf149c48b4cbc177e9d0a996caa6797 (HEAD -> main, origin/main)
 Author: davekane-student <dave.kane+student@gmail.com>
@@ -604,7 +604,7 @@ Date:   Thu Aug 13 05:44:10 2026 +0000
 
     Add script-1 and diamonds plot
 workflow $ 
-````
+```
 
 This GitHub repo is the online copy of your work. The Codespace is where you work. The GitHub repo is where you keep and share it. If your computer stopped working right now, your commit would still be safe on GitHub.
 
@@ -645,7 +645,7 @@ learnr2::question(
 
 One possible answer is:
 
-````
+```
 numbers <- c(5, 12, 8, 23, 15, 7, 19, 11, 31, 9)
 
 sum_result <- sum(numbers)
@@ -654,7 +654,7 @@ mean_result <- mean(numbers)
 print(paste("Vector:", paste(numbers, collapse = ", ")))
 print(paste("Sum:", sum_result))
 print(paste("Mean:", mean_result))
-````
+```
 
 The particular numbers and results do not matter. The important result is a saved, reproducible script that runs successfully.
 
@@ -698,7 +698,7 @@ learnr2::question(
 
 Here is one possible plot:
 
-````
+```
 library(tidyverse)
 
 diamonds_plot <- diamonds |>
@@ -717,7 +717,7 @@ diamonds_plot <- diamonds |>
   theme(legend.position = "bottom")
 
 ggsave("diamonds-2.png", diamonds_plot, width = 8, height = 5)
-````
+```
 
 ### Exercise 3
 
@@ -749,7 +749,7 @@ learnr2::question(
 
 Your answer should look something like:
 
-````
+```
 workflow $ git log -1
 commit 757d4dfd030339a67d164b0c846c5152c559a544 (HEAD -> main, origin/main)
 Author: davekane-student <dave.kane+student@gmail.com>
@@ -757,7 +757,7 @@ Date:   Thu Aug 13 06:21:02 2026 +0000
 
     Add script-2 and second diamonds plot
 workflow $ 
-````
+```
 
 `git log -1` shows the last commit. When the top line shows both `main` and `origin/main`, your Codespace and GitHub agree on the latest commit — your push worked. You can also see the same history on GitHub.
 
@@ -769,7 +769,7 @@ You used the major parts of VS Code, practiced bash commands, created and connec
 From now on, begin course work with the same routine:
 
 1. Start the `codespace-starter` Codespace.
-2. Use `connect-repo.sh` to create and connect with a new repo, generally given the same name as the tutorial which you are about to start.
+2. Use `connect-repo` to create and connect with a new repo, generally given the same name as the tutorial which you are about to start.
 3. Start whichever AI you want to use, in review mode. GitHub Copilot is always available, but you may prefer another agent. 
 4. Start the tutorial.
 
@@ -791,9 +791,9 @@ learnr2::question(
 
 ###
 
-````
+```
 https://github.com/davekane-student/workflow
-````
+```
 
 The `github.com/...` URL is the repository. A `github.dev` or `githubpreview.dev` URL points to a temporary working interface, not the repository page you should submit.
 

@@ -85,7 +85,7 @@ learnr2::question(
 
 Your answer should look like this:
 
-````
+```
 websites-1 $ quarto create project website . --no-open
 ? Title (website) › A New Website
 Creating project at /workspaces/websites-1:
@@ -95,7 +95,7 @@ Creating project at /workspaces/websites-1:
   - Created about.qmd
   - Created styles.css
 websites-1 $
-````
+```
 
 Quarto created 5 new files in the current directory. On the command line, `.` always refers to the current directory.
 
@@ -117,11 +117,11 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-1 $ ls
 _quarto.yml     about.qmd       index.qmd       styles.css
 websites-1 $
-````
+```
 
 These are the basic files needed to build a Quarto website. Note that `ls` does not show "hidden" files — those beginning with a `.`.
 
@@ -141,12 +141,12 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-1 $ ls -a
 .               .git            about.qmd       styles.css
 ..              .gitignore      _quarto.yml     index.qmd
 websites-1 $
-````
+```
 
 In general, do not touch or modify "dot" directories — those whose names begin with a period. They are managed by the operating system or other programs. For example, Git uses `.git` to track all changes in the project. Also note that `quarto create` added a `.gitignore` file, which was hidden from the plain `ls` output.
 
@@ -160,9 +160,9 @@ Now that we have created the necessary files, let's examine them one by one to u
 
 In the R Terminal, run:
 
-````
+```
 show_file("_quarto.yml")
-````
+```
 
 CP/CR.
 
@@ -181,7 +181,7 @@ learnr2::question(
 
 ###
 
-````
+```
 project:
   type: website
 
@@ -198,16 +198,16 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
-````
+```
 
 ###
 
 YAML files are how [Quarto projects](https://quarto.org/docs/projects/quarto-projects.html) describe themselves. You can identify `_quarto.yml` as a YAML file from its `.yml` extension and its content. The first two lines specify that this is a website.
 
-````
+```
 project:
   type: website
-````
+```
 
 But other values for `type` are possible.
 
@@ -215,9 +215,9 @@ But other values for `type` are possible.
 
 In the R Terminal, run:
 
-````
+```
 show_file("_quarto.yml", start = 4, end = 10)
-````
+```
 
 CP/CR.
 
@@ -233,7 +233,7 @@ learnr2::question(
 
 ###
 
-````
+```
 website:
   title: "A New Website"
   navbar:
@@ -241,7 +241,7 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-````
+```
 
 ###
 
@@ -254,9 +254,9 @@ Indents and other whitespace matter in YAML files. Be careful!
 
 In the R Terminal, run:
 
-````
+```
 show_file("_quarto.yml", start = 12, end = 16)
-````
+```
 
 CP/CR.
 
@@ -272,13 +272,13 @@ learnr2::question(
 
 ###
 
-````
+```
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
-````
+```
 
 ###
 
@@ -290,9 +290,9 @@ The `css` line tells Quarto to use the `styles.css` file, located in the same di
 
 In the bash Terminal, run:
 
-````
+```
 cat index.qmd
-````
+```
 
 CP/CR.
 
@@ -309,7 +309,7 @@ learnr2::question(
 
 ###
 
-````
+```
 ---
 title: "A New Website"
 ---
@@ -317,7 +317,7 @@ title: "A New Website"
 This is a Quarto website.
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-````
+```
 
 ###
 
@@ -333,9 +333,9 @@ If you skip the title prompt titles will be set to `.`.
 
 In the bash Terminal, run:
 
-````
+```
 cat .gitignore
-````
+```
 
 CP/CR.
 
@@ -383,7 +383,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-1 $ git log -n 1
 commit 658eedd63f2c3e2734484a2397935e854f5008f7 (HEAD -> main, origin/main, origin/HEAD)
 Author: ppbds-student <ppbds-student@users.noreply.github.com>
@@ -391,7 +391,7 @@ Date:   Sat Mar 15 22:41:22 2025 -0400
 
     initial version
 websites-1 $
-````
+```
 
 To learn more about Git, GitHub, and R, see [Happy Git with R](https://happygitwithr.com/existing-github-last.html).
 
@@ -417,7 +417,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-1 $ quarto render
 [1/2] index.qmd
 [2/2] about.qmd
@@ -425,7 +425,7 @@ websites-1 $ quarto render
 Output created: _site/index.html
 
 websites-1 $
-````
+```
 
 Quarto tells us what it did: it processed both QMD files and created a `_site` directory containing `index.html`.
 
@@ -449,12 +449,12 @@ learnr2::question(
 
 ###
 
-````
+```
 websites-1 $ ls
 _site           index.qmd
 _quarto.yml     about.qmd       styles.css
 websites-1 $
-````
+```
 
 Note the addition of a `_site` directory. This is where the HTML files that make up the website are stored. Website output files are often placed in a directory named `_site` or `docs`, depending on your web hosting service.
 
@@ -476,11 +476,11 @@ learnr2::question(
 
 Your answer will probably look something like:
 
-````
+```
 websites-1 $ ls _site
 about.html      index.html      search.json     site_libs       styles.css
 websites-1 $
-````
+```
 
 The `about.html` and `index.html` files are the rendered versions of `about.qmd` and `index.qmd`. They go into `_site` because the convention is to separate outputs (HTML files) from inputs (QMD files).
 
@@ -496,9 +496,9 @@ Add `_site` to the `.gitignore`. Don't forget that the last line of `.gitignore`
 
 In the bash Terminal, run:
 
-````
+```
 cat .gitignore
-````
+```
 
 CP/CR.
 
@@ -514,11 +514,11 @@ learnr2::question(
 
 ###
 
-````
+```
 /.quarto/
 **/*.quarto_ipynb
 _site
-````
+```
 
 ###
 
@@ -540,7 +540,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-1 $ quarto preview
 Preparing to preview
 
@@ -548,7 +548,7 @@ Watching files for changes
 Browse at http://localhost:6872/
 GET: /
 
-````
+```
 
 The `quarto preview` command does two things. First, it renders the QMD files, just like `quarto render` does. Second, it opens the website in your browser so that you can see what it looks like. Click around and check it out!
 
@@ -573,7 +573,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-1 $ quarto preview
 Preparing to preview
 
@@ -581,7 +581,7 @@ Watching files for changes
 Browse at http://localhost:6872/
 GET: /
 GET: /about.html
-````
+```
 
 Quarto continues running in the background, watching your files. When you clicked "About," it fetched `about.html` to display it.
 
@@ -602,14 +602,14 @@ learnr2::question(
 
 ### 
 
-````
+```
 A New Website
 
 A New Website
 This is a Quarto website.
 
 To learn more about Quarto websites visit https://quarto.org/docs/websites.
-````
+```
 
 The site title ("A New Website"), from `_quarto.yml`, appears in the upper-left corner. The page title ("A New Website"), from `index.qmd`, appears at the top of the home page.
 
@@ -631,9 +631,9 @@ learnr2::question(
 
 Your answer should be something like:
 
-````
+```
 https://your-codespace-name-7193.app.github.dev/
-````
+```
 
 The website is being "hosted" inside your Codespace container and forwarded to your browser by GitHub. It is not publicly available on the web.
 
@@ -655,7 +655,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 GET: /
 pandoc 
   to: html
@@ -679,7 +679,7 @@ metadata
   title: About
   
 GET: /about.html
-````
+```
 
 Quarto has noticed that you changed/saved the `about.qmd` file. It rendered the new version, creating a new `about.html` which it has now *gotten* and is displaying.
 
@@ -702,12 +702,12 @@ learnr2::question(
 
 Your answer should look like this, except with your name instead of mine!
 
-````
+```
 A New Website
 
 About
 David Kane
-````
+```
 
 To stop `quarto preview`, press `Ctrl + c` in the bash Terminal. This cancels any running terminal command.
 
@@ -745,9 +745,9 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 https://github.com/ppbds-student/websites-1/settings/pages
-````
+```
 
 This page shows the settings that control GitHub Pages. It should look something like this:
 
@@ -777,7 +777,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-1 $ quarto publish gh-pages
 ? Publish site to https://ppbds-student.github.io/websites-1/ using gh-pages? (Y/n) › Yes
 Saved working directory and index state WIP on main: 658eedd initial version
@@ -790,7 +790,7 @@ remote:
 To https://github.com/ppbds-student/websites-1.git
  * [new branch]      HEAD -> gh-pages
  ...
-````
+```
 
 Quarto creates a new git branch named `gh-pages` when publishing.
 
@@ -814,12 +814,12 @@ learnr2::question(
 
 ###
 
-````
+```
 Rendering for publish:
 
 [1/2] index.qmd
 [2/2] about.qmd
-````
+```
 
 All pages are rendered every time you publish. This can be problematic if some pages include code that takes minutes or hours to run. In that case, you will need to rearrange your code to avoid re-running it on every publish.
 
@@ -842,7 +842,7 @@ learnr2::question(
 
 ###
 
-````
+```
 To https://github.com/ppbds-student/websites-1.git
    c05d288..0396c20  HEAD -> gh-pages
 
@@ -850,7 +850,7 @@ To https://github.com/ppbds-student/websites-1.git
 [✓] Published to https://ppbds-student.github.io/websites-1/
 
 websites-1 $
-````
+```
 
 There are other publishing options besides GitHub Pages. You would replace `gh-pages` in `quarto publish` with options like `quarto-pub` or `netlify` to use those services.
 
@@ -870,9 +870,9 @@ learnr2::question(
 
 ### 
 
-````
+```
 https://ppbds-student.github.io/websites-1/
-````
+```
 
 When using GitHub Pages, the URL always follows the same pattern: your GitHub username followed by `github.io`, then the repo name. Use descriptive names for your repos.
 
@@ -892,13 +892,13 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-1 $ git branch -a
   gh-pages
 * main
   remotes/origin/gh-pages
   remotes/origin/main
-````
+```
 
 ###
 
@@ -920,7 +920,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-1 $ git ls-tree --name-only gh-pages
 .nojekyll
 about.html
@@ -928,7 +928,7 @@ index.html
 search.json
 site_libs
 styles.css
-````
+```
 
 ###
 
@@ -951,9 +951,9 @@ learnr2::question(
 
 ### 
 
-````
+```
 Your site is live at https://ppbds-student.github.io/websites-1/
-````
+```
 
 ###
 
@@ -977,11 +977,11 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-1 $ ls .quarto
 idx     preview xref
 websites-1 $
-````
+```
 
 The `.quarto` directory is like `.git`. Never look at or edit the files inside either — they are managed by Quarto and Git respectively.
 
@@ -991,9 +991,9 @@ Open the `_quarto.yml` file in the Editor. Change `title: "A New Website"` to `t
 
 In the R Terminal, run:
 
-````
+```
 show_file("_quarto.yml", start = 4, end = 5)
-````
+```
 
 CP/CR.
 
@@ -1010,10 +1010,10 @@ learnr2::question(
 
 ###
 
-````
+```
 website:
   title: "A New Website, second edition"
-````
+```
 
 ###
 
@@ -1036,7 +1036,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 A New Website, second edition
 
 Home
@@ -1045,7 +1045,7 @@ A New Website
 This is a Quarto website.
 
 To learn more about Quarto websites visit https://quarto.org/docs/websites.
-````
+```
 
 But, if you look at the Github Pages version of your website, it still uses the "A New Website" title because we have not (yet) published our new version. We have, however, changed the files in the `_site` directory.
 
@@ -1067,7 +1067,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-1 $ quarto publish
 ? Publish update to: › https://ppbds-student.github.io/websites-1/ (GitHub Pages)
 From https://github.com/ppbds-student/websites-1
@@ -1094,7 +1094,7 @@ button within your web browser to see changes after deployment.
 [✓] Published to https://ppbds-student.github.io/websites-1/
 
 websites-1 $
-````
+```
 
 This output is shorter because Quarto already created the `gh-pages` branch when you first published.
 

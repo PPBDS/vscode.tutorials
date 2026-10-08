@@ -78,7 +78,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-2 $ quarto create project website . --no-open
 ? Title (website) › Websites 2
 Creating project at /workspaces/websites-2:
@@ -88,7 +88,7 @@ Creating project at /workspaces/websites-2:
   - Created about.qmd
   - Created styles.css
 websites-2 $ 
-````
+```
 
 Recall from the Websites 1 tutorial why we add `--no-open`: without it, Quarto asks VS Code to open the new project, which in a Codespace means a second browser tab showing the same Codespace you are already in. Your Codespace may add the flag for you if you forget, but do not rely on that.
 
@@ -112,13 +112,13 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-2 $ cat .gitignore
 /.quarto/
 **/*.quarto_ipynb
 _site
 websites-2 $ 
-````
+```
 
 Keeping track of all the different files and understanding how they work together is the central skill in creating larger projects.
 
@@ -140,13 +140,13 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-2 $ cat index.qmd 
 ---
 title: "Billboard Graphic"
 ---
 websites-2 $ 
-````
+```
 
 Because this is a Quarto website project, the format for all the `qmd` files is `html` by default. So the YAML header does not need to specify that explicitly. 
 
@@ -156,9 +156,9 @@ Create a new code chunk in `index.qmd` which loads the **tidyverse** package, wi
 
 In the R Terminal, run:
 
-````
+```
 show_file("index.qmd", chunk = "Last")
-````
+```
 
 CP/CR. (Did you remember to `library(learnr2)` in the R Terminal so that this function is available?)
 
@@ -174,10 +174,10 @@ learnr2::question(
 
 ###
 
-````
+```
 #| message: false
 library(tidyverse)
-````
+```
 
 ###
 
@@ -202,19 +202,19 @@ learnr2::question(
 
 ### 
 
-````
+```
 Websites 2
 
 Billboard Graphic
 library(tidyverse)
-````
+```
 
 The code is echoed because we have not turned off echoing in the YAML header yet. Do that now with:
 
-````
+```
 execute:
   echo: false
-````  
+```
 
 Note how changing `index.qmd` causes the `index.html` to be re-rendered, leading to a new homepage display in your browser. Seeing fixes implemented automatically is why many people like working in *preview* mode.
 
@@ -228,9 +228,9 @@ You now know two reasonable ways to work with AI, and either is fine here. You c
 
 In the R Terminal, run:
 
-````
+```
 show_file("index.qmd", chunk = "Last")
-````
+```
 
 CP/CR.
 
@@ -248,7 +248,7 @@ learnr2::question(
 
 What [Grok gave me](https://grok.com/chat/4cc49023-df73-4d2c-ad16-49cb52be7559) after 20 minutes of back-and-forth conversation:
 
-````
+```
 data("billboard", package = "tidyr")
 
 # billboard variables:
@@ -333,7 +333,7 @@ ggplot(top_songs, aes(x = week_num, y = rank, color = song_artist)) +
     plot.background = element_rect(fill = "#F5F5F5", color = NA)
   ) +
   guides(color = guide_legend(nrow = 2))
-````
+```
 
 ###
 
@@ -363,9 +363,9 @@ learnr2::question(
 
 Your answer should look like this, but with your username instead of mine.
 
-````
+```
 https://ppbds-student.github.io/websites-2/
-````
+```
 
 Keep track of the three versions of the website. The QMD files in the project directory are the source — always make changes here. The rendered HTML files in `_site` are what you preview locally; never edit them directly. The published website on GitHub is what the world sees.
 
@@ -375,9 +375,9 @@ Open `about.qmd `. Delete all the current text, except for the YAML header. Ensu
 
 In the bash Terminal, run:
 
-````
+```
 cat about.qmd
-````
+```
 
 CP/CR.
 
@@ -393,13 +393,13 @@ learnr2::question(
 
 ### 
 
-````
+```
 ---
 title: "About"
 ---
 
 ## About Me
-````
+```
 
 ###
 
@@ -409,15 +409,15 @@ Hash signs in front of text make the text into a header. The organization of hea
 
 Write a one sentence description of yourself. Write it below the header. Include your name and school, either the one you attend or one from which you have graduated. Write until the end of the line, i.e. do not use the `Enter` key to wrap text. When you are finished, render the QMD. Example:
 
-````
+```
 My name is David Kane, and I graduated from Williams College.
-````
+```
 
 In the bash Terminal, run:
 
-````
+```
 cat about.qmd
-````
+```
 
 CP/CR.
 
@@ -433,7 +433,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 ---
 title: "About"
 ---
@@ -441,7 +441,7 @@ title: "About"
 ## About Me
 
 My name is David Kane, and I graduated from Williams College.
-````
+```
 
 ###
 
@@ -451,17 +451,17 @@ You can have a Quarto document without a YAML header, if you like. You can also 
 
 Let's bold your name and italicize your school's name. In the description you have already written, surround your name with two asterisks, `**`, on both sides. Let's also put a single asterisk, `*`, around both sides of your school. Example:
 
-````
+```
 My name is **David Kane**, and I graduated from *Williams College*.
-````
+```
 
 `Cmd/Ctrl + Shift + K`
 
 In the bash Terminal, run:
 
-````
+```
 cat about.qmd
-````
+```
 
 CP/CR.
 
@@ -477,7 +477,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 ---
 title: "About"
 ---
@@ -485,7 +485,7 @@ title: "About"
 ## About Me
 
 My name is **David Kane**, and I graduated from *Williams College*.
-````
+```
 
 ###
 
@@ -493,13 +493,13 @@ Quarto, which is based on the Markdown language, has a variety of [formatting op
 
 Examples of Quarto formatting options include:
 
-````
+```
 **bold** *italic* ~~strikeout~~ `code`
 
 superscript^2^ subscript~2~
 
 [underline]{.underline} [small caps]{.smallcaps}
-````
+```
 
 <!-- Can we make the format of the above look like the below? Like put them both in boxes? Right now, only the raw text is in a box, because of the four backticks. -->
 
@@ -517,17 +517,17 @@ At the bottom of `about.qmd`, let's create text which is also a hyperlink to a w
 
 It should look like:
 
-````
+```
 [Kane's Free Data Science Bootcamp](https://bootcamp.davidkane.info)
-````
+```
 
 `Cmd/Ctrl + Shift + K`. (Recall that rendering automatically saves the file first.)
 
 In the R Terminal, run:
 
-````
+```
 show_file("about.qmd", pattern = "Bootcamp")
-````
+```
 
 CP/CR.
 
@@ -544,9 +544,9 @@ learnr2::question(
 
 ###
 
-````
+```
 [Kane's Free Data Science Bootcamp](https://bootcamp.davidkane.info)
-````
+```
 
 ###
 
@@ -598,11 +598,11 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-2 $ ls *qmd
 about.qmd       index.qmd       sources.qmd
 websites-2 $ 
-````
+```
 
 You should see `index.qmd`, `about.qmd`, and `sources.qmd` in the output. If not, make sure you are in the `websites-2` directory. The `*qmd` regular expression selects only files with names which end with the letters `qmd`.
 
@@ -612,9 +612,9 @@ In the `sources.qmd` file, below the YAML header, add the text `An overview of s
 
 In the R Terminal, run:
 
-````
+```
 show_file("sources.qmd", pattern = "overview")
-````
+```
 
 CP/CR.
 
@@ -630,9 +630,9 @@ learnr2::question(
 
 ###
 
-````
+```
 An overview of sources used in my project.
-````
+```
 
 ###
 
@@ -642,15 +642,15 @@ Keep in mind that your browser probably has two tabs which show your website. Fi
 
 Add the following sentence to `sources.qmd`: 
 
-````
+```
 These are my sources. Here are some challenges. Quarto websites are awesome.
-````
+```
 
 In the bash Terminal, run:
 
-````
+```
 cat sources.qmd
-````
+```
 
 CP/CR.
 
@@ -666,7 +666,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 ---
 title: "Sources"
 format: html
@@ -675,7 +675,7 @@ format: html
 An overview of sources used in my project.
 
 These are my sources. Here are some challenges. Quarto websites are awesome.
-````
+```
 
 ###
 
@@ -726,9 +726,9 @@ Since `- about.qmd` appears without either the `href` or `text` argument, Quarto
 
 In the bash Terminal, run:
 
-````
+```
 cat _quarto.yml
-````
+```
 
 CP/CR.
 
@@ -744,7 +744,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 project:
   type: website
 
@@ -763,7 +763,7 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
-````
+```
 
 ###
 
@@ -787,12 +787,12 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-2 $ ls _site/*html
 _site/about.html        _site/sources.html
 _site/index.html
 websites-2 $ 
-````
+```
 
 You should see `sources.html`. Quarto websites, like many similar frameworks, place all the pages which appear on the web into a single directory, like `_site`, and then move that directory onto a hosting service like GitHub Pages.
 
@@ -836,7 +836,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-2 $ head source-1.qmd source-2.qmd 
 ==> source-1.qmd <==
 ---
@@ -852,7 +852,7 @@ format: html
 ---
 
 websites-2 $ 
-````
+```
 
 In many Terminal commands, you can provide more than one file as the target of the command. In this case, `head` will be applied to `source-1.qmd` and then `source-2.qmd` sequentially.
 
@@ -866,7 +866,7 @@ The Quarto [documentation](https://quarto.org/) provides an [excellent overview]
 
 Change `_quarto.yml` so that the `navbar` section looks like this.
 
-````
+```
   navbar:
     left:
       - href: index.qmd
@@ -878,13 +878,13 @@ Change `_quarto.yml` so that the `navbar` section looks like this.
           - href: source-2.qmd
             text: Source 2 
       - about.qmd
-````        
+```
 
 In the bash Terminal, run:
 
-````
+```
 cat _quarto.yml
-````
+```
 
 CP/CR.
 
@@ -900,7 +900,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 project:
   type: website
 
@@ -923,7 +923,7 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
-````
+```
 
 ###
 
@@ -947,7 +947,7 @@ learnr2::question(
 
 ### 
 
-````
+```
 websites-2 $ git log -n 1
 commit f0973447485da8bb8e8e36f65e39b5640519dccc (HEAD -> main, origin/main, origin/HEAD)
 Author: David Kane <dave.kane@gmail.com>
@@ -955,7 +955,7 @@ Date:   Mon Mar 17 18:03:23 2025 -0400
 
     Added source pages
 websites-2 $ 
-````
+```
 
 Type `quarto publish` in the bash Terminal and hit "Enter." Note how you did not need to specify `gh-pages`. Quarto is smart enough to know that, since GitHub Pages is what you used last time, it is probably what you want now.  
 
@@ -987,7 +987,7 @@ learnr2::question(
 
 ###
 
-````
+```
 websites-2 $ cat process_data.R
 library(tidyverse)
 
@@ -1032,7 +1032,7 @@ top_songs <- billboard_filtered |>
   filter(!is.na(rank)) |>
   mutate(song_artist = paste0(track, " (", artist, ")"))
 websites-2 $
-````
+```
 
 Because this is a script, not a Quarto document, there are no code chunks and you do not need `suppressPackageStartupMessages()`. We put `library(tidyverse)` at the top so the script runs correctly even in a freshly restarted R session.
 
@@ -1054,7 +1054,7 @@ learnr2::question(
 
 Your answer should look something like:
 
-````
+```
 > source("/workspaces/websites-2/process_data.R", echo = TRUE)
 
 > library(tidyverse)
@@ -1072,7 +1072,7 @@ Your answer should look something like:
 > billboard <- billboard |>
 +   mutate(date.entered = as.Date(date.entered), .... [TRUNCATED]
 >
-````
+```
 
 Notice that the final line of the script assigns its result to `top_songs` rather than printing it, so no tibble appears. Assignment does not produce output.
 
@@ -1092,12 +1092,12 @@ learnr2::question(
 
 ###
 
-````
+```
 > ls()
 [1] "billboard"          "billboard_filtered" "billboard_jul"
 [4] "col_name"           "i"                  "jul_week"
 [7] "top_5_songs"        "top_songs"          "wk_idx"
-````
+```
 
 The script created several objects, including the one we care about, `top_songs`. The others are intermediate steps and loop variables --- real wrangling code often leaves a trail of them behind. Only `top_songs` is worth keeping.
 
@@ -1117,10 +1117,10 @@ learnr2::question(
 
 ###
 
-````
+```
 > ls()
 character(0)
-````
+```
 
 Every object vanished when R restarted. And that is fine! We still have `process_data.R`, which can recreate `top_songs` whenever we want. The code is the source of truth; the objects in memory are disposable.
 
@@ -1142,11 +1142,11 @@ learnr2::question(
 
 ###
 
-````
+```
 websites-2 $ ls clean*
 clean_data.rds
 websites-2 $
-````
+```
 
 `clean*` is a regular expression that matches any file beginning with `clean`. There are now three things associated with our data: the script `process_data.R` that creates it, the in-memory object `top_songs` that disappears when R restarts, and the file `clean_data.rds` that persists on disk.
 
@@ -1154,9 +1154,9 @@ websites-2 $
 
 So that the script itself saves its result, open `process_data.R` and, at the bottom after a blank line, add:
 
-````
+```
 write_rds(top_songs, file = "clean_data.rds")
-````
+```
 
 In the bash Terminal, run `tail -n 3 process_data.R`. CP/CR.
 
@@ -1172,13 +1172,13 @@ learnr2::question(
 
 ###
 
-````
+```
 websites-2 $ tail -n 3 process_data.R
   mutate(song_artist = paste0(track, " (", artist, ")"))
 
 write_rds(top_songs, file = "clean_data.rds")
 websites-2 $
-````
+```
 
 This is a common pattern in larger projects: each script ends by saving an object that later scripts read in. Run `process_data.R` once, and `clean_data.rds` is ready for everything downstream.
 
@@ -1198,7 +1198,7 @@ learnr2::question(
 
 ###
 
-````
+```
 > read_rds("clean_data.rds")
 # A tibble: 158 × 6
    artist  track     week_num  rank week_offset song_artist
@@ -1214,7 +1214,7 @@ learnr2::question(
  9 Aaliyah Try Again       20    12          11 Try Again (Aaliyah)
 10 Aaliyah Try Again       21    10          11 Try Again (Aaliyah)
 # ℹ 148 more rows
-````
+```
 
 `read_rds()` returns whatever object was saved --- here, the `top_songs` tibble, ready to plot. We never had to re-run the wrangling.
 
@@ -1236,7 +1236,7 @@ learnr2::question(
 
 ###
 
-````
+```
 websites-2 $ cat make_plot.R
 library(tidyverse)
 
@@ -1263,7 +1263,7 @@ billboard_plot <- x |>
 
 ggsave("billboard.png", billboard_plot)
 websites-2 $
-````
+```
 
 The fact that the tibble was called `top_songs` in `process_data.R` is irrelevant. `write_rds()` saves the object, not its name, so we are free to call it `x` here.
 
@@ -1283,11 +1283,11 @@ learnr2::question(
 
 ###
 
-````
+```
 websites-2 $ ls *.png
 billboard.png
 websites-2 $
-````
+```
 
 Just like RDS saves a tibble, a PNG saves a graphic. `ggsave()` writes the most recent plot (or the one you name) to an image file, so we avoid re-drawing it every time the site renders.
 
@@ -1348,7 +1348,7 @@ learnr2::question(
 
 ###
 
-````
+```
 websites-2 $ git show --name-status HEAD
 commit 5ff52befc37ba1a3ac87dac781f48d6c6251c225 (HEAD -> main, origin/main, origin/HEAD)
 Author: David Kane <dave.kane@gmail.com>
@@ -1362,7 +1362,7 @@ M       index.qmd
 A       make_plot.R
 A       process_data.R
 websites-2 $
-````
+```
 
 This is the workflow professionals use. First, get something working all in one place. Second, split the slow parts into scripts --- `process_data.R` cleans the data and saves `clean_data.rds`, `make_plot.R` reads that and saves `billboard.png` --- so that `index.qmd` only has to show the image. In a larger project, these files often live in dedicated `code/`, `data/`, and `images/` directories. Separating data cleaning, visualization, and reporting makes pipelines faster to iterate on and easier to debug.
 
@@ -1385,7 +1385,7 @@ learnr2::question(
 
 Your file listing should look something like:
 
-````
+```
 .gitignore      initial version           2 days ago
 _quarto.yml     Added source pages        2 hours ago
 about.qmd       Added plot to home page   3 hours ago
@@ -1397,7 +1397,7 @@ process_data.R  Use saved plot on home... 1 hour ago
 source-1.qmd    Added source pages        2 hours ago
 source-2.qmd    Added source pages        2 hours ago
 styles.css      initial version           2 days ago
-````
+```
 
 Once you have confirmed your files are on GitHub, delete your Codespace. Click the green **Code** button on the repo page, go to the **Codespaces** tab, click **...** next to your Codespace, and select **Delete**.
 

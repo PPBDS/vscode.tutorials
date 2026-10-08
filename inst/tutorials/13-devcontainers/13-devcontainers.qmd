@@ -120,12 +120,12 @@ learnr2::question(
 
 Your output should look like:
 
-````
+```
 devcontainers $ cd ../codespace-starter
 codespace-starter $ pwd
 /workspaces/codespace-starter
 codespace-starter $
-````
+```
 
 ###
 
@@ -172,9 +172,9 @@ learnr2::question(
 
 ###
 
-````
+```
 https://silver-space-adventure-97xrvw59xhx.github.dev/
-````
+```
 
 ###
 
@@ -199,10 +199,10 @@ learnr2::question(
 
 ###
 
-````
+```
 devcontainers      ppbds-student/devcontainers       main    Active
 codespaces-jupyter    ppbds-student/codespaces-jupyter     main    Active
-````
+```
 
 ###
 
@@ -595,9 +595,9 @@ learnr2::question(
 
 ###
 
-````
+```
 codespaces-jupyter    ppbds-student/codespaces-jupyter    main    Stopped
-````
+```
 
 ###
 
@@ -654,9 +654,9 @@ learnr2::question(
 
 Your output should look like:
 
-````
+```
 devcontainer.json
-````
+```
 
 ###
 
@@ -724,7 +724,7 @@ learnr2::question(
 
 ###
 
-````
+```
 {
   "name": "R Dev Container",
   "image": "ghcr.io/rocker-org/devcontainer/tidyverse:4",
@@ -736,7 +736,7 @@ learnr2::question(
     }
   }
 }
-````
+```
 
 ###
 
@@ -768,9 +768,9 @@ learnr2::question(
 
 Your output should begin with something like:
 
-````
+```
 R version 4.6.1 (2026-06-13) -- "Reassured Reassurer"
-````
+```
 Note that your R version may differ as R releases new versions regularly.
 
 ###

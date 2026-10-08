@@ -50,14 +50,14 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-2 $ pwd
 /workspaces/terminal-2
 terminal-2 $ mkdir options
 terminal-2 $ cd options/
 options $ ls
 options $
-````
+```
 
 Note how easy it is to string together several commands in order to accomplish our goals.
 
@@ -77,13 +77,13 @@ learnr2::question(
 
 ###
 
-````
+```
 options $ echo "" > .my-hidden.txt
 options $ ls
 options $ ls -a
 .               ..              .my-hidden.txt
 options $
-````
+```
 
 ###
 
@@ -105,11 +105,11 @@ learnr2::question(
 
 ###
 
-````
+```
 options $ echo $HOME
 /home/rstudio
 options $
-````
+```
 
 ###
 
@@ -131,12 +131,12 @@ learnr2::question(
 
 ###
 
-````
+```
 options $ ls -l $HOME
 total 4
 drwxr-xr-x 2 rstudio rstudio 4096 Apr 30 12:00 Downloads
 options $
-````
+```
 
 ###
 
@@ -158,12 +158,12 @@ learnr2::question(
 
 ###
 
-````
+```
 options $ export FAVORITE_ANIMAL=duck
 options $ echo $FAVORITE_ANIMAL
 duck
 options $
-````
+```
 
 ###
 
@@ -185,11 +185,11 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-2 $ echo $FAVORITE_ANIMAL
 
 terminal-2 $
-````
+```
 
 ###
 
@@ -208,9 +208,9 @@ Before you trust a file --- especially one an AI just wrote --- look inside it. 
 
 Download a copy of the `AUTHORS` document from the R source code. Run:
 
-````
+```
 curl -O https://raw.githubusercontent.com/wch/r-source/refs/heads/trunk/doc/AUTHORS
-````
+```
 
 Recall from Terminal 1 that the `-O` option names the downloaded file with its **O**riginal name. Then run `ls`. CP/CR.
 
@@ -226,7 +226,7 @@ learnr2::question(
 
 ###
 
-````
+```
 options $ curl -O https://raw.githubusercontent.com/wch/r-source/refs/heads/trunk/doc/AUTHORS
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -234,7 +234,7 @@ options $ curl -O https://raw.githubusercontent.com/wch/r-source/refs/heads/trun
 options $ ls
 AUTHORS
 options $
-````
+```
 
 ###
 
@@ -258,14 +258,14 @@ learnr2::question(
 
 Your output should begin something like:
 
-````
+```
 options $ head AUTHORS
 R was initially written by Robert Gentleman and Ross Ihaka---also known as
 "R & R" of the Statistics Department of the University of Auckland.
 
 Since mid-1997 there has been a core group with write access to the R
 source, currently consisting of
-````
+```
 
 ###
 
@@ -325,10 +325,10 @@ learnr2::question(
 
 ###
 
-````
+```
 options $ less AUTHORS
 options $
-````
+```
 
 ###
 
@@ -340,11 +340,11 @@ Remember `q`. Other programs open a pager *for* you without asking: `git log`, `
 
 One more inspection command, and it may be the most important one for working with AI: `diff`, which shows how two files differ. Build a second file that differs by one line, then compare. Run these commands, one at a time:
 
-````
+```
 cp AUTHORS AUTHORS-edited
 echo "Preceptor also helped." >> AUTHORS-edited
 diff AUTHORS AUTHORS-edited
-````
+```
 
 CP/CR.
 
@@ -360,14 +360,14 @@ learnr2::question(
 
 ###
 
-````
+```
 options $ cp AUTHORS AUTHORS-edited
 options $ echo "Preceptor also helped." >> AUTHORS-edited
 options $ diff AUTHORS AUTHORS-edited
 39a40
 > Preceptor also helped.
 options $
-````
+```
 
 Your line numbers may differ.
 
@@ -388,9 +388,9 @@ Downloading files and moving them to a sensible location is a core skill for dat
 
 Confirm your location with `pwd` --- you should still be in `options`; if not, `cd` there. In your browser, go to:
 
-````
+```
 https://github.com/PPBDS/vscode.tutorials/blob/main/TODO.txt
-````
+```
 
 Click the "Download raw file" symbol to download `TODO.txt` to your computer's `Downloads` folder.
 
@@ -414,11 +414,11 @@ learnr2::question(
 
 ###
 
-````
+```
 options $ ls
 AUTHORS  TODO.txt
 options $
-````
+```
 
 ###
 
@@ -452,12 +452,12 @@ learnr2::question(
 
 ###
 
-````
+```
 options $ rm TODO.txt
 options $ ls
 AUTHORS  TODO.txt
 options $
-````
+```
 
 ###
 
@@ -467,11 +467,11 @@ Drag-and-drop and the `Upload...` menu do the same thing. This matters more than
 
 Now practice the realistic version of this workflow --- the one every data science project starts with. Run these commands, one at a time:
 
-````
+```
 cd /workspaces/terminal-2
 mkdir data
 curl -o data/penguins.csv https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv
-````
+```
 
 The lowercase `-o` option, unlike `-O`, lets you choose the downloaded file's name --- including a path, so the file lands directly in `data/`. Then run `head -n 3 data/penguins.csv`. CP/CR.
 
@@ -487,12 +487,12 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-2 $ head -n 3 data/penguins.csv
 species,island,bill_length_mm,bill_depth_mm,flipper_length_mm,body_mass_g,sex,year
 Adelie,Torgersen,39.1,18.7,181,3750,male,2007
 Adelie,Torgersen,39.5,17.6,186,3181,female,2007
-````
+```
 
 Your numbers may differ slightly; what matters is a header row of column names followed by rows of data.
 
@@ -516,13 +516,13 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-2 $ find . -name AUTHORS
 ./options/AUTHORS
 terminal-2 $ find . -name penguins.csv
 ./data/penguins.csv
 terminal-2 $
-````
+```
 
 ###
 
@@ -539,10 +539,10 @@ You have been running programs all along --- `ls`, `curl`, and `git` are program
 
 Make a one-line R script and run it, as you did back in the Orientation tutorial. Run these commands, one at a time:
 
-````
+```
 echo 'print(2 + 2)' > add.R
 Rscript add.R
-````
+```
 
 CP/CR.
 
@@ -558,12 +558,12 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-2 $ echo 'print(2 + 2)' > add.R
 terminal-2 $ Rscript add.R
 [1] 4
 terminal-2 $
-````
+```
 
 ###
 
@@ -573,9 +573,9 @@ terminal-2 $
 
 You do not even need a file. Run:
 
-````
+```
 Rscript -e 'sqrt(144)'
-````
+```
 
 CP/CR.
 
@@ -591,11 +591,11 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-2 $ Rscript -e 'sqrt(144)'
 [1] 12
 terminal-2 $
-````
+```
 
 ###
 
@@ -605,10 +605,10 @@ The `-e` option means "**e**valuate this expression." AI agents use this form co
 
 Now the same thing in Python. Run these commands, one at a time:
 
-````
+```
 echo 'print(2 + 2)' > add.py
 python add.py
-````
+```
 
 CP/CR.
 
@@ -624,12 +624,12 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-2 $ echo 'print(2 + 2)' > add.py
 terminal-2 $ python add.py
 4
 terminal-2 $
-````
+```
 
 ###
 
@@ -639,9 +639,9 @@ You just ran your first Python program. Note the small difference in output: R p
 
 Python's version of `-e` is `-c` (for **c**ommand). Run:
 
-````
+```
 python -c 'print(2 ** 10)'
-````
+```
 
 CP/CR.
 
@@ -657,11 +657,11 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-2 $ python -c 'print(2 ** 10)'
 1024
 terminal-2 $
-````
+```
 
 ###
 
@@ -683,13 +683,13 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-2 $ which Rscript
 /usr/local/bin/Rscript
 terminal-2 $ which python
 /opt/venv/bin/python
 terminal-2 $
-````
+```
 
 ###
 
@@ -711,11 +711,11 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-2 $ echo $PATH
 /opt/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 terminal-2 $
-````
+```
 
 Your exact list may differ. What matters is what comes first.
 
@@ -739,11 +739,11 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-2 $ uv --version
 uv 0.11.23
 terminal-2 $
-````
+```
 
 Your version number may differ.
 
@@ -755,9 +755,9 @@ Your version number may differ.
 
 Prove the venv came stocked. Run:
 
-````
+```
 python -c 'import pandas; print(pandas.__version__)'
-````
+```
 
 Then clean up your scripts: run `rm add.R add.py`. CP/CR.
 
@@ -773,12 +773,12 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-2 $ python -c 'import pandas; print(pandas.__version__)'
 2.2.3
 terminal-2 $ rm add.R add.py
 terminal-2 $
-````
+```
 
 Your version number may differ.
 
@@ -804,7 +804,7 @@ learnr2::question(
 
 Your output should begin something like:
 
-````
+```
 terminal-2 $ quarto check
 Quarto 1.10.18
 [✓] Checking environment information...
@@ -813,7 +813,7 @@ Quarto 1.10.18
       Dart Sass version 1.70.0: OK
       Deno version 1.46.3: OK
 [✓] Checking Quarto installation......OK
-````
+```
 
 Your version numbers will differ.
 
@@ -825,12 +825,12 @@ Your version numbers will differ.
 
 Every program on this machine is a file that someone marked as runnable. See what that means. Run these commands, one at a time:
 
-````
+```
 echo 'echo "I am a program."' > hello.sh
 ./hello.sh
 chmod +x hello.sh
 ./hello.sh
-````
+```
 
 CP/CR.
 
@@ -846,7 +846,7 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-2 $ echo 'echo "I am a program."' > hello.sh
 terminal-2 $ ./hello.sh
 bash: ./hello.sh: Permission denied
@@ -854,7 +854,7 @@ terminal-2 $ chmod +x hello.sh
 terminal-2 $ ./hello.sh
 I am a program.
 terminal-2 $
-````
+```
 
 ###
 

@@ -38,10 +38,10 @@ Open a new bash Terminal and run `cd /workspaces`. (New terminals may open insid
 
 If it reports that you are **not** logged in, run these two commands --- they are steps 1 and 2 from `connect-repo --help` --- and then run `gh auth status` again:
 
-````
+```
 unset GITHUB_TOKEN GH_TOKEN
 gh auth login --hostname github.com --git-protocol https --web
-````
+```
 
 CP/CR.
 
@@ -57,7 +57,7 @@ learnr2::question(
 
 ###
 
-````
+```
 workspaces $ gh auth status
 github.com
   ✓ Logged in to github.com account your-username
@@ -65,7 +65,7 @@ github.com
   - Git operations protocol: https
   - Token: gho_************************************
   - Token scopes: 'gist', 'read:org', 'repo', 'workflow'
-````
+```
 
 ###
 
@@ -75,9 +75,9 @@ You were probably already signed in --- `connect-repo` did that once, in some ea
 
 Create this tutorial's repo by hand. From `/workspaces`, run:
 
-````
+```
 gh repo create github-advanced --public --clone
-````
+```
 
 Then run `ls`. CP/CR.
 
@@ -93,7 +93,7 @@ learnr2::question(
 
 ###
 
-````
+```
 workspaces $ gh repo create github-advanced --public --clone
 ✓ Created repository your-username/github-advanced on github.com
   https://github.com/your-username/github-advanced
@@ -102,7 +102,7 @@ warning: You appear to have cloned an empty repository.
 workspaces $ ls
 codespace-starter  github-advanced
 workspaces $
-````
+```
 
 Your `ls` may also show repos from earlier tutorials. That is fine.
 
@@ -126,13 +126,13 @@ learnr2::question(
 
 ###
 
-````
+```
 workspaces $ cd github-advanced
 github-advanced $ git remote -v
 origin  https://github.com/your-username/github-advanced (fetch)
 origin  https://github.com/your-username/github-advanced (push)
 github-advanced $
-````
+```
 
 ###
 
@@ -144,10 +144,10 @@ Point VS Code at your new repo: `File -> Open Folder...`, then open `/workspaces
 
 Then, in a new bash Terminal, run these two commands, one at a time:
 
-````
+```
 cp /workspaces/codespace-starter/.devcontainer/AGENTS.md .
 ls
-````
+```
 
 CP/CR.
 
@@ -163,12 +163,12 @@ learnr2::question(
 
 ###
 
-````
+```
 github-advanced $ cp /workspaces/codespace-starter/.devcontainer/AGENTS.md .
 github-advanced $ ls
 AGENTS.md
 github-advanced $
-````
+```
 
 ###
 
@@ -194,14 +194,14 @@ learnr2::question(
 
 Your plot code will differ from ours. Something like:
 
-````
+```
 ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
   geom_point(alpha = 0.7) +
   labs(title = "Engine Displacement vs. Highway MPG",
        x = "Engine Displacement (L)",
        y = "Highway MPG",
        color = "Car Class")
-````
+```
 
 ###
 
@@ -223,7 +223,7 @@ learnr2::question(
 
 ###
 
-````
+```
 github-advanced $ git status
 On branch main
 
@@ -237,7 +237,7 @@ Untracked files:
         analysis.qmd
 
 nothing added to commit but untracked files present (use "git add" to track)
-````
+```
 
 ###
 
@@ -247,11 +247,11 @@ Note what is *not* listed: `analysis_files`, because your `.gitignore` is alread
 
 Make the first push. Run these three commands, one at a time:
 
-````
+```
 git add -A
 git commit -m "First analysis"
 git push -u origin main
-````
+```
 
 CP/CR.
 
@@ -267,7 +267,7 @@ learnr2::question(
 
 ###
 
-````
+```
 github-advanced $ git add -A
 github-advanced $ git commit -m "First analysis"
 [main (root-commit) 1a2b3c4] First analysis
@@ -283,7 +283,7 @@ To https://github.com/your-username/github-advanced
  * [new branch]      main -> main
 branch 'main' set up to track 'origin/main'.
 github-advanced $
-````
+```
 
 ###
 
@@ -305,9 +305,9 @@ learnr2::question(
 
 ###
 
-````
+```
 https://github.com/your-username/github-advanced
-````
+```
 
 ###
 
@@ -338,9 +338,9 @@ learnr2::question(
 
 ###
 
-````
+```
 https://zany-computing-machine-vpvrv9p59jxpc66v6.github.dev/
-````
+```
 
 ###
 
@@ -350,11 +350,11 @@ While you waited, GitHub built a computer from scratch, following the instructio
 
 In the **new** Codespace, open a fresh bash Terminal and run the sign-in ritual by hand --- this time it is genuinely needed, because this machine has never met you. Run these commands, one at a time:
 
-````
+```
 unset GITHUB_TOKEN GH_TOKEN
 gh auth login --hostname github.com --git-protocol https --web
 gh auth status
-````
+```
 
 For the login, follow the prompts: press `Enter` to accept the browser flow, copy the one-time code, click Authorize on the GitHub page, and return. CP/CR the final `gh auth status` output.
 
@@ -370,7 +370,7 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ gh auth status
 github.com
   ✓ Logged in to github.com account your-username
@@ -378,7 +378,7 @@ github.com
   - Git operations protocol: https
   - Token: gho_************************************
   - Token scopes: 'gist', 'read:org', 'repo', 'workflow'
-````
+```
 
 ###
 
@@ -388,12 +388,12 @@ Why the `unset`? A Codespace starts with a built-in token that acts as the *Code
 
 Still in the new Codespace, connect to your existing repo. Run these commands, one at a time:
 
-````
+```
 cd /workspaces
 gh repo clone github-advanced
 cd github-advanced
 ls
-````
+```
 
 CP/CR.
 
@@ -409,7 +409,7 @@ learnr2::question(
 
 ###
 
-````
+```
 codespace-starter $ cd /workspaces
 workspaces $ gh repo clone github-advanced
 Cloning into 'github-advanced'...
@@ -420,7 +420,7 @@ workspaces $ cd github-advanced
 github-advanced $ ls
 AGENTS.md  analysis.html  analysis.qmd
 github-advanced $
-````
+```
 
 ###
 
@@ -430,17 +430,17 @@ This is the connect-to-an-existing-repo case: no creation, just a clone. `gh rep
 
 Make a change on this second desk. Open `analysis.qmd` (use the Explorer, or `File -> Open Folder...` to `/workspaces/github-advanced` first if you prefer a full window). Below the last chunk, add the sentence:
 
-````
+```
 This line was written on a second machine.
-````
+```
 
 Save. Then run these three commands, one at a time:
 
-````
+```
 git add -A
 git commit -m "Add a line from the second machine"
 git push
-````
+```
 
 CP/CR.
 
@@ -456,7 +456,7 @@ learnr2::question(
 
 ###
 
-````
+```
 github-advanced $ git add -A
 github-advanced $ git commit -m "Add a line from the second machine"
 [main 5d6e7f8] Add a line from the second machine
@@ -467,7 +467,7 @@ Writing objects: 100% (3/3), 341 bytes | 341.00 KiB/s, done.
 To https://github.com/your-username/github-advanced
    1a2b3c4..5d6e7f8  main -> main
 github-advanced $
-````
+```
 
 ###
 
@@ -489,7 +489,7 @@ learnr2::question(
 
 ###
 
-````
+```
 github-advanced $ git status
 On branch main
 Your branch is up to date with 'origin/main'.
@@ -505,7 +505,7 @@ Fast-forward
  analysis.qmd | 2 ++
  1 file changed, 2 insertions(+)
 github-advanced $
-````
+```
 
 ###
 
@@ -535,7 +535,7 @@ learnr2::question(
 
 Your submission should show two entries, something like:
 
-````
+```
 ppbds-student
 PPBDS/codespace-starter
 automatic funicular
@@ -547,7 +547,7 @@ PPBDS/codespace-starter
 zany computing machine
 main
 Active
-````
+```
 
 ###
 
@@ -571,12 +571,12 @@ learnr2::question(
 
 ###
 
-````
+```
 github-advanced $ git log --oneline
 5d6e7f8 (HEAD -> main, origin/main) Add a line from the second machine
 1a2b3c4 First analysis
 github-advanced $
-````
+```
 
 ###
 
@@ -589,7 +589,7 @@ You ran the entire repo lifecycle without `connect-repo`: signed in with `gh aut
 
 These are the commands you now own:
 
-````
+```
 gh auth login        # once per machine
 gh repo create <name> --public --clone
 gh repo clone <name>
@@ -601,7 +601,7 @@ git push                  # every push after that
 git pull
 git remote -v
 git log --oneline
-````
+```
 
 `connect-repo` is a convenience, not a dependency. If it disappeared tomorrow, you would be fine.
 
@@ -621,9 +621,9 @@ learnr2::question(
 
 ###
 
-````
+```
 https://github.com/your-username/github-advanced
-````
+```
 
 ###
 

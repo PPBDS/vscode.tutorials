@@ -61,12 +61,12 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-3 $ pwd
 /workspaces/terminal-3
 terminal-3 $ mkdir wildcards
 terminal-3 $
-````
+```
 
 The `mkdir` command does not produce any output. To confirm that it had the desired effect, you could run `ls`.
 
@@ -86,12 +86,12 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-3 $ cd wildcards/
 wildcards $ pwd
 /workspaces/terminal-3/wildcards
 wildcards $
-````
+```
 
 Note how the prompt changed after we switched directories.
 
@@ -101,9 +101,9 @@ Keep track of your current location. There is a difference between being in the 
 
 Using `echo`, make three text files named `hat.txt`, `cat.txt`, and `ate.txt` by running:
 
-````
+```
 echo "" > hat.txt & echo "" > cat.txt & echo "" > ate.txt
-````
+```
 
 Confirm that you have done so by running `ls`. (No worries if you make a mistake. Just fix it by removing the misnamed file.)
 
@@ -121,7 +121,7 @@ learnr2::question(
 
 ###
 
-````
+```
 wildcards $ echo "" > hat.txt & echo "" > cat.txt & echo "" > ate.txt
 [1] 59474
 [2] 59475
@@ -130,7 +130,7 @@ wildcards $ echo "" > hat.txt & echo "" > cat.txt & echo "" > ate.txt
 wildcards $ ls
 ate.txt cat.txt hat.txt
 wildcards $
-````
+```
 
 If you are curious about how those commands work, use AI to explore them. The more you interact with AI, the better.
 
@@ -154,11 +154,11 @@ learnr2::question(
 
 ###
 
-````
+```
 wildcards $ ls a
 ls: cannot access 'a': No such file or directory
 wildcards $
-````
+```
 
 Although we have been using `ls` to return all the contents of a directory, `ls` can also take a name as an argument, as above.
 
@@ -178,11 +178,11 @@ learnr2::question(
 
 ###
 
-````
+```
 wildcards $ ls a*
 ate.txt
 wildcards $
-````
+```
 
 Although `*` will match strings of any length, its positioning matters. `a*` is not the same thing as `*a`. The first matches any string (i.e., any filename) that starts with `a`. The second matches any filename that ends with `a`.
 
@@ -202,11 +202,11 @@ learnr2::question(
 
 ###
 
-````
+```
 wildcards $ ls *a*
 ate.txt cat.txt hat.txt
 wildcards $
-````
+```
 
 Note that these **regular expressions** are case-sensitive. A regular expression is a pattern that you can use for many purposes, including as a search criterion.
 
@@ -226,11 +226,11 @@ learnr2::question(
 
 ###
 
-````
+```
 wildcards $ ls *t.*
 cat.txt hat.txt
 wildcards $
-````
+```
 
 This should return `hat.txt` and `cat.txt`. Read this regular expression --- `*t.*` --- as matching any string that includes a `t` followed directly by a period, regardless of any characters before or after. `ate.txt` is not matched because the `t` and the `.` are separated by `e`.
 
@@ -254,12 +254,12 @@ learnr2::question(
 
 ###
 
-````
+```
 wildcards $ ls *a* > afiles.txt
 wildcards $ ls
 afiles.txt      ate.txt         cat.txt         hat.txt
 wildcards $
-````
+```
 
 You can use your `up` and `down` arrow keys to navigate command history. The `>` symbol redirects the result of the left-hand command into the specified file.
 
@@ -285,12 +285,12 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 wildcards $ mkdir seuss
 wildcards $ ls
 afiles.txt      ate.txt         cat.txt         hat.txt         seuss
 wildcards $
-````
+```
 
 The `wildcards` directory, in which you are currently located, now includes five items, one of which is the `seuss` directory.
 
@@ -310,7 +310,7 @@ learnr2::question(
 
 ###
 
-````
+```
 wildcards $ ls -l
 total 16
 -rw-r--r-- 1 codespace codespace 24 Apr 30 12:00 afiles.txt
@@ -319,7 +319,7 @@ total 16
 -rw-r--r-- 1 codespace codespace  1 Apr 30 12:00 hat.txt
 drwxr-xr-x 2 codespace codespace 4096 Apr 30 12:00 seuss
 wildcards $
-````
+```
 
 The `-l` option provides a **l**ong-format listing of the contents of the directory, including information about the type of content (file versus directory) and creation dates/times. The leading `d` in the line for `seuss` indicates that it is a directory.
 
@@ -339,11 +339,11 @@ learnr2::question(
 
 ###
 
-````
+```
 wildcards $ ls *t.*
 cat.txt hat.txt
 wildcards $
-````
+```
 
 Before moving or otherwise acting on a group of files, we often want to ensure that we have the correct group. Running `ls` with the appropriate regular expression is an easy way to test.
 
@@ -363,10 +363,10 @@ learnr2::question(
 
 ###
 
-````
+```
 wildcards $ mv *t.* seuss
 wildcards $
-````
+```
 
 The `mv` command, like `mkdir`, does not produce any output. You need to check by hand to ensure it has done what you wanted.
 
@@ -388,14 +388,14 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 wildcards $ ls -R
 afiles.txt      ate.txt         seuss
 
 ./seuss:
 cat.txt hat.txt
 wildcards $
-````
+```
 
 The `-R` option to the `ls` command stands for **r**ecursive. We see not simply the contents of the current directory (two files and the `seuss` directory) but also the contents of the `seuss` directory itself.
 
@@ -415,12 +415,12 @@ learnr2::question(
 
 ###
 
-````
+```
 wildcards $ cd ..
 terminal-3 $ pwd
 /workspaces/terminal-3
 terminal-3 $
-````
+```
 
 In order to delete a directory, you cannot be located within that directory. We want to delete (that is, "remove") the `wildcards` directory since we always want to --- at least for this tutorial --- clean up any temporary files/directories that we have created.
 
@@ -440,12 +440,12 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-3 $ rm wildcards
 rm: cannot remove 'wildcards': Is a directory
 terminal-3 $ rm -rf wildcards/
 terminal-3 $
-````
+```
 
 Note that both `wildcards` and `wildcards/` refer to the same entity, the `wildcards` directory. The Terminal often "adds" a forward slash (`/`) to the end of directory names to indicate that the object is a directory, not simply a file.
 
@@ -498,7 +498,7 @@ learnr2::question(
 
 When I run this, I see:
 
-````
+```
 terminal-3 $ cd grepping
 grepping $ echo hat.txt > files.txt & echo cat.txt >> files.txt & echo ate.txt >> files.txt & echo "" >> files.txt
 [1] 98048
@@ -512,7 +512,7 @@ hat.txt
 cat.txt
 ate.txt
 grepping $
-````
+```
 
 This shows how three different commands can be run from one command line.
 
@@ -534,13 +534,13 @@ learnr2::question(
 
 ###
 
-````
+```
 grepping $ grep a files.txt
 hat.txt
 cat.txt
 ate.txt
 grepping $
-````
+```
 
 Remember to use the *tab* key to take advantage of auto-completion. Don't type! Tab complete!
 
@@ -564,11 +564,11 @@ learnr2::question(
 
 ###
 
-````
+```
 grepping $ grep ^a files.txt
 ate.txt
 grepping $
-````
+```
 
 `^` is put at the beginning of a regular expression to indicate that the expression must occur at the beginning of a line. A dollar sign --- `$` --- at the end of a regular expression indicates that the expression must occur at the end of the line.
 
@@ -576,9 +576,9 @@ grepping $
 
 Now, we'll download another text file. You can view the file on the following webpage:
 
-````
+```
 https://github.com/PPBDS/vscode.tutorials/blob/main/inst/extdata/grepping.txt
-````
+```
 Then navigate to the URL for the raw text file.
 
 ![](images/grepping-gh-webpage.png){width=90%}
@@ -587,9 +587,9 @@ Copy the URL in your address bar. It should begin with `https://raw.githubuserco
 
 Back in your Codespace, run `cd ..` to return to `terminal-3`. Then run the following command, replacing `URL` with the URL for the raw file:
 
-````
+```
 curl -o grepping/grepping.txt URL
-````
+```
 
 Then run `ls grepping` to verify that the file has been downloaded to the correct location.
 
@@ -609,7 +609,7 @@ learnr2::question(
 
 My answer looks like:
 
-````
+```
 terminal-3 $ curl -o grepping/grepping.txt https://raw.githubusercontent.com/PPBDS/vscode.tutorials/refs/heads/main/inst/extdata/grepping.txt
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -617,7 +617,7 @@ terminal-3 $ curl -o grepping/grepping.txt https://raw.githubusercontent.com/PPB
 terminal-3 $ ls grepping
 files.txt  grepping.txt
 terminal-3 $
-````
+```
 
 There are now two files in `grepping`: `files.txt` and `grepping.txt`.
 
@@ -641,12 +641,12 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-3 $ cd grepping
 grepping $ wc grepping.txt
        7       7      38 grepping.txt
 grepping $
-````
+```
 
 The first number returned by `wc` is the number of lines in the file. The second is the total number of words. The third is the number of characters. In this case, the number of lines is the same as the number of words.
 
@@ -670,13 +670,13 @@ learnr2::question(
 
 ###
 
-````
+```
 grepping $ grep R grepping.txt
 R
 Robert
 aRe
 grepping $
-````
+```
 
 `aRe` is included because the pattern `R` matches any line that includes an `R`, regardless of where that `R` is on the line.
 
@@ -700,12 +700,12 @@ learnr2::question(
 
 ###
 
-````
+```
 grepping $ grep ^R grepping.txt
 R
 Robert
 grepping $
-````
+```
 
 `^` and `$` are called metacharacters. It is often useful to put quotes around a regular expression that includes metacharacters.
 
@@ -729,13 +729,13 @@ learnr2::question(
 
 ###
 
-````
+```
 grepping $ grep e$ grepping.txt
 whose
 these
 aRe
 grepping $
-````
+```
 
 `egrep` is an even more powerful version of `grep`. Learning more about `egrep` is beyond the scope of this tutorial.
 
@@ -743,11 +743,11 @@ grepping $
 
 So far, `grep` has searched one file that you named. Its real power --- and the way AI agents almost always use it --- is searching *every* file at once. Run these commands, one at a time:
 
-````
+```
 cd ..
 grep -rn Robert .
 cd grepping
-````
+```
 
 CP/CR.
 
@@ -763,13 +763,13 @@ learnr2::question(
 
 ###
 
-````
+```
 grepping $ cd ..
 terminal-3 $ grep -rn Robert .
 ./grepping/grepping.txt:12:Robert
 terminal-3 $ cd grepping
 grepping $
-````
+```
 
 Your line number may differ.
 
@@ -796,11 +796,11 @@ learnr2::question(
 
 ###
 
-````
+```
 grepping $ cat grepping.txt | wc -l
 4
 grepping $
-````
+```
 
 ###
 
@@ -822,11 +822,11 @@ learnr2::question(
 
 ###
 
-````
+```
 grepping $ grep t.txt$ grepping.txt | wc -l
 2
 grepping $
-````
+```
 
 ###
 
@@ -848,11 +848,11 @@ learnr2::question(
 
 ###
 
-````
+```
 grepping $ cat grepping.txt | grep ^a | wc -l
 1
 grepping $
-````
+```
 
 ###
 
@@ -876,11 +876,11 @@ learnr2::question(
 
 ###
 
-````
+```
 grepping $ rm --help | grep -w force
   -f, --force           ignore nonexistent files and arguments, never prompt
 grepping $
-````
+```
 
 ###
 
@@ -902,12 +902,12 @@ learnr2::question(
 
 ###
 
-````
+```
 grepping $ cd ..
 terminal-3 $ pwd
 /workspaces/terminal-3
 terminal-3 $
-````
+```
 
 This tutorial uses `/workspaces/terminal-3` as the default working directory.
 
@@ -927,10 +927,10 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-3 $ rm -r grepping
 terminal-3 $
-````
+```
 
 It is always a good idea to clean up after yourself. As the sign says when taking a hike in the forest: "Take only photos. Leave only footprints."
 

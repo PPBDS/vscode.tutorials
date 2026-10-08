@@ -805,7 +805,7 @@ A Dockerfile is just a short recipe: a `FROM` line picks a starting image (here,
 
 Your Dockerfile is a recipe; something still has to cook it. For `ghcr.io/ppbds/devcontainer`, that something is not a person typing commands --- it is a **GitHub Actions workflow** that lives in the same repo as the Dockerfile. Here is the part of it that matters, from `.github/workflows/build.yml`:
 
-````
+```
 name: build-and-push
 
 on:
@@ -856,7 +856,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-````
+```
 
 ### Exercise 3
 
@@ -1138,7 +1138,7 @@ The extra arguments are `upgrade = TRUE` and `dependencies = TRUE`.
 
 ###
 
-Installing straight from each package's GitHub default branch (instead of CRAN or an r-universe build) matches PPBDS practice --- the ecosystem expects the development version. `upgrade = TRUE` makes `pak` also pull the latest version of every transitive dependency: `learnr`, `knitr`, `rmarkdown`, `xfun`, and more. Skip it, and a dependency built against a newer `xfun` than Rocker shipped can fail with an error like `object 'attr' is not exported by 'namespace:xfun'` --- exactly the ABI mismatch the smoke test right below this block is built to catch.
+Installing straight from each package's GitHub default branch (instead of CRAN or an r-universe build) matches PPBDS practice --- the ecosystem expects the development version. `upgrade = TRUE` makes `pak` also pull the latest version of every transitive dependency: `knitr`, `rmarkdown`, `xfun`, and more. Skip it, and a dependency built against a newer `xfun` than Rocker shipped can fail with an error like `object 'attr' is not exported by 'namespace:xfun'` --- exactly the ABI mismatch the smoke test right below this block is built to catch.
 
 `dependencies = TRUE` reaches further: it also installs each course package's **Suggests**. That is a deliberate contract --- a tutorial package's Suggests list *is* the set of packages students need at tutorial runtime, loaded with `library()` or named as tidymodels engine strings --- and "smoke test 1b" below re-reads those lists from the installed packages and loads every entry, so the contract is checked on every build.
 

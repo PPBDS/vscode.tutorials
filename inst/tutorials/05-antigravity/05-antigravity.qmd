@@ -110,7 +110,7 @@ learnr2::question(
 
 ###
 
-````
+```
 antigravity $ agy
 
 
@@ -124,7 +124,7 @@ antigravity $ agy
 >
 ───────────────────────────────────────────────────────────────────────────────────────────────────
 ? for shortcuts                                                             Gemini 3.6 Flash · high
-````
+```
 
 Again, you mostly just accepted the defaults. The main exceptions were "Use a Google Cloud Project" at the beginning and then the project ID `techne-fall-2026`. 
 
@@ -146,7 +146,7 @@ learnr2::question(
 
 ###
 
-````
+```
 >
 ───────────────────────────────────────────────────────────────────────────────────────────
 Antigravity CLI   general    commands    shortcuts   (←/→ or tab to cycle)
@@ -163,7 +163,7 @@ Quick Reference
   /  Type / to see available commands
 
 Keyboard: ↑/↓ Navigate  ←/→ Switch View  esc Close
-````
+```
 
 Note that your output may be different than what is shown here. In the world of AI tools, things change all the time.
 
@@ -189,7 +189,7 @@ learnr2::question(
 
 ###
 
-````
+```
 >
 ───────────────────────────────────────────────────────────────────────────────────────────
 Switch Model
@@ -205,7 +205,7 @@ Switch Model
 Keyboard: ↑/↓ Navigate  ←/→ Effort  enter Select  esc Go Back
 
                                                                     Gemini 3.6 Flash · high
-````
+```
 
 Again, to exit this view, hit the escape key. 
 
@@ -225,7 +225,7 @@ Please explain the contents of this repository. Run ls -a to check the contents.
 
 I get this:
 
-````
+```
 > Please explain the contents of this repository. Run ls -a to check the contents.
 
 ▸ Thought for 18s, 299 tokens
@@ -249,7 +249,7 @@ Do you want to proceed?
 
   ↑/↓ Navigate · tab Amend · ctrl+g edit/expand command
 esc to cancel                                                       Gemini 3.6 Flash · high
-````
+```
 
 
 Select `2`. (If your screen looks different, just select the option that allows Antigravity to run `ls` without asking again.) CP/CR the output.
@@ -268,7 +268,7 @@ learnr2::question(
 
 ###
 
-````
+```
 > Please explain the contents of this repository. Run ls -a to check the contents.
 
 ▸ Thought for 18s, 299 tokens
@@ -290,7 +290,7 @@ learnr2::question(
 
   It looks like a fresh workspace ready for your analysis files or Quarto (.qmd)
   documents! What are you working on today?
-````
+```
 
 Antigravity decomposes your prompt into tool calls dynamically --- the exact commands it runs depend on how it interprets your request, so what you see may differ from the example. 
 
@@ -310,7 +310,7 @@ To be honest, I just copy/pasted the above. AI is smart enough to work with this
 
 Allow the file to be written when Antigravity asks for permission. Along the way, you may also be asked questions like this:
 
-````
+```
 Thought for 1s, 380 tokens
   Refining YAML Header
 
@@ -330,7 +330,7 @@ Do you want to proceed?
 
   ↑/↓ Navigate · tab Amend · ctrl+g edit/expand command
 esc to cancel                                                                  Gemini 3.6 Flash · high                                                    Gemini 3.6 Flash · high
-````
+```
 
 Use your best judgment.
 
@@ -350,7 +350,7 @@ learnr2::question(
 
 AI is always changing and, even when it is not changing, it is non-deterministic. Your output may differ from ours. The important thing is that you have an `analysis.qmd` file with a YAML header, a setup chunk, and a plot of named storms per year.
 
-````
+```
 ListDir(/workspaces/antigravity) (ctrl+o to expand)
 
 ▸ Thought for 1s, 318 tokens
@@ -372,7 +372,7 @@ ListDir(/workspaces/antigravity) (ctrl+o to expand)
 >
 ──────────────────────────────────────────────────────────────────────────────────────────────────────
 ? for shortcuts                                                                Gemini 3.6 Flash · high
-````
+```
 
 ###
 
@@ -400,7 +400,7 @@ learnr2::question(
 
 ###
 
-````
+```
 > Render analysis.qmd using quarto render and tell me what files were created afterward.
 ● Bash(quarto render analysis.qmd) (ctrl+o to expand)
 
@@ -430,7 +430,7 @@ learnr2::question(
   dependencies and generated plot figures).
 
   You can preview analysis.html using the Live Server extension in VS Code.
-````
+```
 
 ###
 
@@ -462,9 +462,9 @@ learnr2::question(
 
 ###
 
-````
+```
 https://congenial-chainsaw-wv757pv4pp67cpw-5500.app.github.dev/analysis.html
-````
+```
 
 Keep this tab open. Every time `analysis.html` is updated in your Codespace --- whether by Antigravity or by running `quarto render` yourself --- the tab will automatically refresh.
 
@@ -500,7 +500,7 @@ Ask Antigravity: Add a plot to a new code chunk in `analysis.qmd` using the `sto
 
 Antogravity might ask:
 
-````
+```
   shift+tab to auto-approve file edits
 Accept this file edit?
 > 1. Yes, accept this change
@@ -508,7 +508,7 @@ Accept this file edit?
 
   ↑/↓ Navigate · tab Amend · f full diff
 esc to cancel                            Gemini 3.6 Flash · high
-````
+```
 
 Obviously, you should accept.
 
@@ -534,7 +534,7 @@ learnr2::question(
 
 ###
 
-````
+```
 storms |> 
   drop_na(category) |> 
   ggplot(aes(x = factor(category), y = wind, fill = factor(category))) +
@@ -546,7 +546,7 @@ storms |>
       y = "Wind Speed (knots)"
     ) +
     theme_minimal()
-````
+```
 
 Your answer will be different from ours, but it should show **ggplot2** code using the `storms` dataset --- something like a boxplot of wind speed by storm category. The chunk should not have `#| echo: true` --- since you set `execute: echo: false` in the YAML header, all chunks use that setting by default.
 
@@ -578,7 +578,7 @@ learnr2::question(
 
 ###
 
-````
+```
 # History files
 .Rhistory
 .RData
@@ -598,7 +598,7 @@ learnr2::question(
 # OS generated files
 .DS_Store
 Thumbs.db
-````
+```
 
 ###
 
@@ -630,7 +630,7 @@ learnr2::question(
 
 ###
 
-````
+```
   I've removed the extra boxplot chunk from analysis.qmd so only the setup chunk and the named storms per year line
   plot remain.
 
@@ -646,7 +646,7 @@ learnr2::question(
 >
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ? for shortcuts                                                                                    Gemini 3.7 Flash · high
-````
+```
 
 ###
 
@@ -839,11 +839,11 @@ learnr2::question(
 
 Your answer should look something like:
 
-````
+```
 antigravity $ ls
 AGENTS.md  analysis_cache  analysis_files  analysis.html  analysis.qmd
 antigravity $ 
-````
+```
 
 ###
 
@@ -871,7 +871,7 @@ learnr2::question(
 
 ###
 
-````
+```
 antigravity $ cat .gitignore
 # History files
 .Rhistory
@@ -893,7 +893,7 @@ antigravity $ cat .gitignore
 .DS_Store
 Thumbs.db
 antigravity $ 
-````
+```
 
 ###
 
@@ -1086,7 +1086,7 @@ learnr2::question(
 
 Your answer should look something like:
 
-````
+```
 > Run git status and explain what each part of the output means.
 
 ╔ Tool Use: run_shell ══════════════════╗
@@ -1113,7 +1113,7 @@ Here's what this means:
 - "Untracked files" — Git has noticed these files but is not monitoring them yet. They will not be included in any commit until you explicitly add them with `git add`.
 
 >
-````
+```
 
 ###
 
@@ -1180,12 +1180,12 @@ learnr2::question(
 
 Your answer should look something like:
 
-````
+```
 antigravity $ git log --oneline
 a3b8c21 (HEAD -> main) initial version with analysis and gitignore
 e3b01ee Initial commit
 antigravity $
-````
+```
 
 The `(HEAD -> main)` indicator confirms your local branch is current, but the missing `origin/main` means this commit hasn't been pushed to GitHub yet. Pushing is what sends it there and makes it visible to others.
 
@@ -1219,7 +1219,7 @@ learnr2::question(
 
 Your output should look something like:
 
-````
+```
 > Please commit analysis.qmd and analysis.html with a good message, and push to GitHub.
 
 ╔ Tool Use: run_shell ═══════════════════════════════════════╗
@@ -1240,7 +1240,7 @@ Allow this tool call? [y/n/a]: y
 ✔ Done! Your changes have been committed and pushed to GitHub.
 
 >
-````
+```
 
 ###
 

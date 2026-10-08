@@ -85,9 +85,9 @@ You need the OpenRouter key from the OpenRouter tutorial for everything here. If
 
 In the bash Terminal, check that your key is present:
 
-````
+```
 echo ${OPENROUTER_API_KEY:0:8}
-````
+```
 
 CP/CR.
 
@@ -123,9 +123,9 @@ Every AI product you have used --- the chat window, the editor sidebar, `aider`,
 
 Ask OpenRouter how many models it offers. In the bash Terminal:
 
-````
+```
 curl -s https://openrouter.ai/api/v1/models | python -c "import sys, json; print(len(json.load(sys.stdin)['data']))"
-````
+```
 
 CP/CR.
 
@@ -158,13 +158,13 @@ And notice what a router gets you, now that you can count it. Several hundred mo
 
 Now send an actual prompt. Replace the model with any free one from the list you made in the OpenRouter tutorial if this one is gone:
 
-````
+```
 curl -s https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "openai/gpt-oss-20b:free", "messages": [{"role": "user", "content": "In one sentence, what is a tibble?"}]}' \
   | python -m json.tool
-````
+```
 
 CP/CR.
 
@@ -235,11 +235,11 @@ Four fields in the reply are worth a look.
 
 Prices are published in that same catalogue. Have AI write you a command that reads <https://openrouter.ai/api/v1/models> and prints the input and output price per million tokens for these three models:
 
-````
+```
 qwen/qwen3-coder-30b-a3b-instruct
 deepseek/deepseek-v3.2
 anthropic/claude-opus-4.8
-````
+```
 
 Run it. CP/CR.
 
@@ -278,13 +278,13 @@ Ask the same question of a cheap open weights model and of an expensive frontier
 
 First the cheap one:
 
-````
+```
 curl -s https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "openai/gpt-oss-20b:free", "messages": [{"role": "user", "content": "Write R code to count rows per cut in the diamonds data set."}]}' \
   | python -c "import sys, json; print(json.load(sys.stdin)['choices'][0]['message']['content'])"
-````
+```
 
 CP/CR.
 
@@ -391,9 +391,9 @@ Go to <https://openrouter.ai/settings/credits> and buy **$10** of credits. Ten d
 
 When the purchase has gone through, check it from the bash Terminal:
 
-````
+```
 curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -c "import sys, json; d = json.load(sys.stdin)['data']; print('spent so far:', d['usage']); print('free tier:', d['is_free_tier'])"
-````
+```
 
 CP/CR.
 
@@ -434,13 +434,13 @@ And you can go back to <https://openrouter.ai/settings/privacy> and turn **off**
 
 Now run the request that was refused. Same model as Exercise 2, and this time pull out the answer and the cost rather than the whole reply:
 
-````
+```
 curl -s https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "anthropic/claude-opus-4.8", "max_tokens": 400, "messages": [{"role": "user", "content": "Write R code to count rows per cut in the diamonds data set."}]}' \
   | python -c "import sys, json; d = json.load(sys.stdin); print(d['choices'][0]['message']['content']); print('--- cost:', d['usage']['cost'])"
-````
+```
 
 CP/CR.
 
@@ -570,13 +570,13 @@ Notice too that output costs roughly three or four times input, everywhere, at e
 
 Give the cheap model the same job you gave Opus. In the bash Terminal:
 
-````
+```
 curl -s https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"model": "qwen/qwen3-coder-30b-a3b-instruct", "max_tokens": 400, "messages": [{"role": "user", "content": "Write R code to count rows per cut in the diamonds data set."}]}' \
   | python -c "import sys, json; d = json.load(sys.stdin); print(d['choices'][0]['message']['content']); print('--- cost:', d['usage']['cost'])"
-````
+```
 
 CP/CR.
 
@@ -616,12 +616,12 @@ You have now had three models write essentially the same code, and not one of th
 
 In the R Terminal:
 
-````
+```
 library(ggplot2)
 library(dplyr)
 
 diamonds |> count(cut)
-````
+```
 
 CP/CR.
 
@@ -738,10 +738,10 @@ It is not the only choice. **[httr2](https://httr2.r-lib.org/)** would let you b
 
 Still in the R Terminal, create a chat and ask it something:
 
-````
+```
 chat <- chat_openrouter(model = "openai/gpt-oss-20b:free")
 chat$chat("In one sentence, what is a tibble?")
-````
+```
 
 CP/CR.
 
@@ -782,14 +782,14 @@ Always name the model. `ellmer` has a default, and its own documentation warns t
 
 Now the thing you could not do by hand. In the R Terminal:
 
-````
+```
 reviews <- c("the room was filthy", "staff went out of their way for us",
              "fine, but overpriced", "would absolutely stay again")
 
 chat <- chat_openrouter(model = "openai/gpt-oss-20b:free")
 chat$chat(paste("Label each line positive, negative, or mixed. One label per line, nothing else:",
                 paste(reviews, collapse = "\n")))
-````
+```
 
 CP/CR.
 
@@ -844,9 +844,9 @@ You spent money today for the first time in this course. This section is the bil
 
 In the bash Terminal, check what you have spent:
 
-````
+```
 curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -c "import sys, json; d = json.load(sys.stdin)['data']; print('spent so far:', d['usage']); print('free tier:', d['is_free_tier'])"
-````
+```
 
 CP/CR.
 

@@ -62,13 +62,13 @@ learnr2::question(
 
 Your answer should look something like:
 
-````
+```
 terminal-1 $
 terminal-1 $
 terminal-1 $ pwd
 /workspaces/terminal-1
 terminal-1 $
-````
+```
 
 The prompt is the name of the directory you are currently in --- `terminal-1` --- followed by a space and a dollar sign. The dollar sign indicates the end of the prompt; you type commands after it. `pwd` prints the full path to that directory. (If you are working on your own computer rather than in a Codespace, your prompt will look different. Default prompts vary from computer to computer.)
 
@@ -76,9 +76,9 @@ The prompt is the name of the directory you are currently in --- `terminal-1` --
 
 You only get this short prompt in a bash Terminal which you open yourself. A bash Terminal that was already open when the Codespace started shows GitHub's long default prompt, something like:
 
-````
+```
 @davekane-student ➜ /workspaces/terminal-1 (main) $
-````
+```
 
 with your GitHub username in place of `davekane-student`. The two prompts behave identically. All our examples show the short prompt, so if you see the long one, open a new bash Terminal.
 
@@ -119,13 +119,13 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 terminal-1 $ mkdir example
 terminal-1 $ cd example
 example $ pwd
 /workspaces/terminal-1/example
 example $
-````
+```
 
 The `example` directory is one level below the directory in which you started.
 
@@ -147,12 +147,12 @@ learnr2::question(
 
 ###
 
-````
+```
 example $ echo "" > my.txt
 example $ ls
 my.txt
 example $
-````
+```
 
 `echo "" > my.txt` creates an empty file. `echo` just repeats whatever follows, which is an empty quote in this case. `>`, which we will discuss more later, redirects whatever comes before it into whatever comes after it.
 
@@ -175,12 +175,12 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 example $ cp my.txt my_2.txt
 example $ ls
 my_2.txt  my.txt
 example $
-````
+```
 
 ### Exercise 6
 
@@ -202,12 +202,12 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 example $ mv my.txt fake.txt
 example $ ls
 fake.txt  my_2.txt
 example $
-````
+```
 
 ###
 
@@ -231,12 +231,12 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 example $ rm fake.txt
 example $ ls
 my_2.txt
 example $
-````
+```
 
 Be careful with the `rm` command in the bash Terminal. Unlike moving files to Trash on your computer, it is (usually) irreversible.
 
@@ -260,12 +260,12 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 example $ cd ..
 terminal-1 $ pwd
 /workspaces/terminal-1
 terminal-1 $
-````
+```
 
 Again, note how the prompt changed because we moved directories. The `..` symbol --- two periods --- always indicates the directory one level up, i.e., the directory in which `example` is located.
 
@@ -283,11 +283,11 @@ learnr2::question(
 )
 ```
 
-````
+```
 terminal-1 $ rm -r example
 terminal-1 $ ls
 terminal-1 $
-````
+```
 
 `-r` is an **option** that allows us to delete a directory. The `r` stands for **r**ecursive because, in order to delete a directory, you must also (recursively) delete every directory and file within that directory.
 
@@ -356,12 +356,12 @@ learnr2::question(
 
 Your answer should look something like:
 
-````
+```
 terminal-1 $ cd paths
 paths $ pwd
 /workspaces/terminal-1/paths
 paths $
-````
+```
 
 Note how the prompt changed after I ran the `cd paths` command. Before, the prompt showed `terminal-1` because that was the current working directory. Using `cd` changed the current working directory to `paths`, causing the prompt to change as well.
 
@@ -381,12 +381,12 @@ learnr2::question(
 
 ###
 
-````
+```
 paths $ mkdir lessons
 paths $ ls
 lessons
 paths $
-````
+```
 
 Because we have changed working directories, the `lessons` directory is created inside the `paths` directory. It is the only object in the `paths` directory.
 
@@ -408,12 +408,12 @@ learnr2::question(
 
 ###
 
-````
+```
 paths $ mkdir lessons/fruits
 paths $ ls lessons/
 fruits
 paths $
-````
+```
 
 ###
 
@@ -457,12 +457,12 @@ learnr2::question(
 
 ###
 
-````
+```
 fruits $ echo "" > pineapple.txt
 fruits $ ls
 pineapple.txt
 fruits $
-````
+```
 ###
 
 `pineapple.txt` is still a relative path, but since the file is directly inside the assumed starting point, i.e., the working directory, the name of the file is all we need. If we had used `lessons/fruits/apple.txt`, as we would have had to do if our working directory were `paths`, we would have gotten an error because those directories would not be recognized from our actual starting point of `fruits`.
@@ -485,12 +485,12 @@ learnr2::question(
 
 ###
 
-````
+```
 fruits $ echo "" > pear.txt & echo "" > does-not-belong
 fruits $ ls
 does-not-belong pear.txt        pineapple.txt
 fruits $
-````
+```
 
 The `&` symbol tells the operating system to run both the command that came before it and the command that comes after it.
 
@@ -510,12 +510,12 @@ learnr2::question(
 
 Your answer should look like this:
 
-````
+```
 fruits $ cd ..
 lessons $ pwd
 /workspaces/terminal-1/paths/lessons
 lessons $
-````
+```
 
 ###
 
@@ -537,12 +537,12 @@ learnr2::question(
 
 ###
 
-````
+```
 lessons $ mkdir tbd
 lessons $ ls
 fruits  tbd
 lessons $
-````
+```
 
 In the same way that `..` refers to the directory above the current directory, `.` --- a single period --- refers to the current directory.
 
@@ -564,12 +564,12 @@ learnr2::question(
 
 ###
 
-````
+```
 lessons $ mv fruits/does-not-belong tbd
 lessons $ ls tbd
 does-not-belong
 lessons $
-````
+```
 
 ###
 
@@ -591,7 +591,7 @@ learnr2::question(
 
 ###
 
-````
+```
 lessons $ cd ..
 paths $ pwd
 /workspaces/terminal-1/paths
@@ -599,7 +599,7 @@ paths $ mv lessons/tbd .
 paths $ ls
 lessons tbd
 paths $
-````
+```
 
 When using `mv`, there is no difference between moving a directory and moving a file. A command like `mv lessons/tbd .` seems like a bit of witchcraft. But all it really says is to move (`mv`) the `tbd` directory (which is located in the `lessons` directory) to here (`.`), meaning to the current directory.
 
@@ -619,13 +619,13 @@ learnr2::question(
 
 ###
 
-````
+```
 paths $ cd ..
 terminal-1 $ pwd
 /workspaces/terminal-1
 terminal-1 $ rm -r paths
 terminal-1 $
-````
+```
 
 ###
 
@@ -656,14 +656,14 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-1 $ mkdir symbols
 terminal-1 $ cd symbols
 symbols $ pwd
 /workspaces/terminal-1/symbols
 symbols $ ls
 symbols $
-````
+```
 
 The more practice we get with command-line commands --- often called "shell" commands --- the easier it is to string together several of them in a row.
 
@@ -687,11 +687,11 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 symbols $ ls -a
 .       ..
 symbols $
-````
+```
 
 Every directory, even an "empty" one, includes `.` and `..`. The `.` is a link to the current directory, i.e., to the `symbols` directory in which we are currently located. The `..` is a link to the directory one level up, which is `/workspaces/terminal-1` in my case.
 
@@ -713,13 +713,13 @@ learnr2::question(
 
 My answer looks like this:
 
-````
+```
 symbols $ ls ..
 symbols
 symbols $ ls ../..
 codespace-starter  terminal-1
 symbols $
-````
+```
 
 ###
 
@@ -743,11 +743,11 @@ learnr2::question(
 
 My answer looks like this:
 
-````
+```
 symbols $ pwd
 /workspaces/terminal-1/symbols
 symbols $
-````
+```
 
 The absolute path for my current working directory breaks down into these components.
 
@@ -773,12 +773,12 @@ learnr2::question(
 
 My answer looks like this:
 
-````
+```
 symbols $ cd
 ~ $ pwd
 /home/rstudio
 ~ $
-````
+```
 
 In Codespaces, the home directory is usually `/home/rstudio`. Note how, after we run `cd`, the prompt changes to report `~` as the current working directory. `~` --- a tilde, pronounced "TIL-duh" --- is the symbol for the current user's home directory. The shorthands `.`, `..`, and `~` are not specific to any one command: they stand for paths, and work anywhere a path does.
 
@@ -798,12 +798,12 @@ learnr2::question(
 
 ###
 
-````
+```
 ~ $ cd /workspaces/terminal-1/symbols
 symbols $ pwd
 /workspaces/terminal-1/symbols
 symbols $
-````
+```
 
 This is an example of using an absolute path to change locations.
 
@@ -825,13 +825,13 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 symbols $ pwd
 /workspaces/terminal-1/symbols
 symbols $ cd ..
 terminal-1 $ rm -rf symbols
 terminal-1 $
-````
+```
 
 Note that `rm -rf symbols` and `rm -rf symbols/`, with the trailing slash, have the same effect. Except in unusual circumstances, including (or not including) the trailing slash in the name of a directory does not matter.
 
@@ -858,11 +858,11 @@ learnr2::question(
 
 For me, this looks like:
 
-````
+```
 terminal-1 $ echo "David Kane"
 David Kane
 terminal-1 $
-````
+```
 
 `echo` just repeats its argument. By default, a program's output lands on your screen.
 
@@ -882,12 +882,12 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-1 $ echo "David Kane" > me.txt
 terminal-1 $ cat me.txt
 David Kane
 terminal-1 $
-````
+```
 
 ###
 
@@ -909,14 +909,14 @@ learnr2::question(
 
 ###
 
-````
+```
 terminal-1 $ echo "I am learning bash." >> me.txt
 terminal-1 $ cat me.txt
 David Kane
 I am learning bash.
 terminal-1 $ rm me.txt
 terminal-1 $
-````
+```
 
 ###
 

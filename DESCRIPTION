@@ -1,6 +1,6 @@
 Package: vscode.tutorials
 Title: Tutorials for Learning 'VS Code' in GitHub Codespaces
-Version: 0.1.1
+Version: 0.1.1.9000
 Authors@R:
     c(
     person(given = "David",
@@ -11,9 +11,11 @@ Authors@R:
 Description: Collection of tutorials for working with 'VS Code'
     and for learning how to apply generative AI when coding with R.
     Covers scripts, 'Quarto' documents, 'Git', 'GitHub', and
-    'Quarto' websites. Makes extensive use of the tools in the
-    'tutorial.helpers' package.
+    'Quarto' websites. Tutorials are built with the 'learnr2' package
+    and run in the browser via 'Quarto' and 'WebR'.
 Depends: R (>= 4.1.0)
+SystemRequirements: Quarto command line tool
+    (https://github.com/quarto-dev/quarto-cli).
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -22,15 +24,17 @@ Config/testthat/edition: 3
 BugReports: https://github.com/PPBDS/vscode.tutorials/issues
 URL: https://ppbds.github.io/vscode.tutorials/, https://github.com/PPBDS/vscode.tutorials
 Imports:
-    tutorial.helpers,
+    learnr2,
     usethis
+Remotes:
+    PPBDS/learnr2
 Suggests:
     ellmer (>= 0.4.2),
     gitcreds,
     httr2,
     knitr,
-    learnr,
     palmerpenguins,
     pkgbuild,
+    quarto,
     testthat,
     tidyverse

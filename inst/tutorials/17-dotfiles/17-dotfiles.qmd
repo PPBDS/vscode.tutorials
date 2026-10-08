@@ -35,9 +35,9 @@ Two things make this tutorial unusual. The repo you make is **permanent** --- ev
 
 Open a **new** bash Terminal (the `+` in the top-right corner of the Panel) and run:
 
-````
+```
 echo $COOLEST_TEACHER
-````
+```
 
 CP/CR.
 
@@ -72,9 +72,9 @@ By the end of this tutorial, that command will print `Preceptor` on a machine wh
 
 Now look at the file that runs every time you open a bash Terminal. The starter put several blocks in it; show the one about your prompt:
 
-````
+```
 grep -A 2 short-prompt ~/.bashrc
-````
+```
 
 CP/CR.
 
@@ -149,11 +149,11 @@ When GitHub built this Codespace it put a **token** --- a temporary password for
 
 Make the repo. In the bash Terminal:
 
-````
+```
 cd /workspaces
 gh repo create dotfiles --private --clone
 cd dotfiles
-````
+```
 
 CP/CR.
 
@@ -200,18 +200,18 @@ Use a script. Ask AI to create two files in `/workspaces/dotfiles`.
 
 First, `install.sh`:
 
-````
+```
 #!/bin/bash
 set -e
 cd "$(dirname "$0")"
 
 echo 'export COOLEST_TEACHER=Preceptor' >> ~/.bashrc
 cp .gitconfig ~/.gitconfig
-````
+```
 
 Second, `.gitconfig`, with your real name and your own GitHub username:
 
-````
+```
 [user]
 	name = Your Name
 	email = YOUR-USERNAME@users.noreply.github.com
@@ -220,7 +220,7 @@ Second, `.gitconfig`, with your real name and your own GitHub username:
 [alias]
 	s = status --short --branch
 	l = log --oneline --graph --decorate -20
-````
+```
 
 In the bash Terminal, run `cat /workspaces/dotfiles/.gitconfig`. CP/CR.
 
@@ -236,7 +236,7 @@ learnr2::question(
 
 ###
 
-````
+```
 [user]
 	name = David Kane
 	email = ppbds-student@users.noreply.github.com
@@ -245,7 +245,7 @@ learnr2::question(
 [alias]
 	s = status --short --branch
 	l = log --oneline --graph --decorate -20
-````
+```
 
 ###
 
@@ -269,9 +269,9 @@ The rule generalises: **when you do not own a file, add to it rather than replac
 
 A script GitHub cannot run is no use. Make it executable, then commit and push everything:
 
-````
+```
 chmod +x install.sh
-````
+```
 
 Then run `ls -l install.sh`. CP/CR.
 
@@ -385,10 +385,10 @@ Nothing in that chain knows anything about this tutorial or this course. It is a
 
 Still in the **new** Codespace, run:
 
-````
+```
 git config --get user.name
 tail -1 ~/.bashrc
-````
+```
 
 CP/CR back here.
 

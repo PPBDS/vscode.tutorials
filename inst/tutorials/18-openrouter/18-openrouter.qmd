@@ -215,15 +215,15 @@ The site shows it once and never again. That is on purpose: OpenRouter does not 
 
 In the bash Terminal, set the key as an environment variable. Replace the placeholder with your actual key:
 
-````
+```
 export OPENROUTER_API_KEY=sk-or-v1-your-actual-key-here
-````
+```
 
 Then run this, which prints only the first eight characters:
 
-````
+```
 echo ${OPENROUTER_API_KEY:0:8}
-````
+```
 
 CP/CR --- the second command only.
 
@@ -254,9 +254,9 @@ We printed only the first eight characters on purpose. Printing the whole key wo
 
 Now use the key. Ask OpenRouter what it knows about your account:
 
-````
+```
 curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool | grep -E '"label"|"usage"|"is_free_tier"'
-````
+```
 
 CP/CR.
 
@@ -291,9 +291,9 @@ The reply comes back as **JSON**, a format that packs a lot of fields into one l
 
 Open a **new** bash Terminal (the `+` in the top-right corner of the Panel). In that new bash Terminal, run:
 
-````
+```
 echo ${OPENROUTER_API_KEY:0:8}
-````
+```
 
 CP/CR.
 
@@ -381,9 +381,9 @@ learnr2::question(
 
 ###
 
-````
+```
 .env
-````
+```
 
 ###
 
@@ -412,9 +412,9 @@ Now the fun part. You have a key that cost nothing, and `aider` will use it. You
 
 You need the name of a model that is free *today*. Ask `aider` first. In the bash Terminal, in your `openrouter` repo:
 
-````
+```
 aider --list-models openrouter/ | grep ':free'
-````
+```
 
 CP/CR.
 
@@ -450,9 +450,9 @@ Remember this feeling. A tool answered instantly, confidently, and wrongly, and 
 
 So ask OpenRouter instead of asking `aider`. In the bash Terminal:
 
-````
+```
 curl -s https://openrouter.ai/api/v1/models | python -c "import sys, json; print('\n'.join(sorted(m['id'] for m in json.load(sys.stdin)['data'] if m['id'].endswith(':free'))))"
-````
+```
 
 CP/CR.
 
@@ -498,9 +498,9 @@ Look at how a name is built. In `google/gemma-4-31b-it:free`, `google` is the co
 
 Pick any model from the list you just printed and start `aider` with it. We used `openai/gpt-oss-20b:free`; if yours is gone, substitute one of your own. Note the `openrouter/` on the front --- that part tells `aider` which service to route through.
 
-````
+```
 aider --model openrouter/openai/gpt-oss-20b:free --no-auto-commits
-````
+```
 
 Answer `Yes` if it offers to add `.aider*` to your `.gitignore`.
 
@@ -539,9 +539,9 @@ The `>` at the bottom is a prompt. `aider` is now waiting for you inside your Te
 
 At the `aider` prompt, ask for a script:
 
-````
+```
 Create hello.R which prints the number of rows in the diamonds data set from ggplot2.
-````
+```
 
 When it finishes, in the bash Terminal run `cat hello.R`. CP/CR.
 
@@ -557,11 +557,11 @@ learnr2::question(
 
 ###
 
-````
+```
 library(ggplot2)
 
 cat(nrow(diamonds), "\n")
-````
+```
 
 ###
 
@@ -613,9 +613,9 @@ The dollar column is all zeros because this model is free. On a paid model those
 
 Now switch models without leaving the session. Pick a *different* model from the live list you printed in Exercise 2, and put `openrouter/` on the front of it. At the `aider` prompt:
 
-````
+```
 /model openrouter/google/gemma-4-31b-it:free
-````
+```
 
 CP/CR.
 
@@ -655,9 +655,9 @@ One warning. `aider` has a `/models` command for searching model names, and it r
 
 Ask the new model a question about the code, without letting it edit anything. At the `aider` prompt:
 
-````
+```
 /ask What would break in hello.R if ggplot2 were not installed?
-````
+```
 
 CP/CR.
 
@@ -696,9 +696,9 @@ That last one is the money-saving trick, and it is worth understanding beyond `a
 
 Leave `aider` by typing `/quit`. Then, back in the bash Terminal, check what all that cost you:
 
-````
+```
 curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool | grep '"usage"'
-````
+```
 
 CP/CR.
 

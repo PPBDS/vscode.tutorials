@@ -53,34 +53,33 @@ learnr2::question(
 
 You will see one of two answers. Either you are already in your repo:
 
-````
+```
 code $ pwd
 /workspaces/code
 code $
-````
+```
 
 or you are still in the course's folder:
 
-````
+```
 codespace-starter $ pwd
 /workspaces/codespace-starter
 codespace-starter $
-````
+```
 
 ###
 
-If your result ends in `code`, you are all set --- **do not run the connect-repo commands in the next exercise**; just do its last step. If it ends in `codespace-starter`, the next exercise connects you.
+If your result ends in `code`, you are all set --- **do not run the connect-repo command in the next exercise**; just do its last step. If it ends in `codespace-starter`, the next exercise connects you.
 
 ### Exercise 2
 
-**Skip this paragraph --- do not run these commands --- if `pwd` showed `/workspaces/code`.** Otherwise, run these two commands, one at a time:
+**Skip this paragraph --- do not run this command --- if `pwd` showed `/workspaces/code`.** Otherwise, run:
 
-````
-cd /workspaces/codespace-starter
-.devcontainer/connect-repo.sh code
-````
+```
+connect-repo code
+```
 
-The `connect-repo` script lives in `codespace-starter`, so the first command moves you there; running the script from anywhere else fails. If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/code`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
+If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/code`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
 
 **Everyone**: open a new bash Terminal and run `pwd`. CP/CR.
 
@@ -96,11 +95,11 @@ learnr2::question(
 
 ###
 
-````
+```
 code $ pwd
 /workspaces/code
 code $
-````
+```
 
 Stop and fix the open folder if your result still ends in `codespace-starter`. All work in this tutorial belongs in `/workspaces/code`.
 
@@ -139,10 +138,10 @@ learnr2::question(
 
 ###
 
-````
+```
 Error in `show_file()`:
 ! could not find function "show_file"
-````
+```
 
 ###
 
@@ -170,7 +169,7 @@ learnr2::question(
 
 ###
 
-````
+```
 ✗ R 4.6.1> library(learnr2)
 R 4.6.1> search()
  [1] ".GlobalEnv"        "package:learnr2"   "tools:vscode"     
@@ -178,7 +177,7 @@ R 4.6.1> search()
  [7] "package:utils"     "package:datasets"  "package:methods"  
 [10] "Autoloads"         "package:base"     
 R 4.6.1> 
-````
+```
 
 The string "package:learnr2" should be in the output. Don't worry if your answer does not match our answer exactly, either in this question or in any other question.
 
@@ -186,9 +185,9 @@ The string "package:learnr2" should be in the output. Don't worry if your answer
 
 At the R Terminal, run:
 
-````
+```
 show_file(file.path(R.home(), "COPYING"), end = 7)
-````
+```
 
 ```{r}
 #| label: packages-3
@@ -202,7 +201,7 @@ learnr2::question(
 
 ###
 
-````
+```
                     GNU GENERAL PUBLIC LICENSE
                        Version 2, June 1991
 
@@ -210,7 +209,7 @@ learnr2::question(
                        51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
-````
+```
 
 ###
 
@@ -236,11 +235,11 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> show_file(file.path(R.home(), "COPYING"), end = 7)
 Error in show_file(file.path(R.home(), "COPYING"), end = 7) :
   could not find function "show_file"
-````
+```
 
 ###
 
@@ -262,10 +261,10 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> library(learnr2)
 R 4.6.1>
-````
+```
 
 Loading some packages prints a bunch of messages to the R Terminal. But most packages, like **learnr2**, print nothing.
 
@@ -287,7 +286,7 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> library(tidyverse)
 ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.2.1     ✔ readr     2.2.0
@@ -300,7 +299,7 @@ R 4.6.1> library(tidyverse)
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 R 4.6.1> 
-````
+```
 
 The **tidyverse** package is warning us about various conflicts. Don't worry about those conflicts for now.
 
@@ -330,9 +329,9 @@ The default directory that VS Code suggests when saving is not necessarily where
 
 In the bash Terminal, run:
 
-````
+```
 cat script-1.R
-````
+```
 
 CP/CR.
 
@@ -348,20 +347,20 @@ learnr2::question(
 
 ###
 
-````
+```
 code $ cat script-1.R
 5 + 5
 6 * 3
 code $
-````
+```
 
 ###
 
 Look closely at the end of your output. If it instead finished like this:
 
-````
+```
 6 * 3code $
-````
+```
 
 with the prompt glued onto your last line of code, then your file is missing a final newline. As a rule of thumb, it is always a good idea to have the last line of any text file be blank.
 
@@ -389,7 +388,7 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> source("/workspaces/code/script-1.R", encoding = "UTF-8", echo = TRUE)
 
 > 5 + 5
@@ -398,7 +397,7 @@ R 4.6.1> source("/workspaces/code/script-1.R", encoding = "UTF-8", echo = TRUE)
 > 6 * 3
 [1] 18
 R 4.6.1>
-````
+```
 
 ###
 
@@ -426,7 +425,7 @@ learnr2::question(
 
 You should get:
 
-````
+```
 R 4.6.1> 6 * 3
 [1] 18
 R 4.6.1> 5 + 5
@@ -434,7 +433,7 @@ R 4.6.1> 5 + 5
 [1] 10
 [1] 18
 R 4.6.1>
-````
+```
 
 ###
 
@@ -458,7 +457,7 @@ learnr2::question(
 
 Your answer should look like this:
 
-````
+```
 R 4.6.1> source("/workspaces/code/script-1.R", encoding = "UTF-8", echo = TRUE)
 
 > x <- 5 + 5
@@ -466,7 +465,7 @@ R 4.6.1> source("/workspaces/code/script-1.R", encoding = "UTF-8", echo = TRUE)
 > 6 * 3
 [1] 18
 R 4.6.1> 
-````
+```
 
 ###
 
@@ -488,11 +487,11 @@ learnr2::question(
 
 ###
 
-````
+```
 R 4.6.1> ls()
 [1] "x"
 R 4.6.1> 
-````
+```
 
 ###
 
@@ -502,11 +501,11 @@ R 4.6.1>
 
 In this case, the object `x`, which has a value of 10, exists in your workspace. You can confirm this by typing `x` at the R Terminal and pressing `Enter`.
 
-````
+```
 > x
 [1] 10
 >
-````
+```
 
 ### Exercise 6
 
@@ -536,7 +535,7 @@ learnr2::question(
 
 ###
 
-````
+```
 code $ git log
 commit 0f0eed547148739b625ec8e3c4db91ac076d96e5 (HEAD -> main, origin/main)
 Author: davekane-student <dave.kane+student@gmail.com>
@@ -544,7 +543,7 @@ Date:   Thu Aug 13 14:40:51 2026 +0000
 
     Add script-1
 code $
-````
+```
 
 ###
 
@@ -596,11 +595,11 @@ learnr2::question(
 
 ###
 
-````
+```
 code $ ls
 AGENTS.md  script-1.R  script-2.R
 code $
-````
+```
 
 Save your scripts in the folder. Edit them and run them line by line or in their entirety. Restart R frequently to make sure you have captured everything in your scripts.
 
@@ -646,11 +645,11 @@ learnr2::question(
 
 ###
 
-````
+```
 > ls()
 character(0)
 >
-````
+```
 
 Do not confuse R's `ls()` with the bash `ls` you just ran: same name, different worlds. Bash's `ls` lists files on disk; R's `ls()` lists objects in R's memory.
 
@@ -662,9 +661,9 @@ You first saw this in Orientation, when the `x` created by Copilot's `Rscript` n
 
 At the top of `script-2.R`, type
 
-````
+```
 library(tidyverse)
-````
+```
 
 You will see, in the top bar of the Editor, that the file name `script-2.R` has a black dot next to it. This indicates that there are unsaved changes in the file.
 
@@ -694,17 +693,17 @@ This function returns a list of loaded packages. This should include the string 
 
 Skip a line and add a comment to the file: a one-sentence description of one of your recent meals, preceded by a hash (`#`). For example:
 
-````
+```
 # Had an OK filet mignon at Cheesecake Factory.
-````
+```
 
 Save the file.
 
 In the bash Terminal, run:
 
-````
+```
 cat script-2.R
-````
+```
 
 CP/CR.
 
@@ -721,11 +720,11 @@ learnr2::question(
 
 ###
 
-````
+```
 library(tidyverse)
 
 # Had an OK filet mignon at Cheesecake Factory.
-````
+```
 
 ###
 
@@ -735,13 +734,13 @@ Did you remember to have a blank line at the end of the file? If not, the closin
 
 Comments begin with a hash (also known as a "pound sign"): `#`. R will ignore everything on the line to the right of the hash. When reading code, you should be able to answer three questions about every line: **what** is it doing, **how** is it doing it, and **why** is it being done. The what and the how can be deduced from the code itself. The why cannot --- use comments for that, and keep them up-to-date when the code changes.
 
-````
+```
 # This is an example of a poor comment:
 x <- x + 1    # Increment x
 
 # This is an example of a good comment:
 x <- x + 1    # Account for borders
-````
+```
 
 ### Exercise 6
 
@@ -761,7 +760,7 @@ learnr2::question(
 
 ###
 
-````
+```
 code $ git log -1
 commit 8c41f7b2a9e05d3c6f1b8e2d4a7c9f0e1b3d5a68 (HEAD -> main, origin/main)
 Author: Your Name <your-username@users.noreply.github.com>
@@ -769,7 +768,7 @@ Date:   Fri Aug 14 15:03:41 2026 +0000
 
     Add script-2
 code $
-````
+```
 
 ###
 
@@ -797,9 +796,9 @@ Run the script interactively, line by line, using `Cmd/Ctrl + Enter`. If there a
 
 In the bash Terminal, run:
 
-````
+```
 cat script-2.R
-````
+```
 
 CP/CR.
 
@@ -815,7 +814,7 @@ learnr2::question(
 
 ###
 
-````
+```
 library(tidyverse)
 
 # Had an OK filet mignon at Cheesecake Factory.
@@ -829,7 +828,7 @@ ggplot(data = diamonds,
        x = "Carat",
        y = "Count",
        caption = "diamonds dataset from ggplot2 package")
-````
+```
 
 ###
 
@@ -873,11 +872,11 @@ learnr2::question(
 
 ###
 
-````
+```
 code $ ls
 AGENTS.md  diamonds.png  script-1.R  script-2.R
 code $
-````
+```
 
 ###
 
@@ -906,7 +905,7 @@ learnr2::question(
 
 ###
 
-````
+```
 code $ git log -1
 commit 5d6e7f8a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e (HEAD -> main, origin/main)
 Author: Your Name <your-username@users.noreply.github.com>
@@ -914,7 +913,7 @@ Date:   Fri Aug 14 15:41:22 2026 +0000
 
     Finish code tutorial
 code $
-````
+```
 
 ###
 
@@ -938,9 +937,9 @@ learnr2::question(
 
 ###
 
-````
+```
 https://github.com/your-username/code
-````
+```
 
 ###
 

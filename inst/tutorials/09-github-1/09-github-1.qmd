@@ -64,10 +64,10 @@ learnr2::question(
 
 Your answer should look something like:
 
-````
+```
 https://github.com/ppbds-student/github-introduction
 https://congenial-chainsaw-wv757pv4pp67cpw.github.dev/
-````
+```
 
 ###
 
@@ -91,11 +91,11 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 github-introduction $ pwd
 /workspaces/github-introduction
 github-introduction $
-````
+```
 
 You should be in a directory named `github-introduction`. `connect-repo` created it, side by side with `codespace-starter`, under `/workspaces`.
 
@@ -117,11 +117,11 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 github-introduction $ ls
 AGENTS.md
 github-introduction $
-````
+```
 
 The only visible file is `AGENTS.md`, which `connect-repo` copied in when it created the repo. It holds guidance for AI assistants working with you in this course --- agents read instruction files like this from the folder they run in.
 
@@ -143,11 +143,11 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 github-introduction $ ls -a
 .  ..  .git  AGENTS.md
 github-introduction $
-````
+```
 
 `.` refers to the current directory. `..` stands for the parent directory. These two links are present in (almost) every directory on your computer.
 
@@ -159,9 +159,9 @@ Unless you have a good reason, you should never mess with the contents of a hidd
 
 Time to open the black box. The `connect-repo` script has a `--help` option that explains --- without running anything --- every command it issues. Run:
 
-````
-/workspaces/codespace-starter/.devcontainer/connect-repo.sh --help
-````
+```
+connect-repo --help
+```
 
 Read the whole thing. Then CP/CR the numbered steps (1 through 4).
 
@@ -179,7 +179,7 @@ learnr2::question(
 
 The key part of the output:
 
-````
+```
   1. ACT AS YOU, NOT AS THE CODESPACE
          unset GITHUB_TOKEN GH_TOKEN
      A Codespace starts with a built-in token that can only touch
@@ -201,7 +201,7 @@ The key part of the output:
      Existing repo:
          gh repo clone <name>
      Either way you end up with the repo at /workspaces/<name>.
-````
+```
 
 ###
 
@@ -223,7 +223,7 @@ learnr2::question(
 
 ###
 
-````
+```
 github-introduction $ gh auth status
 github.com
   ✓ Logged in to github.com account your-username
@@ -231,7 +231,7 @@ github.com
   - Git operations protocol: https
   - Token: gho_************************************
   - Token scopes: 'gist', 'read:org', 'repo', 'workflow'
-````
+```
 
 ###
 
@@ -241,10 +241,10 @@ This is steps 1--3 of the script, already done: when you first ran `connect-repo
 
 Now step 4, by hand. Let's create a throwaway repo --- we will delete it shortly. Run these commands, one at a time:
 
-````
+```
 cd /workspaces
 gh repo create scratch-repo --public --clone
-````
+```
 
 Then run `ls`. CP/CR.
 
@@ -260,7 +260,7 @@ learnr2::question(
 
 ###
 
-````
+```
 github-introduction $ cd /workspaces
 workspaces $ gh repo create scratch-repo --public --clone
 ✓ Created repository your-username/scratch-repo on github.com
@@ -270,7 +270,7 @@ warning: You appear to have cloned an empty repository.
 workspaces $ ls
 codespace-starter  github-introduction  scratch-repo
 workspaces $
-````
+```
 
 ###
 
@@ -280,10 +280,10 @@ One command did two jobs: it created the filing cabinet on GitHub, and `--clone`
 
 How does the local folder know which GitHub repo it belongs to? Run:
 
-````
+```
 cd scratch-repo
 git remote -v
-````
+```
 
 CP/CR.
 
@@ -299,13 +299,13 @@ learnr2::question(
 
 ###
 
-````
+```
 workspaces $ cd scratch-repo
 scratch-repo $ git remote -v
 origin  https://github.com/your-username/scratch-repo (fetch)
 origin  https://github.com/your-username/scratch-repo (push)
 scratch-repo $
-````
+```
 
 ###
 
@@ -327,11 +327,11 @@ learnr2::question(
 
 ###
 
-````
+```
 scratch-repo $ gh repo delete scratch-repo
 X This API operation needs the "delete_repo" scope. To request it, run:  gh auth refresh -h github.com -s delete_repo
 scratch-repo $
-````
+```
 
 Your exact message may differ. The point is the refusal.
 
@@ -345,13 +345,13 @@ Delete `scratch-repo` from the website. Go to its page on GitHub (`https://githu
 
 Then, back in the bash Terminal, confirm it is gone and clean up the local clone. Run these commands, one at a time:
 
-````
+```
 cd /workspaces
 gh repo view scratch-repo
 rm -rf scratch-repo
 ls
 cd github-introduction
-````
+```
 
 CP/CR.
 
@@ -367,7 +367,7 @@ learnr2::question(
 
 ###
 
-````
+```
 scratch-repo $ cd /workspaces
 workspaces $ gh repo view scratch-repo
 GraphQL: Could not resolve to a Repository with the name 'your-username/scratch-repo'. (repository)
@@ -376,7 +376,7 @@ workspaces $ ls
 codespace-starter  github-introduction
 workspaces $ cd github-introduction
 github-introduction $
-````
+```
 
 ###
 
@@ -414,7 +414,7 @@ learnr2::question(
 
 You should have something like this:
 
-````
+```
 github-introduction $ cat analysis-1.qmd 
 ---
 title: "Analysis 1"
@@ -423,7 +423,7 @@ format: html
 ---
 
 github-introduction $
-````
+```
 
 
 ### Exercise 12
@@ -452,7 +452,7 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 metadata
   document-css: false
   link-citations: true
@@ -463,7 +463,7 @@ Output created: analysis-1.html
 
 Watching files for changes
 Browse at http://localhost:7383/
-````
+```
 
 ### Exercise 13
 
@@ -488,11 +488,11 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 github-introduction $ ls
 analysis-1_files  analysis-1.html  analysis-1.qmd
 github-introduction $ 
-````
+```
 
 The bottom part of the Source Control pane shows the history of changes in this repo.
 
@@ -521,7 +521,7 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 github-introduction $ ls -R analysis-1_files
 analysis-1_files:
 libs
@@ -545,7 +545,7 @@ axe-check.js
 analysis-1_files/libs/quarto-html/tabsets:
 tabsets.js
 github-introduction $ 
-````
+```
 
 Whenever you render a document using Quarto, it creates a directory called `base-name-of-your-file_files`. Since the base name of `analysis-1.qmd` is `analysis-1`, the new directory is `analysis-1_files`. This directory is filled with the programs, information, and other files that helped turn `analysis-1.qmd` into `analysis-1.html`. This is mostly confusing stuff that we should ignore. In fact, we usually don't even want it monitored by Git or stored on GitHub.
 
@@ -569,11 +569,11 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 github-introduction $ ls -a
 .  ..  analysis-1_files  analysis-1.html  analysis-1.qmd  .devcontainer  .git  .gitignore
 github-introduction $ 
-````
+```
 
 Because `.gitignore` begins with a `.`, it is a hidden file. It would not appear if we just used `ls`. Note that the Source Control pane now shows a new file, `.gitignore` with an associated "U", meaning it is also untracked.
 
@@ -597,11 +597,11 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 github-introduction $ cat .gitignore
 analysis-1_files
 github-introduction $ 
-````
+```
 
 The `analysis-1_files` line in `.gitignore` tells Git to ignore the `analysis-1_files` directory and everything in it.
 
@@ -636,14 +636,14 @@ learnr2::question(
 
 Your answer should look like this:
 
-````
+```
 github-introduction $ git log
 commit e6e05d17847846e0fda9ceedb9cce3b58fd0a024 (HEAD -> main)
 Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
 Date:   Fri May 1 19:22:33 2026 +0000
 
     initial version
-````
+```
 
 `git log` generates a record --- a "log" --- of all the Git actions we have taken. There is exactly one commit. Remember the "empty repository" warning when you created `scratch-repo` by hand? Your `github-introduction` repo was born the same way --- empty --- and this commit, which adds `analysis-1.qmd`, `analysis-1.html`, `.gitignore`, and `AGENTS.md`, is the first entry in its history.
 
@@ -668,7 +668,7 @@ learnr2::question(
 
 Your answer should look something like this:
 
-````
+```
 github-introduction $ cat analysis-1.qmd
 ---
 title: "Analysis 1"
@@ -678,7 +678,7 @@ format: html
 
 PPBDS student is a data maestro!
 github-introduction $ 
-````
+```
 
 
 ### Exercise 19
@@ -745,14 +745,14 @@ learnr2::question(
 
 Your answer should look something like:
 
-````
+```
 github-introduction $ git log
 commit b81019c11410adc933cdb256649ee4cf66f9026f (HEAD -> main)
 Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
 Date:   Fri May 1 19:41:05 2026 +0000
 
     added sentence
-````
+```
 
 ### Exercise 22
 
@@ -807,7 +807,7 @@ learnr2::question(
 
 Your answer should look like:
 
-````
+```
 github-introduction $ git log
 commit be56bbaedd692a6d29bba410f0a6fd5b1d844a64 (HEAD -> main, origin/main, origin/HEAD)
 Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
@@ -820,7 +820,7 @@ Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
 Date:   Mon May 4 16:57:08 2026 +0000
 
     initial version
-````
+```
 
 This looks the same as before, except that "(HEAD -> main)" in the top line has changed to "(HEAD -> main, origin/main, origin/HEAD)". This tells us that our changes have been pushed to GitHub, not simply committed locally. We will save a discussion of what `"HEAD"` means for later.
 
@@ -853,7 +853,7 @@ learnr2::question(
 
 You should have something like this:
 
-````
+```
 Commit History
 Commits on May 4, 2026
 
@@ -873,7 +873,7 @@ Commits on May 4, 2026
     authored
     15 days ago
 
-````
+```
 ###
 
 As AI writes more and more of our code, it's becoming increasingly important to get good at managing this code with Git and GitHub.
@@ -913,7 +913,7 @@ learnr2::question(
 
 ###
 
-````
+```
 ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
   geom_point(alpha = 0.7) +
   scale_color_brewer(palette = "Set2") +
@@ -935,7 +935,7 @@ ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
     panel.grid.major = element_line(color = "grey90"),
     panel.grid.minor = element_blank()
   )
-````
+```
 
 ###
 
@@ -991,7 +991,7 @@ learnr2::question(
 
 ###
 
-````
+```
 github-introduction $ git log -n 1
 commit d8486207321f7e682075bc5fab87e02f8124a5f1 (HEAD -> main, origin/main, origin/HEAD)
 Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
@@ -999,7 +999,7 @@ Date:   Mon May 4 19:30:10 2026 +0000
 
     added chart
 github-introduction $
-````
+```
 
 We are being a little sloppy to equate "pushing" with "syncing." Strictly speaking, "syncing" does two things: it "pushes" your changes to GitHub *and* it "pulls" any changes made on GitHub to your local computer. But, in this case, because no one else but you can change the GitHub repo, there is nothing to "pull." 
 
@@ -1030,14 +1030,14 @@ learnr2::question(
 
 Here is what I see, broken up to allow for comments:
 
-````
+```
 github-introduction $ quarto publish gh-pages analysis-1.qmd
 ? Publish site to https://ppbds-student.github.io/github-introduction/ using gh-pages? (Y/n) › Yes
-````
+```
 
 There are settings that will prevent this question from being asked every time we update the website. Otherwise, Quarto will check each time.
 
-````
+```
 Saved working directory and index state WIP on main: d848620 added chart
 Switched to a new branch 'gh-pages'
 [gh-pages (root-commit) 0e5631c] Initializing gh-pages branch
@@ -1047,11 +1047,11 @@ remote:      https://github.com/ppbds-student/github-introduction/pull/new/gh-pa
 remote: 
 To https://github.com/ppbds-student/github-introduction
  * [new branch]      HEAD -> gh-pages
-````
+```
 
 By default, `quarto publish` follows the standard GitHub Pages approach of creating a new Git "branch" called `gh-pages`. Branches are lightweight pointers to specific commits. They allow you to isolate work in progress, experiment with new features, and collaborate effectively without affecting the main codebase. 
 
-````
+```
 Switched to branch 'main'
 Your branch is up to date with 'origin/main'.
 
@@ -1067,7 +1067,7 @@ processing file: analysis-1.qmd
 3/4                  
 4/4 [unnamed-chunk-2]
 output file: analysis-1.knit.md
-````
+```
 
 `quarto publish` processes `analysis-1.qmd` in the same way that `quarto preview` or `quarto render` does.
 
@@ -1089,10 +1089,10 @@ learnr2::question(
 
 ###
 
-````
+```
 Your site is live at https://ppbds-student.github.io/repo-2/
 Last deployed by @ppbds-student ppbds-student 6 minutes ago
-````
+```
 
 Here is my whole page:
 

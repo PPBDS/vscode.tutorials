@@ -12,12 +12,12 @@
 # fenced expected-output blocks still exists in the file, whitespace-trimmed.
 # Other block content (shell prompts, ls listings, install logs) is ignored.
 #
-# Usage:  Rscript .github/scripts/check-config-drift.R [tutorial.Rmd] [source]
+# Usage:  Rscript .github/scripts/check-config-drift.R [tutorial.qmd] [source]
 #   source may be a URL or a local path, e.g. ../codespace-starter/.devcontainer/devcontainer.json
 # Exit 1 with a list of missing lines on drift; base R only, no packages.
 
 args     <- commandArgs(trailingOnly = TRUE)
-tutorial <- if (length(args) >= 1) args[1] else "inst/tutorials/14-our-codespace-starter/tutorial.Rmd"
+tutorial <- if (length(args) >= 1) args[1] else "inst/tutorials/14-our-codespace-starter/14-our-codespace-starter.qmd"
 source   <- if (length(args) >= 2) args[2] else
   "https://raw.githubusercontent.com/PPBDS/codespace-starter/main/.devcontainer/devcontainer.json"
 
