@@ -15,6 +15,9 @@ Our answer could be:
 You should have entered `pwd` at the `workflow$` prompt. If you did so, the response should have been `/workspaces/workflow`. 
 ---
 
+Maybe the simplest approach is just to use screenshots for everything. We can show our answer and, if they try to copy/paste our answer, we will catch them. Students have no choice but to actually type in the commands. 
+
+But if we require 30+ screenshots, then we need to worry about the size of the resulting files when we upload them to canvas. So, we should probably make learnr2 automatatically (unless overruled by the tutorial writer) shrink any submitted screenshot to a small size. 
 
 
 There are a couple of tricks that we need to teach before milestone 4, either in current tutorials or in a special 'tricks' tutorial. Key topics:
@@ -266,6 +269,10 @@ Still good tutorials, but we make some changes.
 
 
 
+
+### terminal-3
+
+  * Retake the screenshot `inst/tutorials/08-terminal-3/images/grepping-gh-webpage.png` (Exercise 5 in the grep section). It shows the GitHub file page for `grepping.txt` with the Raw button boxed in red, but the breadcrumb reads `vscode.tutorials / inst / tutorials / 03-terminal / images / grepping.txt`, a directory name two renumberings old, and the commit line says "initial copy over from positron.tutorials". The file now lives at `inst/extdata/grepping.txt` (moved 2026-09-27 so renumbering can never break the download URL again), so the page to screenshot is https://github.com/PPBDS/vscode.tutorials/blob/main/inst/extdata/grepping.txt, once that move is pushed. The current image is also in GitHub dark mode; take the new one in light mode, per the standing note that dark-mode screenshots are unreadable, and keep the red box around Raw since that button is the point of the picture.
 
 ### Other Stuff
 
