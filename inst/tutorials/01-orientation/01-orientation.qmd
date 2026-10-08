@@ -462,7 +462,6 @@ learnr2::question(
 
 ```{r}
 #| label: r-terminal-5-answer
-#| include: false
 learnr2::show_file(file.path(R.home(), "COPYING"), end = 7)
 ```
 
@@ -488,9 +487,15 @@ learnr2::question(
 
 Once you submit an answer, it is locked: you cannot change it. You also cannot click "Continue" until you have submitted every question above it. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.
 
+If you get stuck, just write "I skipped this question" or words to that effect. Skipping a question or two is *never* a problem. Just press on.
+
 ### Exercise 7
 
-When we want to see a web page, we ask for a screenshot rather than copied text. To take one, press `Cmd + Shift + 4` on a Mac or `Win + Shift + S` on Windows, then select the part of the screen you want. Click in the answer box and press `Ctrl + V` (`Cmd + V` on a Mac) to paste it.
+When we want to evaluate a webpage which you have created, we ask for a screenshot rather than copied text. To take one, press `Cmd + Ctrl + Shift + 4` on a Mac or `Win + Shift + S` on Windows, then select the part of the screen you want. This copies the image to your clipboard. Click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
+
+**Note for Mac users**: the more familiar `Cmd + Shift + 4` (without Control) saves the screenshot as a file on your Desktop by default instead of copying it to the clipboard, so pasting won’t work unless you accept the option to save to the clipboard.
+
+<!-- DK: Might be nice to have a little animation for Windows and both Mac cases. -->
 
 ###
 
