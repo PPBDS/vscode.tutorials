@@ -1,5 +1,13 @@
 # vscode.tutorials (development version)
 
+* Each tutorial's place in the sequence now comes from `learnr2: ordering:`
+  in its YAML header, so the directories lost their numeric prefixes
+  (`01-orientation` is now `orientation`, and so on). Run tutorials by the new
+  names, e.g. `learnr2::run_tutorial("workflow", package = "vscode.tutorials")`.
+
+* The Devcontainer Dockerfile tutorial's copy of the Dockerfile is refreshed to
+  the image without learnr.
+
 * Rebuilt every tutorial on **learnr2**, which renders each one to a static
   Quarto page whose code runs in the browser via WebR. **learnr2** is the
   package's only tutorial dependency (it also supplies `show_file()`), and the

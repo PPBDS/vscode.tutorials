@@ -39,7 +39,7 @@ not an outside reference. Two things set this package apart:
 ### Tutorial format: learnr2
 
 Every tutorial is a **learnr2** Quarto document,
-`inst/tutorials/NN-slug/NN-slug.qmd`, rendered to a static page. The
+`inst/tutorials/<slug>/<slug>.qmd`, rendered to a static page. The
 mechanics --- YAML, labels, `echo: false` on widget chunks, question types,
 screenshot questions, `{verbatim}` blocks --- are in learnr2's vignettes
 "Translating learnr Tutorials" and "Tutorials in the Age of AI"; follow them.
@@ -322,48 +322,59 @@ its saved answer is stored under).
   opened as the workspace, and — unlike every other tutorial repo — permanent:
   students keep it, and the OpenRouter tutorial builds on it.
 
-### Refer to tutorials by title, not number
+### Refer to tutorials by title, not slug
 
-Sequence numbers change often; titles rarely do. In prose — this file, and
-cross-references inside tutorials — refer to a tutorial by its **title** ("the
-Quarto tutorial", "GitHub Introduction"), never by its `NN-slug` directory name. Reserve the
-directory name for places that genuinely need it: paths, URLs, `run_tutorial()`
-calls, and ids. This keeps most references immune to renumbering and shrinks the
-fan-out below.
+In prose — this file, and cross-references inside tutorials — refer to a
+tutorial by its **title** ("the Quarto tutorial", "GitHub Introduction"), never
+by its directory slug. Reserve the slug for places that genuinely need it:
+paths, URLs, and `run_tutorial()` calls.
 
 When a title is written out as a title, quote it: *the next tutorial, "Models
 And Money," teaches…*; *the "Orientation" tutorial*. Following American
 style, commas and periods go inside the closing quote. Short attributive
 references (the Quarto tutorial, the Code tutorial) stay unquoted.
 
-### Renumbering tutorials (directory renames)
+### Tutorial order and directory names
 
-Tutorial directory names (`inst/tutorials/NN-slug/`) embed a sequence number.
-Renaming a directory fans out; update all of these together:
+A tutorial's place in the sequence is set by `ordering` in its YAML header:
 
-1. `learnr2::run_tutorial(name = "NN-slug", ...)` calls — `name` is the
-   **directory** name. They appear in README.Rmd/README.md and inside
-   tutorials ("if you quit, restart with...").
-2. Files students download from GitHub (the `raw.githubusercontent.com/...`
-   and `github.com/.../blob/main/...` URLs in download exercises and in
-   `tests/testthat/test-downloads.R`) must **not** live under a numbered
-   tutorial directory. Keep them in `inst/extdata/` (`grepping.txt`) or at the
-   repo root (`TODO.txt`), so a rename never changes the URL. A URL that embeds
-   `inst/tutorials/NN-slug/` breaks in both directions: it 404s until the
-   rename is pushed, and once pushed it 404s for every student still on the
-   previously installed package (how the Terminal 3 `grepping.txt` link broke
-   in September 2026).
-3. Cross-references in prose: "the next tutorial, `NN-slug`", README.Rmd's
-   tutorial list (re-render README.md after editing), and this file.
-4. The `.qmd` file name and the `filename_prefix` of
-   `learnr2::download_answers_button()` — **both must always equal the
-   directory name** (`NN-slug/NN-slug.qmd`). Renumbering a directory therefore
-   means renaming its `.qmd` and updating the prefix in the same commit.
-   (The rename changes the page URL that students' saved answers are keyed
-   on, so those answers do not carry over; that cost is accepted —
-   consistency wins.)
+```yaml
+learnr2:
+  ordering: 5
+```
 
-NEWS.md entries are historical records — never retro-renumber them.
+The R Tutorials extension lists tutorials by `ordering`, lowest first
+(tutorials without one sort after, by folder name). Current order: Orientation
+(1), Workflow, Code, Quarto, Antigravity, Terminal 1--3, GitHub Introduction,
+GitHub Advanced, Websites 1--2, Devcontainers, Our Codespace Starter, The
+Devcontainer Dockerfile, Your Starter, Dotfiles, OpenRouter, Models And Money
+(19). **Every tutorial must set an `ordering`.** Reordering means editing these
+numbers and nothing else.
+
+Because `ordering` controls the sequence, directory names carry **no numeric
+prefix** (they were `01-orientation` … `19-models` until October 2026). A
+directory is `inst/tutorials/<slug>/`, and the `.qmd` inside it and the
+`filename_prefix` of `learnr2::download_answers_button()` must both equal the
+slug (`<slug>/<slug>.qmd`). Renaming a slug fans out; update all of these
+together:
+
+1. `learnr2::run_tutorial(name = "<slug>", ...)` calls, in README.Rmd/README.md
+   and the package help page (`R/vscode.tutorials-package.R`).
+2. The `.qmd` file name and the `filename_prefix`. (The rename changes the page
+   URL that students' saved answers are keyed on, so those answers do not carry
+   over.)
+3. Paths in this file, `.github/scripts/check-config-drift.R`, and
+   `tests/testthat/test-downloads.R`.
+4. Files students download from GitHub (the `raw.githubusercontent.com/...`
+   URLs in download exercises and in `tests/testthat/test-downloads.R`) must
+   **not** live under a tutorial directory. Keep them in `inst/extdata/`
+   (`grepping.txt`) or at the repo root (`TODO.txt`), so a rename never changes
+   the URL. A URL that embeds `inst/tutorials/<slug>/` breaks in both
+   directions: it 404s until the rename is pushed, and once pushed it 404s for
+   every student still on the previously installed package (how the Terminal 3
+   `grepping.txt` link broke in September 2026).
+
+NEWS.md entries are historical records — never rewrite old names in them.
 
 ### The devcontainer image pin (`ghcr.io/ppbds/devcontainer:X.Y.Z`)
 
@@ -375,10 +386,10 @@ pin in [PPBDS/codespace-starter
 them with `grep -rn 'ghcr.io/ppbds/devcontainer:' --include='*.qmd' --include='*.yaml' .`):
 
 1. The Our Codespace Starter tutorial (currently
-   `inst/tutorials/14-our-codespace-starter/14-our-codespace-starter.qmd`) — the expected answer
+   `inst/tutorials/our-codespace-starter/our-codespace-starter.qmd`) — the expected answer
    for the find-the-`"image"`-line exercise.
 2. The Devcontainer Dockerfile tutorial (currently
-   `inst/tutorials/15-docker/15-docker.qmd`) — the intro's back-reference to that
+   `inst/tutorials/docker/docker.qmd`) — the intro's back-reference to that
    line.
 3. `.github/workflows/R-CMD-check.yaml` — the CI `container: image:` tag (this
    one is normally bumped as part of the codespace-starter release process; the

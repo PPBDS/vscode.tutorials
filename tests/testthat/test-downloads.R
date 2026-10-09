@@ -1,5 +1,5 @@
 # Tests that URLs students are instructed to download from in the terminal
-# tutorials (07-terminal-2, 08-terminal-3) are still reachable. We check for text/plain content-type to catch cases where a
+# tutorials (terminal-2, terminal-3) are still reachable. We check for text/plain content-type to catch cases where a
 # URL silently redirects to an HTML error page instead of the raw file.
 # GitHub rate-limits anonymous requests from CI runners, so retry 429s and, if
 # still throttled, skip: a rate limit is not evidence the URL is broken.
@@ -51,7 +51,7 @@ test_that("terminal tutorials: TODO.txt is downloadable", {
   )
 })
 
-test_that("08-terminal-3: grepping.txt is downloadable", {
+test_that("terminal-3: grepping.txt is downloadable", {
   testthat::skip_on_cran()
   testthat::skip_if_offline()
   check_url_is_plain_text(
@@ -61,7 +61,7 @@ test_that("08-terminal-3: grepping.txt is downloadable", {
   )
 })
 
-test_that("07-terminal-2: penguins.csv is downloadable", {
+test_that("terminal-2: penguins.csv is downloadable", {
   testthat::skip_on_cran()
   testthat::skip_if_offline()
   check_url_is_plain_text(

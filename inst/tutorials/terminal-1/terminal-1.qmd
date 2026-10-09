@@ -1,0 +1,955 @@
+---
+title: Terminal 1
+author: David Kane
+description: First of three bash Terminal tutorials. Covers the core commands (pwd, ls, mkdir, cp, mv, rm, cd), paths and the symbols . / .. / ~, and output redirection with > and >>.
+format: live-html
+engine: knitr
+toc: true
+learnr2:
+  ordering: 6
+---
+
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
+
+
+
+## Information
+###
+
+```{r}
+#| label: information-1
+#| echo: false
+learnr2::student_info()
+```
+
+<!-- Some diagrams which show directory structure would be nice. -->
+
+## Introduction
+###
+
+This tutorial introduces the structure and uses of the bash Terminal from within VS Code running on GitHub Codespaces. When most people use the word "terminal," they are referring to something like the bash Terminal, or some other shell which allows us to "talk" with the computer directly.
+
+The older, more general term for the terminal is the "command line." All modern operating systems provide a command line, which sophisticated users can use to modify files and directories with commands like `pwd`, `ls`, `echo`, `mkdir`, `mv`, `rm`, and `cd`. This is the first of three Terminal tutorials: this one covers the core verbs, paths, and redirection; Terminal 2 covers files and running programs; Terminal 3 covers wildcards, grep, and pipes.
+
+Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
+
+###
+
+You should be doing this tutorial in a repo named `terminal-1`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so. (Recall the rule: a tutorial's repo is named after its title, all in lower case, with spaces replaced by dashes --- "Terminal 1" becomes `terminal-1`.)
+
+## Terminal
+###
+
+The lower section of the VS Code window is the "Panel," which is composed of a collection of "views," including Output, Problems, Ports, and Terminal. (Their labels appear in capitals --- **TERMINAL** --- across the top of the Panel.)
+
+The Terminal view is, by far, the part of the Panel which we use most often. Within it you can run several *terminals* at once, each with its own tab on the right side of the Panel. A terminal is just a window for typing text to a program and reading the program's replies. The program is usually the bash **shell** --- a program whose whole job is to interpret your commands --- and that combination is what we call a bash Terminal. But a terminal can host other programs instead: an R Terminal is the same kind of window running R.
+
+![](images/terminal-on-open.png){width=90%}
+
+### Exercise 1
+
+You met the bash Terminal in the Orientation and Workflow tutorials; this is recall. Open a new bash Terminal. Hit the `Enter` key twice --- the string that reappears each time is the **prompt**, telling you bash is ready for your next command. Then run `pwd`. CP/CR.
+
+```{r}
+#| label: terminal-1
+#| echo: false
+learnr2::question(
+  "You met the bash Terminal in the Orientation and Workflow tutorials; this is recall. Open a new bash Terminal. Hit the Enter key twice -- the string that reappears each time is the prompt, telling you bash is ready for your next command. Then run pwd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+Your answer should look something like:
+
+```
+terminal-1 $
+terminal-1 $
+terminal-1 $ pwd
+/workspaces/terminal-1
+terminal-1 $
+```
+
+The prompt is the name of the directory you are currently in --- `terminal-1` --- followed by a space and a dollar sign. The dollar sign indicates the end of the prompt; you type commands after it. `pwd` prints the full path to that directory. (If you are working on your own computer rather than in a Codespace, your prompt will look different. Default prompts vary from computer to computer.)
+
+###
+
+You only get this short prompt in a bash Terminal which you open yourself. A bash Terminal that was already open when the Codespace started shows GitHub's long default prompt, something like:
+
+```
+@davekane-student ➜ /workspaces/terminal-1 (main) $
+```
+
+with your GitHub username in place of `davekane-student`. The two prompts behave identically. All our examples show the short prompt, so if you see the long one, open a new bash Terminal.
+
+### Exercise 2
+
+Let's **m**a**k**e a **dir**ectory called `example`. Run `mkdir example`. Run `ls` to confirm that the new directory exists inside the current working directory. CP/CR.
+
+```{r}
+#| label: terminal-2
+#| echo: false
+learnr2::question(
+  "Let's make a directory called example. Run mkdir example. Run ls to confirm that the new directory exists inside the current working directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+`mkdir` creates an empty directory. We --- and most other people --- use the terms "folder" and "directory" interchangeably.
+
+### Exercise 3
+
+Move into the `example` directory by running `cd example`. Run `pwd`. CP/CR.
+
+
+```{r}
+#| label: terminal-3
+#| echo: false
+learnr2::question(
+  "Move into the example directory by running cd example. Run pwd. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+Your answer should look like:
+
+```
+terminal-1 $ mkdir example
+terminal-1 $ cd example
+example $ pwd
+/workspaces/terminal-1/example
+example $
+```
+
+The `example` directory is one level below the directory in which you started.
+
+### Exercise 4
+
+Let's create a file called `my.txt`. Run `echo "" > my.txt`.
+
+Run `ls` to confirm that the new file exists inside the current directory. CP/CR.
+
+```{r}
+#| label: terminal-4
+#| echo: false
+learnr2::question(
+  "Run ls to confirm that the new file exists inside the current directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+example $ echo "" > my.txt
+example $ ls
+my.txt
+example $
+```
+
+`echo "" > my.txt` creates an empty file. `echo` just repeats whatever follows, which is an empty quote in this case. `>`, which we will discuss more later, redirects whatever comes before it into whatever comes after it.
+
+
+### Exercise 5
+
+Make a copy of `my.txt` called `my_2.txt` by using the `cp` command. That is, run `cp my.txt my_2.txt`. Confirm that this worked by running `ls`. CP/CR.
+
+```{r}
+#| label: terminal-5
+#| echo: false
+learnr2::question(
+  "Make a copy of my.txt called my_2.txt by using the cp command. That is, run cp my.txt my_2.txt. Confirm that this worked by running ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+Your answer should look like:
+
+```
+example $ cp my.txt my_2.txt
+example $ ls
+my_2.txt  my.txt
+example $
+```
+
+### Exercise 6
+
+We rename files with the `mv` command, which is derived from **m**o**v**e. The first argument is the file we want to rename, and the second argument is the new name.
+
+Rename `my.txt` to `fake.txt` by running `mv my.txt fake.txt`. Run `ls` to confirm. CP/CR.
+
+```{r}
+#| label: terminal-6
+#| echo: false
+learnr2::question(
+  "Rename my.txt to fake.txt by running mv my.txt fake.txt. Run ls to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+Your answer should look like:
+
+```
+example $ mv my.txt fake.txt
+example $ ls
+fake.txt  my_2.txt
+example $
+```
+
+###
+
+From the computer's point of view, **renaming** a file is the same thing as **moving** a file. In fact, moving is more general since it allows us to change both the name *and* the location of a file.
+
+### Exercise 7
+
+Let's **r**e**m**ove the file `fake.txt`. Run `rm fake.txt`. Run `ls` to confirm. CP/CR.
+
+```{r}
+#| label: terminal-7
+#| echo: false
+learnr2::question(
+  "Let's remove the file fake.txt. Run rm fake.txt. Run ls to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+Your answer should look like:
+
+```
+example $ rm fake.txt
+example $ ls
+my_2.txt
+example $
+```
+
+Be careful with the `rm` command in the bash Terminal. Unlike moving files to Trash on your computer, it is (usually) irreversible.
+
+### Exercise 8
+
+We want to remove the `example` directory. But we can't do that while we are "located" in that directory. That is, the computer is aware that our Terminal process --- the entity that is executing our commands like `ls` and `cp` --- is currently working from the `example` directory.
+
+Run `cd ..`. The "dot-dot" symbol --- `..` --- references the directory that contains the current directory. Run `pwd` to confirm. CP/CR.
+
+```{r}
+#| label: terminal-8
+#| echo: false
+learnr2::question(
+  "Run cd ... The \"dot-dot\" symbol -- .. -- references the directory that contains the current directory. Run pwd to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+Your answer should look like:
+
+```
+example $ cd ..
+terminal-1 $ pwd
+/workspaces/terminal-1
+terminal-1 $
+```
+
+Again, note how the prompt changed because we moved directories. The `..` symbol --- two periods --- always indicates the directory one level up, i.e., the directory in which `example` is located.
+
+### Exercise 9
+
+Run `rm -r example` to remove the directory `example`. Then run `ls` to confirm. CP/CR.
+
+```{r}
+#| label: terminal-9
+#| echo: false
+learnr2::question(
+  "Run rm -r example to remove the directory example. Then run ls to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+```
+terminal-1 $ rm -r example
+terminal-1 $ ls
+terminal-1 $
+```
+
+`-r` is an **option** that allows us to delete a directory. The `r` stands for **r**ecursive because, in order to delete a directory, you must also (recursively) delete every directory and file within that directory.
+
+It is good to clean up. Don't leave junk files lying around.
+
+## Paths
+###
+
+You will practice using paths both inside and outside the current working directory. You will learn a few shortcuts to make this easier.
+
+### Exercise 1
+
+By default, a new Terminal in VS Code starts in the folder you have open: `/workspaces/terminal-1`, your repo.
+
+Run `pwd` to show your current working directory. CP/CR.
+
+```{r}
+#| label: paths-1
+#| echo: false
+learnr2::question(
+  "Run pwd to show your current working directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+The Activity Bar on the left side of VS Code includes several buttons. When you click one of these buttons, a view opens next to the Activity Bar. Pressing the button again closes that view.
+
+The top button is the Explorer. Pressing it opens the Explorer pane, also called Project Explorer. This functions like the Mac Finder or the Windows Explorer.
+
+### Exercise 2
+
+Use `mkdir` to make a directory named `paths` inside your current working directory. CP/CR.
+
+```{r}
+#| label: paths-2
+#| echo: false
+learnr2::question(
+  "Use mkdir to make a directory named paths inside your current working directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+The new directory is created directly inside the working directory.
+
+### Exercise 3
+
+Let's **c**hange the working **d**irectory to `paths`. Run `cd paths`. Run `pwd` to confirm that you have changed the working directory. CP/CR.
+
+```{r}
+#| label: paths-3
+#| echo: false
+learnr2::question(
+  "Let's change the working directory to paths. Run cd paths. Run pwd to confirm that you have changed the working directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+Your answer should look something like:
+
+```
+terminal-1 $ cd paths
+paths $ pwd
+/workspaces/terminal-1/paths
+paths $
+```
+
+Note how the prompt changed after I ran the `cd paths` command. Before, the prompt showed `terminal-1` because that was the current working directory. Using `cd` changed the current working directory to `paths`, causing the prompt to change as well.
+
+### Exercise 4
+
+Use `mkdir` to make a directory called `lessons` inside `paths` by running `mkdir lessons`. Confirm that this worked by running `ls`. CP/CR.
+
+```{r}
+#| label: paths-4
+#| echo: false
+learnr2::question(
+  "Use mkdir to make a directory called lessons inside paths by running mkdir lessons. Confirm that this worked by running ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+paths $ mkdir lessons
+paths $ ls
+lessons
+paths $
+```
+
+Because we have changed working directories, the `lessons` directory is created inside the `paths` directory. It is the only object in the `paths` directory.
+
+### Exercise 5
+
+Make a directory within `lessons` called `fruits` by running `mkdir lessons/fruits`.
+
+Run `ls lessons` to check to see if `fruits` exists inside the `lessons` directory. CP/CR.
+
+```{r}
+#| label: paths-5
+#| echo: false
+learnr2::question(
+  "Run ls lessons to check to see if fruits exists inside the lessons directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+paths $ mkdir lessons/fruits
+paths $ ls lessons/
+fruits
+paths $
+```
+
+###
+
+We could not, as before, simply give `fruits` as an argument to `mkdir` because then the directory would be created directly inside `paths`, the current working directory, rather than within `lessons`. To refer to a location other than the working directory, we need to use a **path**, which describes the location directory by directory. The path above is called a **relative path** because it uses the working directory as its starting point.
+
+### Exercise 6
+
+Let's change our working directory to `fruits`. Run `cd lessons/fruits`.
+
+As you are typing this command, type only the `f` in `fruits` and then press the tab key (twice may be necessary on some computers). Pressing tab autocompletes the name of a file or directory.
+
+CP/CR.
+
+```{r}
+#| label: paths-6
+#| echo: false
+learnr2::question(
+  "As you are typing this command, type only the f in fruits and then press the tab key (twice may be necessary on some computers). Pressing tab autocompletes the name of a file or directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+Get in the habit of using the tab key. Avoid typing whenever possible. Be lazy!
+
+### Exercise 7
+
+Use `echo "" >` to make a text file inside `fruits`, named `pineapple.txt`. Recall that your current location --- i.e., your working directory --- is now `fruits`. So, to make a new file within `fruits`, you just need `echo "" > pineapple.txt`. Run `ls` to confirm. CP/CR.
+
+```{r}
+#| label: paths-7
+#| echo: false
+learnr2::question(
+  "Use echo \"\" > to make a text file inside fruits, named pineapple.txt. Recall that your current location -- i.e., your working directory -- is now fruits. So, to make a new file within fruits, you just need echo \"\" > pineapple.txt. Run ls to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+fruits $ echo "" > pineapple.txt
+fruits $ ls
+pineapple.txt
+fruits $
+```
+###
+
+`pineapple.txt` is still a relative path, but since the file is directly inside the assumed starting point, i.e., the working directory, the name of the file is all we need. If we had used `lessons/fruits/apple.txt`, as we would have had to do if our working directory were `paths`, we would have gotten an error because those directories would not be recognized from our actual starting point of `fruits`.
+
+Read this paragraph again. No skimming!
+
+### Exercise 8
+
+Use `echo` to make two more text files inside `fruits`, named `pear.txt` and `does-not-belong`. That is, run `echo "" > pear.txt & echo "" > does-not-belong`. Confirm by running `ls`. CP/CR.
+
+```{r}
+#| label: paths-8
+#| echo: false
+learnr2::question(
+  "Use echo to make two more text files inside fruits, named pear.txt and does-not-belong. That is, run echo \"\" > pear.txt & echo \"\" > does-not-belong. Confirm by running ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+fruits $ echo "" > pear.txt & echo "" > does-not-belong
+fruits $ ls
+does-not-belong pear.txt        pineapple.txt
+fruits $
+```
+
+The `&` symbol tells the operating system to run both the command that came before it and the command that comes after it.
+
+### Exercise 9
+
+Let's change our working directory to `lessons`. Run `cd ..` to go to the folder immediately above the working directory. Use `pwd` to confirm that you are in the right directory. CP/CR.
+
+```{r}
+#| label: paths-9
+#| echo: false
+learnr2::question(
+  "Let's change our working directory to lessons. Run cd .. to go to the folder immediately above the working directory. Use pwd to confirm that you are in the right directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+Your answer should look like this:
+
+```
+fruits $ cd ..
+lessons $ pwd
+/workspaces/terminal-1/paths/lessons
+lessons $
+```
+
+###
+
+`..` is shorthand for the directory immediately above the current working directory.
+
+### Exercise 10
+
+Use `mkdir` to make a directory within `lessons`, named `tbd`. Run `ls` to confirm. CP/CR.
+
+```{r}
+#| label: paths-10
+#| echo: false
+learnr2::question(
+  "Use mkdir to make a directory within lessons, named tbd. Run ls to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+lessons $ mkdir tbd
+lessons $ ls
+fruits  tbd
+lessons $
+```
+
+In the same way that `..` refers to the directory above the current directory, `.` --- a single period --- refers to the current directory.
+
+### Exercise 11
+
+Use `mv` to **m**o**v**e the file `does-not-belong` from the `fruits` directory to the `tbd` directory by running `mv fruits/does-not-belong tbd`. Run `ls tbd` to confirm.
+
+CP/CR.
+
+```{r}
+#| label: paths-11
+#| echo: false
+learnr2::question(
+  "Use mv to move the file does-not-belong from the fruits directory to the tbd directory by running mv fruits/does-not-belong tbd. Run ls tbd to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+lessons $ mv fruits/does-not-belong tbd
+lessons $ ls tbd
+does-not-belong
+lessons $
+```
+
+###
+
+We can act on files that are not in the working directory as long as we provide a path --- either relative, as here, or absolute --- to those files. In this case, neither `mv` nor `ls` is acting on the current directory. Instead, they are acting on lower directories: `fruits` and `tbd`.
+
+### Exercise 12
+
+Use `cd` to change the working directory up to `paths` by running `cd ..`. Confirm with `pwd`. Use `mv` and the `.` shorthand to move the directory `tbd` directly inside of `paths` by running `mv lessons/tbd .`. Confirm with `ls`. CP/CR.
+
+```{r}
+#| label: paths-12
+#| echo: false
+learnr2::question(
+  "Use cd to change the working directory up to paths by running cd ... Confirm with pwd. Use mv and the . shorthand to move the directory tbd directly inside of paths by running mv lessons/tbd .. Confirm with ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+lessons $ cd ..
+paths $ pwd
+/workspaces/terminal-1/paths
+paths $ mv lessons/tbd .
+paths $ ls
+lessons tbd
+paths $
+```
+
+When using `mv`, there is no difference between moving a directory and moving a file. A command like `mv lessons/tbd .` seems like a bit of witchcraft. But all it really says is to move (`mv`) the `tbd` directory (which is located in the `lessons` directory) to here (`.`), meaning to the current directory.
+
+### Exercise 13
+
+Move up one more directory, back to the original working directory, by running `cd ..`. Confirm with `pwd`. Run `rm -r paths` to remove all the directories and files that we have been working with. CP/CR.
+
+```{r}
+#| label: paths-13
+#| echo: false
+learnr2::question(
+  "Move up one more directory, back to the original working directory, by running cd ... Confirm with pwd. Run rm -r paths to remove all the directories and files that we have been working with. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+paths $ cd ..
+terminal-1 $ pwd
+/workspaces/terminal-1
+terminal-1 $ rm -r paths
+terminal-1 $
+```
+
+###
+
+In olden times, professional programmers would spend a lot of time learning the various options for commands like `rm`. Now, we just ask ChatGPT or a similar tool.
+
+<!-- Could have them ask ChatGPT to do something and then do it. -->
+
+## Important symbols
+###
+
+We have seen two important symbols --- `..` and `.` --- already. This section will explore those along with `~`. The most common English terms for these symbols are "dot" for `.`, "dot dot" for `..`, and "tilde" for `~`. The `.` symbol indicates the current directory. The `..` symbol is for the directory one level above the current directory. The `~` symbol is for your "home" directory.
+
+### Exercise 1
+
+Use `mkdir symbols` to create a new directory called `symbols`. `cd` into that directory by running `cd symbols`. Confirm the change with `pwd`. Confirm that the directory is empty by running `ls`.
+
+CP/CR.
+
+```{r}
+#| label: important-symbols-1
+#| echo: false
+learnr2::question(
+  "Use mkdir symbols to create a new directory called symbols. cd into that directory by running cd symbols. Confirm the change with pwd. Confirm that the directory is empty by running ls. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+terminal-1 $ mkdir symbols
+terminal-1 $ cd symbols
+symbols $ pwd
+/workspaces/terminal-1/symbols
+symbols $ ls
+symbols $
+```
+
+The more practice we get with command-line commands --- often called "shell" commands --- the easier it is to string together several of them in a row.
+
+### Exercise 2
+
+But is the `symbols` directory really empty? Run `ls -a` to check. The `-` indicates an option to the `ls` command. The `a` option tells `ls` to return *a*ll the members of the directory.
+
+CP/CR.
+
+```{r}
+#| label: important-symbols-2
+#| echo: false
+learnr2::question(
+  "But is the symbols directory really empty? Run ls -a to check. The - indicates an option to the ls command. The a option tells ls to return *a*ll the members of the directory. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+Your answer should look like:
+
+```
+symbols $ ls -a
+.       ..
+symbols $
+```
+
+Every directory, even an "empty" one, includes `.` and `..`. The `.` is a link to the current directory, i.e., to the `symbols` directory in which we are currently located. The `..` is a link to the directory one level up, which is `/workspaces/terminal-1` in my case.
+
+### Exercise 3
+
+Run `ls ..` to examine the contents of the directory one level above the current directory. Then run `ls ../..` to look two levels up. CP/CR.
+
+```{r}
+#| label: important-symbols-3
+#| echo: false
+learnr2::question(
+  "Run ls .. to examine the contents of the directory one level above the current directory. Then run ls ../.. to look two levels up. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+My answer looks like this:
+
+```
+symbols $ ls ..
+symbols
+symbols $ ls ../..
+codespace-starter  terminal-1
+symbols $
+```
+
+###
+
+One level up is your repo, where `symbols` is currently the only visible item. (The repo also contains hidden files, like the `.git` directory, but plain `ls` does not show those.) Two levels up is `/workspaces`, where your repo sits beside `codespace-starter`, the folder that supplied this Codespace --- plus the repos from earlier tutorials, if you have reused this Codespace. The symbols chain: `..` means one level up, `../..` two, and so on.
+
+### Exercise 4
+
+Run `pwd` again. This returns the current working directory. Note that the return value is an **absolute path**. It tells you exactly where you --- meaning your Terminal session or instance --- are located on your computer.
+
+```{r}
+#| label: important-symbols-4
+#| echo: false
+learnr2::question(
+  "Run pwd again. This returns the current working directory. Note that the return value is an absolute path. It tells you exactly where you -- meaning your Terminal session or instance -- are located on your computer.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+My answer looks like this:
+
+```
+symbols $ pwd
+/workspaces/terminal-1/symbols
+symbols $
+```
+
+The absolute path for my current working directory breaks down into these components.
+
+* The starting `/` indicates the root, or origin, of the file system. There is no directory higher than the root directory.
+
+* `workspaces`, which is where GitHub Codespaces stores workspace folders.
+
+* `terminal-1`, the repo in which you are doing this tutorial, followed by `symbols`, which is the directory we just created.
+
+### Exercise 5
+
+Run `cd` without any argument. Doing so changes your current directory to your home directory because that is the default behavior for `cd`. Run `pwd` to confirm where you are. CP/CR.
+
+```{r}
+#| label: important-symbols-5
+#| echo: false
+learnr2::question(
+  "Run cd without any argument. Doing so changes your current directory to your home directory because that is the default behavior for cd. Run pwd to confirm where you are. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+My answer looks like this:
+
+```
+symbols $ cd
+~ $ pwd
+/home/rstudio
+~ $
+```
+
+In Codespaces, the home directory is usually `/home/rstudio`. Note how, after we run `cd`, the prompt changes to report `~` as the current working directory. `~` --- a tilde, pronounced "TIL-duh" --- is the symbol for the current user's home directory. The shorthands `.`, `..`, and `~` are not specific to any one command: they stand for paths, and work anywhere a path does.
+
+### Exercise 6
+
+Use `cd`, along with the full path to the `symbols` directory that you determined above, to change the working directory back to the `symbols` directory. Run `pwd` to confirm. CP/CR.
+
+```{r}
+#| label: important-symbols-6
+#| echo: false
+learnr2::question(
+  "Use cd, along with the full path to the symbols directory that you determined above, to change the working directory back to the symbols directory. Run pwd to confirm. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+~ $ cd /workspaces/terminal-1/symbols
+symbols $ pwd
+/workspaces/terminal-1/symbols
+symbols $
+```
+
+This is an example of using an absolute path to change locations.
+
+### Exercise 7
+
+Confirm that you are currently located in the `symbols` directory by running `pwd`. Run `cd ..` to move one directory up, out of the `symbols` directory. Delete the `symbols` directory with `rm -rf symbols`. CP/CR.
+
+```{r}
+#| label: important-symbols-7
+#| echo: false
+learnr2::question(
+  "Confirm that you are currently located in the symbols directory by running pwd. Run cd .. to move one directory up, out of the symbols directory. Delete the symbols directory with rm -rf symbols. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+Your answer should look like:
+
+```
+symbols $ pwd
+/workspaces/terminal-1/symbols
+symbols $ cd ..
+terminal-1 $ rm -rf symbols
+terminal-1 $
+```
+
+Note that `rm -rf symbols` and `rm -rf symbols/`, with the trailing slash, have the same effect. Except in unusual circumstances, including (or not including) the trailing slash in the name of a directory does not matter.
+
+## Redirection
+###
+
+You have been creating files with `echo "" > my.txt` since the start of this tutorial, without stopping to look at the machinery. The `>` symbol deserves its own moment: it **redirects** a program's output into a file. You should be back in your repo's top-level directory.
+
+### Exercise 1
+
+Run `echo`, giving it a quoted string with your first and last name as its argument. For me, that is `echo "David Kane"`. CP/CR.
+
+```{r}
+#| label: redirection-1
+#| echo: false
+learnr2::question(
+  "Run echo, giving it a quoted string with your first and last name as its argument. For me, that is echo \"David Kane\". CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+For me, this looks like:
+
+```
+terminal-1 $ echo "David Kane"
+David Kane
+terminal-1 $
+```
+
+`echo` just repeats its argument. By default, a program's output lands on your screen.
+
+### Exercise 2
+
+Now redirect that output into a file instead. Run `echo "Your First and Last Name Here" > me.txt` (with your actual name). Then run `cat me.txt` --- `cat` prints a file's contents, as you have seen in earlier tutorials; Terminal 2 gives it a fuller treatment. CP/CR.
+
+```{r}
+#| label: redirection-2
+#| echo: false
+learnr2::question(
+  "Now redirect that output into a file instead. Run echo \"Your First and Last Name Here\" > me.txt (with your actual name). Then run cat me.txt -- cat prints a file's contents, as you have seen in earlier tutorials; Terminal 2 gives it a fuller treatment. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+terminal-1 $ echo "David Kane" > me.txt
+terminal-1 $ cat me.txt
+David Kane
+terminal-1 $
+```
+
+###
+
+Nothing appeared on screen after the first command because `>` sent the output into `me.txt` instead. Be careful: `>` **overwrites** --- if `me.txt` had already existed, its old contents would be gone, with no warning.
+
+### Exercise 3
+
+To add to a file rather than overwrite it, use `>>`. Run `echo "I am learning bash." >> me.txt`, then `cat me.txt`, then clean up with `rm me.txt`. CP/CR.
+
+```{r}
+#| label: redirection-3
+#| echo: false
+learnr2::question(
+  "To add to a file rather than overwrite it, use >>. Run echo \"I am learning bash.\" >> me.txt, then cat me.txt, then clean up with rm me.txt. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+terminal-1 $ echo "I am learning bash." >> me.txt
+terminal-1 $ cat me.txt
+David Kane
+I am learning bash.
+terminal-1 $ rm me.txt
+terminal-1 $
+```
+
+###
+
+`>` overwrites; `>>` appends. Neither is limited to `echo` --- any command's output can be redirected, and AI agents build and extend files this way constantly. When you see `>` in a command an agent proposes, check what file it points at: whatever is there now will be replaced.
+
+## Summary
+###
+
+This tutorial introduced the structure and uses of the bash Terminal from within VS Code running on GitHub Codespaces.
+
+The older, more general term for the terminal is the "command line." All modern operating systems provide a command line, which sophisticated users can use to modify files and directories with commands like `pwd`, `ls`, `echo`, `mkdir`, `mv`, `rm`, and `cd`. Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
+
+Learn more about the command line and related topics by reading [*The Unix Workbench*](https://seankross.com/the-unix-workbench/) by Sean Kross.
+
+## Download answers
+
+```{r}
+#| label: download-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+###
+
+```{r}
+#| label: download-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "terminal-1")
+```
