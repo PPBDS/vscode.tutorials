@@ -110,13 +110,13 @@ This section walks through `codespace-starter’`s `.devcontainer/devcontainer.j
 
 ### Exercise 1
  
-In the bash Terminal, run `cd /workspaces/codespace-starter`. In the Explorer, open `.devcontainer/devcontainer.json` to see the whole file on your screen. Find the line beginning with `"name"`. Copy and paste it.
+In the bash Terminal, run `cd /workspaces/codespace-starter`, then `code .devcontainer/devcontainer.json` to open the whole file in an editor tab. (The Explorer hides `.devcontainer` in `codespace-starter` to keep the starting view simple, but `code` opens any file by its path.) Find the line beginning with `"name"`. Copy and paste it.
 
 ```{r}
 #| label: codespace-starter-1
 #| echo: false
 learnr2::question(
-  "In the bash Terminal, run cd /workspaces/codespace-starter. In the Explorer, open .devcontainer/devcontainer.json to see the whole file on your screen. Find the line beginning with \"name\". Copy and paste it.",
+  "In the bash Terminal, run cd /workspaces/codespace-starter, then code .devcontainer/devcontainer.json to open the whole file in an editor tab. Find the line beginning with \"name\". Copy and paste it.",
   type = "reflection",
   show_text = FALSE
 )
