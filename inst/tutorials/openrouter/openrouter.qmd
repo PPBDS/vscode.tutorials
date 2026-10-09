@@ -12,7 +12,6 @@ learnr2:
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -21,7 +20,6 @@ learnr2::student_info()
 ```
 
 ## Introduction
-###
 
 Every AI tool you have used so far --- Copilot, Antigravity, Claude Code --- locks you to one company's models. [OpenRouter](https://openrouter.ai/) does not. It is a **router**: one account and one key, with hundreds of models behind it. To use a different model, you type a different name.
 
@@ -118,7 +116,6 @@ openrouter $ which aider
 `which` tells you where a command lives. `/usr/local/bin` is one of the folders the shell searches whenever you type a command, which is why `aider` works from any directory without you doing anything first.
 
 ## Your OpenRouter Key
-###
 
 An **API key** is a long password that a program uses to prove it is you. In this section you will get one, check that it works, and store it safely.
 
@@ -406,7 +403,6 @@ Take this seriously. Bots scan new public commits within minutes looking for key
 If it ever happens to you, deleting the commit does **not** fix it. Go delete the key at <https://openrouter.ai/workspaces/default/keys> and make a new one.
 
 ## Driving A Model
-###
 
 Now the fun part. You have a key that cost nothing, and `aider` will use it. You will find a free model, run it, and then swap in a different one without even restarting.
 
@@ -758,7 +754,6 @@ a3f9c21 (HEAD -> main, origin/main) Add hello.R and .gitignore
 One commit, and you wrote it. Without `--no-auto-commits`, `aider` would have made its own commit the moment it created `hello.R`, and your history would record the assistant's work instead of yours. Teams disagree about which they prefer. What matters is that it is a setting, and you now know it exists.
 
 ## Summary
-###
 
 You have an OpenRouter account and an API key. Neither cost anything, and neither needed a credit card. The key is saved as a Codespaces secret, so it survives this machine being deleted and never sits in a repo.
 

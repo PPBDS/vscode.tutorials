@@ -12,7 +12,6 @@ learnr2:
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -21,7 +20,6 @@ learnr2::student_info()
 ```
 
 ## Introduction
-###
 
 This is the first tutorial you should complete after **Orientation**. It builds directly on that tutorial, deliberately repeating its most important ideas --- repetition is how these habits stick. We move slowly and explain every step.
 
@@ -68,7 +66,6 @@ Most questions ask for you to **CP/CR** --- **C**opy/**P**aste the **C**ommand a
 Your answer may look a little different from ours. That is OK. Usernames, version numbers, and the exact look of the prompt can be different. In our examples we shorten the prompt to just the folder name and a `$`, like `codespace-starter $`. Your real prompt may be longer, but it means the same thing.
 
 ## The Terminal
-###
 
 The Terminal is a place where you type commands and the computer answers. In this section you will run a handful of simple, safe commands. You ran several of them --- `pwd`, `ls`, `ls -a` --- in Orientation. Running them again is deliberate: these commands should live in your fingers, not your notes. Every question is just CP/CR.
 
@@ -231,7 +228,6 @@ codespace-starter $
 Your new file now appears. The problem is that this file lives inside the `PPBDS/codespace-starter` working copy, which you do **not** own. You cannot save your work to that repository on GitHub. Closing the browser does not erase the file right away, but deleting the Codespace will. You need a repository that belongs to you. That is what the next section sets up.
 
 ## Git and GitHub
-###
 
 **Git** is a tool that keeps a history of your files. A **repository**, or **repo**, is a folder that Git is watching. **GitHub** is a website that keeps a copy of your repo online, so your work is safe and shareable.
 
@@ -409,7 +405,6 @@ workflow $
 Seeing the repository in your browser proves two things: the repository really exists on GitHub, and it belongs to **you** (your username appears in the address bar, like `github.com/your-username/workflow`). This is the online home where your work will live. 
 
 ## Script 1: GitHub Copilot
-###
 
 You met **GitHub Copilot** --- the AI assistant built right into VS Code --- in the Orientation tutorial, where it wrote small files for you. We use Copilot here because it is always available and works out of the box.
 
@@ -621,7 +616,6 @@ Copilot is only one option. The Codespace may also provide command-line agents f
 5. inspect the result and ask for revisions.
 
 ## Script 2: AI agnostic
-###
 
 From this point forward, we are **AI agnostic**. "Ask AI" means use whichever AI you prefer — Copilot, Antigravity, or any other agent the Codespace provides. We will generally show prompts and results, not tool-specific buttons or screenshots. 
 
@@ -764,7 +758,6 @@ workflow $
 `git log -1` shows the last commit. When the top line shows both `main` and `origin/main`, your Codespace and GitHub agree on the latest commit — your push worked. You can also see the same history on GitHub.
 
 ## Summary
-###
 
 You used the major parts of VS Code, practiced bash commands, created and connected a repository, ran R scripts, directed AI agents, inspected their work, made plots, and used Git and GitHub.
 

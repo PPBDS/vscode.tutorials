@@ -12,7 +12,6 @@ learnr2:
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -21,7 +20,6 @@ learnr2::student_info()
 ```
 
 ## Introduction
-###
 
 This tutorial builds on Terminal 1. There you learned the core verbs --- `pwd`, `ls`, `mkdir`, `cp`, `mv`, `rm`, and `cd` --- along with paths and redirection. Here we cover the rest of what a working data scientist does at the command line: command options, environment variables, looking inside files, moving files into and out of a Codespace, and running programs --- both R scripts and Python scripts.
 
@@ -32,7 +30,6 @@ In the age of AI, you will *read* far more shell commands than you write: your A
 You should be doing this tutorial in a repo named `terminal-2`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
 
 ## Options
-###
 
 Options modify the behavior of command-line programs, as you saw with `ls -a` and `rm -r` in Terminal 1.
 
@@ -202,7 +199,6 @@ An `export` belongs to the one shell you typed it in. The new terminal is a new 
 Close the new terminal (the trash-can icon) and click back to your original tab, which is still sitting in `options` with the variable still set.
 
 ## Looking inside files
-###
 
 Before you trust a file --- especially one an AI just wrote --- look inside it. These are the commands for doing that quickly, without opening an editor.
 
@@ -382,7 +378,6 @@ This is the skill underneath auditing AI work: an agent edits a file, and `diff`
 Clean up: run `rm AUTHORS-edited`.
 
 ## Files in and out
-###
 
 Downloading files and moving them to a sensible location is a core skill for data scientists. Sometimes you download data by hand and must upload it from your `Downloads` folder to your Codespace. Sometimes you need to upload an image for an AI to look at. Here is how files get in and out.
 
@@ -533,7 +528,6 @@ terminal-2 $
 Watch for it in agent transcripts: `find` is one of the first commands an AI runs in an unfamiliar project, because it answers "what is here and where?" in one stroke. In Terminal 3, wildcards will let you search for patterns --- every `.csv` file, say --- instead of exact names.
 
 ## Running programs
-###
 
 You have been running programs all along --- `ls`, `curl`, and `git` are programs. But data scientists also run programs *they* (or their AI agents) just wrote: R scripts and Python scripts. AI agents constantly create small scripts on the fly and run them; this section teaches you to read what is happening when they do.
 
@@ -867,7 +861,6 @@ Second, the `./` prefix: your current directory is deliberately *not* on `$PATH`
 Clean up: run `rm hello.sh`.
 
 ## Summary
-###
 
 This tutorial covered command options, environment variables (reading `$HOME` and `$PATH`, setting your own with `export`, and why an `export` dies with its terminal), looking inside files with `head`, `tail`, `cat`, the `less` pager, and `diff`, finding files with `find`, moving files in and out of a Codespace (drag-and-drop, `Upload...`, and `curl` into a `data/` directory), and running programs: `Rscript` and `Rscript -e` for R, `python` and `python -c` for Python, `quarto check` for Quarto, and your own `hello.sh` --- once `chmod +x` marked it executable. You also saw how our Codespaces arrange the two languages differently --- R installed system-wide, Python in a uv-built virtual environment at `/opt/venv` that comes first on `$PATH`, stocked with the data science stack.
 

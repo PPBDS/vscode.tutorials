@@ -14,7 +14,6 @@ learnr2:
 
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -25,7 +24,6 @@ learnr2::student_info()
 <!-- For later websites, show how to add a link to the website to the GitHub repo. -->
 
 ## Introduction
-### 
 
 This tutorial practices creating and organizing [Quarto websites](https://quarto.org/docs/websites/) using the [Quarto CLI](https://quarto.org/docs/get-started/) (command line interface). You will learn some new skills: adding a visualization, creating new pages, building navigation menus, and --- most importantly --- organizing a site like a real project, with analysis code split into scripts that save their results as RDS and PNG files. Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
@@ -34,7 +32,6 @@ This tutorial practices creating and organizing [Quarto websites](https://quarto
 You should be doing this tutorial in a repo named `websites-2`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
 
 ## The website
-### 
 
 Let's create a website with a beautiful plot of the data from the `billboard` tibble from the **tidyr** package.
 
@@ -1408,7 +1405,6 @@ Once you have confirmed your files are on GitHub, delete your Codespace. Click t
 When you ran `quarto publish gh-pages` for `website-1` and `websites-2`, Quarto was doing something behind the scenes worth understanding. It created (or updated) a separate `gh-pages` branch in your repo containing only the rendered HTML files from `_site`. Your `main` branch stays clean with just the source files. This is exactly why you added `_site` to `.gitignore` — the rendered files do live on GitHub, but in a different branch that GitHub Pages serves automatically. If you visit your repo on GitHub and click the branch dropdown, you will see both `main` and `gh-pages`.
 
 ## Summary
-### 
 
 This tutorial practiced the process of creating and organizing the [Quarto websites](https://quarto.org/docs/websites/) using the [Quarto CLI](https://quarto.org/docs/get-started/) (command line interface). You learned some new skills, such as how to add a visualization, edit text, and create new pages. You also learned how to save the results of your data-manipulation code in an RDS file and how to save your plots as PNG files. Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 

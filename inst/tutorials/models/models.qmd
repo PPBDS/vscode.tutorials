@@ -12,7 +12,6 @@ learnr2:
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -21,7 +20,6 @@ learnr2::student_info()
 ```
 
 ## Introduction
-###
 
 In the OpenRouter tutorial, `aider` talked to the model for you. Now you will take `aider` away and talk to the model yourself --- first from the bash Terminal, then from R.
 
@@ -117,7 +115,6 @@ If that came back empty, the secret has not reached this terminal. Either this i
 That rule is worth remembering, and by now you have met it three times: settings applied when a machine is built do not appear on a machine that already exists. It is why editing `devcontainer.json` does nothing until you rebuild, and why `COOLEST_TEACHER` stayed empty in the Dotfiles tutorial until you opened a new Codespace.
 
 ## The Request Underneath
-###
 
 Every AI product you have used --- the chat window, the editor sidebar, `aider`, Claude Code --- sends the same thing underneath: a list of messages to a web address, with a key attached. This section is that request, with nothing built on top of it.
 
@@ -270,7 +267,6 @@ The prices are **data**, not marketing text on a web page. They arrive in the sa
 Now look at the spread. Output on Opus costs ninety-three times what it costs on the Qwen model. Not ninety-three percent more. Ninety-three *times*. The next section explains why.
 
 ## Open Weights
-###
 
 Why should two things that both answer questions in English differ in price by a hundred times? The answer is mostly not about quality. It is about who is allowed to sell them.
 
@@ -523,7 +519,6 @@ This does not mean always pick the cheap one. It means you now have a real numbe
 That is exactly what `aider`'s `/architect` mode does for you, and now you can see why it is worth the trouble.
 
 ## Cheap Models
-###
 
 "Cheap" so far has meant one model, `qwen/qwen3-coder-30b-a3b-instruct`, because we picked it for you. Now find the cheap end of the market yourself, and then see what you actually give up by working there.
 
@@ -701,7 +696,6 @@ So do not choose a model by reputation, and do not choose one from a benchmark t
 Choose it the way you just did. Take a task you actually have, run it on something cheap, and look at the result. Move up only when you can point at what the cheap model got wrong. That test costs a fraction of a cent and takes a minute, and it is the only evidence about *your* work that exists.
 
 ## Models From R
-###
 
 Everything so far has been about writing code. But the reason a data scientist cares about cheap models is bigger than that: **a model is something you can run on every row of a data set.**
 
@@ -838,7 +832,6 @@ Neither is optional once the data is big. With four reviews you can spot the bad
 You have credits now, so you can test the other half of that claim rather than take our word for it. Run the same thing again with `model = "qwen/qwen3-coder-30b-a3b-instruct"`. On a task this small it will cost you well under a hundredth of a cent, and `perhatian positif` will almost certainly not come back. Cheap is not the same as free, and this is one of the places you can see the difference.
 
 ## What It Cost
-###
 
 You spent money today for the first time in this course. This section is the bill.
 
@@ -941,7 +934,6 @@ models-and-money $ git log --oneline
 Nothing you committed contains your key. That is worth checking rather than assuming. The key lived in an environment variable and in GitHub's encrypted store, and never in a file. Copy that arrangement on every project you ever work on.
 
 ## Summary
-###
 
 You took the assistant away and found one ordinary web request underneath: a model name, a list of messages, and a key. Everything built on top of an AI model is built on that.
 

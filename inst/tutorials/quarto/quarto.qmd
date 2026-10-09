@@ -18,7 +18,6 @@ library(tidyverse)
 ```
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -27,7 +26,6 @@ learnr2::student_info()
 ```
 
 ## Introduction
-### 
 
 This tutorial covers how to create Quarto documents using Visual Studio Code in [GitHub Codespaces](https://github.com/features/codespaces). It assumes that you have completed the previous tutorials, through "Code." Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
@@ -120,7 +118,6 @@ Stop and fix the open folder if your result does not end in `quarto`. All work i
 Going forward, every tutorial will begin by assuming that you are already in a repo named after the tutorial. The repo name is the tutorial's title, all in lower case, with spaces replaced by dashes. This tutorial is titled "Quarto", so its repo is `quarto`. A tutorial titled "Terminal 1" is associated with a repo named `terminal-1`. We will no longer walk you through `connect-repo` --- you know how to create and connect to a repo, and we will assume that you have done so.
 
 ## Quarto 1
-### 
 
 Quarto is a file format for making dynamic documents with R and other languages, like Python. To learn more about Quarto and how to use it, check out the [official webpage](https://quarto.org/). Quarto is the successor technology to [R Markdown](https://rmarkdown.rstudio.com/). This section introduces Quarto documents.
 
@@ -608,7 +605,6 @@ quarto $
 `main` and `origin/main` on the same line: your Codespace and GitHub agree. One document finished, one commit made. You will repeat this rhythm at the end of the next section.
 
 ## Quarto 2
-### 
 
 Restart your R session. (In other words, close your current R Terminal and open a new one.)
 
@@ -1031,7 +1027,6 @@ quarto $
 That instruction --- "commit and push," and nothing more --- is all later tutorials will give you, and now it is all you need. `git status` is the quick way to confirm nothing was left behind: a clean working tree, up to date with `origin/main`, means every piece of your work is safely on GitHub.
 
 ## Publishing
-###
 
 A rendered HTML file in your Codespace can be seen by nobody but you. In this final section you will publish `quarto-2.qmd` --- your document with its AI-made scatterplot --- to the web, where anyone can see it.
 
@@ -1141,7 +1136,6 @@ https://your-username.github.io/quarto/quarto-2.html
 That page is live on the internet --- anyone you send the URL to can read it. This loop --- edit, render, publish --- is how nearly every later tutorial ends: with a piece of work anyone in the world can see.
 
 ## Summary
-###
 
 This tutorial covered how to create [Quarto documents](https://docs.posit.co/ide/user/ide/guide/documents/quarto-project.html#creating-new-documents) using [GitHub Codespaces](https://github.com/features/codespaces), finishing with a document published to the web via GitHub Pages. Some material was from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 

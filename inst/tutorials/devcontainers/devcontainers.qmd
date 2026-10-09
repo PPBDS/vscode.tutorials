@@ -12,7 +12,6 @@ learnr2:
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -21,7 +20,6 @@ learnr2::student_info()
 ```
 
 ## Introduction
-###
 
 This tutorial explores devcontainers --- configuration files that define how a GitHub Codespace is set up. You will examine a `devcontainer.json` file to understand how it specifies the starting image, installed packages, VS Code extensions, and startup commands that make a Codespace ready to use. You will also compare two different Codespace configurations side by side.
 
@@ -152,7 +150,6 @@ learnr2::question(
 Your output shows the full `devcontainer.json` from the `codespace-starter` repo. You will explore each part of this file in a later tutorial. Keep this Codespace open --- you will need it alongside a second Codespace in the next section.
 
 ## Jupyter Notebook Devcontainer
-###
 
 A `devcontainer.json` file captures the entire setup --- starting image, packages, extensions, and startup commands --- so that any codespace opened from the repo starts in an identical, ready-to-use state. In this section you will examine the devcontainer for GitHub's Jupyter Notebook template, which sets up a codespace for doing data science with Python and with Jupyter Notebooks.
 
@@ -606,7 +603,6 @@ codespaces-jupyter    ppbds-student/codespaces-jupyter    main    Stopped
 Stopped Codespaces don't use compute hours but still occupy storage --- they can be restarted at any time. Deleting a codespace frees the storage entirely but cannot be undone.
 
 ## New Devcontainer
-###
 
 In the previous section you explored a devcontainer someone else wrote. Now you will build one from scratch. You will open a blank codespace with no configuration at all, manually create the devcontainer files, use AI to draft the JSON, replace it with a clean version, and rebuild the container to see the new environment take effect.
 
@@ -944,7 +940,6 @@ learnr2::question(
 Stopped codespaces don't use compute hours but still occupy storage --- they can be restarted at any time. Deleting a codespace frees the storage entirely but cannot be undone.
 
 ## Summary
-###
 
 This tutorial introduced devcontainers as a way to define and share consistent codespace setups. You toured the Jupyter Notebook template's `devcontainer.json` --- its starting image, VS Code extensions, and startup command --- then built your own minimal R `devcontainer.json` from scratch, used AI to draft a first version, replaced it with a clean version, and rebuilt a codespace to confirm it worked. 
 

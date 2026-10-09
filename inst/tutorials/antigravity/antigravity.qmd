@@ -18,7 +18,6 @@ library(tidyverse)
 ```
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -35,14 +34,12 @@ learnr2::student_info()
 <!-- Replace or delete a lot of the images, which are Gemini. -->
 
 ## Introduction
-###
 
 You have used GitHub Copilot.  The [Antigravity CLI](https://antigravity.google/product/antigravity-cli) is another terminal-based assistant that can read your files, run commands in the terminal, and write new files directly, asking your permission at each step. In this tutorial you will set it up and use it to explore a project and to create and render a Quarto analysis. Later sections then reinforce the core `analysis.qmd` workflow: one working chunk per artifact, iterative rewrites, and caching.
 
 You should be doing this tutorial in a repo named `antigravity`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
 
 ## Antigravity CLI
-###
 
 The [Antigravity CLI](https://antigravity.google/product/antigravity-cli) is an AI assistant from Google that runs in your terminal. Unlike a web chat interface, it can take actions on your behalf: reading files, running terminal commands, and writing new files. Each time it wants to take an action, it asks for your permission first, at least by default.
 
@@ -608,7 +605,6 @@ Same principle as in the Quarto tutorial: if a file can be *regenerated* from yo
 
 
 ## Working Code Chunk
-###
 
 Real analysis is exploratory. Before we can build anything worth publishing, we poke at the data: print it, check its columns, count things, filter it down. Rather than scattering those attempts across many chunks, we keep **one working code chunk** at the bottom of the document and rewrite it over and over.
 
@@ -783,7 +779,6 @@ storms |>
 The pipe `|>` passes the left side's result directly to the next function. Reading it as "and then" helps: take `storms`, **and then** keep only observations since 2000, **and then** keep these five columns. The result prints because the final expression is a value, not an assignment.
 
 ## Cache
-###
 
 Our exploration has settled on the data we want: observations since 2000, five columns. The next steps are to save that data in an object which later chunks can use, and then to **cache** the chunk that builds it, so that later renders can skip re-running it.
 
@@ -902,7 +897,6 @@ antigravity $
 Cache files are regenerated from source and do not belong in git. Rule of thumb: if a file can be (easily) recreated from other components, do not commit it.
 
 ## Plotting
-###
 
 `storms_recent` is built and cached, but nothing is displayed. Now we want a plot --- a new artifact, and therefore a **new** working code chunk at the bottom of the document. We will iterate on it until the plot is worth publishing.
 
@@ -1060,7 +1054,6 @@ ggplot(storms_recent, aes(x = wind, y = pressure, color = status)) +
 From here on, using AI to write your analysis code is always the assumed approach --- you will describe a goal, let the agent write the code (generally in a working code chunk), render, and inspect the result.
 
 ## Git with Antigravity
-###
 
 Now that the project has real files, let's save the work with Git. Rather than just telling you the commands, we'll use Antigravity to explain the Git workflow. Using AI to understand what you are doing --- not just to do it --- is a powerful learning strategy.
 
@@ -1250,7 +1243,6 @@ Antigravity issued three separate tool calls --- `git add`, `git commit`, and `g
 
 
 ## Summary
-###
 
 This tutorial introduced the [Antigravity CLI](https://antigravity.google/product/antigravity-cli) as an AI *agent* --- a terminal-based assistant that reads your files, runs commands, and writes files on your behalf, asking permission at each step. You authenticated with your Google account, let Antigravity explore the repository, and used it to create and render a Quarto analysis. You then practiced the core `analysis.qmd` workflow: maintaining one working chunk per artifact, iteratively rewriting it, suppressing output, and caching results.
 

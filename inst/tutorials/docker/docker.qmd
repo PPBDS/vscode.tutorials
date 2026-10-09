@@ -12,7 +12,6 @@ learnr2:
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -21,7 +20,6 @@ learnr2::student_info()
 ```
 
 ## Introduction
-###
 
 In a previous tutorial, you found the `"image"` line inside `codespace-starter`'s `devcontainer.json` --- `ghcr.io/ppbds/devcontainer`, pinned to an exact version. That image does not appear out of nowhere --- it is built from a Dockerfile maintained by PPBDS. This tutorial reads through that real, current Dockerfile, section by section, to understand what it does and why it is written the way it is.
 
@@ -34,7 +32,6 @@ This is a **reading tour, not a building exercise**. You will not build this ima
 You should be doing this tutorial in a repo named `the-devcontainer-dockerfile`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
 
 ## The Devcontainer Image
-###
 
 Here is the complete Dockerfile that builds `ghcr.io/ppbds/devcontainer`. Skim it once, then work through the exercises below, which walk through it piece by piece, in the order the layers actually appear.
 
@@ -1496,7 +1493,6 @@ RUN R --vanilla -e 'fit <- brms::brm(mpg ~ wt, data = mtcars, chains = 1, iter =
 `brms` fits Bayesian models by compiling and running a Stan program, which depends on the image's C++ toolchain working --- something a simple `requireNamespace("brms")` load check would never catch, since the package loads fine even if Stan compilation is broken. Fitting a tiny model (one chain, 100 iterations --- just enough to prove compilation and sampling run, not to get a good estimate) is what actually proves the modeling stack works. Same idea as every smoke test here: catch a broken build *now*, during the image build, not the first time a student uses the feature.
 
 ## Summary
-###
 
 This tutorial read through the real Dockerfile behind `ghcr.io/ppbds/devcontainer`, the image `codespace-starter`'s `devcontainer.json` points at. You saw why the base image is pinned by digest rather than a floating tag, why one image now serves both students and package developers, why layer order matters for Docker's build cache, and how deliberate `ARG` version pins keep builds reproducible. You also traced the permissions story that runs through the R package installs --- system libraries baked in as root, `PKG_SYSREQS=false` to stop `pak` from trying to `sudo`, and the switch to `USER rstudio` so lock files never poison the library for later installs --- and saw how the Python venv and the image-wide smoke tests each guard against a specific class of failure at build time, before a student ever opens a Codespace. Finally, you read the GitHub Actions workflow that builds and publishes the image --- `docker build` and `docker push` run by a machine on every push and every release, tagged by pattern, logged in with a token no human ever handles.
 

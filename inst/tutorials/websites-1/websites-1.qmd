@@ -13,7 +13,6 @@ learnr2:
 
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -22,7 +21,6 @@ learnr2::student_info()
 ```
 
 ## Introduction
-### 
 
 This tutorial introduces the process of creating and organizing [Quarto websites](https://quarto.org/docs/websites/) using the [Quarto CLI](https://quarto.org/docs/get-started/) (command line interface) and commands like `quarto create`, `quarto render`, `quarto preview`, and `quarto publish`. Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
@@ -31,7 +29,6 @@ This tutorial introduces the process of creating and organizing [Quarto websites
 You should be doing this tutorial in a repo named `websites-1`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
 
 ## Creating files
-### 
 
 Let's make a [Quarto website](https://quarto.org/docs/websites/).
 
@@ -154,7 +151,6 @@ In general, do not touch or modify "dot" directories — those whose names begin
 
 
 ## Examining files
-### 
 
 Now that we have created the necessary files, let's examine them one by one to understand how a Quarto website is structured.
 
@@ -399,7 +395,6 @@ To learn more about Git, GitHub, and R, see [Happy Git with R](https://happygitw
 
 
 ## Rendering and previewing
-### 
 
 We now have the infrastructure for our website. Next, we will "render" the web pages and then "preview" them to see what the site looks like before publishing it.
 
@@ -716,7 +711,6 @@ To stop `quarto preview`, press `Ctrl + c` in the bash Terminal. This cancels an
 Press `Ctrl + c`.
 
 ## Publishing
-### 
 
 To make your website publicly visible, you need to "publish" it to the web. The Quarto documentation provides a [thorough discussion](https://quarto.org/docs/publishing/). We will be using [GitHub Pages](https://quarto.org/docs/publishing/github-pages.html).
 
@@ -1123,7 +1117,6 @@ learnr2::question(
 Note both the simplicity *and* the complexity of your project. It is simple in that, even if your Codespace were deleted, you could recreate everything from the files on GitHub. It is complex in that there are many files interacting in sophisticated ways.
 
 ## Summary
-### 
 
 This tutorial introduced the process of creating and publishing [Quarto websites](https://quarto.org/docs/websites/) using the [Quarto CLI](https://quarto.org/docs/get-started/) (command line interface) and commands like `quarto create`, `quarto render`, `quarto preview`, and `quarto publish`. Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 

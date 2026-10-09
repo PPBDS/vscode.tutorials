@@ -14,7 +14,6 @@ learnr2:
 
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -25,7 +24,6 @@ learnr2::student_info()
 <!-- Some diagrams which show directory structure would be nice. -->
 
 ## Introduction
-###
 
 This tutorial introduces the structure and uses of the bash Terminal from within VS Code running on GitHub Codespaces. When most people use the word "terminal," they are referring to something like the bash Terminal, or some other shell which allows us to "talk" with the computer directly.
 
@@ -38,7 +36,6 @@ Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Ha
 You should be doing this tutorial in a repo named `terminal-1`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so. (Recall the rule: a tutorial's repo is named after its title, all in lower case, with spaces replaced by dashes --- "Terminal 1" becomes `terminal-1`.)
 
 ## Terminal
-###
 
 The lower section of the VS Code window is the "Panel," which is composed of a collection of "views," including Output, Problems, Ports, and Terminal. (Their labels appear in capitals --- **TERMINAL** --- across the top of the Panel.)
 
@@ -296,7 +293,6 @@ terminal-1 $
 It is good to clean up. Don't leave junk files lying around.
 
 ## Paths
-###
 
 You will practice using paths both inside and outside the current working directory. You will learn a few shortcuts to make this easier.
 
@@ -636,7 +632,6 @@ In olden times, professional programmers would spend a lot of time learning the 
 <!-- Could have them ask ChatGPT to do something and then do it. -->
 
 ## Important symbols
-###
 
 We have seen two important symbols --- `..` and `.` --- already. This section will explore those along with `~`. The most common English terms for these symbols are "dot" for `.`, "dot dot" for `..`, and "tilde" for `~`. The `.` symbol indicates the current directory. The `..` symbol is for the directory one level above the current directory. The `~` symbol is for your "home" directory.
 
@@ -838,7 +833,6 @@ terminal-1 $
 Note that `rm -rf symbols` and `rm -rf symbols/`, with the trailing slash, have the same effect. Except in unusual circumstances, including (or not including) the trailing slash in the name of a directory does not matter.
 
 ## Redirection
-###
 
 You have been creating files with `echo "" > my.txt` since the start of this tutorial, without stopping to look at the machinery. The `>` symbol deserves its own moment: it **redirects** a program's output into a file. You should be back in your repo's top-level directory.
 
@@ -925,7 +919,6 @@ terminal-1 $
 `>` overwrites; `>>` appends. Neither is limited to `echo` --- any command's output can be redirected, and AI agents build and extend files this way constantly. When you see `>` in a command an agent proposes, check what file it points at: whatever is there now will be replaced.
 
 ## Summary
-###
 
 This tutorial introduced the structure and uses of the bash Terminal from within VS Code running on GitHub Codespaces.
 

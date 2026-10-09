@@ -12,7 +12,6 @@ learnr2:
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -21,7 +20,6 @@ learnr2::student_info()
 ```
 
 ## Introduction
-###
 
 Every Codespace you have opened arrived identical to every other one. That is the point --- you have spent three tutorials learning how we guarantee it.
 
@@ -106,7 +104,6 @@ There is the reason your prompt says `codespace-starter $` instead of the long `
 `codespace-starter`'s `setup.sh` appends those lines to the end of `~/.bashrc` while the Codespace is being built, before you ever open a terminal (the lines after them, which `grep` did not show, are the starter's ready banner and, once you have run `connect-repo`, its bookkeeping). Note that word --- **appends**. `.bashrc` already belongs to somebody, and in a few minutes you are going to add a line after theirs rather than replace the file.
 
 ## Your Dotfiles Repo
-###
 
 You need a repo, and you need a way to get files out of it and into your home directory. Both are simpler than they sound.
 
@@ -303,7 +300,6 @@ This is the most common way a dotfiles repo silently does nothing. The script is
 Make sure you have committed and pushed. GitHub reads this repo from *its* servers when it builds a machine, not from your Codespace, so work that is only committed locally does not exist as far as this feature is concerned.
 
 ## Turning It On
-###
 
 The repo exists and so far does nothing at all. GitHub will not go looking for it until you say so, and the switch is not in the repo --- it is in your account.
 
@@ -450,7 +446,6 @@ Delete it for a practical reason: Codespaces are billed by the hour and two runn
 But notice what deleting it cost you, which is nothing. Everything that made that machine yours was on GitHub, not on the machine. That is the arrangement to aim for with all your work: the computer is disposable, and nothing important lives only there.
 
 ## Summary
-###
 
 You started with `echo $COOLEST_TEACHER` printing nothing --- successfully, because an unset variable in bash is empty rather than broken. You finished with the same command printing `Preceptor` on a machine that did not exist when you began.
 

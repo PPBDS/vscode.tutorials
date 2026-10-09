@@ -1,7 +1,7 @@
 ---
 title: Orientation
 author: David Kane
-description: A tour of the working environment - the bash Terminal, the R Terminal, and GitHub Copilot, ending with the ways to run R code.
+description: A tour of the working environment - the bash Terminal, the R Terminal, and GitHub Copilot.
 format: live-html
 engine: knitr
 toc: true
@@ -12,7 +12,6 @@ learnr2:
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -20,12 +19,9 @@ learnr2:
 learnr2::student_info()
 ```
 
-<!-- Get rid of the images which use dark mode. They are unreadable! -->
-
 ## Introduction
-###
 
-This tutorial, intended for beginners, tours the workspace you will use for everything that follows: the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant, ending with the different ways to run R code. Complete it inside a [GitHub Codespace](https://github.com/features/codespaces), as set up [here](https://ppbds.github.io/primer/getting-started.html).
+This tutorial provides a tour of your Visual Studio Code (VS Code) workspace: the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant, ending with the different ways to run R code. Complete it inside a [GitHub Codespace](https://github.com/features/codespaces), as set up [here](https://ppbds.github.io/primer/getting-started.html).
 
 ###
 
@@ -34,7 +30,6 @@ After starting the tutorial, your Codespace looks something like this:
 ![](images/gs-1.png){width=90%}
 
 ## Bash Terminal
-###
 
 The **bash Terminal** is a text-based interface in which you type commands to tell your Codespace what to do. You send a command, the terminal executes it, and it (usually) gives you something back. In this section you will practice the most common bash commands. (In the next section you will see that the R Terminal works exactly the same way.)
 
@@ -303,7 +298,6 @@ codespace-starter $
 `Ctrl + C` interrupts whatever process is currently running in the terminal and returns you to the prompt; the `^C` marks where you pressed it. When a command hangs or you change your mind, `Ctrl + C` stops it.
 
 ## R Terminal
-###
 
 All the terminology associated with VS Code is confusing. The "Panel" is the bottom of the VS Code window. There are several "views" associated with the Panel, including "Output," "Ports," and "Terminal." Within the Terminal view, you can have multiple "terminals" running. Each terminal has an associated "tab" on the right side of the Panel which you can use to select that terminal. A terminal is just a window for talking to a program: a bash Terminal runs the bash shell; an R Terminal runs R. Different terminals serve different purposes.
 
@@ -521,7 +515,6 @@ Your screenshot should show the package name, **learnr2**, and the paragraph tha
 Again, your answer never needs to match ours exactly.
 
 ## GitHub Copilot
-###
 
 Your Codespace includes **GitHub Copilot**, an AI coding assistant that can answer questions, explain code, create and edit files, and run commands for you. 
 
@@ -905,7 +898,6 @@ The five ways to run the script do not all use the same R session:
 | Ask Copilot to use `Rscript` | A new process that closes afterward |
 
 ## Summary
-###
 
 You now know how to use the bash and R Terminals, how to ask GitHub Copilot to create and edit files, and five ways to run R code. Good luck with your data science journey!
 

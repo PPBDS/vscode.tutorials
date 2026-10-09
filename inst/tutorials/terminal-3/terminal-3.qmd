@@ -14,7 +14,6 @@ learnr2:
 
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -32,7 +31,6 @@ learnr2::student_info()
 
 
 ## Introduction
-###
 
 This tutorial builds on Terminal 1 and Terminal 2. You know the core bash commands, paths, options, and how programs run. Here we cover three final topics: **wildcards**, which match many file names at once using metacharacters like `*`; **grep**, which searches for patterns *inside* files; and **pipes**, which chain programs together. These are the grammar of the compound commands you will constantly read --- and approve or reject --- when AI agents work on your behalf.
 
@@ -43,7 +41,6 @@ Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Ha
 You should be doing this tutorial in a repo named `terminal-3`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
 
 ## Wildcards
-###
 
 You will learn how to search for files by using **wildcards** to form **regular expressions**.
 
@@ -452,7 +449,6 @@ terminal-3 $
 Note that both `wildcards` and `wildcards/` refer to the same entity, the `wildcards` directory. The Terminal often "adds" a forward slash (`/`) to the end of directory names to indicate that the object is a directory, not simply a file.
 
 ## grep
-###
 
 In a previous section, we used **wildcards** to generate lists of file names that matched a specific pattern. In this section, we will use `grep` to look for words *inside* files. The idea of matching patterns carries over to `grep`.
 
@@ -939,7 +935,6 @@ It is always a good idea to clean up after yourself. As the sign says when takin
 
 
 ## Summary
-###
 
 This tutorial covered **wildcards**, **grep**, and **pipes**, and through them your first **regular expressions** --- patterns built from metacharacters like `*`, `^`, and `$` that match file names and text. You will rarely type these yourself in the age of AI, but you will constantly *read* them in the commands your AI agents run, and knowing what they mean is how you audit that work before approving it. Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 

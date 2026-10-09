@@ -12,7 +12,6 @@ learnr2:
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -21,7 +20,6 @@ learnr2::student_info()
 ```
 
 ## Introduction
-###
 
 In the last three tutorials you read a real `devcontainer.json`, a real Dockerfile, and the workflow that turns that Dockerfile into a published image. Now you build the whole chain yourself, in miniature: a repo called `my-starter` that you can launch a Codespace from --- your own `codespace-starter`, without the teaching material you no longer need.
 
@@ -56,7 +54,6 @@ https://github.com/ppbds-student/my-starter
 That repo is the product. Everything you make in this tutorial --- the Dockerfile, the workflow, the `devcontainer.json` --- lives inside it, and at the end you will turn it into a **template** so new projects can start from it with one click.
 
 ## Your Starter
-###
 
 Build from the bottom up, in the order the pieces depend on each other: the Dockerfile first, then the workflow that builds it, then the `devcontainer.json` that uses the result.
 
@@ -452,7 +449,6 @@ v1.0.0  Latest  v1.0.0    about 20 minutes ago
 The release is the durable record of what you published, and the loop for every future change runs through it: edit the Dockerfile, push, `gh release create v1.0.1`, wait for the build, change the `1.0.0` in your `devcontainer.json` to `1.0.1`, push again. One last piece of housekeeping: the test Codespace you launched in Exercise 8 is still running. Go to https://github.com/codespaces, find the one on `my-starter`, and stop or delete it --- you will start fresh ones from your template projects rather than reusing this test.
 
 ## Summary
-###
 
 You built the entire chain you spent three tutorials reading: a Dockerfile that adds one package to a pinned base and tests it; a GitHub Actions workflow that builds and publishes the image on every push and every `v*` release, tagged by pattern, logged in with a token no human handles; a `devcontainer.json` that pins the published image at an exact version and configures the editor; and a Codespace launched from all of it, with your package inside. Turning the repo into a template makes it your `codespace-starter` from here on. To change the environment, edit the Dockerfile, push, release `v1.0.1`, and repin --- the same loop PPBDS runs for every version you have used in this course.
 

@@ -12,7 +12,6 @@ learnr2:
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -21,7 +20,6 @@ learnr2::student_info()
 ```
 
 ## Introduction
-###
 
 In the GitHub Introduction tutorial, you opened up the `connect-repo` script and ran its key commands once, against a throwaway repo. This tutorial is the independence drill. `connect-repo` is a convenience script that lives in `codespace-starter` --- a repo you do not control, and a script that might change or disappear. By the end of this tutorial, that will not matter: you will have run the entire repo lifecycle --- create, connect, work, push, clone onto a fresh machine, pull, and dispose --- with your own hands.
 
@@ -30,7 +28,6 @@ So, unlike every other tutorial: **do not run `connect-repo` today.** That is th
 Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. The most useful reference for Git/GitHub is [*Happy Git and GitHub for the useR*](https://happygitwithr.com/).
 
 ## A repo by hand
-###
 
 Everything in this section happens in your current Codespace. You will make the repo this tutorial is named for --- `github-advanced` --- using only `gh` and `git`.
 
@@ -316,7 +313,6 @@ https://github.com/your-username/github-advanced
 Notice that next to each file, GitHub shows the commit message from the last time that file changed. Good commit messages leave a breadcrumb trail visible right on the repo's main page, not just buried in `git log`.
 
 ## A second desk
-###
 
 The real test of independence is a machine you have never touched. On your own laptop, in a colleague's Codespace, on a fresh cloud server --- there is no `connect-repo` there, and there are no credentials. Codespaces make fresh machines cheap, so let's take the test.
 
@@ -514,7 +510,6 @@ github-advanced $
 Look closely: `git status` claimed you were "up to date with 'origin/main'" --- and it was wrong. `git status` never contacts GitHub; it only compares against the last snapshot of `origin` it has seen. `git pull` actually asks GitHub, fetches the new commit, and merges it in. This is the other half of syncing: **push sends, pull receives**. The Source Control pane's "Sync" button does both at once. Whenever more than one desk touches a repo --- a second machine, a collaborator, an AI agent working in the cloud --- pull before you work.
 
 ## Disposable desks
-###
 
 Two desks, one filing cabinet. Time to prove which one matters.
 
@@ -585,7 +580,6 @@ github-advanced $
 The machine that wrote the second commit no longer exists --- and the commit does not care. It lives in the filing cabinet on GitHub and on every desk that has pulled it. This is why we commit and push so often: not to save work *to* a Codespace, but to save it *through* the Codespace to GitHub. Desks are disposable. The cabinet is permanent.
 
 ## Summary
-###
 
 You ran the entire repo lifecycle without `connect-repo`: signed in with `gh auth login`, created a repo with `gh repo create --public --clone`, inspected its wiring with `git remote -v`, pushed a first commit with `git push -u origin main`, cloned onto a brand-new machine with `gh repo clone`, pushed from there with plain `git push`, brought the change home with `git pull`, and deleted a Codespace without losing a byte.
 

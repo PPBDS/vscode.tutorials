@@ -18,7 +18,6 @@ library(tidyverse)
 ```
 
 ## Information
-###
 
 ```{r}
 #| label: information-1
@@ -27,14 +26,12 @@ learnr2::student_info()
 ```
 
 ## Introduction
-### 
 
 This tutorial covers [Git](https://git-scm.com/), a program for keeping track of changes in your code, and [GitHub](https://github.com/), the leading platform for storing your code in the cloud. Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. 
 
 The most useful references for Git/GitHub are [*Happy Git and GitHub for the useR*](https://happygitwithr.com/) and [*Pro Git*](https://git-scm.com/book/en/v2). Refer to these for questions and further learning. Or use AI!
 
 ## Using Git
-### 
 
 GitHub is an online drive for all your R code and projects. In the professional world, what you have in your GitHub account is often more important than what you have on your resume. It is a verifiable demonstration of your abilities.
 
@@ -881,7 +878,6 @@ Commits on May 4, 2026
 As AI writes more and more of our code, it's becoming increasingly important to get good at managing this code with Git and GitHub.
 
 ## Publishing with GitHub Pages
-### 
 
 An HTML file rendered by Quarto only lives on your computer (or Codespace) — it isn't accessible to anyone else. [GitHub Pages](https://pages.github.com/) solves this by serving the static files from your GitHub repository as a public website, giving you a real URL you can share with anyone.
 
@@ -1106,7 +1102,6 @@ Publishing to GitHub Pages has not changed any of the files in our repo, so the 
 
 
 ## Summary
-### 
 
 This tutorial covered [Git](https://git-scm.com/), a program for keeping track of changes in your code, and [GitHub](https://github.com/), the leading platform for storing your code in the cloud. Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
