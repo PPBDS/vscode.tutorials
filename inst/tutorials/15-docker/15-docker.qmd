@@ -1031,7 +1031,7 @@ learnr2::question(
 
 ###
 
-The `fs` package's binary already works fine without `libuv1-dev` --- but `pak` still checks fs's declared requirements and prints a scary "Missing system package" warning anyway, even though nothing's broken. Since `fs` is a dependency of `primer.tutorials` and installs constantly, that phantom warning would hit nearly every student. Baking in the small library is simpler than fighting the warning.
+The `fs` package's binary already works fine without `libuv1-dev` --- but `pak` still checks fs's declared requirements and prints a scary "Missing system package" warning anyway, even though nothing's broken. Since `fs` is a dependency of the course packages and installs constantly, that phantom warning would hit nearly every student. Baking in the small library is simpler than fighting the warning.
 
 ### Exercise 9
 
@@ -1110,13 +1110,13 @@ Without this, `pak` would try `sudo apt-get install` whenever it thinks a system
 
 ### Exercise 12
 
-Find the `RUN` block that installs the four PPBDS course packages from GitHub. Copy and paste it, and note the two arguments to `pak::pkg_install()` that are not just the package list.
+Find the `RUN` block that installs the PPBDS course packages from GitHub. Copy and paste it, and note the two arguments to `pak::pkg_install()` that are not just the package list.
 
 ```{r}
 #| label: the-devcontainer-image-12
 #| echo: false
 learnr2::question(
-  "Find the RUN block that installs the four PPBDS course packages from GitHub. Copy and paste it, and note the two arguments to pak::pkg_install() that are not just the package list.",
+  "Find the RUN block that installs the PPBDS course packages from GitHub. Copy and paste it, and note the two arguments to pak::pkg_install() that are not just the package list.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1126,15 +1126,16 @@ learnr2::question(
 
 ```
 RUN echo "course-package refresh: ${COURSE_PKG_REFRESH}" \
- && R -q -e 'pak::pkg_install(c( \
-        "PPBDS/tutorial.helpers", \
+ && R -q -e 'options(repos = c(P3M = "https://packagemanager.posit.co/cran/__linux__/noble/'"${P3M_SNAPSHOT}"'")); pak::pkg_install(c( \
         "PPBDS/vscode.tutorials", \
         "PPBDS/misc.tutorials", \
-        "PPBDS/primer.tutorials" \
+        "PPBDS/ims.tutorials", \
+        "PPBDS/learnr2", \
+        "PPBDS/primer.data" \
     ), upgrade = TRUE, dependencies = TRUE)'
 ```
 
-The extra arguments are `upgrade = TRUE` and `dependencies = TRUE`.
+The extra arguments are `upgrade = TRUE` and `dependencies = TRUE`. (The `options(repos = ...)` at the start points `pak` at a dated snapshot of CRAN, so every dependency version is frozen to one day and a rebuild gets exactly the same packages.)
 
 ###
 
