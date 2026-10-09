@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">vscode.tutorials</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="vscodetutorials-development-version">vscode.tutorials (development version)<a class="anchor" aria-label="anchor" href="#vscodetutorials-development-version"></a></h2>
-<ul><li><p>Rebuilt every tutorial on <strong>learnr2</strong>, which renders each one to a static Quarto page whose code runs in the browser via WebR. <strong>learnr2</strong> is the package’s only tutorial dependency (it also supplies <code>show_file()</code>), and the tests and CI render tutorials with <code><a href="https://ppbds.github.io/learnr2/reference/check_tutorial.html" class="external-link">learnr2::check_tutorial()</a></code> and <code><a href="https://ppbds.github.io/learnr2/reference/render_tutorials.html" class="external-link">learnr2::render_tutorials()</a></code>. The previous version is tagged <code>last-learnr-version</code>.</p></li>
+<ul><li><p>Each tutorial’s place in the sequence now comes from <code>learnr2: ordering:</code> in its YAML header, so the directories lost their numeric prefixes (<code>01-orientation</code> is now <code>orientation</code>, and so on). Run tutorials by the new names, e.g. <code>learnr2::run_tutorial("workflow", package = "vscode.tutorials")</code>.</p></li>
+<li><p>The Devcontainer Dockerfile tutorial’s copy of the Dockerfile is refreshed to the image without learnr.</p></li>
+<li><p>Rebuilt every tutorial on <strong>learnr2</strong>, which renders each one to a static Quarto page whose code runs in the browser via WebR. <strong>learnr2</strong> is the package’s only tutorial dependency (it also supplies <code>show_file()</code>), and the tests and CI render tutorials with <code><a href="https://ppbds.github.io/learnr2/reference/check_tutorial.html" class="external-link">learnr2::check_tutorial()</a></code> and <code><a href="https://ppbds.github.io/learnr2/reference/render_tutorials.html" class="external-link">learnr2::render_tutorials()</a></code>. The previous version is tagged <code>last-learnr-version</code>.</p></li>
 <li><p>Renamed the Workspace tutorial to Orientation and renumbered every tutorial directory to start from 01 (<code>01-orientation</code> through <code>19-models</code>). Tutorial ids changed with the directories, so stored answers for earlier ids do not carry over.</p></li>
 <li><p>Rebuilt the curriculum into nineteen tutorials, after several rounds of splitting, renaming, and renumbering: Workspace, Workflow, Code, Quarto, Antigravity, Terminal 1-3, GitHub Introduction/Advanced, Websites 1-2, the devcontainer arc (Devcontainers through Your Starter), Dotfiles, OpenRouter, and Models And Money.</p></li>
 <li><p>Code and Quarto now practice Git throughout: Source Control UI commits at each milestone, <code>.gitignore</code> at the first render, and no bash git commands before GitHub Introduction. Quarto builds two documents instead of three and publishes the second.</p></li>
