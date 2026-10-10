@@ -169,87 +169,22 @@ learnr2::question(
 
 ```
 codespace-starter $ ls -a
-.  ..  .devcontainer  .git
+.  ..  .devcontainer  .git  .github  .vscode
 codespace-starter $
 ```
 
 ###
 
-The `-a` flag (for "all") tells `ls` to reveal the hidden entries. `.` is the current directory and `..` is the directory just above it. `.git` stores the project's version history, and `.devcontainer` holds the configuration for your Codespace. A "flag" like `-a` is an option that changes how a command behaves.
+The `-a` flag (for "all") tells `ls` to reveal the hidden entries. `.` is the current directory and `..` is the directory just above it. `.git` stores the project's version history; the other dot-folders hold settings for the Codespace, for GitHub and for VS Code, which is why they are kept out of sight. A "flag" like `-a` is an option that changes how a command behaves.
 
 ### Exercise 6
-
-In the bash Terminal, run `ls .devcontainer`.
-
-CP/CR.
-
-```{r}
-#| label: bash-terminal-6
-#| echo: false
-learnr2::question(
-  "In the bash Terminal, run ls .devcontainer. CP/CR.",
-  type = "reflection",
-  show_text = FALSE
-)
-```
-
-###
-
-```
-codespace-starter $ ls .devcontainer
-AGENTS.md  STUDENT_WORKFLOW.md  connect-repo.sh  devcontainer.json  welcome.sh
-codespace-starter $
-```
-
-###
-
-Giving `ls` a directory name lists what is inside that directory. The `.devcontainer` folder tells GitHub Codespaces how to build your workshop --- which version of R, Python, and Quarto to install, and which AI tools to include --- so that every student gets an identical setup.
-
-### Exercise 7
-
-In the bash Terminal, run `head .devcontainer/STUDENT_WORKFLOW.md`.
-
-CP/CR.
-
-```{r}
-#| label: bash-terminal-7
-#| echo: false
-learnr2::question(
-  "In the bash Terminal, run head .devcontainer/STUDENT_WORKFLOW.md. CP/CR.",
-  type = "reflection",
-  show_text = FALSE
-)
-```
-
-###
-
-```
-codespace-starter $ head .devcontainer/STUDENT_WORKFLOW.md
-# Student workflow
-
-This Codespace is your **workshop** — it already has R, Python (with the
-usual data-science libraries), Quarto, the AI assistants, and all the right
-settings. But this `codespace-starter` repo isn't *yours*, so you won't save
-your work here. Instead, you'll make your **own repo** and work in it. The
-tools travel with the Codespace, so your repo needs no setup of its own.
-
-## 1. Create or connect to your repo (one command)
-
-codespace-starter $
-```
-
-###
-
-`head` prints the first ten lines of a file, a quick way to peek at its contents without opening it. Because `codespace-starter` is not your own repo, you will soon learn to create your own with `connect-repo` and save your work there.
-
-### Exercise 8
 
 Let us make the bash Terminal "sleep" by running `sleep 5`. The `sleep 5` command pauses execution for 5 seconds.
 
 CP/CR.
 
 ```{r}
-#| label: bash-terminal-8
+#| label: bash-terminal-6
 #| echo: false
 learnr2::question(
   "Let us make the bash Terminal \"sleep\" by running sleep 5. The sleep 5 command pauses execution for 5 seconds. CP/CR.",
@@ -269,14 +204,14 @@ codespace-starter $
 
 Many commands do their work silently and print nothing. We can change the duration with `sleep [number]`, where the number is how many seconds the pause lasts.
 
-### Exercise 9
+### Exercise 7
 
 Run `sleep 60` in the bash Terminal. This command makes the terminal sleep for 60 seconds. To cancel the running `sleep` command, press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
 
 CP/CR.
 
 ```{r}
-#| label: bash-terminal-9
+#| label: bash-terminal-7
 #| echo: false
 learnr2::question(
   "Run sleep 60 in the bash Terminal. This command makes the terminal sleep for 60 seconds. To cancel the running sleep command, press Ctrl + C on your keyboard. Do so now, before sleep 60 finishes. CP/CR.",
