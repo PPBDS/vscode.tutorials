@@ -157,7 +157,7 @@ Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
 
 ### Exercise 3
 
-Let's make a file by hand, just to see how it works. Open the Application Menu from the three horizontal bars at the top left on the VS Code widnow. Choose `File -> New File...`.
+Let's make a file by hand, just to see how it works. Open the Application Menu from the three horizontal bars at the top left on the VS Code window. Choose `File -> New File...`.
 
 ![](images/create-new-file.png){width=90%}
 
@@ -325,7 +325,7 @@ workflow $ pwd
 workflow $
 ```
 
-##
+###
 
 If your result still ends in `codespace-starter`, you have a problem. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/workflow`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
 
@@ -472,7 +472,7 @@ The black dot surrounded by the square next to `script-1.R` indicates a file tha
 
 ###
 
-Doing so, makes the black-dot-square disappear. It should be replaced with a `U` to indicate that the file is **untracked** by Git. 
+Doing so makes the black-dot-square disappear. It should be replaced with a `U` to indicate that the file is **untracked** by Git. 
 
 In the bash Terminal, run `ls`. CP/CR.
 
@@ -577,13 +577,13 @@ The GitHub page looks like this.
 
 ###
 
-From the bach Terminal, run `git log`. CP/CR.    
+From the bash Terminal, run `git log`. CP/CR.    
 
 ```{r}
 #| label: script-1-github-copilot-4
 #| echo: false
 learnr2::question(
-  "From the bach Terminal, run git log. CP/CR.",
+  "From the bash Terminal, run git log. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -717,7 +717,7 @@ ggsave("diamonds-2.png", diamonds_plot, width = 8, height = 5)
 
 ### Exercise 3
 
-Save this work too. Through the Source Control view, commit your new files with the message `Add script-2 and second diamonds plot`
+Save this work too. Through the Source Control view, commit your new files with the message `Add script-2 and second diamonds plot`.
 
 ![](images/commit-2.png){width=90%}
 

@@ -83,7 +83,7 @@ If a sign-in message appears, follow it: open the link in your browser, authoriz
 
 ###
 
-The reload will often start a new copy of the tutorial, with your answers already filled in. You know have two tabs open to the same tutorial. Don't fret! These are just two windows open to the same object. You can close one of them. Doesn't matter which.The other will continue to work.
+The reload will often start a new copy of the tutorial, with your answers already filled in. You now have two tabs open to the same tutorial. Don't fret! These are just two windows open to the same object. You can close one of them. Doesn't matter which. The other will continue to work.
 
 The reload might also just stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. 
 
@@ -138,7 +138,7 @@ Select `Quarto Document` from the drop-down menu.
 
 The top of the new document is called the YAML header. It should look like:
 
-![](images/q-2.png){width=90%}
+![](images/q-3.png){width=90%}
 
 Change the title to “My First Quarto Document”.
 
@@ -215,7 +215,7 @@ format: html
 
 ###
 
-A Quarto file uses `qmd` as its extension, where those initials stand for **Q**uarto **M**arkdown **D**ocument. We will often say *QMD*, in the same way that we use *PNG* for some image files. The argument `end = 4` causes just the first four lines of the file to be printed. Note that there is no necessary connection between the **title** of a Quarto document --- “My First Quarto Document” --- and the **name** of the file, `quarto-1.qmd`.
+A Quarto file uses `qmd` as its extension, where those initials stand for **Q**uarto **M**arkdown **D**ocument. We will often say *QMD*, in the same way that we use *PNG* for some image files. Note that there is no necessary connection between the **title** of a Quarto document --- “My First Quarto Document” --- and the **name** of the file, `quarto-1.qmd`.
 
 ###
 
@@ -297,7 +297,7 @@ The fourth is the bash Terminal associated with the Quarto Preview. This last te
 
 ###
 
-Using the `Cmd/Ctrl + Shift + K` shortcut, causes VS Code to open a new bash Terminal and issue the `quarto render` command, along with some options, as you can see below.
+Using the `Cmd/Ctrl + Shift + K` shortcut causes VS Code to open a new bash Terminal and issue the `quarto render` command, along with some options, as you can see below.
 
 ![](images/q-5-c.png){width=90%}
 
@@ -305,7 +305,7 @@ You don't need to worry about this now. Just use `Cmd/Ctrl + Shift + K` to previ
 
 ###
 
-Lastly, note that you also open the HTML file in a browser window by using `Cmd/Ctrl + click` on the "Browse at" link. 
+Lastly, note that you can also open the HTML file in a browser window by using `Cmd/Ctrl + click` on the "Browse at" link. 
 
 ![](images/q-5-d.png){width=90%}
 
@@ -385,7 +385,7 @@ Then, choose `Insert Code Cell`, selecting `r` from the list of options. Within 
 
 ![](images/cs-add-numbers.png){width=90%}
 
-You can also insert a code cell with the shortcut key: `Cmd/Ctrl + Shift + i`. 
+You can also insert a code cell with the shortcut key: `Cmd/Ctrl + Shift + I`. 
 
 Save the file. Render it again.
 
@@ -791,7 +791,7 @@ My Second Quarto Document
 library(tidyverse)
 ```
 
-We want to make our Quarto files beautiful. That means we will almost always "mask" ugly messages like this. Our readers don't care about such a**R**cana. They care about our analysis.
+We want to make our Quarto files beautiful. That means we will almost always "mask" ugly messages like this. Our readers don't care about such arcana. They care about our analysis.
 
 ### Exercise 7
 
