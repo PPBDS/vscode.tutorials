@@ -68,7 +68,7 @@ codespace-starter $
 
 ### Exercise 2
 
-In the bash Terminal, run `echo $0`. ("Run" means to type the command and then press `Enter`, which is the `return` key on a Mac and the `enter` on Windows/Linux. "Execute" means the same thing is "run" in this context.)
+In the bash Terminal, run `echo $0`. ("Run" means to type the command and then press `Enter`, which is the `return` key on a Mac and the `enter` on Windows/Linux. "Execute" means the same thing as "run" in this context.)
 
 CP/CR.
 
@@ -76,7 +76,7 @@ CP/CR.
 #| label: bash-terminal-2
 #| echo: false
 learnr2::question(
-  "In the bash Terminal, run echo $0. (\"Run\" means to type the command and then press Enter, which is the return key on a Mac and the enter on Windows/Linux. \"Execute\" means the same thing is \"run\" in this context.) CP/CR.",
+  "In the bash Terminal, run echo $0. (\"Run\" means to type the command and then press Enter, which is the return key on a Mac and the enter on Windows/Linux. \"Execute\" means the same thing as \"run\" in this context.) CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -120,7 +120,7 @@ codespace-starter $
 
 ###
 
-`pwd` stands for **p**rint **w**orking **d**irectory --- the folder the shell is currently "in." GitHub Codespaces place your starting repository, which is `codebase-starter` in this case, under `/workspaces/`, so that is where you begin. Almost every command you run acts in this directory unless you tell it otherwise.
+`pwd` stands for **p**rint **w**orking **d**irectory --- the folder the shell is currently "in." GitHub Codespaces place your starting repository, which is `codespace-starter` in this case, under `/workspaces/`, so that is where you begin. Almost every command you run acts in this directory unless you tell it otherwise.
 
 ### Exercise 4
 
@@ -249,7 +249,7 @@ Create a new R Terminal by pressing the down arrow next to the plus button on th
 
 ###
 
-You may need to click on the new  "R Interactive" tab at the bottom of the list of terminals in order to bring it to the top of the Panel.
+You may need to click on the new "R Interactive" tab at the bottom of the list of terminals in order to bring it to the top of the Panel.
 
 ### Exercise 1
 
@@ -309,7 +309,7 @@ R 4.6.1>
 
 ### Exercise 3
 
-In the R Terminal, run `getwd()`. This stands for **get** **w**orking **d**irectory, meaning that we want to know the directory in which the R process is currently located.
+In the R Terminal, run `getwd()`. This stands for **g**et **w**orking **d**irectory, meaning that we want to know the directory in which the R process is currently located.
 
 CP/CR.
 
@@ -416,7 +416,7 @@ learnr2::question(
 
 ###
 
-Once you submit an answer, it is locked: you cannot change it. You also cannot click "Continue" until you have submitted every question above it. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.
+Once you submit an answer, it is locked: you cannot change it. You also cannot click "Continue" until you have submitted every question above it. Don't stress! Most instructors grade tutorials on a pass/fail basis, so, as long as you make an honest effort, you will do fine.
 
 If you get stuck, just write "I skipped this question" or words to that effect. Skipping a question or two is *never* a problem. Just press on.
 
@@ -459,7 +459,7 @@ Copilot Chat usually opens automatically when your Codespace starts. If it is no
 
 ![](images/cs-open-copilot-chat.png){width=90%}
 
-When the Copilot Chat view opens, **Agent** will probably be selected by default from mode menu near the chat box. Agent mode lets Copilot work with files and Terminals in your Codespace. If you are asked to sign in or authorize GitHub Copilot, follow the instructions on the screen. Keep the Chat view open throughout this section.
+When the Copilot Chat view opens, **Agent** will probably be selected by default from the mode menu near the chat box. Agent mode lets Copilot work with files and Terminals in your Codespace. If you are asked to sign in or authorize GitHub Copilot, follow the instructions on the screen. Keep the Chat view open throughout this section.
 
 ### Exercise 1
 
@@ -785,7 +785,7 @@ R 4.6.1>
 
 ###
 
-Copilot used `Rscript`, which created `x` in a separate R process and then closed that process. Your open R session therefore reports `FALSE`. it does not know about the `x` that briefly existed in the other session.
+Copilot used `Rscript`, which created `x` in a separate R process and then closed that process. Your open R session therefore reports `FALSE`. It does not know about the `x` that briefly existed in the other session.
 
 ### Exercise 10
 
