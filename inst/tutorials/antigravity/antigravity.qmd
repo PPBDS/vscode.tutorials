@@ -50,7 +50,7 @@ Start the Antigravity CLI by running `agy` in the bash Terminal. Select "Use a G
 
 ![](images/agy-1.png){width=90%}
 
-and hit `Enter`. New College of Florida is providing some funding for your use of Antigravity. But, after the course is over, you can get the same sort of access for $20 or so per month. (If you are not an NCF student, choose the plain "Google 0Auth" option instead and use your own Google account; the rest of the tutorial works the same.) Select "Continue with Google Cloud."
+and hit `Enter`. New College of Florida is providing some funding for your use of Antigravity. But, after the course is over, you can get the same sort of access for $20 or so per month. (If you are not an NCF student, choose the plain "Google OAuth" option instead and use your own Google account; the rest of the tutorial works the same.) Select "Continue with Google Cloud."
 
 ![](images/agy-2.png){width=90%}
 
@@ -497,7 +497,7 @@ You met Live Server in the Quarto tutorial; nothing here is new except that an a
 
 Ask Antigravity: Add a plot to a new code chunk in `analysis.qmd` using the `storms` dataset. Visualize something like a boxplot showing the distribution of wind speeds by storm category. Include a meaningful title and subtitle, and then render the file.
 
-Antogravity might ask:
+Antigravity might ask:
 
 ```
   shift+tab to auto-approve file edits
@@ -614,13 +614,13 @@ In working with AI, it is smart to maintain one working chunk per final artifact
 
 Ask Antigravity to edit `analysis.qmd` so it contains only the setup chunk and the named-storms-per-year line chart. Delete any other chunks. Render. 
 
-Refresh Live Sever. Copy/paste the most recent messages from Antigravity.
+Refresh Live Server. Copy/paste the most recent messages from Antigravity.
 
 ```{r}
 #| label: working-code-chunk-1
 #| echo: false
 learnr2::question(
-  "Refresh Live Sever. Copy/paste the most recent messages from Antigravity.",
+  "Refresh Live Server. Copy/paste the most recent messages from Antigravity.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1321,7 +1321,7 @@ ggplot(storms_recent, aes(x = wind, y = pressure, color = status)) +
 
 You did not write any of this code yourself --- you described the goal and Antigravity produced it. The skill you practiced is reviewing what the agent wrote and confirming that it does what you asked.
 
-### Exercise 4
+### Exercise 2
 
 Publish your rendered QMD to GitHub Pages. In the bash Terminal, run:
 
@@ -1349,7 +1349,7 @@ https://ppbds-student.github.io/antigravity/analysis.html
 
 GitHub Pages takes a minute or two to deploy after `quarto publish` runs. If the link doesn't load immediately, wait and refresh.
 
-### Exercise 5
+### Exercise 3
 
 Commit and push any remaining uncommitted files. Copy/paste the URL to your GitHub repo.
 
