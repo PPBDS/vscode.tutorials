@@ -27,13 +27,13 @@ learnr2::student_info()
 
 ## Introduction
 
-This tutorial teaches you how to use [**Codespaces**](https://github.com/features/codespaces) with [**R**](https://www.r-project.org/about.html) scripts. It assumes that you have completed the "Orientation" tutorial.
+This tutorial teaches you how to use [**Codespaces**](https://github.com/features/codespaces) with [**R**](https://www.r-project.org/about.html) scripts. It assumes that you have completed the Orientation and Workflow tutorials.
 
 This tutorial includes some information from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
 ###
 
-You should be doing this tutorial in a repo called `code`. Recall from the Workflow tutorial: a repo is a folder that Git watches, with a copy kept on GitHub. If your Explorer already shows a `code` folder, you are all set. If it shows `codespace-starter`, the next two exercises will get you connected. Either way, they only take a minute.
+You should be doing this tutorial in a repo called `code`. Recall from the Workflow tutorial: a repo is a folder that Git watches, with a copy kept on GitHub. If the Explorer header already says CODE, you are all set. If it says CODESPACE-STARTER (its file list looks empty), the next two exercises will get you connected. Either way, they only take a minute.
 
 ### Exercise 1
 
@@ -79,15 +79,17 @@ If your result ends in `code`, you are all set --- **do not run the connect-repo
 connect-repo code
 ```
 
-If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/code`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
+If a sign-in message appears, follow it as you did in the Workflow tutorial: press Enter at the `Authenticate Git with your GitHub credentials?` prompt, copy the one-time code, press Enter again, and paste the code into the GitHub tab that opens. (If you signed in during the Workflow tutorial, you probably will not be asked.) The command finishes with a line like `✅  Connected: /workspaces/code  →  https://github.com/your-username/code`, and the prompt becomes `code $`.
 
-**Everyone**: open a new bash Terminal and run `pwd`. CP/CR.
+Then one of two things happens. Usually the VS Code window switches to the new folder by itself: VS Code asks "Do you trust the authors of the files in this folder?" --- click **Trust Folder & Continue** --- your old terminals disappear from the Panel, and a fresh bash terminal opens already at `code $`. (The `✅  Connected:` line vanishes with the old terminal. That is fine.) If the window does not switch and the Explorer still shows `codespace-starter`, use `File -> Open Folder...`, type `/workspaces/code`, press **OK**, and then click **Trust Folder & Continue**. Either way, this tutorial keeps running in your browser tab. If it ever stops responding, reload the tab. If that does not help, restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
+
+**Everyone**: open a new bash Terminal (or use the fresh one that appeared after the switch) and run `pwd`. CP/CR.
 
 ```{r}
 #| label: introduction-2
 #| echo: false
 learnr2::question(
-  "Everyone: open a new bash Terminal and run pwd. CP/CR.",
+  "Everyone: open a new bash Terminal (or use the fresh one that appeared after the switch) and run pwd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -109,7 +111,7 @@ Your repo lives in two places: this folder and `github.com`. `connect-repo` crea
 
 ###
 
-After starting the tutorial, your R Terminal is "busy" running the tutorial. It will be labeled "R Tutorial" in the top right of the Panel. 
+The terminal that started this tutorial is "busy" running it. Its tab, on the right side of the Panel, is labeled **R Tutorial**. (If `connect-repo` switched your window, that tab is gone from the Panel, but the tutorial keeps running. Either way, you cannot type R commands there.)
 
 You will want to run R commands while completing the tutorial. You can do this in a second R Terminal. Click the small down arrow in the top right of the Panel, next to the `+` button. From the drop-down menu, select **R Terminal**.
 
@@ -119,7 +121,7 @@ Now, you have a fresh R Terminal where you can run commands. You can switch betw
 
 ## Packages
 
-Again, you should have completed the "Orientation" tutorial. If not, this section may be difficult.
+Again, you should have completed the Orientation and Workflow tutorials. If not, this section may be difficult.
 
 ### Exercise 1
 
@@ -138,8 +140,8 @@ learnr2::question(
 ###
 
 ```
-Error in `show_file()`:
-! could not find function "show_file"
+R 4.6.1> show_file()
+Error in show_file() : could not find function "show_file"
 ```
 
 ###
@@ -171,9 +173,9 @@ learnr2::question(
 ```
 R 4.6.1> library(learnr2)
 R 4.6.1> search()
- [1] ".GlobalEnv"        "package:learnr2"   "tools:vscode"     
- [4] "package:stats"     "package:graphics"  "package:grDevices"
- [7] "package:utils"     "package:datasets"  "package:methods"  
+ [1] ".GlobalEnv"        "package:learnr2"   "package:stats"    
+ [4] "package:graphics"  "package:grDevices" "package:utils"    
+ [7] "package:datasets"  "cold_call_env"     "package:methods"  
 [10] "Autoloads"         "package:base"     
 R 4.6.1> 
 ```
@@ -216,7 +218,7 @@ This command would have failed if we had not loaded the **learnr2** package alre
 
 ### Exercise 4
 
-To restart R, close the current R Terminal by pressing the trash icon in the menu sidebar. Then, open a new R Terminal.
+To restart R, close the current R Terminal: hover over the **R Interactive** tab on the right side of the Panel and click its trash icon. Then, open a new R Terminal.
 
 ![](images/delete-r-terminal.png){width=90%}
 
@@ -366,9 +368,9 @@ R scripts are permanent copies of your code. You can save them and also work wit
 
 ### Exercise 2
 
-You met the Source button and its keyboard shortcut in the Orientation tutorial. Practice them again now --- the goal is to make them habit.
+You met the Run Source button and its keyboard shortcut in the Orientation tutorial. Practice them again now --- the goal is to make them habit.
 
-Press the **Source** button in the top-right corner of the Editor. (We will sometimes shorten the instruction "press the Source button" to just "source" the script.)
+Press the **Run Source** button in the top-right corner of the Editor. (We will sometimes shorten the instruction "press the Run Source button" to just "source" the script.)
 
 ![](images/source-button.png){width=90%}
 
@@ -378,7 +380,7 @@ CP/CR.
 #| label: script-1-2
 #| echo: false
 learnr2::question(
-  "Press the Source button in the top-right corner of the Editor. (We will sometimes shorten the instruction \"press the Source button\" to just \"source\" the script.) CP/CR.",
+  "Press the Run Source button in the top-right corner of the Editor. (We will sometimes shorten the instruction \"press the Run Source button\" to just \"source\" the script.) CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -439,13 +441,13 @@ R 4.6.1>
 
 ### Exercise 4
 
-Go back to the first line in your R script. Change `5 + 5` to `x <- 5 + 5`, thereby creating an object named `x` with a value of 10. Save the file. Source the file, either by pressing the "Source" triangle or with `Cmd/Ctrl + Shift + S`. CP/CR.
+Go back to the first line in your R script. Change `5 + 5` to `x <- 5 + 5`, thereby creating an object named `x` with a value of 10. Save the file. Source the file, either by pressing the **Run Source** button or with `Cmd/Ctrl + Shift + S`. CP/CR.
 
 ```{r}
 #| label: script-1-4
 #| echo: false
 learnr2::question(
-  "Go back to the first line in your R script. Change 5 + 5 to x <- 5 + 5, thereby creating an object named x with a value of 10. Save the file. Source the file, either by pressing the \"Source\" triangle or with Cmd/Ctrl + Shift + S. CP/CR.",
+  "Go back to the first line in your R script. Change 5 + 5 to x <- 5 + 5, thereby creating an object named x with a value of 10. Save the file. Source the file, either by pressing the Run Source button or with Cmd/Ctrl + Shift + S. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -500,9 +502,9 @@ R 4.6.1>
 In this case, the object `x`, which has a value of 10, exists in your workspace. You can confirm this by typing `x` at the R Terminal and pressing `Enter`.
 
 ```
-> x
+R 4.6.1> x
 [1] 10
->
+R 4.6.1>
 ```
 
 ### Exercise 6
@@ -536,18 +538,12 @@ learnr2::question(
 ```
 code $ git log
 commit 0f0eed547148739b625ec8e3c4db91ac076d96e5 (HEAD -> main, origin/main)
-Author: davekane-student <dave.kane+student@gmail.com>
+Author: Your Name <your-username@users.noreply.github.com>
 Date:   Thu Aug 13 14:40:51 2026 +0000
 
     Add script-1
 code $
 ```
-
-###
-
-<!-- DK: Really ought to make this pop-up disappear in the VS Code or Git settings. -->
-
-You will often see a pop-up asking if you want to automatically "fetch" changes from your GitHub repo. Feel free to dismiss. Since no one else is working on this repo, there are no changes to fetch. If you are working with others, you will want to fetch changes from GitHub before you push your own changes.
 
 ## Script 2
 
@@ -572,7 +568,7 @@ hist_p
 
 ### Exercise 1
 
-Click `File -> New File ... -> R File`. At the top of the Editor, the file will be called *`Untitled-1`* (or something similar) by default.
+Click `File -> New File ... -> R Document`. At the top of the Editor, the file will be called *`Untitled-1`* (or something similar) by default.
 
 ###
 
@@ -602,7 +598,7 @@ Save your scripts in the folder. Edit them and run them line by line or in their
 
 ### Exercise 2
 
-Restart your R session by deleting your current R Terminal and opening a new one.
+Restart your R session: hover over the **R Interactive** tab on the right side of the Panel, click its trash icon, and then open a new R Terminal.
 
 From the bash Terminal, run `ls`. CP/CR.
 
@@ -643,9 +639,9 @@ learnr2::question(
 ###
 
 ```
-> ls()
+R 4.6.1> ls()
 character(0)
->
+R 4.6.1>
 ```
 
 Do not confuse R's `ls()` with the bash `ls` you just ran: same name, different worlds. Bash's `ls` lists files on disk; R's `ls()` lists objects in R's memory.
@@ -662,7 +658,7 @@ At the top of `script-2.R`, type
 library(tidyverse)
 ```
 
-You will see, in the top bar of the Editor, that the file name `script-2.R` has a black dot next to it. This indicates that there are unsaved changes in the file.
+For a moment, you will see, in the top bar of the Editor, that the file name `script-2.R` has a black dot next to it. The dot means the file has unsaved changes. It disappears on its own because the Codespace auto-saves after a short delay.
 
 ###
 

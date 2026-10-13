@@ -79,15 +79,13 @@ If your result ends in `quarto`, you are all set. **Do not run the connect-repo 
 connect-repo quarto
 ```
 
-If a sign-in message appears, follow it: open the link in your browser, authorize GitHub, then return to VS Code. The script may reload the VS Code window or ask you to open a folder. If the Explorer does not show `quarto`, use `File -> Open Folder...` and open `/workspaces/quarto`. 
+If a sign-in message appears, follow it as you did in the Workflow tutorial: press Enter at the `Authenticate Git with your GitHub credentials?` prompt, copy the one-time code, press Enter to open GitHub in your browser, and paste the code there. When `connect-repo` finishes, it prints a line like `✅  Connected: /workspaces/quarto  →  https://github.com/your-username/quarto` and the prompt becomes `quarto $`. Then one of two things happens. Either the VS Code window switches to the new folder by itself --- VS Code asks whether you trust the authors of the files in this folder; click **Trust Folder & Continue** --- or nothing switches, in which case you use `File -> Open Folder...`, open `/workspaces/quarto`, and click **Trust Folder & Continue** when asked. Both are normal.
 
 ###
 
-The reload will often start a new copy of the tutorial, with your answers already filled in. You now have two tabs open to the same tutorial. Don't fret! These are just two windows open to the same object. You can close one of them. Doesn't matter which. The other will continue to work.
+If the window switched, the terminals you had open are gone, replaced by a single new bash Terminal that already sits in `quarto`. The tutorial tab in your browser keeps working, because the tutorial's server survived the switch.
 
-The reload might also just stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. 
-
-All of your saved answers will still be there.
+If the tutorial page ever greys out or stops responding, reload the browser tab. If that does not fix it, restart the tutorial the same way you started it: close the broken tab, trash the old **R Tutorial** terminal, click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. Your answers are saved in your browser, so they will still be there.
 
 ###
 
@@ -207,10 +205,12 @@ learnr2::question(
 ###
 
 ```
+quarto $ cat quarto-1.qmd
 ---
 title: "My First Quarto Document"
 format: html
 ---
+quarto $
 ```
 
 ###
@@ -273,7 +273,7 @@ To "render" our Quarto document, use the shortcut `Cmd/Ctrl + Shift + K`. Your s
 
 ![](images/q-5.png){width=90%}
 
-This command splits the Editor and opens a new tab titled "Quarto Preview" on the right. This displays the rendered document. It's often better to preview the document in a separate browser window. VS Code should have offered you the opportunity to open the HTML file in a browser. Ignore that for now.
+This command splits the Editor and opens a new tab titled "Quarto Preview" on the right. This displays the rendered document. It's often better to preview the document in a separate browser window. VS Code pops up a notice that your application is running on port NNNN, with an **Open in Browser** button. Ignore it for now.
 
 ###
 
@@ -281,23 +281,19 @@ There is a lot going on, so we will consider different parts of the window. Plea
 
 ![](images/q-5-a.png){width=90%}
 
-The Quarto Preview window shows what your Quarto document looks like now that it has been rendered as HTML. The first red arrow indicates the "refresh" button, which re-renders the document, although this refresh generally happens automatically. 
+The Quarto Preview window shows what your Quarto document looks like now that it has been rendered as HTML. Its toolbar, shown above, has three things worth knowing about. The circular arrow on the left is the "refresh" button, which re-renders the document, although this refresh generally happens automatically.
 
-The second red arrow indicates the URL at which the rendered page is actually available (at least to you), via your Codespace.
+Next to it is the URL at which the rendered page is actually available (at least to you), via your Codespace.
 
-The third red arrow indicates the "Open in Browser" button, which opens the rendered document, using that same URL, in a browser window. 
-
-###
-
-The list of terminals on the righthand side of the window shows four entries. The first is the bash Terminal which initialized the Codespace. The second is the bash Terminal associated with running `connect-repo`. The third is the bash Terminal that we opened to run `pwd` and `ls`. 
-
-![](images/q-5-b.png){width=90%}
-
-The fourth is the bash Terminal associated with the Quarto Preview. This last terminal is where the `quarto preview` command is running, which is what generates the rendered document.
+At the far right, the box-with-an-arrow icon is the "Open in Browser" button, which opens the rendered document, using that same URL, in a browser window.
 
 ###
 
-Using the `Cmd/Ctrl + Shift + K` shortcut causes VS Code to open a new bash Terminal and issue the `quarto render` command, along with some options, as you can see below.
+The list of terminals on the righthand side of the Panel shows two entries. The first, `bash`, is the terminal the Codespace opened when it switched to your new folder. The second, `Quarto Preview`, is a terminal that VS Code opened just now: it is where the `quarto preview` command is running, which is what generates the rendered document. (If the window did not switch after `connect-repo`, the list also holds the terminals you opened earlier.)
+
+###
+
+Using the `Cmd/Ctrl + Shift + K` shortcut causes VS Code to open a terminal named "Quarto Preview" and issue the `quarto preview` command, along with some options (`--no-browser --no-watch-inputs`), as you can see below.
 
 ![](images/q-5-c.png){width=90%}
 
@@ -305,7 +301,7 @@ You don't need to worry about this now. Just use `Cmd/Ctrl + Shift + K` to previ
 
 ###
 
-Lastly, note that you can also open the HTML file in a browser window by using `Cmd/Ctrl + click` on the "Browse at" link. 
+Lastly, note that you can also open the HTML file in a browser window by using `Cmd/Ctrl + click` on the "Browse at" link in that terminal. (Either link works; the "Listening on" address is the same page.)
 
 ![](images/q-5-d.png){width=90%}
 
@@ -389,7 +385,7 @@ You can also insert a code cell with the shortcut key: `Cmd/Ctrl + Shift + I`.
 
 Save the file. Render it again.
 
-In the R Terminal, run:
+Open an R Terminal (the drop-down beside `+` on the right side of the Panel, then **R Terminal**; its tab is labeled **R Interactive**). In the R Terminal, run:
 
 ```
 learnr2::show_file("quarto-1.qmd", pattern = "6")
@@ -411,25 +407,26 @@ learnr2::question(
 ###
 
 ```
+R 4.6.1> learnr2::show_file("quarto-1.qmd", pattern = "6")
 6 + 3
 ```
 
 ###
 
-This should return a single character vector with `"6 + 3"`, the line that you added to the code cell.
+This should return the one line in the file that contains a `6`: `6 + 3`, the line that you added to the code cell.
 
-Strictly speaking, you did not need to save the file before rendering it. The `preview` command saves the file automatically. Nevertheless, you should make a habit of saving your work before running it. (If you come across some software that *doesn't* autosave upon running, you'll be running old code and wondering why something still doesn't work when you just fixed it.)
+Strictly speaking, you did not need to save the file before rendering it. The Codespace auto-saves after a short delay, which is why the black dot next to the file name disappears by itself, and the `preview` command saves the file as well. Nevertheless, you should make a habit of saving your work before running it. (If you come across some software that *doesn't* autosave upon running, you'll be running old code and wondering why something still doesn't work when you just fixed it.)
 
 ###
 
-If you can no longer see the preview file, you can usually view it by checking the text that was printed in the Terminal when you rendered the QMD. That text will include something like this:
+If you can no longer see the preview file, you can usually view it by checking the text that was printed in the **Quarto Preview** terminal when you rendered the QMD. That text will include something like this:
 
 ```
 Watching files for changes
 Browse at http://localhost:3807/
 ```
 
-Paste that URL into a browser, or `Cmd + click` it, and you will be able to see the HTML. In my case, the URL is `http://localhost:3807/`; yours will be different.
+`Cmd/Ctrl + click` that link and you will be able to see the HTML. (Do not paste the address into a browser by hand: `localhost` here means your Codespace, a computer far away, and VS Code does the translation for you when you click.) In my case, the URL is `http://localhost:3807/`; yours will be different.
 
 ### Exercise 6
 
@@ -456,26 +453,19 @@ learnr2::question(
 ###
 
 ```
+quarto $ cat quarto-1.qmd
 ---
 title: "My First Quarto Document"
-author: "Your Name"
 format: html
 ---
 
 This is my first Markdown text.
+quarto $
 ```
 
 ###
 
-This should return your entire Quarto document. If you do not have an empty line at the end of your file, you will get a warning message like this:
-
-<span style="color: red;">
-Warning message:
-In readLines("quarto-1.qmd") :
-  incomplete final line found on 'quarto-1.qmd'
-</span>
-
-The solution is to add an empty line to the end of the file. This is (almost) always a good idea! Don't be stingy with whitespace.
+This should return your entire Quarto document. Make sure your file ends with an empty line, so that the `quarto $` prompt appears on its own line rather than glued to the end of your text. Ending a file with a newline is (almost) always a good idea! Don't be stingy with whitespace.
 
 ### Exercise 7
 
@@ -489,7 +479,7 @@ Replace the one sentence already in `quarto-1.qmd` with `## My Header`. Skip a l
 You can do a lot of cool things in Quarto like **bold** and *italic* text.
 ```
 
-Render the file again. Does everything look good in the Viewer/browser?
+Render the file again. Does everything look good in the Quarto Preview pane or your browser?
 
 ### 
 
@@ -515,15 +505,16 @@ learnr2::question(
 ###
 
 ```
+quarto $ cat quarto-1.qmd
 ---
 title: "My First Quarto Document"
-author: "Your Name"
 format: html
 ---
 
 ## My Header
 
 You can do a lot of cool things in Quarto like **bold** and *italic* text.
+quarto $
 ```
 
 ###
@@ -542,7 +533,13 @@ In the Explorer (the file tree on the left side of VS Code), find `quarto-1.html
 
 ![](images/live-server.png){width=90%}
 
-This opens `quarto-1.html` in a new browser tab served through your Codespace. The URL will look something like `https://[codespace-name]-5500.app.github.dev/quarto-1.html`.
+Two notices pop up --- "Server is Started at port : 5500" and "Your application running on port 5500 is available" --- and **Port : 5500** appears in the Status Bar at the bottom of the window.
+
+![](images/live-server-started.png){width=90%}
+
+A new browser tab opens with `quarto-1.html`, served through your Codespace. The URL will look something like `https://[codespace-name]-5500.app.github.dev/quarto-1.html`.
+
+![](images/live-server-tab.png){width=90%}
 
 Copy/paste that URL below.
 
@@ -574,7 +571,7 @@ Why learn two ways to view your work? The "Quarto Preview" pane is quick and liv
 
 ### Exercise 9
 
-Your first Quarto document is done, so commit it. Through the Source Control view, as you did in the Code tutorial: review **Changes** --- you should see `.gitignore`, `quarto-1.qmd`, and `quarto-1.html`, but no `_files` directory, thanks to your `.gitignore` --- type `Add quarto-1` as the message, press **Commit**, then **Sync Changes**.
+Your first Quarto document is done, so commit it. Through the Source Control view, as you did in the Code tutorial: review **Changes** --- you should see `.gitignore`, `AGENTS.md`, `quarto-1.qmd`, and `quarto-1.html`, but no `_files` directory, thanks to your `.gitignore` --- type `Add quarto-1` as the message, press **Commit**, then **Publish Branch**. (This is the first push from a brand-new repo, which is why the button says **Publish Branch**; after this, it will say **Sync Changes**.)
 
 In the bash Terminal, run `git log -1`. CP/CR.
 
@@ -673,7 +670,7 @@ format: html
 
 Note the curly braces `{}` at the top of the chunk, with an `r` inside. The `r` indicates that Quarto should use R to run the code.
 
-In this tutorial, we will only include R code within our code chunks. But code chunks can have any programming language in them, from common ones like Python, Java, and C, to esoteric ones like INTERCAL and Whitespace. All you need to do is indicate the language in the curly braces, e.g., `{py}`, `{ruby}`, et cetera.
+In this tutorial, we will only include R code within our code chunks. But code chunks can have any programming language in them, from common ones like Python, Java, and C, to esoteric ones like INTERCAL and Whitespace. All you need to do is indicate the language in the curly braces, e.g., `{python}`, `{ruby}`, et cetera.
 
 ### Exercise 3
 
@@ -755,13 +752,13 @@ learnr2::question(
 My Second Quarto Document
 library(tidyverse)
 
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.0.4     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+── Attaching core tidyverse packages ──────────────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2
+── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
@@ -859,7 +856,7 @@ learnr2::question(
 
 ### 
 
-You are generally free to label your chunk however you like, but there is one chunk name that imbues special behavior: `setup`. When you’re in a notebook mode, the chunk named `setup` will be run automatically once, before any other code is run.
+You are generally free to label your chunks however you like. `setup` is the conventional name for the chunk that loads libraries and does other housekeeping, and readers of your code will look for it there.
 
 Chunk labels cannot be duplicated. Each chunk label must be unique.
 
@@ -889,7 +886,16 @@ learnr2::question(
 )
 ```
 
-### 
+###
+
+```
+R 4.6.1> pull(mtcars, 1)
+ [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4
+[16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7
+[31] 15.0 21.4
+```
+
+Your lines may break in different places, depending on the width of your terminal. `pull()` is a **dplyr** function; it extracts one column --- here the first, `mpg` --- from a data frame as a plain vector.
 
 If you run this command without running `library(tidyverse)` in the R Terminal, you will get an error about not finding the "pull" function. The fact that `library(tidyverse)` exists in the QMD, and that you have "used" it there by rendering the document, has no bearing on the world of the R Terminal.
 
@@ -1056,12 +1062,39 @@ learnr2::question(
 
 ```
 quarto $ quarto render quarto-2.qmd
-[1/1] quarto-2.qmd
+
+
+processing file: quarto-2.qmd
+1/5
+2/5 [setup]
+3/5
+4/5 [unnamed-chunk-1]
+5/5
+output file: quarto-2.knit.md
+
+pandoc
+  to: html
+  output-file: quarto-2.html
+  standalone: true
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+
+metadata
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  title: My Second Quarto Document
+  author: Your Name
 
 Output created: quarto-2.html
 
 quarto $
 ```
+
+The render names each chunk as it runs it: `setup`, then your plotting chunk, which knitr calls `unnamed-chunk-1` because you never gave it a label. Then pandoc turns the result into HTML, and `Output created` tells you it worked.
 
 ###
 
@@ -1094,18 +1127,69 @@ learnr2::question(
 ```
 quarto $ quarto publish gh-pages quarto-2.qmd
 ? Publish site to https://your-username.github.io/quarto/ using gh-pages? (Y/n) › Yes
-Rendering for publish:
-
-[1/1] quarto-2.qmd
 Switched to a new branch 'gh-pages'
 [gh-pages (root-commit) 0e5631c] Initializing gh-pages branch
+remote:
 remote: Create a pull request for 'gh-pages' on GitHub by visiting:
 remote:      https://github.com/your-username/quarto/pull/new/gh-pages
+remote:
 To https://github.com/your-username/quarto.git
  * [new branch]      HEAD -> gh-pages
-Published to https://your-username.github.io/quarto/quarto-2.html
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+From https://github.com/your-username/quarto
+ * branch            gh-pages   -> FETCH_HEAD
+Rendering for publish:
+
+
+
+processing file: quarto-2.qmd
+1/5
+2/5 [setup]
+3/5
+4/5 [unnamed-chunk-1]
+5/5
+output file: quarto-2.knit.md
+
+pandoc
+  to: html
+  output-file: quarto-2.html
+  standalone: true
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+
+metadata
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  title: My Second Quarto Document
+  author: Your Name
+
+Preparing worktree (resetting branch 'gh-pages'; was at 0e5631c)
+branch 'gh-pages' set up to track 'origin/gh-pages'.
+HEAD is now at 0e5631c Initializing gh-pages branch
+fatal: pathspec '.' did not match any files
+[gh-pages 9c1d2a4] Built site for gh-pages
+ 16 files changed, 4319 insertions(+)
+ create mode 100644 .nojekyll
+ create mode 100644 index.html
+ create mode 100644 quarto-2.html
+ create mode 100644 quarto-2_files/figure-html/unnamed-chunk-1-1.png
+ create mode 100644 quarto-2_files/libs/bootstrap/bootstrap.min.js
+ ...
+To https://github.com/your-username/quarto.git
+   0e5631c..9c1d2a4  HEAD -> gh-pages
+
+[✓] Deploying gh-pages branch to website (this may take a few minutes)
+[✓] Published to https://your-username.github.io/quarto/
+
 quarto $
 ```
+
+The output is long. The line `fatal: pathspec '.' did not match any files` looks alarming but is harmless --- the brand-new `gh-pages` branch simply had nothing in it yet --- and the run carries on to `[✓] Published to https://your-username.github.io/quarto/`. Your page lives at that address plus the file name, `https://your-username.github.io/quarto/quarto-2.html`; `quarto publish` also made a copy called `index.html`, so the bare address works too.
 
 ###
 

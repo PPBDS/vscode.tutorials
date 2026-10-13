@@ -46,12 +46,12 @@ The tutorial itself runs in an R process displayed in a terminal whose tab is na
 VS Code is split into a few parts:
 
 * The **Activity Bar** is the row of small icons on the far left.
-* The **Side Bar** is the box next to those icons. Click the Explorer icon to see your files. Click the Source Control icon to work with Git.
+* The **Side Bar** is the box next to those icons. Click the Explorer icon to see your files. (In `codespace-starter` the Explorer looks almost empty --- only files you made yourself, like `presidents.txt` from Orientation, show up --- because the folder's own plumbing is hidden on purpose.) Click the Source Control icon to work with Git.
 * The **Editor** is the big space in the middle. This is where you read and change files.
 * The **Panel** is usually at the bottom. Its most important view is the **Terminal**, where you type commands.
 * The **Status Bar** is the thin bar across the very bottom.
 
-Here is the whole VS Code window. The Explorer Side Bar is on the left. The Editor is in the middle. The Terminal is inside the red box at the bottom.
+Here is the whole VS Code window. The Explorer Side Bar is on the left. The Editor is in the middle. The Panel, with the Terminal view selected, is across the bottom.
 
 ###
 
@@ -63,7 +63,7 @@ You can make a part bigger or smaller by dragging its edge. If you close somethi
 
 Most questions ask for you to **CP/CR** --- **C**opy/**P**aste the **C**ommand and **R**esponse --- as you have seen in earlier tutorials.
 
-Your answer may look a little different from ours. That is OK. Usernames, version numbers, and the exact look of the prompt can be different. In our examples we shorten the prompt to just the folder name and a `$`, like `codespace-starter $`. Your real prompt may be longer, but it means the same thing.
+Your answer may look a little different from ours. That is OK. Usernames and version numbers can be different. The **prompt** --- the text the Terminal prints while it waits for you to type --- is the name of the current folder, a space, and a `$`, like `codespace-starter $`. We set up `codespace-starter` that way, and every bash Terminal you open in this Codespace has it.
 
 ## The Terminal
 
@@ -79,19 +79,11 @@ You can also open it with the keyboard shortcut shown in the menu, `` Ctrl + ` `
 
 ###
 
-You want a **bash** Terminal. Look at the top-right corner of the Panel. Click the small down arrow beside the `+`, then choose **bash**. The picture below shows an open bash Terminal: the **TERMINAL** view is selected, the red box marks the **bash** tab, and the `+` and down-arrow buttons for opening more terminals sit just to its right.
+You want a **bash** Terminal. The Codespace already opened one for you: the terminal showing the READY banner, which you met in Orientation. Use it; there is no need to open another. The small ⚠ on its tab is harmless --- ignore it. The picture below shows that terminal: the **TERMINAL** view is selected, the **bash** tab sits at the right side of the Panel, and the `+` and down-arrow buttons for opening more terminals are just beside it. If you ever do need another bash Terminal, click the `+`.
 
 ![](images/terminal-on-open.png){width=90%}
 
-You should now have at least two terminal tabs: **R Tutorial**, which is busy running this tutorial, and **bash**, where you will work. Leave the **R Tutorial** tab alone.
-
-Beware: a new bash Terminal will sometimes show a long prompt like
-
-```
-@davekane-student ➜ /workspaces/codespace-starter (main) $
-```
-
-with your GitHub username in place of `davekane-student`. The exact content of your prompt is something you can control. We set up `codespace-starter` so that, by default, the prompt just shows the current directory, followed by a space and a dollar sign, like `codespace-starter $`. 
+Once this tutorial is running, the Panel shows two terminal tabs: **bash**, where you will work, and **R Tutorial**, which is busy running this tutorial. Leave the **R Tutorial** tab alone.
 
 ### Exercise 1
 
@@ -173,7 +165,7 @@ Type this single line into the new file:
 
 Add a blank line after it.
 
-Save the file as `warmup.R` at the top level of `codespace-starter`. Press `Cmd/Ctrl + S`; in the Save dialog, make sure the path ends in `codespace-starter/warmup.R`, then press **OK**. A black dot on an Editor tab means the file has unsaved changes; saving makes the dot disappear.
+Save the file as `warmup.R` at the top level of `codespace-starter`. Press `Cmd/Ctrl + S`; in the Save dialog, make sure the path ends in `codespace-starter/warmup.R`, then press **OK**. A black dot on an Editor tab means the file has unsaved changes; saving makes the dot disappear. (The Codespace also saves files by itself after a short pause, so the dot may vanish before you press anything.) `warmup.R` now appears in the Explorer, which otherwise looks nearly empty because `codespace-starter`'s own folders are hidden.
 
 ![](images/save-warmup.png){width=90%}
 
@@ -245,28 +237,76 @@ In the bash Terminal, run:
 connect-repo workflow
 ```
 
+This is the command the READY banner has been suggesting since the Codespace started. Now is the time to run it.
+
 ###
 
-You should see something like this, assuming you answer `Y` to the first question:
+The first thing `connect-repo` does is sign you in to GitHub. You should see:
 
 ```
 codespace-starter $ connect-repo workflow
 → Sign in to GitHub: authorize in the browser/code prompt, then come back here.
+? Authenticate Git with your GitHub credentials? (Y/n) 
+```
+
+![](images/connect-repo-prompt-1.png){width=90%}
+
+Press `Enter` to answer `Y`. A one-time code appears:
+
+```
 ? Authenticate Git with your GitHub credentials? Yes
 
-! First copy your one-time code: 5887-E310
+! First copy your one-time code: 7A6F-7093
 Press Enter to open https://github.com/login/device in your browser... 
 ```
 
-Your code will be different from this one, and different each time. You should copy the entire one-time code. You will then be able to just paste the whole thing in at once, when GitHub asks for it. 
+![](images/connect-repo-prompt-2-code.png){width=90%}
 
-Press `Enter` to open the link in your browser, authorize GitHub, then return to VS Code. 
+Your code will be different from this one, and different each time. Copy the entire code, dash and all; you will paste the whole thing in at once when GitHub asks for it. (Some junk characters may appear after the "Press Enter" line. Ignore them.)
+
+###
+
+Press `Enter`. A new browser tab opens on GitHub's device page.
+
+![](images/github-device-page.png){width=90%}
+
+Paste your code into the boxes and press **Continue**. If GitHub asks you to authorize, do so. Then return to the VS Code tab.
 
 ![](images/authorize.png){width=90%}
 
 ###
 
-Note that the browser may open up what appears to be a new version of this tutorial. In truth, it is just a new window onto the same tutorial. Delete one of these tutorial tabs. It does not matter which one.
+Back in the Terminal, `connect-repo` finishes its work:
+
+```
+✓ Created repository davekane-student/workflow on github.com
+  https://github.com/davekane-student/workflow
+→ Added AGENTS.md (how AI assistants work with you in this course). Re-run with --no-agents to skip.
+
+   ✅  Connected: /workspaces/workflow  →  https://github.com/davekane-student/workflow
+
+workflow $ 
+```
+
+![](images/connect-repo-connected-line.png){width=90%}
+
+(The picture was taken for a repo with a different name. Yours says `workflow`.) Notice the last line. The prompt has changed from `codespace-starter $` to `workflow $`. `connect-repo` created the repo on GitHub, made a folder for it at `/workspaces/workflow`, and then restarted the shell in this terminal inside that folder.
+
+###
+
+What happens next takes one of two forms. Both are normal.
+
+**Most of the time, the window switches to the new folder by itself.** A "Restricted Mode" bar appears at the top, and VS Code asks, "Do you trust the authors of the files in this folder?" Click **Trust Folder & Continue**.
+
+![](images/trust-after-connect-repo.png){width=90%}
+
+VS Code then rebuilds itself around `/workspaces/workflow`. The old terminals, including **R Tutorial**, vanish from the Panel; a Welcome tab flashes and closes; the Chat side bar reopens; and a fresh, single **bash** terminal appears, already at `workflow $`. The Explorer now shows `AGENTS.md`. Do not worry about the missing **R Tutorial** terminal: the process serving this tutorial survives the switch, so this browser tab keeps working.
+
+![](images/workflow-after-trust.png){width=90%}
+
+**Sometimes nothing switches.** The prompt says `workflow $`, but the Explorer still says `CODESPACE-STARTER`. Open the folder yourself: from the Application Menu choose `File -> Open Folder...`, type `/workspaces/workflow` in the box, and press **OK**. Click **Trust Folder & Continue** when asked. The same rebuild follows.
+
+![](images/open-folder-dialog.png){width=90%}
 
 ###
 
@@ -305,13 +345,13 @@ The first supplied the Codespace and the tutorial. The second is yours and will 
 
 ### Exercise 2
 
-Open a new bash Terminal if necessary. Run `pwd`. CP/CR.
+If you need a new bash Terminal, click the `+` at the right of the Panel. It starts in `workflow`, not in `codespace-starter`: `connect-repo` arranged for every new terminal to begin in your repo. Run `pwd`. CP/CR.
 
 ```{r}
 #| label: git-and-github-2
 #| echo: false
 learnr2::question(
-  "Open a new bash Terminal if necessary. Run pwd. CP/CR.",
+  "If you need a new bash Terminal, click the + at the right of the Panel. Run pwd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -327,7 +367,7 @@ workflow $
 
 ###
 
-If your result still ends in `codespace-starter`, you have a problem. If the Explorer still shows `codespace-starter`, use `File -> Open Folder...` and open `/workspaces/workflow`. The reload will stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
+If your result still ends in `codespace-starter`, that terminal was never moved. Run `cd /workspaces/workflow`, or open a new bash Terminal with the `+`, which starts in the right place. If the Explorer still shows `CODESPACE-STARTER`, that is a separate problem: use `File -> Open Folder...` to open `/workspaces/workflow`, as described above, then click **Trust Folder & Continue**. The reload may stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
 
 ### Exercise 3
 
@@ -351,9 +391,9 @@ workflow $ ls -a
 workflow $ 
 ```
 
-The hidden `.git` directory is what defines a Git repository. Git fills it with your work as you proceed. You never use directly, or even examine, the `.git` folder.
+The hidden `.git` directory is what defines a Git repository. Git fills it with your work as you proceed. You never work directly in, or even examine, the `.git` folder.
 
-`AGENTS.md` is a file we created which tries to guide AI in how best to help beginners. Check it out, if you like! If you don't like it, you can delete it and tell your AI to ignore it. 
+`AGENTS.md` is a plain-text file that `connect-repo` copies into every new repo. GitHub Copilot and the command-line agents (`agy`, `claude`, and the rest) read it from the repo root and follow its rules: take short, narrated steps; ask once for permission; do not solve whole worksheets for you. Read it if you like --- `cat AGENTS.md` in the bash Terminal. If you would rather not have it, `connect-repo --no-agents <name>` skips it next time. Otherwise leave it alone. It goes into your first commit along with everything else, which is normal.
 
 ### Exercise 4
 
@@ -369,7 +409,7 @@ Find the repo named **workflow**. Click it.
 
 ![](images/repo-2.png){width=90%}
 
-This is your repository's page. There is nothing going on yet because we have not made any changes.
+This is your repository's page. Seeing it in your browser proves two things: the repository really exists on GitHub, and it belongs to **you** (your username appears in the address bar, like `github.com/your-username/workflow`). This is the online home where your work will live. There is nothing in it yet because you have not committed anything.
 
 ###
 
@@ -402,19 +442,13 @@ nothing added to commit but untracked files present (use "git add" to track)
 workflow $ 
 ```
 
-Seeing the repository in your browser proves two things: the repository really exists on GitHub, and it belongs to **you** (your username appears in the address bar, like `github.com/your-username/workflow`). This is the online home where your work will live. 
+`On branch main` and `No commits yet` mean what they say: this repo has a branch called `main` but no history at all so far. `Untracked files` lists files that sit in the folder but that Git has not been told to watch --- right now, just `AGENTS.md`. Your first commit will change both of those.
 
 ## Script 1: GitHub Copilot
 
 You met **GitHub Copilot** --- the AI assistant built right into VS Code --- in the Orientation tutorial, where it wrote small files for you. We use Copilot here because it is always available and works out of the box.
 
-Open a new R Terminal by clicking the small arrow beside the `+` in the top-right corner of the Panel, then choosing **R Terminal**. (The new terminal's tab is labeled **R Interactive**.) 
-
-Keep the **R Tutorial** terminal running, and use this new R Terminal for the R commands below. You may need to select the **R Interactive** terminal by clicking on it in order to move it to the front.
-
-###
-
-If the Chat window --- normally the secondary sidebar on the right of the VS Code main screen --- is not open, open it now by clicking the "Toggle Secondary Sidebar" icon in the top-right corner of the window. 
+If the Chat window --- normally the Secondary Side Bar on the right of the VS Code main screen --- is not open, open it now by clicking the "Toggle Secondary Side Bar" icon in the top-right corner of the window. 
 
 ![](images/toggle-chat.png){width=90%}
 
@@ -556,7 +590,7 @@ This solution loads only **tidyverse**, uses only `diamonds`, assigns the plot t
 
 Time to save your work. **Git** records a snapshot of your files, called a **commit**. A **push** sends your commits up to GitHub. Do both by hand through the Source Control view.
 
-Click the Source Control icon (the branching icon) in the Activity Bar on the left. Your new files appear under **Changes**. (Don't worry about `AGENTS.md`. We created this file to help with teaching.) Each one has a `U`, which means **untracked**: Git can see the file, but it is not yet part of any commit.
+Click the Source Control icon (the branching icon) in the Activity Bar on the left. Your new files appear under **Changes**. (`AGENTS.md` is there too. It belongs in this first commit.) Each one has a `U`, which means **untracked**: Git can see the file, but it is not yet part of any commit.
 
 ![](images/source-control.png){width=90%}
 
@@ -569,7 +603,7 @@ Now commit and push:
 
 ###
 
-When the sync finishes, view your work on the web. Open your `workflow` repository on GitHub and refresh the page. 
+When the push finishes, view your work on the web. Open your `workflow` repository on GitHub and refresh the page. 
 
 The GitHub page looks like this. 
 
@@ -763,10 +797,10 @@ You used the major parts of VS Code, practiced bash commands, created and connec
 
 From now on, begin course work with the same routine:
 
-1. Start the `codespace-starter` Codespace.
-2. Use `connect-repo` to create and connect with a new repo, generally given the same name as the tutorial which you are about to start.
-3. Start whichever AI you want to use, in review mode. GitHub Copilot is always available, but you may prefer another agent. 
-4. Start the tutorial.
+1. Open a Codespace on `main` from `PPBDS/codespace-starter`.
+2. Start the tutorial from the R Tutorials panel in the Activity Bar.
+3. When the tutorial tells you to, run `connect-repo` to create and connect to a new repo, named after the tutorial you are doing.
+4. Start whichever AI you want to use. GitHub Copilot is always available, but you may prefer another agent. Review everything it proposes before you approve it.
 
 Future tutorials will often say only "create and connect to a repo," "ask AI," "run," or "commit and push." You now know the choices behind those instructions. We leave the choice of AI and the exact mechanics to you, but you must always review the results.
 

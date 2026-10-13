@@ -42,17 +42,17 @@ You should be doing this tutorial in a repo named `terminal-3`. If you are not, 
 
 ## Wildcards
 
-You will learn how to search for files by using **wildcards** to form **regular expressions**.
+You will learn how to search for files by using **wildcards** to form **wildcard patterns**, which the shell expands into lists of matching file names.
 
 ### Exercise 1
 
-Use `pwd` to confirm that you are in your default working directory. Use `mkdir` to create a directory named `wildcards`. CP/CR.
+In a bash Terminal, use `pwd` to confirm that you are in your default working directory, `/workspaces/terminal-3`. Use `mkdir` to create a directory named `wildcards`. CP/CR.
 
 ```{r}
 #| label: wildcards-1
 #| echo: false
 learnr2::question(
-  "Use pwd to confirm that you are in your default working directory. Use mkdir to create a directory named wildcards. CP/CR.",
+  "In a bash Terminal, use pwd to confirm that you are in your default working directory, /workspaces/terminal-3. Use mkdir to create a directory named wildcards. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -101,8 +101,10 @@ Keep track of your current location. There is a difference between being in the 
 Using `echo`, make three text files named `hat.txt`, `cat.txt`, and `ate.txt` by running:
 
 ```
-echo "" > hat.txt & echo "" > cat.txt & echo "" > ate.txt
+echo "" > hat.txt; echo "" > cat.txt; echo "" > ate.txt
 ```
+
+The semicolons let you put three commands on one line; the shell runs them one after another.
 
 Confirm that you have done so by running `ls`. (No worries if you make a mistake. Just fix it by removing the misnamed file.)
 
@@ -121,11 +123,7 @@ learnr2::question(
 ###
 
 ```
-wildcards $ echo "" > hat.txt & echo "" > cat.txt & echo "" > ate.txt
-[1] 59474
-[2] 59475
-[1]  - done       echo "" > hat.txt
-[2]  + done       echo "" > cat.txt
+wildcards $ echo "" > hat.txt; echo "" > cat.txt; echo "" > ate.txt
 wildcards $ ls
 ate.txt cat.txt hat.txt
 wildcards $
@@ -169,7 +167,7 @@ Let's try again. Run `ls a*`. The only return will be `ate.txt`. Because you put
 #| label: wildcards-5
 #| echo: false
 learnr2::question(
-  "Let's try again. Run ls a*. The only return will be ate.txt. Because you put after a, ls returns only files that begin with a. The \"star\" wildcard -- -- matches anything. CP/CR.",
+  "Let's try again. Run ls a*. The only return will be ate.txt. Because you put * after a, ls returns only files that begin with a. The \"star\" wildcard -- * -- matches anything. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -193,7 +191,7 @@ Now run `ls *a*`. This should return all three files. CP/CR.
 #| label: wildcards-6
 #| echo: false
 learnr2::question(
-  "Now run ls a. This should return all three files. CP/CR.",
+  "Now run ls *a*. This should return all three files. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -207,7 +205,7 @@ ate.txt cat.txt hat.txt
 wildcards $
 ```
 
-Note that these **regular expressions** are case-sensitive. A regular expression is a pattern that you can use for many purposes, including as a search criterion.
+Note that these **wildcard patterns** are case-sensitive. A wildcard pattern is a pattern that the shell expands into the list of matching file names before the command even runs; `ls` never sees the `*`, only the names.
 
 ### Exercise 7
 
@@ -217,7 +215,7 @@ Make a list of all the files with names, before the suffix, that end in `t` by r
 #| label: wildcards-7
 #| echo: false
 learnr2::question(
-  "Make a list of all the files with names, before the suffix, that end in t by running ls t.. CP/CR.",
+  "Make a list of all the files with names, before the suffix, that end in t by running ls *t.*. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -231,7 +229,7 @@ cat.txt hat.txt
 wildcards $
 ```
 
-This should return `hat.txt` and `cat.txt`. Read this regular expression --- `*t.*` --- as matching any string that includes a `t` followed directly by a period, regardless of any characters before or after. `ate.txt` is not matched because the `t` and the `.` are separated by `e`.
+This should return `hat.txt` and `cat.txt`. Read this wildcard pattern --- `*t.*` --- as matching any string that includes a `t` followed directly by a period, regardless of any characters before or after. `ate.txt` is not matched because the `t` and the `.` are separated by `e`.
 
 ### Exercise 8
 
@@ -312,11 +310,11 @@ learnr2::question(
 ```
 wildcards $ ls -l
 total 16
--rw-r--r-- 1 codespace codespace 24 Apr 30 12:00 afiles.txt
--rw-r--r-- 1 codespace codespace  1 Apr 30 12:00 ate.txt
--rw-r--r-- 1 codespace codespace  1 Apr 30 12:00 cat.txt
--rw-r--r-- 1 codespace codespace  1 Apr 30 12:00 hat.txt
-drwxr-xr-x 2 codespace codespace 4096 Apr 30 12:00 seuss
+-rw-rw-rw- 1 rstudio rstudio   24 Oct 12 12:00 afiles.txt
+-rw-rw-rw- 1 rstudio rstudio    1 Oct 12 12:00 ate.txt
+-rw-rw-rw- 1 rstudio rstudio    1 Oct 12 12:00 cat.txt
+-rw-rw-rw- 1 rstudio rstudio    1 Oct 12 12:00 hat.txt
+drwxrwxrwx 2 rstudio rstudio 4096 Oct 12 12:00 seuss
 wildcards $
 ```
 
@@ -330,7 +328,7 @@ Run `ls *t.*`. CP/CR.
 #| label: wildcards-11
 #| echo: false
 learnr2::question(
-  "Run ls t.. CP/CR.",
+  "Run ls *t.*. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -344,7 +342,7 @@ cat.txt hat.txt
 wildcards $
 ```
 
-Before moving or otherwise acting on a group of files, we often want to ensure that we have the correct group. Running `ls` with the appropriate regular expression is an easy way to test.
+Before moving or otherwise acting on a group of files, we often want to ensure that we have the correct group. Running `ls` with the appropriate wildcard pattern is an easy way to test.
 
 ### Exercise 12
 
@@ -354,7 +352,7 @@ Use the previous command (since we have confirmed that it generates the list of 
 #| label: wildcards-12
 #| echo: false
 learnr2::question(
-  "Use the previous command (since we have confirmed that it generates the list of files we want to move), but replace ls with mv and then add seuss, which indicates where we want to move the files. In other words, run mv t. seuss. CP/CR.",
+  "Use the previous command (since we have confirmed that it generates the list of files we want to move), but replace ls with mv and then add seuss, which indicates where we want to move the files. In other words, run mv *t.* seuss. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -442,11 +440,11 @@ learnr2::question(
 ```
 terminal-3 $ rm wildcards
 rm: cannot remove 'wildcards': Is a directory
-terminal-3 $ rm -rf wildcards/
+terminal-3 $ rm -r wildcards
 terminal-3 $
 ```
 
-Note that both `wildcards` and `wildcards/` refer to the same entity, the `wildcards` directory. The Terminal often "adds" a forward slash (`/`) to the end of directory names to indicate that the object is a directory, not simply a file.
+If you tab-completed the name, your command probably reads `rm -r wildcards/` instead. The shell adds a slash when tab-completing a directory, to show you that the object is a directory rather than a file. Both `wildcards` and `wildcards/` refer to the same entity, so either command works.
 
 ## grep
 
@@ -468,6 +466,15 @@ learnr2::question(
 
 ###
 
+```
+terminal-3 $ mkdir grepping
+terminal-3 $ ls
+AGENTS.md  grepping
+terminal-3 $
+```
+
+`AGENTS.md` is the file `connect-repo` placed in your repo for the AI assistants; it has been there all along.
+
 We call this folder `grepping` rather than `grep` because you should not use a command, like `grep`, as the name of a file or a directory. It is possible to do this, just like it is possible to jump off a bridge. But in both cases, you will probably regret it.
 
 ### Exercise 2
@@ -475,10 +482,10 @@ We call this folder `grepping` rather than `grep` because you should not use a c
 `cd` into the `grepping` directory. Run this command:
 
 ```
-echo hat.txt > files.txt & echo cat.txt >> files.txt & echo ate.txt >> files.txt & echo "" >> files.txt
+echo hat.txt > files.txt && echo cat.txt >> files.txt && echo ate.txt >> files.txt && echo "" >> files.txt
 ```
 
-The trick with this command is that `>` redirects the results into a file, deleting anything already in the file, while `>>` appends to an existing file. So, we are creating `files.txt` line by line.
+The trick with this command is that `>` redirects the results into a file, deleting anything already in the file, while `>>` appends to an existing file. So, we are creating `files.txt` line by line. `&&` runs the commands in order, like `;`, but stops if one of them fails --- which matters here, because the `>` must come before the `>>`s.
 
 Run `cat files.txt`. CP/CR.
 
@@ -498,21 +505,16 @@ When I run this, I see:
 
 ```
 terminal-3 $ cd grepping
-grepping $ echo hat.txt > files.txt & echo cat.txt >> files.txt & echo ate.txt >> files.txt & echo "" >> files.txt
-[1] 98048
-[2] 98049
-[3] 98050
-[1]    done       echo hat.txt > files.txt
-[3]  + done       echo ate.txt >> files.txt
-[2]  + done       echo cat.txt >> files.txt
+grepping $ echo hat.txt > files.txt && echo cat.txt >> files.txt && echo ate.txt >> files.txt && echo "" >> files.txt
 grepping $ cat files.txt
 hat.txt
 cat.txt
 ate.txt
+
 grepping $
 ```
 
-This shows how three different commands can be run from one command line.
+This shows how four different commands can be run from one command line.
 
 The extra `""` at the end of the command ensures that there is a blank line at the end of the file, which is always a good idea when working with text files.
 
@@ -577,7 +579,7 @@ Now, we'll download another text file. You can view the file on the following we
 ```
 https://github.com/PPBDS/vscode.tutorials/blob/main/inst/extdata/grepping.txt
 ```
-Then navigate to the URL for the raw text file.
+Then click the **Raw** button at the top right of the file box to open the raw text file.
 
 ![](images/grepping-gh-webpage.png){width=90%}
 
@@ -735,7 +737,7 @@ aRe
 grepping $
 ```
 
-`egrep` is an even more powerful version of `grep`. Learning more about `egrep` is beyond the scope of this tutorial.
+`grep -E` turns on *extended* regular expressions, which add more metacharacters. Learning more about them is beyond the scope of this tutorial.
 
 ### Exercise 10
 
@@ -764,29 +766,28 @@ learnr2::question(
 ```
 grepping $ cd ..
 terminal-3 $ grep -rn Robert .
-./grepping/grepping.txt:12:Robert
+./grepping/grepping.txt:2:Robert
 terminal-3 $ cd grepping
 grepping $
 ```
 
-Your line number may differ.
-
 ###
 
 The `-r` option makes `grep` **r**ecursive: starting from `.`, it descends into every directory and searches every file, printing each match as `file:line:text` (the `-n` adds the line number). Together with Terminal 2's `find`, this completes the pair every agent leans on in an unfamiliar project: `find` locates files by *name*, `grep -r` locates them by *content*. When an AI seems to magically know which file defines something, `grep -rn` is usually the trick --- watch for it the next time you read an agent's transcript.
-###
+
+## Pipes
 
 Every command you have met is a program that reads text and spits out text. The **pipe** symbol --- `|` --- connects them: it feeds the output of one program straight into the next. Pipes are everywhere in the commands AI agents run, so you need to read them fluently. We are still in the `grepping` directory.
 
 ### Exercise 1
 
-Run `cat grepping.txt | wc -l`. CP/CR.
+Run `cat files.txt | wc -l`. CP/CR.
 
 ```{r}
 #| label: pipes-1
 #| echo: false
 learnr2::question(
-  "Run cat grepping.txt | wc -l. CP/CR.",
+  "Run cat files.txt | wc -l. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -795,24 +796,24 @@ learnr2::question(
 ###
 
 ```
-grepping $ cat grepping.txt | wc -l
+grepping $ cat files.txt | wc -l
 4
 grepping $
 ```
 
 ###
 
-`cat` printed the file, but instead of landing on your screen, the output flowed through the pipe into `wc -l`, which counted its lines. `wc -l grepping.txt` gives the same count --- many commands can read either from a file or from a pipe.
+`cat` printed the file, but instead of landing on your screen, the output flowed through the pipe into `wc -l`, which counted its four lines (three file names and the blank line at the end). `wc -l files.txt` gives the same count --- many commands can read either from a file or from a pipe.
 
 ### Exercise 2
 
-Run `grep t.txt$ grepping.txt | wc -l`. CP/CR.
+Run `grep t.txt$ files.txt | wc -l`. CP/CR.
 
 ```{r}
 #| label: pipes-2
 #| echo: false
 learnr2::question(
-  "Run grep t.txt$ grepping.txt | wc -l. CP/CR.",
+  "Run grep t.txt$ files.txt | wc -l. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -821,7 +822,7 @@ learnr2::question(
 ###
 
 ```
-grepping $ grep t.txt$ grepping.txt | wc -l
+grepping $ grep t.txt$ files.txt | wc -l
 2
 grepping $
 ```
@@ -832,13 +833,13 @@ A filter feeding a counter: `grep` kept only the lines ending in `t.txt` (`hat.t
 
 ### Exercise 3
 
-Pipelines can be as long as you like. Run `cat grepping.txt | grep ^a | wc -l`. CP/CR.
+Pipelines can be as long as you like. Run `cat files.txt | grep ^a | wc -l`. CP/CR.
 
 ```{r}
 #| label: pipes-3
 #| echo: false
 learnr2::question(
-  "Pipelines can be as long as you like. Run cat grepping.txt | grep ^a | wc -l. CP/CR.",
+  "Pipelines can be as long as you like. Run cat files.txt | grep ^a | wc -l. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -847,7 +848,7 @@ learnr2::question(
 ###
 
 ```
-grepping $ cat grepping.txt | grep ^a | wc -l
+grepping $ cat files.txt | grep ^a | wc -l
 1
 grepping $
 ```
@@ -936,7 +937,7 @@ It is always a good idea to clean up after yourself. As the sign says when takin
 
 ## Summary
 
-This tutorial covered **wildcards**, **grep**, and **pipes**, and through them your first **regular expressions** --- patterns built from metacharacters like `*`, `^`, and `$` that match file names and text. You will rarely type these yourself in the age of AI, but you will constantly *read* them in the commands your AI agents run, and knowing what they mean is how you audit that work before approving it. Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
+This tutorial covered **wildcards**, **grep**, and **pipes**, and through them two pattern languages: **wildcard patterns**, which the shell expands into file names, and your first **regular expressions**, which `grep` matches against text --- both built from metacharacters like `*`, `^`, and `$`. You will rarely type these yourself in the age of AI, but you will constantly *read* them in the commands your AI agents run, and knowing what they mean is how you audit that work before approving it. Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
 Learn more about the command line and related topics by reading [*The Unix Workbench*](https://seankross.com/the-unix-workbench/) by Sean Kross.
 

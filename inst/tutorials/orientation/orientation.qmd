@@ -1,7 +1,7 @@
 ---
 title: Orientation
 author: David Kane
-description: A tour of the working environment - the bash Terminal, the R Terminal, and GitHub Copilot.
+description: A tour of the working environment - the bash Terminal, the R Terminal, and GitHub Copilot - ending with the different ways to run R code.
 format: live-html
 engine: knitr
 toc: true
@@ -35,7 +35,7 @@ The **bash Terminal** is a text-based interface in which you type commands to te
 
 ###
 
-You need a bash Terminal in which to type commands. The Panel at the bottom of VS Code already shows one. To open another at any time, press the plus button (`+`) on the right side of the Panel.
+You need a bash Terminal in which to type commands. The Panel at the bottom of VS Code already shows one. Its tab carries a small ⚠ icon; that is harmless, so ignore it. The banner printed in that terminal announces that your Codespace is READY and suggests running `connect-repo`. Do **not** run it in this tutorial. The next tutorial, "Workflow," is where you create your own repo. To open another bash Terminal at any time, press the plus button (`+`) on the right side of the Panel.
 
 
 ![](images/gs-2.png){width=90%}
@@ -420,9 +420,11 @@ Once you submit an answer, it is locked: you cannot change it. You also cannot c
 
 If you get stuck, just write "I skipped this question" or words to that effect. Skipping a question or two is *never* a problem. Just press on.
 
+Your answers are saved in your browser, so they survive a reload of this page and even a restart of your Codespace, as long as you come back in the same browser. The **Start Over** button in the sidebar wipes them, so leave it alone unless you mean it. If the tutorial page ever greys out or stops responding, reload the browser tab. If that does not help, restart the tutorial from the R Tutorials panel, first closing the broken tab and trashing the old "R Tutorial" terminal. Your answers will still be there.
+
 ### Exercise 7
 
-When we want to evaluate a webpage which you have created, we ask for a screenshot rather than copied text. To take one, press `Cmd + Ctrl + Shift + 4` on a Mac or `Win + Shift + S` on Windows, then select the part of the screen you want. This copies the image to your clipboard. Click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
+When we want to evaluate a webpage which you have created, we ask for a screenshot rather than copied text. To take one, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook (the Show windows key has a rectangle and two lines on it), then select the part of the screen you want. This copies the image to your clipboard; on a Chromebook, click **Copy to clipboard** in the notification that appears. Click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows, Chromebook) to paste it.
 
 **Note for Mac users**: the more familiar `Cmd + Shift + 4` (without Control) saves the screenshot as a file on your Desktop by default instead of copying it to the clipboard, so pasting won’t work unless you accept the option to save to the clipboard.
 
@@ -559,7 +561,7 @@ James Monroe
 
 ###
 
-Click the Explorer icon at the top of the Activity Bar. The Explorer lists every file in your working directory, and `presidents.txt` should now appear there. Click on it to open the file in the Editor and see its contents directly. The Explorer is useful whenever you want to inspect a file that AI created or edited.
+Click the Explorer icon at the top of the Activity Bar. The Explorer lists the files in your working directory, but, like plain `ls`, it hides the dot-folders you saw with `ls -a` (`.devcontainer`, `.github`, `.vscode`), which is why it looked empty until now. `presidents.txt` should now appear there. Click on it to open the file in the Editor and see its contents directly. The Explorer is useful whenever you want to inspect a file that AI created or edited.
 
 The Explorer icon is marked with a red square below.
 
@@ -830,7 +832,7 @@ The five ways to run the script do not all use the same R session:
 
 | Method | R session used |
 |---|---|
-| Click Source button | Your open R Terminal |
+| Click Run Source button | Your open R Terminal |
 | `Cmd/Ctrl + Enter` | Your open R Terminal; current line only |
 | `Cmd/Ctrl + Shift + S` | Your open R Terminal; entire file |
 | `Rscript script.R` in bash | A new process that closes afterward |

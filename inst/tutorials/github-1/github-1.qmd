@@ -64,7 +64,7 @@ learnr2::question(
 Your answer should look something like:
 
 ```
-https://github.com/ppbds-student/github-introduction
+https://github.com/your-username/github-introduction
 https://congenial-chainsaw-wv757pv4pp67cpw.github.dev/
 ```
 
@@ -144,7 +144,7 @@ Your answer should look like:
 
 ```
 github-introduction $ ls -a
-.  ..  .git  AGENTS.md
+.  ..  AGENTS.md  .git
 github-introduction $
 ```
 
@@ -162,13 +162,13 @@ Time to open the black box. The `connect-repo` script has a `--help` option that
 connect-repo --help
 ```
 
-Read the whole thing. Then CP/CR the numbered steps (1 through 4).
+Read the whole thing. Then CP/CR the numbered steps (1 through 5).
 
 ```{r}
 #| label: using-git-5
 #| echo: false
 learnr2::question(
-  "Read the whole thing. Then CP/CR the numbered steps (1 through 4).",
+  "Read the whole thing. Then CP/CR the numbered steps (1 through 5).",
   type = "reflection",
   show_text = FALSE
 )
@@ -186,25 +186,37 @@ The key part of the output:
      `git` use YOUR GitHub login instead.
 
   2. SIGN IN TO GITHUB AS YOURSELF (once per Codespace)
-         gh auth login --hostname github.com --git-protocol https --web
+         gh auth login --hostname github.com --git-protocol https --web --clipboard=false
      Opens a browser sign-in. Click Authorize, then come back.
 
   3. MAKE `git push` AUTHENTICATE AS YOU
          git config --global credential.helper store
-     Stores your token so pushes go out as you, not as the built-in
-     Codespace token.
+         # then save your token (shown by `gh auth token`) into ~/.git-credentials
+     Stores your token so pushes — from the terminal AND the VS Code Source
+     Control panel — go out as you, not as the built-in Codespace token.
 
   4. CREATE A NEW REPO, OR CONNECT TO ONE THAT EXISTS
      New repo on your account (doesn't exist yet):
          gh repo create <name> --public --clone
-     Existing repo:
-         gh repo clone <name>
+     Existing repo — yours, or an org's / someone else's via owner/<name>:
+         gh repo clone <name>          # your own
+         gh repo clone owner/<name>    # an org / another user (needs read access)
      Either way you end up with the repo at /workspaces/<name>.
+
+  5. ADD AI-ASSISTANT GUIDANCE (default; skip with --no-agents)
+     Copies AGENTS.md into your new repo. It tells AI assistants (GitHub
+     Copilot, Antigravity, and friends) how to work with you in this course:
+     short, narrated steps and brief answers. Pass --no-agents if you'd
+     rather work without it.
 ```
 
 ###
 
 There is no magic here --- the script says so itself. `connect-repo` is a convenience wrapper around a handful of commands, and `--help` is the same convention you met with `ls --help` in the Workflow tutorial: a safe way to learn what a program does without running it. The two programs doing the real work are `git` (tracking changes) and `gh`, GitHub's official command-line program (talking to github.com). You will now run the important commands yourself.
+
+###
+
+Step 5 explains the one file you found in Exercise 3. `AGENTS.md` is a plain-text file that `connect-repo` copies into every new repo. GitHub Copilot and the command-line agents (`agy`, `claude`, and the rest) read it from the root of the repo they are running in and follow its rules: short, narrated steps, ask once before acting, and don't solve whole worksheets for you. It is an ordinary file as far as Git is concerned, so it will be part of your first commit later in this tutorial. If you ever want a repo without it, `connect-repo --no-agents <name>` skips the copy.
 
 ### Exercise 6
 
@@ -225,7 +237,7 @@ learnr2::question(
 ```
 github-introduction $ gh auth status
 github.com
-  ✓ Logged in to github.com account your-username
+  ✓ Logged in to github.com account your-username (/home/rstudio/.config/gh/hosts.yml)
   - Active account: true
   - Git operations protocol: https
   - Token: gho_************************************
@@ -234,7 +246,7 @@ github.com
 
 ###
 
-This is steps 1--3 of the script, already done: when you first ran `connect-repo`, it signed you in, and every `gh` and `git` command since has acted as *you*. Note the **token scopes** line --- the list of powers your login carries. `repo` means you can create and push to repositories. Remember this list; it matters in a few exercises. When an AI agent pushes code for you, it is using exactly these credentials.
+This is steps 1--3 of the script, already done: when you first ran `connect-repo`, it signed you in, and every `gh` and `git` command since has acted as *you*. The path in parentheses is where `gh` keeps that login; it lives inside this Codespace, which is why a brand-new Codespace asks you to sign in again. Note the **token scopes** line --- the list of powers your login carries. `repo` means you can create and push to repositories. Remember this list; it matters in a few exercises. When an AI agent pushes code for you, it is using exactly these credentials.
 
 ### Exercise 7
 
@@ -264,16 +276,16 @@ github-introduction $ cd /workspaces
 workspaces $ gh repo create scratch-repo --public --clone
 ✓ Created repository your-username/scratch-repo on github.com
   https://github.com/your-username/scratch-repo
-Cloning into 'scratch-repo'...
-warning: You appear to have cloned an empty repository.
 workspaces $ ls
 codespace-starter  github-introduction  scratch-repo
 workspaces $
 ```
 
+If you have created other repos in this Codespace, `ls` lists them too.
+
 ###
 
-One command did two jobs: it created the filing cabinet on GitHub, and `--clone` copied it down to a local folder. The "empty repository" warning is expected --- a brand-new repo has no commits yet. This single command is the heart of `connect-repo`. Every repo you have made this course --- `introduction`, `code`, `quarto`, all of them --- was born exactly this way.
+One command did two jobs: it created the filing cabinet on GitHub, and `--clone` gave you a local folder, `scratch-repo`, wired to it. The output is short because there is nothing to copy down: a brand-new repo has no commits yet, so Git has no history to show you --- as you will see in a moment. This single command is the heart of `connect-repo`. Every repo you have made this course --- `workflow`, `code`, `quarto`, all of them --- was born exactly this way. (The only extra in those repos is `AGENTS.md`, which `connect-repo` copies in afterwards; `gh repo create` does not.)
 
 ### Exercise 8
 
@@ -282,6 +294,7 @@ How does the local folder know which GitHub repo it belongs to? Run:
 ```
 cd scratch-repo
 git remote -v
+git log
 ```
 
 CP/CR.
@@ -301,14 +314,20 @@ learnr2::question(
 ```
 workspaces $ cd scratch-repo
 scratch-repo $ git remote -v
-origin  https://github.com/your-username/scratch-repo (fetch)
-origin  https://github.com/your-username/scratch-repo (push)
+origin  https://github.com/your-username/scratch-repo.git (fetch)
+origin  https://github.com/your-username/scratch-repo.git (push)
+scratch-repo $ git log
+fatal: your current branch 'main' does not have any commits yet
 scratch-repo $
 ```
 
 ###
 
 `origin` is Git's conventional nickname for the copy of your repo on GitHub. This is the wiring: when you push, Git sends commits to `origin`; when you pull, it fetches from `origin`. The clone set this up automatically. When something goes wrong with pushing --- and someday it will --- `git remote -v` is the first thing to check: it tells you where Git *thinks* your work is going.
+
+The remote URL ends in `.git`. That is the address Git uses to talk to GitHub; drop the `.git` and you have the address of the repo's web page, which is why the two look so alike.
+
+`git log` is the proof that a new repo is empty. It does not print an empty list; it refuses outright, because the `main` branch does not have a single commit yet. The "fatal" is Git being dramatic, not a sign that anything is broken.
 
 ### Exercise 9
 
@@ -328,11 +347,15 @@ learnr2::question(
 
 ```
 scratch-repo $ gh repo delete scratch-repo
-X This API operation needs the "delete_repo" scope. To request it, run:  gh auth refresh -h github.com -s delete_repo
+? Type your-username/scratch-repo to confirm deletion: your-username/scratch-repo
+HTTP 403: Must have admin rights to Repository. (https://api.github.com/repos/your-username/scratch-repo)
+This API operation needs the "delete_repo" scope. To request it, run:  gh auth refresh -h github.com -s delete_repo
 scratch-repo $
 ```
 
-Your exact message may differ. The point is the refusal.
+![](images/gh-repo-delete.png){width=90%}
+
+`gh` first makes you type the repo's *full* name, `your-username/scratch-repo` --- typing just `scratch-repo` is rejected and the question is asked again. Only after you confirm does GitHub refuse. Your exact message may differ. The point is the refusal.
 
 ###
 
@@ -387,13 +410,15 @@ Create a new Quarto document. From the three horizontal bar icon in the Activity
 
 ![](images/create-analysis.png){width=90%}
 
-Notice how there is a black dot in the `analysis-1.qmd` tab in the Editor. This indicates that the file is unsaved.
+The new file has no name yet, so its Editor tab reads `Untitled-1`, with a black dot showing that it has never been saved.
 
-Change the title to "Analysis 1" and add your name as the author. Save the file with `Cmd/Ctrl + S` as `analysis-1.qmd`.
+Change the title to "Analysis 1" and add your name as the author. Save the file with `Cmd/Ctrl + S`. Because the file is new, VS Code shows a Save As box with a path field; make sure the path ends in `github-introduction/analysis-1.qmd` and press **OK**.
+
+![](images/save-as-dialog.png){width=90%}
 
 ![](images/save-analysis.png){width=90%}
 
-Notice how after saving, the `analysis-1.qmd` tab in the Editor is now green with a "U". This indicates that the file is saved, but the file is **U**ntracked by Git.
+After saving, the tab reads `analysis-1.qmd` and is green with a "U": the file is saved, but **U**ntracked by Git. (The Codespace auto-saves after a short delay, so from now on the black dot appears only briefly as you type.)
 
 Then run `cat analysis-1.qmd`.
 
@@ -431,11 +456,15 @@ Click the Source Control button in the Activity Bar. This opens the Source Contr
 
 ![](images/analysis-git.png){width=90%}
 
-The top part of the pane shows the files that have been added or modified. This is Git telling you what it thinks has changed. Again, the "U" at the end of the line for `analysis-1.qmd` indicates that Git has noticed the file but that it is **U**ntracked.
+The top part of the pane shows the files that have been added or modified. This is Git telling you what it thinks has changed. Again, the "U" at the end of the lines for `AGENTS.md` and `analysis-1.qmd` indicates that Git has noticed these files but that they are **U**ntracked.
 
 Render `analysis-1.qmd` with `Cmd/Ctrl + Shift + K`.
 
-The Terminal fills with a bunch of output. Copy/paste the last few lines.
+Three things happen. A new terminal named **Quarto Preview** appears in the Panel and fills with output; a **Quarto Preview** tab opens in the Editor beside your file, showing the rendered HTML; and VS Code pops up a notice that your application is running on port NNNN, with an **Open in Browser** button. Ignore the notice.
+
+![](images/analysis-preview.png){width=90%}
+
+Copy/paste the last few lines from the Quarto Preview terminal.
 
 ```{r}
 #| label: using-git-12
@@ -461,15 +490,17 @@ metadata
 Output created: analysis-1.html
 
 Watching files for changes
-Browse at http://localhost:7383/
+Browse at http://localhost:4676/
+Listening on http://127.0.0.1:4676/
 ```
+
+The port number is different every time. The first line of that terminal shows the command the shortcut ran for you: `quarto preview /workspaces/github-introduction/analysis-1.qmd --no-browser --no-watch-inputs`.
 
 ### Exercise 13
 
-The VS Code window has changed quite a bit. The Viewer tab has appeared, showing the HTML. The Source Control pane now includes many new files. The Terminal is not showing a prompt.
+The VS Code window has changed quite a bit. The Quarto Preview tab shows the HTML. The Source Control pane now includes many new files. The Quarto Preview terminal is not showing a prompt, because `quarto preview` is still running, watching for changes.
 
-
-We can stop the preview of `analysis-1.qmd` by pressing `Ctrl + c` on your keyboard in the Terminal. Once we do, the Viewer tab is empty, so we can close the entire Secondary Activity Bar.
+Stop it: click the **Quarto Preview** tab on the right side of the Panel and press `Ctrl + c`. Then close the Quarto Preview tab in the Editor.
 
 From the bash Terminal, run `ls`. CP/CR.
 
@@ -489,11 +520,11 @@ Your answer should look like:
 
 ```
 github-introduction $ ls
-analysis-1_files  analysis-1.html  analysis-1.qmd
+AGENTS.md  analysis-1_files  analysis-1.html  analysis-1.qmd
 github-introduction $ 
 ```
 
-The bottom part of the Source Control pane shows the history of changes in this repo.
+The bottom part of the Source Control pane shows the history of changes in this repo. It is empty, since you have not made a commit yet.
 
 ### Exercise 14
 
@@ -529,17 +560,13 @@ analysis-1_files/libs:
 bootstrap  clipboard  quarto-html
 
 analysis-1_files/libs/bootstrap:
-bootstrap-e86e2b27d647aa2d7222437750a2ec6e.min.css  bootstrap-icons.css  bootstrap-icons.woff  bootstrap.min.js
+bootstrap-f65e53b6545a1399d813d8896c6052b8.min.css  bootstrap-icons.css  bootstrap-icons.woff  bootstrap.min.js
 
 analysis-1_files/libs/clipboard:
 clipboard.min.js
 
 analysis-1_files/libs/quarto-html:
-anchor.min.js  popper.min.js  quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css  tippy.css
-axe            quarto.js      tabsets                                                          tippy.umd.min.js
-
-analysis-1_files/libs/quarto-html/axe:
-axe-check.js
+anchor.min.js  popper.min.js  quarto.js  quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css  tabsets  tippy.css  tippy.umd.min.js
 
 analysis-1_files/libs/quarto-html/tabsets:
 tabsets.js
@@ -570,7 +597,7 @@ Your answer should look like:
 
 ```
 github-introduction $ ls -a
-.  ..  analysis-1_files  analysis-1.html  analysis-1.qmd  .devcontainer  .git  .gitignore
+.  ..  AGENTS.md  analysis-1_files  analysis-1.html  analysis-1.qmd  .git  .gitignore
 github-introduction $ 
 ```
 
@@ -613,11 +640,7 @@ Now, according to Git, there have been only four changes to the repo. (Of course
 
 ### Exercise 17
 
-In the box above the "Commit" button, add "initial version" as your commit comment. Press the "Commit" button. You will see a dialog box like this:
-
-![](images/commit-stage-changes-pop-up.png){width=90%}
-
-Press "Yes". In the future, you might click on "Always" so that this dialog stops appearing. It will be months, at least, before you make active use of staging in your Git workflow.
+In the box above the **Commit** button, add "initial version" as your commit comment. Press **Commit**. The Codespace stages everything for you, so no dialog appears and the four files vanish from the Changes list.
 
 From the bash Terminal, run `git log`. CP/CR.
 
@@ -637,14 +660,14 @@ Your answer should look like this:
 
 ```
 github-introduction $ git log
-commit e6e05d17847846e0fda9ceedb9cce3b58fd0a024 (HEAD -> main)
-Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
-Date:   Fri May 1 19:22:33 2026 +0000
+commit 81f70abb905c2c8d328a919115e18038ab3df006 (HEAD -> main)
+Author: Your Name <your-username@users.noreply.github.com>
+Date:   Tue Oct 13 00:05:06 2026 +0000
 
     initial version
 ```
 
-`git log` generates a record --- a "log" --- of all the Git actions we have taken. There is exactly one commit. Remember the "empty repository" warning when you created `scratch-repo` by hand? Your `github-introduction` repo was born the same way --- empty --- and this commit, which adds `analysis-1.qmd`, `analysis-1.html`, `.gitignore`, and `AGENTS.md`, is the first entry in its history.
+`git log` generates a record --- a "log" --- of all the Git actions we have taken. There is exactly one commit. Remember that `git log` in `scratch-repo` could only complain that `main` had no commits yet? Your `github-introduction` repo was born the same way --- empty --- and this commit, which adds `analysis-1.qmd`, `analysis-1.html`, `.gitignore`, and `AGENTS.md`, is the first entry in its history. The `Author` line is your GitHub login and the e-mail address attached to your account; the Codespace set both up for you.
 
 ### Exercise 18
 
@@ -682,7 +705,7 @@ github-introduction $
 
 ### Exercise 19
 
-Within the Source Control pane, press the "Open File" button for `analysis-1.qmd`, which is the first of four symbols to the right of the file name. 
+Within the Source Control pane, press the "Open File" button for `analysis-1.qmd`, which is the first of the symbols that appear to the right of the file name when you hover over it. 
 
 ![](images/analysis-git-4.png){width=90%}
 
@@ -746,12 +769,14 @@ Your answer should look something like:
 
 ```
 github-introduction $ git log
-commit b81019c11410adc933cdb256649ee4cf66f9026f (HEAD -> main)
-Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
-Date:   Fri May 1 19:41:05 2026 +0000
+commit 4c0f3f9d2b7e1a6c5d8e9f0a1b2c3d4e5f6a7b8c (HEAD -> main)
+Author: Your Name <your-username@users.noreply.github.com>
+Date:   Tue Oct 13 00:07:10 2026 +0000
 
     added sentence
 ```
+
+Still only `(HEAD -> main)`: two commits now, both of them local.
 
 ### Exercise 22
 
@@ -759,14 +784,14 @@ The Source Control pane now looks like this:
 
 ![](images/analysis-1-post-commit.png){width=90%}
 
-Although you have committed your changes to Git --- i.e., the changes have been made locally --- you still need to "push" the changes to GitHub.  Hover your cursor over the "Sync Changes" button. What does the pop-up say?
+Although you have committed your changes to Git --- i.e., the changes have been made locally --- you still need to "push" the changes to GitHub. Hover your cursor over the **Publish Branch** button. What does the pop-up say?
 
 ```{r}
 #| label: using-git-22
 #| echo: false
 learnr2::question(
-  "Although you have committed your changes to Git -- i.e., the changes have been made locally -- you still need to \"push\" the changes to GitHub. Hover your cursor over the \"Sync Changes\" button. What does the pop-up say?",
-  learnr2::answer("Something like \"Push 2 commits to origin/main\" --- or \"Publish Branch\", if this is the repo's very first push.", correct = TRUE),
+  "Although you have committed your changes to Git -- i.e., the changes have been made locally -- you still need to \"push\" the changes to GitHub. Hover your cursor over the \"Publish Branch\" button. What does the pop-up say?",
+  learnr2::answer("Publish Branch \"main\"", correct = TRUE),
   type = "reflection",
   show_text = FALSE
 )
@@ -774,13 +799,13 @@ learnr2::question(
 
 ###
 
-The term "origin/main" refers to the "main" branch on the "origin" repo, which is the GitHub repo. 
+The button says **Publish Branch** rather than **Sync Changes** because this is the repo's very first push: GitHub does not yet have a `main` branch to sync with. After this one push the button will read **Sync Changes** with a count of the commits waiting to go out.
 
-Note how the bottom portion of the pane, the Source Control Graph, now has two items. Before you committed, it had just one. The Source Control Graph shows the Git history of this repo.
+Note the bottom portion of the pane, the Source Control Graph, which shows the Git history of this repo. Before you committed, it was empty. Now it lists your commits, the newest on top, each marked only with `main` --- there is no cloud icon anywhere, because nothing has reached GitHub yet. (The picture was taken after a single commit; you have two.)
 
 ### Exercise 23
 
-Press the "Sync Changes" button.
+Press the **Publish Branch** button.
 
 ###
 
@@ -788,7 +813,7 @@ The Source Control View should now look like this:
 
 ![](images/analysis-1-post-sync.png){width=90%}
 
-Notice how the purple cloud icon, representing the remote tracking branch on GitHub called "origin/main", has moved to the most recent commit along with the local main branch.
+The button is gone, and a purple cloud icon has appeared on the most recent commit, beside the local `main` branch. The cloud represents the remote tracking branch on GitHub, called `origin/main`: the `main` branch on the `origin` repo, which is the GitHub repo. Until now there was no such thing.
 
 From the bash Terminal, run `git log` again. CP/CR.
 
@@ -808,22 +833,22 @@ Your answer should look like:
 
 ```
 github-introduction $ git log
-commit be56bbaedd692a6d29bba410f0a6fd5b1d844a64 (HEAD -> main, origin/main, origin/HEAD)
-Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
-Date:   Mon May 4 16:57:38 2026 +0000
+commit 4c0f3f9d2b7e1a6c5d8e9f0a1b2c3d4e5f6a7b8c (HEAD -> main, origin/main)
+Author: Your Name <your-username@users.noreply.github.com>
+Date:   Tue Oct 13 00:07:10 2026 +0000
 
     added sentence
 
-commit 5fc089ec356a2f91dc447a86e76533f443bdb080
-Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
-Date:   Mon May 4 16:57:08 2026 +0000
+commit 81f70abb905c2c8d328a919115e18038ab3df006
+Author: Your Name <your-username@users.noreply.github.com>
+Date:   Tue Oct 13 00:05:06 2026 +0000
 
     initial version
 ```
 
-This looks the same as before, except that "(HEAD -> main)" in the top line has changed to "(HEAD -> main, origin/main, origin/HEAD)". This tells us that our changes have been pushed to GitHub, not simply committed locally. We will save a discussion of what `"HEAD"` means for later.
+This looks the same as before, except that "(HEAD -> main)" in the top line has changed to "(HEAD -> main, origin/main)". This tells us that our changes have been pushed to GitHub, not simply committed locally. We will save a discussion of what `"HEAD"` means for later.
 
-A term like "commit be56bbaedd692a6d29bba410f0a6fd5b1d844a64" gives us the address of that commit. We can use that string to revert to the codebase as it looked after that commit.
+A term like "commit 4c0f3f9d2b7e1a6c5d8e9f0a1b2c3d4e5f6a7b8c" gives us the address of that commit. We can use that string to revert to the codebase as it looked after that commit.
 
 ### Exercise 24
 
@@ -831,7 +856,7 @@ If you look at the GitHub page for `github-introduction`, you will see that the 
 
 ![](images/analysis-1-gh-1.png){width=90%}
 
-This page shows the files from your project that have been pushed to GitHub. Click on the commit history button (in the red box above). This will show a page with the history of commits that you have pushed to GitHub.
+This page shows the files from your project that have been pushed to GitHub: `.gitignore`, `AGENTS.md`, `analysis-1.html`, and `analysis-1.qmd` --- and no `analysis-1_files`, thanks to `.gitignore`. Click the **2 Commits** link at the top right of the file list. This will show a page with the history of commits that you have pushed to GitHub.
 
 ![](images/analysis-1-gh-2.png){width=90%}
 
@@ -853,26 +878,18 @@ learnr2::question(
 You should have something like this:
 
 ```
-Commit History
-Commits on May 4, 2026
+Commits
+Commits on Oct 13, 2026
 
     added sentence
-    ppbds-student
-    ppbds-student
-    committed
-    3 minutes ago
-    initial version
-    ppbds-student
-    ppbds-student
-    committed
-    6 minutes ago
-    Initial commit
-    ppbds-student
-    ppbds-student
-    authored
-    15 days ago
+    your-username committed 3 minutes ago
 
+    initial version
+    your-username committed 6 minutes ago
 ```
+
+Two commits, newest first, matching your `git log`. GitHub's history is your history: nothing more, nothing less.
+
 ###
 
 As AI writes more and more of our code, it's becoming increasingly important to get good at managing this code with Git and GitHub.
@@ -973,9 +990,13 @@ If you click the Source Control button, your Codespaces window should look somet
 
 ![](images/analysis-1-git-post-graph.png){width=90%}
 
-Commit your files and push them to GitHub. Don't forget the commit message. Don't forget that "push" means the same thing as "sync."
+Commit your files with a message like "beautiful graphic". Once you do, the button reads **Sync Changes 1**, and hovering over it shows "Push 1 commits to origin/main" --- this is not the first push, so GitHub already has a `main` branch to sync with. The Graph now has a third entry, your new commit, marked `main`, while the cloud for `origin/main` still sits on "added sentence".
 
-Use `Ctrl + c` to stop the Quarto watching process. From the bash Terminal, run `git log -n 1`. CP/CR.
+![](images/analysis-1-post-commit-sync-changes.png){width=90%}
+
+Press **Sync Changes** to push. Don't forget that "push" means the same thing as "sync."
+
+Click the **Quarto Preview** tab in the Panel and use `Ctrl + c` to stop the Quarto watching process. From the bash Terminal, run `git log -n 1`. CP/CR.
 
 ```{r}
 #| label: publishing-with-github-pages-2
@@ -991,11 +1012,11 @@ learnr2::question(
 
 ```
 github-introduction $ git log -n 1
-commit d8486207321f7e682075bc5fab87e02f8124a5f1 (HEAD -> main, origin/main, origin/HEAD)
-Author: ppbds-student <acrogers362+ppbds-student@gmail.com>
-Date:   Mon May 4 19:30:10 2026 +0000
+commit 42b4257f7223a2ef8af1c6a7399ec777f2b90a3f (HEAD -> main, origin/main)
+Author: Your Name <your-username@users.noreply.github.com>
+Date:   Tue Oct 13 00:10:30 2026 +0000
 
-    added chart
+    beautiful graphic
 github-introduction $
 ```
 
@@ -1030,55 +1051,54 @@ Here is what I see, broken up to allow for comments:
 
 ```
 github-introduction $ quarto publish gh-pages analysis-1.qmd
-? Publish site to https://ppbds-student.github.io/github-introduction/ using gh-pages? (Y/n) › Yes
+? Publish site to https://your-username.github.io/github-introduction/ using gh-pages? (Y/n) › Yes
 ```
 
 There are settings that will prevent this question from being asked every time we update the website. Otherwise, Quarto will check each time.
 
 ```
-Saved working directory and index state WIP on main: d848620 added chart
 Switched to a new branch 'gh-pages'
-[gh-pages (root-commit) 0e5631c] Initializing gh-pages branch
+[gh-pages (root-commit) 08825ec] Initializing gh-pages branch
 remote: 
 remote: Create a pull request for 'gh-pages' on GitHub by visiting:        
-remote:      https://github.com/ppbds-student/github-introduction/pull/new/gh-pages        
+remote:      https://github.com/your-username/github-introduction/pull/new/gh-pages        
 remote: 
-To https://github.com/ppbds-student/github-introduction
+To https://github.com/your-username/github-introduction.git
  * [new branch]      HEAD -> gh-pages
 ```
 
-By default, `quarto publish` follows the standard GitHub Pages approach of creating a new Git "branch" called `gh-pages`. Branches are lightweight pointers to specific commits. They allow you to isolate work in progress, experiment with new features, and collaborate effectively without affecting the main codebase. 
+By default, `quarto publish` follows the standard GitHub Pages approach of creating a new Git "branch" called `gh-pages`. Branches are lightweight pointers to specific commits. They allow you to isolate work in progress, experiment with new features, and collaborate effectively without affecting the main codebase. Note the `.git` on the end of the address, as in `git remote -v`: this is Git talking to GitHub, not a web page.
 
 ```
 Switched to branch 'main'
 Your branch is up to date with 'origin/main'.
-
-From https://github.com/ppbds-student/github-introduction
+From https://github.com/your-username/github-introduction
  * branch            gh-pages   -> FETCH_HEAD
 Rendering for publish:
 
 
 
 processing file: analysis-1.qmd
-1/4                  
-2/4 [unnamed-chunk-1]
-3/4                  
-4/4 [unnamed-chunk-2]
+1/5                  
+2/5 [unnamed-chunk-1]
+3/5                  
+4/5 [unnamed-chunk-2]
+5/5                  
 output file: analysis-1.knit.md
 ```
 
-`quarto publish` processes `analysis-1.qmd` in the same way that `quarto preview` or `quarto render` does.
+`quarto publish` processes `analysis-1.qmd` in the same way that `quarto preview` or `quarto render` does. Further down, after the `pandoc` and `metadata` blocks, you will see a line reading `fatal: pathspec '.' did not match any files`. It looks alarming but is harmless --- the fresh `gh-pages` branch has nothing in it yet for Git to tidy away --- and the output carries on to `[✓] Published to https://your-username.github.io/github-introduction/`.
 
 ### Exercise 4
 
-Go to your `github-introduction` page on GitHub. Refresh the page. `quarto publish` has changed some of the items. Paste a screenshot of the "Visit site" box.
+Go to your `github-introduction` page on GitHub. Refresh the page. `quarto publish` has changed some of the items: there are now 2 branches and 3 commits, and a **Deployments** card reading **github-pages** has appeared in the right-hand column. Click it. This opens the Deployments page, which shows the address of your live site. Paste a screenshot of the Deployments page.
 
 
 ```{r}
 #| label: publishing-with-github-pages-4
 #| echo: false
 learnr2::question(
-  "Go to your github-introduction page on GitHub. Refresh the page. quarto publish has changed some of the items. Paste a screenshot of the \"Visit site\" box.",
+  "Go to your github-introduction page on GitHub. Refresh the page. quarto publish has changed some of the items: there are now 2 branches and 3 commits, and a Deployments card reading github-pages has appeared in the right-hand column. Click it. This opens the Deployments page, which shows the address of your live site. Paste a screenshot of the Deployments page.",
   type = "reflection",
   allow_image = TRUE,
   show_text = FALSE
@@ -1087,14 +1107,21 @@ learnr2::question(
 
 ###
 
-```
-Your site is live at https://ppbds-student.github.io/repo-2/
-Last deployed by @ppbds-student ppbds-student 6 minutes ago
-```
-
-Here is my whole page:
+Here is my repo page, with the Deployments card:
 
 ![](images/gh-pages-published.png){width=90%}
+
+And the Deployments page it leads to:
+
+![](images/gh-pages-deployments.png){width=90%}
+
+```
+github-pages
+Last deployed 2 minutes ago
+https://your-username.github.io/github-introduction/
+```
+
+Visit that address: your graphic is live, on a real URL you can send to anyone. The pattern is always `https://<your-username>.github.io/<repo-name>/`.
 
 We could have made these changes by hand, but it is much easier to let `quarto publish` handle them.
 

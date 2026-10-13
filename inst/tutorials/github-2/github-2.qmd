@@ -35,12 +35,15 @@ Everything in this section happens in your current Codespace. You will make the 
 
 Open a new bash Terminal and run `cd /workspaces`. (New terminals may open inside the repo from an earlier tutorial --- that auto-jump is a `connect-repo` convenience; from now on, we `cd` ourselves.) Then run `gh auth status`.
 
-If it reports that you are **not** logged in, run these two commands --- they are steps 1 and 2 from `connect-repo --help` --- and then run `gh auth status` again:
+If it reports that you are **not** logged in, run these three commands --- they are steps 1, 2 and 3 from `connect-repo --help` --- and then run `gh auth status` again:
 
 ```
 unset GITHUB_TOKEN GH_TOKEN
-gh auth login --hostname github.com --git-protocol https --web
+gh auth login --hostname github.com --git-protocol https --web --clipboard=false
+git config --global credential.helper store
 ```
+
+For the login, `gh` first asks `Authenticate Git with your GitHub credentials? (Y/n)` --- press `Enter`. It then shows a one-time code and says `Press Enter to open https://github.com/login/device in your browser...`. Press `Enter`, paste the code into the GitHub tab that opens, and come back to the Terminal.
 
 CP/CR.
 
@@ -59,16 +62,23 @@ learnr2::question(
 ```
 workspaces $ gh auth status
 github.com
-  ✓ Logged in to github.com account your-username
+  ✓ Logged in to github.com account your-username (/home/rstudio/.config/gh/hosts.yml)
   - Active account: true
   - Git operations protocol: https
   - Token: gho_************************************
   - Token scopes: 'gist', 'read:org', 'repo', 'workflow'
 ```
 
+If you were not signed in, the first `gh auth status` said so instead, and the second one looks like the above:
+
+```
+workspaces $ gh auth status
+You are not logged into any GitHub hosts. To log in, run: gh auth login
+```
+
 ###
 
-You were probably already signed in --- `connect-repo` did that once, in some earlier session, and the credentials stick around. What matters is that you now know how the sign-in happens without the script. Every `git` and `gh` command you run --- and every AI agent that pushes code on your behalf --- uses exactly these credentials.
+You were probably already signed in --- `connect-repo` did that once, in some earlier session, and `gh` keeps the login in the file named in parentheses, `~/.config/gh/hosts.yml`. That file lives in *this* Codespace only: a fresh Codespace is logged out. Both outcomes are normal, and you will meet the logged-out one in the next section. What matters is that you now know how the sign-in happens without the script. Every `git` and `gh` command you run --- and every AI agent that pushes code on your behalf --- uses exactly these credentials.
 
 ### Exercise 2
 
@@ -77,6 +87,8 @@ Create this tutorial's repo by hand. From `/workspaces`, run:
 ```
 gh repo create github-advanced --public --clone
 ```
+
+If GitHub says a repository by that name already exists (from an earlier attempt, say), run `gh repo clone github-advanced` instead.
 
 Then run `ls`. CP/CR.
 
@@ -96,14 +108,12 @@ learnr2::question(
 workspaces $ gh repo create github-advanced --public --clone
 ✓ Created repository your-username/github-advanced on github.com
   https://github.com/your-username/github-advanced
-Cloning into 'github-advanced'...
-warning: You appear to have cloned an empty repository.
 workspaces $ ls
 codespace-starter  github-advanced
 workspaces $
 ```
 
-Your `ls` may also show repos from earlier tutorials. That is fine.
+Your `ls` may also show repos from earlier tutorials. That is fine. Notice that nothing was downloaded: a brand-new repo has no commits yet, so `--clone` just makes the folder and wires it to GitHub.
 
 ###
 
@@ -128,20 +138,20 @@ learnr2::question(
 ```
 workspaces $ cd github-advanced
 github-advanced $ git remote -v
-origin  https://github.com/your-username/github-advanced (fetch)
-origin  https://github.com/your-username/github-advanced (push)
+origin  https://github.com/your-username/github-advanced.git (fetch)
+origin  https://github.com/your-username/github-advanced.git (push)
 github-advanced $
 ```
 
 ###
 
-Same wiring you inspected in the GitHub Introduction tutorial: `origin` is the nickname for the GitHub copy, and the clone set it up for you. Create, clone, wire --- three jobs, one command, no script.
+Same wiring you inspected in the GitHub Introduction tutorial: `origin` is the nickname for the GitHub copy, and the clone set it up for you. The `.git` on the end is the address Git itself talks to; drop it and you have the page you visit in your browser. Create, clone, wire --- three jobs, one command, no script.
 
 ### Exercise 4
 
-Point VS Code at your new repo: `File -> Open Folder...`, then open `/workspaces/github-advanced`. The window will reload and stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
+Point VS Code at your new repo: `File -> Open Folder...`, type `/workspaces/github-advanced` in the box, and press **OK**. The window reloads, and VS Code asks whether you trust the authors of the files in this folder --- click **Trust Folder & Continue**. The reload may stop this tutorial. If it does, restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
 
-Then, in a new bash Terminal, run these two commands, one at a time:
+Then, in the bash Terminal (the reload opens a fresh one, already in `/workspaces/github-advanced`), run these two commands, one at a time:
 
 ```
 cp /workspaces/codespace-starter/.devcontainer/AGENTS.md .
@@ -171,7 +181,7 @@ github-advanced $
 
 ###
 
-Count what you have now reproduced by hand: the sign-in, the repo creation, the clone, the window switch, and `AGENTS.md` --- which turns out to be just a file that `connect-repo` copies, telling AI assistants how to work with you. The script's remaining conveniences are cosmetic. You no longer need it.
+Count what you have now reproduced by hand: the sign-in, the credential store that makes it last, the repo creation, the clone, the window switch, and `AGENTS.md` --- which turns out to be just a file that `connect-repo` copies, telling AI assistants how to work with you. (If you were already signed in, an earlier `connect-repo` ran the first two for you; you will run them yourself in the next section.) The script's remaining conveniences --- opening new terminals in your repo, dropping the terminal that ran it into the repo, silencing the READY banner --- are cosmetic. You no longer need it.
 
 ### Exercise 5
 
@@ -278,7 +288,7 @@ github-advanced $ git commit -m "First analysis"
 github-advanced $ git push -u origin main
 Enumerating objects: 6, done.
 Writing objects: 100% (6/6), 24.31 KiB | 8.10 MiB/s, done.
-To https://github.com/your-username/github-advanced
+To https://github.com/your-username/github-advanced.git
  * [new branch]      main -> main
 branch 'main' set up to track 'origin/main'.
 github-advanced $
@@ -318,9 +328,9 @@ The real test of independence is a machine you have never touched. On your own l
 
 ### Exercise 1
 
-In a **new browser tab**, go to [github.com/codespaces](https://github.com/codespaces). Click the green **New codespace** button, choose the repository `PPBDS/codespace-starter`, leave the branch as `main`, and click **Create codespace**.
+In a **new browser tab**, go to [github.com/codespaces](https://github.com/codespaces). Click the green **New codespace** button, choose the repository `PPBDS/codespace-starter`, leave the branch as `main`, and click **Create codespace**. When the new window asks whether you trust the authors of the files in this folder, click **Trust Folder & Continue**.
 
-Keep the tutorial tab open! You now have two Codespaces: the one running this tutorial, and a fresh machine. The first boot takes a few minutes.
+Keep the tutorial tab open! You now have two Codespaces: the one running this tutorial, and a fresh machine. The boot takes a minute or so. When it finishes, the Panel holds one bash terminal showing the READY banner, which tells you to run `connect-repo`. Ignore that today. (The small warning icon on that terminal's tab is harmless.)
 
 Copy and paste the new Codespace's URL (from its browser tab, ending in `.github.dev`).
 
@@ -342,25 +352,26 @@ https://zany-computing-machine-vpvrv9p59jxpc66v6.github.dev/
 
 ###
 
-While you waited, GitHub built a computer from scratch, following the instructions in `.devcontainer/devcontainer.json` inside `codespace-starter`: which R version to install, which packages to pre-load, which editor extensions to add. That is why every Codespace arrives with R, tidyverse, and Quarto already configured --- none of it happens by accident. The first startup is the slowest because all of that setup work is happening; reopening an existing Codespace is much faster.
+While you waited, GitHub built a computer from the instructions in `.devcontainer/devcontainer.json` inside `codespace-starter`. The key line there names a pre-built image, `ghcr.io/ppbds/devcontainer:1.2.7`, with R, the tidyverse, Quarto, and the rest already inside; the file then adds the editor extensions and settings on top. Nothing is installed at startup --- the image is downloaded and switched on --- which is why every Codespace boots quickly and arrives identical to every other. None of it happens by accident.
 
 ### Exercise 2
 
-In the **new** Codespace, open a fresh bash Terminal and run the sign-in ritual by hand --- this time it is genuinely needed, because this machine has never met you. Run these commands, one at a time:
+In the **new** Codespace, use the bash Terminal that is already open --- it has the short prompt, `codespace-starter $` --- and run the sign-in ritual by hand. This time it is genuinely needed, because this machine has never met you. Run these commands, one at a time:
 
 ```
 unset GITHUB_TOKEN GH_TOKEN
-gh auth login --hostname github.com --git-protocol https --web
+gh auth login --hostname github.com --git-protocol https --web --clipboard=false
+git config --global credential.helper store
 gh auth status
 ```
 
-For the login, follow the prompts: press `Enter` to accept the browser flow, copy the one-time code, click Authorize on the GitHub page, and return. CP/CR the final `gh auth status` output.
+For the login, follow the prompts in order: press `Enter` at `Authenticate Git with your GitHub credentials? (Y/n)`, copy the one-time code, press `Enter` at `Press Enter to open https://github.com/login/device in your browser...`, paste the code into the GitHub tab that opens, and return. CP/CR the final `gh auth status` output.
 
 ```{r}
 #| label: a-second-desk-2
 #| echo: false
 learnr2::question(
-  "For the login, follow the prompts: press Enter to accept the browser flow, copy the one-time code, click Authorize on the GitHub page, and return. CP/CR the final gh auth status output.",
+  "For the login, follow the prompts in order: press Enter at Authenticate Git with your GitHub credentials? (Y/n), copy the one-time code, press Enter at Press Enter to open https://github.com/login/device in your browser..., paste the code into the GitHub tab that opens, and return. CP/CR the final gh auth status output.",
   type = "reflection",
   show_text = FALSE
 )
@@ -368,10 +379,28 @@ learnr2::question(
 
 ###
 
+The login itself ends like this:
+
+```
+codespace-starter $ gh auth login --hostname github.com --git-protocol https --web --clipboard=false
+? Authenticate Git with your GitHub credentials? Yes
+
+! First copy your one-time code: 5076-D3B6
+Press Enter to open https://github.com/login/device in your browser... 
+✓ Authentication complete.
+- gh config set -h github.com git_protocol https
+✓ Configured git protocol
+! Authentication credentials saved in plain text
+✓ Logged in as your-username
+codespace-starter $
+```
+
+And the final `gh auth status`:
+
 ```
 codespace-starter $ gh auth status
 github.com
-  ✓ Logged in to github.com account your-username
+  ✓ Logged in to github.com account your-username (/home/rstudio/.config/gh/hosts.yml)
   - Active account: true
   - Git operations protocol: https
   - Token: gho_************************************
@@ -381,6 +410,8 @@ github.com
 ###
 
 Why the `unset`? A Codespace starts with a built-in token that acts as the *Codespace*, not as *you* --- it can read `codespace-starter` and nothing more. Clearing it forces `gh` to use your real login instead. This whole ritual happens once per machine. On your own laptop, the equivalent is installing `gh` and running `gh auth login` --- same command, no `unset` needed.
+
+Why step 3? `gh auth login` hands your token to Git, but only to Git's short-term memory: the Codespace comes configured with a credential *cache* that forgets after an hour. Skip step 3 and `git push` works for an hour, then stops at `Username for 'https://github.com':`. `git config --global credential.helper store` tells Git to also keep the token in a file, `~/.git-credentials`; Git writes it there the first time a push succeeds, and from then on every push from this Codespace goes out as you. `connect-repo` goes one step further and makes that file the *only* place Git looks, which is what lets the Source Control pane's Sync button --- whose copy of Git still carries the Codespace's built-in token --- push as you too. That step was never cosmetic. If a push ever does stop at the `Username` prompt, press `Ctrl + C` and run the login command again.
 
 ### Exercise 3
 
@@ -426,7 +457,7 @@ This is the connect-to-an-existing-repo case: no creation, just a clone. `gh rep
 
 ### Exercise 4
 
-Make a change on this second desk. Open `analysis.qmd` (use the Explorer, or `File -> Open Folder...` to `/workspaces/github-advanced` first if you prefer a full window). Below the last chunk, add the sentence:
+Make a change on this second desk. The Explorer here still shows `codespace-starter`, not your repo, so open the file from the bash Terminal: with `pwd` reading `/workspaces/github-advanced`, run `code analysis.qmd`. (If you prefer a full window, use `File -> Open Folder...` on `/workspaces/github-advanced`, click **Trust Folder & Continue**, and open the file from the Explorer.) Below the last chunk, add the sentence:
 
 ```
 This line was written on a second machine.
@@ -439,6 +470,8 @@ git add -A
 git commit -m "Add a line from the second machine"
 git push
 ```
+
+If `git commit` stops with `Author identity unknown`, this machine does not know your name yet: run `git config --global user.name "Your Name"` and `git config --global user.email "you@example.com"`, then commit again.
 
 CP/CR.
 
@@ -462,7 +495,7 @@ github-advanced $ git commit -m "Add a line from the second machine"
 github-advanced $ git push
 Enumerating objects: 5, done.
 Writing objects: 100% (3/3), 341 bytes | 341.00 KiB/s, done.
-To https://github.com/your-username/github-advanced
+To https://github.com/your-username/github-advanced.git
    1a2b3c4..5d6e7f8  main -> main
 github-advanced $
 ```
@@ -490,14 +523,11 @@ learnr2::question(
 ```
 github-advanced $ git status
 On branch main
-Your branch is up to date with 'origin/main'.
+Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
 
 nothing to commit, working tree clean
 github-advanced $ git pull
-remote: Enumerating objects: 5, done.
-Unpacking objects: 100% (3/3), 321 bytes | 321.00 KiB/s, done.
-From https://github.com/your-username/github-advanced
-   1a2b3c4..5d6e7f8  main       -> origin/main
 Updating 1a2b3c4..5d6e7f8
 Fast-forward
  analysis.qmd | 2 ++
@@ -505,9 +535,11 @@ Fast-forward
 github-advanced $
 ```
 
+If your `git status` instead said `Your branch is up to date with 'origin/main'`, your `git pull` also printed a few `remote:` lines as it downloaded the commit. Both versions are normal.
+
 ###
 
-Look closely: `git status` claimed you were "up to date with 'origin/main'" --- and it was wrong. `git status` never contacts GitHub; it only compares against the last snapshot of `origin` it has seen. `git pull` actually asks GitHub, fetches the new commit, and merges it in. This is the other half of syncing: **push sends, pull receives**. The Source Control pane's "Sync" button does both at once. Whenever more than one desk touches a repo --- a second machine, a collaborator, an AI agent working in the cloud --- pull before you work.
+`git status` never contacts GitHub. It only compares your branch against the last snapshot of `origin` this Codespace has seen --- so, left to itself, it would have claimed you were "up to date" and been wrong. What usually rescues it is the editor: VS Code fetches from GitHub in the background every few minutes, so by the time you came back to this tab the snapshot had probably been refreshed already, and `git status` could report that you were *behind*. Either way, `git pull` is what brings the commit in: it asks GitHub, fetches anything new, and merges it into your branch. This is the other half of syncing: **push sends, pull receives**. The Source Control pane's "Sync" button does both at once. Whenever more than one desk touches a repo --- a second machine, a collaborator, an AI agent working in the cloud --- pull before you work.
 
 ## Disposable desks
 
@@ -581,12 +613,13 @@ The machine that wrote the second commit no longer exists --- and the commit doe
 
 ## Summary
 
-You ran the entire repo lifecycle without `connect-repo`: signed in with `gh auth login`, created a repo with `gh repo create --public --clone`, inspected its wiring with `git remote -v`, pushed a first commit with `git push -u origin main`, cloned onto a brand-new machine with `gh repo clone`, pushed from there with plain `git push`, brought the change home with `git pull`, and deleted a Codespace without losing a byte.
+You ran the entire repo lifecycle without `connect-repo`: signed in with `gh auth login` and made it stick with `git config --global credential.helper store`, created a repo with `gh repo create --public --clone`, inspected its wiring with `git remote -v`, pushed a first commit with `git push -u origin main`, cloned onto a brand-new machine with `gh repo clone`, pushed from there with plain `git push`, brought the change home with `git pull`, and deleted a Codespace without losing a byte.
 
 These are the commands you now own:
 
 ```
-gh auth login        # once per machine
+gh auth login                                # once per machine
+git config --global credential.helper store  # once per machine, right after the login
 gh repo create <name> --public --clone
 gh repo clone <name>
 git status

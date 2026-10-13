@@ -35,13 +35,13 @@ Options modify the behavior of command-line programs, as you saw with `ls -a` an
 
 ### Exercise 1
 
-Use `pwd` to confirm that you are in your default working directory. Make a directory named `options` with `mkdir options`. `cd` into it. Run `ls` to confirm that it is empty. CP/CR.
+In the bash Terminal, use `pwd` to confirm that you are in the root of your repo, `/workspaces/terminal-2`. Make a directory named `options` with `mkdir options`. `cd` into it. Run `ls` to confirm that it is empty. CP/CR.
 
 ```{r}
 #| label: options-1
 #| echo: false
 learnr2::question(
-  "Use pwd to confirm that you are in your default working directory. Make a directory named options with mkdir options. cd into it. Run ls to confirm that it is empty. CP/CR.",
+  "In the bash Terminal, use pwd to confirm that you are in the root of your repo, /workspaces/terminal-2. Make a directory named options with mkdir options. cd into it. Run ls to confirm that it is empty. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -116,13 +116,13 @@ The `$` prefix means "the value of." Environment variables let commands refer to
 
 ### Exercise 4
 
-Run `ls -l $HOME`. The `-l` option asks for a **l**ong list. CP/CR.
+Run `ls -l /workspaces`. The `-l` option asks for a **l**ong list. CP/CR.
 
 ```{r}
 #| label: options-4
 #| echo: false
 learnr2::question(
-  "Run ls -l $HOME. The -l option asks for a long list. CP/CR.",
+  "Run ls -l /workspaces. The -l option asks for a long list. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -131,15 +131,20 @@ learnr2::question(
 ###
 
 ```
-options $ ls -l $HOME
-total 4
-drwxr-xr-x 2 rstudio rstudio 4096 Apr 30 12:00 Downloads
+options $ ls -l /workspaces
+total 8
+drwxr-xr-x 7 rstudio rstudio 4096 Oct 12 16:10 codespace-starter
+drwxr-xr-x 4 rstudio rstudio 4096 Oct 12 16:20 terminal-2
 options $
 ```
 
+Your dates will differ.
+
 ###
 
-In a long list, names are in the last column and file type is in the first: a leading `d` means **d**irectory, a leading `-` means file, a leading `l` means **l**ink. The middle columns give permissions, owner, size in bytes, and the date last modified. When an agent runs `ls -l` in a transcript, this is what it is reading.
+In a long list, names are in the last column and file type is in the first: a leading `d` means **d**irectory, a leading `-` means file, a leading `l` means **l**ink. Both entries here are directories: `codespace-starter`, where every Codespace begins, and `terminal-2`, the repo `connect-repo` created for you, sitting side by side under `/workspaces`. The middle columns give permissions, owner (`rstudio`, the user you work as in every Codespace), size in bytes, and the date last modified. When an agent runs `ls -l` in a transcript, this is what it is reading.
+
+Why not `ls -l $HOME`? Try it: the answer is a lone `total 0`, because your home directory holds nothing but hidden files. `ls -la $HOME` combines the two options and shows them.
 
 ### Exercise 5
 
@@ -194,7 +199,7 @@ terminal-2 $
 
 A blank line. The variable is gone --- and note that this is *not* an error. Bash treats a variable nobody has set as the empty string, so `echo` printed nothing and finished happily.
 
-An `export` belongs to the one shell you typed it in. The new terminal is a new shell, started fresh, and it has never heard of `FAVORITE_ANIMAL`. This matters more than it looks: later in the course you will store an API key --- a kind of password --- in an environment variable, and this per-terminal behavior is the first thing that will bite you if you forget it.
+An `export` belongs to the one shell you typed it in. The new terminal is a new shell, started fresh, and it has never heard of `FAVORITE_ANIMAL`. Notice the prompt, too: the new shell opened in `terminal-2`, the root of your repo (that is where `connect-repo` arranged for every new terminal to start), not in `options`, where your other terminal happens to be sitting. This matters more than it looks: later in the course you will store an API key --- a kind of password --- in an environment variable, and this per-terminal behavior is the first thing that will bite you if you forget it.
 
 Close the new terminal (the trash-can icon) and click back to your original tab, which is still sitting in `options` with the variable still set.
 
@@ -204,19 +209,19 @@ Before you trust a file --- especially one an AI just wrote --- look inside it. 
 
 ### Exercise 1
 
-Download a copy of the `AUTHORS` document from the R source code. Run:
+Download a copy of the `AUTHORS` document from the R source code. In the bash Terminal, still in `options`, run:
 
 ```
 curl -O https://raw.githubusercontent.com/wch/r-source/refs/heads/trunk/doc/AUTHORS
 ```
 
-Recall from Terminal 1 that the `-O` option names the downloaded file with its **O**riginal name. Then run `ls`. CP/CR.
+The `-O` option (a capital letter O) tells `curl` to save the file under its **O**riginal name --- the last piece of the URL, `AUTHORS` --- instead of spraying its contents across your screen. Then run `ls`. CP/CR.
 
 ```{r}
 #| label: looking-inside-files-1
 #| echo: false
 learnr2::question(
-  "Recall from Terminal 1 that the -O option names the downloaded file with its Original name. Then run ls. CP/CR.",
+  "In the bash Terminal, still in options, run curl -O https://raw.githubusercontent.com/wch/r-source/refs/heads/trunk/doc/AUTHORS to download the AUTHORS file under its original name. Then run ls. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -228,7 +233,7 @@ learnr2::question(
 options $ curl -O https://raw.githubusercontent.com/wch/r-source/refs/heads/trunk/doc/AUTHORS
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100  2831  100  2831    0     0  31261      0 --:--:-- --:--:-- --:--:-- 31106
+100  1093  100  1093    0     0  14187      0 --:--:-- --:--:-- --:--:-- 14194
 options $ ls
 AUTHORS
 options $
@@ -236,7 +241,7 @@ options $
 
 ###
 
-`curl` fetches a URL from the internet --- here, a raw text file straight from GitHub. No browser needed.
+`curl` fetches a URL from the internet --- here, a raw text file straight from GitHub. No browser needed. The table it prints is a progress report: `1093` is the size of the file in bytes, received in full.
 
 ### Exercise 2
 
@@ -258,11 +263,10 @@ Your output should begin something like:
 
 ```
 options $ head AUTHORS
-R was initially written by Robert Gentleman and Ross Ihaka---also known as
-"R & R" of the Statistics Department of the University of Auckland.
+Authors of R.
 
-Since mid-1997 there has been a core group with write access to the R
-source, currently consisting of
+R was initially written by Robert Gentleman and Ross Ihaka, also known as "R & R"
+of the Statistics Department of the University of Auckland.
 ```
 
 ###
@@ -350,7 +354,7 @@ CP/CR.
 #| label: looking-inside-files-6
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Run cp AUTHORS AUTHORS-edited, then echo \"Preceptor also helped.\" >> AUTHORS-edited, then diff AUTHORS AUTHORS-edited. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -362,16 +366,16 @@ learnr2::question(
 options $ cp AUTHORS AUTHORS-edited
 options $ echo "Preceptor also helped." >> AUTHORS-edited
 options $ diff AUTHORS AUTHORS-edited
-39a40
+38a39
 > Preceptor also helped.
 options $
 ```
 
-Your line numbers may differ.
+`AUTHORS` is 38 lines long today; if the R team has added to it since, your numbers will be a little larger.
 
 ###
 
-Read the output: `39a40` means "after line 39 of the first file, line 40 of the second file was **a**dded," and the `>` marks a line that exists only in the second file. Lines only in the *first* file would get `<`. Two identical files produce no output at all --- silence means "same."
+Read the output: `38a39` means "after line 38 of the first file, line 39 of the second file was **a**dded," and the `>` marks a line that exists only in the second file. Lines only in the *first* file would get `<`. Two identical files produce no output at all --- silence means "same."
 
 This is the skill underneath auditing AI work: an agent edits a file, and `diff` shows you exactly what changed and nothing else. In the GitHub tutorials you will meet `git diff`, which applies this same idea to your whole repo's history.
 
@@ -383,27 +387,27 @@ Downloading files and moving them to a sensible location is a core skill for dat
 
 ### Exercise 1
 
-Confirm your location with `pwd` --- you should still be in `options`; if not, `cd` there. In your browser, go to:
+In the bash Terminal, confirm your location with `pwd` --- you should still be in `options`; if not, `cd` there. In your browser, go to:
 
 ```
 https://github.com/PPBDS/vscode.tutorials/blob/main/TODO.txt
 ```
 
-Click the "Download raw file" symbol to download `TODO.txt` to your computer's `Downloads` folder.
+Click the "Download raw file" symbol --- the down-arrow icon just to the right of the **Raw** button, at the top right of the file box --- to download `TODO.txt` to your computer's `Downloads` folder.
 
 ![](images/download-file.png){width=90%}
 
-Then, back in your Codespace, drag and drop `TODO.txt` from your computer's file manager (Finder on Mac, File Explorer on Windows) into the `options` directory in the Explorer.
+Then, back in your Codespace, right-click the `options` directory in the Explorer. Near the bottom of the menu that appears are two entries, **Download...** and **Upload...**. (The screenshot below was taken in a different repo, but the menu is the same.)
 
-![](images/drag-drop.gif)
+![](images/explorer-upload-menu.png){width=90%}
 
-Run `ls` to confirm that it arrived. CP/CR.
+Select **Upload...**, then pick `TODO.txt` from the file selection window that opens. Run `ls` to confirm that it arrived. CP/CR.
 
 ```{r}
 #| label: files-in-and-out-1
 #| echo: false
 learnr2::question(
-  "Run ls to confirm that it arrived. CP/CR.",
+  "Download TODO.txt from GitHub, right-click the options directory in the Explorer, select Upload..., pick TODO.txt, and then run ls to confirm that it arrived. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -421,27 +425,17 @@ options $
 
 The file made a round trip: from GitHub to your computer's `Downloads`, then up into the Codespace. Remember that your Codespace is a different computer --- files on your laptop are not in your Codespace until you put them there.
 
+**Upload...** and **Download...** exist only because you are running VS Code in a browser; they are the bridge between the computer in front of you and the one in the cloud. On a local machine, running desktop VS Code, those menu entries are absent --- there is no gap to bridge, so you drag and drop, or just use your file system.
+
 ### Exercise 2
 
-Delete the file by running `rm TODO.txt`. There is a second way to upload:
-
-1. Left-click the `options` directory in the Explorer so it is selected.
-
-2. Right-click it. A drop-down menu will appear.
-
-3. Select `Upload...` from the menu.
-
-4. Select `TODO.txt` from the file selection window.
-
-![](images/cs-upload.gif)
-
-Run `ls` to confirm. CP/CR.
+Delete the file by running `rm TODO.txt`, and run `ls` to confirm that it is gone. There is a second way to upload: drag and drop. Drag `TODO.txt` from your computer's file manager (Finder on Mac, File Explorer on Windows) and drop it onto the `options` directory in the Explorer. Run `ls` again to confirm. CP/CR.
 
 ```{r}
 #| label: files-in-and-out-2
 #| echo: false
 learnr2::question(
-  "4. Select TODO.txt from the file selection window. Run ls to confirm. CP/CR.",
+  "Run rm TODO.txt and then ls to confirm that it is gone, drag and drop TODO.txt from your computer's file manager onto the options directory in the Explorer, and then run ls again to confirm. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -452,13 +446,15 @@ learnr2::question(
 ```
 options $ rm TODO.txt
 options $ ls
+AUTHORS
+options $ ls
 AUTHORS  TODO.txt
 options $
 ```
 
 ###
 
-Drag-and-drop and the `Upload...` menu do the same thing. This matters more than you might think: you will sometimes need to hand-download data from a website that requires clicking, or upload an image you want an AI to imitate --- and this is the only road from your laptop into the Codespace.
+Drag-and-drop and the **Upload...** menu do the same thing. This matters more than you might think: you will sometimes need to hand-download data from a website that requires clicking, or upload an image you want an AI to imitate --- and this is the only road from your laptop into the Codespace.
 
 ### Exercise 3
 
@@ -488,10 +484,8 @@ learnr2::question(
 terminal-2 $ head -n 3 data/penguins.csv
 species,island,bill_length_mm,bill_depth_mm,flipper_length_mm,body_mass_g,sex,year
 Adelie,Torgersen,39.1,18.7,181,3750,male,2007
-Adelie,Torgersen,39.5,17.6,186,3181,female,2007
+Adelie,Torgersen,39.5,17.4,186,3800,female,2007
 ```
-
-Your numbers may differ slightly; what matters is a header row of column names followed by rows of data.
 
 ###
 
@@ -527,13 +521,37 @@ terminal-2 $
 
 Watch for it in agent transcripts: `find` is one of the first commands an AI runs in an unfamiliar project, because it answers "what is here and where?" in one stroke. In Terminal 3, wildcards will let you search for patterns --- every `.csv` file, say --- instead of exact names.
 
+### Exercise 5
+
+Files also need to come *out*. In the Explorer, expand `options`, right-click `AUTHORS`, and select **Download...**. Your browser saves the file to your computer's `Downloads` folder (or asks you where to put it). Open the downloaded copy on your computer and CP/CR its first line.
+
+```{r}
+#| label: files-in-and-out-5
+#| echo: false
+learnr2::question(
+  "In the Explorer, right-click AUTHORS inside options, select Download..., open the downloaded copy on your computer, and CP/CR its first line.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```
+Authors of R.
+```
+
+###
+
+**Download...** is the return road: it works on a single file or on a whole directory, which arrives as a zip archive. You will use it whenever a plot, a rendered document, or a data file produced in the Codespace needs to live on your own computer --- and remember that a Codespace is not forever, so anything you care about should be either pushed to GitHub or downloaded.
+
 ## Running programs
 
 You have been running programs all along --- `ls`, `curl`, and `git` are programs. But data scientists also run programs *they* (or their AI agents) just wrote: R scripts and Python scripts. AI agents constantly create small scripts on the fly and run them; this section teaches you to read what is happening when they do.
 
 ### Exercise 1
 
-Make a one-line R script and run it, as you did back in the Orientation tutorial. Run these commands, one at a time:
+Make a one-line R script and run it, as you did back in the Orientation tutorial. In the bash Terminal, from the root of your repo (`cd /workspaces/terminal-2` if you are elsewhere), run these commands, one at a time:
 
 ```
 echo 'print(2 + 2)' > add.R
@@ -546,7 +564,7 @@ CP/CR.
 #| label: running-programs-1
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "In the bash Terminal, from the root of your repo, run echo 'print(2 + 2)' > add.R and then Rscript add.R. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -579,7 +597,7 @@ CP/CR.
 #| label: running-programs-2
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Run Rscript -e 'sqrt(144)'. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -612,7 +630,7 @@ CP/CR.
 #| label: running-programs-3
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Run echo 'print(2 + 2)' > add.py and then python add.py. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -645,7 +663,7 @@ CP/CR.
 #| label: running-programs-4
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Run python -c 'print(2 ** 10)'. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -689,7 +707,7 @@ terminal-2 $
 
 ###
 
-Look closely: these are different kinds of places. `Rscript` lives in `/usr/local/bin` --- R is installed **system-wide**, one copy for the whole machine. But `python` lives in `/opt/venv/bin` --- inside a **virtual environment** (a "venv"): a private, self-contained Python installation with its own packages. In our Codespaces, running an R script and running a Python script are genuinely different arrangements under the hood.
+Look closely: these are different kinds of places. `Rscript` lives in `/usr/local/bin` --- R is installed **system-wide**, one copy for the whole machine. But `python` lives in `/opt/venv/bin` --- inside a **virtual environment** (a "venv"): a private, self-contained Python installation with its own packages. (`python --version` reports which one: `Python 3.12.3`.) In our Codespaces, running an R script and running a Python script are genuinely different arrangements under the hood.
 
 ### Exercise 6
 
@@ -709,15 +727,15 @@ learnr2::question(
 
 ```
 terminal-2 $ echo $PATH
-/opt/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+/home/rstudio/.local/bin:/home/rstudio/.local/bin:/home/rstudio/.local/bin:/home/rstudio/.local/bin:/home/rstudio/.local/bin:/home/rstudio/.cargo/bin:/opt/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/rstudio/.local/bin
 terminal-2 $
 ```
 
-Your exact list may differ. What matters is what comes first.
+It is one long line, with directories separated by colons. `/home/rstudio/.local/bin` may appear a different number of times on your machine --- each setup script that adds it does so without checking whether it is already there --- and the repetition is harmless. What matters is the order.
 
 ###
 
-`PATH` is an environment variable holding an ordered list of directories. When you type a command, the shell searches those directories left to right and runs the first match. Because `/opt/venv/bin` comes **first**, plain `python` always means the venv's Python --- no setup, no activation. That is a deliberate choice baked into our Codespace image.
+`PATH` is an environment variable holding an ordered list of directories. When you type a command, the shell walks the list left to right and runs the program from the **first directory that contains one** by that name. `/home/rstudio/.local/bin` is where `connect-repo` lives, and `/home/rstudio/.cargo/bin` is another small tool directory; neither has a `python`. The next entry, `/opt/venv/bin`, does --- and it comes before `/usr/bin`, where the operating system's own Python sits. So plain `python` always means the venv's Python: no setup, no activation. That is a deliberate choice baked into our Codespace image.
 
 ### Exercise 7
 
@@ -737,7 +755,7 @@ learnr2::question(
 
 ```
 terminal-2 $ uv --version
-uv 0.11.23
+uv 0.13.0 (x86_64-unknown-linux-musl)
 terminal-2 $
 ```
 
@@ -761,7 +779,7 @@ Then clean up your scripts: run `rm add.R add.py`. CP/CR.
 #| label: running-programs-8
 #| echo: false
 learnr2::question(
-  "Then clean up your scripts: run rm add.R add.py. CP/CR.",
+  "Run python -c 'import pandas; print(pandas.__version__)', then clean up your scripts with rm add.R add.py. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -771,7 +789,7 @@ learnr2::question(
 
 ```
 terminal-2 $ python -c 'import pandas; print(pandas.__version__)'
-2.2.3
+3.0.6
 terminal-2 $ rm add.R add.py
 terminal-2 $
 ```
@@ -802,7 +820,7 @@ Your output should begin something like:
 
 ```
 terminal-2 $ quarto check
-Quarto 1.10.18
+Quarto 1.10.19
 [✓] Checking environment information...
 [✓] Checking versions of quarto binary dependencies...
       Pandoc version 3.4.0: OK
@@ -811,7 +829,7 @@ Quarto 1.10.18
 [✓] Checking Quarto installation......OK
 ```
 
-Your version numbers will differ.
+The version numbers of the dependencies may differ.
 
 ###
 
@@ -834,7 +852,7 @@ CP/CR.
 #| label: running-programs-10
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Run echo 'echo \"I am a program.\"' > hello.sh, then ./hello.sh, then chmod +x hello.sh, then ./hello.sh again, one at a time. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -862,7 +880,7 @@ Clean up: run `rm hello.sh`.
 
 ## Summary
 
-This tutorial covered command options, environment variables (reading `$HOME` and `$PATH`, setting your own with `export`, and why an `export` dies with its terminal), looking inside files with `head`, `tail`, `cat`, the `less` pager, and `diff`, finding files with `find`, moving files in and out of a Codespace (drag-and-drop, `Upload...`, and `curl` into a `data/` directory), and running programs: `Rscript` and `Rscript -e` for R, `python` and `python -c` for Python, `quarto check` for Quarto, and your own `hello.sh` --- once `chmod +x` marked it executable. You also saw how our Codespaces arrange the two languages differently --- R installed system-wide, Python in a uv-built virtual environment at `/opt/venv` that comes first on `$PATH`, stocked with the data science stack.
+This tutorial covered command options, environment variables (reading `$HOME` and `$PATH`, setting your own with `export`, and why an `export` dies with its terminal), looking inside files with `head`, `tail`, `cat`, the `less` pager, and `diff`, finding files with `find`, moving files in and out of a Codespace (the Explorer's `Upload...` and `Download...`, drag-and-drop, and `curl` into a `data/` directory), and running programs: `Rscript` and `Rscript -e` for R, `python` and `python -c` for Python, `quarto check` for Quarto, and your own `hello.sh` --- once `chmod +x` marked it executable. You also saw how our Codespaces arrange the two languages differently --- R installed system-wide, Python in a uv-built virtual environment at `/opt/venv` that comes first on `$PATH`, stocked with the data science stack.
 
 You will type some of these commands yourself. But mostly you will *read* them, in the transcripts of AI agents working on your behalf --- and now you can.
 

@@ -267,11 +267,15 @@ example $
 - **Exception — Codespaces not started from our image.** The Jupyter and Blank
   template Codespaces (toured in the Devcontainers tutorial) show GitHub's stock
   long prompt. Those transcripts are correct as-is; leave them.
-- **Subtlety, taught in Workflow and Terminal 1:** only a *newly
-  opened* bash Terminal gets the short prompt. The terminal already open when the
-  Codespace starts shows the stock long prompt (the `PS1` override lands at the
-  end of `~/.bashrc` and only affects shells started afterward). Tutorials tell
-  students to open a fresh bash Terminal.
+- **Every terminal gets the short prompt, including the first one.** Since
+  October 2026 `setup.sh` runs from `onCreateCommand` (prebuild time), so the
+  `PS1` override is already at the end of `~/.bashrc` before the Codespace's
+  first terminal opens. The old subtlety ("only a newly opened bash Terminal gets
+  the short prompt") is retired; tutorials must not teach it or show the long
+  prompt as something a student might see in a `codespace-starter` Codespace.
+  What the first terminal *does* carry is a small ⚠ "extensions want to relaunch
+  the terminal" icon on its tab (as does any terminal created before the R
+  extension activates); it is harmless, and Orientation says so once.
 
 ### Repo names derive from tutorial titles
 

@@ -41,17 +41,21 @@ The lower section of the VS Code window is the "Panel," which is composed of a c
 
 The Terminal view is, by far, the part of the Panel which we use most often. Within it you can run several *terminals* at once, each with its own tab on the right side of the Panel. A terminal is just a window for typing text to a program and reading the program's replies. The program is usually the bash **shell** --- a program whose whole job is to interpret your commands --- and that combination is what we call a bash Terminal. But a terminal can host other programs instead: an R Terminal is the same kind of window running R.
 
+The icons on the right side of the Panel manage terminals: `+` opens a new bash Terminal (the drop-down arrow beside it offers other kinds, such as **R Terminal**), the split icon puts two terminals side by side, and the trash can closes the selected terminal. The first terminal's tab may carry a small warning triangle (⚠), which just means an extension activated after that terminal started. It is harmless; ignore it.
+
 ![](images/terminal-on-open.png){width=90%}
+
+This is a fresh Codespace, before any repo has been connected. The Panel holds one `bash` terminal showing the "YOUR CODESPACE IS READY" banner and, below it, the prompt: `codespace-starter $`. In your Codespace, now that you have connected to `terminal-1`, the prompt reads `terminal-1 $` instead.
 
 ### Exercise 1
 
-You met the bash Terminal in the Orientation and Workflow tutorials; this is recall. Open a new bash Terminal. Hit the `Enter` key twice --- the string that reappears each time is the **prompt**, telling you bash is ready for your next command. Then run `pwd`. CP/CR.
+You met the bash Terminal in the Orientation and Workflow tutorials; this is recall. Use the bash Terminal that is already open, or open a new one with the `+` icon. Hit the `Enter` key twice --- the string that reappears each time is the **prompt**, telling you bash is ready for your next command. Then run `pwd`. CP/CR.
 
 ```{r}
 #| label: terminal-1
 #| echo: false
 learnr2::question(
-  "You met the bash Terminal in the Orientation and Workflow tutorials; this is recall. Open a new bash Terminal. Hit the Enter key twice -- the string that reappears each time is the prompt, telling you bash is ready for your next command. Then run pwd. CP/CR.",
+  "You met the bash Terminal in the Orientation and Workflow tutorials; this is recall. Use the bash Terminal that is already open, or open a new one with the + icon. Hit the Enter key twice -- the string that reappears each time is the prompt, telling you bash is ready for your next command. Then run pwd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -69,17 +73,7 @@ terminal-1 $ pwd
 terminal-1 $
 ```
 
-The prompt is the name of the directory you are currently in --- `terminal-1` --- followed by a space and a dollar sign. The dollar sign indicates the end of the prompt; you type commands after it. `pwd` prints the full path to that directory. (If you are working on your own computer rather than in a Codespace, your prompt will look different. Default prompts vary from computer to computer.)
-
-###
-
-You only get this short prompt in a bash Terminal which you open yourself. A bash Terminal that was already open when the Codespace started shows GitHub's long default prompt, something like:
-
-```
-@davekane-student ➜ /workspaces/terminal-1 (main) $
-```
-
-with your GitHub username in place of `davekane-student`. The two prompts behave identically. All our examples show the short prompt, so if you see the long one, open a new bash Terminal.
+The prompt is the name of the directory you are currently in --- `terminal-1` --- followed by a space and a dollar sign. The dollar sign indicates the end of the prompt; you type commands after it. `pwd` prints the full path to that directory. (If you are working on your own computer rather than in a Codespace, your prompt will look different. Default prompts vary from computer to computer.) Every bash Terminal in a Codespace started from `codespace-starter` shows this short prompt, because `codespace-starter` set it up that way.
 
 ### Exercise 2
 
@@ -120,13 +114,15 @@ Your answer should look like:
 
 ```
 terminal-1 $ mkdir example
+terminal-1 $ ls
+AGENTS.md  example
 terminal-1 $ cd example
 example $ pwd
 /workspaces/terminal-1/example
 example $
 ```
 
-The `example` directory is one level below the directory in which you started.
+The `example` directory is one level below the directory in which you started. The other item `ls` listed, `AGENTS.md`, was placed in your repo by `connect-repo`; we will come back to it.
 
 ### Exercise 4
 
@@ -285,6 +281,7 @@ learnr2::question(
 ```
 terminal-1 $ rm -r example
 terminal-1 $ ls
+AGENTS.md
 terminal-1 $
 ```
 
@@ -298,7 +295,7 @@ You will practice using paths both inside and outside the current working direct
 
 ### Exercise 1
 
-By default, a new Terminal in VS Code starts in the folder you have open: `/workspaces/terminal-1`, your repo.
+Every bash Terminal in this Codespace --- the one that was already open and any new one you open with `+` --- starts in `/workspaces/terminal-1`, your repo. VS Code normally starts a terminal in the folder you have open, and `connect-repo` also added a line to your shell's startup file that moves each new terminal into the repo, so you land there either way.
 
 Run `pwd` to show your current working directory. CP/CR.
 
@@ -469,13 +466,13 @@ Read this paragraph again. No skimming!
 
 ### Exercise 8
 
-Use `echo` to make two more text files inside `fruits`, named `pear.txt` and `does-not-belong`. That is, run `echo "" > pear.txt & echo "" > does-not-belong`. Confirm by running `ls`. CP/CR.
+Use `echo` to make two more text files inside `fruits`, named `pear.txt` and `does-not-belong`. That is, run `echo "" > pear.txt && echo "" > does-not-belong`. Confirm by running `ls`. CP/CR.
 
 ```{r}
 #| label: paths-8
 #| echo: false
 learnr2::question(
-  "Use echo to make two more text files inside fruits, named pear.txt and does-not-belong. That is, run echo \"\" > pear.txt & echo \"\" > does-not-belong. Confirm by running ls. CP/CR.",
+  "Use echo to make two more text files inside fruits, named pear.txt and does-not-belong. That is, run echo \"\" > pear.txt && echo \"\" > does-not-belong. Confirm by running ls. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -484,13 +481,13 @@ learnr2::question(
 ###
 
 ```
-fruits $ echo "" > pear.txt & echo "" > does-not-belong
+fruits $ echo "" > pear.txt && echo "" > does-not-belong
 fruits $ ls
-does-not-belong pear.txt        pineapple.txt
+does-not-belong  pear.txt  pineapple.txt
 fruits $
 ```
 
-The `&` symbol tells the operating system to run both the command that came before it and the command that comes after it.
+`&&` joins two commands on one line: the shell runs the first, and then runs the second only if the first succeeded. (A single `&` means something quite different --- it sends the command before it to the background --- so be careful to type both ampersands.)
 
 ### Exercise 9
 
@@ -627,9 +624,9 @@ terminal-1 $
 
 ###
 
-In olden times, professional programmers would spend a lot of time learning the various options for commands like `rm`. Now, we just ask ChatGPT or a similar tool.
+In olden times, professional programmers would spend a lot of time learning the various options for commands like `rm`. Now, we just ask an AI assistant.
 
-<!-- Could have them ask ChatGPT to do something and then do it. -->
+<!-- Could have them ask an AI assistant to do something and then do it. -->
 
 ## Important symbols
 
@@ -712,7 +709,7 @@ My answer looks like this:
 
 ```
 symbols $ ls ..
-symbols
+AGENTS.md  symbols
 symbols $ ls ../..
 codespace-starter  terminal-1
 symbols $
@@ -720,7 +717,7 @@ symbols $
 
 ###
 
-One level up is your repo, where `symbols` is currently the only visible item. (The repo also contains hidden files, like the `.git` directory, but plain `ls` does not show those.) Two levels up is `/workspaces`, where your repo sits beside `codespace-starter`, the folder that supplied this Codespace --- plus the repos from earlier tutorials, if you have reused this Codespace. The symbols chain: `..` means one level up, `../..` two, and so on.
+One level up is your repo, where `symbols` sits beside `AGENTS.md` --- the plain-text file `connect-repo` copies into every new repo, which AI assistants such as Copilot read from the repo root to learn the rules for working with you in this course. (The repo also contains hidden files, like the `.git` directory, but plain `ls` does not show those.) Two levels up is `/workspaces`, where your repo sits beside `codespace-starter`, the folder that supplied this Codespace --- plus the repos from earlier tutorials, if you have reused this Codespace. The symbols chain: `..` means one level up, `../..` two, and so on.
 
 ### Exercise 4
 
