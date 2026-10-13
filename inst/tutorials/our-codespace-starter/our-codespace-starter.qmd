@@ -228,13 +228,13 @@ learnr2::question(
 
 ### Exercise 6
 
-Just below `"mechatroner.rainbow-csv"`, find the comment that begins `ALSO DELIBERATELY ABSENT`. Copy and paste its first five lines.
+Just below `"mechatroner.rainbow-csv"`, find the comment that begins `ALSO DELIBERATELY ABSENT`. Copy and paste its first four lines.
 
 ```{r}
 #| label: codespace-starter-6
 #| echo: false
 learnr2::question(
-  "Just below \"mechatroner.rainbow-csv\", find the comment that begins ALSO DELIBERATELY ABSENT. Copy and paste its first five lines.",
+  "Just below \"mechatroner.rainbow-csv\", find the comment that begins ALSO DELIBERATELY ABSENT. Copy and paste its first four lines.",
   type = "reflection",
   show_text = FALSE
 )
@@ -474,13 +474,13 @@ You have already met the result of this line --- it is behind the "✅ YOUR CODE
 
 ### Exercise 16
 
-You might expect a `"postCreateCommand"` field --- a command that runs every time a Codespace is created. There isn't one. Find the comment that begins `NO postCreateCommand right now`. Copy and paste its first five lines.
+You might expect a `"postCreateCommand"` field --- a command that runs every time a Codespace is created. There isn't one. Find the comment that begins `NO postCreateCommand right now`. Copy and paste its first four lines.
 
 ```{r}
 #| label: codespace-starter-16
 #| echo: false
 learnr2::question(
-  "You might expect a \"postCreateCommand\" field -- a command that runs every time a Codespace is created. There isn't one. Find the comment that begins NO postCreateCommand right now. Copy and paste its first five lines.",
+  "You might expect a \"postCreateCommand\" field -- a command that runs every time a Codespace is created. There isn't one. Find the comment that begins NO postCreateCommand right now. Copy and paste its first four lines.",
   type = "reflection",
   show_text = FALSE
 )
@@ -490,15 +490,14 @@ learnr2::question(
 
 ```
 // NO postCreateCommand right now — RETIRED 2026-07-30. All course
-// packages, including primer.tutorials, ship at whatever versions the
-// image baked; the live at-create refresh of primer.tutorials was removed
-// because the baked version is recent enough, making creates faster and
-// GitHub-independent.
+// packages ship at whatever versions the image baked; the live at-create
+// refresh of a course package was removed because the baked version is
+// recent enough, making creates faster and GitHub-independent.
 ```
 
 ###
 
-There *used* to be a `postCreateCommand` here that refreshed the course packages from GitHub every time a Codespace was created. It was retired: the four course packages now ship at whatever versions the image baked, and updates reach students through a new image release plus a pin bump --- the same `"image"` line you found in Exercise 2. That makes Codespace creation faster and independent of GitHub being reachable.
+There *used* to be a `postCreateCommand` here that refreshed the course packages from GitHub every time a Codespace was created. It was retired: the course packages now ship at whatever versions the image baked, and updates reach students through a new image release plus a pin bump --- the same `"image"` line you found in Exercise 2. That makes Codespace creation faster and independent of GitHub being reachable.
 
 Read the rest of the comment, though. The recipe was kept on purpose, dormant, in case course content ever again needs to move faster than image releases --- along with hard-won notes on *why* it must be `postCreateCommand` rather than `onCreateCommand` if revived --- the opposite choice from the setup script above, and for a reason: setup can be frozen into the prebuild, a package refresh must not be. Deleting working knowledge is cheap; re-learning it is not. Either way, the packages only cover the course --- anything else you need, you install yourself, by hand or by asking AI, which is exactly what the next few exercises do.
 
