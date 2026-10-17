@@ -551,7 +551,7 @@ If Antigravity does not render the file, ask it to. After Antigravity finishes, 
 Open a new R Terminal, if you don't have one open already. 
 
 ```r
-learnr2::show_file("analysis.qmd", chunk = "Last")
+learnr2::show_file("analysis.qmd")
 ```
 
 CP/CR.
@@ -689,7 +689,7 @@ Each code chunk should produce **one** final artifact --- either cleaned data or
 
 Ask Antigravity to add a **new chunk** at the bottom of `analysis.qmd` that prints the `storms` dataset. Render. 
 
-In the R Terminal, run `learnr2::show_file("analysis.qmd", chunk = "Last")`. 
+In the R Terminal, run `learnr2::show_file("analysis.qmd")`. 
 
 CP/CR.
 
@@ -697,7 +697,7 @@ CP/CR.
 #| label: working-code-chunk-2
 #| echo: false
 learnr2::question(
-  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -723,7 +723,7 @@ Printing a raw tibble like this would never remain a published document. That is
 
 Ask Antigravity to update the last chunk to pipe `storms` through `glimpse()`. Render and inspect the output. 
 
-In the R Terminal, run `learnr2::show_file("analysis.qmd", chunk = "Last")`. 
+In the R Terminal, run `learnr2::show_file("analysis.qmd")`. 
 
 CP/CR.
 
@@ -731,7 +731,7 @@ CP/CR.
 #| label: working-code-chunk-3
 #| echo: false
 learnr2::question(
-  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -754,7 +754,7 @@ storms |>
 
 Ask Antigravity to update the working chunk to count the observations in `storms` by `status`. Render. 
 
-In the R Terminal, run `learnr2::show_file("analysis.qmd", chunk = "Last")`. 
+In the R Terminal, run `learnr2::show_file("analysis.qmd")`. 
 
 CP/CR.
 
@@ -762,7 +762,7 @@ CP/CR.
 #| label: working-code-chunk-4
 #| echo: false
 learnr2::question(
-  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -785,7 +785,7 @@ storms |>
 
 Ask Antigravity to update the working chunk to filter `storms` to observations with `year >= 2000` and select the `year`, `name`, `status`, `wind`, and `pressure` columns. Leave the result as the final expression so it prints. Render. 
 
-In the R Terminal, run `learnr2::show_file("analysis.qmd", chunk = "Last")`. 
+In the R Terminal, run `learnr2::show_file("analysis.qmd")`. 
 
 CP/CR.
 
@@ -793,7 +793,7 @@ CP/CR.
 #| label: working-code-chunk-5
 #| echo: false
 learnr2::question(
-  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -821,7 +821,7 @@ Our exploration has settled on the data we want: observations since 2000, five c
 
 Ask Antigravity to save the filtered tibble to a variable called `storms_recent` instead of printing it directly. Render. Notice the table disappears from the HTML. 
 
-In the R Terminal, run `learnr2::show_file("analysis.qmd", chunk = "Last")`. 
+In the R Terminal, run `learnr2::show_file("analysis.qmd")`. 
 
 CP/CR.
 
@@ -829,7 +829,7 @@ CP/CR.
 #| label: cache-1
 #| echo: false
 learnr2::question(
-  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -939,7 +939,7 @@ Nothing needed to change. The `*_cache/` line Antigravity wrote into `.gitignore
 
 Ask Antigravity to add a new code chunk with a **ggplot2** scatter plot of `pressure` vs. `wind`, using `storms_recent`. Render. 
 
-In the R Terminal, run `learnr2::show_file("analysis.qmd", chunk = "Last")`. 
+In the R Terminal, run `learnr2::show_file("analysis.qmd")`. 
 
 CP/CR.
 
@@ -947,7 +947,7 @@ CP/CR.
 #| label: plotting-1
 #| echo: false
 learnr2::question(
-  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -977,7 +977,7 @@ Chunks in the same document share an R session --- `storms_recent` is created in
 
 The first version of a plot is rarely the last. Ask Antigravity to improve the working chunk: color the points by `status`, make them semi-transparent so overlapping observations show, and add a meaningful title, subtitle, and axis labels. Render and check the Live Server tab. 
 
-In the R Terminal, run `learnr2::show_file("analysis.qmd", chunk = "Last")`. 
+In the R Terminal, run `learnr2::show_file("analysis.qmd")`. 
 
 CP/CR.
 
@@ -985,7 +985,7 @@ CP/CR.
 #| label: plotting-2
 #| echo: false
 learnr2::question(
-  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )

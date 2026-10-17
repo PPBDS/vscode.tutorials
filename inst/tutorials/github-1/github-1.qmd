@@ -915,13 +915,13 @@ Let's make `analysis-1.qmd` worth publishing. Set it up as you learned in the Qu
 
 (In the Antigravity tutorial you met a CLI agent that can edit your files directly. Either approach is fine throughout these Git tutorials: ask an AI in a chat window and copy/paste the code by hand, or let an agent write it into your file for you. Use whichever you prefer.)
 
-In the R Terminal, run `learnr2::show_file("analysis-1.qmd", chunk = "Last")`. CP/CR.
+In the R Terminal, run `learnr2::show_file("analysis-1.qmd")`. CP/CR.
 
 ```{r}
 #| label: publishing-with-github-pages-1
 #| echo: false
 learnr2::question(
-  "In the R Terminal, run learnr2::show_file(\"analysis-1.qmd\", chunk = \"Last\"). CP/CR.",
+  "In the R Terminal, run learnr2::show_file(\"analysis-1.qmd\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )

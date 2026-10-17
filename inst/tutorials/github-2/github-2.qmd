@@ -187,13 +187,13 @@ Count what you have now reproduced by hand: the sign-in, the credential store th
 
 Give the repo something worth keeping, set up the way you learned in the Quarto tutorial: create `analysis.qmd` with the title "GitHub Advanced", your name as author, `execute: echo: false` in the YAML, a setup chunk loading **tidyverse** with `#| message: false`, and a second chunk holding an AI-generated plot using a built-in data set. Also create a `.gitignore` containing `analysis_files`. Render with `Cmd/Ctrl + Shift + K`.
 
-In the R Terminal, run `learnr2::show_file("analysis.qmd", chunk = "Last")`. CP/CR.
+In the R Terminal, run `learnr2::show_file("analysis.qmd")`. CP/CR.
 
 ```{r}
 #| label: a-repo-by-hand-5
 #| echo: false
 learnr2::question(
-  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\", chunk = \"Last\"). CP/CR.",
+  "In the R Terminal, run learnr2::show_file(\"analysis.qmd\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )

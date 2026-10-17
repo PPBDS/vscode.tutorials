@@ -937,7 +937,7 @@ Preview the file. You should see your plot --- but not the code that made it. Th
 In the R Terminal, run:
 
 ```r
-learnr2::show_file("quarto-2.qmd", chunk = "Last")
+learnr2::show_file("quarto-2.qmd")
 ```
 
 CP/CR.

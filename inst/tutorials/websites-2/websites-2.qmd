@@ -156,7 +156,7 @@ Create a new code chunk in `index.qmd` which loads the **tidyverse** package, wi
 In the R Terminal, run:
 
 ```r
-show_file("index.qmd", chunk = "Last")
+show_file("index.qmd")
 ```
 
 CP/CR. (Did you remember to `library(learnr2)` in the R Terminal so that this function is available?)
@@ -229,7 +229,7 @@ You now know two reasonable ways to work with AI, and either is fine here. You c
 In the R Terminal, run:
 
 ```r
-show_file("index.qmd", chunk = "Last")
+show_file("index.qmd")
 ```
 
 CP/CR.
