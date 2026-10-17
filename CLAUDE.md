@@ -55,10 +55,58 @@ prompt stays in the prose above its chunk, with a plain-text copy in
 `## Information` (`information-1`) and `## Download answers`
 (`download-answers-1`, `download-answers-2`). Check with
 [`learnr2::check_tutorial()`](https://ppbds.github.io/learnr2/reference/check_tutorial.html)
-and
+(warning-level checks included: it flags bare code fences and mentions
+of the old packages) and
 [`learnr2::render_tutorials()`](https://ppbds.github.io/learnr2/reference/render_tutorials.html).
 The version before the move to learnr2 is the git tag
 `last-learnr-version`.
+
+The learnr2 behaviours an author here most often runs into:
+
+- **Every code block names what it is** (October 2026; the vignette’s
+  “Code, commands and output”). Something to type gets its language:
+  ```` ```bash ```` for the bash Terminal, ```` ```r ```` for the R
+  Terminal, ```` ```yaml ````, ```` ```json ````,
+  ```` ```dockerfile ````, ```` ```ini ```` as the content demands, and
+  ```` ```markdown ```` for text destined for a `.qmd`. Text to type
+  that is not in any language — a prompt for an AI, a commit message,
+  lines for `.gitignore` — is ```` ```default ````, which boxes it with
+  a copy button and no colouring. Anything the student *compares
+  against* — a transcript (`code $ ls` and what follows), the answer
+  shown after Continue, an error message — is ```` ```{.output} ````,
+  which renders lighter and without a copy button. A bare ```` ``` ````
+  fence is a `check_tutorial()` warning. When it is not obvious where a
+  command runs, label it: ```` ```{.bash filename="bash Terminal"} ````.
+- **Questions lock on submit.** Every text or image question is
+  `type = "reflection"`: one Submit, then the box is locked and our
+  answer appears, so a student cannot copy it back.
+  `reflection_editable` exists for the minutes question only.
+  `student_info()` and the minutes question get an Edit/Submit cycle
+  instead (Edit reopens, Submit resubmits); a submitted screenshot gets
+  an “Edit Answer” button that reopens only the image box.
+- **Continue is gated by default.** `tutorial_options()` (the hidden
+  chunk at the top of every tutorial) defaults to
+  `require_submission = TRUE`, so a section’s Continue stays disabled
+  until every question above it is submitted, and `allow_skip = FALSE`,
+  which dims the TOC entries for sections not yet reached. Tutorial-wide
+  switches go through `tutorial_options()`, never a new YAML key. A bare
+  `###` divider is a Continue stop; never put one directly under a `##`
+  or `###` heading, since a Continue button with no text above it is a
+  reported annoyance.
+- **Screenshot questions** are `allow_image = TRUE, allow_text = FALSE`:
+  no text box, and Submit refuses an empty box, because a typed answer
+  there proves nothing. Use them in the vignette’s four cases: the
+  student would otherwise copy text out of a *web page* (settings they
+  turned on, a row in the Codespaces list, a help page); the student
+  produced an image; nothing else can verify the step (signed in, a
+  window open); or a run of small steps ends in one screen that only
+  looks right if all of them were done. Copying a line out of a file in
+  the Editor or output from the Terminal is *not* a screenshot case:
+  that text copies cleanly, so those stay text questions. A tutorial’s
+  first screenshot question says how to take one
+  (`Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, then
+  click in the answer box and paste). Ask for one specific screenshot,
+  never a hedged choice.
 
 **Never mention learnr or tutorial.helpers** — in tutorial prose,
 examples, README, or package docs. Students know only learnr2:
@@ -83,13 +131,13 @@ lean on. Antigravity and GitHub Introduction teach them again later;
 that repetition is deliberate reinforcement.
 
 The dependency runs both ways. The standard class workflow sends
-students from these four tutorials directly into `misc.tutorials`’
-`r4ds-1`–`r4ds-5`, so the first four must supply **every** piece of
-background that sequence relies on. When a downstream tutorial needs a
-skill not taught through Quarto, the fix lands here (or the downstream
-tutorial scaffolds it explicitly) — it is never assumed silently.
-Cutting material from Orientation, Workflow, Code, or Quarto therefore
-requires checking what downstream leans on it.
+students from these four tutorials directly into `misc.tutorials`’ R4DS
+family (`r4ds-1` through `imdb-rankings`), so the first four must supply
+**every** piece of background that sequence relies on. When a downstream
+tutorial needs a skill not taught through Quarto, the fix lands here (or
+the downstream tutorial scaffolds it explicitly) — it is never assumed
+silently. Cutting material from Orientation, Workflow, Code, or Quarto
+therefore requires checking what downstream leans on it.
 
 ### The universal entry point
 
@@ -239,12 +287,13 @@ base guide and every other tutorial package. In particular:
   inside the chunk, not inline `, key = value` on the header.** So an
   answer chunk is
 
-      ```{r}
-      #| label: section-name-N-answer
-      #| echo: true
-      # our code
-
-  \`\`\`
+  ```` markdown
+  ```{r}
+  #| label: section-name-N-answer
+  #| echo: true
+  # our code
+  ```
+  ````
 
   not `{r section-name-N-answer, echo = TRUE}`. The label, too, goes on
   a `#| label:` line, and nothing stays inline on the header. This is
@@ -273,7 +322,8 @@ applied everywhere (including the primer’s Getting Started chapter):
   / running R. **Instructions must always name which one** — “In the
   bash Terminal, run `ls`” — never bare “From the Terminal, run …”.
   (Typing bash commands into the R Terminal is the classic student error
-  this prevents.)
+  this prevents.) Where the prose is far from the block, the block can
+  carry the name too: ```` ```{.bash filename="bash Terminal"} ````.
 - Bold verbatim UI strings (**TERMINAL**, **bash**, **R Terminal**, **R
   Interactive**) only when pointing the student at something on screen.
   Wrinkle worth a parenthetical where it bites: the drop-down item is
@@ -298,8 +348,10 @@ not change one piece without the others.
 Codespace started from `codespace-starter` the bash prompt is **the
 basename of the current working directory, a space, and a dollar sign**:
 
-    codespace-starter $ cd example
-    example $
+``` output
+codespace-starter $ cd example
+example $
+```
 
 - Every example transcript must use this style — never GitHub’s stock
   long prompt (`@user ➜ /workspaces/dir (main) $`), never a bare `$`.
