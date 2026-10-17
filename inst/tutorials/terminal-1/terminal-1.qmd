@@ -65,7 +65,7 @@ learnr2::question(
 
 Your answer should look something like:
 
-```
+```{.output}
 terminal-1 $
 terminal-1 $
 terminal-1 $ pwd
@@ -112,7 +112,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 terminal-1 $ mkdir example
 terminal-1 $ ls
 AGENTS.md  example
@@ -142,7 +142,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 example $ echo "" > my.txt
 example $ ls
 my.txt
@@ -170,7 +170,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 example $ cp my.txt my_2.txt
 example $ ls
 my_2.txt  my.txt
@@ -197,7 +197,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 example $ mv my.txt fake.txt
 example $ ls
 fake.txt  my_2.txt
@@ -226,7 +226,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 example $ rm fake.txt
 example $ ls
 my_2.txt
@@ -255,7 +255,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 example $ cd ..
 terminal-1 $ pwd
 /workspaces/terminal-1
@@ -278,7 +278,7 @@ learnr2::question(
 )
 ```
 
-```
+```{.output}
 terminal-1 $ rm -r example
 terminal-1 $ ls
 AGENTS.md
@@ -351,7 +351,7 @@ learnr2::question(
 
 Your answer should look something like:
 
-```
+```{.output}
 terminal-1 $ cd paths
 paths $ pwd
 /workspaces/terminal-1/paths
@@ -376,7 +376,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 paths $ mkdir lessons
 paths $ ls
 lessons
@@ -403,7 +403,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 paths $ mkdir lessons/fruits
 paths $ ls lessons/
 fruits
@@ -452,7 +452,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 fruits $ echo "" > pineapple.txt
 fruits $ ls
 pineapple.txt
@@ -480,7 +480,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 fruits $ echo "" > pear.txt && echo "" > does-not-belong
 fruits $ ls
 does-not-belong  pear.txt  pineapple.txt
@@ -505,7 +505,7 @@ learnr2::question(
 
 Your answer should look like this:
 
-```
+```{.output}
 fruits $ cd ..
 lessons $ pwd
 /workspaces/terminal-1/paths/lessons
@@ -532,7 +532,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 lessons $ mkdir tbd
 lessons $ ls
 fruits  tbd
@@ -559,7 +559,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 lessons $ mv fruits/does-not-belong tbd
 lessons $ ls tbd
 does-not-belong
@@ -586,7 +586,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 lessons $ cd ..
 paths $ pwd
 /workspaces/terminal-1/paths
@@ -614,7 +614,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 paths $ cd ..
 terminal-1 $ pwd
 /workspaces/terminal-1
@@ -650,7 +650,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-1 $ mkdir symbols
 terminal-1 $ cd symbols
 symbols $ pwd
@@ -681,7 +681,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 symbols $ ls -a
 .       ..
 symbols $
@@ -707,7 +707,7 @@ learnr2::question(
 
 My answer looks like this:
 
-```
+```{.output}
 symbols $ ls ..
 AGENTS.md  symbols
 symbols $ ls ../..
@@ -737,7 +737,7 @@ learnr2::question(
 
 My answer looks like this:
 
-```
+```{.output}
 symbols $ pwd
 /workspaces/terminal-1/symbols
 symbols $
@@ -767,7 +767,7 @@ learnr2::question(
 
 My answer looks like this:
 
-```
+```{.output}
 symbols $ cd
 ~ $ pwd
 /home/rstudio
@@ -792,7 +792,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 ~ $ cd /workspaces/terminal-1/symbols
 symbols $ pwd
 /workspaces/terminal-1/symbols
@@ -819,7 +819,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 symbols $ pwd
 /workspaces/terminal-1/symbols
 symbols $ cd ..
@@ -851,7 +851,7 @@ learnr2::question(
 
 For me, this looks like:
 
-```
+```{.output}
 terminal-1 $ echo "David Kane"
 David Kane
 terminal-1 $
@@ -875,7 +875,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-1 $ echo "David Kane" > me.txt
 terminal-1 $ cat me.txt
 David Kane
@@ -902,7 +902,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-1 $ echo "I am learning bash." >> me.txt
 terminal-1 $ cat me.txt
 David Kane

@@ -35,7 +35,7 @@ You should be doing this tutorial in a repo named `the-devcontainer-dockerfile`.
 
 Here is the complete Dockerfile that builds `ghcr.io/ppbds/devcontainer`. Skim it once, then work through the exercises below, which walk through it piece by piece, in the order the layers actually appear.
 
-````
+````dockerfile
 # syntax=docker/dockerfile:1.7
 #
 # THE PPBDS devcontainer image — ghcr.io/ppbds/devcontainer.
@@ -1018,7 +1018,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.6@sha256:3a9ecbed900f17da528cdb17c3ddc43045fc9b4be7dbd8c61cb7b8a6439bfa6b
 ```
 
@@ -1030,7 +1030,7 @@ This image is pinned by **digest** (the long `sha256:...` hash), not just by the
 
 Time to build something of your own. In the bash Terminal, create a new file called `Dockerfile` (no extension) at the top level of your `the-devcontainer-dockerfile` repo, and write a simple Dockerfile that starts from a small base image and runs one command. For example:
 
-```
+```dockerfile
 FROM alpine:3.20
 CMD ["echo", "Hello from my first Docker image!"]
 ```
@@ -1055,7 +1055,7 @@ A Dockerfile is just a short recipe: a `FROM` line picks a starting image (here,
 
 Your Dockerfile is a recipe; something still has to cook it. For `ghcr.io/ppbds/devcontainer`, that something is not a person typing commands --- it is a **GitHub Actions workflow** that lives in the same repo as the Dockerfile. Here is the part of it that matters, from `.github/workflows/build.yml`:
 
-```
+```yaml
 name: build-and-push
 
 on:
@@ -1124,7 +1124,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 with:
   context: .
   push: true
@@ -1156,7 +1156,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 type=raw,value=latest,enable={{is_default_branch}}
 type=semver,pattern={{version}}
 type=semver,pattern={{major}}.{{minor}}
@@ -1185,7 +1185,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 It replaced the old base/dev/student trio in v1.0.0 —
 the dev image's delta (qpdf + five R packages) was a rounding error against
 the full image, and the split cost more in CI plumbing and cross-image
@@ -1212,7 +1212,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 Layer order matters and mirrors the old base → dev → student layering:
 system libs and CLIs first (root), R stacks next (root, then hardened),
 then course packages and per-user installs (rstudio), then Python/JS
@@ -1239,7 +1239,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 ARG QUARTO_VERSION=1.10.18
 ARG ARF_VERSION=0.5.3
 ARG NODE_MAJOR=24
@@ -1271,7 +1271,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 - libuv1-dev: fs >= 2.1.0 declares libuv as a sysreq. The P3M binary works
    without it, but pak prints a phantom "✖ Missing 1 system package:
    libuv1-dev" on every install that touches fs (i.e. nearly all of them) —
@@ -1299,7 +1299,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 'Provides: libnode-dev, libv8-dev' \
 ```
 
@@ -1323,7 +1323,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 Locks created by ROOT here are group-unreadable (root's
 umask), and a later rstudio-user pak run then dies with
 "filelock::lock(): Cannot open lock file: Permission denied" — this
@@ -1350,7 +1350,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 ENV PKG_SYSREQS=false
 ```
 
@@ -1374,7 +1374,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 RUN echo "course-package refresh: ${COURSE_PKG_REFRESH}" \
  && R -q -e 'options(repos = c(P3M = "https://packagemanager.posit.co/cran/__linux__/noble/'"${P3M_SNAPSHOT}"'")); pak::pkg_install(c( \
         "PPBDS/vscode.tutorials", \
@@ -1411,7 +1411,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 R -q -e 'remotes::install_url("https://github.com/catboost/catboost/releases/download/v1.2.10/catboost-R-linux-x86_64-1.2.10.tgz", INSTALL_opts = c("--no-multiarch", "--no-test-load", "--no-staged-install"))'
 ```
 
@@ -1435,7 +1435,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 ENV PATH=/opt/venv/bin:$PATH \
     RETICULATE_PYTHON=/opt/venv/bin/python
 ```
@@ -1460,7 +1460,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 RUN npm install -g @observablehq/framework@1.13.4 && observable --version
 ```
 
@@ -1484,7 +1484,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 RUN R --vanilla -e 'fit <- brms::brm(mpg ~ wt, data = mtcars, chains = 1, iter = 100, refresh = 0, silent = 2); stopifnot(inherits(fit, "brmsfit")); cat("brms + Stan end-to-end OK\n")'
 ```
 

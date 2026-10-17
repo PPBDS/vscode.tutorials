@@ -20,11 +20,7 @@ Terminal 2 needs to some clean up.
 
 ### Orientation
 
-Copy over Getting Started tutorial. Rename it "Orientation." 
 
-* Download button should be visible the first time the word download is used. Otherwise, students are looking for a button which is not there yet.
-
-* R Tutorials icon is often hidden in the `...`. Show this.
 
 * Copy and paste question is unclear. Change so that we set out a little poem (First stanza of If) and then tell students to copy and paste that. (Is that in workspace?)
 
@@ -32,9 +28,7 @@ Copy over Getting Started tutorial. Rename it "Orientation."
 
 * Discuss Reload/Restart options for tutorials. Grey them out in purpose. Show some images. Show other broken images. See the text below.
 
-* Advice on how to copy/paste images from PNG files to discord?
-
-Update the Getting Started chapter to be consistent with the above. Plan going forward is that this will be the first lecture/session of the class.
+* Advice on how to copy/paste images from PNG files to Discusions from a PC. Seems to often not work.
 
 ### Reload/Restart/Re-Codespace
 

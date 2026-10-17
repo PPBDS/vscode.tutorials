@@ -41,7 +41,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://github.com/ppbds-student/devcontainers
 ```
 
@@ -65,7 +65,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://congenial-chainsaw-wv757pv4pp67cpw.github.dev/
 ```
 
@@ -90,7 +90,7 @@ learnr2::question(
 ###
 
 
-```
+```{.output}
 devcontainers $ pwd
 /workspaces/devcontainers
 devcontainers $ ls -a
@@ -120,7 +120,7 @@ learnr2::question(
 
 Your output should look like:
 
-```
+```{.output}
 devcontainers $ cd ../codespace-starter
 codespace-starter $ pwd
 /workspaces/codespace-starter
@@ -171,7 +171,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://silver-space-adventure-97xrvw59xhx.github.dev/
 ```
 
@@ -181,7 +181,7 @@ The Jupyter Notebook template is a pre-built Codespace for Python data science u
 
 ### Exercise 2
 
-You should have two Codespaces open. Go to https://github.com/codespaces. Then paste a screenshot of the two table rows corresponding to your open Codespaces.
+You should have two Codespaces open. Go to https://github.com/codespaces. Then paste a screenshot of the two table rows corresponding to your open Codespaces. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
 
 ![](images/open-codespaces.png){width=90%}
 
@@ -192,13 +192,14 @@ learnr2::question(
   "You should have two Codespaces open. Go to https://github.com/codespaces. Then paste a screenshot of the two table rows corresponding to your open Codespaces.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
 
 ###
 
-```
+```{.output}
 devcontainers      ppbds-student/devcontainers       main    Active
 codespaces-jupyter    ppbds-student/codespaces-jupyter     main    Active
 ```
@@ -223,7 +224,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "image": "mcr.microsoft.com/devcontainers/universal:2",
 ```
 
@@ -248,7 +249,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "vscode": {
       "extensions": [
         "ms-toolsai.jupyter",
@@ -281,7 +282,7 @@ learnr2::question(
 
 Your answer should look like this:
 
-```
+```{.output}
 "updateContentCommand": "python3 -m pip install -r requirements.txt",
 
 ipywidgets==8.1.8
@@ -321,7 +322,7 @@ learnr2::question(
 
 My new file looks like this:
 
-```
+```{.output}
 {
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "hostRequirements": {
@@ -370,7 +371,7 @@ learnr2::question(
 
 You should see something like this:
 
-```
+```{.output}
 @ppbds-student ➜ /workspaces/codespaces-jupyter (main) $ git status
 On branch main
 nothing to commit, working tree clean
@@ -391,7 +392,7 @@ Until you commit, changes exist only in your local files and can be discarded at
 
 Replace the first paragraph of `README.md` with:
 
-```
+```default
 This is YOUR NAME's new Python Codespace!
 ```
 
@@ -417,7 +418,7 @@ learnr2::question(
 
 Your output should look something like this:
 
-```
+```{.output}
 @ppbds-student ➜ /workspaces/codespaces-jupyter (main) $ git log --oneline
 bf71a79 (HEAD -> main) Updated README
 7c6c35a Initial commit
@@ -446,7 +447,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 notebooks/data
 notebooks/cifar_net.pth
 .ipynb_checkpoints/
@@ -472,7 +473,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 year,population
 2000,12400
 2001,12800
@@ -486,21 +487,25 @@ CSV (comma-separated values) is a plain-text format where each row is a record a
 
 ### Exercise 11
 
-In the Explorer, navigate to the `notebooks` directory, then `populations.ipynb`. Double click the heading of the document to open the editor for that section. Copy and paste all of the text.
+In the Explorer, navigate to the `notebooks` directory, then `populations.ipynb`. Double click the heading of the document to open the editor for that section. Take a screenshot of that first cell, with its text open for editing, and paste it below.
 
 ```{r}
 #| label: devcontainers-11
 #| echo: false
 learnr2::question(
-  "In the Explorer, navigate to the notebooks directory, then populations.ipynb. Double click the heading of the document to open the editor for that section. Copy and paste all of the text.",
+  "In the Explorer, navigate to the notebooks directory, then populations.ipynb. Double click the heading of the document to open the editor for that section. Take a screenshot of that first cell, with its text open for editing, and paste it below.",
   type = "reflection",
+  allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
 
 ###
 
-```
+The text in your screenshot should be:
+
+```{.output}
 # Population Data from CSV
 
 This notebooks reads sample population data from `data/atlantis.csv` and plots it using Matplotlib. Edit `data/atlantis.csv` and re-run this cell to see how the plots change!
@@ -535,7 +540,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 @ppbds-student ➜ /workspaces/codespaces-jupyter (main) $ git log --oneline
 bf71a79 (HEAD -> main, origin/main) Updated README
 7c6c35a Initial commit
@@ -568,7 +573,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://github.com/ppbds-student/codespaces-jupyter
 ```
 ###
@@ -588,13 +593,14 @@ learnr2::question(
   "Then go to https://github.com/codespaces. Find the row for the Jupyter Notebook Codespace and paste a screenshot of it.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
 
 ###
 
-```
+```{.output}
 codespaces-jupyter    ppbds-student/codespaces-jupyter    main    Stopped
 ```
 
@@ -632,7 +638,7 @@ In the blank codespace, open the Explorer. Right-click in the file tree and sele
 
 In the bash Terminal, run:
 
-```
+```bash
 ls .devcontainer/
 ```
 
@@ -652,7 +658,7 @@ learnr2::question(
 
 Your output should look like:
 
-```
+```{.output}
 devcontainer.json
 ```
 
@@ -664,7 +670,7 @@ GitHub Codespaces looks for a file named exactly `devcontainer.json` inside a di
 
 Open an AI chatbot --- ChatGPT, Gemini, Claude, or any other. Ask it:
 
-```
+```default
 Write a devcontainer.json for an R data science project.
 ```
 
@@ -688,7 +694,7 @@ AI tends to produce longer `devcontainer.json` files than needed, adding optiona
 
 Open `.devcontainer/devcontainer.json` in the editor. Replace all of its contents with the following:
 
-```
+```json
 {
   "name": "R Dev Container",
   "image": "ghcr.io/rocker-org/devcontainer/tidyverse:4",
@@ -704,7 +710,7 @@ Open `.devcontainer/devcontainer.json` in the editor. Replace all of its content
 
 Save the file. Then in the **bash Terminal**, run:
 
-```
+```bash
 cat .devcontainer/devcontainer.json
 ```
 
@@ -722,7 +728,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 {
   "name": "R Dev Container",
   "image": "ghcr.io/rocker-org/devcontainer/tidyverse:4",
@@ -746,7 +752,7 @@ Click the blue connection indicator in the bottom-left corner of VS Code (it sho
 
 Once the Codespace has reloaded, in the bash Terminal run:
 
-```
+```bash
 R --version
 ```
 
@@ -766,7 +772,7 @@ learnr2::question(
 
 Your output should begin with something like:
 
-```
+```{.output}
 R version 4.6.1 (2026-06-13) -- "Reassured Reassurer"
 ```
 Note that your R version may differ as R releases new versions regularly.
@@ -793,7 +799,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 "image": "ghcr.io/rocker-org/devcontainer/tidyverse:4",
 ```
 
@@ -819,7 +825,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 "customizations": {
   "vscode": {
     "extensions": [
@@ -851,7 +857,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 "REditorSupport.r"
 ```
 
@@ -881,7 +887,7 @@ learnr2::question(
 
 Your log should look like this:
 
-```
+```{.output}
 main $ git log --oneline
 abc1234 (HEAD -> main, origin/main) add R devcontainer
 def5678 Initial commit
@@ -910,7 +916,7 @@ learnr2::question(
 
 Your URL should look something like this:
 
-```
+```{.output}
 https://github.com/ppbds-student/r-devcontainer
 ```
 
@@ -931,6 +937,7 @@ learnr2::question(
   "Then go to https://github.com/codespaces. Find the row for the blank Codespace and paste a screenshot of it.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
@@ -961,7 +968,7 @@ learnr2::question(
 
 Your URL should look something like:
 
-```
+```{.output}
 https://github.com/ppbds-student/codespaces-jupyter
 ```
 
@@ -985,7 +992,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://github.com/ppbds-student/r-devcontainer
 ```
 

@@ -56,7 +56,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ whoami
 rstudio
 codespace-starter $
@@ -84,7 +84,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ echo $0
 /bin/bash
 codespace-starter $
@@ -112,7 +112,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ pwd
 /workspaces/codespace-starter
 codespace-starter $
@@ -140,7 +140,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ ls
 codespace-starter $
 ```
@@ -167,7 +167,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ ls -a
 .  ..  .devcontainer  .git  .github  .vscode
 codespace-starter $
@@ -195,7 +195,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ sleep 5
 codespace-starter $
 ```
@@ -222,7 +222,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ sleep 60
 ^C
 codespace-starter $
@@ -269,7 +269,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 R 4.6.1> 4 + 5
 [1] 9
 R 4.6.1>
@@ -297,7 +297,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 R 4.6.1> sqrt(16)
 [1] 4
 R 4.6.1>
@@ -325,7 +325,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 R 4.6.1> getwd()
 [1] "/workspaces/codespace-starter"
 R 4.6.1>
@@ -353,7 +353,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 R 4.6.1> R.version.string
 [1] "R version 4.6.1 (2026-06-24)"
 R 4.6.1> 
@@ -373,7 +373,7 @@ You can generally call a function by giving its name followed by parentheses, as
 
 In the R Terminal, run this command:
 
-```
+```r
 learnr2::show_file(file.path(R.home(), "COPYING"), end = 7)
 ```
 
@@ -441,6 +441,7 @@ learnr2::question(
   "Go to the homepage of the learnr2 package and take a screenshot of the browser window from \"learnr2\" in the upper-left corner through the end of the first paragraph. Paste it below.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
@@ -471,7 +472,7 @@ The bottom of the Chat window looks like this:
 
 In the Copilot chat box, type the following message and press `Enter`. Replace `<your-name>` with your actual name.
 
-```
+```default
 Hello! My name is <your-name>
 ```
 
@@ -489,7 +490,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 Hello David! How can I help you today?
 ```
 
@@ -501,7 +502,7 @@ GitHub Copilot works like ChatGPT. You "talk" to it in plain English, and it res
 
 Copilot can do much more than chat. In Agent mode, which is the default, it can create and edit files for you. Send this message:
 
-```
+```default
 Make a file called presidents.txt which includes the names of the first 5 US Presidents.
 ```
 
@@ -533,7 +534,7 @@ Or maybe not. AI is changing all the time!
 
 From the *R Terminal* (not the bash Terminal), run:
 
-```
+```r
 learnr2::show_file("presidents.txt")
 ```
 
@@ -551,7 +552,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 George Washington
 John Adams
 Thomas Jefferson
@@ -571,13 +572,13 @@ The Explorer icon is marked with a red square below.
 
 We are done with the presidents example. Now ask Copilot to create a very small R program. Send this message:
 
-```
+```default
 Create an R script called script.R containing only this line: 2 + 2. Do not run the script.
 ```
 
 If Copilot asks you to keep or accept the file, do so. Then run this command in the R Terminal:
 
-```
+```r
 learnr2::show_file("script.R")
 ```
 
@@ -595,7 +596,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 2 + 2
 ```
 
@@ -625,7 +626,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 R 4.6.1> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
 
 > 2 + 2
@@ -655,7 +656,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 R 4.6.1> 2 + 2
 [1] 4
 R 4.6.1>
@@ -681,7 +682,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 R 4.6.1> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
 
 > 2 + 2
@@ -697,7 +698,7 @@ The button and the keyboard shortcut both source the saved file in your current 
 
 Now run the script outside your open R session. Press the plus button (`+`) on the right side of the Panel to open a new bash Terminal. At the bash prompt, run:
 
-```
+```bash
 Rscript script.R
 ```
 
@@ -715,7 +716,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ Rscript script.R
 [1] 4
 codespace-starter $
@@ -729,7 +730,7 @@ codespace-starter $
 
 AI can also run files for you. Return to Copilot Chat and tell your AI:
 
-```
+```default
 Run script.R
 ```
 
@@ -759,13 +760,13 @@ So far, `script.R` calculates `2 + 2` and displays the result, but it does not g
 
 Ask Copilot to edit and run the script:
 
-```
+```default
 Edit script.R so its only line is x <- 2 + 2. Then run it with Rscript.
 ```
 
 If Copilot asks for permission, inspect and approve the command. When it finishes, return to the same R Terminal and run:
 
-```
+```r
 exists("x")
 ```
 
@@ -783,7 +784,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 R 4.6.1> exists("x")
 [1] FALSE
 R 4.6.1>
@@ -797,7 +798,7 @@ Copilot used `Rscript`, which created `x` in a separate R process and then close
 
 Open `script.R` in the Editor. It should now contain `x <- 2 + 2`. Keep your cursor in the Editor and press `Cmd/Ctrl + Shift + S` to source the file in your open R session. Then run this command in the R Terminal:
 
-```
+```r
 x
 ```
 
@@ -815,7 +816,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 R 4.6.1> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
 
 > x <- 2 + 2

@@ -63,7 +63,7 @@ learnr2::question(
 
 Your answer should look something like:
 
-```
+```{.output}
 https://github.com/your-username/github-introduction
 https://congenial-chainsaw-wv757pv4pp67cpw.github.dev/
 ```
@@ -90,7 +90,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 github-introduction $ pwd
 /workspaces/github-introduction
 github-introduction $
@@ -116,7 +116,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 github-introduction $ ls
 AGENTS.md
 github-introduction $
@@ -142,7 +142,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 github-introduction $ ls -a
 .  ..  AGENTS.md  .git
 github-introduction $
@@ -158,7 +158,7 @@ Unless you have a good reason, you should never mess with the contents of a hidd
 
 Time to open the black box. The `connect-repo` script has a `--help` option that explains --- without running anything --- every command it issues. Run:
 
-```
+```bash
 connect-repo --help
 ```
 
@@ -178,7 +178,7 @@ learnr2::question(
 
 The key part of the output:
 
-```
+```{.output}
   1. ACT AS YOU, NOT AS THE CODESPACE
          unset GITHUB_TOKEN GH_TOKEN
      A Codespace starts with a built-in token that can only touch
@@ -234,7 +234,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 github-introduction $ gh auth status
 github.com
   ✓ Logged in to github.com account your-username (/home/rstudio/.config/gh/hosts.yml)
@@ -252,7 +252,7 @@ This is steps 1--3 of the script, already done: when you first ran `connect-repo
 
 Now step 4, by hand. Let's create a throwaway repo --- we will delete it shortly. Run these commands, one at a time:
 
-```
+```bash
 cd /workspaces
 gh repo create scratch-repo --public --clone
 ```
@@ -271,7 +271,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 github-introduction $ cd /workspaces
 workspaces $ gh repo create scratch-repo --public --clone
 ✓ Created repository your-username/scratch-repo on github.com
@@ -291,7 +291,7 @@ One command did two jobs: it created the filing cabinet on GitHub, and `--clone`
 
 How does the local folder know which GitHub repo it belongs to? Run:
 
-```
+```bash
 cd scratch-repo
 git remote -v
 git log
@@ -311,7 +311,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 workspaces $ cd scratch-repo
 scratch-repo $ git remote -v
 origin  https://github.com/your-username/scratch-repo.git (fetch)
@@ -345,7 +345,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 scratch-repo $ gh repo delete scratch-repo
 ? Type your-username/scratch-repo to confirm deletion: your-username/scratch-repo
 HTTP 403: Must have admin rights to Repository. (https://api.github.com/repos/your-username/scratch-repo)
@@ -367,7 +367,7 @@ Delete `scratch-repo` from the website. Go to its page on GitHub (`https://githu
 
 Then, back in the bash Terminal, confirm it is gone and clean up the local clone. Run these commands, one at a time:
 
-```
+```bash
 cd /workspaces
 gh repo view scratch-repo
 rm -rf scratch-repo
@@ -389,7 +389,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 scratch-repo $ cd /workspaces
 workspaces $ gh repo view scratch-repo
 GraphQL: Could not resolve to a Repository with the name 'your-username/scratch-repo'. (repository)
@@ -438,7 +438,7 @@ learnr2::question(
 
 You should have something like this:
 
-```
+```{.output}
 github-introduction $ cat analysis-1.qmd 
 ---
 title: "Analysis 1"
@@ -480,7 +480,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 metadata
   document-css: false
   link-citations: true
@@ -518,7 +518,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 github-introduction $ ls
 AGENTS.md  analysis-1_files  analysis-1.html  analysis-1.qmd
 github-introduction $ 
@@ -551,7 +551,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 github-introduction $ ls -R analysis-1_files
 analysis-1_files:
 libs
@@ -595,7 +595,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 github-introduction $ ls -a
 .  ..  AGENTS.md  analysis-1_files  analysis-1.html  analysis-1.qmd  .git  .gitignore
 github-introduction $ 
@@ -623,7 +623,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 github-introduction $ cat .gitignore
 analysis-1_files
 github-introduction $ 
@@ -658,7 +658,7 @@ learnr2::question(
 
 Your answer should look like this:
 
-```
+```{.output}
 github-introduction $ git log
 commit 81f70abb905c2c8d328a919115e18038ab3df006 (HEAD -> main)
 Author: Your Name <your-username@users.noreply.github.com>
@@ -690,7 +690,7 @@ learnr2::question(
 
 Your answer should look something like this:
 
-```
+```{.output}
 github-introduction $ cat analysis-1.qmd
 ---
 title: "Analysis 1"
@@ -767,7 +767,7 @@ learnr2::question(
 
 Your answer should look something like:
 
-```
+```{.output}
 github-introduction $ git log
 commit 4c0f3f9d2b7e1a6c5d8e9f0a1b2c3d4e5f6a7b8c (HEAD -> main)
 Author: Your Name <your-username@users.noreply.github.com>
@@ -831,7 +831,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 github-introduction $ git log
 commit 4c0f3f9d2b7e1a6c5d8e9f0a1b2c3d4e5f6a7b8c (HEAD -> main, origin/main)
 Author: Your Name <your-username@users.noreply.github.com>
@@ -860,7 +860,7 @@ This page shows the files from your project that have been pushed to GitHub: `.g
 
 ![](images/analysis-1-gh-2.png){width=90%}
 
-Paste a screenshot of this page.
+Paste a screenshot of this page. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
 
 ```{r}
 #| label: using-git-24
@@ -869,6 +869,7 @@ learnr2::question(
   "Paste a screenshot of this page.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
@@ -877,7 +878,7 @@ learnr2::question(
 
 You should have something like this:
 
-```
+```{.output}
 Commits
 Commits on Oct 13, 2026
 
@@ -928,7 +929,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
   geom_point(alpha = 0.7) +
   scale_color_brewer(palette = "Set2") +
@@ -1010,7 +1011,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 github-introduction $ git log -n 1
 commit 42b4257f7223a2ef8af1c6a7399ec777f2b90a3f (HEAD -> main, origin/main)
 Author: Your Name <your-username@users.noreply.github.com>
@@ -1049,14 +1050,14 @@ learnr2::question(
 
 Here is what I see, broken up to allow for comments:
 
-```
+```{.output}
 github-introduction $ quarto publish gh-pages analysis-1.qmd
 ? Publish site to https://your-username.github.io/github-introduction/ using gh-pages? (Y/n) › Yes
 ```
 
 There are settings that will prevent this question from being asked every time we update the website. Otherwise, Quarto will check each time.
 
-```
+```{.output}
 Switched to a new branch 'gh-pages'
 [gh-pages (root-commit) 08825ec] Initializing gh-pages branch
 remote: 
@@ -1069,7 +1070,7 @@ To https://github.com/your-username/github-introduction.git
 
 By default, `quarto publish` follows the standard GitHub Pages approach of creating a new Git "branch" called `gh-pages`. Branches are lightweight pointers to specific commits. They allow you to isolate work in progress, experiment with new features, and collaborate effectively without affecting the main codebase. Note the `.git` on the end of the address, as in `git remote -v`: this is Git talking to GitHub, not a web page.
 
-```
+```{.output}
 Switched to branch 'main'
 Your branch is up to date with 'origin/main'.
 From https://github.com/your-username/github-introduction
@@ -1101,6 +1102,7 @@ learnr2::question(
   "Go to your github-introduction page on GitHub. Refresh the page. quarto publish has changed some of the items: there are now 2 branches and 3 commits, and a Deployments card reading github-pages has appeared in the right-hand column. Click it. This opens the Deployments page, which shows the address of your live site. Paste a screenshot of the Deployments page.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
@@ -1115,7 +1117,7 @@ And the Deployments page it leads to:
 
 ![](images/gh-pages-deployments.png){width=90%}
 
-```
+```{.output}
 github-pages
 Last deployed 2 minutes ago
 https://your-username.github.io/github-introduction/

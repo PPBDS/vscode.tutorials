@@ -111,7 +111,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 antigravity $ agy
 
 
@@ -147,7 +147,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 >
 ───────────────────────────────────────────────────────────────────────────────────────────
 Antigravity CLI   general    commands    shortcuts   (←/→ or tab to cycle)
@@ -190,7 +190,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 >
 ───────────────────────────────────────────────────────────────────────────────────────────
 Switch Model
@@ -218,7 +218,7 @@ The Antigravity model family has several tiers which vary in terms of speed and 
 
 Ask Antigravity to describe what files are in the repository. Type something like:
 
-```
+```default
 Please explain the contents of this repository. Run ls -a to check the contents.
 ```
 
@@ -226,7 +226,7 @@ Please explain the contents of this repository. Run ls -a to check the contents.
 
 I get this:
 
-```
+```{.output}
 > Please explain the contents of this repository. Run ls -a to check the contents.
 
 ▸ Thought for 18s, 299 tokens
@@ -269,7 +269,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 > Please explain the contents of this repository. Run ls -a to check the contents.
 
 ▸ Thought for 18s, 299 tokens
@@ -311,7 +311,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 antigravity $ cat AGENTS.md
 # Working with students in this course
 
@@ -344,7 +344,7 @@ To be honest, I just copy/pasted the above. AI is smart enough to work with this
 
 Allow the file to be written when Antigravity asks for permission. Along the way, you may also be asked questions like this:
 
-```
+```{.output}
 Thought for 1s, 380 tokens
   Refining YAML Header
 
@@ -384,7 +384,7 @@ learnr2::question(
 
 AI is always changing and, even when it is not changing, it is non-deterministic. Your output may differ from ours. The important thing is that you have an `analysis.qmd` file with a YAML header, a setup chunk, and a plot of named storms per year.
 
-```
+```{.output}
 ListDir(/workspaces/antigravity) (ctrl+o to expand)
 
 ▸ Thought for 1s, 318 tokens
@@ -416,7 +416,7 @@ When you ask Antigravity to create a file, it generates the entire contents in o
 
 Ask AI to render the `analysis.qmd`. Type something like:
 
-```
+```default
 Render analysis.qmd using quarto render and tell me what files were created afterward.
 ```
 
@@ -434,7 +434,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 > Render analysis.qmd using quarto render and tell me what files were created afterward.
 ● Bash(quarto render analysis.qmd) (ctrl+o to expand)
 
@@ -496,7 +496,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://congenial-chainsaw-wv757pv4pp67cpw-5500.app.github.dev/analysis.html
 ```
 
@@ -534,7 +534,7 @@ Ask Antigravity: Add a plot to a new code chunk in `analysis.qmd` using the `sto
 
 Antigravity might ask:
 
-```
+```{.output}
   shift+tab to auto-approve file edits
 Accept this file edit?
 > 1. Yes, accept this change
@@ -550,7 +550,7 @@ If Antigravity does not render the file, ask it to. After Antigravity finishes, 
 
 Open a new R Terminal, if you don't have one open already. 
 
-```
+```r
 learnr2::show_file("analysis.qmd", chunk = "Last")
 ```
 
@@ -568,7 +568,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 storms |> 
   drop_na(category) |> 
   ggplot(aes(x = factor(category), y = wind, fill = factor(category))) +
@@ -594,7 +594,7 @@ This loop --- ask Antigravity, render, view --- is the same workflow you would u
 
 In the Quarto tutorial you wrote a `.gitignore` by hand. This time, delegate the job: ask Antigravity to create a `.gitignore` file suitable for a Quarto R project. Type something like:
 
-```
+```default
 Create a .gitignore file suitable for a Quarto R project. Include common R and Quarto files that should not be tracked by Git.
 ```
 
@@ -612,7 +612,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 # History files
 .Rhistory
 .RData
@@ -663,7 +663,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
   I've removed the extra boxplot chunk from analysis.qmd so only the setup chunk and the named storms per year line
   plot remain.
 
@@ -871,7 +871,7 @@ learnr2::question(
 
 Your answer should look something like:
 
-```
+```{.output}
 antigravity $ ls
 AGENTS.md  analysis_cache  analysis_files  analysis.html  analysis.qmd
 antigravity $ 
@@ -903,7 +903,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 antigravity $ cat .gitignore
 # History files
 .Rhistory
@@ -1096,13 +1096,13 @@ Now that the project has real files, let's save the work with Git. You already k
 
 First, ask Antigravity to improve the storms-per-year chart. Type something like:
 
-```
+```default
 Update the storms-per-year chart in `analysis.qmd` to be a stacked area chart showing the count of each storm type per year. Filter to just tropical depressions, tropical storms, and hurricanes. Use a color scale that goes from light blue for tropical depressions through orange for tropical storms to dark red for hurricanes. Re-render the file when done.
 ```
 
 If Antigravity asks permission, choose 1 (Yes). Once the Live Server tab has refreshed and you are happy with the result, ask Antigravity to handle the entire Git workflow:
 
-```
+```default
 Please commit everything in this repo with a good message, and push to GitHub.
 ```
 
@@ -1122,7 +1122,7 @@ learnr2::question(
 
 Your output should look something like this. Antigravity usually checks the state of the repo before touching it:
 
-```
+```{.output}
 > Please commit everything in this repo with a good message, and push to GitHub.
 
 ▸ Thought for 4s, 210 tokens
@@ -1148,7 +1148,7 @@ esc to cancel                                                       Gemini 3.6 F
 
 Once you have let it through, the rest follows:
 
-```
+```{.output}
 ● Bash(git status) (ctrl+o to expand)
 ● Bash(git add -A) (ctrl+o to expand)
 ● Bash(git commit -m "Add storms analysis with stacked area chart") (ctrl+o to expand)
@@ -1177,7 +1177,7 @@ This tutorial introduced the [Antigravity CLI](https://antigravity.google/produc
 
 Quit Antigravity (`Ctrl + C` twice, or `Ctrl + D`) if you haven't already. From the bash Terminal, run `quarto render analysis.qmd` to regenerate the HTML. Then, still in the bash Terminal, run:
 
-```
+```bash
 cat analysis.qmd
 ```
 
@@ -1252,7 +1252,7 @@ You did not write any of this code yourself --- you described the goal and Antig
 
 Publish your rendered QMD to GitHub Pages. In the bash Terminal, run:
 
-```
+```bash
 quarto publish gh-pages analysis.qmd
 ```
 
@@ -1270,7 +1270,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://ppbds-student.github.io/antigravity/analysis.html
 ```
 

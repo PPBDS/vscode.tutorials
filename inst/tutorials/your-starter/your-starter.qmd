@@ -45,7 +45,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://github.com/ppbds-student/my-starter
 ```
 
@@ -61,7 +61,7 @@ Build from the bottom up, in the order the pieces depend on each other: the Dock
 
 In the bash Terminal, at the top level of your `my-starter` repo, create a file called `Dockerfile` (no extension) with exactly this content:
 
-```
+```dockerfile
 FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.5
 
 # One package of your own, so this is provably YOUR image.
@@ -85,7 +85,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 my-starter $ cat Dockerfile
 FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.5
 
@@ -106,7 +106,7 @@ The two `RUN` lines are the PPBDS discipline in miniature: install something, th
 
 Now the workflow. Create the folders and file `.github/workflows/build.yml` with this content, **replacing `YOUR_USERNAME` with your GitHub username in lowercase** (registry names must be lowercase):
 
-```
+```yaml
 name: build-and-push
 
 on:
@@ -156,7 +156,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 my-starter $ cat .github/workflows/build.yml
 name: build-and-push
 
@@ -186,7 +186,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 my-starter $ gh run list --limit 1
 *  Add Dockerfile and build workflow  build-and-push  main  push  31812345678  1m2s  1m
 ```
@@ -211,7 +211,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 my-starter $ gh release create v1.0.0 --title "v1.0.0" --notes "First image."
 https://github.com/ppbds-student/my-starter/releases/tag/v1.0.0
 ```
@@ -238,7 +238,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://github.com/ppbds-student/my-starter/pkgs/container/my-starter
 ```
 
@@ -250,7 +250,7 @@ While you are on that page, notice the tags listed for the package: `latest` fro
 
 Now the file that ties it together. Create `.devcontainer/devcontainer.json` with this content, again **replacing `YOUR_USERNAME` with your lowercase GitHub username**:
 
-```
+```json
 {
   "name": "my-starter",
   "image": "ghcr.io/YOUR_USERNAME/my-starter:1.0.0",
@@ -284,7 +284,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 my-starter $ cat .devcontainer/devcontainer.json
 {
   "name": "my-starter",
@@ -311,7 +311,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 my-starter $ git log --oneline -n 3
 a1b2c3d Add devcontainer.json
 e4f5a6b Add Dockerfile and build workflow
@@ -338,7 +338,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 my-starter is ready
 ```
 
@@ -362,7 +362,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 > library(praise)
 > praise()
 [1] "You are wonderful!"
@@ -388,7 +388,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 my-starter $ R --version | head -n 1
 R version 4.5.3 (2026-03-11) -- "Reassured Reassurer"
 ```
@@ -413,7 +413,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 my-starter $ gh repo view my-starter --json isTemplate
 {"isTemplate":true}
 ```
@@ -438,7 +438,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 my-starter $ gh release list
 TITLE   TYPE    TAG NAME  PUBLISHED
 v1.0.0  Latest  v1.0.0    about 20 minutes ago
@@ -468,7 +468,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 my-starter $ git status
 On branch main
 Your branch is up to date with 'origin/main'.

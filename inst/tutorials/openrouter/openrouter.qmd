@@ -55,7 +55,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://github.com/ppbds-student/openrouter
 ```
 
@@ -79,7 +79,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 openrouter $ aider --version
 aider 0.86.2
 ```
@@ -106,7 +106,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 openrouter $ which aider
 /usr/local/bin/aider
 ```
@@ -137,7 +137,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://openrouter.ai/
 ```
 
@@ -151,24 +151,23 @@ Go to <https://openrouter.ai/settings/privacy> and find the **Data Training** se
 
 Turn **on** the two settings that mention *free* endpoints. Leave the two about paid endpoints and the data discount alone.
 
-Copy and paste the names of the two settings you turned on.
+Take a screenshot of the **Data Training** section showing the two settings turned on, and paste it below. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
 
 ```{r}
 #| label: key-2
 #| echo: false
 learnr2::question(
-  "Copy and paste the names of the two settings you turned on.",
+  "Take a screenshot of the Data Training section showing the two settings turned on, and paste it below.",
   type = "reflection",
+  allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
 
 ###
 
-```
-Allow free endpoints that train on request data
-Allow free endpoints that publish prompts
-```
+Your screenshot should show **Allow free endpoints that train on request data** and **Allow free endpoints that publish prompts** switched on, and the other settings untouched.
 
 ###
 
@@ -198,7 +197,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace
 ```
 
@@ -214,13 +213,13 @@ The site shows it once and never again. That is on purpose: OpenRouter does not 
 
 In the bash Terminal, set the key as an environment variable. Replace the placeholder with your actual key:
 
-```
+```bash
 export OPENROUTER_API_KEY=sk-or-v1-your-actual-key-here
 ```
 
 Then run this, which prints only the first eight characters:
 
-```
+```bash
 echo ${OPENROUTER_API_KEY:0:8}
 ```
 
@@ -238,7 +237,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 openrouter $ echo ${OPENROUTER_API_KEY:0:8}
 sk-or-v1
 ```
@@ -253,7 +252,7 @@ We printed only the first eight characters on purpose. Printing the whole key wo
 
 Now use the key. Ask OpenRouter what it knows about your account:
 
-```
+```bash
 curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool | grep -E '"label"|"usage"|"is_free_tier"'
 ```
 
@@ -271,7 +270,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
         "label": "sk-or-v1-2f3...4db",
         "usage": 0,
         "is_free_tier": true,
@@ -290,7 +289,7 @@ The reply comes back as **JSON**, a format that packs a lot of fields into one l
 
 Open a **new** bash Terminal (the `+` in the top-right corner of the Panel). In that new bash Terminal, run:
 
-```
+```bash
 echo ${OPENROUTER_API_KEY:0:8}
 ```
 
@@ -308,7 +307,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 openrouter $ echo ${OPENROUTER_API_KEY:0:8}
 
 ```
@@ -329,14 +328,16 @@ Make the key survive. Go to <https://github.com/settings/codespaces> --- the sam
 
 Scroll past the **Dotfiles** section to **Codespaces secrets** and click **New secret**. Name it `OPENROUTER_API_KEY`, paste your key as the value, and under **Repository access** select `PPBDS/codespace-starter`. Save it.
 
-Copy and paste the name of the secret and the repository you granted access to.
+Take a screenshot of the **Codespaces secrets** list showing the new secret and the repository it can reach, and paste it below. The list shows names only, never the value, so the screenshot is safe to submit.
 
 ```{r}
 #| label: key-7
 #| echo: false
 learnr2::question(
-  "Copy and paste the name of the secret and the repository you granted access to.",
+  "Take a screenshot of the Codespaces secrets list showing the new secret and the repository it can reach, and paste it below.",
   type = "reflection",
+  allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
@@ -347,10 +348,7 @@ learnr2::question(
      public repo they do not own. If the repository picker refuses, the fallback
      is appending the export line to ~/.bashrc, and this exercise must be rewritten. -->
 
-```
-OPENROUTER_API_KEY
-PPBDS/codespace-starter
-```
+Your screenshot should show a secret named `OPENROUTER_API_KEY` with `PPBDS/codespace-starter` under its repository access.
 
 ###
 
@@ -380,7 +378,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 .env
 ```
 
@@ -410,7 +408,7 @@ Now the fun part. You have a key that cost nothing, and `aider` will use it. You
 
 You need the name of a model that is free *today*. Ask `aider` first. In the bash Terminal, in your `openrouter` repo:
 
-```
+```bash
 aider --list-models openrouter/ | grep ':free'
 ```
 
@@ -428,7 +426,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 openrouter $ aider --list-models openrouter/ | grep ':free'
 - openrouter/deepseek/deepseek-chat-v3-0324:free
 - openrouter/deepseek/deepseek-chat:free
@@ -448,7 +446,7 @@ Remember this feeling. A tool answered instantly, confidently, and wrongly, and 
 
 So ask OpenRouter instead of asking `aider`. In the bash Terminal:
 
-```
+```bash
 curl -s https://openrouter.ai/api/v1/models | python -c "import sys, json; print('\n'.join(sorted(m['id'] for m in json.load(sys.stdin)['data'] if m['id'].endswith(':free'))))"
 ```
 
@@ -466,7 +464,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 cohere/north-mini-code:free
 google/gemma-4-26b-a4b-it:free
 google/gemma-4-31b-it:free
@@ -496,7 +494,7 @@ Look at how a name is built. In `google/gemma-4-31b-it:free`, `google` is the co
 
 Pick any model from the list you just printed and start `aider` with it. We used `openai/gpt-oss-20b:free`; if yours is gone, substitute one of your own. Note the `openrouter/` on the front --- that part tells `aider` which service to route through.
 
-```
+```bash
 aider --model openrouter/openai/gpt-oss-20b:free --no-auto-commits
 ```
 
@@ -516,7 +514,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 Added .aider* to .gitignore
 Aider v0.86.2
 Model: openrouter/openai/gpt-oss-20b:free with whole edit format
@@ -537,7 +535,7 @@ The `>` at the bottom is a prompt. `aider` is now waiting for you inside your Te
 
 At the `aider` prompt, ask for a script:
 
-```
+```default
 Create hello.R which prints the number of rows in the diamonds data set from ggplot2.
 ```
 
@@ -555,7 +553,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 library(ggplot2)
 
 cat(nrow(diamonds), "\n")
@@ -583,7 +581,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 > /tokens
 
 Approximate context window usage for openrouter/openai/gpt-oss-20b:free, in
@@ -611,7 +609,7 @@ The dollar column is all zeros because this model is free. On a paid model those
 
 Now switch models without leaving the session. Pick a *different* model from the live list you printed in Exercise 2, and put `openrouter/` on the front of it. At the `aider` prompt:
 
-```
+```default
 /model openrouter/google/gemma-4-31b-it:free
 ```
 
@@ -629,7 +627,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 > /model openrouter/google/gemma-4-31b-it:free
 Aider v0.86.2
 Main model: openrouter/google/gemma-4-31b-it:free with whole edit format
@@ -653,7 +651,7 @@ One warning. `aider` has a `/models` command for searching model names, and it r
 
 Ask the new model a question about the code, without letting it edit anything. At the `aider` prompt:
 
-```
+```default
 /ask What would break in hello.R if ggplot2 were not installed?
 ```
 
@@ -671,7 +669,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 > /ask What would break in hello.R if ggplot2 were not installed?
 
 The library(ggplot2) call on line 1 would fail with "there is no package
@@ -694,7 +692,7 @@ That last one is the money-saving trick, and it is worth understanding beyond `a
 
 Leave `aider` by typing `/quit`. Then, back in the bash Terminal, check what all that cost you:
 
-```
+```bash
 curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -m json.tool | grep '"usage"'
 ```
 
@@ -712,7 +710,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
         "usage": 0,
 ```
 
@@ -744,7 +742,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 openrouter $ git log --oneline
 a3f9c21 (HEAD -> main, origin/main) Add hello.R and .gitignore
 ```

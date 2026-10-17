@@ -60,7 +60,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-3 $ pwd
 /workspaces/terminal-3
 terminal-3 $ mkdir wildcards
@@ -85,7 +85,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-3 $ cd wildcards/
 wildcards $ pwd
 /workspaces/terminal-3/wildcards
@@ -100,7 +100,7 @@ Keep track of your current location. There is a difference between being in the 
 
 Using `echo`, make three text files named `hat.txt`, `cat.txt`, and `ate.txt` by running:
 
-```
+```bash
 echo "" > hat.txt; echo "" > cat.txt; echo "" > ate.txt
 ```
 
@@ -122,7 +122,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 wildcards $ echo "" > hat.txt; echo "" > cat.txt; echo "" > ate.txt
 wildcards $ ls
 ate.txt cat.txt hat.txt
@@ -151,7 +151,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 wildcards $ ls a
 ls: cannot access 'a': No such file or directory
 wildcards $
@@ -175,7 +175,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 wildcards $ ls a*
 ate.txt
 wildcards $
@@ -199,7 +199,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 wildcards $ ls *a*
 ate.txt cat.txt hat.txt
 wildcards $
@@ -223,7 +223,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 wildcards $ ls *t.*
 cat.txt hat.txt
 wildcards $
@@ -251,7 +251,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 wildcards $ ls *a* > afiles.txt
 wildcards $ ls
 afiles.txt      ate.txt         cat.txt         hat.txt
@@ -282,7 +282,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 wildcards $ mkdir seuss
 wildcards $ ls
 afiles.txt      ate.txt         cat.txt         hat.txt         seuss
@@ -307,7 +307,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 wildcards $ ls -l
 total 16
 -rw-rw-rw- 1 rstudio rstudio   24 Oct 12 12:00 afiles.txt
@@ -336,7 +336,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 wildcards $ ls *t.*
 cat.txt hat.txt
 wildcards $
@@ -360,7 +360,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 wildcards $ mv *t.* seuss
 wildcards $
 ```
@@ -385,7 +385,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 wildcards $ ls -R
 afiles.txt      ate.txt         seuss
 
@@ -412,7 +412,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 wildcards $ cd ..
 terminal-3 $ pwd
 /workspaces/terminal-3
@@ -437,7 +437,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-3 $ rm wildcards
 rm: cannot remove 'wildcards': Is a directory
 terminal-3 $ rm -r wildcards
@@ -466,7 +466,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-3 $ mkdir grepping
 terminal-3 $ ls
 AGENTS.md  grepping
@@ -481,7 +481,7 @@ We call this folder `grepping` rather than `grep` because you should not use a c
 
 `cd` into the `grepping` directory. Run this command:
 
-```
+```bash
 echo hat.txt > files.txt && echo cat.txt >> files.txt && echo ate.txt >> files.txt && echo "" >> files.txt
 ```
 
@@ -503,7 +503,7 @@ learnr2::question(
 
 When I run this, I see:
 
-```
+```{.output}
 terminal-3 $ cd grepping
 grepping $ echo hat.txt > files.txt && echo cat.txt >> files.txt && echo ate.txt >> files.txt && echo "" >> files.txt
 grepping $ cat files.txt
@@ -534,7 +534,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 grepping $ grep a files.txt
 hat.txt
 cat.txt
@@ -564,7 +564,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 grepping $ grep ^a files.txt
 ate.txt
 grepping $
@@ -576,7 +576,7 @@ grepping $
 
 Now, we'll download another text file. You can view the file on the following webpage:
 
-```
+```default
 https://github.com/PPBDS/vscode.tutorials/blob/main/inst/extdata/grepping.txt
 ```
 Then click the **Raw** button at the top right of the file box to open the raw text file.
@@ -587,7 +587,7 @@ Copy the URL in your address bar. It should begin with `https://raw.githubuserco
 
 Back in your Codespace, run `cd ..` to return to `terminal-3`. Then run the following command, replacing `URL` with the URL for the raw file:
 
-```
+```bash
 curl -o grepping/grepping.txt URL
 ```
 
@@ -609,7 +609,7 @@ learnr2::question(
 
 My answer looks like:
 
-```
+```{.output}
 terminal-3 $ curl -o grepping/grepping.txt https://raw.githubusercontent.com/PPBDS/vscode.tutorials/refs/heads/main/inst/extdata/grepping.txt
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -641,7 +641,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-3 $ cd grepping
 grepping $ wc grepping.txt
        7       7      38 grepping.txt
@@ -670,7 +670,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 grepping $ grep R grepping.txt
 R
 Robert
@@ -700,7 +700,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 grepping $ grep ^R grepping.txt
 R
 Robert
@@ -729,7 +729,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 grepping $ grep e$ grepping.txt
 whose
 these
@@ -743,7 +743,7 @@ grepping $
 
 So far, `grep` has searched one file that you named. Its real power --- and the way AI agents almost always use it --- is searching *every* file at once. Run these commands, one at a time:
 
-```
+```bash
 cd ..
 grep -rn Robert .
 cd grepping
@@ -763,7 +763,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 grepping $ cd ..
 terminal-3 $ grep -rn Robert .
 ./grepping/grepping.txt:2:Robert
@@ -795,7 +795,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 grepping $ cat files.txt | wc -l
 4
 grepping $
@@ -821,7 +821,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 grepping $ grep t.txt$ files.txt | wc -l
 2
 grepping $
@@ -847,7 +847,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 grepping $ cat files.txt | grep ^a | wc -l
 1
 grepping $
@@ -875,7 +875,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 grepping $ rm --help | grep -w force
   -f, --force           ignore nonexistent files and arguments, never prompt
 grepping $
@@ -901,7 +901,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 grepping $ cd ..
 terminal-3 $ pwd
 /workspaces/terminal-3
@@ -926,7 +926,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-3 $ rm -r grepping
 terminal-3 $
 ```

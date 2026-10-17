@@ -1,5 +1,22 @@
 # vscode.tutorials (development version)
 
+* Every code block now says what it is: commands carry their language
+  (`bash`, `r`, `yaml`, `json`, `dockerfile`, `ini`, `markdown`), text to
+  type that is in no language (AI prompts, commit messages) is `default`,
+  and transcripts and the answers shown after Continue are `{.output}`,
+  which renders lighter and without a copy button. The 575 bare fences are
+  gone, so `learnr2::check_tutorial()` runs clean.
+
+* Questions that had the student copy text out of a web page now ask for a
+  screenshot instead: the `ggsave()` help page (Code), the first cell of the
+  Jupyter notebook (Devcontainers), the Dotfiles setting and the Codespaces
+  list after a deletion (Dotfiles), the key's credit limit (Models And
+  Money), and the Data Training settings and the Codespaces secret
+  (OpenRouter). Every screenshot question is now image-only
+  (`allow_text = FALSE`), and the first one in each tutorial says how to take
+  a screenshot and paste it. Needs the learnr2 that ships
+  `allow_text`.
+
 * Each tutorial's place in the sequence now comes from `learnr2: ordering:`
   in its YAML header, so the directories lost their numeric prefixes
   (`01-orientation` is now `orientation`, and so on). Run tutorials by the new

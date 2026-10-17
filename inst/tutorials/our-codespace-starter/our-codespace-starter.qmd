@@ -41,7 +41,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://github.com/ppbds-student/our-codespace-starter
 ```
 
@@ -67,7 +67,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://congenial-space-broccoli-7qpj5xvw9xhpqj9.github.dev/
 ```
 
@@ -91,7 +91,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 our-codespace-starter $ cd ../codespace-starter
 codespace-starter $ ls .devcontainer
 AGENTS.md  STUDENT_WORKFLOW.md  connect-repo.sh  devcontainer.json  setup.sh  tests  welcome.sh
@@ -121,7 +121,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "name": "Preceptor's Primer",
 ```
 
@@ -145,7 +145,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "image": "ghcr.io/ppbds/devcontainer:1.1.5",
 ```
 
@@ -169,7 +169,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "reditorsupport.r@3.0.1",
 ```
 
@@ -193,7 +193,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "quarto.quarto",
 ```
 
@@ -217,7 +217,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 // NOTE — PPBDS.vscode-r-tutorials is deliberately NOT in this list.
 // We publish it to Open VSX, and this list can only install from the
 ```
@@ -242,7 +242,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 // ALSO DELIBERATELY ABSENT (dropped 2026-08-20, David): the Python
 // extensions (ms-python.python, ms-toolsai.jupyter). Students use
 // only a handful of Activity Bar icons, and these two added Python/
@@ -270,7 +270,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "ritwickdey.LiveServer",
 "tomoki1207.pdf",
 "mechatroner.rainbow-csv"
@@ -296,7 +296,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "r.consolePath": "/usr/local/bin/arf",
 ```
 
@@ -320,7 +320,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "r.plot.backend": "httpgd",
 ```
 
@@ -344,7 +344,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "r.source.echo": true,
 ```
 
@@ -368,7 +368,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "git.enableSmartCommit": true,
 ```
 
@@ -392,7 +392,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "files.autoSave": "afterDelay",
 ```
 
@@ -416,7 +416,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "editor.wordWrap": "on",
 ```
 
@@ -440,7 +440,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "workbench.editor.enablePreview": false
 ```
 
@@ -464,7 +464,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 "onCreateCommand": "bash ${containerWorkspaceFolder}/.devcontainer/setup.sh",
 ```
 
@@ -488,7 +488,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 // NO postCreateCommand right now — RETIRED 2026-07-30. All course
 // packages ship at whatever versions the image baked; the live at-create
 // refresh of a course package was removed because the baked version is
@@ -517,7 +517,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 > install.packages("praise")
 Installing package into '/home/ppbds-student/R/library'
 (as 'lib' is unspecified)
@@ -558,7 +558,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ /opt/venv/bin/pip install emoji
 Collecting emoji
   Downloading emoji-2.14.0-py3-none-any.whl (590 kB)
@@ -586,7 +586,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 > install.packages("cowsay")
 Installing package into '/home/ppbds-student/R/library'
 (as 'lib' is unspecified)
@@ -624,7 +624,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ /opt/venv/bin/pip install pyfiglet
 Collecting pyfiglet
   Downloading pyfiglet-1.0.2-py3-none-any.whl (1.1 MB)
@@ -656,7 +656,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 our-codespace-starter $ git status
 On branch main
 nothing to commit, working tree clean
@@ -683,7 +683,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://github.com/ppbds-student/our-codespace-starter
 ```
 
@@ -707,7 +707,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 our-codespace-starter    ppbds-student/our-codespace-starter    main    Stopped
 ```
 

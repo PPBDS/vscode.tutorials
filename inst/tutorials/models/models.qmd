@@ -73,7 +73,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://github.com/ppbds-student/models-and-money
 ```
 
@@ -85,7 +85,7 @@ You need the OpenRouter key from the OpenRouter tutorial for everything here. If
 
 In the bash Terminal, check that your key is present:
 
-```
+```bash
 echo ${OPENROUTER_API_KEY:0:8}
 ```
 
@@ -103,7 +103,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 models-and-money $ echo ${OPENROUTER_API_KEY:0:8}
 sk-or-v1
 ```
@@ -122,7 +122,7 @@ Every AI product you have used --- the chat window, the editor sidebar, `aider`,
 
 Ask OpenRouter how many models it offers. In the bash Terminal:
 
-```
+```bash
 curl -s https://openrouter.ai/api/v1/models | python -c "import sys, json; print(len(json.load(sys.stdin)['data']))"
 ```
 
@@ -140,7 +140,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 models-and-money $ curl -s https://openrouter.ai/api/v1/models | python -c "import sys, json; print(len(json.load(sys.stdin)['data']))"
 341
 ```
@@ -157,7 +157,7 @@ And notice what a router gets you, now that you can count it. Several hundred mo
 
 Now send an actual prompt. Replace the model with any free one from the list you made in the OpenRouter tutorial if this one is gone:
 
-```
+```bash
 curl -s https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -H "Content-Type: application/json" \
@@ -181,7 +181,7 @@ learnr2::question(
 
 Ours, with the model's chain of thought cut short to fit:
 
-```
+```{.output}
 {
     "id": "gen-1785184071-Ek9msxDQCT6FtDLjnFt7",
     "object": "chat.completion",
@@ -234,7 +234,7 @@ Four fields in the reply are worth a look.
 
 Prices are published in that same catalogue. Have AI write you a command that reads <https://openrouter.ai/api/v1/models> and prints the input and output price per million tokens for these three models:
 
-```
+```{.output}
 qwen/qwen3-coder-30b-a3b-instruct
 deepseek/deepseek-v3.2
 anthropic/claude-opus-4.8
@@ -254,7 +254,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
     0.07     0.27  qwen/qwen3-coder-30b-a3b-instruct
     0.27     0.40  deepseek/deepseek-v3.2
     5.00    25.00  anthropic/claude-opus-4.8
@@ -276,7 +276,7 @@ Ask the same question of a cheap open weights model and of an expensive frontier
 
 First the cheap one:
 
-```
+```bash
 curl -s https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -H "Content-Type: application/json" \
@@ -300,7 +300,7 @@ learnr2::question(
 
 Ours, abridged --- it ran to 546 tokens and offered three different solutions:
 
-```
+```{.output}
 Below is a compact **R** script that will give you the number of observations
 for each level of the `cut` variable in the built-in `diamonds gegeben` data
 set from the **ggplot2** package.
@@ -350,7 +350,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 {
     "error": {
         "message": "This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 1600. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account",
@@ -389,7 +389,7 @@ Go to <https://openrouter.ai/settings/credits> and buy **$10** of credits. Ten d
 
 When the purchase has gone through, check it from the bash Terminal:
 
-```
+```bash
 curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -c "import sys, json; d = json.load(sys.stdin)['data']; print('spent so far:', d['usage']); print('free tier:', d['is_free_tier'])"
 ```
 
@@ -407,7 +407,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 spent so far: 0
 free tier: False
 ```
@@ -432,7 +432,7 @@ And you can go back to <https://openrouter.ai/settings/privacy> and turn **off**
 
 Now run the request that was refused. Same model as Exercise 2, and this time pull out the answer and the cost rather than the whole reply:
 
-```
+```bash
 curl -s https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -H "Content-Type: application/json" \
@@ -456,7 +456,7 @@ learnr2::question(
 
 Ours:
 
-```
+```{.output}
 library(ggplot2)
 library(dplyr)
 
@@ -505,7 +505,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 qwen3-coder-30b:  0.5 * 0.07 + 0.05 * 0.27  = $0.049
 claude-opus-4.8:  0.5 * 5.00 + 0.05 * 25.00 = $3.75
 ```
@@ -542,7 +542,7 @@ learnr2::question(
 
 Yours will differ from ours --- prices move and models come and go:
 
-```
+```{.output}
     0.01     0.03  meta-llama/llama-3.2-1b-instruct
     0.02     0.04  google/gemma-4-4b-it
     0.02     0.05  qwen/qwen3-1.7b-instruct
@@ -567,7 +567,7 @@ Notice too that output costs roughly three or four times input, everywhere, at e
 
 Give the cheap model the same job you gave Opus. In the bash Terminal:
 
-```
+```bash
 curl -s https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -H "Content-Type: application/json" \
@@ -589,7 +589,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 library(ggplot2)
 library(dplyr)
 
@@ -613,7 +613,7 @@ You have now had three models write essentially the same code, and not one of th
 
 In the R Terminal:
 
-```
+```r
 library(ggplot2)
 library(dplyr)
 
@@ -634,7 +634,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 # A tibble: 5 × 2
   cut           n
   <ord>     <int>
@@ -673,7 +673,7 @@ learnr2::question(
 
 Ours:
 
-```
+```{.output}
 Because the task was easy. The gap probably shows up on hard problems,
 long files, or when you need it to follow instructions exactly.
 ```
@@ -720,7 +720,7 @@ learnr2::question(
      0.4.2: chat_openrouter(model = ...) constructs, reads OPENROUTER_API_KEY,
      returns an R6 Chat object. -->
 
-```
+```{.output}
 > library(ellmer)
 ```
 
@@ -734,7 +734,7 @@ It is not the only choice. **[httr2](https://httr2.r-lib.org/)** would let you b
 
 Still in the R Terminal, create a chat and ask it something:
 
-```
+```r
 chat <- chat_openrouter(model = "openai/gpt-oss-20b:free")
 chat$chat("In one sentence, what is a tibble?")
 ```
@@ -753,7 +753,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 > chat <- chat_openrouter(model = "openai/gpt-oss-20b:free")
 > chat$chat("In one sentence, what is a tibble?")
 User asks: "In one sentence, what is a tibble?" Provide one sentence
@@ -778,7 +778,7 @@ Always name the model. `ellmer` has a default, and its own documentation warns t
 
 Now the thing you could not do by hand. In the R Terminal:
 
-```
+```r
 reviews <- c("the room was filthy", "staff went out of their way for us",
              "fine, but overpriced", "would absolutely stay again")
 
@@ -803,7 +803,7 @@ learnr2::question(
 
 Ours, with the reasoning trimmed --- the last four lines are what it offered as the answer:
 
-```
+```{.output}
 1. "the room was filthy" -> Negative (clear negative).
 2. staff ... it's a compliment about staff, positive.
 3. "fine, but overpriced" -> Mixed?  ...
@@ -839,7 +839,7 @@ You spent money today for the first time in this course. This section is the bil
 
 In the bash Terminal, check what you have spent:
 
-```
+```bash
 curl -s https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY" | python -c "import sys, json; d = json.load(sys.stdin)['data']; print('spent so far:', d['usage']); print('free tier:', d['is_free_tier'])"
 ```
 
@@ -857,7 +857,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 spent so far: 0.0061
 free tier: False
 ```
@@ -874,14 +874,16 @@ Notice the habit in that command, too: the reply had fourteen fields and we aske
 
 Protect the balance before you leave. Go back to <https://openrouter.ai/workspaces/default/keys>, edit your `codespace` key, and set a **credit limit** of `$2`.
 
-Copy and paste the name of the key and the limit you set.
+Take a screenshot of the keys page showing the `codespace` key and its new limit, and paste it below. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
 
 ```{r}
 #| label: paying-2
 #| echo: false
 learnr2::question(
-  "Copy and paste the name of the key and the limit you set.",
+  "Take a screenshot of the keys page showing the codespace key and its new limit, and paste it below.",
   type = "reflection",
+  allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
@@ -893,10 +895,7 @@ learnr2::question(
      time, this exercise becomes "delete the key and make a new one with a
      limit," and Exercise 3's key rotation note must move up. -->
 
-```
-codespace
-$2
-```
+Your screenshot should show the key named `codespace` with a credit limit of $2.
 
 ###
 
@@ -924,7 +923,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 models-and-money $ git log --oneline
 7d21ab8 (HEAD -> main, origin/main) Add model comparison work
 ```

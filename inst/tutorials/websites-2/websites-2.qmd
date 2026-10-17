@@ -51,7 +51,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 https://github.com/ppbds-student/websites-2
 ```
 
@@ -77,7 +77,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-2 $ quarto create project website . --no-open
 ? Title (website) › Websites 2
 Creating project at /workspaces/websites-2:
@@ -111,7 +111,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-2 $ cat .gitignore
 /.quarto/
 **/*.quarto_ipynb
@@ -139,7 +139,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-2 $ cat index.qmd 
 ---
 title: "Billboard Graphic"
@@ -155,7 +155,7 @@ Create a new code chunk in `index.qmd` which loads the **tidyverse** package, wi
 
 In the R Terminal, run:
 
-```
+```r
 show_file("index.qmd", chunk = "Last")
 ```
 
@@ -173,7 +173,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 #| message: false
 library(tidyverse)
 ```
@@ -186,7 +186,7 @@ Without `#| message: false`, the tidyverse startup messages would appear right o
 
 From the bash Terminal, run `quarto preview`. 
 
-Paste a screenshot of the home page, leaving out the menu items.
+Paste a screenshot of the home page, leaving out the menu items. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
 
 ```{r}
 #| label: the-website-6
@@ -195,13 +195,14 @@ learnr2::question(
   "Paste a screenshot of the home page, leaving out the menu items.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
 
 ### 
 
-```
+```{.output}
 Websites 2
 
 Billboard Graphic
@@ -210,7 +211,7 @@ library(tidyverse)
 
 The code is echoed because we have not turned off echoing in the YAML header yet. Do that now with:
 
-```
+```yaml
 execute:
   echo: false
 ```
@@ -227,7 +228,7 @@ You now know two reasonable ways to work with AI, and either is fine here. You c
 
 In the R Terminal, run:
 
-```
+```r
 show_file("index.qmd", chunk = "Last")
 ```
 
@@ -247,7 +248,7 @@ learnr2::question(
 
 What [Grok gave me](https://grok.com/chat/4cc49023-df73-4d2c-ad16-49cb52be7559) after 20 minutes of back-and-forth conversation:
 
-```
+```r
 data("billboard", package = "tidyr")
 
 # billboard variables:
@@ -362,7 +363,7 @@ learnr2::question(
 
 Your answer should look like this, but with your username instead of mine.
 
-```
+```{.output}
 https://ppbds-student.github.io/websites-2/
 ```
 
@@ -374,7 +375,7 @@ Open `about.qmd `. Delete all the current text, except for the YAML header. Ensu
 
 In the bash Terminal, run:
 
-```
+```bash
 cat about.qmd
 ```
 
@@ -392,7 +393,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 ---
 title: "About"
 ---
@@ -408,13 +409,13 @@ Hash signs in front of text make the text into a header. The organization of hea
 
 Write a one sentence description of yourself. Write it below the header. Include your name and school, either the one you attend or one from which you have graduated. Write until the end of the line, i.e. do not use the `Enter` key to wrap text. When you are finished, render the QMD. Example:
 
-```
+```default
 My name is David Kane, and I graduated from Williams College.
 ```
 
 In the bash Terminal, run:
 
-```
+```bash
 cat about.qmd
 ```
 
@@ -432,7 +433,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 ---
 title: "About"
 ---
@@ -450,7 +451,7 @@ You can have a Quarto document without a YAML header, if you like. You can also 
 
 Let's bold your name and italicize your school's name. In the description you have already written, surround your name with two asterisks, `**`, on both sides. Let's also put a single asterisk, `*`, around both sides of your school. Example:
 
-```
+```markdown
 My name is **David Kane**, and I graduated from *Williams College*.
 ```
 
@@ -458,7 +459,7 @@ My name is **David Kane**, and I graduated from *Williams College*.
 
 In the bash Terminal, run:
 
-```
+```bash
 cat about.qmd
 ```
 
@@ -476,7 +477,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 ---
 title: "About"
 ---
@@ -492,7 +493,7 @@ Quarto, which is based on the Markdown language, has a variety of [formatting op
 
 Examples of Quarto formatting options include:
 
-```
+```markdown
 **bold** *italic* ~~strikeout~~ `code`
 
 superscript^2^ subscript~2~
@@ -516,7 +517,7 @@ At the bottom of `about.qmd`, let's create text which is also a hyperlink to a w
 
 It should look like:
 
-```
+```markdown
 [Kane's Free Data Science Bootcamp](https://bootcamp.davidkane.info)
 ```
 
@@ -524,7 +525,7 @@ It should look like:
 
 In the R Terminal, run:
 
-```
+```r
 show_file("about.qmd", pattern = "Bootcamp")
 ```
 
@@ -543,7 +544,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 [Kane's Free Data Science Bootcamp](https://bootcamp.davidkane.info)
 ```
 
@@ -597,7 +598,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-2 $ ls *qmd
 about.qmd       index.qmd       sources.qmd
 websites-2 $ 
@@ -611,7 +612,7 @@ In the `sources.qmd` file, below the YAML header, add the text `An overview of s
 
 In the R Terminal, run:
 
-```
+```r
 show_file("sources.qmd", pattern = "overview")
 ```
 
@@ -629,7 +630,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 An overview of sources used in my project.
 ```
 
@@ -641,13 +642,13 @@ Keep in mind that your browser probably has two tabs which show your website. Fi
 
 Add the following sentence to `sources.qmd`: 
 
-```
+```default
 These are my sources. Here are some challenges. Quarto websites are awesome.
 ```
 
 In the bash Terminal, run:
 
-```
+```bash
 cat sources.qmd
 ```
 
@@ -665,7 +666,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 ---
 title: "Sources"
 format: html
@@ -686,7 +687,7 @@ You may be directed to the `localhost` version of your website, showing the "Sou
 
 Open the `_quarto.yml` file. You should see a line that says `navbar`. Below this line you should see the line `left`. Below this is the code that creates the header links for the navigation bar on your site. It should look like:
 
-```
+```{.output}
 website:
   title: "Websites 2"
   navbar:
@@ -701,7 +702,7 @@ website:
 
 To add `sources.qmd` as a new page which will appear on the menu, we need to edit `_quarto.yml` to look like this:
 
-```
+```yaml
 website:
   title: "Websites 2"
   navbar:
@@ -725,7 +726,7 @@ Since `- about.qmd` appears without either the `href` or `text` argument, Quarto
 
 In the bash Terminal, run:
 
-```
+```bash
 cat _quarto.yml
 ```
 
@@ -743,7 +744,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 project:
   type: website
 
@@ -786,7 +787,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-2 $ ls _site/*html
 _site/about.html        _site/sources.html
 _site/index.html
@@ -835,7 +836,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-2 $ head source-1.qmd source-2.qmd 
 ==> source-1.qmd <==
 ---
@@ -865,7 +866,7 @@ The Quarto [documentation](https://quarto.org/) provides an [excellent overview]
 
 Change `_quarto.yml` so that the `navbar` section looks like this.
 
-```
+```yaml
   navbar:
     left:
       - href: index.qmd
@@ -881,7 +882,7 @@ Change `_quarto.yml` so that the `navbar` section looks like this.
 
 In the bash Terminal, run:
 
-```
+```bash
 cat _quarto.yml
 ```
 
@@ -899,7 +900,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 project:
   type: website
 
@@ -946,7 +947,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-2 $ git log -n 1
 commit f0973447485da8bb8e8e36f65e39b5640519dccc (HEAD -> main, origin/main, origin/HEAD)
 Author: David Kane <dave.kane@gmail.com>
@@ -986,7 +987,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 websites-2 $ cat process_data.R
 library(tidyverse)
 
@@ -1053,7 +1054,7 @@ learnr2::question(
 
 Your answer should look something like:
 
-```
+```{.output}
 > source("/workspaces/websites-2/process_data.R", echo = TRUE)
 
 > library(tidyverse)
@@ -1091,7 +1092,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 > ls()
 [1] "billboard"          "billboard_filtered" "billboard_jul"
 [4] "col_name"           "i"                  "jul_week"
@@ -1116,7 +1117,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 > ls()
 character(0)
 ```
@@ -1141,7 +1142,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 websites-2 $ ls clean*
 clean_data.rds
 websites-2 $
@@ -1153,7 +1154,7 @@ websites-2 $
 
 So that the script itself saves its result, open `process_data.R` and, at the bottom after a blank line, add:
 
-```
+```r
 write_rds(top_songs, file = "clean_data.rds")
 ```
 
@@ -1171,7 +1172,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 websites-2 $ tail -n 3 process_data.R
   mutate(song_artist = paste0(track, " (", artist, ")"))
 
@@ -1197,7 +1198,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 > read_rds("clean_data.rds")
 # A tibble: 158 × 6
    artist  track     week_num  rank week_offset song_artist
@@ -1235,7 +1236,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 websites-2 $ cat make_plot.R
 library(tidyverse)
 
@@ -1282,7 +1283,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 websites-2 $ ls *.png
 billboard.png
 websites-2 $
@@ -1347,7 +1348,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 websites-2 $ git show --name-status HEAD
 commit 5ff52befc37ba1a3ac87dac781f48d6c6251c225 (HEAD -> main, origin/main, origin/HEAD)
 Author: David Kane <dave.kane@gmail.com>
@@ -1376,6 +1377,7 @@ learnr2::question(
   "Navigate to your websites-2 GitHub repo. Paste a screenshot of the repository file listing.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
@@ -1384,7 +1386,7 @@ learnr2::question(
 
 Your file listing should look something like:
 
-```
+```{.output}
 .gitignore      initial version           2 days ago
 _quarto.yml     Added source pages        2 hours ago
 about.qmd       Added plot to home page   3 hours ago

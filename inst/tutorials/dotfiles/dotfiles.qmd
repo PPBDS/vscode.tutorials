@@ -35,7 +35,7 @@ Two things make this tutorial unusual. The repo you make is **permanent** --- ev
 
 Open a **new** bash Terminal (the `+` in the top-right corner of the Panel) and run:
 
-```
+```bash
 echo $COOLEST_TEACHER
 ```
 
@@ -53,7 +53,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ echo $COOLEST_TEACHER
 
 ```
@@ -72,7 +72,7 @@ By the end of this tutorial, that command will print `Preceptor` on a machine wh
 
 Now look at the file that runs every time you open a bash Terminal. The starter put several blocks in it; show the one about your prompt:
 
-```
+```bash
 grep -A 2 short-prompt ~/.bashrc
 ```
 
@@ -90,7 +90,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ grep -A 2 short-prompt ~/.bashrc
 # codespace-starter:short-prompt — short prompt for beginners (folder name + $).
 PROMPT_COMMAND=''
@@ -126,7 +126,7 @@ learnr2::question(
 <!-- VERIFY: the exact wording and scope list gh reports inside a Codespace
      built from codespace-starter. -->
 
-```
+```{.output}
 codespace-starter $ gh auth status
 github.com
   ✓ Logged in to github.com account ppbds-student (GITHUB_TOKEN)
@@ -148,7 +148,7 @@ When GitHub built this Codespace it put a **token** --- a temporary password for
 
 Make the repo. In the bash Terminal:
 
-```
+```bash
 cd /workspaces
 gh repo create dotfiles --private --clone
 cd dotfiles
@@ -173,7 +173,7 @@ learnr2::question(
      https://github.com/new and clone it instead; that fallback is in the prose
      below and works identically. -->
 
-```
+```{.output}
 codespace-starter $ cd /workspaces
 workspaces $ gh repo create dotfiles --private --clone
 ✓ Created repository ppbds-student/dotfiles on GitHub
@@ -199,7 +199,7 @@ Use a script. Ask AI to create two files in `/workspaces/dotfiles`.
 
 First, `install.sh`:
 
-```
+```bash
 #!/bin/bash
 set -e
 cd "$(dirname "$0")"
@@ -210,7 +210,7 @@ cp .gitconfig ~/.gitconfig
 
 Second, `.gitconfig`, with your real name and your own GitHub username:
 
-```
+```ini
 [user]
 	name = Your Name
 	email = YOUR-USERNAME@users.noreply.github.com
@@ -235,7 +235,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 [user]
 	name = David Kane
 	email = ppbds-student@users.noreply.github.com
@@ -268,7 +268,7 @@ The rule generalises: **when you do not own a file, add to it rather than replac
 
 A script GitHub cannot run is no use. Make it executable, then commit and push everything:
 
-```
+```bash
 chmod +x install.sh
 ```
 
@@ -286,7 +286,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 dotfiles $ ls -l install.sh
 -rwxr-xr-x 1 rstudio rstudio 118 Jul 30 14:22 install.sh
 ```
@@ -309,24 +309,23 @@ Go to <https://github.com/settings/codespaces>.
 
 Under **Dotfiles**, tick **Automatically install dotfiles**, and use the dropdown to choose your `dotfiles` repository.
 
-Copy and paste the name of the setting you turned on and the repository you chose.
+Take a screenshot of the **Dotfiles** section, showing the ticked box and the repository you chose, and paste it below. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
 
 ```{r}
 #| label: switch-1
 #| echo: false
 learnr2::question(
-  "Copy and paste the name of the setting you turned on and the repository you chose.",
+  "Take a screenshot of the Dotfiles section, showing the ticked box and the repository you chose, and paste it below.",
   type = "reflection",
+  allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
 
 ###
 
-```
-Automatically install dotfiles
-ppbds-student/dotfiles
-```
+Your screenshot should show **Automatically install dotfiles** ticked and your `dotfiles` repository (ours is `ppbds-student/dotfiles`) selected in the dropdown.
 
 ###
 
@@ -364,7 +363,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ echo $COOLEST_TEACHER
 Preceptor
 ```
@@ -383,7 +382,7 @@ Nothing in that chain knows anything about this tutorial or this course. It is a
 
 Still in the **new** Codespace, run:
 
-```
+```bash
 git config --get user.name
 tail -1 ~/.bashrc
 ```
@@ -402,7 +401,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ git config --get user.name
 David Kane
 codespace-starter $ tail -1 ~/.bashrc
@@ -421,23 +420,23 @@ Think about what else could go in there as you get more comfortable: a `.gitigno
 
 Clean up. Go back to <https://github.com/codespaces>, find the Codespace you just created, and delete it from the `...` menu.
 
-Copy and paste the name of the Codespace you deleted.
+Once it is gone, take a screenshot of the Codespaces list and paste it below.
 
 ```{r}
 #| label: switch-4
 #| echo: false
 learnr2::question(
-  "Copy and paste the name of the Codespace you deleted.",
+  "Once the Codespace you just created is gone, take a screenshot of the Codespaces list and paste it below.",
   type = "reflection",
+  allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
 
 ###
 
-```
-fuzzy-space-doodle-7q9v4wpx
-```
+Your screenshot should show the Codespace you are working in now, but no longer the one you made for this test (ours was `fuzzy-space-doodle-7q9v4wpx`).
 
 ###
 

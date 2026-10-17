@@ -50,7 +50,7 @@ learnr2::question(
 
 Your answer should look something like:
 
-```
+```{.output}
 https://github.com/ppbds-student/websites-1
 ```
 
@@ -84,7 +84,7 @@ learnr2::question(
 
 Your answer should look like this:
 
-```
+```{.output}
 websites-1 $ quarto create project website . --no-open
 ? Title (website) › A New Website
 Creating project at /workspaces/websites-1:
@@ -116,7 +116,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-1 $ ls
 _quarto.yml     about.qmd       index.qmd       styles.css
 websites-1 $
@@ -140,7 +140,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-1 $ ls -a
 .               .git            about.qmd       styles.css
 ..              .gitignore      _quarto.yml     index.qmd
@@ -158,7 +158,7 @@ Now that we have created the necessary files, let's examine them one by one to u
 
 In the R Terminal, run:
 
-```
+```r
 show_file("_quarto.yml")
 ```
 
@@ -179,7 +179,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 project:
   type: website
 
@@ -202,7 +202,7 @@ format:
 
 YAML files are how [Quarto projects](https://quarto.org/docs/projects/quarto-projects.html) describe themselves. You can identify `_quarto.yml` as a YAML file from its `.yml` extension and its content. The first two lines specify that this is a website.
 
-```
+```yaml
 project:
   type: website
 ```
@@ -213,7 +213,7 @@ But other values for `type` are possible.
 
 In the R Terminal, run:
 
-```
+```r
 show_file("_quarto.yml", start = 4, end = 10)
 ```
 
@@ -231,7 +231,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 website:
   title: "A New Website"
   navbar:
@@ -252,7 +252,7 @@ Indents and other whitespace matter in YAML files. Be careful!
 
 In the R Terminal, run:
 
-```
+```r
 show_file("_quarto.yml", start = 12, end = 16)
 ```
 
@@ -270,7 +270,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 format:
   html:
     theme: cosmo
@@ -288,7 +288,7 @@ The `css` line tells Quarto to use the `styles.css` file, located in the same di
 
 In the bash Terminal, run:
 
-```
+```bash
 cat index.qmd
 ```
 
@@ -307,7 +307,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 ---
 title: "A New Website"
 ---
@@ -331,7 +331,7 @@ If you skip the title prompt titles will be set to `.`.
 
 In the bash Terminal, run:
 
-```
+```bash
 cat .gitignore
 ```
 
@@ -350,7 +350,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 /.quarto/
 **/*.quarto_ipynb
 ```
@@ -381,7 +381,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-1 $ git log -n 1
 commit 658eedd63f2c3e2734484a2397935e854f5008f7 (HEAD -> main, origin/main, origin/HEAD)
 Author: ppbds-student <ppbds-student@users.noreply.github.com>
@@ -414,7 +414,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-1 $ quarto render
 [1/2] index.qmd
 [2/2] about.qmd
@@ -446,7 +446,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 websites-1 $ ls
 _site           index.qmd
 _quarto.yml     about.qmd       styles.css
@@ -473,7 +473,7 @@ learnr2::question(
 
 Your answer will probably look something like:
 
-```
+```{.output}
 websites-1 $ ls _site
 about.html      index.html      search.json     site_libs       styles.css
 websites-1 $
@@ -493,7 +493,7 @@ Add `_site` to the `.gitignore`. Don't forget that the last line of `.gitignore`
 
 In the bash Terminal, run:
 
-```
+```bash
 cat .gitignore
 ```
 
@@ -511,7 +511,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 /.quarto/
 **/*.quarto_ipynb
 _site
@@ -537,7 +537,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-1 $ quarto preview
 Preparing to preview
 
@@ -570,7 +570,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-1 $ quarto preview
 Preparing to preview
 
@@ -584,7 +584,7 @@ Quarto continues running in the background, watching your files. When you clicke
 
 ### Exercise 7
 
-Look again at your website in the browser. Click on the "Home" link and then paste a screenshot of the entire HTML screen.
+Look again at your website in the browser. Click on the "Home" link and then paste a screenshot of the entire HTML screen. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
 
 ```{r}
 #| label: rendering-and-previewing-7
@@ -593,13 +593,14 @@ learnr2::question(
   "Look again at your website in the browser. Click on the \"Home\" link and then paste a screenshot of the entire HTML screen.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
 
 ### 
 
-```
+```{.output}
 A New Website
 
 A New Website
@@ -628,7 +629,7 @@ learnr2::question(
 
 Your answer should be something like:
 
-```
+```{.output}
 https://your-codespace-name-7193.app.github.dev/
 ```
 
@@ -652,7 +653,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 GET: /
 pandoc 
   to: html
@@ -691,6 +692,7 @@ learnr2::question(
   "Paste a screenshot of the About page from your browser.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
@@ -699,7 +701,7 @@ learnr2::question(
 
 Your answer should look like this, except with your name instead of mine!
 
-```
+```{.output}
 A New Website
 
 About
@@ -741,7 +743,7 @@ learnr2::question(
 
 Your answer should look like:
 
-```
+```{.output}
 https://github.com/ppbds-student/websites-1/settings/pages
 ```
 
@@ -773,7 +775,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-1 $ quarto publish gh-pages
 ? Publish site to https://ppbds-student.github.io/websites-1/ using gh-pages? (Y/n) › Yes
 Saved working directory and index state WIP on main: 658eedd initial version
@@ -810,7 +812,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 Rendering for publish:
 
 [1/2] index.qmd
@@ -838,7 +840,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 To https://github.com/ppbds-student/websites-1.git
    c05d288..0396c20  HEAD -> gh-pages
 
@@ -866,7 +868,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 https://ppbds-student.github.io/websites-1/
 ```
 
@@ -888,7 +890,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-1 $ git branch -a
   gh-pages
 * main
@@ -916,7 +918,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-1 $ git ls-tree --name-only gh-pages
 .nojekyll
 about.html
@@ -941,13 +943,14 @@ learnr2::question(
   "Earlier, you visited your repo's Pages settings before publishing. Go back: from your repo's page on GitHub, click Settings, then Pages. Paste a screenshot of the sentence at the top which describes your site.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
 
 ### 
 
-```
+```{.output}
 Your site is live at https://ppbds-student.github.io/websites-1/
 ```
 
@@ -973,7 +976,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-1 $ ls .quarto
 idx     preview xref
 websites-1 $
@@ -987,7 +990,7 @@ Open the `_quarto.yml` file in the Editor. Change `title: "A New Website"` to `t
 
 In the R Terminal, run:
 
-```
+```r
 show_file("_quarto.yml", start = 4, end = 5)
 ```
 
@@ -1006,7 +1009,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 website:
   title: "A New Website, second edition"
 ```
@@ -1026,13 +1029,14 @@ learnr2::question(
   "From the bash Terminal, run quarto preview. Paste a screenshot of the home page once it comes up on your browser.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
 
 ### 
 
-```
+```{.output}
 A New Website, second edition
 
 Home
@@ -1063,7 +1067,7 @@ learnr2::question(
 
 ### 
 
-```
+```{.output}
 websites-1 $ quarto publish
 ? Publish update to: › https://ppbds-student.github.io/websites-1/ (GitHub Pages)
 From https://github.com/ppbds-student/websites-1

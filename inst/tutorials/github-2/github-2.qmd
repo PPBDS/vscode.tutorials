@@ -37,7 +37,7 @@ Open a new bash Terminal and run `cd /workspaces`. (New terminals may open insid
 
 If it reports that you are **not** logged in, run these three commands --- they are steps 1, 2 and 3 from `connect-repo --help` --- and then run `gh auth status` again:
 
-```
+```bash
 unset GITHUB_TOKEN GH_TOKEN
 gh auth login --hostname github.com --git-protocol https --web --clipboard=false
 git config --global credential.helper store
@@ -59,7 +59,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 workspaces $ gh auth status
 github.com
   ✓ Logged in to github.com account your-username (/home/rstudio/.config/gh/hosts.yml)
@@ -71,7 +71,7 @@ github.com
 
 If you were not signed in, the first `gh auth status` said so instead, and the second one looks like the above:
 
-```
+```{.output}
 workspaces $ gh auth status
 You are not logged into any GitHub hosts. To log in, run: gh auth login
 ```
@@ -84,7 +84,7 @@ You were probably already signed in --- `connect-repo` did that once, in some ea
 
 Create this tutorial's repo by hand. From `/workspaces`, run:
 
-```
+```bash
 gh repo create github-advanced --public --clone
 ```
 
@@ -104,7 +104,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 workspaces $ gh repo create github-advanced --public --clone
 ✓ Created repository your-username/github-advanced on github.com
   https://github.com/your-username/github-advanced
@@ -135,7 +135,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 workspaces $ cd github-advanced
 github-advanced $ git remote -v
 origin  https://github.com/your-username/github-advanced.git (fetch)
@@ -153,7 +153,7 @@ Point VS Code at your new repo: `File -> Open Folder...`, type `/workspaces/gith
 
 Then, in the bash Terminal (the reload opens a fresh one, already in `/workspaces/github-advanced`), run these two commands, one at a time:
 
-```
+```bash
 cp /workspaces/codespace-starter/.devcontainer/AGENTS.md .
 ls
 ```
@@ -172,7 +172,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 github-advanced $ cp /workspaces/codespace-starter/.devcontainer/AGENTS.md .
 github-advanced $ ls
 AGENTS.md
@@ -203,7 +203,7 @@ learnr2::question(
 
 Your plot code will differ from ours. Something like:
 
-```
+```{.output}
 ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
   geom_point(alpha = 0.7) +
   labs(title = "Engine Displacement vs. Highway MPG",
@@ -232,7 +232,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 github-advanced $ git status
 On branch main
 
@@ -256,7 +256,7 @@ Note what is *not* listed: `analysis_files`, because your `.gitignore` is alread
 
 Make the first push. Run these three commands, one at a time:
 
-```
+```bash
 git add -A
 git commit -m "First analysis"
 git push -u origin main
@@ -276,7 +276,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 github-advanced $ git add -A
 github-advanced $ git commit -m "First analysis"
 [main (root-commit) 1a2b3c4] First analysis
@@ -314,7 +314,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://github.com/your-username/github-advanced
 ```
 
@@ -346,7 +346,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://zany-computing-machine-vpvrv9p59jxpc66v6.github.dev/
 ```
 
@@ -358,7 +358,7 @@ While you waited, GitHub built a computer from the instructions in `.devcontaine
 
 In the **new** Codespace, use the bash Terminal that is already open --- it has the short prompt, `codespace-starter $` --- and run the sign-in ritual by hand. This time it is genuinely needed, because this machine has never met you. Run these commands, one at a time:
 
-```
+```bash
 unset GITHUB_TOKEN GH_TOKEN
 gh auth login --hostname github.com --git-protocol https --web --clipboard=false
 git config --global credential.helper store
@@ -381,7 +381,7 @@ learnr2::question(
 
 The login itself ends like this:
 
-```
+```{.output}
 codespace-starter $ gh auth login --hostname github.com --git-protocol https --web --clipboard=false
 ? Authenticate Git with your GitHub credentials? Yes
 
@@ -397,7 +397,7 @@ codespace-starter $
 
 And the final `gh auth status`:
 
-```
+```{.output}
 codespace-starter $ gh auth status
 github.com
   ✓ Logged in to github.com account your-username (/home/rstudio/.config/gh/hosts.yml)
@@ -417,7 +417,7 @@ Why step 3? `gh auth login` hands your token to Git, but only to Git's short-ter
 
 Still in the new Codespace, connect to your existing repo. Run these commands, one at a time:
 
-```
+```bash
 cd /workspaces
 gh repo clone github-advanced
 cd github-advanced
@@ -438,7 +438,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 codespace-starter $ cd /workspaces
 workspaces $ gh repo clone github-advanced
 Cloning into 'github-advanced'...
@@ -459,13 +459,13 @@ This is the connect-to-an-existing-repo case: no creation, just a clone. `gh rep
 
 Make a change on this second desk. The Explorer here still shows `codespace-starter`, not your repo, so open the file from the bash Terminal: with `pwd` reading `/workspaces/github-advanced`, run `code analysis.qmd`. (If you prefer a full window, use `File -> Open Folder...` on `/workspaces/github-advanced`, click **Trust Folder & Continue**, and open the file from the Explorer.) Below the last chunk, add the sentence:
 
-```
+```default
 This line was written on a second machine.
 ```
 
 Save. Then run these three commands, one at a time:
 
-```
+```bash
 git add -A
 git commit -m "Add a line from the second machine"
 git push
@@ -487,7 +487,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 github-advanced $ git add -A
 github-advanced $ git commit -m "Add a line from the second machine"
 [main 5d6e7f8] Add a line from the second machine
@@ -520,7 +520,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 github-advanced $ git status
 On branch main
 Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
@@ -547,7 +547,7 @@ Two desks, one filing cabinet. Time to prove which one matters.
 
 ### Exercise 1
 
-Go to [github.com/codespaces](https://github.com/codespaces). You should see (at least) two active Codespaces. Paste a screenshot of the table.
+Go to [github.com/codespaces](https://github.com/codespaces). You should see (at least) two active Codespaces. Paste a screenshot of the table. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
 
 ```{r}
 #| label: disposable-desks-1
@@ -556,6 +556,7 @@ learnr2::question(
   "Go to github.com/codespaces. You should see (at least) two active Codespaces. Paste a screenshot of the table.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
@@ -564,7 +565,7 @@ learnr2::question(
 
 Your submission should show two entries, something like:
 
-```
+```{.output}
 ppbds-student
 PPBDS/codespace-starter
 automatic funicular
@@ -600,7 +601,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 github-advanced $ git log --oneline
 5d6e7f8 (HEAD -> main, origin/main) Add a line from the second machine
 1a2b3c4 First analysis
@@ -617,7 +618,7 @@ You ran the entire repo lifecycle without `connect-repo`: signed in with `gh aut
 
 These are the commands you now own:
 
-```
+```bash
 gh auth login                                # once per machine
 git config --global credential.helper store  # once per machine, right after the login
 gh repo create <name> --public --clone
@@ -650,7 +651,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://github.com/your-username/github-advanced
 ```
 

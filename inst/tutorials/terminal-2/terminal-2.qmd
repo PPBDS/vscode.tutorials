@@ -49,7 +49,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-2 $ pwd
 /workspaces/terminal-2
 terminal-2 $ mkdir options
@@ -76,7 +76,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 options $ echo "" > .my-hidden.txt
 options $ ls
 options $ ls -a
@@ -104,7 +104,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 options $ echo $HOME
 /home/rstudio
 options $
@@ -130,7 +130,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 options $ ls -l /workspaces
 total 8
 drwxr-xr-x 7 rstudio rstudio 4096 Oct 12 16:10 codespace-starter
@@ -162,7 +162,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 options $ export FAVORITE_ANIMAL=duck
 options $ echo $FAVORITE_ANIMAL
 duck
@@ -189,7 +189,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-2 $ echo $FAVORITE_ANIMAL
 
 terminal-2 $
@@ -211,7 +211,7 @@ Before you trust a file --- especially one an AI just wrote --- look inside it. 
 
 Download a copy of the `AUTHORS` document from the R source code. In the bash Terminal, still in `options`, run:
 
-```
+```bash
 curl -O https://raw.githubusercontent.com/wch/r-source/refs/heads/trunk/doc/AUTHORS
 ```
 
@@ -229,7 +229,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 options $ curl -O https://raw.githubusercontent.com/wch/r-source/refs/heads/trunk/doc/AUTHORS
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -261,7 +261,7 @@ learnr2::question(
 
 Your output should begin something like:
 
-```
+```{.output}
 options $ head AUTHORS
 Authors of R.
 
@@ -327,7 +327,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 options $ less AUTHORS
 options $
 ```
@@ -342,7 +342,7 @@ Remember `q`. Other programs open a pager *for* you without asking: `git log`, `
 
 One more inspection command, and it may be the most important one for working with AI: `diff`, which shows how two files differ. Build a second file that differs by one line, then compare. Run these commands, one at a time:
 
-```
+```bash
 cp AUTHORS AUTHORS-edited
 echo "Preceptor also helped." >> AUTHORS-edited
 diff AUTHORS AUTHORS-edited
@@ -362,7 +362,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 options $ cp AUTHORS AUTHORS-edited
 options $ echo "Preceptor also helped." >> AUTHORS-edited
 options $ diff AUTHORS AUTHORS-edited
@@ -389,7 +389,7 @@ Downloading files and moving them to a sensible location is a core skill for dat
 
 In the bash Terminal, confirm your location with `pwd` --- you should still be in `options`; if not, `cd` there. In your browser, go to:
 
-```
+```default
 https://github.com/PPBDS/vscode.tutorials/blob/main/TODO.txt
 ```
 
@@ -415,7 +415,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 options $ ls
 AUTHORS  TODO.txt
 options $
@@ -443,7 +443,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 options $ rm TODO.txt
 options $ ls
 AUTHORS
@@ -460,7 +460,7 @@ Drag-and-drop and the **Upload...** menu do the same thing. This matters more th
 
 Now practice the realistic version of this workflow --- the one every data science project starts with. Run these commands, one at a time:
 
-```
+```bash
 cd /workspaces/terminal-2
 mkdir data
 curl -o data/penguins.csv https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv
@@ -480,7 +480,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-2 $ head -n 3 data/penguins.csv
 species,island,bill_length_mm,bill_depth_mm,flipper_length_mm,body_mass_g,sex,year
 Adelie,Torgersen,39.1,18.7,181,3750,male,2007
@@ -507,7 +507,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-2 $ find . -name AUTHORS
 ./options/AUTHORS
 terminal-2 $ find . -name penguins.csv
@@ -537,7 +537,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 Authors of R.
 ```
 
@@ -553,7 +553,7 @@ You have been running programs all along --- `ls`, `curl`, and `git` are program
 
 Make a one-line R script and run it, as you did back in the Orientation tutorial. In the bash Terminal, from the root of your repo (`cd /workspaces/terminal-2` if you are elsewhere), run these commands, one at a time:
 
-```
+```bash
 echo 'print(2 + 2)' > add.R
 Rscript add.R
 ```
@@ -572,7 +572,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-2 $ echo 'print(2 + 2)' > add.R
 terminal-2 $ Rscript add.R
 [1] 4
@@ -587,7 +587,7 @@ terminal-2 $
 
 You do not even need a file. Run:
 
-```
+```bash
 Rscript -e 'sqrt(144)'
 ```
 
@@ -605,7 +605,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-2 $ Rscript -e 'sqrt(144)'
 [1] 12
 terminal-2 $
@@ -619,7 +619,7 @@ The `-e` option means "**e**valuate this expression." AI agents use this form co
 
 Now the same thing in Python. Run these commands, one at a time:
 
-```
+```bash
 echo 'print(2 + 2)' > add.py
 python add.py
 ```
@@ -638,7 +638,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-2 $ echo 'print(2 + 2)' > add.py
 terminal-2 $ python add.py
 4
@@ -653,7 +653,7 @@ You just ran your first Python program. Note the small difference in output: R p
 
 Python's version of `-e` is `-c` (for **c**ommand). Run:
 
-```
+```bash
 python -c 'print(2 ** 10)'
 ```
 
@@ -671,7 +671,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-2 $ python -c 'print(2 ** 10)'
 1024
 terminal-2 $
@@ -697,7 +697,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-2 $ which Rscript
 /usr/local/bin/Rscript
 terminal-2 $ which python
@@ -725,7 +725,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-2 $ echo $PATH
 /home/rstudio/.local/bin:/home/rstudio/.local/bin:/home/rstudio/.local/bin:/home/rstudio/.local/bin:/home/rstudio/.local/bin:/home/rstudio/.cargo/bin:/opt/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/rstudio/.local/bin
 terminal-2 $
@@ -753,7 +753,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-2 $ uv --version
 uv 0.13.0 (x86_64-unknown-linux-musl)
 terminal-2 $
@@ -769,7 +769,7 @@ Your version number may differ.
 
 Prove the venv came stocked. Run:
 
-```
+```bash
 python -c 'import pandas; print(pandas.__version__)'
 ```
 
@@ -787,7 +787,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-2 $ python -c 'import pandas; print(pandas.__version__)'
 3.0.6
 terminal-2 $ rm add.R add.py
@@ -818,7 +818,7 @@ learnr2::question(
 
 Your output should begin something like:
 
-```
+```{.output}
 terminal-2 $ quarto check
 Quarto 1.10.19
 [✓] Checking environment information...
@@ -839,7 +839,7 @@ The version numbers of the dependencies may differ.
 
 Every program on this machine is a file that someone marked as runnable. See what that means. Run these commands, one at a time:
 
-```
+```bash
 echo 'echo "I am a program."' > hello.sh
 ./hello.sh
 chmod +x hello.sh
@@ -860,7 +860,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 terminal-2 $ echo 'echo "I am a program."' > hello.sh
 terminal-2 $ ./hello.sh
 bash: ./hello.sh: Permission denied

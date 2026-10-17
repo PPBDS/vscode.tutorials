@@ -53,7 +53,7 @@ learnr2::question(
 
 You will see one of two answers. Either you are already in your repo:
 
-```
+```{.output}
 quarto $ pwd
 /workspaces/quarto
 quarto $
@@ -61,7 +61,7 @@ quarto $
 
 or you are somewhere else, like the course's folder:
 
-```
+```{.output}
 codespace-starter $ pwd
 /workspaces/codespace-starter
 codespace-starter $
@@ -75,7 +75,7 @@ If your result ends in `quarto`, you are all set. **Do not run the connect-repo 
 
 **Skip this paragraph --- do not run this command --- if `pwd` showed `/workspaces/quarto`.** Otherwise, run:
 
-```
+```bash
 connect-repo quarto
 ```
 
@@ -103,7 +103,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 quarto $ pwd
 /workspaces/quarto
 quarto $
@@ -156,7 +156,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 quarto $ ls
 AGENTS.md
 quarto $
@@ -204,7 +204,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 quarto $ cat quarto-1.qmd
 ---
 title: "My First Quarto Document"
@@ -321,7 +321,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 quarto $ ls
 AGENTS.md  quarto-1.html  quarto-1.qmd  quarto-1_files
 quarto $
@@ -339,7 +339,7 @@ Look at the Source Control icon in the Activity Bar --- the one that looks like 
 
 Create a new file named `.gitignore` --- note the leading dot --- containing this single line:
 
-```
+```default
 quarto-1_files
 ```
 
@@ -359,7 +359,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 quarto $ cat .gitignore
 quarto-1_files
 quarto $
@@ -387,7 +387,7 @@ Save the file. Render it again.
 
 Open an R Terminal (the drop-down beside `+` on the right side of the Panel, then **R Terminal**; its tab is labeled **R Interactive**). In the R Terminal, run:
 
-```
+```r
 learnr2::show_file("quarto-1.qmd", pattern = "6")
 ```
 
@@ -406,7 +406,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 R 4.6.1> learnr2::show_file("quarto-1.qmd", pattern = "6")
 6 + 3
 ```
@@ -421,7 +421,7 @@ Strictly speaking, you did not need to save the file before rendering it. The Co
 
 If you can no longer see the preview file, you can usually view it by checking the text that was printed in the **Quarto Preview** terminal when you rendered the QMD. That text will include something like this:
 
-```
+```{.output}
 Watching files for changes
 Browse at http://localhost:3807/
 ```
@@ -434,7 +434,7 @@ Delete the first code cell. Add `This is my first Markdown text.` two lines belo
 
 In the bash Terminal, run:
 
-```
+```bash
 cat quarto-1.qmd
 ```
 
@@ -452,7 +452,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 quarto $ cat quarto-1.qmd
 ---
 title: "My First Quarto Document"
@@ -475,7 +475,7 @@ In Quarto documents, you can use [Markdown syntax](https://quarto.org/docs/autho
 
 Replace the one sentence already in `quarto-1.qmd` with `## My Header`. Skip a line and add this text. 
 
-```
+```markdown
 You can do a lot of cool things in Quarto like **bold** and *italic* text.
 ```
 
@@ -485,7 +485,7 @@ Render the file again. Does everything look good in the Quarto Preview pane or y
 
 In the bash Terminal, run:
 
-```
+```bash
 cat quarto-1.qmd
 ```
 
@@ -504,7 +504,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 quarto $ cat quarto-1.qmd
 ---
 title: "My First Quarto Document"
@@ -555,7 +555,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://congenial-chainsaw-wv757pv4pp67cpw-5500.app.github.dev/quarto-1.html
 ```
 
@@ -587,7 +587,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 quarto $ git log -1
 commit 2f8b4c6d9e1a3b5c7d9e0f2a4b6c8d0e2f4a6b8c (HEAD -> main, origin/main)
 Author: Your Name <your-username@users.noreply.github.com>
@@ -637,7 +637,7 @@ Save the file.
 
 In the bash Terminal, run:
 
-```
+```bash
 cat quarto-2.qmd
 ```
 
@@ -674,7 +674,7 @@ In this tutorial, we will only include R code within our code chunks. But code c
 
 ### Exercise 3
 
-Put `2 * 2` within the code chunk. `Cmd/Ctrl + Shift + K`. Take a screenshot of the entire rendered document and paste it below. (This allows us to confirm that your file rendered correctly.)
+Put `2 * 2` within the code chunk. `Cmd/Ctrl + Shift + K`. Take a screenshot of the entire rendered document and paste it below. (This allows us to confirm that your file rendered correctly.) To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
 
 ```{r}
 #| label: quarto-2-3
@@ -683,6 +683,7 @@ learnr2::question(
   "Put 2 * 2 within the code chunk. Cmd/Ctrl + Shift + K. Take a screenshot of the entire rendered document and paste it below. (This allows us to confirm that your file rendered correctly.)",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
@@ -691,7 +692,7 @@ learnr2::question(
 
 It is OK if your response does not look exactly like ours. But here is what we got:
 
-```
+```{.output}
 My Second Quarto Document
 2 * 2
 
@@ -717,13 +718,14 @@ learnr2::question(
   "Cmd/Ctrl + Shift + K. Paste a screenshot of the HTML below.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
 
 ###
 
-```
+```{.output}
 My Second Quarto Document
 [1] 4
 ```
@@ -742,13 +744,14 @@ learnr2::question(
   "Delete the current code chunk. Add a new one. In this new code chunk, put library(tidyverse). Cmd/Ctrl + Shift + K. A message about \"Attaching core tidyverse packages\" should appear in the HTML file. Paste a screenshot of the rendered file below.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
 
 ### 
 
-```
+```{.output}
 My Second Quarto Document
 library(tidyverse)
 
@@ -777,13 +780,14 @@ learnr2::question(
   "Add #| message: false to the code chunk. Cmd/Ctrl + Shift + K. Paste a screenshot of the entire rendered file below.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
 
 ### 
 
-```
+```{.output}
 My Second Quarto Document
 library(tidyverse)
 ```
@@ -794,7 +798,7 @@ We want to make our Quarto files beautiful. That means we will almost always "ma
 
 Instead of setting `echo: false` chunk by chunk, we can set it once for the whole document. Add
 
-```
+```yaml
 execute:
   echo: false
 ```
@@ -819,7 +823,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 Error
 
 Validation of YAML front matter failed.
@@ -850,6 +854,7 @@ learnr2::question(
   "Cmd/Ctrl + Shift + K. Paste a screenshot of the HTML below.",
   type = "reflection",
   allow_image = TRUE,
+  allow_text = FALSE,
   show_text = FALSE
 )
 ```
@@ -888,7 +893,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 R 4.6.1> pull(mtcars, 1)
  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4
 [16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7
@@ -931,7 +936,7 @@ Preview the file. You should see your plot --- but not the code that made it. Th
 
 In the R Terminal, run:
 
-```
+```r
 learnr2::show_file("quarto-2.qmd", chunk = "Last")
 ```
 
@@ -949,7 +954,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 ggplot(data = iris,
        mapping = aes(x = Sepal.Width,
                      y = Sepal.Length,
@@ -990,7 +995,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 quarto $ cat .gitignore
 quarto-1_files
 quarto-2_files
@@ -1019,7 +1024,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 quarto $ git status
 On branch main
 Your branch is up to date with 'origin/main'.
@@ -1040,7 +1045,7 @@ A rendered HTML file in your Codespace can be seen by nobody but you. In this fi
 
 So far you have rendered with `Cmd/Ctrl + Shift + K`. This time, render from the **bash Terminal**, the way later tutorials always will:
 
-```
+```bash
 quarto render quarto-2.qmd
 ```
 
@@ -1060,7 +1065,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 quarto $ quarto render quarto-2.qmd
 
 
@@ -1124,7 +1129,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 quarto $ quarto publish gh-pages quarto-2.qmd
 ? Publish site to https://your-username.github.io/quarto/ using gh-pages? (Y/n) › Yes
 Switched to a new branch 'gh-pages'
@@ -1211,7 +1216,7 @@ learnr2::question(
 
 ###
 
-```
+```{.output}
 https://your-username.github.io/quarto/quarto-2.html
 ```
 

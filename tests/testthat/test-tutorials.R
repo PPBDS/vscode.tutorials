@@ -11,7 +11,7 @@ test_that("tutorials pass learnr2's static checks", {
 })
 
 test_that("tutorials render", {
-  testthat::skip_on_cran() # Needed because the data directories are not on CRAN.
+  testthat::skip_on_cran() # Rendering every tutorial needs Quarto and takes minutes.
   testthat::skip_if(is.null(quarto::quarto_path()), "Quarto is not installed")
   expect_no_error(learnr2::render_tutorials(tutorial_paths()))
 })
