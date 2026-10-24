@@ -46,6 +46,10 @@ development:
 - **GitHub Advanced** (github-2): Advanced Git/GitHub workflows and
   GitHub Pages
 
+- **Dotfiles** (dotfiles): Graduate from connect-repo with a private
+  dotfiles repo and a GH_TOKEN Codespaces secret, so every new Codespace
+  is already signed in as you
+
 - **Websites 1** (websites-1): Basic website construction using Quarto
   projects
 
@@ -65,10 +69,6 @@ development:
 - **Your Starter** (your-starter): Build your own version of
   codespace-starter (under construction)
 
-- **Dotfiles** (dotfiles): Build a private dotfiles repo GitHub installs
-  into every new Codespace, carrying your Git identity and shell
-  settings
-
 - **OpenRouter** (openrouter): Get an OpenRouter API key, store it
   safely, and drive aider with it
 
@@ -83,8 +83,8 @@ To run a tutorial, use:
 
 Available tutorial names include: orientation, workflow, code, quarto,
 antigravity, terminal-1, terminal-2, terminal-3, github-1, github-2,
-websites-1, websites-2, devcontainers, our-codespace-starter, docker,
-your-starter, dotfiles, openrouter, and models.
+dotfiles, websites-1, websites-2, devcontainers, our-codespace-starter,
+docker, your-starter, openrouter, and models.
 
 ## See also
 
