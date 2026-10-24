@@ -6,7 +6,7 @@ format: live-html
 engine: knitr
 toc: true
 learnr2:
-  ordering: 12
+  ordering: 13
 ---
 
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
@@ -29,7 +29,7 @@ This tutorial practices creating and organizing [Quarto websites](https://quarto
 
 ### 
 
-You should be doing this tutorial in a repo named `websites-2`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
+You should be doing this tutorial in a repo named `websites-2`. If you are not, create one and then connect to it.
 
 ## The website
 
@@ -57,7 +57,7 @@ https://github.com/ppbds-student/websites-2
 
 ###
 
-Each website gets its own GitHub repo. This keeps projects independent: separate commit histories, separate collaborators, and separate deployment settings. It also means you can delete or archive a project without affecting anything else. This is good practice for any data science project, not just websites.
+Each website gets its own GitHub repo. This keeps projects independent: separate commit histories, separate collaborators, and separate deployment settings. It also means you can delete or archive a project without affecting anything else.
 
 ### Exercise 2
 
@@ -90,8 +90,6 @@ websites-2 $
 ```
 
 Recall from the Websites 1 tutorial why we add `--no-open`: without it, Quarto asks VS Code to open the new project, which in a Codespace means a second browser tab showing the same Codespace you are already in. Your Codespace may add the flag for you if you forget, but do not rely on that.
-
-We are moving faster than in the Websites 1 tutorial because you are already familiar with these steps. Later, we will also learn how to save analysis results to files so the site does not re-run all its code on every render.
 
 ### Exercise 3
 
@@ -216,13 +214,13 @@ execute:
   echo: false
 ```
 
-Note how changing `index.qmd` causes the `index.html` to be re-rendered, leading to a new homepage display in your browser. Seeing fixes implemented automatically is why many people like working in *preview* mode.
+Because `quarto preview` is running, saving `index.qmd` re-renders `index.html` and the home page in your browser updates on its own.
 
 ### Exercise 7
 
 Create another code chunk. Create a cool-looking plot using the `billboard` tibble from the **tidyr** package and `ggplot()`. Make sure you understand what the plot is showing. Work with AI to solve any errors, improve the code, make the graphic better and so on.
 
-You now know two reasonable ways to work with AI, and either is fine here. You can ask an AI in a chat window --- Grok, ChatGPT, Claude, and so on --- and copy/paste the code it gives you into your chunk by hand, the way we did in the earlier tutorials. Or you can let an AI command-line assistant like `agy` read and edit `index.qmd` for you directly, the way you learned in the Antigravity tutorial. Use whichever you prefer.
+You can ask an AI in a chat window --- Grok, ChatGPT, Claude, and so on --- and copy/paste the code it gives you into your chunk by hand, the way we did in the earlier tutorials. Or you can let an AI command-line assistant like `agy` read and edit `index.qmd` for you directly, the way you learned in the Antigravity tutorial. Use whichever you prefer.
 
 `Cmd/Ctrl + Shift + K` to ensure that the plot looks good. If it looks bad, or there are some weird messages/warnings, use the AI to fix things.
 
@@ -238,7 +236,7 @@ CP/CR.
 #| label: the-website-7
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Create another code chunk in index.qmd. Create a cool-looking plot using the billboard tibble from the tidyr package and ggplot(). Make sure you understand what the plot is showing. Work with AI to solve any errors, improve the code, make the graphic better and so on. You can ask an AI in a chat window (Grok, ChatGPT, Claude, and so on) and copy/paste the code it gives you into your chunk by hand, or you can let an AI command-line assistant like agy read and edit index.qmd for you directly. Use whichever you prefer. Press Cmd/Ctrl + Shift + K to ensure that the plot looks good. If it looks bad, or there are some weird messages/warnings, use the AI to fix things. In the R Terminal, run show_file(\"index.qmd\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -337,11 +335,11 @@ ggplot(top_songs, aes(x = week_num, y = rank, color = song_artist)) +
 
 ###
 
-As AI gets better, less iteration will be necessary. But you still need to be *intentional*, to demonstrate *agency* and *understanding*. You must be able to explain what the plot means. You don't have to *write* the code, but you should be able to *read* the code, perhaps after asking the AI for help.
+You must be able to explain what the plot means. You don't have to *write* the code, but you should be able to *read* it, perhaps after asking the AI for help.
 
 ### Exercise 8
 
-There are two common modes for working with larger projects. First, as here, we work with an individual file, like `index.qmd`, and ensure that it is working as we want. Second, as before, we work with the project as a whole, using commands like `quarto render`, which render all the files in the project. The former approach is quickest and is how we spend most of our time. But, at the end of the day, we need to build the entire project.
+There are two common modes for working with larger projects. First, as here, we work with an individual file, like `index.qmd`, and ensure that it is working as we want. Second, as before, we work with the project as a whole, using commands like `quarto render`, which render all the files in the project. The former approach is quickest and is how we spend most of our time. But we still need to build the entire project before publishing.
 
 Go to the Source Control pane. Commit and push your new changes to GitHub. Include a descriptive commit message, e.g. "Added plot to home page".
 
@@ -367,7 +365,7 @@ Your answer should look like this, but with your username instead of mine.
 https://ppbds-student.github.io/websites-2/
 ```
 
-Keep track of the three versions of the website. The QMD files in the project directory are the source — always make changes here. The rendered HTML files in `_site` are what you preview locally; never edit them directly. The published website on GitHub is what the world sees.
+Keep track of the three versions of the website. The QMD files in the project directory are the source — always make changes here. The rendered HTML files in `_site` are what you preview locally. Never edit them directly. The published website on GitHub is what the world sees.
 
 ### Exercise 9
 
@@ -385,7 +383,7 @@ CP/CR.
 #| label: the-website-9
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Open about.qmd. Delete all the current text, except for the YAML header. Ensure that the title is \"About\". Add ## About Me as the first (and only) line of text. Render the QMD. In the bash Terminal, run cat about.qmd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -403,7 +401,7 @@ title: "About"
 
 ###
 
-Hash signs in front of text make the text into a header. The organization of headers is determined by the number of hash signs. Fewer hash signs make higher level headers, i.e. bigger text. More hash signs make lower level headers, i.e. smaller text. 
+Hash signs in front of text make it a header. Fewer hash signs make a higher-level header with bigger text. More hash signs make a lower-level header with smaller text.
 
 ### Exercise 10
 
@@ -425,7 +423,7 @@ CP/CR.
 #| label: the-website-10
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "In about.qmd, write a one sentence description of yourself below the header. Include your name and school, either the one you attend or one from which you have graduated. Write until the end of the line, i.e. do not use the Enter key to wrap text. Example: My name is David Kane, and I graduated from Williams College. When you are finished, render the QMD. In the bash Terminal, run cat about.qmd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -445,7 +443,7 @@ My name is David Kane, and I graduated from Williams College.
 
 ###
 
-You can have a Quarto document without a YAML header, if you like. You can also have an empty YAML header. But, it will often be the case that we want all the files in a project to have similar YAML headers in order to create a consistent look-and-feel.
+A Quarto document can have an empty YAML header, or none at all. In a project, though, the files usually share similar YAML headers so that the pages look consistent.
 
 ### Exercise 11
 
@@ -469,7 +467,7 @@ CP/CR.
 #| label: the-website-11
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Let's bold your name and italicize your school's name. In the description you have already written in about.qmd, surround your name with two asterisks, **, on both sides, and put a single asterisk, *, around both sides of your school. Example: My name is **David Kane**, and I graduated from *Williams College*. Press Cmd/Ctrl + Shift + K. In the bash Terminal, run cat about.qmd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -536,7 +534,7 @@ CP/CR.
 #| label: the-website-12
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "At the bottom of about.qmd, create text which is also a hyperlink to a website. Enclose the text \"Kane's Free Data Science Bootcamp\" in brackets []. Then, without a space intervening, add parentheses () which enclose a link to the relevant website: https://bootcamp.davidkane.info. It should look like: [Kane's Free Data Science Bootcamp](https://bootcamp.davidkane.info). Press Cmd/Ctrl + Shift + K. (Recall that rendering automatically saves the file first.) In the R Terminal, run show_file(\"about.qmd\", pattern = \"Bootcamp\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -566,15 +564,28 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
-Troubleshooting Quarto documents can be challenging because you are no longer in an interactive R environment. You will need to learn some new tricks. Additionally, an error could be due to issues with the Quarto document itself or due to the R code in the Quarto document.
+```{.output}
+websites-2 $ quarto publish gh-pages
+? Publish site to https://ppbds-student.github.io/websites-2/ using gh-pages? (Y/n) › Yes
+Rendering for publish:
 
-If the errors are due to the R code in the document, the first thing you should always try is to recreate the problem in an interactive session. Render the QMD. If you’re lucky, that will recreate the problem, and you can figure out what’s going on interactively.
+...
+
+[gh-pages 7c2e1a9] Built site for gh-pages
+To https://github.com/ppbds-student/websites-2.git
+   3f9c2a1..7c2e1a9  gh-pages -> gh-pages
+
+[✓] Deploying gh-pages branch to website (this may take a few minutes)
+[✓] Published to https://ppbds-student.github.io/websites-2/
+```
+
+If the render inside `quarto publish` fails, the problem is in a QMD or in the R code it runs, not in Git. Run `quarto render` by itself first. It shows the same error without the publishing steps, so you can fix it and then publish.
 
 ###
 
-Recall from the Websites 1 tutorial what the publish command did behind the scenes: it rendered the site into a temporary worktree, committed the result to the `gh-pages` branch, and pushed. Run `git log --oneline gh-pages` any time to watch the "Built site for gh-pages" commits stack up --- every publish is just one more commit on the deployment branch.
+The publish command rendered the site into a temporary worktree, committed the result to the `gh-pages` branch, and pushed. Run `git log --oneline gh-pages` any time to see the "Built site for gh-pages" commits. Every publish is one more commit on the deployment branch.
 
 ### Exercise 14
 
@@ -604,7 +615,7 @@ about.qmd       index.qmd       sources.qmd
 websites-2 $ 
 ```
 
-You should see `index.qmd`, `about.qmd`, and `sources.qmd` in the output. If not, make sure you are in the `websites-2` directory. The `*qmd` regular expression selects only files with names which end with the letters `qmd`.
+If `sources.qmd` is missing, make sure you are in the `websites-2` directory. The `*qmd` pattern selects only files whose names end with the letters `qmd`.
 
 ### Exercise 15
 
@@ -622,7 +633,7 @@ CP/CR.
 #| label: the-website-15
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "In the sources.qmd file, below the YAML header, add the text: An overview of sources used in my project. Save the file. In the R Terminal, run show_file(\"sources.qmd\", pattern = \"overview\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -636,7 +647,7 @@ An overview of sources used in my project.
 
 ###
 
-Keep in mind that your browser probably has two tabs which show your website. First, the GitHub Pages version, which has not changed since you last hit `quarto publish gh-pages`. The only way to affect the public website is to publish to it. Second, the `localhost` version, which is what you have been changing every time that you render `index.qmd`.
+Your browser probably has two tabs which show your website. The GitHub Pages version has not changed since you last ran `quarto publish gh-pages`. The only way to affect the public website is to publish to it. The `localhost` version is what changes every time you render.
 
 ### Exercise 16
 
@@ -658,7 +669,7 @@ CP/CR.
 #| label: the-website-16
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Add the following sentence to sources.qmd: These are my sources. Here are some challenges. Quarto websites are awesome. In the bash Terminal, run cat sources.qmd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -679,9 +690,9 @@ These are my sources. Here are some challenges. Quarto websites are awesome.
 
 ###
 
-A website, when you first look closely, may appear overwhelming in its complexity. But it is usually created from a small collection of text files, each of them quite simple.
+A website is usually built from a small collection of text files, each of them quite simple.
 
-You may be directed to the `localhost` version of your website, showing the "Sources" page. You have rendered the QMD into HTML. But notice that there is no way to navigate to this page from the website menu — it still needs to be added to `_quarto.yml`.
+If you render `sources.qmd`, the `localhost` version of your website shows the new "Sources" page. But there is no way to reach it from the website menu. The page still needs to be added to `_quarto.yml`.
 
 ### Exercise 17
 
@@ -714,8 +725,6 @@ website:
         text: Sources
 ```
 
-Note the two additional lines. 
-
 The `href` line tells Quarto to create an HTML page by rendering `sources.qmd` and to include that new page in the website. 
 
 The `text` line tells Quarto to format the link in the **nav**igation tool**bar** as `Sources`. This is the same process by which the home page, created from `index.qmd`, has a link labeled `Home`.
@@ -736,7 +745,7 @@ CP/CR.
 #| label: the-website-17
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Open the _quarto.yml file. Below the navbar line and the left line is the code that creates the header links for the navigation bar on your site. To add sources.qmd as a new page which will appear on the menu, edit _quarto.yml so that the left list under navbar has three entries: an entry with href: index.qmd and text: Home; then about.qmd; then an entry with href: sources.qmd and text: Sources. In the bash Terminal, run cat _quarto.yml. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -767,11 +776,11 @@ format:
 
 ###
 
-**YAML files are *very* tricky!** Tabs and white spaces matter. The code `left` before the navbar items puts the navigation bar on the left side of your site. This can be changed to `right`.
+In a YAML file, tabs and white spaces matter. The `left` before the navbar items puts the links on the left side of the navigation bar. It can be changed to `right`.
 
 ### Exercise 18
 
-Run `quarto preview` from the bash Terminal. (You may need to first use `Ctrl + c` to end whatever program is currently running.) You will need to hit `Enter` once. Check out your new project! See how "Sources" now appears on the navigation toolbar. Click on "Sources" and see how the text you added to `sources.qmd` now appears on the web.
+Run `quarto preview` from the bash Terminal. (You may need to first use `Ctrl + c` to end whatever program is currently running.) You will need to hit `Enter` once. "Sources" now appears on the navigation toolbar. Click on it to see the text you added to `sources.qmd`.
 
 Run `ls _site/*html` in the bash Terminal. CP/CR.
 
@@ -794,7 +803,7 @@ _site/index.html
 websites-2 $ 
 ```
 
-You should see `sources.html`. Quarto websites, like many similar frameworks, place all the pages which appear on the web into a single directory, like `_site`, and then move that directory onto a hosting service like GitHub Pages.
+Quarto websites, like many similar frameworks, place all the pages which appear on the web into a single directory, like `_site`, and then move that directory onto a hosting service like GitHub Pages.
 
 ### Exercise 19
 
@@ -812,9 +821,17 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
-There should not be a `sources.qmd` file. We are practicing these skills to make you more comfortable building up and tearing down the parts of a project. You need to build more than one house to get good at house-building!
+```{.output}
+websites-2 $ ls *qmd
+about.qmd  index.qmd
+websites-2 $
+```
+
+###
+
+Removing a page takes two steps: delete the file and delete its entry in `_quarto.yml`. Otherwise the navbar would link to a page that no longer exists.
 
 ### Exercise 20
 
@@ -854,13 +871,11 @@ format: html
 websites-2 $ 
 ```
 
-In many Terminal commands, you can provide more than one file as the target of the command. In this case, `head` will be applied to `source-1.qmd` and then `source-2.qmd` sequentially.
+Many bash commands accept more than one file. Here `head` is applied to `source-1.qmd` and then to `source-2.qmd`.
 
 ### Exercise 21
 
 Let's create a drop-down menu called "Sources" through which one could visit either the page for "Source 1" or "Source 2" from the top menu.
-
-We will be changing YAML settings to enable this, so pay very close attention.
 
 The Quarto [documentation](https://quarto.org/) provides an [excellent overview](https://quarto.org/docs/websites/website-navigation.html) of approaches to website navigation.
 
@@ -892,7 +907,7 @@ CP/CR.
 #| label: the-websites-21
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Let's create a drop-down menu called \"Sources\" through which one could visit either the page for \"Source 1\" or \"Source 2\" from the top menu. The Quarto documentation at https://quarto.org/docs/websites/website-navigation.html provides an excellent overview of approaches to website navigation. Change _quarto.yml so that the left list under navbar has three entries: an entry with href: index.qmd and text: Home; then an entry with text: Sources and a menu containing two items, one with href: source-1.qmd and text: Source 1 and one with href: source-2.qmd and text: Source 2; then about.qmd. In the bash Terminal, run cat _quarto.yml. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -927,7 +942,7 @@ format:
 
 ###
 
-Run `quarto preview` to see the changes.
+Run `quarto preview` to see the changes. A `menu:` entry under a navbar item turns it into a drop-down. The item's `text` is the label, and each entry under `menu:` becomes one choice.
 
 ### Exercise 22
 
@@ -957,13 +972,13 @@ Date:   Mon Mar 17 18:03:23 2025 -0400
 websites-2 $ 
 ```
 
-Type `quarto publish` in the bash Terminal and hit "Enter." Note how you did not need to specify `gh-pages`. Quarto is smart enough to know that, since GitHub Pages is what you used last time, it is probably what you want now.  
+Type `quarto publish` in the bash Terminal and hit "Enter." You did not need to specify `gh-pages`. Quarto remembers that GitHub Pages is what you used last time.
 
-Explore the use of the "Sources" menu on your website.
+Try the "Sources" menu on your website.
 
 ###
 
-Your home page works, but there is a problem hiding in it. Every time you render the site, *all* of the billboard wrangling code in `index.qmd` runs again --- the date math, the loop, the pivot, the join. That is wasteful, especially for code that takes a while. Over the next few exercises we will move that work into scripts and save the results, so the website only has to display a finished image.
+Every time you render the site, *all* of the billboard wrangling code in `index.qmd` runs again --- the date math, the loop, the pivot, the join. That is wasteful, especially for code that takes a while. The next few exercises move that work into scripts and save the results, so the website only has to display a finished image.
 
 The first tool we need is the RDS format, which lets us save any R object to a file. When we read from an RDS, we get the object back without re-running the code that created it.
 
@@ -1074,7 +1089,7 @@ Your answer should look something like:
 >
 ```
 
-Notice that the final line of the script assigns its result to `top_songs` rather than printing it, so no tibble appears. Assignment does not produce output.
+The final line of the script assigns its result to `top_songs` rather than printing it, so no tibble appears. Assignment does not produce output.
 
 ### Exercise 25
 
@@ -1099,7 +1114,7 @@ learnr2::question(
 [7] "top_5_songs"        "top_songs"          "wk_idx"
 ```
 
-The script created several objects, including the one we care about, `top_songs`. The others are intermediate steps and loop variables --- real wrangling code often leaves a trail of them behind. Only `top_songs` is worth keeping.
+The script created several objects, including the one we care about, `top_songs`. The others are intermediate steps and loop variables. Only `top_songs` is worth keeping.
 
 ### Exercise 26
 
@@ -1122,11 +1137,11 @@ learnr2::question(
 character(0)
 ```
 
-Every object vanished when R restarted. And that is fine! We still have `process_data.R`, which can recreate `top_songs` whenever we want. The code is the source of truth; the objects in memory are disposable.
+Every object vanished when R restarted. We still have `process_data.R`, which can recreate `top_songs` whenever we want. The code is the source of truth. The objects in memory are disposable.
 
 ### Exercise 27
 
-Source `process_data.R` again to recreate `top_songs` (click the Run button ▷). Then, from the R Terminal, run `write_rds(top_songs, file = "clean_data.rds")`. [`write_rds()`](https://readr.tidyverse.org/reference/read_rds.html) comes from the **readr** package and saves an R object to a file; it produces no output.
+Source `process_data.R` again to recreate `top_songs` (click the Run button ▷). Then, from the R Terminal, run `write_rds(top_songs, file = "clean_data.rds")`. [`write_rds()`](https://readr.tidyverse.org/reference/read_rds.html) comes from the **readr** package and saves an R object to a file. It produces no output.
 
 In the bash Terminal, run `ls clean*`. CP/CR.
 
@@ -1148,7 +1163,7 @@ clean_data.rds
 websites-2 $
 ```
 
-`clean*` is a regular expression that matches any file beginning with `clean`. There are now three things associated with our data: the script `process_data.R` that creates it, the in-memory object `top_songs` that disappears when R restarts, and the file `clean_data.rds` that persists on disk.
+`clean*` is a pattern that matches any file name beginning with `clean`. There are now three things associated with our data: the script `process_data.R` that creates it, the in-memory object `top_songs` that disappears when R restarts, and the file `clean_data.rds` that persists on disk.
 
 ### Exercise 28
 
@@ -1328,7 +1343,7 @@ include_graphics("billboard.png")
 
 ###
 
-There was nothing wrong with keeping the plotting code in `index.qmd`. The trouble is that it re-runs on every render. By moving the work into scripts and displaying only the saved image, the site renders almost instantly --- no matter how slow the original analysis was.
+The plotting code in `index.qmd` was not wrong. The trouble was that it re-ran on every render. With the work in scripts and only the saved image displayed, the site renders almost instantly, no matter how slow the original analysis was.
 
 ### Exercise 33
 
@@ -1364,7 +1379,7 @@ A       process_data.R
 websites-2 $
 ```
 
-This is the workflow professionals use. First, get something working all in one place. Second, split the slow parts into scripts --- `process_data.R` cleans the data and saves `clean_data.rds`, `make_plot.R` reads that and saves `billboard.png` --- so that `index.qmd` only has to show the image. In a larger project, these files often live in dedicated `code/`, `data/`, and `images/` directories. Separating data cleaning, visualization, and reporting makes pipelines faster to iterate on and easier to debug.
+First, get something working all in one place. Second, split the slow parts into scripts --- `process_data.R` cleans the data and saves `clean_data.rds`, `make_plot.R` reads that and saves `billboard.png` --- so that `index.qmd` only has to show the image. In a larger project, these files often live in dedicated `code/`, `data/`, and `images/` directories. Separating data cleaning, visualization, and reporting makes pipelines faster to iterate on and easier to debug.
 
 ### Exercise 34
 
@@ -1404,7 +1419,7 @@ Once you have confirmed your files are on GitHub, delete your Codespace. Click t
 
 ###
 
-When you ran `quarto publish gh-pages` for `website-1` and `websites-2`, Quarto was doing something behind the scenes worth understanding. It created (or updated) a separate `gh-pages` branch in your repo containing only the rendered HTML files from `_site`. Your `main` branch stays clean with just the source files. This is exactly why you added `_site` to `.gitignore` — the rendered files do live on GitHub, but in a different branch that GitHub Pages serves automatically. If you visit your repo on GitHub and click the branch dropdown, you will see both `main` and `gh-pages`.
+Each time you ran `quarto publish gh-pages`, Quarto created (or updated) a separate `gh-pages` branch in your repo containing only the rendered HTML files from `_site`. Your `main` branch holds just the source files. This is why you added `_site` to `.gitignore`. The rendered files do live on GitHub, but in a different branch that GitHub Pages serves automatically. If you visit your repo on GitHub and click the branch dropdown, you will see both `main` and `gh-pages`.
 
 ## Summary
 

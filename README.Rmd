@@ -69,6 +69,8 @@ The core tutorials introduce students to the VS Code integrated development envi
 
 - *GitHub Advanced* ("github-2"). More practice with Git/GitHub: create a repo by hand with `gh`, clone it onto a fresh machine, pull changes back, and delete a Codespace while your work survives on GitHub.
 
+- *Dotfiles* ("dotfiles"). Graduate from `connect-repo`: a private `dotfiles` repo delivers your files to every new Codespace, a Codespaces secret delivers your GitHub token, and a brand new machine is already signed in as you.
+
 - *Websites 1* ("websites-1"). Use the quarto CLI to create, render, preview, and publish a multi-page website to GitHub Pages.
 
 - *Websites 2* ("websites-2"). Build a site with multi-page navigation and drop-down menus, then refactor analysis code into scripts that save results as RDS and PNG files.
@@ -80,8 +82,6 @@ The core tutorials introduce students to the VS Code integrated development envi
 - *The Devcontainer Dockerfile* ("docker"). Read through the Dockerfile that builds the PPBDS devcontainer image.
 
 - *Your Starter* ("your-starter"). Build your own version of `codespace-starter`, with your own Dockerfile, image, and devcontainer.json. Under construction.
-
-- *Dotfiles* ("dotfiles"). Build a private `dotfiles` repo that GitHub reads every time it makes you a machine, so a brand new Codespace already knows your Git identity.
 
 - *OpenRouter* ("openrouter"). Get an OpenRouter account and API key, store the key so it survives a rebuild, and use it to drive `aider` on free and cheap models.
 

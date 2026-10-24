@@ -79,7 +79,7 @@ If your result ends in `quarto`, you are all set. **Do not run the connect-repo 
 connect-repo quarto
 ```
 
-If a sign-in message appears, follow it as you did in the Workflow tutorial: press Enter at the `Authenticate Git with your GitHub credentials?` prompt, copy the one-time code, press Enter to open GitHub in your browser, and paste the code there. When `connect-repo` finishes, it prints a line like `✅  Connected: /workspaces/quarto  →  https://github.com/your-username/quarto` and the prompt becomes `quarto $`. Then one of two things happens. Either the VS Code window switches to the new folder by itself --- VS Code asks whether you trust the authors of the files in this folder; click **Trust Folder & Continue** --- or nothing switches, in which case you use `File -> Open Folder...`, open `/workspaces/quarto`, and click **Trust Folder & Continue** when asked. Both are normal.
+If a sign-in message appears, follow it as you did in the Workflow tutorial: press Enter at the `Authenticate Git with your GitHub credentials?` prompt, copy the one-time code, press Enter to open GitHub in your browser, and paste the code there. When `connect-repo` finishes, it prints a line like `✅  Connected: /workspaces/quarto  →  https://github.com/your-username/quarto` and the prompt becomes `quarto $`. Then one of two things happens. Either the VS Code window switches to the new folder by itself and asks whether you trust the authors of the files in this folder. Click **Trust Folder & Continue**. Or nothing switches, in which case you use `File -> Open Folder...`, open `/workspaces/quarto`, and click **Trust Folder & Continue** when asked. Both are normal.
 
 ###
 
@@ -113,11 +113,11 @@ Stop and fix the open folder if your result does not end in `quarto`. All work i
 
 ###
 
-Going forward, every tutorial will begin by assuming that you are already in a repo named after the tutorial. The repo name is the tutorial's title, all in lower case, with spaces replaced by dashes. This tutorial is titled "Quarto", so its repo is `quarto`. A tutorial titled "Terminal 1" is associated with a repo named `terminal-1`. We will no longer walk you through `connect-repo` --- you know how to create and connect to a repo, and we will assume that you have done so.
+Going forward, every tutorial will begin by assuming that you are already in a repo named after the tutorial. The repo name is the tutorial's title, all in lower case, with spaces replaced by dashes. This tutorial is titled "Quarto", so its repo is `quarto`. A tutorial titled "Terminal 1" is associated with a repo named `terminal-1`. Later tutorials will not walk you through `connect-repo`. Create and connect to the repo before you begin.
 
 ## Quarto 1
 
-Quarto is a file format for making dynamic documents with R and other languages, like Python. To learn more about Quarto and how to use it, check out the [official webpage](https://quarto.org/). Quarto is the successor technology to [R Markdown](https://rmarkdown.rstudio.com/). This section introduces Quarto documents.
+Quarto is a file format for making dynamic documents with R and other languages, like Python. To learn more about Quarto and how to use it, check out the [official webpage](https://quarto.org/). Quarto is the successor technology to [R Markdown](https://rmarkdown.rstudio.com/).
 
 
 ### Exercise 1
@@ -170,11 +170,11 @@ The black dot next to the name indicates that the file has unsaved changes. The 
 
 ###
 
-If you did save the file, no worries! **It is never a problem if your answer to a tutorial exercise differs from ours.** What matters is that you made an honest effort to follow the instructions. 
+If you already saved the file, your listing also shows `quarto-1.qmd`. An answer that differs from ours is never a problem.
 
 ###
 
-Quarto is a command line interface tool, not an R package. Therefore, its commands are largely run in a bash Terminal. As you work through this tutorial, and use Quarto in the future, you should refer to the [Quarto documentation](https://quarto.org/). Of course, in the modern world, we ask an AI when we have a problem.
+Quarto is a command line tool, not an R package, so its commands run in a bash Terminal. The [Quarto documentation](https://quarto.org/) is the reference, and an AI is often the quickest way to get an answer.
 
 ### Exercise 2
 
@@ -184,7 +184,7 @@ Name the file `quarto-1.qmd`.
 
 ![](images/q-4.png){width=90%}
 
-Now that the file is saved, the black dot has disappeared. The file is now part of the repo, and will be tracked by Git. The `U` next to the name means that, according to Git, the file is **untracked**. Git does not yet recognize it, because we have not added it to the repo. 
+Now that the file is saved, the black dot has disappeared. The `U` next to the name means that, according to Git, the file is **untracked**. It sits in the repo folder, but Git will not record it until you commit it.
 
 ###
 
@@ -215,7 +215,7 @@ quarto $
 
 ###
 
-A Quarto file uses `qmd` as its extension, where those initials stand for **Q**uarto **M**arkdown **D**ocument. We will often say *QMD*, in the same way that we use *PNG* for some image files. Note that there is no necessary connection between the **title** of a Quarto document --- “My First Quarto Document” --- and the **name** of the file, `quarto-1.qmd`.
+A Quarto file uses `qmd` as its extension, where those initials stand for **Q**uarto **M**arkdown **D**ocument. We will often say *QMD*, in the same way that we use *PNG* for some image files. There is no necessary connection between the **title** of a Quarto document --- “My First Quarto Document” --- and the **name** of the file, `quarto-1.qmd`.
 
 ###
 
@@ -253,7 +253,7 @@ The `echo: false` option disables the printing of code (only output is displayed
 
 ### 
 
-As you can see, a lot of the text is regular plain text, not code. However, there are code chunks (denoted by triple backticks on both ends, `` ```[code here]``` ``) that allow us to execute code when the document is "rendered." To "render" a Quarto document is to transform it into an HTML, PDF, DOCX, or other output file format while also running any embedded code. Here's an example of an R code chunk:
+A lot of the text is regular plain text, not code. However, there are code chunks (denoted by triple backticks on both ends, `` ```[code here]``` ``) that allow us to execute code when the document is "rendered." To "render" a Quarto document is to transform it into an HTML, PDF, DOCX, or other output file format while also running any embedded code. Here's an example of an R code chunk:
 
 ````{verbatim}
 ```{r}
@@ -277,11 +277,9 @@ This command splits the Editor and opens a new tab titled "Quarto Preview" on th
 
 ###
 
-There is a lot going on, so we will consider different parts of the window. Please pay attention.
-
 ![](images/q-5-a.png){width=90%}
 
-The Quarto Preview window shows what your Quarto document looks like now that it has been rendered as HTML. Its toolbar, shown above, has three things worth knowing about. The circular arrow on the left is the "refresh" button, which re-renders the document, although this refresh generally happens automatically.
+The Quarto Preview window shows what your Quarto document looks like now that it has been rendered as HTML. Its toolbar, shown above, has three controls. The circular arrow on the left is the "refresh" button, which re-renders the document, although this refresh generally happens automatically.
 
 Next to it is the URL at which the rendered page is actually available (at least to you), via your Codespace.
 
@@ -297,11 +295,11 @@ Using the `Cmd/Ctrl + Shift + K` shortcut causes VS Code to open a terminal name
 
 ![](images/q-5-c.png){width=90%}
 
-You don't need to worry about this now. Just use `Cmd/Ctrl + Shift + K` to preview your Quarto documents. Remember: Professionals don't click buttons. They save time by using keyboard shortcuts.
+Use `Cmd/Ctrl + Shift + K` to preview your Quarto documents. Professionals save time with keyboard shortcuts rather than clicking buttons.
 
 ###
 
-Lastly, note that you can also open the HTML file in a browser window by using `Cmd/Ctrl + click` on the "Browse at" link in that terminal. (Either link works; the "Listening on" address is the same page.)
+You can also open the HTML file in a browser window with `Cmd/Ctrl + click` on the "Browse at" link in that terminal. The "Listening on" address is the same page, so either link works.
 
 ![](images/q-5-d.png){width=90%}
 
@@ -331,7 +329,7 @@ In the Explorer, you should see a new file, `quarto-1.html`. This is the file cr
 
 ### 
 
-You should also see a new directory: `quarto-1_files`. Anytime you render a Quarto document, you create a directory like this, with the same name as the file, without the extension, plus `_files`. Quarto uses this directory to store intermediate work products associated with the creation of the associated output file.
+You should also see a new directory: `quarto-1_files`. Anytime you render a Quarto document, you create a directory like this, with the same name as the file, without the extension, plus `_files`. Quarto stores the support files for the rendered output there.
 
 ### Exercise 4
 
@@ -371,7 +369,7 @@ quarto $
 
 ### Exercise 5
 
-The HTML document created from a QMD file will, by default, show both the code and the results generated by that code. This is the magic of Quarto. We can easily document and reproduce our work.
+The HTML document created from a QMD file shows, by default, both the code and the results that code generates. That is what makes a Quarto document reproducible.
 
 Add a couple of blank lines to the bottom of `quarto-1.qmd`. Then, add an R code chunk by selecting the `More Actions ...` button --- the three dots in the top-right of the editor. 
 
@@ -385,7 +383,7 @@ You can also insert a code cell with the shortcut key: `Cmd/Ctrl + Shift + I`.
 
 Save the file. Render it again.
 
-Open an R Terminal (the drop-down beside `+` on the right side of the Panel, then **R Terminal**; its tab is labeled **R Interactive**). In the R Terminal, run:
+Open an R Terminal: use the drop-down beside `+` on the right side of the Panel, then choose **R Terminal**. Its tab is labeled **R Interactive**. In the R Terminal, run:
 
 ```r
 learnr2::show_file("quarto-1.qmd", pattern = "6")
@@ -398,7 +396,7 @@ CP/CR.
 #| label: quarto-1-5
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Add a couple of blank lines to the bottom of quarto-1.qmd. Then, add an R code chunk by selecting the More Actions ... button, the three dots in the top-right of the editor. Then, choose Insert Code Cell, selecting r from the list of options. Within the code cell, add 6 + 3. (You can also insert a code cell with the shortcut key Cmd/Ctrl + Shift + I.) Save the file. Render it again. Open an R Terminal: use the drop-down beside + on the right side of the Panel, then choose R Terminal. Its tab is labeled R Interactive. In the R Terminal, run learnr2::show_file(\"quarto-1.qmd\", pattern = \"6\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -413,9 +411,9 @@ R 4.6.1> learnr2::show_file("quarto-1.qmd", pattern = "6")
 
 ###
 
-This should return the one line in the file that contains a `6`: `6 + 3`, the line that you added to the code cell.
+`show_file()` with `pattern = "6"` returns only the lines that contain a `6`, here the one line you added to the code cell.
 
-Strictly speaking, you did not need to save the file before rendering it. The Codespace auto-saves after a short delay, which is why the black dot next to the file name disappears by itself, and the `preview` command saves the file as well. Nevertheless, you should make a habit of saving your work before running it. (If you come across some software that *doesn't* autosave upon running, you'll be running old code and wondering why something still doesn't work when you just fixed it.)
+You did not strictly need to save the file before rendering it. The Codespace auto-saves after a short delay, which is why the black dot next to the file name disappears by itself, and `quarto preview` saves the file as well. Still, make a habit of saving your work before running it. Software that does not autosave will run your old code, and you will wonder why a fix did not work.
 
 ###
 
@@ -426,7 +424,7 @@ Watching files for changes
 Browse at http://localhost:3807/
 ```
 
-`Cmd/Ctrl + click` that link and you will be able to see the HTML. (Do not paste the address into a browser by hand: `localhost` here means your Codespace, a computer far away, and VS Code does the translation for you when you click.) In my case, the URL is `http://localhost:3807/`; yours will be different.
+`Cmd/Ctrl + click` that link and you will be able to see the HTML. (Do not paste the address into a browser by hand: `localhost` here means your Codespace, a computer far away, and VS Code does the translation for you when you click.) In my case, the URL is `http://localhost:3807/`. Yours will be different.
 
 ### Exercise 6
 
@@ -444,7 +442,7 @@ CP/CR.
 #| label: quarto-1-6
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Delete the first code cell. Add This is my first Markdown text. two lines below the YAML header. Save the file. In the bash Terminal, run cat quarto-1.qmd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -465,7 +463,7 @@ quarto $
 
 ###
 
-This should return your entire Quarto document. Make sure your file ends with an empty line, so that the `quarto $` prompt appears on its own line rather than glued to the end of your text. Ending a file with a newline is (almost) always a good idea! Don't be stingy with whitespace.
+Make sure your file ends with an empty line, so that the `quarto $` prompt appears on its own line rather than glued to the end of your text. Ending a file with a newline is almost always a good idea.
 
 ### Exercise 7
 
@@ -479,7 +477,7 @@ Replace the one sentence already in `quarto-1.qmd` with `## My Header`. Skip a l
 You can do a lot of cool things in Quarto like **bold** and *italic* text.
 ```
 
-Render the file again. Does everything look good in the Quarto Preview pane or your browser?
+Render the file again and check the result in the Quarto Preview pane or your browser.
 
 ### 
 
@@ -496,7 +494,7 @@ CP/CR.
 #| label: quarto-1-7
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Replace the one sentence already in quarto-1.qmd with ## My Header. Skip a line and add this text: You can do a lot of cool things in Quarto like **bold** and *italic* text. Render the file again and check the result in the Quarto Preview pane or your browser. In the bash Terminal, run cat quarto-1.qmd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -521,9 +519,9 @@ quarto $
 
 You can find a full list of Markdown formatting styles and commands [here](https://www.markdownguide.org/basic-syntax/).
 
-To encourage the use of shortcut keys going forward, we will start using them directly in our instructions to you. So, instead of writing "Render the document," we will write `Cmd/Ctrl + Shift + K`.
+From now on, instead of writing "Render the document," we will write `Cmd/Ctrl + Shift + K`.
 
-Strictly speaking, the underlying command being issued is the "Preview" command, which both renders the QMD once and then also continues to watch for any changes in the QMD, re-rendering as needed.
+That shortcut runs the "Preview" command, which renders the QMD once and then keeps watching it, re-rendering whenever it changes.
 
 ### Exercise 8
 
@@ -547,7 +545,7 @@ Copy/paste that URL below.
 #| label: quarto-1-8
 #| echo: false
 learnr2::question(
-  "Copy/paste that URL below.",
+  "In the Explorer (the file tree on the left side of VS Code), find quarto-1.html. Right-click it and select Open with Live Server. Two notices pop up, Server is Started at port : 5500 and Your application running on port 5500 is available, and Port : 5500 appears in the Status Bar at the bottom of the window. A new browser tab opens with quarto-1.html, served through your Codespace. The URL will look something like https://[codespace-name]-5500.app.github.dev/quarto-1.html. Copy/paste that URL below.",
   type = "reflection",
   show_text = FALSE
 )
@@ -567,11 +565,11 @@ Live Server is a VS Code extension that hosts HTML files so they can be viewed i
 
 ###
 
-Why learn two ways to view your work? The "Quarto Preview" pane is quick and lives right inside the editor. Live Server gives you a real browser tab that behaves exactly like the published web page your readers will eventually see --- which is why the later tutorials lean on it. Either one shows you the rendered HTML; use whichever you prefer.
+The "Quarto Preview" pane is quick and lives inside the editor. Live Server gives you a real browser tab that behaves exactly like the published web page your readers will eventually see, which is why later tutorials lean on it. Use whichever you prefer.
 
 ### Exercise 9
 
-Your first Quarto document is done, so commit it. Through the Source Control view, as you did in the Code tutorial: review **Changes** --- you should see `.gitignore`, `AGENTS.md`, `quarto-1.qmd`, and `quarto-1.html`, but no `_files` directory, thanks to your `.gitignore` --- type `Add quarto-1` as the message, press **Commit**, then **Publish Branch**. (This is the first push from a brand-new repo, which is why the button says **Publish Branch**; after this, it will say **Sync Changes**.)
+Your first Quarto document is done, so commit it. Through the Source Control view, as you did in the Code tutorial: review **Changes** --- you should see `.gitignore`, `AGENTS.md`, `quarto-1.qmd`, and `quarto-1.html`, but no `_files` directory, thanks to your `.gitignore` --- type `Add quarto-1` as the message, press **Commit**, then **Publish Branch**. (This is the first push from a brand-new repo, which is why the button says **Publish Branch**. After this, it will say **Sync Changes**.)
 
 In the bash Terminal, run `git log -1`. CP/CR.
 
@@ -599,13 +597,13 @@ quarto $
 
 ###
 
-`main` and `origin/main` on the same line: your Codespace and GitHub agree. One document finished, one commit made. You will repeat this rhythm at the end of the next section.
+`main` and `origin/main` on the same line means your Codespace and GitHub agree. The `-1` limits `git log` to the most recent commit.
 
 ## Quarto 2
 
 Restart your R session. (In other words, close your current R Terminal and open a new one.)
 
-Let's create another Quarto document so that we can explore how to include R code within the document.
+Let's create another Quarto document to explore how to include R code within it.
 
 ### Exercise 1
 
@@ -647,7 +645,7 @@ CP/CR.
 #| label: quarto-2-2
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Add a code cell by using the shortcut key combination Cmd/Ctrl + Shift + I. (On the Mac, the shortcut key is Cmd + Shift + I while on Windows it is Ctrl + Shift + I.) The newly created code cell will be empty. Save the file. In the bash Terminal, run cat quarto-2.qmd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -668,9 +666,9 @@ format: html
 
 ###
 
-Note the curly braces `{}` at the top of the chunk, with an `r` inside. The `r` indicates that Quarto should use R to run the code.
+The curly braces `{}` at the top of the chunk hold an `r`, which tells Quarto to run the code with R.
 
-In this tutorial, we will only include R code within our code chunks. But code chunks can have any programming language in them, from common ones like Python, Java, and C, to esoteric ones like INTERCAL and Whitespace. All you need to do is indicate the language in the curly braces, e.g., `{python}`, `{ruby}`, et cetera.
+Code chunks can hold any programming language, from common ones like Python, Java, and C to esoteric ones like INTERCAL and Whitespace. Name the language in the curly braces: `{python}`, `{ruby}`, and so on.
 
 ### Exercise 3
 
@@ -690,7 +688,7 @@ learnr2::question(
 
 ### 
 
-It is OK if your response does not look exactly like ours. But here is what we got:
+Here is what we got:
 
 ```{.output}
 My Second Quarto Document
@@ -699,11 +697,11 @@ My Second Quarto Document
 [1] 4
 ```
 
-We see both the code itself and the result of the code. This is an example of a "reproducible" analysis. We can re-render the document anytime we like, thereby confirming our results.
+The rendered page shows both the code and its result. Anyone can re-render the document and confirm that result, which is what "reproducible" means.
 
 ### Exercise 4
 
-You can add options to code chunks. In Quarto, code chunk options are always preceded by `#|`, pronounced "hash-pipe", followed by an option/value pair, separated by a colon. A chunk can have several options; each belongs on its own line, and the order does not matter.
+You can add options to code chunks. In Quarto, code chunk options are always preceded by `#|`, pronounced "hash-pipe", followed by an option/value pair, separated by a colon. A chunk can have several options. Each goes on its own line, and the order does not matter.
 
 Add two options above the `2 * 2` calculation: `#| echo: false` and `#| label: calculation`.
 
@@ -715,7 +713,7 @@ Add two options above the `2 * 2` calculation: `#| echo: false` and `#| label: c
 #| label: quarto-2-4
 #| echo: false
 learnr2::question(
-  "Cmd/Ctrl + Shift + K. Paste a screenshot of the HTML below.",
+  "Add two options above the 2 * 2 calculation: #| echo: false and #| label: calculation. Cmd/Ctrl + Shift + K. Paste a screenshot of the HTML below.",
   type = "reflection",
   allow_image = TRUE,
   allow_text = FALSE,
@@ -730,7 +728,7 @@ My Second Quarto Document
 [1] 4
 ```
 
-`echo: false` prevents the code, but not the results, from appearing in the finished file. Use this when writing reports aimed at people who don’t want to see the underlying R code, which is the vast majority of people you will ever write for. The `label` option, by contrast, has no effect on the output at all; labels are for organizing your work. Keep them short but evocative, with dashes (`-`) rather than underscores or spaces.
+`echo: false` prevents the code, but not the results, from appearing in the finished file. Use this when writing reports aimed at people who don’t want to see the underlying R code, which is the vast majority of people you will ever write for. The `label` option, by contrast, has no effect on the output at all. Labels are for organizing your work. Keep them short but evocative, with dashes (`-`) rather than underscores or spaces.
 
 ### Exercise 5
 
@@ -792,7 +790,7 @@ My Second Quarto Document
 library(tidyverse)
 ```
 
-We want to make our Quarto files beautiful. That means we will almost always "mask" ugly messages like this. Our readers don't care about such arcana. They care about our analysis.
+`message: false` hides the attach message. We almost always do this, because readers care about the analysis, not about which packages loaded.
 
 ### Exercise 7
 
@@ -815,7 +813,7 @@ Copy/paste the error that appears.
 #| label: quarto-2-7
 #| echo: false
 learnr2::question(
-  "Copy/paste the error that appears.",
+  "Add execute: echo: false to the bottom of the YAML header, with execute: on one line and echo: false on the next line, indented with two spaces. Cmd/Ctrl + Shift + K. The rendered file should now be empty except for the title. YAML is very fussy about formatting. Confirm this by breaking it: edit the YAML header so that echo: false is no longer indented. Cmd/Ctrl + Shift + K. Copy/paste the error that appears.",
   type = "reflection",
   show_text = FALSE
 )
@@ -839,11 +837,11 @@ Render failed due to invalid YAML.
 
 ###
 
-Indent `echo: false` again. `Cmd/Ctrl + Shift + K` to confirm that everything works. Any code chunk option that applies to most or all chunks belongs in the YAML header under `execute:`; an option for just one or two chunks stays in those chunks, preceded by `#|`.
+Indent `echo: false` again. `Cmd/Ctrl + Shift + K` to confirm that everything works. Any code chunk option that applies to most or all chunks belongs in the YAML header under `execute:`. An option for just one or two chunks stays in those chunks, preceded by `#|`.
 
 ### Exercise 8
 
-Add another code chunk option: `label: setup`. Don't forget to preface it with the hash-pipe: `#|`. It is conventional to label the code chunk that loads libraries and takes care of other housekeeping as the "setup" code chunk.
+Add another code chunk option: `label: setup`. Don't forget to preface it with the hash-pipe: `#|`.
 
 `Cmd/Ctrl + Shift + K`. Paste a screenshot of the HTML below.
 
@@ -851,7 +849,7 @@ Add another code chunk option: `label: setup`. Don't forget to preface it with t
 #| label: quarto-2-8
 #| echo: false
 learnr2::question(
-  "Cmd/Ctrl + Shift + K. Paste a screenshot of the HTML below.",
+  "Add another code chunk option: label: setup. Don't forget to preface it with the hash-pipe: #|. Cmd/Ctrl + Shift + K. Paste a screenshot of the HTML below.",
   type = "reflection",
   allow_image = TRUE,
   allow_text = FALSE,
@@ -861,13 +859,11 @@ learnr2::question(
 
 ### 
 
-You are generally free to label your chunks however you like. `setup` is the conventional name for the chunk that loads libraries and does other housekeeping, and readers of your code will look for it there.
-
-Chunk labels cannot be duplicated. Each chunk label must be unique.
+You may label chunks however you like, but `setup` is the conventional name for the chunk that loads libraries and does other housekeeping, and readers of your code will look for it there. Every chunk label in a document must be unique.
 
 ### Exercise 9
 
-**Important Point**: There are two different "worlds" that we are dealing with. First is the world of the Quarto document, the QMD file. Second are the worlds of the R Terminals. **These worlds only connect when we connect them**. Something written in a Quarto document --- or an R script --- is not, by default, part of an R Terminal session. The world of an R Terminal session includes only the commands executed in that terminal.
+There are two different "worlds" here. One is the Quarto document, the QMD file. The other is the R Terminal. **These worlds only connect when we connect them.** Code in a Quarto document --- or an R script --- is not part of an R Terminal session until you run it there. An R Terminal session holds only the commands executed in that terminal.
 
 ### 
 
@@ -900,7 +896,7 @@ R 4.6.1> pull(mtcars, 1)
 [31] 15.0 21.4
 ```
 
-Your lines may break in different places, depending on the width of your terminal. `pull()` is a **dplyr** function; it extracts one column --- here the first, `mpg` --- from a data frame as a plain vector.
+Your lines may break in different places, depending on the width of your terminal. `pull()` is a **dplyr** function. It extracts one column --- here the first, `mpg` --- from a data frame as a plain vector.
 
 If you run this command without running `library(tidyverse)` in the R Terminal, you will get an error about not finding the "pull" function. The fact that `library(tidyverse)` exists in the QMD, and that you have "used" it there by rendering the document, has no bearing on the world of the R Terminal.
 
@@ -932,7 +928,7 @@ Use AI to recreate the chart you see above using R. You can describe it in words
 
 ### 
 
-Preview the file. You should see your plot --- but not the code that made it. The `execute: echo: false` you added to the YAML header in Exercise 7 applies to every chunk in the document, including this new one. That is exactly what we want: a reader sees the graphic, not the machinery.
+Preview the file. You should see your plot --- but not the code that made it. The `execute: echo: false` you added to the YAML header in Exercise 7 applies to every chunk in the document, including this new one.
 
 In the R Terminal, run:
 
@@ -946,7 +942,7 @@ CP/CR.
 #| label: quarto-2-10
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Create a new code chunk. Use AI to recreate the scatterplot shown above (the iris data, with Sepal.Width on the x-axis, Sepal.Length on the y-axis, points colored by Species, and the title \"Measurements for Different Species of Iris\") using R. You can describe it in words, or even use the image of the chart itself. Then paste the code you get back into your new code chunk. Preview the file. You should see your plot but not the code that made it. In the R Terminal, run learnr2::show_file(\"quarto-2.qmd\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -969,11 +965,11 @@ ggplot(data = iris,
 
 ###
 
-AI code is not perfect! A new piping character, `|>`, was introduced to replace `%>%`. But AI often uses the older version. If your AI used `%>%`, tell it to replace those characters with the newer `|>`. This can help "teach" your AI to write better code for you.
+The pipe `|>` replaced the older `%>%`, but AI often still writes `%>%`. If yours did, tell it to use `|>` instead.
 
 ###
 
-One more warning about AI code: **you should never include `install.packages()` in a Quarto document or R script that you share.** Generative AI tools will often suggest this. It is inconsiderate to hand off code that could change someone else's computer if they are not careful. Just having the `library()` command in the document tells us everything we need to know.
+**Never include `install.packages()` in a Quarto document or R script that you share.** AI tools often suggest it. Code that installs packages changes someone else's computer, and the `library()` call already tells readers which packages they need.
 
 ### Exercise 11
 
@@ -1004,7 +1000,7 @@ quarto $
 
 ###
 
-A `.gitignore` grows one line at a time as a project accumulates generated files. Git also accepts wildcard patterns --- a single line reading `*_files` would cover both directories at once --- but exact names are easier to read and to reason about. You will meet wildcards later.
+A `.gitignore` grows one line at a time as a project accumulates generated files. Git also accepts wildcard patterns --- a single line reading `*_files` would cover both directories at once --- but exact names are easier to read and to reason about.
 
 ### Exercise 12
 
@@ -1016,7 +1012,7 @@ Then, in the bash Terminal, run `git status`. CP/CR.
 #| label: quarto-2-12
 #| echo: false
 learnr2::question(
-  "Then, in the bash Terminal, run git status. CP/CR.",
+  "Commit and push. Use the commit message Add quarto-2. Then, in the bash Terminal, run git status. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1035,7 +1031,7 @@ quarto $
 
 ###
 
-That instruction --- "commit and push," and nothing more --- is all later tutorials will give you, and now it is all you need. `git status` is the quick way to confirm nothing was left behind: a clean working tree, up to date with `origin/main`, means every piece of your work is safely on GitHub.
+`git status` confirms nothing was left behind. A clean working tree, up to date with `origin/main`, means all of your work is on GitHub.
 
 ## Publishing
 
@@ -1057,7 +1053,7 @@ CP/CR the render command and its output.
 #| label: publishing-1
 #| echo: false
 learnr2::question(
-  "CP/CR the render command and its output.",
+  "Render from the bash Terminal: run quarto render quarto-2.qmd. Then, in the Explorer, right-click quarto-2.html and choose Open with Live Server. Keep that tab open. CP/CR the render command and its output.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1103,11 +1099,11 @@ The render names each chunk as it runs it: `setup`, then your plotting chunk, wh
 
 ###
 
-Notice the shape your document has grown into: a YAML header, a `setup` chunk that loads libraries, then a work chunk that makes a graphic. That is the skeleton of every analysis document you will make from now on.
+Your document now has a YAML header, a `setup` chunk that loads libraries, and a work chunk that makes a graphic. That is the skeleton of every analysis document you will make from now on.
 
 ###
 
-`quarto render` and `Cmd/Ctrl + Shift + K` are cousins. The shortcut runs `quarto preview`, which renders once and then keeps watching your file, re-rendering on every save. `quarto render` does one render and stops. The loop you just used --- edit, `quarto render`, glance at the refreshed Live Server tab --- is the one every data science tutorial from here on assumes.
+The shortcut runs `quarto preview`, which renders once and then keeps watching your file, re-rendering on every save. `quarto render` renders once and stops. Later tutorials assume the loop you just used: edit, `quarto render`, check the refreshed Live Server tab.
 
 ### Exercise 2
 
@@ -1121,7 +1117,7 @@ Then run `quarto publish gh-pages quarto-2.qmd`. Respond with "Y" when it asks w
 #| label: publishing-2
 #| echo: false
 learnr2::question(
-  "Then run quarto publish gh-pages quarto-2.qmd. Respond with \"Y\" when it asks whether you want to publish. (This might take a minute.) CP/CR.",
+  "In the bash Terminal, run git status. If it shows anything to commit, commit and push before continuing. Then run quarto publish gh-pages quarto-2.qmd. Respond with \"Y\" when it asks whether you want to publish. (This might take a minute.) CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1194,7 +1190,7 @@ To https://github.com/your-username/quarto.git
 quarto $
 ```
 
-The output is long. The line `fatal: pathspec '.' did not match any files` looks alarming but is harmless --- the brand-new `gh-pages` branch simply had nothing in it yet --- and the run carries on to `[✓] Published to https://your-username.github.io/quarto/`. Your page lives at that address plus the file name, `https://your-username.github.io/quarto/quarto-2.html`; `quarto publish` also made a copy called `index.html`, so the bare address works too.
+The line `fatal: pathspec '.' did not match any files` looks alarming but is harmless --- the brand-new `gh-pages` branch simply had nothing in it yet --- and the run carries on to `[✓] Published to https://your-username.github.io/quarto/`. Your page lives at that address plus the file name, `https://your-username.github.io/quarto/quarto-2.html`. `quarto publish` also made a copy called `index.html`, so the bare address works too.
 
 ###
 
@@ -1222,7 +1218,7 @@ https://your-username.github.io/quarto/quarto-2.html
 
 ###
 
-That page is live on the internet --- anyone you send the URL to can read it. This loop --- edit, render, publish --- is how nearly every later tutorial ends: with a piece of work anyone in the world can see.
+Anyone you send that URL to can read the page. Nearly every later tutorial ends the same way: edit, render, publish.
 
 ## Summary
 

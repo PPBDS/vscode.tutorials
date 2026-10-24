@@ -79,6 +79,11 @@ development environment.
   a repo by hand with `gh`, clone it onto a fresh machine, pull changes
   back, and delete a Codespace while your work survives on GitHub.
 
+- *Dotfiles* (“dotfiles”). Graduate from `connect-repo`: a private
+  `dotfiles` repo delivers your files to every new Codespace, a
+  Codespaces secret delivers your GitHub token, and a brand new machine
+  is already signed in as you.
+
 - *Websites 1* (“websites-1”). Use the quarto CLI to create, render,
   preview, and publish a multi-page website to GitHub Pages.
 
@@ -99,10 +104,6 @@ development environment.
 - *Your Starter* (“your-starter”). Build your own version of
   `codespace-starter`, with your own Dockerfile, image, and
   devcontainer.json. Under construction.
-
-- *Dotfiles* (“dotfiles”). Build a private `dotfiles` repo that GitHub
-  reads every time it makes you a machine, so a brand new Codespace
-  already knows your Git identity.
 
 - *OpenRouter* (“openrouter”). Get an OpenRouter account and API key,
   store the key so it survives a rebuild, and use it to drive `aider` on

@@ -21,7 +21,7 @@ learnr2::student_info()
 
 ## Introduction
 
-This tutorial provides a tour of your Visual Studio Code (VS Code) workspace: the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant, ending with the different ways to run R code. Given that you are reading these words, you probably started the tutorial from a [GitHub Codespace](https://github.com/features/codespaces), as set up [here](https://ppbds.github.io/primer/getting-started.html).
+This tutorial provides a tour of your Visual Studio Code (VS Code) workspace: the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant, ending with the different ways to run R code. You probably started the tutorial from a [GitHub Codespace](https://github.com/features/codespaces), as set up [here](https://ppbds.github.io/primer/getting-started.html).
 
 ###
 
@@ -31,18 +31,18 @@ After starting the tutorial, your Codespace looks something like this:
 
 ## Bash Terminal
 
-The **bash Terminal** is a text-based interface in which you type commands to tell your Codespace what to do. You send a command, the terminal executes it, and it (usually) gives you something back. In this section you will practice the most common bash commands. (In the next section you will see that the R Terminal works exactly the same way.)
+The **bash Terminal** is a text-based interface in which you type commands to tell your Codespace what to do. You send a command, the terminal executes it, and it (usually) gives you something back.
 
 ###
 
-You need a bash Terminal in which to type commands. The Panel at the bottom of VS Code already shows one. Its tab carries a small ⚠ icon; that is harmless, so ignore it. The banner printed in that terminal announces that your Codespace is READY and suggests running `connect-repo`. Do **not** run it in this tutorial. The next tutorial, "Workflow," is where you create your own repo. To open another bash Terminal at any time, press the plus button (`+`) on the right side of the Panel.
+The Panel at the bottom of VS Code already shows a bash Terminal. Its tab carries a small ⚠ icon. The icon is harmless, so ignore it. The banner printed in that terminal announces that your Codespace is READY and suggests running `connect-repo`. Do **not** run it in this tutorial. The next tutorial, "Workflow," is where you create your own repo. To open another bash Terminal at any time, press the plus button (`+`) on the right side of the Panel.
 
 
 ![](images/gs-2.png){width=90%}
 
 ### Exercise 1
 
-In the bash Terminal, run `whoami`. CP/CR. (Recall that "CO/CR" means "copy and paste the command and its response into the answer box below.")
+In the bash Terminal, run `whoami`. CP/CR. (Recall that "CP/CR" means "copy and paste the command and its response into the answer box below.")
 
 ```{r}
 #| label: bash-terminal-1
@@ -64,7 +64,7 @@ codespace-starter $
 
 ###
 
-`whoami` prints the username of the account you are signed in as. Your Codespace is a complete computer running in the cloud, and you interact with it as the `rstudio` user. It is OK if your formatting differs from ours. What matters is that you show that you executed the command as instructed.
+`whoami` prints the username of the account you are signed in as. Your Codespace is a complete computer running in the cloud, and you interact with it as the `rstudio` user. It is OK if your formatting differs from ours.
 
 ### Exercise 2
 
@@ -147,7 +147,7 @@ codespace-starter $
 
 ###
 
-`ls` **l**i**s**ts the files in the working directory. Notice that nothing was printed! That is because, by default, `ls` hides any file or folder whose name begins with a dot (`.`). The directory is not actually empty, as we will see next.
+`ls` **l**i**s**ts the files in the working directory. Nothing was printed because, by default, `ls` hides any file or folder whose name begins with a dot (`.`). Every entry in this directory starts with a dot, so the directory only looks empty.
 
 ### Exercise 5
 
@@ -175,11 +175,11 @@ codespace-starter $
 
 ###
 
-The `-a` flag (for "all") tells `ls` to reveal the hidden entries. `.` is the current directory and `..` is the directory just above it. `.git` stores the project's version history; the other dot-folders hold settings for the Codespace, for GitHub and for VS Code, which is why they are kept out of sight. A "flag" like `-a` is an option that changes how a command behaves.
+The `-a` flag (for "all") tells `ls` to reveal the hidden entries. `.` is the current directory and `..` is the directory just above it. `.git` stores the project's version history. The other dot-folders hold settings for the Codespace, for GitHub and for VS Code, which is why they are kept out of sight. A "flag" like `-a` is an option that changes how a command behaves.
 
 ### Exercise 6
 
-Let us make the bash Terminal "sleep" by running `sleep 5`. The `sleep 5` command pauses execution for 5 seconds.
+In the bash Terminal, run `sleep 5`. This command pauses execution for 5 seconds.
 
 CP/CR.
 
@@ -187,7 +187,7 @@ CP/CR.
 #| label: bash-terminal-6
 #| echo: false
 learnr2::question(
-  "Let us make the bash Terminal \"sleep\" by running sleep 5. The sleep 5 command pauses execution for 5 seconds. CP/CR.",
+  "In the bash Terminal, run sleep 5. This command pauses execution for 5 seconds. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -206,7 +206,7 @@ Many commands do their work silently and print nothing. We can change the durati
 
 ### Exercise 7
 
-Run `sleep 60` in the bash Terminal. This command makes the terminal sleep for 60 seconds. To cancel the running `sleep` command, press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
+In the bash Terminal, run `sleep 60`. Before the 60 seconds are up, press `Ctrl + C` on your keyboard to cancel the running command.
 
 CP/CR.
 
@@ -214,7 +214,7 @@ CP/CR.
 #| label: bash-terminal-7
 #| echo: false
 learnr2::question(
-  "Run sleep 60 in the bash Terminal. This command makes the terminal sleep for 60 seconds. To cancel the running sleep command, press Ctrl + C on your keyboard. Do so now, before sleep 60 finishes. CP/CR.",
+  "In the bash Terminal, run sleep 60. Before the 60 seconds are up, press Ctrl + C on your keyboard to cancel the running command. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -230,15 +230,15 @@ codespace-starter $
 
 ###
 
-`Ctrl + C` interrupts whatever process is currently running in the terminal and returns you to the prompt; the `^C` marks where you pressed it. When a command hangs or you change your mind, `Ctrl + C` stops it.
+`Ctrl + C` interrupts whatever process is currently running in the terminal and returns you to the prompt. The `^C` marks where you pressed it. When a command hangs or you change your mind, `Ctrl + C` stops it.
 
 ## R Terminal
 
-All the terminology associated with VS Code is confusing. The "Panel" is the bottom of the VS Code window. There are several "views" associated with the Panel, including "Output," "Ports," and "Terminal." Within the Terminal view, you can have multiple "terminals" running. Each terminal has an associated "tab" on the right side of the Panel which you can use to select that terminal. A terminal is just a window for talking to a program: a bash Terminal runs the bash shell; an R Terminal runs R. Different terminals serve different purposes.
+The "Panel" is the bottom of the VS Code window. There are several "views" associated with the Panel, including "Output," "Ports," and "Terminal." Within the Terminal view, you can have multiple "terminals" running. Each terminal has an associated "tab" on the right side of the Panel which you can use to select that terminal. A terminal is just a window for talking to a program. A bash Terminal runs the bash shell. An R Terminal runs R.
 
 ###
 
-So far, we have learned about the "bash Terminal," which lets you talk to the computer. The "R Terminal" lets you talk to R, the programming language you will use for data science. The two work the same way: you type a command, press `Enter`, and the terminal executes the command and gives you something back. The only real difference is the language --- bash commands like `ls` and `pwd` on the one hand, R commands like `sqrt(16)` on the other. Each exercise in this section asks you to run a one-line command and then CP/CR.
+The bash Terminal lets you talk to the computer. The R Terminal lets you talk to R, the programming language you will use for data science. The two work the same way: you type a command, press `Enter`, and the terminal executes the command and gives you something back. The only real difference is the language --- bash commands like `ls` and `pwd` on the one hand, R commands like `sqrt(16)` on the other.
 
 ###
 
@@ -277,7 +277,7 @@ R 4.6.1>
 
 ###
 
-At its simplest, R is a calculator. Just as the bash Terminal took `whoami` and handed back your username, the R Terminal takes `4 + 5` and hands back the result. You send a command; the terminal sends something back. The `[1]` at the start of the output is a counter telling you that the line begins with the first element of the result --- useful when a result has many values spread across several lines.
+At its simplest, R is a calculator. Just as the bash Terminal took `whoami` and handed back your username, the R Terminal takes `4 + 5` and hands back the result. The `[1]` at the start of the output is a counter telling you that the line begins with the first element of the result --- useful when a result has many values spread across several lines.
 
 ### Exercise 2
 
@@ -309,7 +309,7 @@ R 4.6.1>
 
 ### Exercise 3
 
-In the R Terminal, run `getwd()`. This stands for **g**et **w**orking **d**irectory, meaning that we want to know the directory in which the R process is currently located.
+In the R Terminal, run `getwd()`. This stands for **g**et **w**orking **d**irectory, the directory in which the R process is currently located.
 
 CP/CR.
 
@@ -317,7 +317,7 @@ CP/CR.
 #| label: r-terminal-3
 #| echo: false
 learnr2::question(
-  "In the R Terminal, run getwd(). This stands for get working directory, meaning that we want to know the directory in which the R process is currently located. CP/CR.",
+  "In the R Terminal, run getwd(). This stands for get working directory, the directory in which the R process is currently located. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -383,7 +383,7 @@ CP/CR.
 #| label: r-terminal-5
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "show_file() is a commonly used function from the learnr2 package. It makes it easy for you to share the contents of another file with your instructor, especially a file that you have edited. You can generally call a function by giving its name followed by parentheses, as with getwd(). However, we often prefix the function name with the name of the package in which the function is found, separated by two colons. Since show_file() is in the learnr2 package, we can call it using this \"double-colon\" notation: learnr2::show_file(). In the R Terminal, run this command: learnr2::show_file(file.path(R.home(), \"COPYING\"), end = 7). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -396,11 +396,11 @@ learnr2::question(
 learnr2::show_file(file.path(R.home(), "COPYING"), end = 7)
 ```
 
-For now, don't worry about what `R.home()` and `file.path()` are doing, although you can read about them by running `?R.home` and `?file.path` in the R Terminal. Those details are less important than seeing the intended usage of `show_file()`.
+`R.home()` returns the directory where R is installed, and `file.path()` joins pieces of a path together. Their help pages open when you run `?R.home` and `?file.path` in the R Terminal.
 
 ### Exercise 6
 
-Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are simply copies of commands and their results. Other times, we will ask you to write one or more sentences of prose.
+Some written answers are copies of commands and their results. Others are one or more sentences of prose.
 
 Copy and paste everything from the exercise header above, beginning with "Exercise 6," through the end of this sentence into the answer box below. In other words, you are copying from this tutorial, not from the Terminal. Press "Submit Answer."
 
@@ -416,15 +416,15 @@ learnr2::question(
 
 ###
 
-Once you submit an answer, it is locked: you cannot change it. You also cannot click "Continue" until you have submitted every question above it. Don't stress! Most instructors grade tutorials on a pass/fail basis, so, as long as you make an honest effort, you will do fine.
+Once you submit an answer, it is locked: you cannot change it. You also cannot click "Continue" until you have submitted every question above it. Most instructors grade tutorials on a pass/fail basis, so an honest effort is enough.
 
-If you get stuck, just write "I skipped this question" or words to that effect. Skipping a question or two is *never* a problem. Just press on.
+If you get stuck, write "I skipped this question" or words to that effect. Skipping a question or two is *never* a problem.
 
 Your answers are saved in your browser, so they survive a reload of this page and even a restart of your Codespace, as long as you come back in the same browser. The **Start Over** button in the sidebar wipes them, so leave it alone unless you mean it. If the tutorial page ever greys out or stops responding, reload the browser tab. If that does not help, restart the tutorial from the R Tutorials panel, first closing the broken tab and trashing the old "R Tutorial" terminal. Your answers will still be there.
 
 ### Exercise 7
 
-When we want to evaluate a webpage which you have created, we ask for a screenshot rather than copied text. To take one, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook (the Show windows key has a rectangle and two lines on it), then select the part of the screen you want. This copies the image to your clipboard; on a Chromebook, click **Copy to clipboard** in the notification that appears. Click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows, Chromebook) to paste it.
+When we want to evaluate a webpage which you have created, we ask for a screenshot rather than copied text. To take one, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook (the Show windows key has a rectangle and two lines on it), then select the part of the screen you want. This copies the image to your clipboard. On a Chromebook, click **Copy to clipboard** in the notification that appears. Click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows, Chromebook) to paste it.
 
 **Note for Mac users**: the more familiar `Cmd + Shift + 4` (without Control) saves the screenshot as a file on your Desktop by default instead of copying it to the clipboard, so pasting won’t work unless you accept the option to save to the clipboard.
 
@@ -450,8 +450,6 @@ learnr2::question(
 
 Your screenshot should show the package name, **learnr2**, and the paragraph that begins "learnr2 creates interactive R tutorials that run entirely in the reader's web browser."
 
-Again, your answer never needs to match ours exactly.
-
 ## GitHub Copilot
 
 Your Codespace includes **GitHub Copilot**, an AI coding assistant that can answer questions, explain code, create and edit files, and run commands for you. 
@@ -476,13 +474,13 @@ In the Copilot chat box, type the following message and press `Enter`. Replace `
 Hello! My name is <your-name>
 ```
 
-Copy Copilot's response into the box below. This is the only exercise in which we ask you to copy what the AI says back. Usually, we will confirm its work by checking the file which it has edited.
+Copy Copilot's response into the box below.
 
 ```{r}
 #| label: github-copilot-1
 #| echo: false
 learnr2::question(
-  "Copy Copilot's response into the box below. This is the only exercise in which we ask you to copy what the AI says back. Usually, we will confirm its work by checking the file which it has edited.",
+  "In the Copilot chat box, type the following message and press Enter. Replace <your-name> with your actual name: Hello! My name is <your-name>. Copy Copilot's response into the box below.",
   type = "reflection",
   show_text = FALSE
 )
@@ -496,11 +494,11 @@ Hello David! How can I help you today?
 
 ###
 
-GitHub Copilot works like ChatGPT. You "talk" to it in plain English, and it responds. Your exact response will differ from ours --- AI does not usually give the same answer twice --- and that is fine.
+You "talk" to GitHub Copilot in plain English, as with ChatGPT, and it responds. Your exact response will differ from ours. AI rarely gives the same answer twice.
 
 ### Exercise 2
 
-Copilot can do much more than chat. In Agent mode, which is the default, it can create and edit files for you. Send this message:
+In Agent mode, which is the default, Copilot can create and edit files for you. Send this message:
 
 ```default
 Make a file called presidents.txt which includes the names of the first 5 US Presidents.
@@ -510,11 +508,11 @@ Copilot might just create the file in your working directory without checking wi
 
 ![](images/pres.png){width=90%}
 
-Note the `U` next to the file name. This indicated that the file is **untracked** by Git. Git is a version control system that tracks changes to files in your project. Untracked files are new files that Git has not yet been told to track.
+Note the `U` next to the file name. This indicates that the file is **untracked** by Git. Git is a version control system that tracks changes to files in your project. Untracked files are new files that Git has not yet been told to track.
 
 ###
 
-AI is changing all the time. So, you might see something different. For example, you might see a dark circle inside a box next to `presidents.txt`. A dark circle alone indicates a file that has been changed *by you* but not saved. A file created (or edited) by AI also shows a dark circle, but within a box to indicate AI involvement.
+You might see something different. For example, you might see a dark circle inside a box next to `presidents.txt`. A dark circle alone indicates a file that has been changed *by you* but not saved. A file created (or edited) by AI also shows a dark circle, but within a box to indicate AI involvement.
 
 ###
 
@@ -527,8 +525,6 @@ Or, Copilot might open the new file in the Editor and display a **Keep** button.
 The **Keep** button may also appear in a smaller change summary near the Copilot chat box.
 
 ![](images/cs-copilot-keep-summary.png){width=90%}
-
-Or maybe not. AI is changing all the time!
 
 ###
 
@@ -544,7 +540,7 @@ CP/CR.
 #| label: github-copilot-2
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "In Agent mode, which is the default, Copilot can create and edit files for you. Send this message: Make a file called presidents.txt which includes the names of the first 5 US Presidents. Copilot might just create the file in your working directory without checking with you. Click on the Explorer icon to check. Note the U next to the file name, which indicates that the file is untracked by Git. You might see something different, such as a dark circle inside a box next to presidents.txt. Or, Copilot might open the new file in the Editor and display a Keep button; click Keep to accept the file. The Keep button may also appear in a smaller change summary near the Copilot chat box. From the R Terminal (not the bash Terminal), run: learnr2::show_file(\"presidents.txt\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -562,7 +558,7 @@ James Monroe
 
 ###
 
-Click the Explorer icon at the top of the Activity Bar. The Explorer lists the files in your working directory, but, like plain `ls`, it hides the dot-folders you saw with `ls -a` (`.devcontainer`, `.github`, `.vscode`), which is why it looked empty until now. `presidents.txt` should now appear there. Click on it to open the file in the Editor and see its contents directly. The Explorer is useful whenever you want to inspect a file that AI created or edited.
+The Explorer lists the files in your working directory, but, like plain `ls`, it hides the dot-folders you saw with `ls -a` (`.devcontainer`, `.github`, `.vscode`), which is why it looked empty until `presidents.txt` appeared. Click on `presidents.txt` to open the file in the Editor and see its contents directly.
 
 The Explorer icon is marked with a red square below.
 
@@ -570,7 +566,7 @@ The Explorer icon is marked with a red square below.
 
 ### Exercise 3
 
-We are done with the presidents example. Now ask Copilot to create a very small R program. Send this message:
+Ask Copilot to create a very small R program. Send this message:
 
 ```default
 Create an R script called script.R containing only this line: 2 + 2. Do not run the script.
@@ -588,7 +584,7 @@ CP/CR.
 #| label: github-copilot-3
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Ask Copilot to create a very small R program. Send this message: Create an R script called script.R containing only this line: 2 + 2. Do not run the script. If Copilot asks you to keep or accept the file, do so. Then run this command in the R Terminal: learnr2::show_file(\"script.R\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -618,7 +614,7 @@ CP/CR.
 #| label: github-copilot-4
 #| echo: false
 learnr2::question(
-  "The Run Source button is marked with a red arrow below. CP/CR.",
+  "In the Explorer, click script.R to open it in the Editor. Click the triangular Run Source button in the upper-right corner of the Editor. Look in the R Terminal for the generated source() command, the line of code, and its result. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -708,7 +704,7 @@ CP/CR.
 #| label: github-copilot-7
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Now run the script outside your open R session. Press the plus button (+) on the right side of the Panel to open a new bash Terminal. At the bash prompt, run: Rscript script.R. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -740,7 +736,7 @@ Copilot will usually choose a command such as `Rscript script.R`. If it asks for
 #| label: github-copilot-8
 #| echo: false
 learnr2::question(
-  "Copilot will usually choose a command such as Rscript script.R. If it asks for permission, provide it. Copilot should report the result in the Chat view. Enter that result in the box below.",
+  "AI can also run files for you. Return to Copilot Chat and tell your AI: Run script.R. Copilot will usually choose a command such as Rscript script.R. If it asks for permission, provide it. Copilot should report the result in the Chat view. Enter that result in the box below.",
   type = "reflection",
   show_text = FALSE
 )
@@ -776,7 +772,7 @@ CP/CR.
 #| label: github-copilot-9
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "So far, script.R calculates 2 + 2 and displays the result, but it does not give that result a name. In R, an object is a name used to store a value so you can use it again. The instruction x <- 2 + 2 creates an object named x and stores the value 4 in it. An object exists only in the R session where it was created. Ask Copilot to edit and run the script: Edit script.R so its only line is x <- 2 + 2. Then run it with Rscript. If Copilot asks for permission, inspect and approve the command. When it finishes, return to the same R Terminal and run: exists(\"x\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -808,7 +804,7 @@ CP/CR.
 #| label: github-copilot-10
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Open script.R in the Editor. It should now contain x <- 2 + 2. Keep your cursor in the Editor and press Cmd/Ctrl + Shift + S to source the file in your open R session. Then run this command in the R Terminal: x. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -834,14 +830,14 @@ The five ways to run the script do not all use the same R session:
 | Method | R session used |
 |---|---|
 | Click Run Source button | Your open R Terminal |
-| `Cmd/Ctrl + Enter` | Your open R Terminal; current line only |
-| `Cmd/Ctrl + Shift + S` | Your open R Terminal; entire file |
+| `Cmd/Ctrl + Enter` | Your open R Terminal (current line only) |
+| `Cmd/Ctrl + Shift + S` | Your open R Terminal (entire file) |
 | `Rscript script.R` in bash | A new process that closes afterward |
 | Ask Copilot to use `Rscript` | A new process that closes afterward |
 
 ## Summary
 
-You now know how to use the bash and R Terminals, how to ask GitHub Copilot to create and edit files, and five ways to run R code. Good luck with your data science journey!
+You now know how to use the bash and R Terminals, how to ask GitHub Copilot to create and edit files, and five ways to run R code.
 
 <p>
   <img src="images/neo-cs.gif" alt="Neo learns codespaces" width="320">

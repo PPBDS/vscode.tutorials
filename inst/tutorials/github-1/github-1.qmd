@@ -1,7 +1,7 @@
 ---
 title: "GitHub Introduction"
 author: David Kane
-description: Introduction to Git and GitHub. Opens up the connect-repo script, creates and deletes a repo by hand with the gh command-line program, walks through the commit/push cycle, and publishes a Quarto document with GitHub Pages.
+description: Introduction to Git and GitHub. Compares a raw Codespace with one where connect-repo has run, reproduces each of its steps by hand with the gh command-line program, walks through the commit/push cycle, and publishes a Quarto document with GitHub Pages.
 format: live-html
 engine: knitr
 toc: true
@@ -33,27 +33,23 @@ The most useful references for Git/GitHub are [*Happy Git and GitHub for the use
 
 ## Using Git
 
-GitHub is an online drive for all your R code and projects. In the professional world, what you have in your GitHub account is often more important than what you have on your resume. It is a verifiable demonstration of your abilities.
+GitHub is an online drive for all your R code and projects. In the professional world, what you have in your GitHub account is often more important than what you have on your resume.
 
-Until now, `connect-repo` has done all the GitHub work for you. In this tutorial we open that black box: you will read the commands it runs, run the important ones yourself --- creating, wiring, and deleting a repo by hand --- and learn to read what Git is telling you about your files.
+Until now, `connect-repo` has done the GitHub setup for you. This section shows what it did, one setting at a time, by comparing two Codespaces. In one, your usual one, `connect-repo` has run. In the other, it has not. For each setting you will look at the raw Codespace, look at your usual one, and then make the raw one match by hand.
 
 [Git](https://en.wikipedia.org/wiki/Git) is "software for tracking changes in any set of files, usually used for coordinating work among programmers collaboratively developing source code during software development."
 
 ### Exercise 1
 
-You should be doing this tutorial in a repo named `github-introduction`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
+You should be doing this tutorial in a repo named `github-introduction`. If you are not, create one and then connect to it.
 
-Copy and paste the URLs for:
-
-1. Your `github-introduction` repository on GitHub. Find it under **Your repositories**, as you learned in the Workflow tutorial.
-
-2. This Codespace --- the address in your browser's address bar, ending in `.github.dev`.
+Copy and paste the URL of your `github-introduction` repository on GitHub. Find it under **Your repositories**, as you learned in the Workflow tutorial.
 
 ```{r}
 #| label: using-git-1
 #| echo: false
 learnr2::question(
-  "2. This Codespace -- the address in your browser's address bar, ending in .github.dev.",
+  "You should be doing this tutorial in a repo named github-introduction. If you are not, create one and then connect to it. Copy and paste the URL of your github-introduction repository on GitHub. Find it under Your repositories, as you learned in the Workflow tutorial.",
   type = "reflection",
   show_text = FALSE
 )
@@ -61,172 +57,155 @@ learnr2::question(
 
 ###
 
-Your answer should look something like:
-
 ```{.output}
 https://github.com/your-username/github-introduction
+```
+
+###
+
+Your repo URL is where your code lives. Think of it as a filing cabinet. It exists permanently on GitHub, whether or not any Codespace is running.
+
+### Exercise 2
+
+Copy and paste the URL of this Codespace, the address in your browser's address bar, ending in `.github.dev`.
+
+```{r}
+#| label: using-git-25
+#| echo: false
+learnr2::question(
+  "Copy and paste the URL of this Codespace, the address in your browser's address bar, ending in .github.dev.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
 https://congenial-chainsaw-wv757pv4pp67cpw.github.dev/
 ```
 
 ###
 
-Notice the two URLs look quite different. Your repo URL (`github.com/...`) is where your code lives — think of it as the filing cabinet. Your Codespace URL (`*.github.dev`) is where you work on that code — the desk you sit at to open, edit, and run files. The filing cabinet exists permanently on GitHub; the desk is spun up on demand and shut down when you're done.
+Your Codespace URL is where you work on that code, the desk you sit at to open, edit, and run files. The desk is spun up on demand and shut down when you are done. The filing cabinet stays.
 
-### Exercise 2
+### Exercise 3
 
-At the bash Terminal, run `pwd`. CP/CR.
+Open a **second browser tab** and go to <https://github.com/codespaces>. Click **New codespace**, choose repository `PPBDS/codespace-starter` and branch `main`, and create it. Wait for it to start. **Do not run `connect-repo` in it.**
+
+Copy and paste the URL of this second Codespace.
+
+```{r}
+#| label: using-git-26
+#| echo: false
+learnr2::question(
+  "Open a second browser tab and go to github.com/codespaces. Click New codespace, choose repository PPBDS/codespace-starter and branch main, and create it. Do not run connect-repo in it. Copy and paste the URL of this second Codespace.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+https://fuzzy-space-doodle-7q9v4wpx.github.dev/
+```
+
+###
+
+Two desks, built from the same image. We will call this one the **raw Codespace** and the one running this tutorial your **`github-introduction` Codespace**. Keep both tabs open. The tutorial and your answers live in this one, so every output from the raw Codespace gets copied back here.
+
+### Exercise 4
+
+In the raw Codespace, run `pwd` in the bash Terminal. Copy the output, come back to this tab, and paste it.
+
+```{r}
+#| label: using-git-27
+#| echo: false
+learnr2::question(
+  "In the raw Codespace, run pwd in the bash Terminal. Copy the output, come back to this tab, and paste it.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+codespace-starter $ pwd
+/workspaces/codespace-starter
+```
+
+###
+
+A new Codespace opens inside the repo it was built from. `codespace-starter` is the launcher, not a place to keep work. Nothing on this machine has anything to do with a repo of yours yet.
+
+### Exercise 5
+
+In your `github-introduction` Codespace, run `pwd` in the bash Terminal. CP/CR.
 
 ```{r}
 #| label: using-git-2
 #| echo: false
 learnr2::question(
-  "At the bash Terminal, run pwd. CP/CR.",
+  "In your github-introduction Codespace, run pwd in the bash Terminal. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
 ```
 
 ###
-
-Your answer should look like:
 
 ```{.output}
 github-introduction $ pwd
 /workspaces/github-introduction
-github-introduction $
-```
-
-You should be in a directory named `github-introduction`. `connect-repo` created it, side by side with `codespace-starter`, under `/workspaces`.
-
-### Exercise 3
-
-At the bash Terminal, run `ls`. CP/CR.
-
-```{r}
-#| label: using-git-3
-#| echo: false
-learnr2::question(
-  "At the bash Terminal, run ls. CP/CR.",
-  type = "reflection",
-  show_text = FALSE
-)
 ```
 
 ###
 
-Your answer should look like:
-
-```{.output}
-github-introduction $ ls
-AGENTS.md
-github-introduction $
-```
-
-The only visible file is `AGENTS.md`, which `connect-repo` copied in when it created the repo. It holds guidance for AI assistants working with you in this course --- agents read instruction files like this from the folder they run in.
-
-### Exercise 4
-
-At the bash Terminal, run `ls -a`. The `a` option tells `ls` to show all directories and files, including hidden ones, which start with a dot (`.`). CP/CR.
-
-```{r}
-#| label: using-git-4
-#| echo: false
-learnr2::question(
-  "At the bash Terminal, run ls -a. The a option tells ls to show all directories and files, including hidden ones, which start with a dot (.). CP/CR.",
-  type = "reflection",
-  show_text = FALSE
-)
-```
-
-###
-
-Your answer should look like:
-
-```{.output}
-github-introduction $ ls -a
-.  ..  AGENTS.md  .git
-github-introduction $
-```
-
-`.` refers to the current directory. `..` stands for the parent directory. These two links are present in (almost) every directory on your computer.
-
-`.git` is a hidden directory used by the program Git to keep track of all the files in your project. 
-
-Unless you have a good reason, you should never mess with the contents of a hidden directory like `.git`.
-
-### Exercise 5
-
-Time to open the black box. The `connect-repo` script has a `--help` option that explains --- without running anything --- every command it issues. Run:
-
-```bash
-connect-repo --help
-```
-
-Read the whole thing. Then CP/CR the numbered steps (1 through 5).
-
-```{r}
-#| label: using-git-5
-#| echo: false
-learnr2::question(
-  "Read the whole thing. Then CP/CR the numbered steps (1 through 5).",
-  type = "reflection",
-  show_text = FALSE
-)
-```
-
-###
-
-The key part of the output:
-
-```{.output}
-  1. ACT AS YOU, NOT AS THE CODESPACE
-         unset GITHUB_TOKEN GH_TOKEN
-     A Codespace starts with a built-in token that can only touch
-     codespace-starter and can't create repos. Clearing it makes `gh` and
-     `git` use YOUR GitHub login instead.
-
-  2. SIGN IN TO GITHUB AS YOURSELF (once per Codespace)
-         gh auth login --hostname github.com --git-protocol https --web --clipboard=false
-     Opens a browser sign-in. Click Authorize, then come back.
-
-  3. MAKE `git push` AUTHENTICATE AS YOU
-         git config --global credential.helper store
-         # then save your token (shown by `gh auth token`) into ~/.git-credentials
-     Stores your token so pushes — from the terminal AND the VS Code Source
-     Control panel — go out as you, not as the built-in Codespace token.
-
-  4. CREATE A NEW REPO, OR CONNECT TO ONE THAT EXISTS
-     New repo on your account (doesn't exist yet):
-         gh repo create <name> --public --clone
-     Existing repo — yours, or an org's / someone else's via owner/<name>:
-         gh repo clone <name>          # your own
-         gh repo clone owner/<name>    # an org / another user (needs read access)
-     Either way you end up with the repo at /workspaces/<name>.
-
-  5. ADD AI-ASSISTANT GUIDANCE (default; skip with --no-agents)
-     Copies AGENTS.md into your new repo. It tells AI assistants (GitHub
-     Copilot, Antigravity, and friends) how to work with you in this course:
-     short, narrated steps and brief answers. Pass --no-agents if you'd
-     rather work without it.
-```
-
-###
-
-There is no magic here --- the script says so itself. `connect-repo` is a convenience wrapper around a handful of commands, and `--help` is the same convention you met with `ls --help` in the Workflow tutorial: a safe way to learn what a program does without running it. The two programs doing the real work are `git` (tracking changes) and `gh`, GitHub's official command-line program (talking to github.com). You will now run the important commands yourself.
-
-###
-
-Step 5 explains the one file you found in Exercise 3. `AGENTS.md` is a plain-text file that `connect-repo` copies into every new repo. GitHub Copilot and the command-line agents (`agy`, `claude`, and the rest) read it from the root of the repo they are running in and follow its rules: short, narrated steps, ask once before acting, and don't solve whole worksheets for you. It is an ordinary file as far as Git is concerned, so it will be part of your first commit later in this tutorial. If you ever want a repo without it, `connect-repo --no-agents <name>` skips the copy.
+`connect-repo` cloned your repo beside the launcher and set every new terminal to open inside it. That is why the two prompts differ. Each exercise from here on says which Codespace to use.
 
 ### Exercise 6
 
-Start with identity. Run `gh auth status`. CP/CR.
+In the raw Codespace, run `gh auth status`. Copy the output and paste it here.
+
+```{r}
+#| label: using-git-28
+#| echo: false
+learnr2::question(
+  "In the raw Codespace, run gh auth status. Copy the output and paste it here.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+codespace-starter $ gh auth status
+github.com
+  ✓ Logged in to github.com account your-username (GITHUB_TOKEN)
+  - Active account: true
+  - Git operations protocol: https
+  - Token: ghu_************************************
+  - Token scopes: none
+```
+
+###
+
+`gh` is GitHub's command-line program. `git` tracks changes and has never heard of GitHub. `gh` talks to github.com.
+
+The parentheses say where the login came from: `GITHUB_TOKEN`, a token GitHub placed in the environment when it built the machine. That token acts as the Codespace, not as you. It can read `codespace-starter` and nothing else, and it cannot create a repo.
+
+### Exercise 7
+
+In your `github-introduction` Codespace, run `gh auth status`. CP/CR.
 
 ```{r}
 #| label: using-git-6
 #| echo: false
 learnr2::question(
-  "Start with identity. Run gh auth status. CP/CR.",
+  "In your github-introduction Codespace, run gh auth status. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -246,24 +225,27 @@ github.com
 
 ###
 
-This is steps 1--3 of the script, already done: when you first ran `connect-repo`, it signed you in, and every `gh` and `git` command since has acted as *you*. The path in parentheses is where `gh` keeps that login; it lives inside this Codespace, which is why a brand-new Codespace asks you to sign in again. Note the **token scopes** line --- the list of powers your login carries. `repo` means you can create and push to repositories. Remember this list; it matters in a few exercises. When an AI agent pushes code for you, it is using exactly these credentials.
+`connect-repo` signed you in as yourself. The login lives in the file named in parentheses, inside this Codespace only. The scopes line lists what the login may do. `repo` is the one that matters: create repositories and push to them.
 
-### Exercise 7
+### Exercise 8
 
-Now step 4, by hand. Let's create a throwaway repo --- we will delete it shortly. Run these commands, one at a time:
+In the raw Codespace, run these three commands, one at a time:
 
 ```bash
-cd /workspaces
-gh repo create scratch-repo --public --clone
+unset GITHUB_TOKEN GH_TOKEN
+echo 'unset GITHUB_TOKEN GH_TOKEN' >> ~/.bashrc
+gh auth login --hostname github.com --git-protocol https --web --clipboard=false
 ```
 
-Then run `ls`. CP/CR.
+For the login, `gh` first asks `Authenticate Git with your GitHub credentials? (Y/n)`. Press `Enter`. It then shows a one-time code and says `Press Enter to open https://github.com/login/device in your browser...`. Press `Enter`, paste the code into the GitHub tab that opens, and come back to the Terminal.
+
+Then run `gh auth status`. Copy the output and paste it here.
 
 ```{r}
-#| label: using-git-7
+#| label: using-git-29
 #| echo: false
 learnr2::question(
-  "Then run ls. CP/CR.",
+  "In the raw Codespace, run unset GITHUB_TOKEN GH_TOKEN, then echo 'unset GITHUB_TOKEN GH_TOKEN' >> ~/.bashrc, then gh auth login --hostname github.com --git-protocol https --web --clipboard=false, following the prompts. Then run gh auth status. Copy the output and paste it here.",
   type = "reflection",
   show_text = FALSE
 )
@@ -272,24 +254,143 @@ learnr2::question(
 ###
 
 ```{.output}
-github-introduction $ cd /workspaces
+codespace-starter $ gh auth status
+github.com
+  ✓ Logged in to github.com account your-username (/home/rstudio/.config/gh/hosts.yml)
+  - Active account: true
+  - Git operations protocol: https
+  - Token: gho_************************************
+  - Token scopes: 'gist', 'read:org', 'repo', 'workflow'
+```
+
+###
+
+The first command removes the built-in token from this terminal, so `gh` looks for a real login. The second removes it from every terminal you open later. The third signs you in. On this setting, the raw Codespace now matches yours.
+
+### Exercise 9
+
+In the raw Codespace, run `ls -l ~/.git-credentials`. Copy the output and paste it here.
+
+```{r}
+#| label: using-git-30
+#| echo: false
+learnr2::question(
+  "In the raw Codespace, run ls -l ~/.git-credentials. Copy the output and paste it here.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+codespace-starter $ ls -l ~/.git-credentials
+ls: cannot access '/home/rstudio/.git-credentials': No such file or directory
+```
+
+###
+
+`gh` knows who you are now. `git` does not ask `gh`. When `git push` needs a password it looks in its own places, and this file is the one that matters. Without it, a push from this Codespace goes out as the built-in token or stops at `Username for 'https://github.com':`.
+
+### Exercise 10
+
+In your `github-introduction` Codespace, run `ls -l ~/.git-credentials`. CP/CR.
+
+```{r}
+#| label: using-git-31
+#| echo: false
+learnr2::question(
+  "In your github-introduction Codespace, run ls -l ~/.git-credentials. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+github-introduction $ ls -l ~/.git-credentials
+-rw------- 1 rstudio rstudio 75 Oct 23 09:12 /home/rstudio/.git-credentials
+```
+
+###
+
+`connect-repo` wrote your token into this file. `-rw-------` means only you can read it. Every push from this Codespace, from the Terminal or from the Source Control pane, reads it and goes out as you. Never `cat` this file where anyone can see your screen.
+
+### Exercise 11
+
+In the raw Codespace, run these four commands, one at a time:
+
+```bash
+git config --global --replace-all credential.helper ""
+git config --global --add credential.helper store
+printf 'https://x-access-token:%s@github.com\n' "$(gh auth token)" > ~/.git-credentials
+chmod 600 ~/.git-credentials
+```
+
+Then run `ls -l ~/.git-credentials`. Copy the output and paste it here.
+
+```{r}
+#| label: using-git-32
+#| echo: false
+learnr2::question(
+  "In the raw Codespace, run git config --global --replace-all credential.helper \"\", then git config --global --add credential.helper store, then printf 'https://x-access-token:%s@github.com\\n' \"$(gh auth token)\" > ~/.git-credentials, then chmod 600 ~/.git-credentials. Then run ls -l ~/.git-credentials. Copy the output and paste it here.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+codespace-starter $ ls -l ~/.git-credentials
+-rw------- 1 rstudio rstudio 75 Oct 23 14:30 /home/rstudio/.git-credentials
+```
+
+###
+
+The first command clears any password helpers the Codespace came with. The second tells Git to use a file. The third writes your token into it: `gh auth token` prints the token and `>` sends it to the file. `chmod 600` makes the file readable by you alone.
+
+### Exercise 12
+
+Now the part of `connect-repo` you can see: the repo. In the raw Codespace, run these commands, one at a time:
+
+```bash
+cd /workspaces
+gh repo create scratch-repo --public --clone
+```
+
+Then run `ls`. Copy the output and paste it here.
+
+```{r}
+#| label: using-git-7
+#| echo: false
+learnr2::question(
+  "In the raw Codespace, run cd /workspaces, then gh repo create scratch-repo --public --clone. Then run ls. Copy the output and paste it here.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+codespace-starter $ cd /workspaces
 workspaces $ gh repo create scratch-repo --public --clone
 ✓ Created repository your-username/scratch-repo on github.com
   https://github.com/your-username/scratch-repo
 workspaces $ ls
-codespace-starter  github-introduction  scratch-repo
+codespace-starter  scratch-repo
 workspaces $
 ```
 
-If you have created other repos in this Codespace, `ls` lists them too.
-
 ###
 
-One command did two jobs: it created the filing cabinet on GitHub, and `--clone` gave you a local folder, `scratch-repo`, wired to it. The output is short because there is nothing to copy down: a brand-new repo has no commits yet, so Git has no history to show you --- as you will see in a moment. This single command is the heart of `connect-repo`. Every repo you have made this course --- `workflow`, `code`, `quarto`, all of them --- was born exactly this way. (The only extra in those repos is `AGENTS.md`, which `connect-repo` copies in afterwards; `gh repo create` does not.)
+One command did two jobs. It created the repo on GitHub, and `--clone` made a local folder wired to it. Every repo you have made in this course was born this way, which is why `ls /workspaces` in your `github-introduction` Codespace shows `github-introduction` beside the launcher.
 
-### Exercise 8
+### Exercise 13
 
-How does the local folder know which GitHub repo it belongs to? Run:
+How does the local folder know which GitHub repo it belongs to? In the raw Codespace, run:
 
 ```bash
 cd scratch-repo
@@ -297,13 +398,13 @@ git remote -v
 git log
 ```
 
-CP/CR.
+Copy the output and paste it here.
 
 ```{r}
 #| label: using-git-8
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "In the raw Codespace, run cd scratch-repo, then git remote -v, then git log. Copy the output and paste it here.",
   type = "reflection",
   show_text = FALSE
 )
@@ -323,21 +424,105 @@ scratch-repo $
 
 ###
 
-`origin` is Git's conventional nickname for the copy of your repo on GitHub. This is the wiring: when you push, Git sends commits to `origin`; when you pull, it fetches from `origin`. The clone set this up automatically. When something goes wrong with pushing --- and someday it will --- `git remote -v` is the first thing to check: it tells you where Git *thinks* your work is going.
+`origin` is Git's nickname for the copy of your repo on GitHub. Pushes go to `origin` and pulls come from it. When a push goes wrong, `git remote -v` is the first thing to check, because it shows where Git thinks your work is going. The URL ends in `.git`. Drop that and you have the repo's web page.
 
-The remote URL ends in `.git`. That is the address Git uses to talk to GitHub; drop the `.git` and you have the address of the repo's web page, which is why the two look so alike.
+`git log` refuses outright because `main` has no commits yet. The "fatal" does not mean anything is broken.
 
-`git log` is the proof that a new repo is empty. It does not print an empty list; it refuses outright, because the `main` branch does not have a single commit yet. The "fatal" is Git being dramatic, not a sign that anything is broken.
+### Exercise 14
 
-### Exercise 9
+Still in `scratch-repo` in the raw Codespace, run `ls -a`. The `a` option shows hidden files, whose names start with a dot. Copy the output and paste it here.
 
-We don't need `scratch-repo`. Try to delete it from the command line. Run `gh repo delete scratch-repo`. CP/CR whatever happens --- including a refusal.
+```{r}
+#| label: using-git-35
+#| echo: false
+learnr2::question(
+  "Still in scratch-repo in the raw Codespace, run ls -a. Copy the output and paste it here.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+scratch-repo $ ls -a
+.  ..  .git
+scratch-repo $
+```
+
+###
+
+`.` is this directory and `..` is its parent. `.git` is the hidden directory where Git keeps every version of every file. Never edit anything inside it. A repo made by `gh repo create` holds nothing else.
+
+### Exercise 15
+
+In your `github-introduction` Codespace, run `ls -a`. CP/CR.
+
+```{r}
+#| label: using-git-4
+#| echo: false
+learnr2::question(
+  "In your github-introduction Codespace, run ls -a. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+github-introduction $ ls -a
+.  ..  AGENTS.md  .git
+github-introduction $
+```
+
+###
+
+The one difference is `AGENTS.md`. `connect-repo` copies it into every repo it creates. AI assistants read it from the root of the repo they run in, and it asks them for short, narrated steps. To Git it is an ordinary file, so it will be part of your first commit.
+
+### Exercise 16
+
+In the raw Codespace, still in `scratch-repo`, run:
+
+```bash
+cp /workspaces/codespace-starter/.devcontainer/AGENTS.md .
+ls -a
+```
+
+Copy the output and paste it here.
+
+```{r}
+#| label: using-git-36
+#| echo: false
+learnr2::question(
+  "In the raw Codespace, still in scratch-repo, run cp /workspaces/codespace-starter/.devcontainer/AGENTS.md . and then ls -a. Copy the output and paste it here.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+scratch-repo $ cp /workspaces/codespace-starter/.devcontainer/AGENTS.md .
+scratch-repo $ ls -a
+.  ..  AGENTS.md  .git
+scratch-repo $
+```
+
+###
+
+That was the last of `connect-repo`'s five jobs: drop the built-in token, sign in, store the credential, create the repo, copy `AGENTS.md`. The raw Codespace now matches yours. `connect-repo --no-agents <name>` skips this last step if you ever want a repo without the file.
+
+### Exercise 17
+
+We do not need `scratch-repo`. In the raw Codespace, try to delete it from the command line. Run `gh repo delete scratch-repo`. Copy whatever happens, including a refusal, and paste it here.
 
 ```{r}
 #| label: using-git-9
 #| echo: false
 learnr2::question(
-  "We don't need scratch-repo. Try to delete it from the command line. Run gh repo delete scratch-repo. CP/CR whatever happens -- including a refusal.",
+  "In the raw Codespace, run gh repo delete scratch-repo. Copy whatever happens, including a refusal, and paste it here.",
   type = "reflection",
   show_text = FALSE
 )
@@ -355,33 +540,32 @@ scratch-repo $
 
 ![](images/gh-repo-delete.png){width=90%}
 
-`gh` first makes you type the repo's *full* name, `your-username/scratch-repo` --- typing just `scratch-repo` is rejected and the question is asked again. Only after you confirm does GitHub refuse. Your exact message may differ. The point is the refusal.
+`gh` first makes you type the repo's full name. Only after you confirm does GitHub refuse. Your exact message may differ.
 
 ###
 
-Look back at the token scopes from Exercise 6: `delete_repo` was not among them. Deleting a repository is so destructive --- the history, the issues, the published site, all gone, unrecoverable --- that your everyday credentials deliberately lack the power. You *could* grant it with the `gh auth refresh` command shown, and the command-line route is occasionally useful. But don't. The normal way to delete a repo is the website, which forces you to slow down.
+Look back at the token scopes from Exercise 7. `delete_repo` was not among them. Deleting a repository destroys its history, its issues, and its published site, so your everyday credentials deliberately lack the power. You could grant it with the `gh auth refresh` command shown. Don't. The normal way to delete a repo is the website, which forces you to slow down.
 
-### Exercise 10
+### Exercise 18
 
-Delete `scratch-repo` from the website. Go to its page on GitHub (`https://github.com/your-username/scratch-repo`), click **Settings** in the top menu, and scroll all the way to the bottom, to the **Danger Zone**. Click **Delete this repository**, and follow the prompts --- GitHub will make you type the repository's full name to confirm.
+Delete `scratch-repo` from the website. Go to its page on GitHub (`https://github.com/your-username/scratch-repo`), click **Settings** in the top menu, and scroll to the bottom, to the **Danger Zone**. Click **Delete this repository** and follow the prompts. GitHub makes you type the repository's full name to confirm.
 
-Then, back in the bash Terminal, confirm it is gone and clean up the local clone. Run these commands, one at a time:
+Then, in the raw Codespace, confirm it is gone and remove the local clone. Run these commands, one at a time:
 
 ```bash
 cd /workspaces
 gh repo view scratch-repo
 rm -rf scratch-repo
 ls
-cd github-introduction
 ```
 
-CP/CR.
+Copy the output and paste it here.
 
 ```{r}
 #| label: using-git-10
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Delete scratch-repo from its Settings page on GitHub (Danger Zone, Delete this repository). Then, in the raw Codespace, run cd /workspaces, then gh repo view scratch-repo, then rm -rf scratch-repo, then ls. Copy the output and paste it here.",
   type = "reflection",
   show_text = FALSE
 )
@@ -395,16 +579,41 @@ workspaces $ gh repo view scratch-repo
 GraphQL: Could not resolve to a Repository with the name 'your-username/scratch-repo'. (repository)
 workspaces $ rm -rf scratch-repo
 workspaces $ ls
-codespace-starter  github-introduction
-workspaces $ cd github-introduction
-github-introduction $
+codespace-starter
+workspaces $
 ```
 
 ###
 
-Two lessons. First, the Danger Zone's type-the-full-name ritual is friction by design: irreversible actions should be hard to do absentmindedly. You will delete repos fairly often --- abandoned experiments, practice work, wrongly named projects --- so remember where this lives: **Settings, bottom of the page**. Second, notice that deleting the repo on GitHub did *not* delete the local clone: the filing cabinet and the desk are separate, and we had to `rm -rf` the folder ourselves. The same is true in reverse --- deleting a local folder never touches GitHub.
+The Danger Zone's type-the-full-name step is friction by design. You will delete repos fairly often, and the control is always at **Settings**, bottom of the page. Deleting the repo on GitHub did not delete the local clone. The filing cabinet and the desk are separate, so you removed the folder yourself. The same is true in reverse: deleting a local folder never touches GitHub.
 
-### Exercise 11
+### Exercise 19
+
+The raw Codespace has done its job. Go to <https://github.com/codespaces>, find it, and delete it from the `...` menu.
+
+Once it is gone, take a screenshot of the Codespaces list and paste it below. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
+
+```{r}
+#| label: using-git-37
+#| echo: false
+learnr2::question(
+  "Delete the raw Codespace from the ... menu at github.com/codespaces. Once it is gone, take a screenshot of the Codespaces list and paste it below.",
+  type = "reflection",
+  allow_image = TRUE,
+  allow_text = FALSE,
+  show_text = FALSE
+)
+```
+
+###
+
+Your screenshot should show the Codespace you are working in now, but no longer the raw one (ours was `fuzzy-space-doodle-7q9v4wpx`).
+
+###
+
+Everything you set up by hand on that machine went with it: the login, the credential file, the line in `.bashrc`. Your `github-introduction` repo on GitHub is untouched, because nothing in it lived there. The rest of this tutorial happens in this Codespace.
+
+### Exercise 20
 
 Create a new Quarto document. From the three horizontal bar icon in the Activity Bar, select `File -> New File...`, then select `Quarto Document` from the drop-down menu. This opens the new file in the Editor.
 
@@ -412,7 +621,7 @@ Create a new Quarto document. From the three horizontal bar icon in the Activity
 
 The new file has no name yet, so its Editor tab reads `Untitled-1`, with a black dot showing that it has never been saved.
 
-Change the title to "Analysis 1" and add your name as the author. Save the file with `Cmd/Ctrl + S`. Because the file is new, VS Code shows a Save As box with a path field; make sure the path ends in `github-introduction/analysis-1.qmd` and press **OK**.
+Change the title to "Analysis 1" and add your name as the author. Save the file with `Cmd/Ctrl + S`. Because the file is new, VS Code shows a Save As box with a path field. Make sure the path ends in `github-introduction/analysis-1.qmd` and press **OK**.
 
 ![](images/save-as-dialog.png){width=90%}
 
@@ -428,7 +637,7 @@ CP/CR.
 #| label: using-git-11
 #| echo: false
 learnr2::question(
-  "Then run cat analysis-1.qmd. CP/CR.",
+  "Create a new Quarto document. From the three horizontal bar icon in the Activity Bar, select File -> New File..., then select Quarto Document from the drop-down menu. This opens the new file in the Editor. Change the title to \"Analysis 1\" and add your name as the author. Save the file with Cmd/Ctrl + S. Because the file is new, VS Code shows a Save As box with a path field. Make sure the path ends in github-introduction/analysis-1.qmd and press OK. Then run cat analysis-1.qmd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -449,18 +658,19 @@ format: html
 github-introduction $
 ```
 
+The file is nothing but a YAML header. Quarto's template supplies a title, an author, and an output format, and you supplied the values.
 
-### Exercise 12
+### Exercise 21
 
 Click the Source Control button in the Activity Bar. This opens the Source Control pane, which is an interface to using Git and GitHub.
 
 ![](images/analysis-git.png){width=90%}
 
-The top part of the pane shows the files that have been added or modified. This is Git telling you what it thinks has changed. Again, the "U" at the end of the lines for `AGENTS.md` and `analysis-1.qmd` indicates that Git has noticed these files but that they are **U**ntracked.
+The top part of the pane shows the files that have been added or modified. Again, the "U" at the end of the lines for `AGENTS.md` and `analysis-1.qmd` indicates that Git has noticed these files but that they are **U**ntracked.
 
 Render `analysis-1.qmd` with `Cmd/Ctrl + Shift + K`.
 
-Three things happen. A new terminal named **Quarto Preview** appears in the Panel and fills with output; a **Quarto Preview** tab opens in the Editor beside your file, showing the rendered HTML; and VS Code pops up a notice that your application is running on port NNNN, with an **Open in Browser** button. Ignore the notice.
+Three things happen. A new terminal named **Quarto Preview** appears in the Panel and fills with output. A **Quarto Preview** tab opens in the Editor beside your file, showing the rendered HTML. And VS Code pops up a notice that your application is running on port NNNN, with an **Open in Browser** button. Ignore the notice.
 
 ![](images/analysis-preview.png){width=90%}
 
@@ -470,7 +680,7 @@ Copy/paste the last few lines from the Quarto Preview terminal.
 #| label: using-git-12
 #| echo: false
 learnr2::question(
-  "The Terminal fills with a bunch of output. Copy/paste the last few lines.",
+  "Render analysis-1.qmd with Cmd/Ctrl + Shift + K. Copy/paste the last few lines from the Quarto Preview terminal.",
   type = "reflection",
   show_text = FALSE
 )
@@ -496,9 +706,9 @@ Listening on http://127.0.0.1:4676/
 
 The port number is different every time. The first line of that terminal shows the command the shortcut ran for you: `quarto preview /workspaces/github-introduction/analysis-1.qmd --no-browser --no-watch-inputs`.
 
-### Exercise 13
+### Exercise 22
 
-The VS Code window has changed quite a bit. The Quarto Preview tab shows the HTML. The Source Control pane now includes many new files. The Quarto Preview terminal is not showing a prompt, because `quarto preview` is still running, watching for changes.
+The Source Control pane now includes many new files. The Quarto Preview terminal is not showing a prompt, because `quarto preview` is still running, watching for changes.
 
 Stop it: click the **Quarto Preview** tab on the right side of the Panel and press `Ctrl + c`. Then close the Quarto Preview tab in the Editor.
 
@@ -508,7 +718,7 @@ From the bash Terminal, run `ls`. CP/CR.
 #| label: using-git-13
 #| echo: false
 learnr2::question(
-  "From the bash Terminal, run ls. CP/CR.",
+  "The Quarto Preview terminal is not showing a prompt, because quarto preview is still running. Stop it: click the Quarto Preview tab on the right side of the Panel and press Ctrl + c. Then close the Quarto Preview tab in the Editor. From the bash Terminal, run ls. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -526,13 +736,13 @@ github-introduction $
 
 The bottom part of the Source Control pane shows the history of changes in this repo. It is empty, since you have not made a commit yet.
 
-### Exercise 14
+### Exercise 23
 
 Look more closely at the Source Control pane:
 
 ![](images/analysis-git-2.png){width=90%}
 
-We have many new files, like `analysis-1.html`, created when we rendered `analysis-1.qmd`. They have "U" indicators because, according to Git, they are **U**ntracked. Many of these files are weird and confusing. It turns out that all these files live in the `analysis-1_files` directory.
+Rendering `analysis-1.qmd` created many new files, like `analysis-1.html`. They have "U" indicators because, according to Git, they are **U**ntracked. Most of them live in the `analysis-1_files` directory.
 
 From the bash Terminal, run `ls -R analysis-1_files`. The `-R` option means **r**ecursive. CP/CR.
 
@@ -573,9 +783,9 @@ tabsets.js
 github-introduction $ 
 ```
 
-Whenever you render a document using Quarto, it creates a directory called `base-name-of-your-file_files`. Since the base name of `analysis-1.qmd` is `analysis-1`, the new directory is `analysis-1_files`. This directory is filled with the programs, information, and other files that helped turn `analysis-1.qmd` into `analysis-1.html`. This is mostly confusing stuff that we should ignore. In fact, we usually don't even want it monitored by Git or stored on GitHub.
+Whenever you render a document using Quarto, it creates a directory called `base-name-of-your-file_files`. Since the base name of `analysis-1.qmd` is `analysis-1`, the new directory is `analysis-1_files`. It holds the support files --- scripts, style sheets, fonts --- that `analysis-1.html` loads in the browser. We usually don't want it monitored by Git or stored on GitHub.
 
-### Exercise 15
+### Exercise 24
 
 From the three horizontal bar icon, `File -> New Text File`. Save this new file as `.gitignore`. (Don't forget the leading period.) 
 
@@ -585,7 +795,7 @@ From the bash Terminal, run `ls -a`. CP/CR.
 #| label: using-git-15
 #| echo: false
 learnr2::question(
-  "From the bash Terminal, run ls -a. CP/CR.",
+  "From the three horizontal bar icon, File -> New Text File. Save this new file as .gitignore. (Don't forget the leading period.) From the bash Terminal, run ls -a. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -601,9 +811,9 @@ github-introduction $ ls -a
 github-introduction $ 
 ```
 
-Because `.gitignore` begins with a `.`, it is a hidden file. It would not appear if we just used `ls`. Note that the Source Control pane now shows a new file, `.gitignore` with an associated "U", meaning it is also untracked.
+Because `.gitignore` begins with a `.`, it is a hidden file. It would not appear with plain `ls`. The Source Control pane now lists `.gitignore` with a "U": it, too, is untracked.
 
-### Exercise 16
+### Exercise 25
 
 The purpose of the `.gitignore` file is to specify the files and directories that **Git** should **ignore**. Add a new line to the file, `analysis-1_files`, followed by an empty line. Save your changes.
 
@@ -613,7 +823,7 @@ From the bash Terminal, run `cat .gitignore`. CP/CR.
 #| label: using-git-16
 #| echo: false
 learnr2::question(
-  "From the bash Terminal, run cat .gitignore. CP/CR.",
+  "Add a new line to the .gitignore file, analysis-1_files, followed by an empty line. Save your changes. From the bash Terminal, run cat .gitignore. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -631,14 +841,14 @@ github-introduction $
 
 The `analysis-1_files` line in `.gitignore` tells Git to ignore the `analysis-1_files` directory and everything in it.
 
-Note the change in the Source Control pane!
+The Source Control pane has changed:
 
 ![](images/analysis-git-3.png){width=90%}
 
-Now, according to Git, there have been only four changes to the repo. (Of course, there have been more changes, but Git is ignoring anything that resides in `analysis-1_files`.) Four files --- `analysis-1.qmd`, `analysis-1.html`, `.gitignore`, and `AGENTS.md` --- are untracked (U).
+Git now reports four changes. Four files --- `analysis-1.qmd`, `analysis-1.html`, `.gitignore`, and `AGENTS.md` --- are untracked (U). Everything inside `analysis-1_files` is ignored.
 
 
-### Exercise 17
+### Exercise 26
 
 In the box above the **Commit** button, add "initial version" as your commit comment. Press **Commit**. The Codespace stages everything for you, so no dialog appears and the four files vanish from the Changes list.
 
@@ -648,7 +858,7 @@ From the bash Terminal, run `git log`. CP/CR.
 #| label: using-git-17
 #| echo: false
 learnr2::question(
-  "From the bash Terminal, run git log. CP/CR.",
+  "In the box above the Commit button, add \"initial version\" as your commit comment. Press Commit. From the bash Terminal, run git log. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -667,9 +877,9 @@ Date:   Tue Oct 13 00:05:06 2026 +0000
     initial version
 ```
 
-`git log` generates a record --- a "log" --- of all the Git actions we have taken. There is exactly one commit. Remember that `git log` in `scratch-repo` could only complain that `main` had no commits yet? Your `github-introduction` repo was born the same way --- empty --- and this commit, which adds `analysis-1.qmd`, `analysis-1.html`, `.gitignore`, and `AGENTS.md`, is the first entry in its history. The `Author` line is your GitHub login and the e-mail address attached to your account; the Codespace set both up for you.
+`git log` lists every commit in the repo. There is exactly one. In `scratch-repo`, `git log` could only complain that `main` had no commits yet. Your `github-introduction` repo was born the same way, and this commit, which adds `analysis-1.qmd`, `analysis-1.html`, `.gitignore`, and `AGENTS.md`, is the first entry in its history. The `Author` line is your GitHub login and the e-mail address attached to your account. The Codespace set both up for you.
 
-### Exercise 18
+### Exercise 27
 
 Return to editing `analysis-1.qmd`. Add a line beginning with your actual name: "[Your name] is a data maestro!" Make sure there is a blank line at the end of the document, and save.
 
@@ -679,7 +889,7 @@ Run `cat analysis-1.qmd`. CP/CR.
 #| label: using-git-18
 #| echo: false
 learnr2::question(
-  "Run cat analysis-1.qmd. CP/CR.",
+  "Return to editing analysis-1.qmd. Add a line beginning with your actual name: \"[Your name] is a data maestro!\" Make sure there is a blank line at the end of the document, and save. Run cat analysis-1.qmd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -702,14 +912,15 @@ PPBDS student is a data maestro!
 github-introduction $ 
 ```
 
+The file on disk has changed, but the commit you made still holds the old version. Git stores snapshots, not live files.
 
-### Exercise 19
+### Exercise 28
 
 Within the Source Control pane, press the "Open File" button for `analysis-1.qmd`, which is the first of the symbols that appear to the right of the file name when you hover over it. 
 
 ![](images/analysis-git-4.png){width=90%}
 
-Notice how there is now an orange "M" next to the file name. This indicates that Git is now tracking the file's changes and that it has been **M**odified.
+There is now an orange "M" next to the file name. Git is tracking the file, and it has been **M**odified since the last commit.
 
 Hold your cursor over the symbol (a curved arrow) next to the "Open File" button. What is the name for this button?
 
@@ -726,9 +937,9 @@ learnr2::question(
 
 ###
 
-Clicking this button gets rid of any changes made since the last time you told Git to save them. 
+Clicking this button throws away every change made since the last commit.
 
-### Exercise 20
+### Exercise 29
 
 Hold your cursor over the symbol --- `+`, a plus sign --- next to the "Discard Changes" button. What is the name for this button?
 
@@ -745,9 +956,9 @@ learnr2::question(
 
 ###
 
-Saving changes in Git is, in theory, a two-step process. The first step is to "stage" the changes. The second step is to "commit" the changes. For the most part, we don't stage. We just "commit," which incorporates the staging process automatically.
+Saving changes in Git is, strictly, a two-step process: first "stage" the changes, then "commit" them. We rarely stage by hand. Pressing **Commit** in the Codespace stages everything automatically.
 
-### Exercise 21
+### Exercise 30
 
 Commit the changes with a comment like "added sentence". 
 
@@ -757,7 +968,7 @@ Run `git log`. CP/CR the latest entry.
 #| label: using-git-21
 #| echo: false
 learnr2::question(
-  "Run git log. CP/CR the latest entry.",
+  "Commit the changes with a comment like \"added sentence\". Run git log. CP/CR the latest entry.",
   type = "reflection",
   show_text = FALSE
 )
@@ -778,7 +989,7 @@ Date:   Tue Oct 13 00:07:10 2026 +0000
 
 Still only `(HEAD -> main)`: two commits now, both of them local.
 
-### Exercise 22
+### Exercise 31
 
 The Source Control pane now looks like this:
 
@@ -801,9 +1012,9 @@ learnr2::question(
 
 The button says **Publish Branch** rather than **Sync Changes** because this is the repo's very first push: GitHub does not yet have a `main` branch to sync with. After this one push the button will read **Sync Changes** with a count of the commits waiting to go out.
 
-Note the bottom portion of the pane, the Source Control Graph, which shows the Git history of this repo. Before you committed, it was empty. Now it lists your commits, the newest on top, each marked only with `main` --- there is no cloud icon anywhere, because nothing has reached GitHub yet. (The picture was taken after a single commit; you have two.)
+The bottom portion of the pane, the Source Control Graph, shows the Git history of this repo. It lists your commits, newest on top, each marked only with `main`. There is no cloud icon anywhere, because nothing has reached GitHub yet. (The picture was taken after a single commit. You have two.)
 
-### Exercise 23
+### Exercise 32
 
 Press the **Publish Branch** button.
 
@@ -821,7 +1032,7 @@ From the bash Terminal, run `git log` again. CP/CR.
 #| label: using-git-23
 #| echo: false
 learnr2::question(
-  "From the bash Terminal, run git log again. CP/CR.",
+  "Press the Publish Branch button. From the bash Terminal, run git log again. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -846,13 +1057,13 @@ Date:   Tue Oct 13 00:05:06 2026 +0000
     initial version
 ```
 
-This looks the same as before, except that "(HEAD -> main)" in the top line has changed to "(HEAD -> main, origin/main)". This tells us that our changes have been pushed to GitHub, not simply committed locally. We will save a discussion of what `"HEAD"` means for later.
+The top line has changed from "(HEAD -> main)" to "(HEAD -> main, origin/main)". Our changes have been pushed to GitHub, not simply committed locally.
 
-A term like "commit 4c0f3f9d2b7e1a6c5d8e9f0a1b2c3d4e5f6a7b8c" gives us the address of that commit. We can use that string to revert to the codebase as it looked after that commit.
+The long string after "commit" is the address of that commit. We can use it to revert to the codebase as it looked after that commit.
 
-### Exercise 24
+### Exercise 33
 
-If you look at the GitHub page for `github-introduction`, you will see that the changes have been pushed to GitHub. If your computer stops working, you won't lose any of your work.
+Go to the GitHub page for `github-introduction`. The changes have been pushed. If your computer stops working, you won't lose any of your work.
 
 ![](images/analysis-1-gh-1.png){width=90%}
 
@@ -860,13 +1071,13 @@ This page shows the files from your project that have been pushed to GitHub: `.g
 
 ![](images/analysis-1-gh-2.png){width=90%}
 
-Paste a screenshot of this page. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
+Paste a screenshot of this page.
 
 ```{r}
 #| label: using-git-24
 #| echo: false
 learnr2::question(
-  "Paste a screenshot of this page.",
+  "Go to the GitHub page for github-introduction. Click the 2 Commits link at the top right of the file list to show the page with the history of commits you have pushed to GitHub. Paste a screenshot of this page.",
   type = "reflection",
   allow_image = TRUE,
   allow_text = FALSE,
@@ -889,7 +1100,7 @@ Commits on Oct 13, 2026
     your-username committed 6 minutes ago
 ```
 
-Two commits, newest first, matching your `git log`. GitHub's history is your history: nothing more, nothing less.
+Two commits, newest first, matching your `git log`. GitHub has exactly the history you pushed.
 
 ###
 
@@ -983,7 +1194,7 @@ ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
   )
 ```
 
-Nothing in this exercise was new: the YAML header, the setup chunk, `#| message: false`, and `execute: echo: false` all come straight from the Quarto tutorial. What *is* new is what comes next: publishing this page from a repo you have managed with raw Git commands.
+`execute: echo: false` in the YAML header hides the code in every chunk, so the rendered page shows only the graphic.
 
 ### Exercise 2
 
@@ -1029,7 +1240,7 @@ Let's publish our results to [GitHub Pages](https://pages.github.com/). Before w
 
 ![](images/repo-settings-pages.png){width=90%}
 
-We won't modify these options by hand. But it is useful to know where the details are located.
+We won't modify these options by hand. `quarto publish` sets them for us.
 
 From the bash Terminal, run `quarto publish gh-pages analysis-1.qmd`. Respond with "Y" when it asks whether you want to publish. (This might take a minute to run.) 
 
@@ -1040,7 +1251,7 @@ CP/CR just the first 10 or so lines of the output.
 #| label: publishing-with-github-pages-3
 #| echo: false
 learnr2::question(
-  "CP/CR just the first 10 or so lines of the output.",
+  "Go to the GitHub repo for github-introduction, click on the Settings top menu item, and then click on the Pages side menu item. We won't modify these options by hand. From the bash Terminal, run quarto publish gh-pages analysis-1.qmd. Respond with \"Y\" when it asks whether you want to publish. CP/CR just the first 10 or so lines of the output.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1055,7 +1266,7 @@ github-introduction $ quarto publish gh-pages analysis-1.qmd
 ? Publish site to https://your-username.github.io/github-introduction/ using gh-pages? (Y/n) › Yes
 ```
 
-There are settings that will prevent this question from being asked every time we update the website. Otherwise, Quarto will check each time.
+Quarto asks this question on every publish. There is a setting that turns it off.
 
 ```{.output}
 Switched to a new branch 'gh-pages'
@@ -1088,7 +1299,7 @@ processing file: analysis-1.qmd
 output file: analysis-1.knit.md
 ```
 
-`quarto publish` processes `analysis-1.qmd` in the same way that `quarto preview` or `quarto render` does. Further down, after the `pandoc` and `metadata` blocks, you will see a line reading `fatal: pathspec '.' did not match any files`. It looks alarming but is harmless --- the fresh `gh-pages` branch has nothing in it yet for Git to tidy away --- and the output carries on to `[✓] Published to https://your-username.github.io/github-introduction/`.
+`quarto publish` processes `analysis-1.qmd` in the same way that `quarto preview` or `quarto render` does. Further down, after the `pandoc` and `metadata` blocks, you will see a line reading `fatal: pathspec '.' did not match any files`. It is harmless. The fresh `gh-pages` branch has nothing in it yet for Git to tidy away, and the output carries on to `[✓] Published to https://your-username.github.io/github-introduction/`.
 
 ### Exercise 4
 
@@ -1125,9 +1336,7 @@ https://your-username.github.io/github-introduction/
 
 Visit that address: your graphic is live, on a real URL you can send to anyone. The pattern is always `https://<your-username>.github.io/<repo-name>/`.
 
-We could have made these changes by hand, but it is much easier to let `quarto publish` handle them.
-
-Publishing to GitHub Pages has not changed any of the files in our repo, so the "Source Control" button does not show any changes for us to deal with. Our local repo matches our `github-introduction` on GitHub. We are done!
+Publishing to GitHub Pages has not changed any of the files on `main`, so the Source Control button shows no changes. Your local repo matches `github-introduction` on GitHub.
 
 
 ## Summary

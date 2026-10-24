@@ -1,5 +1,33 @@
 # vscode.tutorials (development version)
 
+* GitHub Introduction's "Using Git" section is rebuilt around two
+  Codespaces. Students open a raw `codespace-starter` Codespace beside their
+  usual one and, for each thing `connect-repo` does (drop the built-in token,
+  sign in, store the credential, create the repo, copy `AGENTS.md`), look at
+  the raw machine, look at their own, and then make the raw one match by
+  hand. `connect-repo --help` is gone from the tutorial.
+
+* Dotfiles is rewritten as the graduation from `connect-repo` and moves to
+  directly after GitHub Advanced (ordering 11). A private `dotfiles` repo
+  delivers an install script that appends `bashrc` and `gitconfig` fragments,
+  a new section stores a GitHub token as the Codespaces secret `GH_TOKEN`,
+  and a fresh Codespace arrives signed in as the student. Websites 1 and 2
+  and the four devcontainer tutorials shift down one slot each.
+
+* GitHub Advanced's sign-in recipe gains the line that writes the token into
+  `~/.git-credentials`, and its Summary points at Dotfiles.
+
+* Editorial pass over every tutorial: an exercise asks the student to paste
+  one thing (two-ask questions were split, adding a dozen exercises across
+  Code, Devcontainers, Our Codespace Starter, The Devcontainer Dockerfile,
+  GitHub Introduction, and Models And Money), prose has almost no semicolons,
+  filler sentences are gone, and every question's `text` is a complete copy
+  of its prompt. The repo line no longer says "You may need to restart this
+  tutorial after you do so," which was a learnr artifact.
+
+* Stale image pins in GitHub Advanced and Our Codespace Starter now read
+  1.2.9.
+
 * Every code block now says what it is: commands carry their language
   (`bash`, `r`, `yaml`, `json`, `dockerfile`, `ini`, `markdown`), text to
   type that is in no language (AI prompts, commit messages) is `default`,

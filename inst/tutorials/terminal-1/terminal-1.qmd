@@ -27,13 +27,13 @@ learnr2::student_info()
 
 This tutorial introduces the structure and uses of the bash Terminal from within VS Code running on GitHub Codespaces. When most people use the word "terminal," they are referring to something like the bash Terminal, or some other shell which allows us to "talk" with the computer directly.
 
-The older, more general term for the terminal is the "command line." All modern operating systems provide a command line, which sophisticated users can use to modify files and directories with commands like `pwd`, `ls`, `echo`, `mkdir`, `mv`, `rm`, and `cd`. This is the first of three Terminal tutorials: this one covers the core verbs, paths, and redirection; Terminal 2 covers files and running programs; Terminal 3 covers wildcards, grep, and pipes.
+The older, more general term for the terminal is the "command line." All modern operating systems provide a command line, which sophisticated users can use to modify files and directories with commands like `pwd`, `ls`, `echo`, `mkdir`, `mv`, `rm`, and `cd`. This is the first of three Terminal tutorials. This one covers the core commands, paths, and redirection. Terminal 2 covers files and running programs. Terminal 3 covers wildcards, grep, and pipes.
 
 Some material is from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
 ###
 
-You should be doing this tutorial in a repo named `terminal-1`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so. (Recall the rule: a tutorial's repo is named after its title, all in lower case, with spaces replaced by dashes --- "Terminal 1" becomes `terminal-1`.)
+You should be doing this tutorial in a repo named `terminal-1`. If you are not, create one and then connect to it. (Recall the rule: a tutorial's repo is named after its title, all in lower case, with spaces replaced by dashes --- "Terminal 1" becomes `terminal-1`.)
 
 ## Terminal
 
@@ -41,7 +41,7 @@ The lower section of the VS Code window is the "Panel," which is composed of a c
 
 The Terminal view is, by far, the part of the Panel which we use most often. Within it you can run several *terminals* at once, each with its own tab on the right side of the Panel. A terminal is just a window for typing text to a program and reading the program's replies. The program is usually the bash **shell** --- a program whose whole job is to interpret your commands --- and that combination is what we call a bash Terminal. But a terminal can host other programs instead: an R Terminal is the same kind of window running R.
 
-The icons on the right side of the Panel manage terminals: `+` opens a new bash Terminal (the drop-down arrow beside it offers other kinds, such as **R Terminal**), the split icon puts two terminals side by side, and the trash can closes the selected terminal. The first terminal's tab may carry a small warning triangle (⚠), which just means an extension activated after that terminal started. It is harmless; ignore it.
+The icons on the right side of the Panel manage terminals: `+` opens a new bash Terminal (the drop-down arrow beside it offers other kinds, such as **R Terminal**), the split icon puts two terminals side by side, and the trash can closes the selected terminal. The first terminal's tab may carry a small warning triangle (⚠), which just means an extension activated after that terminal started. It is harmless.
 
 ![](images/terminal-on-open.png){width=90%}
 
@@ -49,13 +49,13 @@ This is a fresh Codespace, before any repo has been connected. The Panel holds o
 
 ### Exercise 1
 
-You met the bash Terminal in the Orientation and Workflow tutorials; this is recall. Use the bash Terminal that is already open, or open a new one with the `+` icon. Hit the `Enter` key twice --- the string that reappears each time is the **prompt**, telling you bash is ready for your next command. Then run `pwd`. CP/CR.
+Use the bash Terminal that is already open, or open a new one with the `+` icon. Hit the `Enter` key twice --- the string that reappears each time is the **prompt**, telling you bash is ready for your next command. Then run `pwd`. CP/CR.
 
 ```{r}
 #| label: terminal-1
 #| echo: false
 learnr2::question(
-  "You met the bash Terminal in the Orientation and Workflow tutorials; this is recall. Use the bash Terminal that is already open, or open a new one with the + icon. Hit the Enter key twice -- the string that reappears each time is the prompt, telling you bash is ready for your next command. Then run pwd. CP/CR.",
+  "Use the bash Terminal that is already open, or open a new one with the + icon. Hit the Enter key twice -- the string that reappears each time is the prompt, telling you bash is ready for your next command. Then run pwd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -73,7 +73,7 @@ terminal-1 $ pwd
 terminal-1 $
 ```
 
-The prompt is the name of the directory you are currently in --- `terminal-1` --- followed by a space and a dollar sign. The dollar sign indicates the end of the prompt; you type commands after it. `pwd` prints the full path to that directory. (If you are working on your own computer rather than in a Codespace, your prompt will look different. Default prompts vary from computer to computer.) Every bash Terminal in a Codespace started from `codespace-starter` shows this short prompt, because `codespace-starter` set it up that way.
+The prompt is the name of the directory you are currently in --- `terminal-1` --- followed by a space and a dollar sign. The dollar sign marks the end of the prompt. You type commands after it. `pwd` prints the full path to that directory. (If you are working on your own computer rather than in a Codespace, your prompt will look different. Default prompts vary from computer to computer.) Every bash Terminal in a Codespace started from `codespace-starter` shows this short prompt, because `codespace-starter` set it up that way.
 
 ### Exercise 2
 
@@ -122,7 +122,7 @@ example $ pwd
 example $
 ```
 
-The `example` directory is one level below the directory in which you started. The other item `ls` listed, `AGENTS.md`, was placed in your repo by `connect-repo`; we will come back to it.
+The `example` directory is one level below the directory in which you started. The other item `ls` listed, `AGENTS.md`, was placed in your repo by `connect-repo`.
 
 ### Exercise 4
 
@@ -149,7 +149,7 @@ my.txt
 example $
 ```
 
-`echo "" > my.txt` creates an empty file. `echo` just repeats whatever follows, which is an empty quote in this case. `>`, which we will discuss more later, redirects whatever comes before it into whatever comes after it.
+`echo "" > my.txt` creates an empty file. `echo` just repeats whatever follows, which is an empty quote in this case. `>` redirects whatever comes before it into whatever comes after it.
 
 
 ### Exercise 5
@@ -176,6 +176,8 @@ example $ ls
 my_2.txt  my.txt
 example $
 ```
+
+`cp` takes two arguments: the file to copy and the name of the copy. The original is left untouched.
 
 ### Exercise 6
 
@@ -262,7 +264,7 @@ terminal-1 $ pwd
 terminal-1 $
 ```
 
-Again, note how the prompt changed because we moved directories. The `..` symbol --- two periods --- always indicates the directory one level up, i.e., the directory in which `example` is located.
+The prompt changed because we moved directories. The `..` symbol --- two periods --- always means the directory one level up, here the directory in which `example` is located.
 
 ### Exercise 9
 
@@ -278,6 +280,8 @@ learnr2::question(
 )
 ```
 
+###
+
 ```{.output}
 terminal-1 $ rm -r example
 terminal-1 $ ls
@@ -287,11 +291,11 @@ terminal-1 $
 
 `-r` is an **option** that allows us to delete a directory. The `r` stands for **r**ecursive because, in order to delete a directory, you must also (recursively) delete every directory and file within that directory.
 
-It is good to clean up. Don't leave junk files lying around.
+Don't leave junk files lying around.
 
 ## Paths
 
-You will practice using paths both inside and outside the current working directory. You will learn a few shortcuts to make this easier.
+You will practice using paths both inside and outside the current working directory.
 
 ### Exercise 1
 
@@ -358,7 +362,7 @@ paths $ pwd
 paths $
 ```
 
-Note how the prompt changed after I ran the `cd paths` command. Before, the prompt showed `terminal-1` because that was the current working directory. Using `cd` changed the current working directory to `paths`, causing the prompt to change as well.
+The prompt changed from `terminal-1` to `paths` because `cd` changed the working directory.
 
 ### Exercise 4
 
@@ -383,7 +387,7 @@ lessons
 paths $
 ```
 
-Because we have changed working directories, the `lessons` directory is created inside the `paths` directory. It is the only object in the `paths` directory.
+Because we changed working directories, the `lessons` directory is created inside the `paths` directory.
 
 ### Exercise 5
 
@@ -434,7 +438,7 @@ learnr2::question(
 
 ###
 
-Get in the habit of using the tab key. Avoid typing whenever possible. Be lazy!
+Get in the habit of using the tab key. It saves typing and prevents misspelled file names.
 
 ### Exercise 7
 
@@ -460,9 +464,7 @@ fruits $
 ```
 ###
 
-`pineapple.txt` is still a relative path, but since the file is directly inside the assumed starting point, i.e., the working directory, the name of the file is all we need. If we had used `lessons/fruits/apple.txt`, as we would have had to do if our working directory were `paths`, we would have gotten an error because those directories would not be recognized from our actual starting point of `fruits`.
-
-Read this paragraph again. No skimming!
+`pineapple.txt` is still a relative path. Since the file is directly inside the working directory, the name of the file is all we need. `lessons/fruits/pineapple.txt`, which is what we would need if our working directory were `paths`, would produce an error. Those directories do not exist inside our actual starting point, `fruits`.
 
 ### Exercise 8
 
@@ -502,6 +504,8 @@ learnr2::question(
   show_text = FALSE
 )
 ```
+
+###
 
 Your answer should look like this:
 
@@ -568,7 +572,7 @@ lessons $
 
 ###
 
-We can act on files that are not in the working directory as long as we provide a path --- either relative, as here, or absolute --- to those files. In this case, neither `mv` nor `ls` is acting on the current directory. Instead, they are acting on lower directories: `fruits` and `tbd`.
+We can act on files that are not in the working directory as long as we provide a path --- either relative, as here, or absolute --- to those files. Here neither `mv` nor `ls` acts on the current directory. Both act on directories below it, `fruits` and `tbd`.
 
 ### Exercise 12
 
@@ -596,7 +600,7 @@ lessons tbd
 paths $
 ```
 
-When using `mv`, there is no difference between moving a directory and moving a file. A command like `mv lessons/tbd .` seems like a bit of witchcraft. But all it really says is to move (`mv`) the `tbd` directory (which is located in the `lessons` directory) to here (`.`), meaning to the current directory.
+When using `mv`, there is no difference between moving a directory and moving a file. `mv lessons/tbd .` moves the `tbd` directory, located inside `lessons`, to `.`, the current directory.
 
 ### Exercise 13
 
@@ -659,7 +663,7 @@ symbols $ ls
 symbols $
 ```
 
-The more practice we get with command-line commands --- often called "shell" commands --- the easier it is to string together several of them in a row.
+Command-line commands are often called "shell" commands, because the bash shell is the program that reads and runs them.
 
 ### Exercise 2
 
@@ -717,17 +721,17 @@ symbols $
 
 ###
 
-One level up is your repo, where `symbols` sits beside `AGENTS.md` --- the plain-text file `connect-repo` copies into every new repo, which AI assistants such as Copilot read from the repo root to learn the rules for working with you in this course. (The repo also contains hidden files, like the `.git` directory, but plain `ls` does not show those.) Two levels up is `/workspaces`, where your repo sits beside `codespace-starter`, the folder that supplied this Codespace --- plus the repos from earlier tutorials, if you have reused this Codespace. The symbols chain: `..` means one level up, `../..` two, and so on.
+One level up is your repo, where `symbols` sits beside `AGENTS.md`, the plain-text file `connect-repo` copies into every new repo. AI assistants such as Copilot read it from the repo root to learn the rules for working with you in this course. (The repo also contains hidden files, like the `.git` directory, but plain `ls` does not show those.) Two levels up is `/workspaces`, where your repo sits beside `codespace-starter`, the folder that supplied this Codespace, plus the repos from earlier tutorials if you have reused this Codespace. `..` means one level up, `../..` two, and so on.
 
 ### Exercise 4
 
-Run `pwd` again. This returns the current working directory. Note that the return value is an **absolute path**. It tells you exactly where you --- meaning your Terminal session or instance --- are located on your computer.
+Run `pwd` again. This returns the current working directory. Note that the return value is an **absolute path**. It tells you exactly where you --- meaning your Terminal session or instance --- are located on your computer. CP/CR.
 
 ```{r}
 #| label: important-symbols-4
 #| echo: false
 learnr2::question(
-  "Run pwd again. This returns the current working directory. Note that the return value is an absolute path. It tells you exactly where you -- meaning your Terminal session or instance -- are located on your computer.",
+  "Run pwd again. This returns the current working directory. Note that the return value is an absolute path. It tells you exactly where you -- meaning your Terminal session or instance -- are located on your computer. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -765,6 +769,8 @@ learnr2::question(
 )
 ```
 
+###
+
 My answer looks like this:
 
 ```{.output}
@@ -774,7 +780,7 @@ symbols $ cd
 ~ $
 ```
 
-In Codespaces, the home directory is usually `/home/rstudio`. Note how, after we run `cd`, the prompt changes to report `~` as the current working directory. `~` --- a tilde, pronounced "TIL-duh" --- is the symbol for the current user's home directory. The shorthands `.`, `..`, and `~` are not specific to any one command: they stand for paths, and work anywhere a path does.
+In Codespaces, the home directory is usually `/home/rstudio`. After `cd`, the prompt reports `~` as the current working directory. `~` --- a tilde, pronounced "TIL-duh" --- is the symbol for the current user's home directory. The shorthands `.`, `..`, and `~` are not specific to any one command. They stand for paths and work anywhere a path does.
 
 ### Exercise 6
 
@@ -799,7 +805,7 @@ symbols $ pwd
 symbols $
 ```
 
-This is an example of using an absolute path to change locations.
+An absolute path works from anywhere, because it starts at the root of the file system rather than at the working directory.
 
 ### Exercise 7
 
@@ -831,7 +837,7 @@ Note that `rm -rf symbols` and `rm -rf symbols/`, with the trailing slash, have 
 
 ## Redirection
 
-You have been creating files with `echo "" > my.txt` since the start of this tutorial, without stopping to look at the machinery. The `>` symbol deserves its own moment: it **redirects** a program's output into a file. You should be back in your repo's top-level directory.
+You have been creating files with `echo "" > my.txt` since the start of this tutorial. The `>` symbol **redirects** a program's output into a file. You should be back in your repo's top-level directory.
 
 ### Exercise 1
 
@@ -861,13 +867,13 @@ terminal-1 $
 
 ### Exercise 2
 
-Now redirect that output into a file instead. Run `echo "Your First and Last Name Here" > me.txt` (with your actual name). Then run `cat me.txt` --- `cat` prints a file's contents, as you have seen in earlier tutorials; Terminal 2 gives it a fuller treatment. CP/CR.
+Now redirect that output into a file instead. Run `echo "Your First and Last Name Here" > me.txt` (with your actual name). Then run `cat me.txt`. `cat` prints a file's contents. CP/CR.
 
 ```{r}
 #| label: redirection-2
 #| echo: false
 learnr2::question(
-  "Now redirect that output into a file instead. Run echo \"Your First and Last Name Here\" > me.txt (with your actual name). Then run cat me.txt -- cat prints a file's contents, as you have seen in earlier tutorials; Terminal 2 gives it a fuller treatment. CP/CR.",
+  "Now redirect that output into a file instead. Run echo \"Your First and Last Name Here\" > me.txt (with your actual name). Then run cat me.txt. cat prints a file's contents. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -913,7 +919,7 @@ terminal-1 $
 
 ###
 
-`>` overwrites; `>>` appends. Neither is limited to `echo` --- any command's output can be redirected, and AI agents build and extend files this way constantly. When you see `>` in a command an agent proposes, check what file it points at: whatever is there now will be replaced.
+`>` overwrites. `>>` appends. Neither is limited to `echo`. Any command's output can be redirected, and AI agents build and extend files this way constantly. When you see `>` in a command an agent proposes, check what file it points at. Whatever is there now will be replaced.
 
 ## Summary
 

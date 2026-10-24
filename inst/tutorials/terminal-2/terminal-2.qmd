@@ -23,11 +23,11 @@ learnr2::student_info()
 
 This tutorial builds on Terminal 1. There you learned the core verbs --- `pwd`, `ls`, `mkdir`, `cp`, `mv`, `rm`, and `cd` --- along with paths and redirection. Here we cover the rest of what a working data scientist does at the command line: command options, environment variables, looking inside files, moving files into and out of a Codespace, and running programs --- both R scripts and Python scripts.
 
-In the age of AI, you will *read* far more shell commands than you write: your AI agents run them constantly, and your job is to understand what you are approving. Keep that frame in mind throughout.
+In the age of AI, you will *read* far more shell commands than you write: your AI agents run them constantly, and your job is to understand what you are approving.
 
 ###
 
-You should be doing this tutorial in a repo named `terminal-2`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
+You should be doing this tutorial in a repo named `terminal-2`. If you are not, create one and then connect to it.
 
 ## Options
 
@@ -58,7 +58,7 @@ options $ ls
 options $
 ```
 
-Note how easy it is to string together several commands in order to accomplish our goals.
+The prompt tracks your location. After `cd options/` it changes from `terminal-2 $` to `options $`.
 
 ### Exercise 2
 
@@ -86,7 +86,7 @@ options $
 
 ###
 
-Plain `ls` shows nothing; `ls -a` reveals the file. Any file whose name starts with a `.` is "hidden" --- which is exactly how `.gitignore` and the `.git` directory stay out of your way. Other than the leading `.`, avoid special characters and spaces in file names.
+Plain `ls` shows nothing. `ls -a` reveals the file. Any file whose name starts with a `.` is "hidden," which is how `.gitignore` and the `.git` directory stay out of your way. Other than the leading `.`, avoid special characters and spaces in file names.
 
 ### Exercise 3
 
@@ -142,9 +142,9 @@ Your dates will differ.
 
 ###
 
-In a long list, names are in the last column and file type is in the first: a leading `d` means **d**irectory, a leading `-` means file, a leading `l` means **l**ink. Both entries here are directories: `codespace-starter`, where every Codespace begins, and `terminal-2`, the repo `connect-repo` created for you, sitting side by side under `/workspaces`. The middle columns give permissions, owner (`rstudio`, the user you work as in every Codespace), size in bytes, and the date last modified. When an agent runs `ls -l` in a transcript, this is what it is reading.
+In a long list, names are in the last column and file type is in the first: a leading `d` means **d**irectory, a leading `-` means file, a leading `l` means **l**ink. Both entries here are directories: `codespace-starter`, where every Codespace begins, and `terminal-2`, the repo `connect-repo` created for you, sitting side by side under `/workspaces`. The middle columns give permissions, owner (`rstudio`, the user you work as in every Codespace), size in bytes, and the date last modified.
 
-Why not `ls -l $HOME`? Try it: the answer is a lone `total 0`, because your home directory holds nothing but hidden files. `ls -la $HOME` combines the two options and shows them.
+`ls -l $HOME` prints a lone `total 0`, because your home directory holds nothing but hidden files. `ls -la $HOME` combines the two options and shows them.
 
 ### Exercise 5
 
@@ -197,15 +197,15 @@ terminal-2 $
 
 ###
 
-A blank line. The variable is gone --- and note that this is *not* an error. Bash treats a variable nobody has set as the empty string, so `echo` printed nothing and finished happily.
+The blank line is not an error. Bash treats a variable nobody has set as the empty string, so `echo` printed nothing.
 
-An `export` belongs to the one shell you typed it in. The new terminal is a new shell, started fresh, and it has never heard of `FAVORITE_ANIMAL`. Notice the prompt, too: the new shell opened in `terminal-2`, the root of your repo (that is where `connect-repo` arranged for every new terminal to start), not in `options`, where your other terminal happens to be sitting. This matters more than it looks: later in the course you will store an API key --- a kind of password --- in an environment variable, and this per-terminal behavior is the first thing that will bite you if you forget it.
+An `export` belongs to the one shell you typed it in. The new terminal is a new shell, started fresh, and it has never heard of `FAVORITE_ANIMAL`. The prompt shows that the new shell opened in `terminal-2`, the root of your repo, where `connect-repo` arranged for every new terminal to start, not in `options`. Later in the course you will store an API key --- a kind of password --- in an environment variable, and it will exist only in the terminal where you set it.
 
 Close the new terminal (the trash-can icon) and click back to your original tab, which is still sitting in `options` with the variable still set.
 
 ## Looking inside files
 
-Before you trust a file --- especially one an AI just wrote --- look inside it. These are the commands for doing that quickly, without opening an editor.
+Before you trust a file --- especially one an AI just wrote --- look inside it. These commands do that without opening an editor.
 
 ### Exercise 1
 
@@ -289,7 +289,7 @@ learnr2::question(
 
 ###
 
-Your output shows the last five lines of the file. `tail` is `head`'s mirror image. Together they let you sample a file's top and bottom in a second --- which is often all you need to decide whether it is the file you think it is.
+Your output shows the last five lines of the file. `tail` is `head`'s mirror image. A look at the top and bottom is often all you need to decide whether a file is the one you think it is.
 
 ### Exercise 4
 
@@ -307,9 +307,9 @@ learnr2::question(
 
 ###
 
-`cat` prints an entire file; the `-n` option adds line numbers. (`cat` stands for con**cat**enate --- given two files, it prints them together.) For a short file, `cat` beats opening an editor. For a long one, `head` and `tail` are kinder to your screen.
+`cat` prints an entire file. The `-n` option adds line numbers. (`cat` stands for con**cat**enate --- given two files, it prints them together.) For a short file, `cat` beats opening an editor. For a long one, `head` and `tail` are kinder to your screen.
 
-You will also see agents use `sed` (edit text in a stream) and `awk` (slice columns from text). You do not need to write those --- you need to not be scared of them when they scroll past. Recognize the name, and if a command matters, ask AI or `--help` what it does.
+You will also see agents use `sed` (edit text in a stream) and `awk` (slice columns from text). You do not need to write those. If one matters, ask AI or `--help` what it does.
 
 ### Exercise 5
 
@@ -334,13 +334,13 @@ options $
 
 ###
 
-Not much to paste --- when you quit, `less` puts the screen back the way it was. That is the point of a pager: it shows without touching.
+When you quit, `less` puts the screen back the way it was, so there is little to paste. A pager shows a file without changing it.
 
-Remember `q`. Other programs open a pager *for* you without asking: `git log`, `gh`, and the manual pages all dump long output into `less`. If your Terminal ever seems stuck displaying a file, with a `:` or `(END)` at the bottom, you are in a pager --- press `q` and you are free.
+Other programs open a pager *for* you without asking: `git log`, `gh`, and the manual pages all dump long output into `less`. If your Terminal ever seems stuck displaying a file, with a `:` or `(END)` at the bottom, you are in a pager. Press `q`.
 
 ### Exercise 6
 
-One more inspection command, and it may be the most important one for working with AI: `diff`, which shows how two files differ. Build a second file that differs by one line, then compare. Run these commands, one at a time:
+`diff` shows how two files differ. Build a second file that differs by one line, then compare. Run these commands, one at a time:
 
 ```bash
 cp AUTHORS AUTHORS-edited
@@ -371,23 +371,23 @@ options $ diff AUTHORS AUTHORS-edited
 options $
 ```
 
-`AUTHORS` is 38 lines long today; if the R team has added to it since, your numbers will be a little larger.
+`AUTHORS` is 38 lines long today. If the R team has added to it since, your numbers will be a little larger.
 
 ###
 
-Read the output: `38a39` means "after line 38 of the first file, line 39 of the second file was **a**dded," and the `>` marks a line that exists only in the second file. Lines only in the *first* file would get `<`. Two identical files produce no output at all --- silence means "same."
+`38a39` means "after line 38 of the first file, line 39 of the second file was **a**dded," and the `>` marks a line that exists only in the second file. Lines only in the *first* file would get `<`. Two identical files produce no output at all.
 
-This is the skill underneath auditing AI work: an agent edits a file, and `diff` shows you exactly what changed and nothing else. In the GitHub tutorials you will meet `git diff`, which applies this same idea to your whole repo's history.
+When an agent edits a file, `diff` shows you exactly what changed and nothing else. `git diff`, which you will meet in the GitHub tutorials, applies the same idea to a whole repo.
 
 Clean up: run `rm AUTHORS-edited`.
 
 ## Files in and out
 
-Downloading files and moving them to a sensible location is a core skill for data scientists. Sometimes you download data by hand and must upload it from your `Downloads` folder to your Codespace. Sometimes you need to upload an image for an AI to look at. Here is how files get in and out.
+Sometimes you download data by hand and must upload it from your `Downloads` folder to your Codespace. Sometimes you need to upload an image for an AI to look at.
 
 ### Exercise 1
 
-In the bash Terminal, confirm your location with `pwd` --- you should still be in `options`; if not, `cd` there. In your browser, go to:
+In the bash Terminal, confirm your location with `pwd`. You should still be in `options`. If not, `cd` there. In your browser, go to:
 
 ```default
 https://github.com/PPBDS/vscode.tutorials/blob/main/TODO.txt
@@ -423,9 +423,9 @@ options $
 
 ###
 
-The file made a round trip: from GitHub to your computer's `Downloads`, then up into the Codespace. Remember that your Codespace is a different computer --- files on your laptop are not in your Codespace until you put them there.
+The file made a round trip: from GitHub to your computer's `Downloads`, then up into the Codespace. Your Codespace is a different computer. Files on your laptop are not in your Codespace until you put them there.
 
-**Upload...** and **Download...** exist only because you are running VS Code in a browser; they are the bridge between the computer in front of you and the one in the cloud. On a local machine, running desktop VS Code, those menu entries are absent --- there is no gap to bridge, so you drag and drop, or just use your file system.
+**Upload...** and **Download...** exist only because you are running VS Code in a browser. They bridge the computer in front of you and the one in the cloud. On a local machine, running desktop VS Code, those menu entries are absent, and you use your file system instead.
 
 ### Exercise 2
 
@@ -454,11 +454,11 @@ options $
 
 ###
 
-Drag-and-drop and the **Upload...** menu do the same thing. This matters more than you might think: you will sometimes need to hand-download data from a website that requires clicking, or upload an image you want an AI to imitate --- and this is the only road from your laptop into the Codespace.
+Drag-and-drop and the **Upload...** menu do the same thing. Either one is the only road from your laptop into the Codespace, whether you are moving data you downloaded by hand from a website or an image you want an AI to imitate.
 
 ### Exercise 3
 
-Now practice the realistic version of this workflow --- the one every data science project starts with. Run these commands, one at a time:
+Now fetch a data file directly into a `data/` directory. Run these commands, one at a time:
 
 ```bash
 cd /workspaces/terminal-2
@@ -466,13 +466,13 @@ mkdir data
 curl -o data/penguins.csv https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv
 ```
 
-The lowercase `-o` option, unlike `-O`, lets you choose the downloaded file's name --- including a path, so the file lands directly in `data/`. Then run `head -n 3 data/penguins.csv`. CP/CR.
+The lowercase `-o` option, unlike `-O`, lets you choose the downloaded file's name, including a path, so the file lands directly in `data/`. Then run `head -n 3 data/penguins.csv`. CP/CR.
 
 ```{r}
 #| label: files-in-and-out-3
 #| echo: false
 learnr2::question(
-  "The lowercase -o option, unlike -O, lets you choose the downloaded file's name -- including a path, so the file lands directly in data/. Then run head -n 3 data/penguins.csv. CP/CR.",
+  "Now fetch a data file directly into a data/ directory. Run cd /workspaces/terminal-2, mkdir data, and curl -o data/penguins.csv https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv, one at a time. The lowercase -o option, unlike -O, lets you choose the downloaded file's name, including a path, so the file lands directly in data/. Then run head -n 3 data/penguins.csv. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -489,7 +489,7 @@ Adelie,Torgersen,39.5,17.4,186,3800,female,2007
 
 ###
 
-Make a `data/` directory, fetch a file into it, `head` it to confirm it is what you expect: this exact sequence opens nearly every data science project you will ever do, whether you type it or an AI agent does. The first line of a CSV file names the columns; every following line is one observation.
+Make a `data/` directory, fetch a file into it, and `head` it to confirm it is what you expect. This sequence opens nearly every data science project, whether you type it or an AI agent does. The first line of a CSV file names the columns. Every following line is one observation.
 
 ### Exercise 4
 
@@ -519,7 +519,7 @@ terminal-2 $
 
 `find` searches a directory --- here `.`, the current one --- and everything beneath it, printing the path of every match. Where `ls` shows you one directory at a time, `find` sweeps the whole tree.
 
-Watch for it in agent transcripts: `find` is one of the first commands an AI runs in an unfamiliar project, because it answers "what is here and where?" in one stroke. In Terminal 3, wildcards will let you search for patterns --- every `.csv` file, say --- instead of exact names.
+`find` is one of the first commands an AI runs in an unfamiliar project, because it answers "what is here and where?" in one stroke.
 
 ### Exercise 5
 
@@ -543,11 +543,11 @@ Authors of R.
 
 ###
 
-**Download...** is the return road: it works on a single file or on a whole directory, which arrives as a zip archive. You will use it whenever a plot, a rendered document, or a data file produced in the Codespace needs to live on your own computer --- and remember that a Codespace is not forever, so anything you care about should be either pushed to GitHub or downloaded.
+**Download...** works on a single file or on a whole directory, which arrives as a zip archive. A Codespace is not forever. Anything you care about should be either pushed to GitHub or downloaded.
 
 ## Running programs
 
-You have been running programs all along --- `ls`, `curl`, and `git` are programs. But data scientists also run programs *they* (or their AI agents) just wrote: R scripts and Python scripts. AI agents constantly create small scripts on the fly and run them; this section teaches you to read what is happening when they do.
+You have been running programs all along --- `ls`, `curl`, and `git` are programs. But data scientists also run programs *they* (or their AI agents) just wrote: R scripts and Python scripts. AI agents constantly create small scripts on the fly and run them.
 
 ### Exercise 1
 
@@ -581,7 +581,7 @@ terminal-2 $
 
 ###
 
-`Rscript` starts a fresh R process, runs the file, prints the result, and exits. Nothing is left running --- and nothing you define in the script exists afterward, as you saw with the vanishing `x` in Orientation.
+`Rscript` starts a fresh R process, runs the file, prints the result, and exits. Nothing is left running, and nothing you define in the script exists afterward, as you saw with the vanishing `x` in Orientation.
 
 ### Exercise 2
 
@@ -597,7 +597,7 @@ CP/CR.
 #| label: running-programs-2
 #| echo: false
 learnr2::question(
-  "Run Rscript -e 'sqrt(144)'. CP/CR.",
+  "You do not even need a file. Run Rscript -e 'sqrt(144)'. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -613,7 +613,7 @@ terminal-2 $
 
 ###
 
-The `-e` option means "**e**valuate this expression." AI agents use this form constantly --- to check that a package is installed, to peek at a data file, to test one line of code --- because it needs no file and cleans up after itself. When you see `Rscript -e '...'` scroll past in an agent transcript, this is all it is.
+The `-e` option means "**e**valuate this expression." AI agents use this form constantly --- to check that a package is installed, to peek at a data file, to test one line of code --- because it needs no file and cleans up after itself.
 
 ### Exercise 3
 
@@ -647,7 +647,7 @@ terminal-2 $
 
 ###
 
-You just ran your first Python program. Note the small difference in output: R printed `[1] 4` (R results are vectors, and `[1]` indexes them); Python printed a plain `4`. Same idea, different language --- a script is a text file, and an interpreter runs it.
+R printed `[1] 4`, because R results are vectors and `[1]` indexes them. Python printed a plain `4`. In both languages a script is a text file, and an interpreter runs it.
 
 ### Exercise 4
 
@@ -663,7 +663,7 @@ CP/CR.
 #| label: running-programs-4
 #| echo: false
 learnr2::question(
-  "Run python -c 'print(2 ** 10)'. CP/CR.",
+  "Python's version of -e is -c (for command). Run python -c 'print(2 ** 10)'. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -679,7 +679,7 @@ terminal-2 $
 
 ###
 
-`**` is Python's power operator (R uses `^`). Agents mix R and Python freely --- checking something with `python -c` here, `Rscript -e` there --- choosing whichever tool fits. You need to recognize both forms.
+`**` is Python's power operator (R uses `^`). Agents mix R and Python freely --- checking something with `python -c` here, `Rscript -e` there --- choosing whichever tool fits.
 
 ### Exercise 5
 
@@ -707,7 +707,7 @@ terminal-2 $
 
 ###
 
-Look closely: these are different kinds of places. `Rscript` lives in `/usr/local/bin` --- R is installed **system-wide**, one copy for the whole machine. But `python` lives in `/opt/venv/bin` --- inside a **virtual environment** (a "venv"): a private, self-contained Python installation with its own packages. (`python --version` reports which one: `Python 3.12.3`.) In our Codespaces, running an R script and running a Python script are genuinely different arrangements under the hood.
+`Rscript` lives in `/usr/local/bin`. R is installed **system-wide**, one copy for the whole machine. `python` lives in `/opt/venv/bin`, inside a **virtual environment** (a "venv"): a private, self-contained Python installation with its own packages. (`python --version` reports which one: `Python 3.12.3`.)
 
 ### Exercise 6
 
@@ -735,7 +735,7 @@ It is one long line, with directories separated by colons. `/home/rstudio/.local
 
 ###
 
-`PATH` is an environment variable holding an ordered list of directories. When you type a command, the shell walks the list left to right and runs the program from the **first directory that contains one** by that name. `/home/rstudio/.local/bin` is where `connect-repo` lives, and `/home/rstudio/.cargo/bin` is another small tool directory; neither has a `python`. The next entry, `/opt/venv/bin`, does --- and it comes before `/usr/bin`, where the operating system's own Python sits. So plain `python` always means the venv's Python: no setup, no activation. That is a deliberate choice baked into our Codespace image.
+`PATH` is an environment variable holding an ordered list of directories. When you type a command, the shell walks the list left to right and runs the program from the **first directory that contains one** by that name. `/home/rstudio/.local/bin` is where `connect-repo` lives, and `/home/rstudio/.cargo/bin` is another small tool directory. Neither has a `python`. The next entry, `/opt/venv/bin`, does, and it comes before `/usr/bin`, where the operating system's own Python sits. So plain `python` always means the venv's Python: no setup, no activation. That is a deliberate choice baked into our Codespace image.
 
 ### Exercise 7
 
@@ -763,7 +763,7 @@ Your version number may differ.
 
 ###
 
-[uv](https://docs.astral.sh/uv/) is a fast, modern tool for managing Python environments and packages. When our Codespace image was built, uv created the venv (`uv venv /opt/venv`) and installed a locked list of data science packages into it (`uv pip install`). This is the big cultural difference between the two languages: there is usually **one R** on a machine, with packages in a shared library --- but there are often **many Pythons**, each project carrying its own venv so its packages cannot conflict with another project's. Tools like uv exist to manage that. When you see an agent run `uv pip install ...` or `uv run ...`, it is working inside this system.
+[uv](https://docs.astral.sh/uv/) is a fast, modern tool for managing Python environments and packages. When our Codespace image was built, uv created the venv (`uv venv /opt/venv`) and installed a locked list of data science packages into it (`uv pip install`). There is usually **one R** on a machine, with packages in a shared library, but often **many Pythons**, each project carrying its own venv so its packages cannot conflict with another project's. Tools like uv manage that. When an agent runs `uv pip install ...` or `uv run ...`, it is working inside this system.
 
 ### Exercise 8
 
@@ -798,7 +798,7 @@ Your version number may differ.
 
 ###
 
-**pandas** is Python's rough equivalent of the tidyverse's data-manipulation tools, and it was already installed --- along with **numpy**, **matplotlib**, **seaborn**, **scikit-learn**, and the rest of the standard Python data science stack --- because uv baked them into the venv when the image was built. On a random laptop, `python -c 'import pandas'` might fail with `ModuleNotFoundError`; in our Codespaces it just works. That difference --- and knowing it exists --- is most of what you need to understand about Python environments for now.
+**pandas** is Python's rough equivalent of the tidyverse's data-manipulation tools, and it was already installed --- along with **numpy**, **matplotlib**, **seaborn**, **scikit-learn**, and the rest of the standard Python data science stack --- because uv baked them into the venv when the image was built. On a random laptop, `python -c 'import pandas'` might fail with `ModuleNotFoundError`. In our Codespaces it works.
 
 ### Exercise 9
 
@@ -833,11 +833,11 @@ The version numbers of the dependencies may differ.
 
 ###
 
-`quarto check` inspects the whole Quarto installation --- the rendering engines, R, Python --- and reports what works. It is the first thing to run (or to let an AI run) when rendering breaks mysteriously. The larger point: `Cmd/Ctrl + Shift + K` was never magic. It runs this same `quarto` program, which you can drive yourself --- and the Websites tutorials will do exactly that, with `quarto create`, `quarto preview`, and `quarto publish`.
+`quarto check` inspects the whole Quarto installation --- the rendering engines, R, Python --- and reports what works. It is the first thing to run (or to let an AI run) when rendering breaks mysteriously. `Cmd/Ctrl + Shift + K` runs this same `quarto` program. The Websites tutorials will drive it directly, with `quarto create`, `quarto preview`, and `quarto publish`.
 
 ### Exercise 10
 
-Every program on this machine is a file that someone marked as runnable. See what that means. Run these commands, one at a time:
+Every program on this machine is a file that someone marked as runnable. Run these commands, one at a time:
 
 ```bash
 echo 'echo "I am a program."' > hello.sh
@@ -872,9 +872,9 @@ terminal-2 $
 
 ###
 
-Two lessons in one transcript. First, `Permission denied`: a fresh file is just text, even if it contains commands. `chmod +x` sets the **executable bit** --- the `x` you saw in `ls -l`'s permission strings --- and only then will the shell run it. A script that exists but was never `chmod`ed is a classic silent failure, and it will come up again in a later tutorial.
+`Permission denied` means that a fresh file is just text, even if it contains commands. `chmod +x` sets the **executable bit**, the `x` you saw in `ls -l`'s permission strings, and only then will the shell run it. A script that exists but was never `chmod`ed is a classic silent failure.
 
-Second, the `./` prefix: your current directory is deliberately *not* on `$PATH` (a security choice --- imagine a malicious `ls` planted in a folder you `cd` into), so you must point at the script explicitly.
+The `./` prefix is needed because your current directory is deliberately *not* on `$PATH`, a security choice (imagine a malicious `ls` planted in a folder you `cd` into). You must point at the script explicitly.
 
 Clean up: run `rm hello.sh`.
 
@@ -882,7 +882,7 @@ Clean up: run `rm hello.sh`.
 
 This tutorial covered command options, environment variables (reading `$HOME` and `$PATH`, setting your own with `export`, and why an `export` dies with its terminal), looking inside files with `head`, `tail`, `cat`, the `less` pager, and `diff`, finding files with `find`, moving files in and out of a Codespace (the Explorer's `Upload...` and `Download...`, drag-and-drop, and `curl` into a `data/` directory), and running programs: `Rscript` and `Rscript -e` for R, `python` and `python -c` for Python, `quarto check` for Quarto, and your own `hello.sh` --- once `chmod +x` marked it executable. You also saw how our Codespaces arrange the two languages differently --- R installed system-wide, Python in a uv-built virtual environment at `/opt/venv` that comes first on `$PATH`, stocked with the data science stack.
 
-You will type some of these commands yourself. But mostly you will *read* them, in the transcripts of AI agents working on your behalf --- and now you can.
+You will type some of these commands yourself. But mostly you will *read* them, in the transcripts of AI agents working on your behalf.
 
 ## Download answers
 

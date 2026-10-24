@@ -21,7 +21,7 @@ learnr2::student_info()
 
 ## Introduction
 
-This is the first tutorial you should complete after **Orientation**. It builds directly on that tutorial, deliberately repeating its most important ideas --- repetition is how these habits stick. We move slowly and explain every step.
+This is the first tutorial you should complete after **Orientation**. It builds directly on that tutorial and repeats its most important ideas. Repetition is how these habits stick.
 
 You will:
 
@@ -33,7 +33,7 @@ You will:
 
 ###
 
-Every tutorial begins in the same place: a Codespace on the `main` branch of [`PPBDS/codespace-starter`](https://github.com/PPBDS/codespace-starter). You then start the tutorial from the R Tutorials extension in the Activity Bar in VS Code. That is, presumably, how you got here.
+Every tutorial begins in the same place: a Codespace on the `main` branch of [`PPBDS/codespace-starter`](https://github.com/PPBDS/codespace-starter). You then start the tutorial from the R Tutorials extension in the Activity Bar in VS Code.
 
 ![](images/wf-1.png){width=90%}
 
@@ -63,11 +63,11 @@ You can make a part bigger or smaller by dragging its edge. If you close somethi
 
 Most questions ask for you to **CP/CR** --- **C**opy/**P**aste the **C**ommand and **R**esponse --- as you have seen in earlier tutorials.
 
-Your answer may look a little different from ours. That is OK. Usernames and version numbers can be different. The **prompt** --- the text the Terminal prints while it waits for you to type --- is the name of the current folder, a space, and a `$`, like `codespace-starter $`. We set up `codespace-starter` that way, and every bash Terminal you open in this Codespace has it.
+Your answer may look a little different from ours. Usernames and version numbers vary. The **prompt** --- the text the Terminal prints while it waits for you to type --- is the name of the current folder, a space, and a `$`, like `codespace-starter $`. `codespace-starter` sets that prompt, so every bash Terminal you open in this Codespace has it.
 
 ## The Terminal
 
-The Terminal is a place where you type commands and the computer answers. In this section you will run a handful of simple, safe commands. You ran several of them --- `pwd`, `ls`, `ls -a` --- in Orientation. Running them again is deliberate: these commands should live in your fingers, not your notes. Every question is just CP/CR.
+The Terminal is a place where you type commands and the computer answers. You ran several of this section's commands --- `pwd`, `ls`, `ls -a` --- in Orientation. Running them again puts them in your fingers, not your notes.
 
 ###
 
@@ -79,7 +79,7 @@ You can also open it with the keyboard shortcut shown in the menu, `` Ctrl + ` `
 
 ###
 
-You want a **bash** Terminal. The Codespace already opened one for you: the terminal showing the READY banner, which you met in Orientation. Use it; there is no need to open another. The picture below shows that terminal: the **TERMINAL** view is selected, the **bash** tab sits at the right side of the Panel, and the `+` and down-arrow buttons for opening more terminals are just beside it. If you ever do need another bash Terminal, click the `+`.
+You want a **bash** Terminal. The Codespace already opened one for you: the terminal showing the READY banner, which you met in Orientation. Use it. In the picture below, the **TERMINAL** view is selected, the **bash** tab sits at the right side of the Panel, and the `+` and down-arrow buttons for opening more terminals are just beside it. If you ever need another bash Terminal, click the `+`.
 
 ![](images/terminal-on-open.png){width=90%}
 
@@ -145,11 +145,11 @@ List information about the FILEs (the current directory by default).
 Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
 ```
 
-`--help` is a safe way to learn what a command does. It just prints a description; it never changes your files. Almost every command you meet has a `--help` option.
+`--help` prints a description and never changes your files. Almost every command you meet has a `--help` option.
 
 ### Exercise 3
 
-Let's make a file by hand, just to see how it works. Open the Application Menu from the three horizontal bars at the top left on the VS Code window. Choose `File -> New File...`.
+Let's make a file by hand. Open the Application Menu from the three horizontal bars at the top left of the VS Code window. Choose `File -> New File...`.
 
 <!-- DK: This image shows Text Document highlighted in blue instead of R Document. -->
 
@@ -167,11 +167,11 @@ Type this single line into the new file:
 
 Add a blank line after it.
 
-Save the file as `warmup.R` at the top level of `codespace-starter`. Press `Cmd/Ctrl + S`; in the Save dialog, make sure the path ends in `codespace-starter/warmup.R`, then press **OK**. A black dot on an Editor tab means the file has unsaved changes; saving makes the dot disappear. (The Codespace also saves files by itself after a short pause, so the dot may vanish before you press anything.) `warmup.R` now appears in the Explorer, which otherwise looks nearly empty because `codespace-starter`'s own folders are hidden.
+Save the file as `warmup.R` at the top level of `codespace-starter`. Press `Cmd/Ctrl + S`. In the Save dialog, make sure the path ends in `codespace-starter/warmup.R`, then press **OK**. A black dot on an Editor tab means the file has unsaved changes. Saving makes the dot disappear. (The Codespace also saves files by itself after a short pause, so the dot may vanish before you press anything.) `warmup.R` now appears in the Explorer.
 
 ![](images/save-warmup.png){width=90%}
 
-Be careful. Sometimes VS Code seems to prefer a small `r` suffix. Either `r` or `R` is fine, but the file must be named exactly `warmup.R` (capital `R`) for the next step to work.
+VS Code sometimes suggests a lowercase `.r` suffix. R accepts either, but the next step needs the file named exactly `warmup.R`, with a capital `R`.
 
 In the bash Terminal, run `Rscript warmup.R`. CP/CR.
 
@@ -219,7 +219,7 @@ warmup.R
 codespace-starter $
 ```
 
-Your new file now appears. The problem is that this file lives inside the `PPBDS/codespace-starter` working copy, which you do **not** own. You cannot save your work to that repository on GitHub. Closing the browser does not erase the file right away, but deleting the Codespace will. You need a repository that belongs to you. That is what the next section sets up.
+`warmup.R` lives inside the `PPBDS/codespace-starter` working copy, which you do **not** own. You cannot save your work to that repository on GitHub. Closing the browser does not erase the file, but deleting the Codespace will. You need a repository that belongs to you.
 
 ## Git and GitHub
 
@@ -227,7 +227,7 @@ Your new file now appears. The problem is that this file lives inside the `PPBDS
 
 The `codespace-starter` folder you have been working in is one repo, but it belongs to the course, not to you. In this section you will create your own repo, named `workflow`, and connect to it.
 
-We give you a shortcut for this called `connect-repo`. It signs you in to GitHub, creates (or finds) a repo with the name you give it, and opens that repo's folder. Later tutorials will show you the individual Git commands hiding behind this shortcut.
+We give you a shortcut for this called `connect-repo`. It signs you in to GitHub, creates (or finds) a repo with the name you give it, and opens that repo's folder.
 
 ### Exercise 1
 
@@ -239,7 +239,7 @@ In the bash Terminal, run:
 connect-repo workflow
 ```
 
-This is the command the READY banner has been suggesting since the Codespace started. Now is the time to run it.
+This is the command the READY banner has been suggesting since the Codespace started.
 
 ###
 
@@ -264,7 +264,7 @@ Press Enter to open https://github.com/login/device in your browser...
 
 ![](images/connect-repo-prompt-2-code.png){width=90%}
 
-Your code will be different from this one, and different each time. Copy the entire code, dash and all; you will paste the whole thing in at once when GitHub asks for it. (Some junk characters may appear after the "Press Enter" line. Ignore them.)
+Your code will be different from this one, and different each time. Copy the entire code, dash and all. You will paste the whole thing in at once when GitHub asks for it. (Some junk characters may appear after the "Press Enter" line. Ignore them.)
 
 ###
 
@@ -292,7 +292,7 @@ workflow $
 
 ![](images/connect-repo-connected-line.png){width=90%}
 
-(The picture was taken for a repo with a different name. Yours says `workflow`.) Notice the last line. The prompt has changed from `codespace-starter $` to `workflow $`. `connect-repo` created the repo on GitHub, made a folder for it at `/workspaces/workflow`, and then restarted the shell in this terminal inside that folder.
+(The picture was taken for a repo with a different name. Yours says `workflow`.) The prompt on the last line has changed from `codespace-starter $` to `workflow $`. `connect-repo` created the repo on GitHub, made a folder for it at `/workspaces/workflow`, and then restarted the shell in this terminal inside that folder.
 
 ###
 
@@ -302,7 +302,7 @@ What happens next takes one of two forms. Both are normal.
 
 ![](images/trust-after-connect-repo.png){width=90%}
 
-VS Code then rebuilds itself around `/workspaces/workflow`. The old terminals, including **R Tutorial**, vanish from the Panel; a Welcome tab flashes and closes; the Chat side bar reopens; and a fresh, single **bash** terminal appears, already at `workflow $`. The Explorer now shows `AGENTS.md`. Do not worry about the missing **R Tutorial** terminal: the process serving this tutorial survives the switch, so this browser tab keeps working.
+VS Code then rebuilds itself around `/workspaces/workflow`. The old terminals, including **R Tutorial**, vanish from the Panel. A Welcome tab flashes and closes. The Chat side bar reopens. A fresh, single **bash** terminal appears, already at `workflow $`. The Explorer now shows `AGENTS.md`. The process serving this tutorial survives the switch, so this browser tab keeps working even though the **R Tutorial** terminal is gone.
 
 ![](images/workflow-after-trust.png){width=90%}
 
@@ -318,7 +318,7 @@ Run `ls`. CP/CR.
 #| label: git-and-github-1
 #| echo: false
 learnr2::question(
-  "Run ls. CP/CR.",
+  "In the bash Terminal, run connect-repo workflow. When asked whether to authenticate Git with your GitHub credentials, press Enter to answer Y. Copy the one-time code that appears, dash and all, then press Enter to open https://github.com/login/device in your browser. Paste the code into the boxes, press Continue, authorize if GitHub asks, and return to the VS Code tab. connect-repo creates the repo on GitHub, makes a folder for it at /workspaces/workflow, and restarts the shell in that folder, so the prompt changes from codespace-starter $ to workflow $. Most of the time the window then switches to the new folder by itself; click Trust Folder & Continue when VS Code asks whether you trust the authors of the files in this folder. If nothing switches and the Explorer still says CODESPACE-STARTER, open the folder yourself: from the Application Menu choose File -> Open Folder..., type /workspaces/workflow in the box, press OK, and click Trust Folder & Continue when asked. Then run ls. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -369,7 +369,7 @@ workflow $
 
 ###
 
-If your result still ends in `codespace-starter`, that terminal was never moved. Run `cd /workspaces/workflow`, or open a new bash Terminal with the `+`, which starts in the right place. If the Explorer still shows `CODESPACE-STARTER`, that is a separate problem: use `File -> Open Folder...` to open `/workspaces/workflow`, as described above, then click **Trust Folder & Continue**. The reload may stop this tutorial. That is OK! Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
+If your result still ends in `codespace-starter`, that terminal was never moved. Run `cd /workspaces/workflow`, or open a new bash Terminal with the `+`, which starts in the right place. If the Explorer still shows `CODESPACE-STARTER`, that is a separate problem: use `File -> Open Folder...` to open `/workspaces/workflow`, as described above, then click **Trust Folder & Continue**. The reload may stop this tutorial. Restart it the same way you started it: click **R Tutorials** in the Activity Bar, find this tutorial under **vscode.tutorials**, and click the arrow to launch it. All of your saved answers will still be there.
 
 ### Exercise 3
 
@@ -395,7 +395,7 @@ workflow $
 
 The hidden `.git` directory is what defines a Git repository. Git fills it with your work as you proceed. You never work directly in, or even examine, the `.git` folder.
 
-`AGENTS.md` is a plain-text file that `connect-repo` copies into every new repo. GitHub Copilot and the command-line agents (`agy`, `claude`, and the rest) read it from the repo root and follow its rules: take short, narrated steps; ask once for permission; do not solve whole worksheets for you. Read it if you like --- `cat AGENTS.md` in the bash Terminal. If you would rather not have it, `connect-repo --no-agents <name>` skips it next time. Otherwise leave it alone. It goes into your first commit along with everything else, which is normal.
+`AGENTS.md` is a plain-text file that `connect-repo` copies into every new repo. GitHub Copilot and the command-line agents (`agy`, `claude`, and the rest) read it from the repo root and follow its rules: take short, narrated steps, ask once for permission, and do not solve whole worksheets for you. Read it with `cat AGENTS.md` in the bash Terminal. If you would rather not have it, `connect-repo --no-agents <name>` skips it next time. Otherwise leave it alone. It goes into your first commit along with everything else.
 
 ### Exercise 4
 
@@ -411,7 +411,7 @@ Find the repo named **workflow**. Click it.
 
 ![](images/repo-2.png){width=90%}
 
-This is your repository's page. Seeing it in your browser proves two things: the repository really exists on GitHub, and it belongs to **you** (your username appears in the address bar, like `github.com/your-username/workflow`). This is the online home where your work will live. There is nothing in it yet because you have not committed anything.
+This is your repository's page. Your username appears in the address bar, like `github.com/your-username/workflow`, so the repository belongs to **you**. It is empty because you have not committed anything.
 
 ###
 
@@ -444,7 +444,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 workflow $ 
 ```
 
-`On branch main` and `No commits yet` mean what they say: this repo has a branch called `main` but no history at all so far. `Untracked files` lists files that sit in the folder but that Git has not been told to watch --- right now, just `AGENTS.md`. Your first commit will change both of those.
+`On branch main` and `No commits yet` mean this repo has a branch called `main` but no history yet. `Untracked files` lists files that sit in the folder but that Git has not been told to watch --- right now, just `AGENTS.md`. Your first commit will change both.
 
 ## Script 1: GitHub Copilot
 
@@ -478,7 +478,7 @@ CP/CR.
 #| label: script-1-github-copilot-1
 #| echo: false
 learnr2::question(
-  "cat prints a file's contents in the Terminal. It is the quickest way to show us -- and any AI you are working with -- exactly what is in a file. You will use it constantly. CP/CR.",
+  "cat prints a file's contents in the Terminal. It is the quickest way to show us -- and any AI you are working with -- exactly what is in a file. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -496,7 +496,7 @@ print(total)
 
 ### Exercise 2
 
-The Copilot interface and default changes all the time, like everything associated with AI. So, these images may be out of date. However, it is likely that the Explorer shows you something like this:
+The Copilot interface changes all the time, so these images may be out of date. The Explorer probably shows something like this:
 
 ![](images/sc-1.png){width=90%}
 
@@ -531,7 +531,7 @@ AGENTS.md  script-1.R
 workflow $ 
 ```
 
-The file is now saved, but it is not yet part of your repository. You will add it to the repository later. 
+The file is saved, but Git will not track it until you commit it.
 
 ### Exercise 3
 
@@ -554,7 +554,7 @@ cat script-1.R
 #| label: script-1-github-copilot-3
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Finish the script with a plot. Ask Copilot: Update script-1.R so that it keeps the addition example and then makes a beautiful plot using the diamonds data set from ggplot2. Use library(tidyverse) and no other library calls or data sets. Save the plot as diamonds-1.png. Run the script and fix any errors. Do not install packages. Keep the changes and allow the agent to run the script. Then, in the bash Terminal, run cat script-1.R. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -590,7 +590,7 @@ This solution loads only **tidyverse**, uses only `diamonds`, assigns the plot t
 
 ### Exercise 4
 
-Time to save your work. **Git** records a snapshot of your files, called a **commit**. A **push** sends your commits up to GitHub. Do both by hand through the Source Control view.
+**Git** records a snapshot of your files, called a **commit**. A **push** sends your commits up to GitHub. Do both through the Source Control view.
 
 Click the Source Control icon (the branching icon) in the Activity Bar on the left. Your new files appear under **Changes**. (`AGENTS.md` is there too. It belongs in this first commit.) Each one has a `U`, which means **untracked**: Git can see the file, but it is not yet part of any commit.
 
@@ -605,9 +605,7 @@ Now commit and push:
 
 ###
 
-When the push finishes, view your work on the web. Open your `workflow` repository on GitHub and refresh the page. 
-
-The GitHub page looks like this. 
+When the push finishes, open your `workflow` repository on GitHub and refresh the page. It looks like this.
 
 ![](images/github-repository.png){width=90%}
 
@@ -639,21 +637,21 @@ Date:   Thu Aug 13 05:44:10 2026 +0000
 workflow $ 
 ```
 
-This GitHub repo is the online copy of your work. The Codespace is where you work. The GitHub repo is where you keep and share it. If your computer stopped working right now, your commit would still be safe on GitHub.
+The Codespace is where you work. The GitHub repo is where you keep and share it. If your computer stopped working right now, your commit would still be safe on GitHub.
 
 ###
 
 Copilot is only one option. The Codespace may also provide command-line agents from Google, OpenAI, Anthropic, and other providers. These tools have different interfaces, models, limits, and account requirements, but the core workflow is the same:
 
-1. describe the outcome you want;
-2. let the AI inspect the relevant files;
-3. review proposed changes and commands;
-4. run or render the result;
-5. inspect the result and ask for revisions.
+1. Describe the outcome you want.
+2. Let the AI inspect the relevant files.
+3. Review proposed changes and commands.
+4. Run or render the result.
+5. Inspect the result and ask for revisions.
 
 ## Script 2: AI agnostic
 
-From this point forward, we are **AI agnostic**. "Ask AI" means use whichever AI you prefer — Copilot, Antigravity, or any other agent the Codespace provides. We will generally show prompts and results, not tool-specific buttons or screenshots. 
+From this point forward, we are **AI agnostic**. "Ask AI" means use whichever AI you prefer — Copilot, Antigravity, or any other agent the Codespace provides.
 
 ### Exercise 1
 
@@ -688,7 +686,7 @@ print(paste("Sum:", sum_result))
 print(paste("Mean:", mean_result))
 ```
 
-The particular numbers and results do not matter. The important result is a saved, reproducible script that runs successfully.
+The particular numbers do not matter. What matters is a saved script that runs successfully with `Rscript`.
 
 ### Exercise 2
 
@@ -696,7 +694,7 @@ Finish the second script with another plot. Ask your AI:
 
 > Update script-2.R so that it deletes the number example and then makes a beautiful plot using the diamonds data set from ggplot2. Use library(tidyverse) and no other library calls or data sets. Make a different kind of plot from the one in script-1.R, save it as diamonds-2.png, run the script, and fix any errors. Do not install packages.
 
-Note how confusing your screen can become!
+Your screen can become confusing:
 
 ![](images/confuse.png){width=90%}
 
@@ -704,13 +702,13 @@ Note how confusing your screen can become!
 
 * The black-dot-square also appears next to `script-2.R` in the name of the tab in the Editor.
 
-* To save `script-2.R`, you will need to take some action, like selecting "Keep". VS Code wants you to do that, so it offers 3 (!) different "Keep" buttons, all of which do the same thing. 
+* To save `script-2.R`, select "Keep". VS Code offers three different "Keep" buttons, all of which do the same thing.
 
 * The red shaded portion of `script-2.R` in the Editor indicates code that the AI wants to remove. The green shaded portion indicates code that the AI wants to add. 
 
 * Click any one of the "Keep" buttons to save the file. Both black-dot-squares should disappear. The one in the Explorer should be replaced with a `U` to indicate that the file is **untracked** by Git.
 
-* The AI is asking your permission to run the script using `Rscript script-2.R` in the bash Terminal. You can approve or reject that command. If you approve, the AI will run the script and show you the result. If you reject it, you can run the script yourself in the bash Terminal. As you get more experienced, you will tell the AI to stop asking you for permission to do every little thing. 
+* The AI is asking your permission to run the script using `Rscript script-2.R` in the bash Terminal. You can approve or reject that command. If you approve, the AI will run the script and show you the result. If you reject it, you can run the script yourself in the bash Terminal. Experienced users tell the AI to stop asking permission for every small step.
 
 ###
 
@@ -751,9 +749,11 @@ diamonds_plot <- diamonds |>
 ggsave("diamonds-2.png", diamonds_plot, width = 8, height = 5)
 ```
 
+`slice_sample(n = 5000)` plots a random 5,000 of the 53,940 diamonds, which keeps the scatterplot from turning into a solid blob.
+
 ### Exercise 3
 
-Save this work too. Through the Source Control view, commit your new files with the message `Add script-2 and second diamonds plot`.
+Through the Source Control view, commit your new files with the message `Add script-2 and second diamonds plot`.
 
 ![](images/commit-2.png){width=90%}
 
@@ -761,7 +761,7 @@ Then press **Sync Changes 1** to push.
 
 ![](images/push-2.png){width=90%}
 
-The `1` in "Sync Changes 1" indicates that you have one commit to push. This label is "Sync Changes" rather than "Publish Branch" because you have already pushed once. The first push is always "Publish Branch". Subsequent pushes are "Sync Changes".
+The `1` in "Sync Changes 1" means you have one commit to push. The first push of a repo is labeled "Publish Branch". Every later push is "Sync Changes".
 
 ###
 
@@ -791,7 +791,7 @@ Date:   Thu Aug 13 06:21:02 2026 +0000
 workflow $ 
 ```
 
-`git log -1` shows the last commit. When the top line shows both `main` and `origin/main`, your Codespace and GitHub agree on the latest commit — your push worked. You can also see the same history on GitHub.
+`git log -1` shows only the last commit. When its top line shows both `main` and `origin/main`, your Codespace and GitHub agree on the latest commit, so your push worked.
 
 ## Summary
 
@@ -804,7 +804,7 @@ From now on, begin course work with the same routine:
 3. When the tutorial tells you to, run `connect-repo` to create and connect to a new repo, named after the tutorial you are doing.
 4. Start whichever AI you want to use. GitHub Copilot is always available, but you may prefer another agent. Review everything it proposes before you approve it.
 
-Future tutorials will often say only "create and connect to a repo," "ask AI," "run," or "commit and push." You now know the choices behind those instructions. We leave the choice of AI and the exact mechanics to you, but you must always review the results.
+Future tutorials will often say only "create and connect to a repo," "ask AI," "run," or "commit and push." Those phrases mean what you did here. Whichever AI you use, always review its results.
 
 ### Exercise 1
 

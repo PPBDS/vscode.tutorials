@@ -37,7 +37,7 @@ learnr2::student_info()
 
 You have used GitHub Copilot.  The [Antigravity CLI](https://antigravity.google/product/antigravity-cli) is another terminal-based assistant that can read your files, run commands in the terminal, and write new files directly, asking your permission at each step. In this tutorial you will set it up and use it to explore a project and to create and render a Quarto analysis. Later sections then reinforce the core `analysis.qmd` workflow: one working chunk per artifact, iterative rewrites, and caching.
 
-You should be doing this tutorial in a repo named `antigravity`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
+You should be doing this tutorial in a repo named `antigravity`. If you are not, create one and then connect to it.
 
 ## Antigravity CLI
 
@@ -50,35 +50,35 @@ Start the Antigravity CLI by running `agy` in the bash Terminal. Select "Use a G
 
 ![](images/agy-1.png){width=90%}
 
-and hit `Enter`. New College of Florida is providing some funding for your use of Antigravity. But, after the course is over, you can get the same sort of access for $20 or so per month. (If you are not an NCF student, choose the plain "Google OAuth" option instead and use your own Google account; the rest of the tutorial works the same.) Select "Continue with Google Cloud."
+and hit `Enter`. New College of Florida is providing some funding for your use of Antigravity. But, after the course is over, you can get the same sort of access for $20 or so per month. (If you are not an NCF student, choose the plain "Google OAuth" option instead and use your own Google account. The rest of the tutorial works the same.) Select "Continue with Google Cloud."
 
 ![](images/agy-2.png){width=90%}
 
-NCF has set up a Google Cloud Project for us. The resulting authentication screen is a bit overwhelming.
+NCF has set up a Google Cloud Project for us.
 
 ![](images/agy-3.png){width=90%}
 
-The basic idea is that Google needs to ensure that we have the right to use this account. Your next step is to `Cmd/Ctrl + Click` that big URL. 
+Google needs to confirm that you have the right to use this project. `Cmd/Ctrl + Click` that big URL.
 
 ![](images/agy-4.png){width=90%}
 
-Doing so will probably bring up this screen. Obviously, you should click "Open."
+Doing so will probably bring up this screen. Click "Open."
 
 ![](images/agy-5.png){width=90%}
 
 The next step might ask you to confirm your Google account. **You must use your NCF email account.**
 
-As Google changes things, this sequence of images won't match exactly what you see. Common sense should get you through it all. The most important step is choosing "Use a Google Cloud Project" at the start.
+As Google changes things, this sequence of images won't match exactly what you see. The most important step is choosing "Use a Google Cloud Project" at the start.
 
 Eventually, Google will give you a verification code.
 
 ![](images/agy-6.png){width=90%}
 
-Copy that code and go back to the authorization window in your terminal. You may want to expand the Panel upward so that you can better see what is happening. Either way, you paste in the code where the cursor left you by default.
+Copy that code and go back to the authorization window in your terminal. You may want to expand the Panel upward to see more of it. Paste the code where the cursor is.
 
 ![](images/agy-7.png){width=90%}
 
-You will now be asked for your Google Cloud Project ID. Enter `techne-fall-2026` and hit `Enter`. The red "No licenses found" message is expected and harmless; it just means that the project ID has to be typed in by hand.
+You will now be asked for your Google Cloud Project ID. Enter `techne-fall-2026` and hit `Enter`. The red "No licenses found" message is expected and harmless. It means that the project ID has to be typed in by hand.
 
 ![](images/agy-8.png){width=90%}
 
@@ -88,11 +88,11 @@ You will then be asked to select a region. Select `global` and hit `Enter`.
 
 ![](images/agy-9.png){width=90%}
 
-You will then be asked a series of questions. In general, you just select the defaults. Here are two examples. The first asks you to select a license; the yellow "No license available" warning is, again, expected and harmless, so accept the "Agent Platform" option.
+You will then be asked a series of questions. In general, you just select the defaults. Here are two examples. The first asks you to select a license. The yellow "No license available" warning is, again, expected and harmless, so accept the "Agent Platform" option.
 
 ![](images/agy-10.png){width=90%}
 
-The second is Antigravity's own trust prompt --- "Do you trust the contents of this project?" --- not the VS Code one you met when the Codespace started. The path above it, `/workspaces/antigravity`, confirms that Antigravity is running in your repo, which is exactly where you want it. Select "Yes, I trust this folder."
+The second is Antigravity's own trust prompt --- "Do you trust the contents of this project?" --- not the VS Code one you met when the Codespace started. The path above it, `/workspaces/antigravity`, confirms that Antigravity is running in your repo. Select "Yes, I trust this folder."
 
 ![](images/agy-11.png){width=90%}
 
@@ -127,7 +127,7 @@ antigravity $ agy
 ? for shortcuts                                                             Gemini 3.6 Flash · high
 ```
 
-Again, you mostly just accepted the defaults. The main exceptions were "Use a Google Cloud Project" at the beginning and then the project ID `techne-fall-2026`. 
+The banner shows the account you signed in with, the model Antigravity will use, and the folder it is working in.
 
 ### Exercise 2
 
@@ -166,9 +166,9 @@ Quick Reference
 Keyboard: ↑/↓ Navigate  ←/→ Switch View  esc Close
 ```
 
-Note that your output may be different than what is shown here. In the world of AI tools, things change all the time.
+Your output may differ from this. AI tools change all the time.
 
-Note that you need to click the `esc` (escape) key to exit the help screen and return to the `>` prompt. You can also use the up and down arrow keys to scroll through previous commands.
+Press the `esc` (escape) key to exit the help screen and return to the `>` prompt. The up and down arrow keys scroll through previous commands.
 
 ###
 
@@ -208,11 +208,11 @@ Keyboard: ↑/↓ Navigate  ←/→ Effort  enter Select  esc Go Back
                                                                     Gemini 3.6 Flash · high
 ```
 
-Again, to exit this view, hit the escape key. 
+Hit the escape key to exit this view.
 
 ###
 
-The Antigravity model family has several tiers which vary in terms of speed and cost.
+The Antigravity models come in several tiers that differ in speed and cost.
 
 ### Exercise 4
 
@@ -293,7 +293,7 @@ learnr2::question(
   documents! What are you working on today?
 ```
 
-Antigravity decomposes your prompt into tool calls dynamically --- the exact commands it runs depend on how it interprets your request, so what you see may differ from the example.
+Antigravity turns your prompt into tool calls as it goes. The exact commands depend on how it reads your request, so your output may differ from the example.
 
 ### Exercise 5
 
@@ -326,7 +326,7 @@ Your job is to help them **learn**, not to do the work for them. Default AI beha
 
 ###
 
-`AGENTS.md` is a plain text file that `connect-repo` copies into every new repo. GitHub Copilot and the terminal agents --- `agy`, `claude`, and the rest --- read it from the repo root and follow its rules: work in short, narrated steps, ask once for permission rather than at every turn, and never solve a whole worksheet for you. That is why Antigravity could describe it, unprompted, as rules for AI assistants in this course. (`connect-repo --no-agents <name>` would have skipped it.) Later, when you commit, `AGENTS.md` goes into the first commit along with everything else; that is normal.
+`AGENTS.md` is a plain text file that `connect-repo` copies into every new repo. GitHub Copilot and the terminal agents --- `agy`, `claude`, and the rest --- read it from the repo root and follow its rules: work in short, narrated steps, ask once for permission rather than at every turn, and never solve a whole worksheet for you. (`connect-repo --no-agents <name>` would have skipped it.) When you commit later, `AGENTS.md` goes into the first commit along with everything else.
 
 ### Exercise 6
 
@@ -338,7 +338,7 @@ Escape again. Now ask Antigravity to create an `analysis.qmd` file, set up the w
 - A plot using the `storms` dataset from **dplyr** --- for example, a line chart showing the number of named storms per year.
 - To not render `analysis.qmd` yet.
 
-To be honest, I just copy/pasted the above. AI is smart enough to work with this.
+You can paste that list straight into the prompt.
 
 ###
 
@@ -366,7 +366,7 @@ Do you want to proceed?
 esc to cancel                                                                  Gemini 3.6 Flash · high
 ```
 
-Use your best judgment.
+Allow these too.
 
 CP/CR Antigravity's explanation of what it created.
 
@@ -374,7 +374,7 @@ CP/CR Antigravity's explanation of what it created.
 #| label: antigravity-cli-5
 #| echo: false
 learnr2::question(
-  "CP/CR Antigravity's explanation of what it created.",
+  "Escape again. Now ask Antigravity to create an analysis.qmd file, set up the way you learned in the Quarto tutorial. Tell it you want: a YAML header with the title \"Exploring Storms\" and your name as author; execute: echo: false in the YAML; a setup chunk loading library(tidyverse), with #| message: false; a plot using the storms dataset from dplyr, for example a line chart showing the number of named storms per year; and to not render analysis.qmd yet. You can paste that list straight into the prompt. Allow the file to be written when Antigravity asks for permission. Along the way, you may also be asked permission for commands such as git config user.name. Allow these too. CP/CR Antigravity's explanation of what it created.",
   type = "reflection",
   show_text = FALSE
 )
@@ -382,7 +382,7 @@ learnr2::question(
 
 ###
 
-AI is always changing and, even when it is not changing, it is non-deterministic. Your output may differ from ours. The important thing is that you have an `analysis.qmd` file with a YAML header, a setup chunk, and a plot of named storms per year.
+AI is non-deterministic, so your output will differ from ours. What matters is that you now have an `analysis.qmd` file with a YAML header, a setup chunk, and a plot of named storms per year.
 
 ```{.output}
 ListDir(/workspaces/antigravity) (ctrl+o to expand)
@@ -410,7 +410,7 @@ ListDir(/workspaces/antigravity) (ctrl+o to expand)
 
 ###
 
-When you ask Antigravity to create a file, it generates the entire contents in one step and writes it for you. Instead of typing the YAML header, chunk settings, and library calls yourself, you describe what you want and refine the result --- editing is almost always faster than composing from scratch.
+Antigravity wrote the whole file in one step. You describe what you want and then refine the result. Editing is almost always faster than composing from scratch.
 
 ### Exercise 7
 
@@ -488,7 +488,7 @@ Copy/paste that URL below.
 #| label: antigravity-cli-7
 #| echo: false
 learnr2::question(
-  "Copy/paste that URL below.",
+  "Let's view the rendered file in a browser, the way you learned in the Quarto tutorial: in the Explorer, find analysis.html, right-click (or two-finger click) it, and select \"Open with Live Server\". This will generally open a view of the entire directory, with all the generated files and folders. You can then open analysis.html in a new browser tab served through your Codespace. The URL will look something like https://[codespace-name]-5500.app.github.dev/analysis.html. Copy/paste that URL below.",
   type = "reflection",
   show_text = FALSE
 )
@@ -526,7 +526,7 @@ storms |>
 
 ###
 
-You met Live Server in the Quarto tutorial; nothing here is new except that an agent, rather than you, is triggering the renders.
+The `5500` in the URL is the port Live Server serves on. The Codespace forwards that port to a public address so your browser can reach it.
 
 ### Exercise 9
 
@@ -544,9 +544,9 @@ Accept this file edit?
 esc to cancel                            Gemini 3.6 Flash · high
 ```
 
-Obviously, you should accept.
+Accept.
 
-If Antigravity does not render the file, ask it to. After Antigravity finishes, check your Live Server tab --- it should have refreshed automatically to show the plot. However, if you are viewing the HTML in a browser, you will probably have to refresh the tab.
+If Antigravity does not render the file, ask it to. After Antigravity finishes, check your Live Server tab. It should have refreshed to show the plot. If it has not, refresh the tab yourself.
 
 Open a new R Terminal, if you don't have one open already. 
 
@@ -560,7 +560,7 @@ CP/CR.
 #| label: antigravity-cli-8
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Ask Antigravity: Add a plot to a new code chunk in analysis.qmd using the storms dataset. Visualize something like a boxplot showing the distribution of wind speeds by storm category. Include a meaningful title and subtitle, and then render the file. Antigravity might ask you to accept the file edit. Accept. If Antigravity does not render the file, ask it to. After Antigravity finishes, check your Live Server tab. It should have refreshed to show the plot. If it has not, refresh the tab yourself. Open a new R Terminal, if you don't have one open already, and run learnr2::show_file(\"analysis.qmd\"). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -586,9 +586,7 @@ Your answer will be different from ours, but it should show **ggplot2** code usi
 
 ###
 
-When Antigravity adds a plot and re-renders, two things happen automatically: Quarto updates `analysis.html`, and Live Server detects the change and refreshes your browser, although you may need to refresh the tab.
-
-This loop --- ask Antigravity, render, view --- is the same workflow you would use throughout a real project.
+This loop --- ask Antigravity, render, view --- is the workflow you will use in every real project.
 
 ### Exercise 10
 
@@ -643,7 +641,7 @@ Same principle as in the Quarto tutorial: if a file can be *regenerated* from yo
 
 Real analysis is exploratory. Before we can build anything worth publishing, we poke at the data: print it, check its columns, count things, filter it down. Rather than scattering those attempts across many chunks, we keep **one working code chunk** at the bottom of the document and rewrite it over and over.
 
-In working with AI, it is smart to maintain one working chunk per final artifact, iteratively rewriting that chunk to keep only necessary code, managing code chunk outputs in your rendered file, and caching results. Throughout this section we will explicitly tell you to use AI. In future tutorials, use of AI is simply assumed.
+Keep one working chunk per final artifact. Rewrite it until only the necessary code remains, control what each chunk prints in the rendered file, and cache slow results. In this section we tell you explicitly to use AI. In future tutorials, that is assumed.
 
 ### Exercise 1
 
@@ -717,7 +715,7 @@ storms
 
 ###
 
-Printing a raw tibble like this would never remain a published document. That is fine --- the working chunk's output is for *you*, not your readers, and we will clean it up before publishing.
+Printing a raw tibble like this would never remain in a published document. The working chunk's output is for *you*, not your readers.
 
 ### Exercise 3
 
@@ -748,7 +746,7 @@ storms |>
 
 ###
 
-`glimpse()` gives a column-level overview of a dataset --- every variable name, its type, and a few example values on one screen. Use this and/or other similar functions like `summary()` to initially explore any unfamiliar dataset.
+`glimpse()` gives a column-level overview of a dataset --- every variable name, its type, and a few example values on one screen. Use it, or `summary()`, as the first look at any unfamiliar dataset.
 
 ### Exercise 4
 
@@ -811,7 +809,7 @@ storms |>
 
 ###
 
-Read `|>` as "and then" --- take `storms`, **and then** keep only observations since 2000, **and then** keep these five columns --- and the result prints because the final expression is a value, not an assignment.
+Read `|>` as "and then": take `storms`, **and then** keep only observations since 2000, **and then** keep these five columns. The result prints because the final expression is a value, not an assignment.
 
 ## Cache
 
@@ -847,7 +845,7 @@ storms_recent <- storms |>
 
 ###
 
-A chunk that only assigns with `<-` produces no output in the render, so the blank spot in the HTML is not an error --- the chunk built `storms_recent` without displaying it.
+A chunk that only assigns with `<-` produces no output in the render. The blank spot in the HTML is not an error. The chunk built `storms_recent` without displaying it.
 
 ### Exercise 2
 
@@ -879,7 +877,7 @@ antigravity $
 
 ###
 
-Caching is a render-time feature. The first render writes the chunk's result to disk. Later renders skip re-running the chunk and load from disk instead. `analysis_cache/` appearing via `ls` confirms it is wired up. 
+Caching is a render-time feature. The first render writes the chunk's result to disk. Later renders skip re-running the chunk and load from disk instead. The new `analysis_cache/` directory holds that saved result.
 
 Data preparation is the natural chunk to cache: in real projects it is often the slow part --- downloading files, joining tables, fitting models --- and its result rarely changes. 
 
@@ -895,7 +893,7 @@ CP/CR.
 #| label: cache-3
 #| echo: false
 learnr2::question(
-  "Then, in the bash Terminal, run cat .gitignore. CP/CR.",
+  "A new directory in the repo usually means new untracked files, yet the Source Control badge count in VS Code did not jump when analysis_cache appeared. Ask Antigravity whether analysis_cache is already covered by .gitignore, and why. Then, in the bash Terminal, run cat .gitignore. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -929,7 +927,7 @@ antigravity $
 
 ###
 
-Nothing needed to change. The `*_cache/` line Antigravity wrote into `.gitignore` earlier is a wildcard pattern, and `analysis_cache/` matches it, so Git ignored the new directory from the moment it appeared. Cache files are regenerated from source and do not belong in git; the rule of thumb stands: if a file can be (easily) recreated from other components, do not commit it.
+The `*_cache/` line Antigravity wrote into `.gitignore` earlier is a wildcard pattern. `analysis_cache/` matches it, so Git ignored the new directory from the moment it appeared. Cache files can be regenerated from source, so they do not belong in Git.
 
 ## Plotting
 
@@ -971,11 +969,11 @@ storms_recent |>
 
 ###
 
-Chunks in the same document share an R session --- `storms_recent` is created in the cached chunk and available to this one without being redefined. The two-chunk pattern here --- one to prepare data, one to plot it --- is a common pattern. And even this bare first draft shows the key fact about storms: the lower the central air pressure, the faster the wind.
+Chunks in the same document share an R session. `storms_recent` is created in the cached chunk and available to this one without being redefined. The two-chunk pattern --- one to prepare data, one to plot it --- is common. Even this bare first draft shows the key fact about storms: the lower the central air pressure, the faster the wind.
 
 ### Exercise 2
 
-The first version of a plot is rarely the last. Ask Antigravity to improve the working chunk: color the points by `status`, make them semi-transparent so overlapping observations show, and add a meaningful title, subtitle, and axis labels. Render and check the Live Server tab. 
+Ask Antigravity to improve the working chunk: color the points by `status`, make them semi-transparent so overlapping observations show, and add a meaningful title, subtitle, and axis labels. Render and check the Live Server tab. 
 
 In the R Terminal, run `learnr2::show_file("analysis.qmd")`. 
 
@@ -1011,7 +1009,7 @@ Your answer will be different from ours, but it should color by `status`, use tr
 
 ###
 
-This is what iterating in a working chunk looks like: you never retyped the plot, you described the changes. When the Live Server tab shows a plot you are happy with, iteration is over --- the chunk stops being a scratchpad and becomes the document's final artifact. We are ready to publish.
+You never retyped the plot. You described the changes. When the Live Server tab shows a plot you are happy with, the chunk stops being a scratchpad and becomes the document's final artifact.
 
 ### Exercise 3
 
@@ -1086,11 +1084,11 @@ ggplot(storms_recent, aes(x = wind, y = pressure, color = status)) +
 
 ###
 
-From here on, using AI to write your analysis code is always the assumed approach --- you will describe a goal, let the agent write the code (generally in a working code chunk), render, and inspect the result.
+From here on, AI writes your analysis code. You describe a goal, let the agent write the code in a working chunk, render, and inspect the result.
 
 ## Git with Antigravity
 
-Now that the project has real files, let's save the work with Git. You already know the Source Control workflow from the Quarto tutorial; this time, delegate it to Antigravity.
+Now that the project has real files, let's save the work with Git. You already know the Source Control workflow from the Quarto tutorial. This time, delegate it to Antigravity.
 
 ### Exercise 1
 
@@ -1166,7 +1164,7 @@ Once you have let it through, the rest follows:
 
 ###
 
-Antigravity issued separate tool calls for `git add`, `git commit`, and `git push` --- staging, recording, and sharing, the same three steps the Source Control sidebar performs when you press **Commit** and then **Publish Branch**. Confirm it for yourself: in the bash Terminal, `git log --oneline` should now show one commit marked `(HEAD -> main, origin/main)`, meaning your local branch and the GitHub copy agree.
+Antigravity issued separate tool calls for `git add`, `git commit`, and `git push`: staging, recording, and sharing. Those are the same three steps the Source Control sidebar performs when you press **Commit** and then **Publish Branch**. In the bash Terminal, `git log --oneline` should now show one commit marked `(HEAD -> main, origin/main)`, meaning your local branch and the GitHub copy agree.
 
 
 ## Summary
@@ -1187,7 +1185,7 @@ CP/CR.
 #| label: summary-1
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Quit Antigravity (Ctrl + C twice, or Ctrl + D) if you haven't already. From the bash Terminal, run quarto render analysis.qmd to regenerate the HTML. Then, still in the bash Terminal, run cat analysis.qmd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1246,7 +1244,7 @@ ggplot(storms_recent, aes(x = wind, y = pressure, color = status)) +
 
 ###
 
-You did not write any of this code yourself --- you described the goal and Antigravity produced it. The skill you practiced is reviewing what the agent wrote and confirming that it does what you asked.
+You described the goal and Antigravity wrote the code. Your job was to review what it wrote and confirm that it does what you asked.
 
 ### Exercise 2
 

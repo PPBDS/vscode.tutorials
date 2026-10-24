@@ -6,7 +6,7 @@ format: live-html
 engine: knitr
 toc: true
 learnr2:
-  ordering: 11
+  ordering: 12
 ---
 
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
@@ -26,7 +26,7 @@ This tutorial introduces the process of creating and organizing [Quarto websites
 
 ### 
 
-You should be doing this tutorial in a repo named `websites-1`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
+You should be doing this tutorial in a repo named `websites-1`. If you are not, create one and then connect to it.
 
 ## Creating files
 
@@ -98,7 +98,7 @@ websites-1 $
 
 Quarto created 5 new files in the current directory. On the command line, `.` always refers to the current directory.
 
-Why `--no-open`? By default, when you run `quarto create` from inside a VS Code terminal, Quarto finishes by asking VS Code to open the new project. In a Codespace, "open the project" means "open a new browser tab" — pointed at the very same Codespace and folder you are already looking at. Nothing is broken, but you end up with two tabs of the same workspace, which is confusing. The `--no-open` flag tells Quarto to create the files and stop. We may have set up your Codespace to add this flag automatically even when you forget it, but type it anyway: you should know what your commands do.
+By default, when you run `quarto create` from inside a VS Code terminal, Quarto finishes by asking VS Code to open the new project. In a Codespace, that means a new browser tab pointed at the very same Codespace and folder you are already looking at, so you end up with two tabs of the same workspace. The `--no-open` flag tells Quarto to create the files and stop. Your Codespace may add this flag automatically when you forget it, but type it anyway. You should know what your commands do.
 
 ### Exercise 3
 
@@ -152,7 +152,7 @@ In general, do not touch or modify "dot" directories — those whose names begin
 
 ## Examining files
 
-Now that we have created the necessary files, let's examine them one by one to understand how a Quarto website is structured.
+Let's examine the new files one by one to see how a Quarto website is structured.
 
 ### Exercise 1
 
@@ -200,7 +200,7 @@ format:
 
 ###
 
-YAML files are how [Quarto projects](https://quarto.org/docs/projects/quarto-projects.html) describe themselves. You can identify `_quarto.yml` as a YAML file from its `.yml` extension and its content. The first two lines specify that this is a website.
+YAML files are how [Quarto projects](https://quarto.org/docs/projects/quarto-projects.html) describe themselves. The `.yml` extension marks `_quarto.yml` as a YAML file. The first two lines specify that this is a website.
 
 ```yaml
 project:
@@ -223,7 +223,7 @@ CP/CR.
 #| label: examining-files-2
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "In the R Terminal, run show_file(\"_quarto.yml\", start = 4, end = 10). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -245,7 +245,7 @@ website:
 
 These lines provide metadata about the website and its organization.
 
-Indents and other whitespace matter in YAML files. Be careful!
+Indents and other whitespace matter in YAML files.
 
 
 ### Exercise 3
@@ -262,7 +262,7 @@ CP/CR.
 #| label: examining-files-3
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "In the R Terminal, run show_file(\"_quarto.yml\", start = 12, end = 16). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -299,7 +299,7 @@ CP/CR.
 #| label: examining-files-4
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "In the bash Terminal, run cat index.qmd. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -319,13 +319,13 @@ To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
 ###
 
-Whenever a web browser goes to a directory on the internet, it looks for an `index.html` file. If found, that file is displayed. So, the `index.qmd` file, which we will soon render as `index.html`, is important.
+Whenever a web browser goes to a directory on the internet, it looks for an `index.html` file. If found, that file is displayed. So `index.qmd`, which we will soon render as `index.html`, becomes the home page of the site.
 
 ### 
 
-Note that the `title` (`"A New Website"`) in `_quarto.yml` is independent of the `title` (`"A New Website"`) in `index.qmd`. The former is the title for the entire website; the latter is the title for just the `index.html` page. They are set to the same value by default when you run `quarto create project website .` and provide a title.
+The `title` (`"A New Website"`) in `_quarto.yml` is independent of the `title` (`"A New Website"`) in `index.qmd`. The former is the title for the entire website. The latter is the title for just the `index.html` page. They are set to the same value by default when you run `quarto create project website .` and provide a title.
 
-If you skip the title prompt titles will be set to `.`.
+If you skip the title prompt, both titles will be set to `.`.
 
 ### Exercise 5
 
@@ -342,7 +342,7 @@ CP/CR.
 #| label: examining-files-5
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "In the bash Terminal, run cat .gitignore. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -357,11 +357,11 @@ learnr2::question(
 
 ###
 
-The leading `/` in `/.quarto/` escapes the `.`. In other words, we need the leading `/` if we want to ignore the files in a dotted directory.
+The leading `/` in `/.quarto/` anchors the pattern to the top of the repo, so only that one directory is ignored, not any `.quarto` folder that might appear deeper.
 
-In fact, the `.quarto` directory does not yet exist. But the `quarto create project` command wanted to ensure that, once it does, Git would ignore it and its contents.
+The `.quarto` directory does not yet exist. But the `quarto create project` command wanted to ensure that, once it does, Git would ignore it and its contents.
 
-Sometimes we create a .gitignore by hand — like when we manually add _site to tell Git to ignore our rendered website files. Other times, a program creates or modifies the .gitignore for us. For example, when you run quarto create project website ., Quarto automatically adds /.quarto/ and **/*.quarto_ipynb to the file. The **/*.quarto_ipynb pattern refers to temporary Jupyter notebook files that Quarto creates internally — these never need to be tracked by Git.
+Sometimes we add a line to `.gitignore` by hand, as you will soon do for `_site`. Other times a program writes the lines for us, as `quarto create` did here. The `**/*.quarto_ipynb` pattern matches temporary Jupyter notebook files that Quarto creates internally. Those never need to be tracked by Git.
 
 ### Exercise 6
 
@@ -453,7 +453,7 @@ _quarto.yml     about.qmd       styles.css
 websites-1 $
 ```
 
-Note the addition of a `_site` directory. This is where the HTML files that make up the website are stored. Website output files are often placed in a directory named `_site` or `docs`, depending on your web hosting service.
+A `_site` directory has been added. This is where the HTML files that make up the website are stored. Website output files are often placed in a directory named `_site` or `docs`, depending on your web hosting service.
 
 ### Exercise 3
 
@@ -479,11 +479,7 @@ about.html      index.html      search.json     site_libs       styles.css
 websites-1 $
 ```
 
-The `about.html` and `index.html` files are the rendered versions of `about.qmd` and `index.qmd`. They go into `_site` because the convention is to separate outputs (HTML files) from inputs (QMD files).
-
-### 
-
-We won't discuss the `search.json`, `styles.css`, or `site_libs` files — they are beyond the scope of this tutorial. The entire `_site` directory is a self-contained website, ready to deploy.
+The `about.html` and `index.html` files are the rendered versions of `about.qmd` and `index.qmd`. They go into `_site` because the convention is to separate outputs (HTML files) from inputs (QMD files). The entire `_site` directory is a self-contained website, ready to deploy.
 
 ### Exercise 4
 
@@ -503,7 +499,7 @@ CP/CR.
 #| label: rendering-and-previewing-4
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Look at the Source Control button. Note how many new files there are. Most of this is generated output that does not belong on GitHub. Add _site to the .gitignore. Don't forget that the last line of .gitignore should always be blank. Save the file. In the bash Terminal, run cat .gitignore. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -547,7 +543,7 @@ GET: /
 
 ```
 
-The `quarto preview` command does two things. First, it renders the QMD files, just like `quarto render` does. Second, it opens the website in your browser so that you can see what it looks like. Click around and check it out!
+The `quarto preview` command does two things. First, it renders the QMD files, just like `quarto render` does. Second, it opens the website in your browser so that you can see what it looks like.
 
 In Codespaces, a pop-up notification should appear automatically offering to open the site in your browser. If it does not, click the URL shown in the bash Terminal's output.
 
@@ -679,7 +675,7 @@ metadata
 GET: /about.html
 ```
 
-Quarto has noticed that you changed/saved the `about.qmd` file. It rendered the new version, creating a new `about.html` which it has now *gotten* and is displaying.
+Quarto noticed that you saved `about.qmd`. It rendered the new version, creating a new `about.html`, which the browser then fetched (`GET: /about.html`) and displayed.
 
 ### Exercise 10
 
@@ -708,15 +704,13 @@ About
 David Kane
 ```
 
-To stop `quarto preview`, press `Ctrl + c` in the bash Terminal. This cancels any running terminal command.
-
-Press `Ctrl + c`.
+Press `Ctrl + c` in the bash Terminal to stop `quarto preview`. `Ctrl + c` cancels any running terminal command.
 
 ## Publishing
 
 To make your website publicly visible, you need to "publish" it to the web. The Quarto documentation provides a [thorough discussion](https://quarto.org/docs/publishing/). We will be using [GitHub Pages](https://quarto.org/docs/publishing/github-pages.html).
 
-In later projects, you will often just ask AI to create a website's files and put the site on the web. That is OK! But, at least for now, issue the `quarto publish gh-pages` command yourself, at the bash Terminal. It is guaranteed to handle the subtle Git branching issues, and their interaction with GitHub Pages, that AI sometimes messes up. By the end of this section you will know exactly what the command does behind the scenes --- which is how you audit anyone, human or AI, who publishes on your behalf.
+In later projects, you will often ask AI to create a website's files and put the site on the web. For now, run `quarto publish gh-pages` yourself, in the bash Terminal. It handles the subtle Git branching issues, and their interaction with GitHub Pages, that AI sometimes gets wrong.
 
 
 ### Exercise 1
@@ -733,7 +727,7 @@ Copy/paste the resulting URL.
 #| label: publishing-1
 #| echo: false
 learnr2::question(
-  "Copy/paste the resulting URL.",
+  "Go to your websites-1 GitHub repository. Click \"Settings\" on the right side of the top menu. Click \"Pages\" on the left-hand menu. Copy/paste the resulting URL.",
   type = "reflection",
   show_text = FALSE
 )
@@ -767,7 +761,7 @@ CP/CR the first 10 or so lines of the output.
 #| label: publishing-2
 #| echo: false
 learnr2::question(
-  "CP/CR the first 10 or so lines of the output.",
+  "We won't edit the GitHub Pages settings by hand, Quarto will handle that. Publishing a website works the same way as publishing a single document. At the bash Terminal, run quarto publish gh-pages. You will then need to type \"Y\" to accept the default settings. CP/CR the first 10 or so lines of the output.",
   type = "reflection",
   show_text = FALSE
 )
@@ -900,17 +894,17 @@ websites-1 $ git branch -a
 
 ###
 
-`quarto publish` created a second branch, `gh-pages`, and pushed it to GitHub (that is the `remotes/origin/gh-pages` line). The `*` marks the branch you are on: `main`, exactly where you have been all along. Your repo now carries two parallel histories.
+`quarto publish` created a second branch, `gh-pages`, and pushed it to GitHub (that is the `remotes/origin/gh-pages` line). The `*` marks the branch you are on, `main`. Your repo now carries two parallel histories.
 
 ### Exercise 7
 
-What is on that other branch? From the bash Terminal, run `git ls-tree --name-only gh-pages`. CP/CR.
+From the bash Terminal, run `git ls-tree --name-only gh-pages`. CP/CR.
 
 ```{r}
 #| label: publishing-7
 #| echo: false
 learnr2::question(
-  "What is on that other branch? From the bash Terminal, run git ls-tree --name-only gh-pages. CP/CR.",
+  "From the bash Terminal, run git ls-tree --name-only gh-pages. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -930,7 +924,7 @@ styles.css
 
 ###
 
-No QMD files at all. The `gh-pages` branch holds the *rendered site* --- the same files you saw in `_site`. Behind the scenes, `quarto publish gh-pages` does four things: it renders the site into a temporary copy of the repo (a "worktree"), commits the resulting HTML to the `gh-pages` branch, pushes that branch to GitHub, and tells GitHub Pages to serve it. `main` keeps the source; `gh-pages` keeps the product. That division is why the Source Control pane shows no changes after publishing --- nothing on `main` moved. (The extra `.nojekyll` file tells GitHub Pages to serve the files exactly as they are.)
+No QMD files at all. The `gh-pages` branch holds the *rendered site*, the same files you saw in `_site`. `quarto publish gh-pages` does four things. It renders the site into a temporary copy of the repo (a "worktree"), commits the resulting HTML to the `gh-pages` branch, pushes that branch to GitHub, and tells GitHub Pages to serve it. `main` keeps the source. `gh-pages` keeps the product. That division is why the Source Control pane shows no changes after publishing. The extra `.nojekyll` file tells GitHub Pages to serve the files exactly as they are.
 
 ### Exercise 8
 
@@ -956,7 +950,7 @@ Your site is live at https://ppbds-student.github.io/websites-1/
 
 ###
 
-The publish command changed these settings for you: the deployment source is now the `gh-pages` branch. When a publish goes wrong --- yours or an AI agent's --- this page is where you check what GitHub Pages is actually serving.
+The publish command changed these settings for you. The deployment source is now the `gh-pages` branch. When a publish goes wrong, yours or an AI agent's, this page is where you check what GitHub Pages is serving.
 
 ### Exercise 9
 
@@ -1001,7 +995,7 @@ CP/CR.
 #| label: publishing-10
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Open the _quarto.yml file in the Editor. Change title: \"A New Website\" to title: \"A New Website, second edition\". Save the file. In the R Terminal, run show_file(\"_quarto.yml\", start = 4, end = 5). CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1110,7 +1104,7 @@ The `-n 2` option causes Git to just provide the information on the last two com
 #| label: publishing-13
 #| echo: false
 learnr2::question(
-  "The -n 2 option causes Git to just provide the information on the last two commits.",
+  "Commit and push all the files in the project. Run git log -n 2 in the bash Terminal. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1118,7 +1112,7 @@ learnr2::question(
 
 ### 
 
-Note both the simplicity *and* the complexity of your project. It is simple in that, even if your Codespace were deleted, you could recreate everything from the files on GitHub. It is complex in that there are many files interacting in sophisticated ways.
+Even if your Codespace were deleted, you could recreate everything from the files on GitHub.
 
 ## Summary
 

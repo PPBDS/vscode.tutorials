@@ -6,7 +6,7 @@ format: live-html
 engine: knitr
 toc: true
 learnr2:
-  ordering: 13
+  ordering: 14
 ---
 
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
@@ -25,7 +25,7 @@ This tutorial explores devcontainers --- configuration files that define how a G
 
 ### Exercise 1
 
-You should be doing this tutorial in a repo named `devcontainers`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
+You should be doing this tutorial in a repo named `devcontainers`. If you are not, create one and then connect to it.
 
 Copy and paste the URL for your `devcontainers` repository.
 
@@ -100,7 +100,7 @@ devcontainers $
 
 ###
 
-Your `devcontainers` repo starts almost empty --- the `.git` directory confirms it is tracked by Git, but there is nothing else here yet. This is where you will save your own work. Notice what is *missing*: there is no `.devcontainer` directory, even though this Codespace clearly has one configured. We track it down next.
+Your `devcontainers` repo starts almost empty. The `.git` directory shows it is tracked by Git, but there is nothing else here yet. In particular, there is no `.devcontainer` directory, even though this Codespace clearly has one configured.
 
 ### Exercise 4
 
@@ -129,17 +129,17 @@ codespace-starter $
 
 ###
 
-Both repos live side by side inside this Codespace, under `/workspaces`: your own `devcontainers` and the `codespace-starter` you launched from. The `..` in `cd ../codespace-starter` means "the parent directory," so the command moves up from `/workspaces/devcontainers` to `/workspaces`, then down into `codespace-starter`. That is where the `devcontainer.json` that configured this machine actually lives --- not in your work repo, which is just for saving your own work. Notice the prompt change from `devcontainers $` to `codespace-starter $`: the prompt always shows the name of the directory you are in, a quick way to confirm where you are.
+Both repos live side by side under `/workspaces`: your own `devcontainers` and the `codespace-starter` you launched from. The `..` in `cd ../codespace-starter` means "the parent directory," so the command moves up to `/workspaces`, then down into `codespace-starter`. The `devcontainer.json` that configured this machine lives here, not in your work repo. The prompt changed from `devcontainers $` to `codespace-starter $` because it always shows the name of the directory you are in.
 
 ### Exercise 5
 
-Run `cat .devcontainer/devcontainer.json`. CP/CR.
+In the bash Terminal, run `cat .devcontainer/devcontainer.json`. CP/CR.
 
 ```{r}
 #| label: introduction-5
 #| echo: false
 learnr2::question(
-  "Run cat .devcontainer/devcontainer.json. CP/CR.",
+  "In the bash Terminal, run cat .devcontainer/devcontainer.json. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -147,15 +147,15 @@ learnr2::question(
 
 ###
 
-Your output shows the full `devcontainer.json` from the `codespace-starter` repo. You will explore each part of this file in a later tutorial. Keep this Codespace open --- you will need it alongside a second Codespace in the next section.
+This is the file GitHub read when it built the Codespace you are sitting in. Keep this Codespace open. You will need it alongside a second Codespace in the next section.
 
 ## Jupyter Notebook Devcontainer
 
-A `devcontainer.json` file captures the entire setup --- starting image, packages, extensions, and startup commands --- so that any codespace opened from the repo starts in an identical, ready-to-use state. In this section you will examine the devcontainer for GitHub's Jupyter Notebook template, which sets up a codespace for doing data science with Python and with Jupyter Notebooks.
+A `devcontainer.json` file captures the entire setup --- starting image, packages, extensions, and startup commands --- so that any codespace opened from the repo starts in an identical, ready-to-use state. In this section you will examine the devcontainer for GitHub's Jupyter Notebook template, which sets up a codespace for doing data science with Python and Jupyter Notebooks.
 
 ### Exercise 1
 
-Go to https://github.com/codespaces/templates. Then press the "Use This Template" button for the Jupyter Notebook notebook template. This will open a new Codespace using this template. Copy and paste its URL.
+Go to https://github.com/codespaces/templates. Then press the "Use This Template" button for the Jupyter Notebook template. This will open a new Codespace using this template. Copy and paste its URL.
 
 ![](images/jupyter-template.png){width=90%}
 
@@ -163,7 +163,7 @@ Go to https://github.com/codespaces/templates. Then press the "Use This Template
 #| label: devcontainers-1
 #| echo: false
 learnr2::question(
-  "Go to https://github.com/codespaces/templates. Then press the \"Use This Template\" button for the Jupyter Notebook notebook template. This will open a new Codespace using this template. Copy and paste its URL.",
+  "Go to https://github.com/codespaces/templates. Then press the \"Use This Template\" button for the Jupyter Notebook template. This will open a new Codespace using this template. Copy and paste its URL.",
   type = "reflection",
   show_text = FALSE
 )
@@ -234,14 +234,14 @@ The `image` field tells GitHub which pre-built setup to use --- think of it as c
 
 ### Exercise 4
 
-In the same file, find the chunk of code beginning with `"vscode": {` copy and paste this chunk, ending with the bracket which closes the starting bracket on the first line.
+In the same file, find the chunk of code beginning with `"vscode": {`. Copy and paste this chunk, ending with the bracket that closes the one on the first line.
 
 
 ```{r}
 #| label: devcontainers-4
 #| echo: false
 learnr2::question(
-  "In the same file, find the chunk of code beginning with \"vscode\": { copy and paste this chunk, ending with the bracket which closes the starting bracket on the first line.",
+  "In the same file, find the chunk of code beginning with \"vscode\": {. Copy and paste this chunk, ending with the bracket that closes the one on the first line.",
   type = "reflection",
   show_text = FALSE
 )
@@ -260,19 +260,17 @@ learnr2::question(
 
 ###
 
-This block lists which VS Code extensions to pre-install. `ms-toolsai.jupyter` enables Jupyter notebooks; `ms-python.python` adds Python code completion and error highlighting.
+This block lists which VS Code extensions to pre-install. `ms-toolsai.jupyter` enables Jupyter notebooks. `ms-python.python` adds Python code completion and error highlighting.
 
 ### Exercise 5
 
-<!-- DK: Split into two questions. -->
-
-Find the line beginning with `"updateContentCommand"` in `devcontainer.json`. Copy and paste it. Then navigate to `requirements.txt` in the Explorer and copy and paste the entire file.
+Find the line beginning with `"updateContentCommand"` in `devcontainer.json`. Copy and paste it.
 
 ```{r}
 #| label: devcontainers-5
 #| echo: false
 learnr2::question(
-  "Find the line beginning with \"updateContentCommand\" in devcontainer.json. Copy and paste it. Then navigate to requirements.txt in the Explorer and copy and paste the entire file.",
+  "Find the line beginning with \"updateContentCommand\" in devcontainer.json. Copy and paste it.",
   type = "reflection",
   show_text = FALSE
 )
@@ -284,7 +282,31 @@ Your answer should look like this:
 
 ```{.output}
 "updateContentCommand": "python3 -m pip install -r requirements.txt",
+```
 
+###
+
+`updateContentCommand` runs when the Codespace is first created and again whenever the repo's files change. `pip` is Python's package installer, and `-r requirements.txt` tells it to install every package listed in that file.
+
+### Exercise 6
+
+Navigate to `requirements.txt` in the Explorer. Copy and paste the entire file.
+
+```{r}
+#| label: devcontainers-15
+#| echo: false
+learnr2::question(
+  "Navigate to requirements.txt in the Explorer. Copy and paste the entire file.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+Your answer should look like this:
+
+```{.output}
 ipywidgets==8.1.8
 matplotlib==3.8.4
 pandas==2.2.2
@@ -299,10 +321,10 @@ Pygments==2.20.0
 
 ###
 
-`updateContentCommand` runs when the Codespace is first created and again whenever the repo's files change --- so if someone pushes a new `requirements.txt`, the packages update automatically. `pandas` and `matplotlib` are the core packages: the Python equivalents of the tidyverse tools you've been using in R.
+`requirements.txt` lists the Python packages a project needs, one per line, and `==` pins each to an exact version so every Codespace gets the same one. `pandas` and `matplotlib` are the Python equivalents of the tidyverse tools you have been using in R.
 
 
-### Exercise 6
+### Exercise 7
 
 Tell AI to edit `devcontainer.json` so it installs and configures the environment for using R instead of Python. 
 
@@ -347,11 +369,11 @@ My new file looks like this:
 
 ###
 
-Describing what you want in plain English works just as well for configuration files like `devcontainer.json` as it does for analysis code. Once comfortable, you can publish your own repo as a template and reuse it for future projects.
+Describing what you want in plain English works just as well for configuration files like `devcontainer.json` as it does for analysis code. You can also publish your own repo as a template and reuse it for future projects.
 
-### Exercise 7
+### Exercise 8
 
- Let's revert any changes we've made to `devcontainer.json`. Go to the Source Control side bar and press the revert button on the right.
+Revert the changes to `devcontainer.json`. Go to the Source Control side bar and press the revert button on the right.
 
 ![](images/revert-devcontainer.png){width=90%}
 
@@ -378,14 +400,12 @@ nothing to commit, working tree clean
 @ppbds-student ➜ /workspaces/codespaces-jupyter (main) $
 ```
 
-This indicates that Git doesn't detect any changes to the repository.
-
 ###
 
-Until you commit, changes exist only in your local files and can be discarded at any time. The revert button works here precisely because changes in `devcontainer.json` was never added to Git or committed --- once a change is committed, undoing it requires a new commit rather than a simple discard.
+Until you commit, changes exist only in your local files and can be discarded at any time. The revert button worked because the change to `devcontainer.json` was never committed. Once a change is committed, undoing it requires a new commit rather than a simple discard.
 
 
-### Exercise 8
+### Exercise 9
 
 
 <!-- DK: What is going on here? Can we really commit (and push?!) changes in the Jupyter codespace? How does that work? -->
@@ -427,19 +447,17 @@ bf71a79 (HEAD -> main) Updated README
 
 ###
 
-This pop-up doesn't appear when we use Codespaces started with `codespace-starter` because that template enables smart commit, a VS Code feature that automatically includes all changed files when the "Commit" button is pressed. The pop-up appeared in this Codespace because the `devcontainer.json` does not enable this feature.
+This pop-up never appears in a Codespace started from `codespace-starter`, whose `devcontainer.json` enables smart commit, a VS Code setting that stages every changed file when you press Commit. The Jupyter template's `devcontainer.json` does not turn it on, so VS Code asks.
 
-### Exercise 9
+### Exercise 10
 
-Let's continue our tour of this repo. Navigate to `.gitignore` in the Explorer.
-
-Copy and paste the entire file.
+Navigate to `.gitignore` in the Explorer. Copy and paste the entire file.
 
 ```{r}
 #| label: devcontainers-9
 #| echo: false
 learnr2::question(
-  "Copy and paste the entire file.",
+  "Navigate to .gitignore in the Explorer. Copy and paste the entire file.",
   type = "reflection",
   show_text = FALSE
 )
@@ -455,9 +473,9 @@ notebooks/cifar_net.pth
 
 ###
 
-Each line excludes files that shouldn't be tracked in Git, either because it might contain excessively large files (`notebooks/data`, `notebooks/cifar_net.pth`) or because the files are temporary (`.ipynb_checkpoints/`) .
+Each line names files Git should not track, either because they may be very large (`notebooks/data`, `notebooks/cifar_net.pth`) or because they are temporary (`.ipynb_checkpoints/`).
 
-### Exercise 10
+### Exercise 11
 
 Navigate to the `data` directory and open `atlantis.csv`. Paste the top 5 lines.
 
@@ -485,7 +503,7 @@ year,population
 
 CSV (comma-separated values) is a plain-text format where each row is a record and each column is separated by a comma --- `atlantis.csv` contains simulated year-by-year population data for a fictional city.
 
-### Exercise 11
+### Exercise 12
 
 In the Explorer, navigate to the `notebooks` directory, then `populations.ipynb`. Double click the heading of the document to open the editor for that section. Take a screenshot of that first cell, with its text open for editing, and paste it below.
 
@@ -515,7 +533,7 @@ This notebooks reads sample population data from `data/atlantis.csv` and plots i
 
 A `.ipynb` file is a Jupyter notebook --- like a Quarto document, it mixes text, code, and output in runnable cells. `populations.ipynb` reads population data from `atlantis.csv` and plots it with **matplotlib**.
 
-### Exercise 12
+### Exercise 13
 
 Go to the Source Control side bar and press the "Publish Branch" button.
 
@@ -554,9 +572,9 @@ Also notice how the Graph section of the Source Control side bar shows the same 
 
 ###
 
-`(HEAD -> main, origin/main)` on the same commit means your local branch and GitHub are up to date with each other. The Source Control graph shows the same thing --- a purple cloud icon means the commit has been pushed to GitHub.
+`(HEAD -> main, origin/main)` on the same commit means your local branch and GitHub are up to date with each other. In the graph, a purple cloud icon marks a commit that has been pushed to GitHub.
 
-### Exercise 13
+### Exercise 14
 
 Go to GitHub. In the upper-right corner, click your profile picture, then select "Your repositories". Click the repository named `codespaces-jupyter`. Paste the URL of the repo.
 
@@ -578,9 +596,9 @@ https://github.com/ppbds-student/codespaces-jupyter
 ```
 ###
 
-Codespaces started from `codespace-starter` are backed by an existing GitHub repo, so pushing just sends commits to a remote that already exists. This Codespace was created directly from a template, so there was no GitHub repo yet --- "Publish Branch" is what creates it.
+Codespaces started from `codespace-starter` are backed by an existing GitHub repo, so pushing just sends commits to a remote that already exists. This Codespace was created directly from a template, so there was no GitHub repo yet. "Publish Branch" is what creates it.
 
-### Exercise 14
+### Exercise 15
 
 If you haven't already, stop the Jupyter Notebook Codespace. Open the Command Palette with `Cmd/Ctrl + Shift + P`, type `>stop`, and select **"Codespaces: Stop Current Codespace"**.
 
@@ -590,7 +608,7 @@ Then go to https://github.com/codespaces. Find the row for the Jupyter Notebook 
 #| label: devcontainers-14
 #| echo: false
 learnr2::question(
-  "Then go to https://github.com/codespaces. Find the row for the Jupyter Notebook Codespace and paste a screenshot of it.",
+  "If you haven't already, stop the Jupyter Notebook Codespace: open the Command Palette with Cmd/Ctrl + Shift + P, type >stop, and select Codespaces: Stop Current Codespace. Then go to https://github.com/codespaces. Find the row for the Jupyter Notebook Codespace and paste a screenshot of it.",
   type = "reflection",
   allow_image = TRUE,
   allow_text = FALSE,
@@ -630,7 +648,7 @@ learnr2::question(
 
 ###
 
-Without a `.devcontainer` directory, GitHub falls back to a generic default setup with no customization. This is the starting point for any brand-new project where you want to configure the codespace from scratch.
+Without a `.devcontainer` directory, GitHub falls back to a generic default setup with no customization. This is the starting point for any project you configure from scratch.
 
 ### Exercise 2
 
@@ -648,7 +666,7 @@ CP/CR.
 #| label: new-devcontainer-2
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "In the blank codespace, open the Explorer. Right-click in the file tree and select \"New Folder\". Name it .devcontainer. Then right-click the new folder and select \"New File\". Name it devcontainer.json. In the bash Terminal, run ls .devcontainer/. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -680,7 +698,7 @@ CP/CR the AI's full response.
 #| label: new-devcontainer-3
 #| echo: false
 learnr2::question(
-  "CP/CR the AI's full response.",
+  "Open an AI chatbot, ChatGPT, Gemini, Claude, or any other. Ask it: Write a devcontainer.json for an R data science project. CP/CR the AI's full response.",
   type = "reflection",
   show_text = FALSE
 )
@@ -720,7 +738,7 @@ CP/CR.
 #| label: new-devcontainer-4
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Open .devcontainer/devcontainer.json in the editor. Replace all of its contents with a JSON object with three fields: \"name\" set to \"R Dev Container\", \"image\" set to \"ghcr.io/rocker-org/devcontainer/tidyverse:4\", and \"customizations\" containing a \"vscode\" block whose \"extensions\" list holds \"REditorSupport.r\". Save the file. Then in the bash Terminal, run cat .devcontainer/devcontainer.json. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -744,7 +762,7 @@ learnr2::question(
 
 ###
 
-This file is simpler than what the AI produced --- fewer fields means fewer things that can go wrong. Good devcontainers are minimal: only add what the project actually needs.
+This file is simpler than what the AI produced. Fewer fields means fewer things that can go wrong, so add only what the project needs.
 
 ### Exercise 5
 
@@ -762,7 +780,7 @@ CP/CR.
 #| label: new-devcontainer-5
 #| echo: false
 learnr2::question(
-  "CP/CR.",
+  "Click the blue connection indicator in the bottom-left corner of VS Code (it shows text like \"Codespaces: ...\"). From the menu that appears, select \"Rebuild Container\", then \"Full Rebuild\". Wait for the rebuild to complete; the window will reload when the new container is ready. Once the Codespace has reloaded, in the bash Terminal run R --version. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -837,7 +855,7 @@ Your answer should look like:
 
 ###
 
-The `customizations` block holds tool-specific settings --- each tool reads only its own key. The `vscode` key contains settings only VS Code reads, so the same `devcontainer.json` can also work with other editors.
+The `customizations` block holds tool-specific settings, and each tool reads only its own key. VS Code reads `vscode` and ignores the rest, so the same `devcontainer.json` can also work with other editors.
 
 ### Exercise 8
 
@@ -922,7 +940,7 @@ https://github.com/ppbds-student/r-devcontainer
 
 ###
 
-This Codespace was created directly from a template, so there was no GitHub repo yet --- "Publish Branch" is what creates it.
+This Codespace was created directly from a template, so there was no GitHub repo yet. "Publish Branch" is what creates it.
 
 ### Exercise 11
 
@@ -934,7 +952,7 @@ Then go to https://github.com/codespaces. Find the row for the blank Codespace a
 #| label: new-devcontainer-11
 #| echo: false
 learnr2::question(
-  "Then go to https://github.com/codespaces. Find the row for the blank Codespace and paste a screenshot of it.",
+  "If you haven't already, stop the blank Codespace: open the Command Palette with Cmd/Ctrl + Shift + P, type >stop, and select Codespaces: Stop Current Codespace. Then go to https://github.com/codespaces. Find the row for the blank Codespace and paste a screenshot of it.",
   type = "reflection",
   allow_image = TRUE,
   allow_text = FALSE,
@@ -997,8 +1015,6 @@ https://github.com/ppbds-student/r-devcontainer
 ```
 
 ###
-
-<!-- DK: Explain `requirements.txt` earlier. -->
 
 Because the `devcontainer.json` you wrote is committed to `r-devcontainer`, the Codespace configuration travels with the repo --- anyone who launches a Codespace from it gets the exact same R setup. This is the same principle behind `requirements.txt`: capture your setup in Git so it can be reproduced by anyone.
 

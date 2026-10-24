@@ -29,13 +29,13 @@ The package includes tutorials focused on VS Code and modern R development:
 \item \strong{Terminal 3} (terminal-3): Wildcards, regular expressions, grep, and pipes
 \item \strong{GitHub Introduction} (github-1): Git and GitHub basics within VS Code
 \item \strong{GitHub Advanced} (github-2): Advanced Git/GitHub workflows and GitHub Pages
+\item \strong{Dotfiles} (dotfiles): Graduate from connect-repo with a private dotfiles repo and a GH_TOKEN Codespaces secret, so every new Codespace is already signed in as you
 \item \strong{Websites 1} (websites-1): Basic website construction using Quarto projects
 \item \strong{Websites 2} (websites-2): Advanced Quarto websites with modular data analysis
 \item \strong{Devcontainers} (devcontainers): An introduction to devcontainers, touring a pre-built Jupyter devcontainer.json and building an R devcontainer.json from scratch
 \item \strong{Our Codespace Starter} (our-codespace-starter): A tour of the devcontainer.json behind codespace-starter itself
 \item \strong{The Devcontainer Dockerfile} (docker): A reading tour of the Dockerfile that builds the PPBDS devcontainer image
 \item \strong{Your Starter} (your-starter): Build your own version of codespace-starter (under construction)
-\item \strong{Dotfiles} (dotfiles): Build a private dotfiles repo GitHub installs into every new Codespace, carrying your Git identity and shell settings
 \item \strong{OpenRouter} (openrouter): Get an OpenRouter API key, store it safely, and drive aider with it
 \item \strong{Models And Money} (models): Buy $10 of OpenRouter credits (the only credit card in the course), call the API from bash and R, and compare what the price gap between free and frontier models buys
 }
@@ -48,8 +48,8 @@ To run a tutorial, use:
 
 Available tutorial names include: orientation, workflow, code, quarto,
 antigravity, terminal-1, terminal-2, terminal-3, github-1,
-github-2, websites-1, websites-2, devcontainers,
-our-codespace-starter, docker, your-starter, dotfiles,
+github-2, dotfiles, websites-1, websites-2, devcontainers,
+our-codespace-starter, docker, your-starter,
 openrouter, and models.
 }
 

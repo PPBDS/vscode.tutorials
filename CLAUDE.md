@@ -150,11 +150,11 @@ How much the intro spells out scales with where the tutorial sits:
   `connect-repo` here is correct because the environment is the subject.
 - **Later tutorials (and downstream packages):** just use the standard repo line:
   *"You should be doing this tutorial in a repo named `whatever`. If you are not,
-  create one and then connect to it. You may need to restart this tutorial after
-  you do so."* The mechanics were taught earlier, so this wording carries the
-  whole setup — it correctly covers the student who already connected before
-  launching the tutorial, and the restart warning covers the VS Code window
-  reload that `connect-repo` can trigger. Downstream normal tutorials keep this
+  create one and then connect to it."* The mechanics were taught earlier, so
+  this wording carries the whole setup — it correctly covers the student who
+  already connected before launching the tutorial. (The old third sentence,
+  "You may need to restart this tutorial after you do so," was a learnr
+  artifact and is gone: a learnr2 page needs no restart.) Downstream normal tutorials keep this
   environment-agnostic per the base guide — the student executes "create one and
   then connect to it" the same way regardless of where they are.
 
@@ -339,7 +339,13 @@ when a transcript genuinely has the student located in that folder.
 
 `connect-repo` is a command on the `PATH` (`codespace-starter`'s `setup.sh`
 installs it in `~/.local/bin`) and works from any directory. The canonical
-fix-it instruction is the single command `connect-repo <name>`. **Always call
+fix-it instruction is the single command `connect-repo <name>`. **Dotfiles is
+the graduation point.** It retires the once-per-machine steps `connect-repo`
+automates (the `gh auth login` and credential-helper setup), so a tutorial
+ordered after Dotfiles may instead have the student run `cd /workspaces`,
+`gh repo create <name> --public --clone`, `cd <name>`; `connect-repo` still
+works and is still acceptable there. Tutorials ordered before Dotfiles keep
+`connect-repo` as the one instruction. **Always call
 it `connect-repo`** --- never `connect-repo.sh` or
 `.devcontainer/connect-repo.sh`, and never with a preceding
 `cd /workspaces/codespace-starter`. The only exception is real output that
@@ -371,7 +377,10 @@ its saved answer is stored under).
   (`dotfiles`), but it is **private**, created with
   `gh repo create dotfiles --private --clone` rather than `connect-repo`, never
   opened as the workspace, and — unlike every other tutorial repo — permanent:
-  students keep it, and the OpenRouter tutorial builds on it.
+  students keep it, and the OpenRouter tutorial builds on it. The same tutorial
+  has the student store a classic personal access token as the Codespaces
+  secret `GH_TOKEN`, so that `gh` and `git` are signed in as the student on
+  every new Codespace without `gh auth login`.
 
 ### Refer to tutorials by title, not slug
 
@@ -397,9 +406,11 @@ learnr2:
 The R Tutorials extension lists tutorials by `ordering`, lowest first
 (tutorials without one sort after, by folder name). Current order: Orientation
 (1), Workflow, Code, Quarto, Antigravity, Terminal 1--3, GitHub Introduction,
-GitHub Advanced, Websites 1--2, Devcontainers, Our Codespace Starter, The
-Devcontainer Dockerfile, Your Starter, Dotfiles, OpenRouter, Models And Money
-(19). **Every tutorial must set an `ordering`.** Reordering means editing these
+GitHub Advanced, Dotfiles (11), Websites 1--2, Devcontainers, Our Codespace
+Starter, The Devcontainer Dockerfile, Your Starter, OpenRouter, Models And
+Money (19). Dotfiles sits directly after the two GitHub tutorials because it
+builds on them and retires their once-per-machine login steps; the
+devcontainer tutorials come late and may not be assigned at all. **Every tutorial must set an `ordering`.** Reordering means editing these
 numbers and nothing else.
 
 Because `ordering` controls the sequence, directory names carry **no numeric

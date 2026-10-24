@@ -6,7 +6,7 @@ format: live-html
 engine: knitr
 toc: true
 learnr2:
-  ordering: 15
+  ordering: 16
 ---
 
 {{< include _extensions/r-wasm/live/_knitr.qmd >}}
@@ -21,19 +21,19 @@ learnr2::student_info()
 
 ## Introduction
 
-In a previous tutorial, you found the `"image"` line inside `codespace-starter`'s `devcontainer.json` --- `ghcr.io/ppbds/devcontainer`, pinned to an exact version. That image does not appear out of nowhere --- it is built from a Dockerfile maintained by PPBDS. This tutorial reads through that real, current Dockerfile, section by section, to understand what it does and why it is written the way it is.
+In a previous tutorial, you found the `"image"` line inside `codespace-starter`'s `devcontainer.json` --- `ghcr.io/ppbds/devcontainer`, pinned to an exact version. That image is built from a Dockerfile maintained by PPBDS. This tutorial reads through that real, current Dockerfile, section by section, to understand what it does and why it is written the way it is.
 
 ###
 
-This is a **reading tour, not a building exercise**. You will not build this image yourself --- it is not buildable inside the course Codespace, and doing so is not the point. Instead, each exercise shows you a piece of the Dockerfile and asks you to find and quote a specific line or block from it, then explains what that piece does and why it exists. (You *will* write one tiny Dockerfile of your own along the way, just to feel the shape of one --- and then read the workflow that turns Dockerfiles like it into published images.)
+This is a **reading tour, not a building exercise**. You will not build this image yourself. It cannot be built inside the course Codespace. Each exercise asks you to find and quote a specific line or block from the Dockerfile, then explains what that piece does and why it exists. You will also write one tiny Dockerfile of your own and read the workflow that turns Dockerfiles like it into published images.
 
 ###
 
-You should be doing this tutorial in a repo named `the-devcontainer-dockerfile`. If you are not, create one and then connect to it. You may need to restart this tutorial after you do so.
+You should be doing this tutorial in a repo named `the-devcontainer-dockerfile`. If you are not, create one and then connect to it.
 
 ## The Devcontainer Image
 
-Here is the complete Dockerfile that builds `ghcr.io/ppbds/devcontainer`. Skim it once, then work through the exercises below, which walk through it piece by piece, in the order the layers actually appear.
+Here is the complete Dockerfile that builds `ghcr.io/ppbds/devcontainer`. Skim it once. The exercises below walk through it in the order the layers appear.
 
 ````dockerfile
 # syntax=docker/dockerfile:1.7
@@ -1024,11 +1024,11 @@ FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.6@sha256:3a9ecbed900f17da528cdb
 
 ###
 
-This image is pinned by **digest** (the long `sha256:...` hash), not just by the `:4.6` tag. A tag like `:4.6` floats: Rocker can push a new build under that same tag any time, silently changing what future builds pull in. The digest locks the base to one exact, unchanging build. Bumping it is deliberate --- pull `:4.6` fresh, copy in the new digest, and commit the change on purpose, instead of being surprised by an upstream update. And because the digest quietly encodes the R version too, an R-version smoke test near the bottom of the file fails the build if a digest bump ever changes the R minor version unnoticed.
+This image is pinned by **digest** (the long `sha256:...` hash), not just by the `:4.6` tag. A tag like `:4.6` floats: Rocker can push a new build under that same tag at any time, silently changing what future builds pull in. The digest locks the base to one exact build. Bumping it is deliberate: pull `:4.6` fresh, copy in the new digest, and commit the change. Because the digest also encodes the R version, an R-version smoke test near the bottom of the file fails the build if a digest bump ever changes the R minor version unnoticed.
 
 ### Exercise 2
 
-Time to build something of your own. In the bash Terminal, create a new file called `Dockerfile` (no extension) at the top level of your `the-devcontainer-dockerfile` repo, and write a simple Dockerfile that starts from a small base image and runs one command. For example:
+In the bash Terminal, create a new file called `Dockerfile` (no extension) at the top level of your `the-devcontainer-dockerfile` repo, and write a simple Dockerfile that starts from a small base image and runs one command. For example:
 
 ```dockerfile
 FROM alpine:3.20
@@ -1049,11 +1049,11 @@ learnr2::question(
 
 ###
 
-A Dockerfile is just a short recipe: a `FROM` line picks a starting image (here, `alpine:3.20`, a tiny ~5 MB Linux distribution often used as a lightweight base), and each instruction after it adds one more layer on top. `CMD` sets the command that runs when a container starts from the image --- in this example, printing a greeting. It's the same shape as the much longer devcontainer Dockerfile you just read, just doing more work: more `FROM`, `RUN`, `COPY`, and `ENV` lines. You will not build this one yourself --- nobody at PPBDS builds the big one by hand either. The next two exercises show who does.
+A Dockerfile is a short recipe. A `FROM` line picks a starting image (here `alpine:3.20`, a tiny ~5 MB Linux distribution often used as a lightweight base), and each instruction after it adds one more layer on top. `CMD` sets the command that runs when a container starts from the image. The devcontainer Dockerfile has the same shape, with many more `RUN`, `ENV`, and `USER` lines.
 
 ###
 
-Your Dockerfile is a recipe; something still has to cook it. For `ghcr.io/ppbds/devcontainer`, that something is not a person typing commands --- it is a **GitHub Actions workflow** that lives in the same repo as the Dockerfile. Here is the part of it that matters, from `.github/workflows/build.yml`:
+A Dockerfile does nothing until something builds it. For `ghcr.io/ppbds/devcontainer`, that something is a **GitHub Actions workflow** in the same repo as the Dockerfile. Here is the part that matters, from `.github/workflows/build.yml`:
 
 ```yaml
 name: build-and-push
@@ -1136,9 +1136,9 @@ with:
 
 ###
 
-That one step is two `docker` commands in a trench coat. `docker build -t NAME .` reads the Dockerfile in the current directory (`context: .`), runs each instruction in order, and saves the result as a local image --- a self-contained snapshot that can run as a container on any machine with Docker installed. `docker push` uploads that image to a registry (`push: true`). Two smaller verbs round out the family: `docker images` lists the images on a machine, and `docker tag` gives an image a second name without rebuilding it. The `cache-` lines are why a rebuild that changes one late line of the Dockerfile takes minutes instead of an hour: every unchanged layer is reused.
+That one step runs two `docker` commands. `docker build -t NAME .` reads the Dockerfile in the current directory (`context: .`), runs each instruction in order, and saves the result as a local image, a self-contained snapshot that can run as a container on any machine with Docker installed. `docker push` uploads that image to a registry (`push: true`). Two smaller verbs round out the family: `docker images` lists the images on a machine, and `docker tag` gives an image a second name without rebuilding it. The `cache-` lines are why a rebuild that changes one late line of the Dockerfile takes minutes instead of an hour. Every unchanged layer is reused.
 
-Notice who runs this: a GitHub Actions machine, on every push to `main` and every `v*` tag (look back at the `on:` block). Nobody at PPBDS types `docker build`. That is how essentially every real image gets made --- by a runner, from a Dockerfile in a repo, on a trigger. If you ever want your Exercise 2 Dockerfile built and published for real, you would not run these commands either: you would ask an AI to add a workflow like this one to your repo, and the runner would do the rest.
+A GitHub Actions machine runs this step on every push to `main` and every `v*` tag (see the `on:` block). Nobody at PPBDS types `docker build`. Essentially every real image is made this way: by a runner, from a Dockerfile in a repo, on a trigger. To get your Exercise 2 Dockerfile built and published for real, you would ask an AI to add a workflow like this one to your repo.
 
 ### Exercise 4
 
@@ -1165,9 +1165,9 @@ type=sha
 
 ###
 
-These four patterns decide the **names** the image is published under. A release tagged `v1.1.5` produces `1.1.5` and `1.1`; every build of `main` also refreshes `latest`; and every build gets a `sha-` tag naming the exact commit. All of them live on GHCR, the same registry as any public image. This is the other half of a lesson from the previous tutorial: `codespace-starter` pins `ghcr.io/ppbds/devcontainer` to an exact `X.Y.Z`, never `latest`, because `latest` moves every time this workflow runs on `main` --- and a floating pin would change every student's Codespace without anyone deciding it should.
+These four patterns decide the **names** the image is published under. A release tagged `v1.1.5` produces `1.1.5` and `1.1`. Every build of `main` also refreshes `latest`. Every build gets a `sha-` tag naming the exact commit. All of them live on GHCR, the same registry as any public image. `codespace-starter` pins `ghcr.io/ppbds/devcontainer` to an exact `X.Y.Z`, never `latest`, because `latest` moves every time this workflow runs on `main`. A floating pin would change every student's Codespace without anyone deciding it should.
 
-One more thing the workflow does that no student ever will: it logs in. `permissions: packages: write` plus `secrets.GITHUB_TOKEN` give the runner a temporary token that can push to GHCR, and the `Login to GHCR` step uses it. No personal token, no password, nothing to remember --- which is exactly why publishing an image is a job for a workflow rather than a person.
+The workflow also logs in. `permissions: packages: write` plus `secrets.GITHUB_TOKEN` give the runner a temporary token that can push to GHCR, and the `Login to GHCR` step uses it. No personal token and no password are involved, which is why publishing an image is a job for a workflow rather than a person.
 
 ### Exercise 5
 
@@ -1194,7 +1194,7 @@ permission bugs than it saved.
 
 ###
 
-There's now one image for everyone --- students launched via `codespace-starter` and PPBDS package developers alike. The old three-image split kept the student image lean, but the "dev" and "student" images barely differed (just qpdf plus five R packages). That tiny gain wasn't worth the extra CI setup and the permission bugs that crept in when slightly different images diverged.
+One image now serves everyone, students launched via `codespace-starter` and PPBDS package developers alike. The old three-image split kept the student image lean, but the "dev" and "student" images differed only by qpdf plus five R packages. That small saving was not worth the extra CI setup and the permission bugs that crept in as slightly different images diverged.
 
 ### Exercise 6
 
@@ -1221,17 +1221,17 @@ then course packages and per-user installs (rstudio), then Python/JS
 
 ###
 
-Docker caches each instruction as its own layer, reusing every cached layer until it hits the first one that changed --- then it rebuilds everything after that point. That's why the most stable things (system libraries, CLI tools) come first: a change deep in the file, like adding one R package, won't force Docker to redo the slow `apt-get` layers. Flip the order, and almost any small edit would blow away the whole cache, making every rebuild slow.
+Docker caches each instruction as its own layer. It reuses every cached layer until it hits the first one that changed, then rebuilds everything after that point. That is why the most stable things (system libraries, CLI tools) come first. A change deep in the file, like adding one R package, does not force Docker to redo the slow `apt-get` layers. Flip the order, and almost any small edit would throw away the whole cache.
 
 ### Exercise 7
 
-Find the seven `ARG` lines that pin tool versions (`QUARTO_VERSION`, `ARF_VERSION`, `NODE_MAJOR`, `CLAUDE_CODE_VERSION`, `CODEX_VERSION`, `GROK_VERSION`, `AIDER_VERSION`). Copy and paste them, and note which CLI mentioned nearby is the *exception* to this pinning approach.
+Find the seven `ARG` lines that pin tool versions (`QUARTO_VERSION`, `ARF_VERSION`, `NODE_MAJOR`, `CLAUDE_CODE_VERSION`, `CODEX_VERSION`, `GROK_VERSION`, `AIDER_VERSION`). Copy and paste them.
 
 ```{r}
 #| label: the-devcontainer-image-7
 #| echo: false
 learnr2::question(
-  "Find the seven ARG lines that pin tool versions (QUARTO_VERSION, ARF_VERSION, NODE_MAJOR, CLAUDE_CODE_VERSION, CODEX_VERSION, GROK_VERSION, AIDER_VERSION). Copy and paste them, and note which CLI mentioned nearby is the exception to this pinning approach.",
+  "Find the seven ARG lines that pin tool versions (QUARTO_VERSION, ARF_VERSION, NODE_MAJOR, CLAUDE_CODE_VERSION, CODEX_VERSION, GROK_VERSION, AIDER_VERSION). Copy and paste them.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1249,13 +1249,33 @@ ARG GROK_VERSION=1.0.46
 ARG AIDER_VERSION=0.86.2
 ```
 
-The exception is the Antigravity CLI (`agy`) --- its installer offers no version pin, so it always installs whatever is latest.
+###
+
+Pinning versions with `ARG` means every build installs the *exact same* Quarto, `arf`, Node, Claude Code, Codex, Grok, and aider until someone deliberately bumps a number. That is what makes the build reproducible. The comment above `AIDER_VERSION` records a lapse: aider floated unpinned until v1.0.8, the one tool with a pin mechanism nobody was using.
+
+### Exercise 8
+
+The comments near those `ARG` lines name one CLI that is the *exception* to this pinning approach. Which CLI is it?
+
+```{r}
+#| label: the-devcontainer-image-17
+#| echo: false
+learnr2::question(
+  "The comments near those ARG lines name one CLI that is the exception to this pinning approach. Which CLI is it?",
+  type = "reflection",
+  show_text = FALSE
+)
+```
 
 ###
 
-Pinning versions with `ARG` means every build installs the *exact same* Quarto, `arf`, Node, Claude Code, Codex, Grok, and aider --- until someone deliberately bumps a number. That's what makes the build reproducible. Note the comment above `AIDER_VERSION`: aider floated unpinned for a while, the one tool with a pin mechanism nobody was using, until v1.0.8 closed that gap. `agy` is the lone remaining exception: its installer has no version-pin option, so it floats with every rebuild. That's accepted as a known gap --- the CLI smoke test near the bottom still fails the build if a future `agy` release breaks something.
+The Antigravity CLI (`agy`). Its installer offers no version pin, so it always installs whatever is latest.
 
-### Exercise 8
+###
+
+`agy` therefore changes with every image rebuild, whether or not anyone decided it should. That is accepted only because there is no pin mechanism, and the CLI smoke test near the bottom of the file still fails the build if a future `agy` release breaks.
+
+### Exercise 9
 
 Find the bullet point in the system-libraries comment that explains why `libuv1-dev` is baked into the image even though the R package that needs it doesn't strictly require it. Copy and paste that bullet.
 
@@ -1281,17 +1301,17 @@ learnr2::question(
 
 ###
 
-The `fs` package's binary already works fine without `libuv1-dev` --- but `pak` still checks fs's declared requirements and prints a scary "Missing system package" warning anyway, even though nothing's broken. Since `fs` is a dependency of the course packages and installs constantly, that phantom warning would hit nearly every student. Baking in the small library is simpler than fighting the warning.
+The `fs` binary works without `libuv1-dev`, but `pak` still checks fs's declared requirements and prints a "Missing system package" warning. Since `fs` is a dependency of the course packages and installs constantly, that phantom warning would hit nearly every student. Baking in the small library is simpler than fighting the warning.
 
-### Exercise 9
+### Exercise 10
 
-Find the line inside the `libnode-dev-virtual` package's control file that lists what it `Provides`. Copy and paste it, and explain in one sentence why this trick exists.
+Find the line inside the `libnode-dev-virtual` package's control file that lists what it `Provides`. Copy and paste it.
 
 ```{r}
 #| label: the-devcontainer-image-9
 #| echo: false
 learnr2::question(
-  "Find the line inside the libnode-dev-virtual package's control file that lists what it Provides. Copy and paste it, and explain in one sentence why this trick exists.",
+  "Find the line inside the libnode-dev-virtual package's control file that lists what it Provides. Copy and paste it.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1305,9 +1325,31 @@ learnr2::question(
 
 ###
 
-`pak` thinks the **V8** R package needs the Debian package `libnode-dev` --- but the real **V8** binary is statically linked and needs no system library, and installing an actual `libnode-dev` would conflict with the NodeSource `nodejs` package installed earlier. So instead of a false "Missing system package" warning on every install that touches **V8** (like `gt`), the Dockerfile builds a tiny fake `.deb` that just *claims* to provide `libnode-dev`/`libv8-dev`, satisfying `pak`'s check without installing anything real.
+`Provides:` is how a Debian package declares that it stands in for another package. This one ships no files at all, so it coexists with NodeSource's `nodejs`, and `dpkg` still records that `libnode-dev` and `libv8-dev` are present. The `dpkg-query` line at the end of the block is a smoke test: the build fails if the `Provides` did not register.
 
-### Exercise 10
+### Exercise 11
+
+Explain in one sentence why the `libnode-dev-virtual` trick exists.
+
+```{r}
+#| label: the-devcontainer-image-18
+#| echo: false
+learnr2::question(
+  "Explain in one sentence why the libnode-dev-virtual trick exists.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+`pak` thinks the **V8** R package needs the Debian package `libnode-dev`, but the **V8** binary is statically linked and needs no system library, and a real `libnode-dev` would conflict with the NodeSource `nodejs` installed earlier.
+
+###
+
+Without the fake package, every install that touches **V8** (such as `gt`) printed a false "Missing 1 system package: libnode-dev" warning. The trick satisfies `pak`'s check without installing anything real.
+
+### Exercise 12
 
 Find the two-part comment (in the "hardenings" block and the "Everything below installs as rstudio" block) that explains why a `pak` run as root can break later installs by the non-root user. Copy and paste the sentence describing what happens to `filelock`.
 
@@ -1332,9 +1374,9 @@ broke the student build (2026-07).
 
 ###
 
-`pkgdepends` (used by `pak`) locks package directories while installing. Locks created by root inherit root's restrictive umask, so they end up unreadable by anyone else. If a *later* install runs as the non-root `rstudio` user, it can't even open that leftover lock file --- and the build, or a student's own `pak::pkg_install()`, fails outright. That's why the `_cache` directory gets deleted and permissions get widened (`chmod -R g+rwX`) right after the root-run installs, and why everything after that runs as `USER rstudio` instead of root.
+`pkgdepends` (used by `pak`) locks package directories while installing. Locks created by root inherit root's restrictive umask, so nobody else can read them. A *later* install running as the non-root `rstudio` user cannot open that leftover lock file, and the build, or a student's own `pak::pkg_install()`, fails outright. That is why the `_cache` directory gets deleted and permissions get widened (`chmod -R g+rwX`) right after the root-run installs, and why everything after that runs as `USER rstudio`.
 
-### Exercise 11
+### Exercise 13
 
 Find the `ENV` line that turns off `pak`'s system-requirement auto-install behavior. Copy and paste it.
 
@@ -1356,17 +1398,17 @@ ENV PKG_SYSREQS=false
 
 ###
 
-Without this, `pak` would try `sudo apt-get install` whenever it thinks a system library is missing. The non-root `rstudio` user can't `sudo`, so that attempt just fails --- and, like the **V8**/`libnode-dev` case, `pak` sometimes *mis-detects* a library as missing when it's already baked in. Turning this off stops `pak` from installing anything at the system level; it'll still print any requirements it finds, but the build (and student installs) relies on the libraries already baked in near the top of the file.
+Without this, `pak` would try `sudo apt-get install` whenever it thinks a system library is missing. The non-root `rstudio` user cannot `sudo`, so that attempt fails. Like the **V8**/`libnode-dev` case, `pak` sometimes *mis-detects* a baked-in library as missing. With this off, `pak` still prints any requirements it finds but installs nothing at the system level. The build and student installs rely on the libraries baked in near the top of the file.
 
-### Exercise 12
+### Exercise 14
 
-Find the `RUN` block that installs the PPBDS course packages from GitHub. Copy and paste it, and note the two arguments to `pak::pkg_install()` that are not just the package list.
+Find the `RUN` block that installs the PPBDS course packages from GitHub. Copy and paste it.
 
 ```{r}
 #| label: the-devcontainer-image-12
 #| echo: false
 learnr2::question(
-  "Find the RUN block that installs the PPBDS course packages from GitHub. Copy and paste it, and note the two arguments to pak::pkg_install() that are not just the package list.",
+  "Find the RUN block that installs the PPBDS course packages from GitHub. Copy and paste it.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1385,25 +1427,47 @@ RUN echo "course-package refresh: ${COURSE_PKG_REFRESH}" \
  && R -q -e 'options(repos = c(P3M = "https://packagemanager.posit.co/cran/__linux__/noble/'"${P3M_SNAPSHOT}"'")); pak::pkg_install("PPBDS/learnr2", upgrade = TRUE)'
 ```
 
-The extra arguments are `upgrade = TRUE` and `dependencies = TRUE`. (**learnr2**, which runs the tutorials themselves, gets its own `pak::pkg_install()` call at the end of the block.) (The `options(repos = ...)` at the start points `pak` at a dated snapshot of CRAN, so every dependency version is frozen to one day and a rebuild gets exactly the same packages.)
+**learnr2**, which runs the tutorials themselves, gets its own `pak::pkg_install()` call at the end of the block.
 
 ###
 
-Installing straight from each package's GitHub default branch (instead of CRAN or an r-universe build) matches PPBDS practice --- the ecosystem expects the development version. `upgrade = TRUE` makes `pak` also pull the latest version of every transitive dependency: `knitr`, `rmarkdown`, `xfun`, and more. Skip it, and a dependency built against a newer `xfun` than Rocker shipped can fail with an error like `object 'attr' is not exported by 'namespace:xfun'` --- exactly the ABI mismatch the smoke test right below this block is built to catch.
+Installing straight from each package's GitHub default branch (instead of CRAN or an r-universe build) matches PPBDS practice. The ecosystem expects the development version. The `options(repos = ...)` at the start points `pak` at a dated snapshot of CRAN, so every dependency version is frozen to one day and a rebuild gets exactly the same packages.
 
-`dependencies = TRUE` reaches further: it also installs each course package's **Suggests**. That is a deliberate contract --- a tutorial package's Suggests list *is* the set of packages students need at tutorial runtime, loaded with `library()` or named as tidymodels engine strings --- and "smoke test 1b" below re-reads those lists from the installed packages and loads every entry, so the contract is checked on every build.
+The `echo` line and the `COURSE_PKG_REFRESH` date `ARG` just above the block are a cache-bust knob. Docker caches layers by instruction text, so a rebuild with an unchanged Dockerfile would reuse this layer and silently ship stale course packages. Bumping the date changes the instruction text, which rebuilds this layer and everything after it.
 
-Notice also the `echo` line and the `COURSE_PKG_REFRESH` date `ARG` just above the block. Docker caches layers by instruction text, so a rebuild with an unchanged Dockerfile would reuse this layer and silently ship stale course packages. Bumping the date changes the instruction text, which busts the cache for this layer and everything after it --- that is the whole job of that line.
+### Exercise 15
 
-### Exercise 13
+In that block, which two arguments to `pak::pkg_install()` are not just the package list?
 
-Find the `remotes::install_url()` line that installs **CatBoost**. Copy and paste it, and explain in one sentence why **CatBoost** needs this special install method instead of a normal `pak::pkg_install()` call.
+```{r}
+#| label: the-devcontainer-image-19
+#| echo: false
+learnr2::question(
+  "In that block, which two arguments to pak::pkg_install() are not just the package list?",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+`upgrade = TRUE` and `dependencies = TRUE`.
+
+###
+
+`upgrade = TRUE` makes `pak` also pull the latest version of every transitive dependency: `knitr`, `rmarkdown`, `xfun`, and more. Skip it, and a dependency built against a newer `xfun` than Rocker shipped can fail with an error like `object 'attr' is not exported by 'namespace:xfun'`, the ABI mismatch the smoke test right below this block is built to catch.
+
+`dependencies = TRUE` also installs each course package's **Suggests**. That is a deliberate contract: a tutorial package's Suggests list *is* the set of packages students need at tutorial runtime, loaded with `library()` or named as tidymodels engine strings. "Smoke test 1b" below re-reads those lists from the installed packages and loads every entry, so the contract is checked on every build.
+
+### Exercise 16
+
+Find the `remotes::install_url()` line that installs **CatBoost**. Copy and paste it.
 
 ```{r}
 #| label: the-devcontainer-image-13
 #| echo: false
 learnr2::question(
-  "Find the remotes::install_url() line that installs CatBoost. Copy and paste it, and explain in one sentence why CatBoost needs this special install method instead of a normal pak::pkg_install() call.",
+  "Find the remotes::install_url() line that installs CatBoost. Copy and paste it.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1417,9 +1481,31 @@ R -q -e 'remotes::install_url("https://github.com/catboost/catboost/releases/dow
 
 ###
 
-**CatBoost** isn't on CRAN, so there's no package for `pak` to find --- it installs directly from **CatBoost**'s own pinned linux-x86_64 release binary (fine, since the image only targets amd64). It's installed with `--no-test-load`, so the install step never confirms it actually works. That's why "Modeling smoke test 2" goes further than the rest: instead of just loading the `catboost` package, it fits a real model through `tidymodels`/`bonsai` and checks the predictions, proving the binary and the engine binding both work.
+The `--no-test-load` option means the install step never confirms the package works. That is why "Modeling smoke test 2" goes further than the rest: instead of just loading the `catboost` package, it fits a real model through `tidymodels`/`bonsai` and checks the predictions, proving the binary and the engine binding both work.
 
-### Exercise 14
+### Exercise 17
+
+Explain in one sentence why **CatBoost** needs this special install method instead of a normal `pak::pkg_install()` call.
+
+```{r}
+#| label: the-devcontainer-image-20
+#| echo: false
+learnr2::question(
+  "Explain in one sentence why CatBoost needs this special install method instead of a normal pak::pkg_install() call.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+**CatBoost** is not on CRAN, so there is no package for `pak` to find, and the line instead installs **CatBoost**'s own pinned linux-x86_64 release binary.
+
+###
+
+The image is built for amd64 only (`build.yml` sets no platforms), so a single x86_64 binary is enough. `remotes` is in the modeling `pak::pkg_install()` call above this line for exactly this one install.
+
+### Exercise 18
 
 Find the `ENV` line that sets `RETICULATE_PYTHON`, and the comment just above the Python venv block explaining why it is set even though nothing installed in this Dockerfile uses it directly. Copy and paste the `ENV` line.
 
@@ -1442,17 +1528,17 @@ ENV PATH=/opt/venv/bin:$PATH \
 
 ###
 
-Quarto renders Python chunks through the Jupyter engine (`ipykernel`), which needs no bridge from R at all --- so nothing baked in here actually requires `RETICULATE_PYTHON`. It's set anyway as a convenience: *if* a student later installs R's `reticulate` package, it'll automatically connect to this same `/opt/venv` instead of hunting for a separate Python. The Python packages are pinned in `requirements.lock`, generated from `requirements.txt` via `uv pip compile` --- and a separate build step fails if the two files ever fall out of sync, so a stale lock can never ship silently.
+Quarto renders Python chunks through the Jupyter engine (`ipykernel`), which needs no bridge from R, so nothing baked in here requires `RETICULATE_PYTHON`. It is set as a convenience: *if* a student later installs R's `reticulate` package, it connects to this same `/opt/venv` instead of hunting for a separate Python. The Python packages are pinned in `requirements.lock`, generated from `requirements.txt` via `uv pip compile`, and a separate build step fails if the two files ever fall out of sync.
 
-### Exercise 15
+### Exercise 19
 
-Find the line that installs Observable Framework. Copy and paste it, and explain when a student actually needs this CLI versus when Quarto already has them covered.
+Find the line that installs Observable Framework. Copy and paste it.
 
 ```{r}
 #| label: the-devcontainer-image-15
 #| echo: false
 learnr2::question(
-  "Find the line that installs Observable Framework. Copy and paste it, and explain when a student actually needs this CLI versus when Quarto already has them covered.",
+  "Find the line that installs Observable Framework. Copy and paste it.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1466,17 +1552,39 @@ RUN npm install -g @observablehq/framework@1.13.4 && observable --version
 
 ###
 
-Interactive Observable charts *inside* an existing Quarto document need nothing extra --- Quarto already bundles support for `{ojs}` cells. The `observable` CLI is only for a different job: building a standalone Observable Framework data app or dashboard (`observable create`, `observable preview`, `observable build`), which is its own separate kind of project.
+The `&& observable --version` at the end is the smoke test. If the CLI did not install, the version check fails and the build stops at this layer.
 
-### Exercise 16
+### Exercise 20
 
-Find the "Modeling smoke test 3" `RUN` line near the bottom of the file, the one that fits a `brms` model. Copy and paste it, and explain why this test needs to actually fit a model rather than just checking that the `brms` package loads.
+When does a student actually need the `observable` CLI, and when does Quarto already have them covered?
+
+```{r}
+#| label: the-devcontainer-image-21
+#| echo: false
+learnr2::question(
+  "When does a student actually need the observable CLI, and when does Quarto already have them covered?",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+Interactive Observable charts *inside* an existing Quarto document need nothing extra, because Quarto already bundles support for `{ojs}` cells. The `observable` CLI is only for building a standalone Observable Framework data app or dashboard.
+
+###
+
+An Observable Framework app (`observable create`, `observable preview`, `observable build`) is its own kind of project, separate from any Quarto site.
+
+### Exercise 21
+
+Find the "Modeling smoke test 3" `RUN` line near the bottom of the file, the one that fits a `brms` model. Copy and paste it.
 
 ```{r}
 #| label: the-devcontainer-image-16
 #| echo: false
 learnr2::question(
-  "Find the \"Modeling smoke test 3\" RUN line near the bottom of the file, the one that fits a brms model. Copy and paste it, and explain why this test needs to actually fit a model rather than just checking that the brms package loads.",
+  "Find the \"Modeling smoke test 3\" RUN line near the bottom of the file, the one that fits a brms model. Copy and paste it.",
   type = "reflection",
   show_text = FALSE
 )
@@ -1490,11 +1598,33 @@ RUN R --vanilla -e 'fit <- brms::brm(mpg ~ wt, data = mtcars, chains = 1, iter =
 
 ###
 
-`brms` fits Bayesian models by compiling and running a Stan program, which depends on the image's C++ toolchain working --- something a simple `requireNamespace("brms")` load check would never catch, since the package loads fine even if Stan compilation is broken. Fitting a tiny model (one chain, 100 iterations --- just enough to prove compilation and sampling run, not to get a good estimate) is what actually proves the modeling stack works. Same idea as every smoke test here: catch a broken build *now*, during the image build, not the first time a student uses the feature.
+One chain and 100 iterations is far too little for a good estimate. It is just enough to prove that compilation and sampling run, which is all a smoke test needs.
+
+### Exercise 22
+
+Explain why this test needs to actually fit a model rather than just checking that the `brms` package loads.
+
+```{r}
+#| label: the-devcontainer-image-22
+#| echo: false
+learnr2::question(
+  "Explain why this test needs to actually fit a model rather than just checking that the brms package loads.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+`brms` fits Bayesian models by compiling and running a Stan program, which depends on the image's C++ toolchain working. The package loads fine even if Stan compilation is broken, so a `requireNamespace("brms")` check would never catch the failure.
+
+###
+
+Every smoke test in this file works the same way: catch a broken build during the image build, not the first time a student uses the feature.
 
 ## Summary
 
-This tutorial read through the real Dockerfile behind `ghcr.io/ppbds/devcontainer`, the image `codespace-starter`'s `devcontainer.json` points at. You saw why the base image is pinned by digest rather than a floating tag, why one image now serves both students and package developers, why layer order matters for Docker's build cache, and how deliberate `ARG` version pins keep builds reproducible. You also traced the permissions story that runs through the R package installs --- system libraries baked in as root, `PKG_SYSREQS=false` to stop `pak` from trying to `sudo`, and the switch to `USER rstudio` so lock files never poison the library for later installs --- and saw how the Python venv and the image-wide smoke tests each guard against a specific class of failure at build time, before a student ever opens a Codespace. Finally, you read the GitHub Actions workflow that builds and publishes the image --- `docker build` and `docker push` run by a machine on every push and every release, tagged by pattern, logged in with a token no human ever handles.
+This tutorial read through the real Dockerfile behind `ghcr.io/ppbds/devcontainer`, the image `codespace-starter`'s `devcontainer.json` points at. You saw why the base image is pinned by digest rather than a floating tag, why one image now serves both students and package developers, why layer order matters for Docker's build cache, and how `ARG` version pins keep builds reproducible. You also traced the permissions story that runs through the R package installs: system libraries baked in as root, `PKG_SYSREQS=false` to stop `pak` from trying to `sudo`, and the switch to `USER rstudio` so lock files never poison the library for later installs. The Python venv and the image-wide smoke tests each guard against a specific class of failure at build time, before a student ever opens a Codespace. Finally, you read the GitHub Actions workflow that builds and publishes the image: `docker build` and `docker push` run by a machine on every push and every release, tagged by pattern, logged in with a token no human ever handles.
 
 ## Download answers
 
