@@ -22,7 +22,7 @@
 #'   \item \strong{Terminal 3} (terminal-3): Wildcards, regular expressions, grep, and pipes
 #'   \item \strong{GitHub Introduction} (github-1): Git and GitHub basics within VS Code
 #'   \item \strong{GitHub Advanced} (github-2): Advanced Git/GitHub workflows and GitHub Pages
-#'   \item \strong{Dotfiles} (dotfiles): Graduate from connect-repo with a private dotfiles repo and a GH_TOKEN Codespaces secret, so every new Codespace is already signed in as you
+#'   \item \strong{Dotfiles} (dotfiles): Graduate from connect-repo with a private dotfiles repo and Codespaces secrets for your GitHub token and Census API key, so every new Codespace is already signed in as you
 #'   \item \strong{Websites 1} (websites-1): Basic website construction using Quarto projects
 #'   \item \strong{Websites 2} (websites-2): Advanced Quarto websites with modular data analysis
 #'   \item \strong{Devcontainers} (devcontainers): An introduction to devcontainers, touring a pre-built Jupyter devcontainer.json and building an R devcontainer.json from scratch

@@ -318,11 +318,11 @@ This is the same lesson as QMD World and R World: two things running side by sid
 
 In the Dotfiles tutorial you had a variable that vanished the same way, and you made it stick by putting the `export` line in `~/.bashrc`, where every new bash Terminal reads it.
 
-That approach would work here too, but you also know the better one: in the Dotfiles tutorial your GitHub token went into a Codespaces secret, not a file. An API key is the same kind of thing.
+That approach would work here too, but you also know the better one: in the Dotfiles tutorial your GitHub token and your Census key went into Codespaces secrets, not files. An API key is the same kind of thing.
 
 ### Exercise 7
 
-Make the key survive. Go to <https://github.com/settings/codespaces> --- the same page where you stored `GH_TOKEN` in the Dotfiles tutorial.
+Make the key survive. Go to <https://github.com/settings/codespaces> --- the same page where you stored `GH_TOKEN` and `CENSUS_API_KEY` in the Dotfiles tutorial.
 
 Under **Codespaces secrets**, click **New secret**, exactly as you did then. Name it `OPENROUTER_API_KEY`, paste your key as the value, and under **Repository access** select `PPBDS/codespace-starter`. Save it.
 
@@ -350,9 +350,9 @@ Your screenshot should show a secret named `OPENROUTER_API_KEY` with `PPBDS/code
 
 ###
 
-GitHub now stores your key, encrypted, and hands it to every new Codespace you start, beside `GH_TOKEN`. Delete this Codespace, open a new one next week, and `OPENROUTER_API_KEY` is already there. You never type it again, and it is never saved in a file.
+GitHub now stores your key, encrypted, and hands it to every new Codespace you start, beside `GH_TOKEN` and `CENSUS_API_KEY`. Delete this Codespace, open a new one next week, and `OPENROUTER_API_KEY` is already there. You never type it again, and it is never saved in a file.
 
-This is the line you drew in the Dotfiles tutorial, applied a second time. **Dotfiles** deliver files you wrote. **Secrets** deliver values GitHub holds encrypted, straight into the environment, with nothing written to disk. Notice that GitHub will not show you the value again either --- not even to you.
+This is the line you drew in the Dotfiles tutorial, applied a third time. **Dotfiles** deliver files you wrote. **Secrets** deliver values GitHub holds encrypted, straight into the environment, with nothing written to disk. Notice that GitHub will not show you the value again either --- not even to you.
 
 You picked `codespace-starter` because that is the repo your Codespace was built from. The machine you are sitting in belongs to it, not to `openrouter`.
 

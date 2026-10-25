@@ -353,7 +353,7 @@ https://zany-computing-machine-vpvrv9p59jxpc66v6.github.dev/
 
 ###
 
-While you waited, GitHub built a computer from the instructions in `.devcontainer/devcontainer.json` inside `codespace-starter`. The key line there names a pre-built image, `ghcr.io/ppbds/devcontainer:1.2.9`, with R, the tidyverse, Quarto, and the rest already inside. The file then adds the editor extensions and settings on top. Nothing is installed at startup --- the image is downloaded and switched on --- which is why every Codespace boots quickly and arrives identical to every other.
+While you waited, GitHub built a computer from the instructions in `.devcontainer/devcontainer.json` inside `codespace-starter`. The key line there names a pre-built image, `ghcr.io/ppbds/devcontainer:1.3.1`, with R, the tidyverse, Quarto, and the rest already inside. The file then adds the editor extensions and settings on top. Nothing is installed at startup --- the image is downloaded and switched on --- which is why every Codespace boots quickly and arrives identical to every other.
 
 ### Exercise 2
 

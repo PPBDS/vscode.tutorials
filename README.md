@@ -80,9 +80,9 @@ development environment.
   back, and delete a Codespace while your work survives on GitHub.
 
 - *Dotfiles* (“dotfiles”). Graduate from `connect-repo`: a private
-  `dotfiles` repo delivers your files to every new Codespace, a
-  Codespaces secret delivers your GitHub token, and a brand new machine
-  is already signed in as you.
+  `dotfiles` repo delivers your shell and Git settings to every new
+  Codespace, Codespaces secrets deliver your GitHub token and Census API
+  key, and a brand new machine is already signed in as you.
 
 - *Websites 1* (“websites-1”). Use the quarto CLI to create, render,
   preview, and publish a multi-page website to GitHub Pages.

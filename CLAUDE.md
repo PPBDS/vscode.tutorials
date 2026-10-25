@@ -380,7 +380,10 @@ its saved answer is stored under).
   students keep it, and the OpenRouter tutorial builds on it. The same tutorial
   has the student store a classic personal access token as the Codespaces
   secret `GH_TOKEN`, so that `gh` and `git` are signed in as the student on
-  every new Codespace without `gh auth login`.
+  every new Codespace without `gh auth login`, and their Census API key as
+  the secret `CENSUS_API_KEY`, which tidycensus reads from the environment.
+  Its `bashrc` fragment also defines `agyd` as
+  `agy --dangerously-skip-permissions`.
 
 ### Refer to tutorials by title, not slug
 
