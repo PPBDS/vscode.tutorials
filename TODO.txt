@@ -1,7 +1,5 @@
 ## topics
 
-Sure would be cool if the answer to whoami was not "rstudio".
-
 We need a quick tutorial for creating a second GitHub account.
 
 There are a couple of tricks that we need to teach before milestone 4, either in current tutorials or in a special 'tricks' tutorial. Key topics:
