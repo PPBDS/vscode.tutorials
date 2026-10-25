@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">vscode.tutorials</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -172,7 +172,7 @@ example $</code></pre>
 <li>Rows copied from the github.com/codespaces list (they show repo names).</li>
 </ol><p>Do <strong>not</strong> change: the tutorial’s directory name under <code>inst/tutorials/</code> (it also names the <code>.qmd</code> and the page URL that saved answers are keyed on, and a title change does not touch it), or chunk labels (a question’s label is the key its saved answer is stored under).</p>
 <ul><li>A title must not collide with a directory that already exists under <code>/workspaces</code> — in particular, a title that would map to <code>codespace-starter</code> is forbidden (that folder is always present).</li>
-<li>There are currently no exceptions to one-title-one-repo: every tutorial uses exactly one repo, named from its title. The Dotfiles tutorial stretches the pattern without breaking it: its repo is still named from its title (<code>dotfiles</code>), but it is <strong>private</strong>, created with <code>gh repo create dotfiles --private --clone</code> rather than <code>connect-repo</code>, never opened as the workspace, and — unlike every other tutorial repo — permanent: students keep it, and the OpenRouter tutorial builds on it. The same tutorial has the student store a classic personal access token as the Codespaces secret <code>GH_TOKEN</code>, so that <code>gh</code> and <code>git</code> are signed in as the student on every new Codespace without <code>gh auth login</code>.</li>
+<li>There are currently no exceptions to one-title-one-repo: every tutorial uses exactly one repo, named from its title. The Dotfiles tutorial stretches the pattern without breaking it: its repo is still named from its title (<code>dotfiles</code>), but it is <strong>private</strong>, created with <code>gh repo create dotfiles --private --clone</code> rather than <code>connect-repo</code>, never opened as the workspace, and — unlike every other tutorial repo — permanent: students keep it, and the OpenRouter tutorial builds on it. The same tutorial has the student store a classic personal access token as the Codespaces secret <code>GH_TOKEN</code>, so that <code>gh</code> and <code>git</code> are signed in as the student on every new Codespace without <code>gh auth login</code>, and their Census API key as the secret <code>CENSUS_API_KEY</code>, which tidycensus reads from the environment. Its <code>bashrc</code> fragment also defines <code>agyd</code> as <code>agy --dangerously-skip-permissions</code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="refer-to-tutorials-by-title-not-slug">Refer to tutorials by title, not slug<a class="anchor" aria-label="anchor" href="#refer-to-tutorials-by-title-not-slug"></a></h3>

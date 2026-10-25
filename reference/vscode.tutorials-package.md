@@ -47,8 +47,8 @@ development:
   GitHub Pages
 
 - **Dotfiles** (dotfiles): Graduate from connect-repo with a private
-  dotfiles repo and a GH_TOKEN Codespaces secret, so every new Codespace
-  is already signed in as you
+  dotfiles repo and Codespaces secrets for your GitHub token and Census
+  API key, so every new Codespace is already signed in as you
 
 - **Websites 1** (websites-1): Basic website construction using Quarto
   projects

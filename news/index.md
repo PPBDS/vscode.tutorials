@@ -13,10 +13,12 @@
 - Dotfiles is rewritten as the graduation from `connect-repo` and moves
   to directly after GitHub Advanced (ordering 11). A private `dotfiles`
   repo delivers an install script that appends `bashrc` and `gitconfig`
-  fragments, a new section stores a GitHub token as the Codespaces
-  secret `GH_TOKEN`, and a fresh Codespace arrives signed in as the
-  student. Websites 1 and 2 and the four devcontainer tutorials shift
-  down one slot each.
+  fragments, a new section stores a GitHub token and the student’s
+  Census API key as the Codespaces secrets `GH_TOKEN` and
+  `CENSUS_API_KEY`, the `bashrc` fragment defines `agyd` as
+  `agy --dangerously-skip-permissions`, and a fresh Codespace arrives
+  signed in as the student with tidycensus ready. Websites 1 and 2 and
+  the four devcontainer tutorials shift down one slot each.
 
 - GitHub Advanced’s sign-in recipe gains the line that writes the token
   into `~/.git-credentials`, and its Summary points at Dotfiles.
@@ -30,8 +32,8 @@
   longer says “You may need to restart this tutorial after you do so,”
   which was a learnr artifact.
 
-- Stale image pins in GitHub Advanced and Our Codespace Starter now read
-  1.2.9.
+- Stale image pins in GitHub Advanced and Our Codespace Starter now
+  match codespace-starter (1.3.1).
 
 - Every code block now says what it is: commands carry their language
   (`bash`, `r`, `yaml`, `json`, `dockerfile`, `ini`, `markdown`), text
