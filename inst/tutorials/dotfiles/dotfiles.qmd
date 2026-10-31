@@ -21,19 +21,26 @@ learnr2::student_info()
 
 ## Introduction
 
-Every Codespace you have used so far has arrived identical to every other one. That is the point --- it is what lets every example in these tutorials match your screen.
+Every Codespace you have opened arrived identical to every other one. A machine built from `codespace-starter` knows nothing about you. That is why GitHub Advanced ended with commands you run "once per machine," and why `connect-repo` exists.
 
-But *identical for everyone* is not the same as *set up for you*. A machine built from `codespace-starter` knows nothing about you personally, which is why GitHub Advanced ended with two commands you run "once per machine": `gh auth login`, and `git config --global credential.helper store`. Every new Codespace, the same two commands, or `connect-repo` running them for you.
+This tutorial retires those commands. A **dotfile** is a configuration file whose name starts with a dot, which hides it from an ordinary `ls`. `.bashrc` configures the bash shell. `.gitconfig` configures Git.
 
-This tutorial retires them. A **dotfile** is a configuration file whose name starts with a dot, which is how Unix hides it from an ordinary `ls`. `.bashrc` configures the bash shell. `.gitconfig` configures Git. Today you put yours in a repo that GitHub reads every time it builds you a machine --- and you put the two things that must *not* go in a repo, your GitHub token and your Census API key, where GitHub keeps secrets.
+###
 
-Two things make this tutorial unusual. The repo you make is **permanent**. Every other repo in this course is scratch work, but this one you keep. And you will **not** open it as your workspace. Everything happens in the bash Terminal.
+The plan, in four parts:
+
+1. Look at two settings a fresh Codespace lacks.
+2. Build a private repo called `dotfiles` holding three small files, and push it.
+3. Store two secrets, your GitHub token and your Census API key, where GitHub keeps secrets.
+4. Turn dotfiles on, build a new Codespace, and check that everything arrived.
+
+The repo you make is **permanent**. Every other repo in this course is scratch work. This one you keep. You will not open it as your workspace. Everything happens in the bash Terminal.
 
 ### Exercise 1
 
 In the bash Terminal, run:
 
-``` bash
+```bash
 echo $COOLEST_TEACHER
 ```
 
@@ -49,25 +56,22 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
-``` output
+```{.output}
 codespace-starter $ echo $COOLEST_TEACHER
+
 ```
 
-### 
+###
 
-Nothing. A blank line, and then your prompt again.
-
-**It did not fail.** Bash treats a variable nobody has set as the empty string, so `echo` printed the empty string.
-
-By the end of this tutorial, that command will print `Preceptor` on a machine which does not exist yet.
+Nothing. A blank line, and then your prompt again. **It did not fail.** Bash treats a variable nobody has set as the empty string. By the end of this tutorial, that command will print `Preceptor` on a machine which does not exist yet.
 
 ### Exercise 2
 
-In the Antigravity tutorial, the agent stopped to ask permission before most actions. `agy --dangerously-skip-permissions` starts it in a mode that does not ask. That flag is long enough that nobody wants to typesit twice, so we will give it a short name, `agyd`. First check that no such name exists yet. In the bash Terminal, run:
+In the Antigravity tutorial, the agent asked permission before most actions. `agy --dangerously-skip-permissions` starts it in a mode that does not ask. We will give that long command a short name, `agyd`. First check that no such name exists. In the bash Terminal, run:
 
-``` bash
+```bash
 alias agyd
 ```
 
@@ -83,22 +87,22 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
-``` output
+```{.output}
 codespace-starter $ alias agyd
 bash: alias: agyd: not found
 ```
 
-### 
+###
 
-An **alias** is a short name for a longer command, and bash keeps them in memory for the current shell. This one does not exist. Aliases live in `.bashrc`.
+An **alias** is a short name for a longer command. This one does not exist, and this time bash says so. Aliases live in `.bashrc`.
 
 ### Exercise 3
 
-`~/.bashrc` runs every time you open a bash Terminal. `codespace-starter` already puts several elements in it. In the bash Terminal, show the one about your prompt:
+`~/.bashrc` runs every time you open a bash Terminal. In the bash Terminal, show the block about your prompt:
 
-``` bash
+```bash
 grep -A 2 short-prompt ~/.bashrc
 ```
 
@@ -114,24 +118,24 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
-``` output
+```{.output}
 codespace-starter $ grep -A 2 short-prompt ~/.bashrc
 # codespace-starter:short-prompt — short prompt for beginners (folder name + $).
 PROMPT_COMMAND=''
 PS1='\W \$ '
 ```
 
-### 
+###
 
-There is the reason your prompt says `codespace-starter $` instead of the long one GitHub gives everybody else. `PS1` holds your prompt, and `\W` means *the name of the current directory*, which is why it changes as you `cd` around. (`PROMPT_COMMAND` is cleared first because the stock Codespaces prompt rebuilds itself through it on every render --- clearing it is what lets the simple `PS1` stick.)
+`PS1` holds your prompt, and `\W` means the name of the current directory. That is why the prompt changes as you `cd` around.
 
-`codespace-starter`'s setup script **appends** those lines to the end of `~/.bashrc` while the Codespace is being built, before you ever open a terminal. `.bashrc` already belongs to somebody, and in a few minutes you will add lines after theirs rather than replace the file.
+`codespace-starter` **appended** those lines to the end of `~/.bashrc` while the Codespace was being built. The file already belongs to somebody. In a few minutes you will add lines after theirs rather than replace it.
 
 ## Your Dotfiles Repo
 
-You need a repo, and you need a way to get files out of it and into your home directory.
+Part two. You need a repo, and a way to get its files into your home directory.
 
 ### Exercise 1
 
@@ -139,8 +143,8 @@ In the bash Terminal, run `gh auth status`.
 
 If it reports that you are **not** logged in, run the sign-in ritual from GitHub Advanced and then run `gh auth status` again:
 
-``` bash
-unset GITHUB_TOKEN GH_TOKEN
+```bash
+unset GITHUB_TOKEN
 gh auth login --hostname github.com --git-protocol https --web --clipboard=false
 git config --global credential.helper store
 printf 'https://x-access-token:%s@github.com\n' "$(gh auth token)" > ~/.git-credentials
@@ -152,15 +156,15 @@ CP/CR.
 #| label: repo-1
 #| echo: false
 learnr2::question(
-  "In the bash Terminal, run gh auth status. If it reports that you are not logged in, run the sign-in ritual from GitHub Advanced (unset GITHUB_TOKEN GH_TOKEN, then gh auth login --hostname github.com --git-protocol https --web --clipboard=false, then git config --global credential.helper store, then printf 'https://x-access-token:%s@github.com\\n' \"$(gh auth token)\" > ~/.git-credentials) and then run gh auth status again. CP/CR.",
+  "In the bash Terminal, run gh auth status. If it reports that you are not logged in, run the sign-in ritual from GitHub Advanced (unset GITHUB_TOKEN, then gh auth login --hostname github.com --git-protocol https --web --clipboard=false, then git config --global credential.helper store, then printf 'https://x-access-token:%s@github.com\\n' \"$(gh auth token)\" > ~/.git-credentials) and then run gh auth status again. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
 ```
 
-### 
+###
 
-``` output
+```{.output}
 codespace-starter $ gh auth status
 github.com
   ✓ Logged in to github.com account your-username (/home/rstudio/.config/gh/hosts.yml)
@@ -170,15 +174,15 @@ github.com
   - Token scopes: 'gist', 'read:org', 'repo', 'workflow'
 ```
 
-### 
+###
 
-The login lives in `hosts.yml`, inside this one Codespace. A fresh Codespace is logged out, which is why every tutorial so far has started with `connect-repo` or with these four commands.
+The login lives in `hosts.yml`, inside this one Codespace. A fresh Codespace is logged out. That is the problem part three solves.
 
 ### Exercise 2
 
-Make the repo. In the bash Terminal:
+Make the repo. In the bash Terminal, run these commands, one at a time:
 
-``` bash
+```bash
 cd /workspaces
 gh repo create dotfiles --private --clone
 cd dotfiles
@@ -196,9 +200,9 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
-``` output
+```{.output}
 codespace-starter $ cd /workspaces
 workspaces $ gh repo create dotfiles --private --clone
 ✓ Created repository your-username/dotfiles on GitHub
@@ -208,115 +212,248 @@ workspaces $ cd dotfiles
 dotfiles $
 ```
 
-### 
+###
 
-The same command you used for `scratch-repo` in Gthub: Advanced with one difference. GitHub reads this repo using your own permissions, so a private one works exactly as well as a public one, and there is no reason to publish your settings to the world.
-
-The name is a convention, not a rule. GitHub lets you pick any repo you own from a dropdown, but essentially every dotfiles repo you will ever meet is called `dotfiles`, so ours is too.
+The same command you used for `scratch-repo`, with `--private`. GitHub reads this repo with your own permissions, so private works as well as public, and there is no reason to publish your settings. Almost every dotfiles repo in the world is called `dotfiles`, so ours is too.
 
 ### Exercise 3
 
-<!-- DK: This is absurdly long. Split it into several different questions, each of which only does one thing. Ideally, there would be about 6 questions, organized in three sets of two. The first question in each pair tells the student to change a file. The exercise then asks to see, via cat or whatever, the new file. The second exercise probably needs to load the new file and then check that it has worked. -->
+GitHub sets up your machine in one of two ways. If the repo has an **install script**, named `install.sh`, GitHub runs it and stops. If not, GitHub **symlinks** every dotted file in the repo into your home directory. We use a script, and the script appends small **fragments** to files that already exist.
 
-GitHub sets up your machine in one of two ways, and you pick by what you put in the repo. If it finds an **install script** --- `install.sh` is the first name it looks for --- it runs that and stops. If there is no install script, it instead **symlinks** every dotted file in the repo into your home directory.
+Ask AI to create the first fragment, a file called `bashrc` in `/workspaces/dotfiles`, with exactly these two lines:
 
-Use a script, and keep it tiny. Ask AI to create three files in `/workspaces/dotfiles`.
-
-First, `install.sh`:
-
-``` bash
-#!/bin/bash
-set -e
-cd "$(dirname "$0")"
-
-cat bashrc >> ~/.bashrc
-cat gitconfig >> ~/.gitconfig
-```
-
-Second, `bashrc`, two lines:
-
-``` bash
+```bash
 export COOLEST_TEACHER=Preceptor
 alias agyd='agy --dangerously-skip-permissions'
 ```
 
-Third, `gitconfig`, with your real name and your own GitHub username:
-
-<!-- DK: Where does GitHUb username go in the below? Your Name? -->
-
-``` ini
-[user]
-    name = Your Name
-    email = YOUR-USERNAME@users.noreply.github.com
-[init]
-    defaultBranch = main
-[alias]
-    s = status --short --branch
-    l = log --oneline --graph --decorate -20
-[credential]
-    helper =
-    helper = !gh auth git-credential
-```
-
-In the bash Terminal, run `cat /workspaces/dotfiles/gitconfig`. CP/CR.
+In the bash Terminal, run `cat bashrc`. CP/CR.
 
 ```{r}
 #| label: repo-3
 #| echo: false
 learnr2::question(
-  "Ask AI to create install.sh, bashrc, and gitconfig in /workspaces/dotfiles with the contents shown. In the bash Terminal, run cat /workspaces/dotfiles/gitconfig. CP/CR.",
+  "Ask AI to create a file called bashrc in /workspaces/dotfiles with exactly two lines: export COOLEST_TEACHER=Preceptor, and alias agyd='agy --dangerously-skip-permissions'. In the bash Terminal, run cat bashrc. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
 ```
 
-### 
+###
 
-``` output
-[user]
-    name = David Kane
-    email = your-username@users.noreply.github.com
-[init]
-    defaultBranch = main
-[alias]
-    s = status --short --branch
-    l = log --oneline --graph --decorate -20
-[credential]
-    helper =
-    helper = !gh auth git-credential
+```{.output}
+dotfiles $ cat bashrc
+export COOLEST_TEACHER=Preceptor
+alias agyd='agy --dangerously-skip-permissions'
 ```
 
-### 
+###
 
-Neither `bashrc` nor `gitconfig` has a leading dot, and that is deliberate. They are **fragments** to be appended to files that already exist, not files to be installed. If you ever delete `install.sh`, GitHub falls back to symlinking, and a file named `.gitconfig` in this repo would then replace the real one.
-
-`[user]` is the part that matters. Git refuses to commit until it knows who you are, and outside a Codespace --- on your laptop, say --- a fresh machine does not. Use the `@users.noreply.github.com` address rather than your real one. Your commits carry that email into every public repo you ever push to, and published email addresses get scraped.
-
-<!-- DK: Is the aboves sensible? Is scraping a legitimate concern nowadays? -->
-
-In the `[credential]` block, the first `helper =` line, with nothing after the equals sign, clears whatever credential helpers the machine came with. The second tells Git to ask `gh` for a password whenever it needs one.
-
-The `alias` line in `bashrc` means that typing `agyd` runs `agy --dangerously-skip-permissions`. An agent that never asks permission is fine in a disposable Codespace holding work that is already on GitHub. 
-
-### 
-
-Note that `>>` **appends** to a file. A single `>` would overwrite it.
-
-Most dotfiles repos on the internet contain a whole `.bashrc`. With no install script, GitHub would symlink theirs straight over the top of the one you looked at in the Introduction. Your prompt would become GitHub's long default in every Codespace you ever opened, and every example in these tutorials would stop matching your screen.
-
-The rule generalises: **when you do not own a file, add to it rather than replace it.** Ask AI to change your shell configuration and it will hand you a complete `.bashrc`. Append the lines you need instead.
-
-(`set -e` means stop at the first command that fails. `cd "$(dirname "$0")"` moves to wherever the script happens to live, since you do not know what directory GitHub will run it from.)
+No leading dot, on purpose. This is a fragment to append to `~/.bashrc`, not a file to install. If you ever deleted `install.sh`, GitHub would fall back to symlinking, and a file named `.bashrc` here would replace the real one.
 
 ### Exercise 4
 
-GitHub runs the script only if it is executable. In the bash Terminal, make it so:
+Test the fragment before shipping it. In the bash Terminal, run these commands, one at a time:
 
-``` bash
-chmod +x install.sh
+```bash
+source bashrc
+echo $COOLEST_TEACHER
 ```
 
-Then run `ls -l install.sh`. CP/CR.
+CP/CR.
+
+```{r}
+#| label: repo-6
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run source bashrc, then echo $COOLEST_TEACHER. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+dotfiles $ source bashrc
+dotfiles $ echo $COOLEST_TEACHER
+Preceptor
+```
+
+###
+
+`source` runs a file's lines in the current shell, which is how `.bashrc` itself gets run. The effect reaches this one terminal only. A new terminal would still print nothing, because `~/.bashrc` has not changed.
+
+### Exercise 5
+
+Ask AI to create the second fragment, `gitconfig`, in `/workspaces/dotfiles`. Put your real name after `name =` and your GitHub username in the email address:
+
+```ini
+[user]
+	name = Your Name
+	email = YOUR-USERNAME@users.noreply.github.com
+[init]
+	defaultBranch = main
+[alias]
+	s = status --short --branch
+	l = log --oneline --graph --decorate -20
+[credential]
+	helper =
+	helper = !gh auth git-credential
+```
+
+In the bash Terminal, run `cat gitconfig`. CP/CR.
+
+```{r}
+#| label: repo-7
+#| echo: false
+learnr2::question(
+  "Ask AI to create gitconfig in /workspaces/dotfiles with the contents shown, with your real name after name = and your GitHub username in the email address. In the bash Terminal, run cat gitconfig. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+dotfiles $ cat gitconfig
+[user]
+	name = David Kane
+	email = your-username@users.noreply.github.com
+[init]
+	defaultBranch = main
+[alias]
+	s = status --short --branch
+	l = log --oneline --graph --decorate -20
+[credential]
+	helper =
+	helper = !gh auth git-credential
+```
+
+###
+
+`[user]` is what Git needs before it will commit. Outside a Codespace, a fresh machine does not know it. Use the `@users.noreply.github.com` address rather than your real one, because every commit carries its email into every public repo you push to.
+
+### Exercise 6
+
+Check that Git can read the fragment. In the bash Terminal, run:
+
+```bash
+git config --file gitconfig --list
+```
+
+CP/CR.
+
+```{r}
+#| label: repo-8
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run git config --file gitconfig --list. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+dotfiles $ git config --file gitconfig --list
+user.name=David Kane
+user.email=your-username@users.noreply.github.com
+init.defaultbranch=main
+alias.s=status --short --branch
+alias.l=log --oneline --graph --decorate -20
+credential.helper=
+credential.helper=!gh auth git-credential
+```
+
+###
+
+Git parsed every line, so the file is valid. The two `credential.helper` lines are deliberate. The empty one clears whatever helpers the machine came with. The second tells Git to ask `gh` for a password whenever it needs one.
+
+### Exercise 7
+
+Ask AI to create the third file, `install.sh`, in `/workspaces/dotfiles`:
+
+```bash
+#!/bin/bash
+set -e
+cd "$(dirname "$0")"
+
+printf '\n%s\n' "$(cat bashrc)" >> ~/.bashrc
+printf '\n%s\n' "$(cat gitconfig)" >> ~/.gitconfig
+```
+
+In the bash Terminal, run `cat install.sh`. CP/CR.
+
+```{r}
+#| label: repo-9
+#| echo: false
+learnr2::question(
+  "Ask AI to create install.sh in /workspaces/dotfiles with the contents shown. In the bash Terminal, run cat install.sh. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+dotfiles $ cat install.sh
+#!/bin/bash
+set -e
+cd "$(dirname "$0")"
+
+printf '\n%s\n' "$(cat bashrc)" >> ~/.bashrc
+printf '\n%s\n' "$(cat gitconfig)" >> ~/.gitconfig
+```
+
+###
+
+`>>` **appends** to a file. A single `>` would overwrite it. Most dotfiles repos on the internet ship a whole `.bashrc`, which would wipe out the short prompt you looked at in the Introduction. **When you do not own a file, add to it rather than replace it.**
+
+`$(cat bashrc)` is the text of the fragment. `printf` writes it with a newline before and after, so it can never glue itself onto the last line of the file, even when the fragment has no final newline. Files written by AI often lack one.
+
+`set -e` stops the script at the first failure. `cd "$(dirname "$0")"` moves to wherever the script lives, since you do not know where GitHub will run it from.
+
+### Exercise 8
+
+In the bash Terminal, run `ls -l install.sh`. CP/CR.
+
+```{r}
+#| label: repo-10
+#| echo: false
+learnr2::question(
+  "In the bash Terminal, run ls -l install.sh. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+dotfiles $ ls -l install.sh
+-rw-rw-rw- 1 rstudio rstudio 137 Oct 23 14:22 install.sh
+```
+
+If yours already begins `-rwxrwxrwx`, the AI made the file executable for you. Carry on.
+
+###
+
+The ten characters at the left are the file's permissions. The first is `-` for a plain file. Then come three groups of three: what the owner may do, what the owner's group may do, and what everyone else may do. `r` is read, `w` is write, and `x` is execute. `-rw-rw-rw-` means anyone may read or write this file and nobody may run it.
+
+### Exercise 9
+
+GitHub runs the script only if it is executable. In the bash Terminal, run these commands, one at a time:
+
+```bash
+chmod +x install.sh
+ls -l install.sh
+```
+
+CP/CR.
 
 ```{r}
 #| label: repo-4
@@ -328,24 +465,21 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
-``` output
+```{.output}
+dotfiles $ chmod +x install.sh
 dotfiles $ ls -l install.sh
--rwxrwxrwx 1 rstudio rstudio 95 Oct 23 14:22 install.sh
+-rwxrwxrwx 1 rstudio rstudio 137 Oct 23 14:22 install.sh
 ```
 
-### 
+###
 
-<!-- DK: Make this two exercises. The first checks the x bit before changing it. The knowledge drop for that explains the various permissions bits, briefly. -->
+`chmod +x` sets the execute bit for everyone, and the `x` characters appear. A missing execute bit is the most common way a dotfiles repo silently does nothing. Git stores this bit, so it survives the trip to a new machine.
 
-The `x` characters in `-rwxrwxrwx` are the **executable bit**. Without it the line reads `-rw-rw-rw-` and the file is just text that happens to contain commands. If AI created the file with the bit already set, `chmod +x` changed nothing, which is fine.
+### Exercise 10
 
-A missing executable bit is the most common way a dotfiles repo silently does nothing. The script is there, GitHub declines to run it, and no error appears anywhere. Git stores this bit, which is why it survives the trip to a new machine.
-
-### Exercise 5
-
-This repo is not your open workspace, so the Source Control pane cannot see it. Commit and push from the bash Terminal instead, as you did in GitHub Advanced. Run these commands, one at a time:
+This repo is not your open workspace, so the Source Control pane cannot see it. Commit and push from the bash Terminal, as you did in GitHub Advanced. Run these commands, one at a time:
 
 ```bash
 git add -A
@@ -353,7 +487,7 @@ git commit -m "Add install script and fragments"
 git push -u origin main
 ```
 
-The first push of a new repo needs the `-u origin main`. Then run `git log --oneline`. CP/CR.
+Then run `git log --oneline`. CP/CR.
 
 ```{r}
 #| label: repo-5
@@ -365,40 +499,56 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
-``` output
+```{.output}
 dotfiles $ git log --oneline
 4c1e2a9 (HEAD -> main, origin/main) Add install script and fragments
 ```
 
-### 
+###
 
-`origin/main` on the same line as `HEAD -> main` is the proof that the push landed. GitHub reads this repo from *its* servers when it builds a machine, not from your Codespace, so a commit that is only local does nothing.
+`origin/main` beside `HEAD -> main` proves the push landed. GitHub reads this repo from its own servers when it builds a machine, so a commit that is only local does nothing. Part two is done.
 
 ## What Does Not Belong In A Repo
 
-Everything in `gitconfig` is a **setting**: true for years, and harmless if the whole world read it. Your GitHub token is neither. It is a password, and a password in a repo --- even a private one --- is a copy on GitHub, a copy on every machine you ever open, and a line in Git history that outlives every attempt to delete it.
-
-GitHub keeps a separate place for values like that, and it delivers them the same way: when a Codespace is created.
+Part three. Everything in `gitconfig` is a **setting**: true for years, and harmless if the whole world read it. Your GitHub token is a password. A password in a repo, even a private one, is a copy on GitHub, a copy on every machine you open, and a line in Git history forever. GitHub keeps a separate place for values like that.
 
 ### Exercise 1
 
-<!-- DK: Again, split this up into separate exercises. Also, this whole tutorial is a bit too wordy. Students won't read more than two sentences at a time. -->
+Go to <https://github.com/settings/tokens>. This page lists your classic personal access tokens. Take a screenshot of it and paste it below. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
 
-Make a token. Go to <https://github.com/settings/tokens/new?scopes=repo,read:org,workflow&description=Codespaces>. The note and the three scopes are already filled in. Set **Expiration** to a date after the end of this course, then click **Generate token**.
+```{r}
+#| label: secrets-4
+#| echo: false
+learnr2::question(
+  "Go to https://github.com/settings/tokens, the list of your classic personal access tokens. Take a screenshot of the page and paste it below.",
+  type = "reflection",
+  allow_image = TRUE,
+  allow_text = FALSE,
+  show_text = FALSE
+)
+```
 
-GitHub shows the token once, on the next page. Copy it somewhere safe for the next exercise. **Never paste the token itself into this tutorial, or anywhere else that is saved.**
+###
 
-<!-- DK: We don't explain how to do a screen shot every time. Also, the first question in this series should be a screen shot of the current token page, which will presumably be empty. THen the student makes a token. That exercise asks for a second screenshot of the token page, showing that we have, indeed, made a token. -->
+<!-- TODO: images/tokens-empty.png — the Personal access tokens (classic) page of a test account with no tokens. -->
 
-Then go to <https://github.com/settings/tokens> and take a screenshot of the token list, which shows the new token's name and expiration but never its value, and paste it below. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
+For most students the list is empty. A **token** is a password made for programs rather than people. It has a job description attached and an expiry date, and you can revoke it without changing anything else about your account.
+
+### Exercise 2
+
+Go to <https://github.com/settings/tokens/new?scopes=repo,read:org,workflow&description=Codespaces>. The note and the three scopes are already filled in. Set **Expiration** to a date after the end of this course and click **Generate token**.
+
+GitHub shows the token once, on the next page. Copy it somewhere safe for Exercise 4. **Never paste the token itself into this tutorial or anywhere else that is saved.**
+
+Then go back to <https://github.com/settings/tokens>, take a screenshot of the list, and paste it below.
 
 ```{r}
 #| label: secrets-1
 #| echo: false
 learnr2::question(
-  "Create a classic personal access token at github.com/settings/tokens/new with the repo, read:org, and workflow scopes and an expiration after the end of the course. Copy it somewhere safe. Then take a screenshot of the token list at github.com/settings/tokens, showing the new token's name and expiration, and paste it below.",
+  "Create a classic personal access token at github.com/settings/tokens/new with the repo, read:org, and workflow scopes and an expiration after the end of the course. Copy it somewhere safe. Then take a screenshot of the token list at github.com/settings/tokens and paste it below.",
   type = "reflection",
   allow_image = TRUE,
   allow_text = FALSE,
@@ -406,66 +556,53 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
-Your screenshot should show a token named `Codespaces` with its expiration date, and nothing that starts with `ghp_`.
+<!-- TODO: images/tokens-one.png — the same page showing one token named Codespaces with its expiration. -->
 
-### 
+The list now shows a token named `Codespaces` with its expiration date, and nothing that starts with `ghp_`.
 
-Those three scopes --- `repo`, `read:org`, `workflow` --- are the same ones `gh auth login` asked for in GitHub Advanced. A token is a password with a job description attached: this one can read and write your repositories and nothing else about your account.
+###
 
-A leaked token works until someone revokes it. An expiry date revokes it whether you remember to or not.
+`repo`, `read:org`, and `workflow` are the scopes `gh auth login` asked for in GitHub Advanced. This token can read and write your repositories and nothing else. A leaked token works until someone revokes it. The expiry date revokes it whether you remember to or not.
 
-### Exercise 2
+### Exercise 3
 
-You already own a second key. In the census tutorial you ran `census_api_key("...", install = TRUE)`, which wrote your Census API key into `~/.Renviron`. Count its lines without showing the key. In the bash Terminal, run:
+Your second secret already exists. When you signed up for a Census API key in the census tutorial, the Census Bureau emailed it to you. Find that email. Paste the **first ten characters** of the key below, and no more. We never put a whole key anywhere that is saved.
 
-``` bash
-grep -c CENSUS ~/.Renviron
-```
-
-CP/CR.
-
-<!-- DK: Of course it will show nothing! This a new Codespace! Don't pretend that it might exist. Instead, ask the student if they can find it in their email, since it was mailed to them by the Census. If not, they should ask for another now. -->
-
-<!-- DK: Again, this should be several separate questions. The first makes sure that the student has an KEY from the census. (The exercise asks the student to copy in the first 10 characters of the key, emphasizing that we never share keys publicly. The second confirms that .Rneviron does not exist, but explains what it does. At that point, I am a bit lost. What should the next step be? Maybe this is wrong since we aren't even creating a .Reviron files at all? -->
-
-If it prints `0`, or says the file does not exist, you do not have a key yet. Sign up for a free one at <https://api.census.gov/data/key_signup.html>, click the activation link in the email, and keep the key for the next exercise.
+If you cannot find the email, request a new key at <https://api.census.gov/data/key_signup.html> and click the activation link in the message that arrives.
 
 ```{r}
-#| label: secrets-3
+#| label: secrets-5
 #| echo: false
 learnr2::question(
-  "In the bash Terminal, run grep -c CENSUS ~/.Renviron. CP/CR. If it prints 0 or says the file does not exist, sign up for a free key at https://api.census.gov/data/key_signup.html, click the activation link in the email, and keep the key for the next exercise.",
+  "Find the email from the Census Bureau that contains your Census API key, or request a new key at https://api.census.gov/data/key_signup.html and activate it. Paste the first ten characters of the key, and no more.",
   type = "reflection",
   show_text = FALSE
 )
 ```
 
-### 
+###
 
-``` output
-codespace-starter $ grep -c CENSUS ~/.Renviron
-1
+```{.output}
+3f9a2c7e1b
 ```
 
-### 
+###
 
-`-c` counts matching lines instead of printing them, which keeps the key off your screen. `~/.Renviron` is a file R reads when it starts, and it exists on this machine only. A new Codespace has no such file, which is why `get_acs()` would fail there until you installed the key again.
+A Census key is forty characters of hexadecimal, tied to your email address. In the census tutorial you installed it with `census_api_key(..., install = TRUE)`, which wrote it into a file called `~/.Renviron` on that machine. That file does not exist in this Codespace, and we are not going to create one.
 
-### Exercise 3
+### Exercise 4
 
-Go to <https://github.com/settings/codespaces>. Under **Codespaces secrets**, click **New secret**. Name it `GH_TOKEN`, paste your token as the value, and under **Repository access** select `PPBDS/codespace-starter`. Add it.
+Go to <https://github.com/settings/codespaces>. Under **Codespaces secrets**, click **New secret**. Name it `GH_TOKEN`, paste your GitHub token as the value, and under **Repository access** select `PPBDS/codespace-starter`. Add it.
 
-Then add a second secret the same way, named `CENSUS_API_KEY`, with your Census key as the value and the same repository access. The key is the text after `CENSUS_API_KEY=` in `~/.Renviron`. In the bash Terminal, `code ~/.Renviron` opens the file so you can copy it.
-
-Take a screenshot of the **Codespaces secrets** list showing both secrets and the repository they can reach, and paste it below. The list shows names only, never the values, so the screenshot is safe to submit.
+Take a screenshot of the **Codespaces secrets** list and paste it below. The list shows names only, never values, so it is safe to submit.
 
 ```{r}
 #| label: secrets-2
 #| echo: false
 learnr2::question(
-  "At github.com/settings/codespaces, add a Codespaces secret named GH_TOKEN with your token as the value and PPBDS/codespace-starter under Repository access. Then add a second secret named CENSUS_API_KEY with your Census key as the value and the same repository access (the key is the text after CENSUS_API_KEY= in ~/.Renviron; code ~/.Renviron opens the file). Take a screenshot of the Codespaces secrets list showing both secrets and the repository they can reach, and paste it below.",
+  "At github.com/settings/codespaces, add a Codespaces secret named GH_TOKEN with your GitHub token as the value and PPBDS/codespace-starter under Repository access. Take a screenshot of the Codespaces secrets list and paste it below.",
   type = "reflection",
   allow_image = TRUE,
   allow_text = FALSE,
@@ -473,54 +610,63 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
-<!-- DK: In this an other exercises which ask for screenshots, we should show our own screenshots. -->
+<!-- TODO: images/secrets-one.png — the Codespaces secrets list showing GH_TOKEN with PPBDS/codespace-starter under repository access. -->
 
-Your screenshot should show two secrets, `CENSUS_API_KEY` and `GH_TOKEN`, each with `PPBDS/codespace-starter` under its repository access.
+The list shows one secret, `GH_TOKEN`, with `PPBDS/codespace-starter` under its repository access.
 
-### 
+###
 
-`GH_TOKEN` is the name `gh` looks for. `gh` prefers it over the `GITHUB_TOKEN` that GitHub puts into every Codespace, the built-in token that can only touch `codespace-starter` and cannot create repos, which is why `connect-repo` starts by unsetting it. With `GH_TOKEN` in the environment, `gh` acts as you, and so does `git`, because the `[credential]` lines in your `gitconfig` tell it to ask `gh`.
+`GH_TOKEN` is the name `gh` looks for, and `gh` prefers it to the built-in `GITHUB_TOKEN` that can only touch `codespace-starter`. With it in the environment, `gh` acts as you, and so does `git`, because your `gitconfig` tells Git to ask `gh`. You picked `codespace-starter` because that is the repo your Codespaces are built from.
 
-`CENSUS_API_KEY` is the name **tidycensus** looks for. A Codespaces secret arrives as an environment variable, and every process on the machine sees it, including the R Terminal, `Rscript`, and `quarto render`. So `get_acs()` finds the key with no `.Renviron` at all. `install = TRUE` remains the right way on a laptop, where there is no secret store.
+### Exercise 5
 
-You picked `codespace-starter` because that is the repo your Codespaces are built from. The secrets go to machines made from that repo, whatever repo you then create inside them.
+Add a second secret the same way. Name it `CENSUS_API_KEY`, paste your whole Census key as the value, and give it the same repository access.
 
-### 
+Take a screenshot of the **Codespaces secrets** list and paste it below.
 
-<!-- DK: Again, this is way too much text that students are never going to read. This information, if it is valuable, needs to be intersperesed on smaller junks among a greater number of questions. -->
+```{r}
+#| label: secrets-6
+#| echo: false
+learnr2::question(
+  "At github.com/settings/codespaces, add a second Codespaces secret named CENSUS_API_KEY with your Census key as the value and PPBDS/codespace-starter under Repository access. Take a screenshot of the Codespaces secrets list and paste it below.",
+  type = "reflection",
+  allow_image = TRUE,
+  allow_text = FALSE,
+  show_text = FALSE
+)
+```
 
-Two boxes on one settings page, for two different kinds of thing.
+###
 
-- **Dotfiles** deliver *files you wrote* by cloning your repo onto the machine: your name, your `agyd` alias, your prompt. Settings. Things you want to keep forever and would not mind anyone reading.
-- **Secrets** deliver *values GitHub holds encrypted*, straight into the environment, with nothing written to disk or to any repo. Your GitHub token, your Census key. Things you may one day need to revoke in a hurry.
+<!-- TODO: images/secrets-two.png — the same list showing CENSUS_API_KEY and GH_TOKEN. -->
 
-When you are not sure which box something belongs in, ask whether a leak would embarrass you or get you *in trouble*. Embarrassed is a dotfile. In trouble is a secret.
+The list shows two secrets, `CENSUS_API_KEY` and `GH_TOKEN`.
+
+###
+
+`CENSUS_API_KEY` is the name **tidycensus** looks for. A secret arrives as an environment variable, which every program on the machine can read, so `get_acs()` will find the key with no `.Renviron` at all.
+
+###
+
+Two boxes on one page. **Dotfiles** deliver files you wrote: your name, your aliases, your prompt. Things you would not mind anyone reading. **Secrets** deliver values GitHub holds encrypted: your GitHub token, your Census key. Things you may one day need to revoke in a hurry. Part three is done.
 
 ## Turning It On
 
-<!-- DK: This is such bad, confusing writing! "The page you just left???" Why write in riddles? -->
-
-The repo exists, and so far it does nothing. GitHub will not go looking for it until you say so. The switch is not in the repo but in your account, on the page you just left.
+Part four. The repo is pushed and the secrets are stored. GitHub does not install dotfiles until you turn that on, and the switch is on the same settings page as the secrets.
 
 ### Exercise 1
 
-Go back to <https://github.com/settings/codespaces>.
+Go to <https://github.com/settings/codespaces>. Under **Dotfiles**, tick **Automatically install dotfiles** and use the dropdown to choose your `dotfiles` repository.
 
-Under **Dotfiles**, tick **Automatically install dotfiles**, and use the dropdown to choose your `dotfiles` repository.
-
-<!-- DK: Did we already commit and push dotfiles? -->
-
-<!-- DK: At some point in the beginning of this tutorial, we should have provided a clear map of what we were going to do and the order in which we were going to do it. -->
-
-Take a screenshot of the **Dotfiles** section, showing the ticked box and the repository you chose, and paste it below.
+Take a screenshot of the **Dotfiles** section and paste it below.
 
 ```{r}
 #| label: switch-1
 #| echo: false
 learnr2::question(
-  "At github.com/settings/codespaces, under Dotfiles, tick Automatically install dotfiles and choose your dotfiles repository. Take a screenshot of the Dotfiles section, showing the ticked box and the repository you chose, and paste it below.",
+  "At github.com/settings/codespaces, under Dotfiles, tick Automatically install dotfiles and choose your dotfiles repository. Take a screenshot of the Dotfiles section and paste it below.",
   type = "reflection",
   allow_image = TRUE,
   allow_text = FALSE,
@@ -528,31 +674,48 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
-Your screenshot should show **Automatically install dotfiles** ticked and your `dotfiles` repository (ours is `your-username/dotfiles`) selected in the dropdown.
+<!-- TODO: images/dotfiles-switch.png — the Dotfiles section with the box ticked and your-username/dotfiles selected. -->
 
-### 
+The box is ticked and your `dotfiles` repository is selected.
 
-Both switches on this page are **account** settings, not repo settings: from here on they apply to every Codespace you create, in any repo, in any organisation, whether you own that repo or not.
+###
 
-### 
-
-Check the bash Terminal you are sitting in: `$COOLEST_TEACHER` is still empty, and it will stay empty here no matter how long you wait.
-
-Dotfiles and secrets are delivered when a Codespace is created. This one was created before you had either, and nothing goes back to revisit it. **Settings that apply at creation do not reach a machine that already exists.** The only way to see any of this work is to build a new machine.
+Dotfiles and secrets are **account** settings. From now on they apply to every Codespace you create, from any repo.
 
 ### Exercise 2
 
-Open a **second browser tab** and go to <https://github.com/codespaces>.
+Open a new bash Terminal with the `+` button on the right side of the Panel. In it, run `echo $COOLEST_TEACHER`. CP/CR.
 
-Click **New codespace**, choose repository `PPBDS/codespace-starter` and branch `main`, and create it. Wait for it to start.
+```{r}
+#| label: switch-6
+#| echo: false
+learnr2::question(
+  "Open a new bash Terminal with the + button on the right side of the Panel. In it, run echo $COOLEST_TEACHER. CP/CR.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
 
-<!-- DK: Might give some more background here by pointing out the URL of the tutorial to show/explain how it would disappear if the Codespace closed. But, also, wouldn't the answers be saved, so that if we opened up a new Codespace and started this tutorial again, all the answers we already gave would be filled in. Right? I should test this! -->
+###
 
-**Leave this tab open** --- the tutorial and all your answers live in this Codespace.
+```{.output}
+codespace-starter $ echo $COOLEST_TEACHER
 
-In the *new* Codespace, open a bash Terminal and run `echo $COOLEST_TEACHER`. Copy the output, come back to this tab, and paste it.
+```
+
+###
+
+Still empty, and it will stay empty here. Dotfiles and secrets are delivered when a Codespace is **created**. This one was created before you had either, and nothing goes back to revisit it. **Settings that apply at creation do not reach a machine that already exists.**
+
+### Exercise 3
+
+Open a **second browser tab** and go to <https://github.com/codespaces>. Click **New codespace**, choose repository `PPBDS/codespace-starter` and branch `main`, and create it. Wait for it to start.
+
+**Leave this tab open.** The tutorial and your answers live in this Codespace.
+
+In the new Codespace, open a bash Terminal and run `echo $COOLEST_TEACHER`. Copy the output, come back to this tab, and paste it.
 
 ```{r}
 #| label: switch-2
@@ -564,45 +727,34 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
-``` output
+```{.output}
 codespace-starter $ echo $COOLEST_TEACHER
 Preceptor
 ```
 
-### 
+###
 
-GitHub built a container from our image. Then, because your account said to, it cloned your private `dotfiles` repo onto the machine, found `install.sh`, saw it was executable, and ran it. The script appended two lines to `~/.bashrc`. When you opened a bash Terminal, bash read `.bashrc`, and the variable was there.
+GitHub built the container, cloned your private `dotfiles` repo onto it, found `install.sh`, saw that it was executable, and ran it. The script appended your two lines to `~/.bashrc`.
 
-### Exercise 3
+### Exercise 4
 
-<!-- DK: Split this into four separate questions. Each runs one command, but the intro and knowledge drop allow us space to do some more teaching with each one. -->
-
-Still in the **new** Codespace, in its bash Terminal, run:
-
-``` bash
-gh auth status
-git config --get user.name
-alias agyd
-tail -2 ~/.bashrc
-```
-
-CP/CR back here.
+Still in the **new** Codespace, in its bash Terminal, run `gh auth status`. Copy the output and paste it here.
 
 ```{r}
 #| label: switch-3
 #| echo: false
 learnr2::question(
-  "Still in the new Codespace, in its bash Terminal, run gh auth status, then git config --get user.name, then alias agyd, then tail -2 ~/.bashrc. CP/CR back here.",
+  "Still in the new Codespace, in its bash Terminal, run gh auth status. Copy the output and paste it here.",
   type = "reflection",
   show_text = FALSE
 )
 ```
 
-### 
+###
 
-``` output
+```{.output}
 codespace-starter $ gh auth status
 github.com
   ✓ Logged in to github.com account your-username (GH_TOKEN)
@@ -610,47 +762,112 @@ github.com
   - Git operations protocol: https
   - Token: ghp_************************************
   - Token scopes: 'read:org', 'repo', 'workflow'
-codespace-starter $ git config --get user.name
-David Kane
-codespace-starter $ alias agyd
-alias agyd='agy --dangerously-skip-permissions'
-codespace-starter $ tail -2 ~/.bashrc
-export COOLEST_TEACHER=Preceptor
-alias agyd='agy --dangerously-skip-permissions'
 ```
 
-### 
+###
 
-You are signed in as yourself on a brand new machine. Not through `hosts.yml`, which does not exist here, and not as the Codespace's built-in token, which `gh` would report as `(GITHUB_TOKEN)`, but through the secret, which `gh` reports as `(GH_TOKEN)`. Git knows your name because `install.sh` appended your `gitconfig`, so you can create a repo and commit to it without Git stopping to ask.
+Signed in as yourself on a brand new machine, and the parentheses say how: `(GH_TOKEN)`, the secret. Not `hosts.yml`, which does not exist here, and not the built-in `(GITHUB_TOKEN)`. The once-per-machine login just happened with nobody running it.
 
-`agyd` exists now, and the last two lines of `.bashrc` are yours. The starter's lines went in while the Codespace was being built, your `install.sh` ran when it was created, and `>>` put your lines after theirs. The starter's `PS1` survived, which is why your prompt still reads `codespace-starter $`. Had you shipped a whole `.bashrc` with no install script, it would not have.
+### Exercise 5
 
-Other things belong in the same repo: a `.gitignore_global` so junk files never reach a repo again, more aliases, R options. Anything you would otherwise redo on every machine.
-
-### Exercise 4
-
-Still in the **new** Codespace, open an R Terminal and run:
-
-``` r
-nzchar(Sys.getenv("CENSUS_API_KEY"))
-file.exists("~/.Renviron")
-```
-
-CP/CR back here.
+Still in the new Codespace, run `git config --get user.name`. Copy the output and paste it here.
 
 ```{r}
-#| label: switch-5
+#| label: switch-8
 #| echo: false
 learnr2::question(
-  "Still in the new Codespace, open an R Terminal and run nzchar(Sys.getenv(\"CENSUS_API_KEY\")), then file.exists(\"~/.Renviron\"). CP/CR back here.",
+  "Still in the new Codespace, run git config --get user.name. Copy the output and paste it here.",
   type = "reflection",
   show_text = FALSE
 )
 ```
 
-### 
+###
 
-``` output
+```{.output}
+codespace-starter $ git config --get user.name
+David Kane
+```
+
+###
+
+Git knows your name because `install.sh` appended your `gitconfig` to `~/.gitconfig`. You can create a repo and commit to it without Git stopping to ask who you are.
+
+### Exercise 6
+
+Still in the new Codespace, run `alias agyd`. Copy the output and paste it here.
+
+```{r}
+#| label: switch-9
+#| echo: false
+learnr2::question(
+  "Still in the new Codespace, run alias agyd. Copy the output and paste it here.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+codespace-starter $ alias agyd
+alias agyd='agy --dangerously-skip-permissions'
+```
+
+###
+
+The alias exists in every terminal on this machine. An agent that never asks permission is fine in a disposable Codespace whose work is already on GitHub. Do not use it on a machine you care about.
+
+### Exercise 7
+
+Still in the new Codespace, run `tail -2 ~/.bashrc`. Copy the output and paste it here.
+
+```{r}
+#| label: switch-10
+#| echo: false
+learnr2::question(
+  "Still in the new Codespace, run tail -2 ~/.bashrc. Copy the output and paste it here.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
+codespace-starter $ tail -2 ~/.bashrc
+export COOLEST_TEACHER=Preceptor
+alias agyd='agy --dangerously-skip-permissions'
+```
+
+###
+
+The last two lines of `.bashrc` are yours, and the starter's lines are still above them. That is `>>` at work, and it is why your prompt still reads `codespace-starter $`. More aliases, a `.gitignore_global`, R options: anything you would otherwise redo on every machine belongs in the same fragment.
+
+### Exercise 8
+
+Still in the new Codespace, open an R Terminal and run these two lines:
+
+```r
+nzchar(Sys.getenv("CENSUS_API_KEY"))
+file.exists("~/.Renviron")
+```
+
+Copy the output and paste it here.
+
+```{r}
+#| label: switch-5
+#| echo: false
+learnr2::question(
+  "Still in the new Codespace, open an R Terminal and run nzchar(Sys.getenv(\"CENSUS_API_KEY\")), then file.exists(\"~/.Renviron\"). Copy the output and paste it here.",
+  type = "reflection",
+  show_text = FALSE
+)
+```
+
+###
+
+```{.output}
 R 4.6.1> nzchar(Sys.getenv("CENSUS_API_KEY"))
 [1] TRUE
 R 4.6.1> file.exists("~/.Renviron")
@@ -658,13 +875,13 @@ R 4.6.1> file.exists("~/.Renviron")
 R 4.6.1>
 ```
 
-### 
+###
 
-R has your Census key and there is no `.Renviron` to hold it. The key came through the environment, from the secret, the same way `GH_TOKEN` reached `gh`. Every `get_acs()` call on this machine would work, and the key is not written anywhere a `git add` could find it.
+R has your Census key and there is no `.Renviron` to hold it. The key came through the environment, from the secret, the same way `GH_TOKEN` reached `gh`. Every `get_acs()` call on this machine will work.
 
-### Exercise 5
+### Exercise 9
 
-Clean up. Go back to <https://github.com/codespaces>, find the Codespace you just created, and delete it from the `...` menu, as you did in GitHub Advanced.
+Go to <https://github.com/codespaces>, find the Codespace you just created, and delete it from the `...` menu, as you did in GitHub Advanced.
 
 Once it is gone, take a screenshot of the Codespaces list and paste it below.
 
@@ -680,39 +897,37 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
-Your screenshot should show the Codespace you are working in now, but no longer the one you made for this test (ours was `fuzzy-space-doodle-7q9v4wpx`).
+<!-- TODO: images/codespaces-list.png — the Codespaces list showing only the Codespace running the tutorial. -->
 
-### 
+The list shows the Codespace you are working in now, and no longer the one you made for this test.
 
-Codespaces are billed by the hour, and two running machines burn your allowance twice as fast.
+###
 
-Deleting it cost you nothing. Everything that made that machine yours was on GitHub, a repo and two secrets, not on the machine. The computer is disposable, and nothing important lives only there.
+Deleting it cost nothing. Everything that made it yours was on GitHub, a repo and two secrets. One thing to know before you ever delete *this* Codespace: your tutorial answers are saved in the browser under this Codespace's address, so download them first.
 
 ## Summary
 
-You started with `echo $COOLEST_TEACHER` printing nothing --- successfully, because an unset variable in bash is empty rather than broken. You finished with the same command printing `Preceptor` on a machine that did not exist when you began, and with that machine already signed in to GitHub as you.
+You started with `echo $COOLEST_TEACHER` printing nothing. You finished with it printing `Preceptor` on a machine that did not exist when you began, and that machine was signed in to GitHub as you, knew your name, had `agyd`, and had your Census key.
 
-### 
+###
 
-In between you built a private repo called `dotfiles` holding an executable `install.sh` and two fragments, `bashrc` and `gitconfig`, which the script **appends** to the real files rather than replacing them. The fragments carry your Git identity, your aliases, and `agyd`. You put the two things that must not live in a repo, your GitHub token and your Census API key, in the Codespaces secrets `GH_TOKEN` and `CENSUS_API_KEY`. And you flipped the account-level switches that deliver all of it to every Codespace you create from now on.
+You built a private repo called `dotfiles` holding `install.sh` and two fragments, `bashrc` and `gitconfig`, which the script **appends** to the real files. You put the two things that must not live in a repo, your GitHub token and your Census API key, in the Codespaces secrets `GH_TOKEN` and `CENSUS_API_KEY`. And you turned on the switch that delivers the repo to every Codespace you create.
 
-### 
+###
 
-From here on, a tutorial that says *create a repo called `whatever` and connect to it* needs no login step and no `connect-repo`:
+From here on, a tutorial that says *create a repo called `whatever` and connect to it* needs no login step:
 
-``` bash
+```bash
 cd /workspaces
 gh repo create whatever --public --clone
 cd whatever
 ```
 
-<!-- DK: Does connect-repo really still work even if you are already logged onto GitHub? If so, cool! -->
+Then **File -> Open Folder...** on `/workspaces/whatever`. `connect-repo` still works. It checks whether you are signed in, finds that you are, and goes straight to creating the repo, dropping in `AGENTS.md` on the way.
 
-Then **File -\> Open Folder...** on `/workspaces/whatever`, as always. `connect-repo` still works if you prefer it --- it also drops an `AGENTS.md` into the repo and makes new terminals open there --- but it no longer has anything to log you in to.
-
-### 
+###
 
 One rule to carry forward: **settings that apply at creation do not reach a machine that already exists.** Dotfiles and secrets alike.
 
@@ -729,7 +944,7 @@ learnr2::question(
 )
 ```
 
-### 
+###
 
 ```{r}
 #| label: download-answers-2

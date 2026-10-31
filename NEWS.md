@@ -13,7 +13,9 @@
   a new section stores a GitHub token and the student's Census API key as
   the Codespaces secrets `GH_TOKEN` and `CENSUS_API_KEY`, the `bashrc`
   fragment defines `agyd` as `agy --dangerously-skip-permissions`, and a
-  fresh Codespace arrives signed in as the student with tidycensus ready. Websites 1 and 2
+  fresh Codespace arrives signed in as the student with tidycensus ready.
+  Its 27 exercises each ask for one paste, with a four-part map in the
+  Introduction. Websites 1 and 2
   and the four devcontainer tutorials shift down one slot each.
 
 * GitHub Advanced's sign-in recipe gains the line that writes the token into
@@ -28,7 +30,7 @@
   tutorial after you do so," which was a learnr artifact.
 
 * Stale image pins in GitHub Advanced and Our Codespace Starter now match
-  codespace-starter (1.3.1).
+  codespace-starter (1.3.4).
 
 * Every code block now says what it is: commands carry their language
   (`bash`, `r`, `yaml`, `json`, `dockerfile`, `ini`, `markdown`), text to

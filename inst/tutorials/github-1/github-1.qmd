@@ -232,8 +232,8 @@ github.com
 In the raw Codespace, run these three commands, one at a time:
 
 ```bash
-unset GITHUB_TOKEN GH_TOKEN
-echo 'unset GITHUB_TOKEN GH_TOKEN' >> ~/.bashrc
+unset GITHUB_TOKEN
+echo 'unset GITHUB_TOKEN' >> ~/.bashrc
 gh auth login --hostname github.com --git-protocol https --web --clipboard=false
 ```
 
@@ -245,7 +245,7 @@ Then run `gh auth status`. Copy the output and paste it here.
 #| label: using-git-29
 #| echo: false
 learnr2::question(
-  "In the raw Codespace, run unset GITHUB_TOKEN GH_TOKEN, then echo 'unset GITHUB_TOKEN GH_TOKEN' >> ~/.bashrc, then gh auth login --hostname github.com --git-protocol https --web --clipboard=false, following the prompts. Then run gh auth status. Copy the output and paste it here.",
+  "In the raw Codespace, run unset GITHUB_TOKEN, then echo 'unset GITHUB_TOKEN' >> ~/.bashrc, then gh auth login --hostname github.com --git-protocol https --web --clipboard=false, following the prompts. Then run gh auth status. Copy the output and paste it here.",
   type = "reflection",
   show_text = FALSE
 )
