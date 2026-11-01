@@ -370,14 +370,20 @@ example $
   them.
 - **Every terminal gets the short prompt, including the first one.**
   Since October 2026 `setup.sh` runs from `onCreateCommand` (prebuild
-  time), so the `PS1` override is already at the end of `~/.bashrc`
-  before the Codespace’s first terminal opens. The old subtlety (“only a
-  newly opened bash Terminal gets the short prompt”) is retired;
-  tutorials must not teach it or show the long prompt as something a
-  student might see in a `codespace-starter` Codespace. What the first
-  terminal *does* carry is a small ⚠ “extensions want to relaunch the
-  terminal” icon on its tab (as does any terminal created before the R
-  extension activates); it is harmless, and Orientation says so once.
+  time), so the `PS1` override is in place before the Codespace’s first
+  terminal opens. It lives in
+  `~/.config/codespace-starter/bashrc.d/10-prompt.sh`; `~/.bashrc`
+  carries only one starter block, which sources every `bashrc.d/*.sh`
+  (`20-banner.sh` is the READY banner, `30-github-token.sh` is written
+  by `connect-repo`). Nothing else of the starter’s is ever written to
+  `~/.bashrc`, so a student’s dotfiles append below that block. The old
+  subtlety (“only a newly opened bash Terminal gets the short prompt”)
+  is retired; tutorials must not teach it or show the long prompt as
+  something a student might see in a `codespace-starter` Codespace. What
+  the first terminal *does* carry is a small ⚠ “extensions want to
+  relaunch the terminal” icon on its tab (as does any terminal created
+  before the R extension activates); it is harmless, and Orientation
+  says so once.
 
 ### Repo names derive from tutorial titles
 
@@ -522,13 +528,15 @@ repo** (find them with
 
 1.  The Our Codespace Starter tutorial (currently
     `inst/tutorials/our-codespace-starter/our-codespace-starter.qmd`) —
-    the expected answer for the find-the-`"image"`-line exercise.
-2.  The Devcontainer Dockerfile tutorial (currently
-    `inst/tutorials/docker/docker.qmd`) — the intro’s back-reference to
-    that line.
-3.  `.github/workflows/R-CMD-check.yaml` — the CI `container: image:`
-    tag (this one is normally bumped as part of the codespace-starter
-    release process; the tutorials are what get forgotten).
+    the expected answer for the find-the-`"image"`-line exercise. CI’s
+    “tutorial 14 still matches codespace-starter’s devcontainer.json”
+    job fails when this one drifts.
+2.  The GitHub Advanced tutorial (currently
+    `inst/tutorials/github-2/github-2.qmd`) — the second-desk knowledge
+    drop that names the image a new Codespace was built from.
+
+`.github/workflows/R-CMD-check.yaml` needs no edit: since 2026-10-30 it
+reads the tag live from codespace-starter’s `devcontainer.json`.
 
 Unversioned mentions of `ghcr.io/ppbds/devcontainer` (no `:X.Y.Z`) are
 fine and need no touching. Separately, The Devcontainer Dockerfile

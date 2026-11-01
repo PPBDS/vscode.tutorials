@@ -2,6 +2,17 @@
 
 ## vscode.tutorials (development version)
 
+- Aligned with codespace-starter’s 2026-10-30 consolidation: the starter
+  writes one block to `~/.bashrc` that sources
+  `~/.config/codespace-starter/bashrc.d/*.sh`, the short prompt lives in
+  `10-prompt.sh`, `connect-repo` persists its `unset GITHUB_TOKEN` as
+  `30-github-token.sh` and prints each command it runs or skips, and the
+  auto-cd hook is gone. Dotfiles shows that block instead of a
+  `short-prompt` grep, the by-hand sign-in recipe in GitHub
+  Introduction, GitHub Advanced, and Dotfiles writes the same snippet
+  file, and Workflow’s connect-repo transcript shows the new step lines.
+  Image pins read 1.3.5.
+
 - The sentence that says how to take a screenshot
   (`Cmd + Ctrl + Shift + 4`, `Win + Shift + S`,
   `Ctrl + Shift + Show windows`) now appears only in Orientation,
@@ -41,7 +52,13 @@
   which was a learnr artifact.
 
 - Stale image pins in GitHub Advanced and Our Codespace Starter now
-  match codespace-starter (1.3.4).
+  match codespace-starter (1.3.5).
+
+- Orientation no longer says the Explorer hides dot-folders the way
+  plain `ls` does. It explains that `codespace-starter` hides its own
+  `.devcontainer`, `.github` and `.vscode` on purpose, through a setting
+  of its own, and that a student’s repo shows everything. Devcontainers
+  and Our Codespace Starter say the same where they open the file.
 
 - Every code block now says what it is: commands carry their language
   (`bash`, `r`, `yaml`, `json`, `dockerfile`, `ini`, `markdown`), text

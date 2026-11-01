@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">vscode.tutorials</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -158,7 +158,7 @@ example $</code></pre>
 <li>
 <strong>Exception — Codespaces not started from our image.</strong> The Jupyter and Blank template Codespaces (toured in the Devcontainers tutorial) show GitHub’s stock long prompt. Those transcripts are correct as-is; leave them.</li>
 <li>
-<strong>Every terminal gets the short prompt, including the first one.</strong> Since October 2026 <code>setup.sh</code> runs from <code>onCreateCommand</code> (prebuild time), so the <code>PS1</code> override is already at the end of <code>~/.bashrc</code> before the Codespace’s first terminal opens. The old subtlety (“only a newly opened bash Terminal gets the short prompt”) is retired; tutorials must not teach it or show the long prompt as something a student might see in a <code>codespace-starter</code> Codespace. What the first terminal <em>does</em> carry is a small ⚠ “extensions want to relaunch the terminal” icon on its tab (as does any terminal created before the R extension activates); it is harmless, and Orientation says so once.</li>
+<strong>Every terminal gets the short prompt, including the first one.</strong> Since October 2026 <code>setup.sh</code> runs from <code>onCreateCommand</code> (prebuild time), so the <code>PS1</code> override is in place before the Codespace’s first terminal opens. It lives in <code>~/.config/codespace-starter/bashrc.d/10-prompt.sh</code>; <code>~/.bashrc</code> carries only one starter block, which sources every <code>bashrc.d/*.sh</code> (<code>20-banner.sh</code> is the READY banner, <code>30-github-token.sh</code> is written by <code>connect-repo</code>). Nothing else of the starter’s is ever written to <code>~/.bashrc</code>, so a student’s dotfiles append below that block. The old subtlety (“only a newly opened bash Terminal gets the short prompt”) is retired; tutorials must not teach it or show the long prompt as something a student might see in a <code>codespace-starter</code> Codespace. What the first terminal <em>does</em> carry is a small ⚠ “extensions want to relaunch the terminal” icon on its tab (as does any terminal created before the R extension activates); it is harmless, and Orientation says so once.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="repo-names-derive-from-tutorial-titles">Repo names derive from tutorial titles<a class="anchor" aria-label="anchor" href="#repo-names-derive-from-tutorial-titles"></a></h3>
@@ -196,11 +196,10 @@ example $</code></pre>
 <div class="section level3">
 <h3 id="the-devcontainer-image-pin-ghcrioppbdsdevcontainerxyz">The devcontainer image pin (<code>ghcr.io/ppbds/devcontainer:X.Y.Z</code>)<a class="anchor" aria-label="anchor" href="#the-devcontainer-image-pin-ghcrioppbdsdevcontainerxyz"></a></h3>
 <p>The version tag students see when they read <code>codespace-starter</code>’s <code>devcontainer.json</code> changes regularly. The authoritative value is the <code>"image"</code> pin in <a href="https://github.com/PPBDS/codespace-starter/blob/main/.devcontainer/devcontainer.json" class="external-link">PPBDS/codespace-starter <code>.devcontainer/devcontainer.json</code></a>. <strong>Whenever that pin is bumped, update every versioned copy in this repo</strong> (find them with <code>grep -rn 'ghcr.io/ppbds/devcontainer:' --include='*.qmd' --include='*.yaml' .</code>):</p>
-<ol style="list-style-type: decimal"><li>The Our Codespace Starter tutorial (currently <code>inst/tutorials/our-codespace-starter/our-codespace-starter.qmd</code>) — the expected answer for the find-the-<code>"image"</code>-line exercise.</li>
-<li>The Devcontainer Dockerfile tutorial (currently <code>inst/tutorials/docker/docker.qmd</code>) — the intro’s back-reference to that line.</li>
-<li>
-<code>.github/workflows/R-CMD-check.yaml</code> — the CI <code>container: image:</code> tag (this one is normally bumped as part of the codespace-starter release process; the tutorials are what get forgotten).</li>
-</ol><p>Unversioned mentions of <code>ghcr.io/ppbds/devcontainer</code> (no <code>:X.Y.Z</code>) are fine and need no touching. Separately, The Devcontainer Dockerfile tutorial embeds a full copy of the <code>PPBDS/devcontainers</code> Dockerfile — when that Dockerfile changes materially, the embedded copy (and the exercises reading it) must be refreshed too.</p>
+<ol style="list-style-type: decimal"><li>The Our Codespace Starter tutorial (currently <code>inst/tutorials/our-codespace-starter/our-codespace-starter.qmd</code>) — the expected answer for the find-the-<code>"image"</code>-line exercise. CI’s “tutorial 14 still matches codespace-starter’s devcontainer.json” job fails when this one drifts.</li>
+<li>The GitHub Advanced tutorial (currently <code>inst/tutorials/github-2/github-2.qmd</code>) — the second-desk knowledge drop that names the image a new Codespace was built from.</li>
+</ol><p><code>.github/workflows/R-CMD-check.yaml</code> needs no edit: since 2026-10-30 it reads the tag live from codespace-starter’s <code>devcontainer.json</code>.</p>
+<p>Unversioned mentions of <code>ghcr.io/ppbds/devcontainer</code> (no <code>:X.Y.Z</code>) are fine and need no touching. Separately, The Devcontainer Dockerfile tutorial embeds a full copy of the <code>PPBDS/devcontainers</code> Dockerfile — when that Dockerfile changes materially, the embedded copy (and the exercises reading it) must be refreshed too.</p>
 </div>
 </div>
 </div>
