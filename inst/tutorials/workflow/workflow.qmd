@@ -243,11 +243,13 @@ This is the command the READY banner has been suggesting since the Codespace sta
 
 ###
 
-The first thing `connect-repo` does is sign you in to GitHub. You should see:
+`connect-repo` prints each command it runs, after an arrow. The first drops the Codespace's built-in GitHub token. The second signs you in. You should see:
 
 ```{.output}
 codespace-starter $ connect-repo workflow
-→ Sign in to GitHub: authorize in the browser/code prompt, then come back here.
+→ unset GITHUB_TOKEN   (the built-in token acts as the Codespace, not as you; also in every new terminal)
+→ gh auth login --hostname github.com --git-protocol https --web --clipboard=false
+   Authorize in the browser/code prompt, then come back here.
 ? Authenticate Git with your GitHub credentials? (Y/n) 
 ```
 
@@ -280,10 +282,12 @@ Paste your code into the boxes and press **Continue**. If GitHub asks you to aut
 
 Back in the Terminal, `connect-repo` finishes its work:
 
-```bash
+```{.output}
+→ git config --global credential.helper store   (saves your token in ~/.git-credentials so the Sync button pushes as you; see --help)
+→ gh repo create workflow --public --clone
 ✓ Created repository davekane-student/workflow on github.com
   https://github.com/davekane-student/workflow
-→ Added AGENTS.md (how AI assistants work with you in this course). Re-run with --no-agents to skip.
+→ cp codespace-starter/.devcontainer/AGENTS.md /workspaces/workflow/   (how AI assistants work with you in this course; --no-agents skips)
 
    ✅  Connected: /workspaces/workflow  →  https://github.com/davekane-student/workflow
 
@@ -292,7 +296,7 @@ workflow $
 
 ![](images/connect-repo-connected-line.png){width=90%}
 
-(The picture was taken for a repo with a different name. Yours says `workflow`.) The prompt on the last line has changed from `codespace-starter $` to `workflow $`. `connect-repo` created the repo on GitHub, made a folder for it at `/workspaces/workflow`, and then restarted the shell in this terminal inside that folder.
+(The pictures show an older version of the script's messages and a repo with a different name. Yours says `workflow`.) The prompt on the last line has changed from `codespace-starter $` to `workflow $`. `connect-repo` created the repo on GitHub, made a folder for it at `/workspaces/workflow`, and then restarted the shell in this terminal inside that folder.
 
 ###
 

@@ -28,27 +28,7 @@ Terminal 2 needs to some clean up.
 
 * Advice on how to copy/paste images from PNG files to Discusions from a PC. Seems to often not work.
 
-### Reload/Restart/Re-Codespace
 
-Not sure where this goes, but . . .
-
-2) If a tutorial ever "greys out" or doesn't display fully or just doesn't work, there are three possible solutions:
-
-a) Reload the tutorial by clicking the swirling-arrow image: 
-image.png
-That is the image for Chrome (which you should be using, or Edge).
-
-2) Restart the tutorial the usual way:
-
-image.png
-
-You should probably also delete the broken tab, either by closing it or by using the "Garbage Can" icon in the Terminal list:
-
-image.png
-
-Restarting the tutorial will almost always work.
-
-3) Delete the codespace and start a new one. The first two options will definitely preserve your answers. This one might or might not. If it does not, no worries! Fill in the name and email boxes, but then skip all the questions you already did and just start where you left off.
 
 ### Antigravity
 

@@ -682,7 +682,7 @@ devcontainer.json
 
 ###
 
-GitHub Codespaces looks for a file named exactly `devcontainer.json` inside a directory named exactly `.devcontainer` at the root of the repo. The leading dot makes `.devcontainer` a hidden directory --- it won't appear in `ls` without the `-a` flag, but it is visible in VS Code's Explorer by default.
+GitHub Codespaces looks for a file named exactly `devcontainer.json` inside a directory named exactly `.devcontainer` at the root of the repo. The leading dot makes `.devcontainer` a hidden directory --- it won't appear in `ls` without the `-a` flag, but it is visible in VS Code's Explorer by default, as it is here in your own repo. `codespace-starter` is the one exception you have met: it hides its `.devcontainer` in the Explorer on purpose, which is why the Orientation tutorial had you find it with `ls -a`.
 
 ### Exercise 3
 

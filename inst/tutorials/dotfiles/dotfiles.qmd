@@ -100,10 +100,10 @@ An **alias** is a short name for a longer command. This one does not exist, and 
 
 ### Exercise 3
 
-`~/.bashrc` runs every time you open a bash Terminal. In the bash Terminal, show the block about your prompt:
+`~/.bashrc` runs every time you open a bash Terminal. `codespace-starter` added exactly one block to it. In the bash Terminal, show that block:
 
 ```bash
-grep -A 2 short-prompt ~/.bashrc
+grep -A 6 codespace-starter:bashrc.d ~/.bashrc
 ```
 
 CP/CR.
@@ -112,7 +112,7 @@ CP/CR.
 #| label: introduction-2
 #| echo: false
 learnr2::question(
-  "In the bash Terminal, run grep -A 2 short-prompt ~/.bashrc. CP/CR.",
+  "In the bash Terminal, run grep -A 6 codespace-starter:bashrc.d ~/.bashrc. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -121,17 +121,21 @@ learnr2::question(
 ###
 
 ```{.output}
-codespace-starter $ grep -A 2 short-prompt ~/.bashrc
-# codespace-starter:short-prompt — short prompt for beginners (folder name + $).
-PROMPT_COMMAND=''
-PS1='\W \$ '
+codespace-starter $ grep -A 6 codespace-starter:bashrc.d ~/.bashrc
+# codespace-starter:bashrc.d — everything codespace-starter adds to your shell,
+# one file per thing, in ~/.config/codespace-starter/bashrc.d. Nothing of the
+# starter's is below this block; your own additions belong after it.
+for __f in "$HOME"/.config/codespace-starter/bashrc.d/*.sh; do
+  [[ -r $__f ]] && . "$__f"
+done
+unset __f
 ```
 
 ###
 
-`PS1` holds your prompt, and `\W` means the name of the current directory. That is why the prompt changes as you `cd` around.
+The block runs every file in `~/.config/codespace-starter/bashrc.d`. `10-prompt.sh` there sets `PS1='\W \$ '`, your short prompt, where `\W` means the name of the current directory. `20-banner.sh` prints the READY banner once, and `connect-repo` adds `30-github-token.sh`.
 
-`codespace-starter` **appended** those lines to the end of `~/.bashrc` while the Codespace was being built. The file already belongs to somebody. In a few minutes you will add lines after theirs rather than replace it.
+`codespace-starter` **appended** that one block to the end of `~/.bashrc` while the Codespace was being built, and nothing of the starter's goes below it. The file already belongs to somebody. In a few minutes you will add lines after theirs rather than replace it.
 
 ## Your Dotfiles Repo
 
@@ -145,6 +149,7 @@ If it reports that you are **not** logged in, run the sign-in ritual from GitHub
 
 ```bash
 unset GITHUB_TOKEN
+echo 'unset GITHUB_TOKEN' > ~/.config/codespace-starter/bashrc.d/30-github-token.sh
 gh auth login --hostname github.com --git-protocol https --web --clipboard=false
 git config --global credential.helper store
 printf 'https://x-access-token:%s@github.com\n' "$(gh auth token)" > ~/.git-credentials
@@ -156,7 +161,7 @@ CP/CR.
 #| label: repo-1
 #| echo: false
 learnr2::question(
-  "In the bash Terminal, run gh auth status. If it reports that you are not logged in, run the sign-in ritual from GitHub Advanced (unset GITHUB_TOKEN, then gh auth login --hostname github.com --git-protocol https --web --clipboard=false, then git config --global credential.helper store, then printf 'https://x-access-token:%s@github.com\\n' \"$(gh auth token)\" > ~/.git-credentials) and then run gh auth status again. CP/CR.",
+  "In the bash Terminal, run gh auth status. If it reports that you are not logged in, run the sign-in ritual from GitHub Advanced (unset GITHUB_TOKEN, then echo 'unset GITHUB_TOKEN' > ~/.config/codespace-starter/bashrc.d/30-github-token.sh, then gh auth login --hostname github.com --git-protocol https --web --clipboard=false, then git config --global credential.helper store, then printf 'https://x-access-token:%s@github.com\\n' \"$(gh auth token)\" > ~/.git-credentials) and then run gh auth status again. CP/CR.",
   type = "reflection",
   show_text = FALSE
 )
@@ -176,7 +181,7 @@ github.com
 
 ###
 
-The login lives in `hosts.yml`, inside this one Codespace. A fresh Codespace is logged out. That is the problem part three solves.
+The login lives in `hosts.yml`, inside this one Codespace. A fresh Codespace is logged out, which is why every tutorial so far has started with `connect-repo` or with these five commands. That is the problem part three solves.
 
 ### Exercise 2
 

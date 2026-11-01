@@ -175,7 +175,7 @@ codespace-starter $
 
 ###
 
-The `-a` flag (for "all") tells `ls` to reveal the hidden entries. `.` is the current directory and `..` is the directory just above it. `.git` stores the project's version history. The other dot-folders hold settings for the Codespace, for GitHub and for VS Code, which is why they are kept out of sight. A "flag" like `-a` is an option that changes how a command behaves.
+The `-a` flag (for "all") tells `ls` to reveal the hidden entries. `.` is the current directory and `..` is the directory just above it. `.git` stores the project's version history. The other dot-folders hold settings for the Codespace, for GitHub and for VS Code. Any name that starts with a dot is left out of plain `ls`; that is a Unix convention for bookkeeping files, not anything special about these three. A "flag" like `-a` is an option that changes how a command behaves.
 
 ### Exercise 6
 
@@ -558,7 +558,7 @@ James Monroe
 
 ###
 
-The Explorer lists the files in your working directory, but, like plain `ls`, it hides the dot-folders you saw with `ls -a` (`.devcontainer`, `.github`, `.vscode`), which is why it looked empty until `presidents.txt` appeared. Click on `presidents.txt` to open the file in the Editor and see its contents directly.
+The Explorer lists the files in your working directory. Normally it shows dot-folders too; VS Code hides only a few bookkeeping entries such as `.git`. But `codespace-starter` hides its own `.devcontainer`, `.github` and `.vscode` on purpose, through a setting inside that last folder, so that your first view of a Codespace is an empty tree and the terminal. That is why the Explorer looked empty until `presidents.txt` appeared. In a repo of your own, the Explorer shows everything `ls -a` shows, apart from `.git`. Click on `presidents.txt` to open the file in the Editor and see its contents directly.
 
 The Explorer icon is marked with a red square below.
 

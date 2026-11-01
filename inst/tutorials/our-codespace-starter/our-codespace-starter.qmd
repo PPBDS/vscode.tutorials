@@ -107,7 +107,7 @@ This section walks through `codespace-starter`'s `.devcontainer/devcontainer.jso
 
 ### Exercise 1
  
-In the bash Terminal, run `cd /workspaces/codespace-starter`, then `code .devcontainer/devcontainer.json` to open the whole file in an editor tab. (The Explorer hides `.devcontainer` in `codespace-starter` to keep the starting view simple, but `code` opens any file by its path.) Find the line beginning with `"name"`. Copy and paste it.
+In the bash Terminal, run `cd /workspaces/codespace-starter`, then `code .devcontainer/devcontainer.json` to open the whole file in an editor tab. (The Explorer hides `.devcontainer` in `codespace-starter` to keep the starting view simple --- a setting in that repo's own `.vscode/settings.json`, not a VS Code default; your own repos hide nothing --- but `code` opens any file by its path.) Find the line beginning with `"name"`. Copy and paste it.
 
 ```{r}
 #| label: codespace-starter-1
@@ -146,7 +146,7 @@ learnr2::question(
 ###
 
 ```{.output}
-"image": "ghcr.io/ppbds/devcontainer:1.3.4",
+"image": "ghcr.io/ppbds/devcontainer:1.3.5",
 ```
 
 ###

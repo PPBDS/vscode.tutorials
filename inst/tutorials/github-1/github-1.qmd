@@ -163,7 +163,7 @@ github-introduction $ pwd
 
 ###
 
-`connect-repo` cloned your repo beside the launcher and set every new terminal to open inside it. That is why the two prompts differ. Each exercise from here on says which Codespace to use.
+`connect-repo` cloned your repo beside the launcher and switched the Explorer to it, and VS Code opens new terminals in whatever folder the Explorer shows. That is why the two prompts differ. Each exercise from here on says which Codespace to use.
 
 ### Exercise 6
 
@@ -233,7 +233,7 @@ In the raw Codespace, run these three commands, one at a time:
 
 ```bash
 unset GITHUB_TOKEN
-echo 'unset GITHUB_TOKEN' >> ~/.bashrc
+echo 'unset GITHUB_TOKEN' > ~/.config/codespace-starter/bashrc.d/30-github-token.sh
 gh auth login --hostname github.com --git-protocol https --web --clipboard=false
 ```
 
@@ -245,7 +245,7 @@ Then run `gh auth status`. Copy the output and paste it here.
 #| label: using-git-29
 #| echo: false
 learnr2::question(
-  "In the raw Codespace, run unset GITHUB_TOKEN, then echo 'unset GITHUB_TOKEN' >> ~/.bashrc, then gh auth login --hostname github.com --git-protocol https --web --clipboard=false, following the prompts. Then run gh auth status. Copy the output and paste it here.",
+  "In the raw Codespace, run unset GITHUB_TOKEN, then echo 'unset GITHUB_TOKEN' > ~/.config/codespace-starter/bashrc.d/30-github-token.sh, then gh auth login --hostname github.com --git-protocol https --web --clipboard=false, following the prompts. Then run gh auth status. Copy the output and paste it here.",
   type = "reflection",
   show_text = FALSE
 )
@@ -265,7 +265,7 @@ github.com
 
 ###
 
-The first command removes the built-in token from this terminal, so `gh` looks for a real login. The second removes it from every terminal you open later. The third signs you in. On this setting, the raw Codespace now matches yours.
+The first command removes the built-in token from this terminal, so `gh` looks for a real login. The second writes a one-line file into the starter's `bashrc.d` folder, which every new terminal reads, so the token stays gone. The third signs you in. On this setting, the raw Codespace now matches yours.
 
 ### Exercise 9
 
@@ -611,7 +611,7 @@ Your screenshot should show the Codespace you are working in now, but no longer 
 
 ###
 
-Everything you set up by hand on that machine went with it: the login, the credential file, the line in `.bashrc`. Your `github-introduction` repo on GitHub is untouched, because nothing in it lived there. The rest of this tutorial happens in this Codespace.
+Everything you set up by hand on that machine went with it: the login, the credential file, the snippet in `bashrc.d`. Your `github-introduction` repo on GitHub is untouched, because nothing in it lived there. The rest of this tutorial happens in this Codespace.
 
 ### Exercise 20
 
