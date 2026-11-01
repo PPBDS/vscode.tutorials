@@ -575,7 +575,7 @@ Two Codespaces now hold copies of `github-advanced`, and GitHub holds a third. T
 
 ### Exercise 1
 
-Go to [github.com/codespaces](https://github.com/codespaces). You should see (at least) two active Codespaces. Paste a screenshot of the table. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
+Go to [github.com/codespaces](https://github.com/codespaces). You should see (at least) two active Codespaces. Paste a screenshot of the table.
 
 ```{r}
 #| label: disposable-desks-1

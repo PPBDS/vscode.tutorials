@@ -875,7 +875,7 @@ The reply to that command had fourteen fields and we asked for two. An API hands
 
 Go back to <https://openrouter.ai/workspaces/default/keys>, edit your `codespace` key, and set a **credit limit** of `$2`.
 
-Take a screenshot of the keys page showing the `codespace` key and its new limit, and paste it below. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
+Take a screenshot of the keys page showing the `codespace` key and its new limit, and paste it below.
 
 ```{r}
 #| label: paying-2

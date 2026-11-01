@@ -1,5 +1,12 @@
 # vscode.tutorials (development version)
 
+* The sentence that says how to take a screenshot (`Cmd + Ctrl + Shift + 4`,
+  `Win + Shift + S`, `Ctrl + Shift + Show windows`) now appears only in
+  Orientation, Workflow and Code. Workflow gains a screenshot question to
+  carry it: a picture of the new, empty `workflow` repository on GitHub. The
+  nine later tutorials with screenshot questions just ask for the
+  screenshot.
+
 * GitHub Introduction's "Using Git" section is rebuilt around two
   Codespaces. Students open a raw `codespace-starter` Codespace beside their
   usual one and, for each thing `connect-repo` does (drop the built-in token,

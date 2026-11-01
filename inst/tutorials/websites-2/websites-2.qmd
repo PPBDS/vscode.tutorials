@@ -184,7 +184,7 @@ Without `#| message: false`, the tidyverse startup messages would appear right o
 
 From the bash Terminal, run `quarto preview`. 
 
-Paste a screenshot of the home page, leaving out the menu items. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
+Paste a screenshot of the home page, leaving out the menu items.
 
 ```{r}
 #| label: the-website-6

@@ -413,13 +413,30 @@ Find the repo named **workflow**. Click it.
 
 This is your repository's page. Your username appears in the address bar, like `github.com/your-username/workflow`, so the repository belongs to **you**. It is empty because you have not committed anything.
 
-###
-
-Go back to the bash Terminal in your Codespace and run `git status`. CP/CR.
-
+Take a screenshot of the page, from the repository name at the top down through the blue "Quick setup" box, and paste it below. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
 
 ```{r}
 #| label: git-and-github-4
+#| echo: false
+learnr2::question(
+  "Take a screenshot of your workflow repository's page on GitHub, from the repository name at the top down through the blue \"Quick setup\" box, and paste it below.",
+  type = "reflection",
+  allow_image = TRUE,
+  allow_text = FALSE,
+  show_text = FALSE
+)
+```
+
+###
+
+Your screenshot should show `your-username / workflow` at the top and the "Quick setup" box, which GitHub shows only on a repository with no commits. Once you push, a list of files takes its place.
+
+### Exercise 5
+
+Go back to the bash Terminal in your Codespace and run `git status`. CP/CR.
+
+```{r}
+#| label: git-and-github-5
 #| echo: false
 learnr2::question(
   "Go back to the bash Terminal in your Codespace and run git status. CP/CR.",

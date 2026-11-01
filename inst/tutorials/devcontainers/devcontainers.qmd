@@ -181,7 +181,7 @@ The Jupyter Notebook template is a pre-built Codespace for Python data science u
 
 ### Exercise 2
 
-You should have two Codespaces open. Go to https://github.com/codespaces. Then paste a screenshot of the two table rows corresponding to your open Codespaces. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
+You should have two Codespaces open. Go to https://github.com/codespaces. Then paste a screenshot of the two table rows corresponding to your open Codespaces.
 
 ![](images/open-codespaces.png){width=90%}
 

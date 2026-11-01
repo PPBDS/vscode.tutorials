@@ -580,7 +580,7 @@ Quarto continues running in the background, watching your files. When you clicke
 
 ### Exercise 7
 
-Look again at your website in the browser. Click on the "Home" link and then paste a screenshot of the entire HTML screen. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
+Look again at your website in the browser. Click on the "Home" link and then paste a screenshot of the entire HTML screen.
 
 ```{r}
 #| label: rendering-and-previewing-7

@@ -672,7 +672,7 @@ Code chunks can hold any programming language, from common ones like Python, Jav
 
 ### Exercise 3
 
-Put `2 * 2` within the code chunk. `Cmd/Ctrl + Shift + K`. Take a screenshot of the entire rendered document and paste it below. (This allows us to confirm that your file rendered correctly.) To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
+Put `2 * 2` within the code chunk. `Cmd/Ctrl + Shift + K`. Take a screenshot of the entire rendered document and paste it below. (This allows us to confirm that your file rendered correctly.)
 
 ```{r}
 #| label: quarto-2-3

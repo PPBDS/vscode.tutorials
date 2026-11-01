@@ -151,7 +151,7 @@ Go to <https://openrouter.ai/settings/privacy> and find the **Data Training** se
 
 Turn **on** the two settings that mention *free* endpoints. Leave the two about paid endpoints and the data discount alone.
 
-Take a screenshot of the **Data Training** section showing the two settings turned on, and paste it below. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
+Take a screenshot of the **Data Training** section showing the two settings turned on, and paste it below.
 
 ```{r}
 #| label: key-2

@@ -516,7 +516,7 @@ Part three. Everything in `gitconfig` is a **setting**: true for years, and harm
 
 ### Exercise 1
 
-Go to <https://github.com/settings/tokens>. This page lists your classic personal access tokens. Take a screenshot of it and paste it below. To take a screenshot, press `Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, or `Ctrl + Shift + Show windows` on a Chromebook, select the area, then click in the answer box and press `Cmd + V` (Mac) or `Ctrl + V` (Windows) to paste it.
+Go to <https://github.com/settings/tokens>. This page lists your classic personal access tokens. Take a screenshot of it and paste it below.
 
 ```{r}
 #| label: secrets-4

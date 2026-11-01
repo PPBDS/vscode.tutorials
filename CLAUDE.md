@@ -90,10 +90,13 @@ The learnr2 behaviours an author here most often runs into:
   steps ends in one screen that only looks right if all of them were done.
   Copying a line out of a file in the Editor or output from the Terminal is
   *not* a screenshot case: that text copies cleanly, so those stay text
-  questions. A tutorial's first screenshot question says how to take one
-  (`Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows, then click in
-  the answer box and paste). Ask for one specific screenshot, never a hedged
-  choice.
+  questions. How to take a screenshot is taught in the first three tutorials
+  only: Orientation, Workflow and Code each carry the one-sentence how-to
+  (`Cmd + Ctrl + Shift + 4` on a Mac, `Win + Shift + S` on Windows,
+  `Ctrl + Shift + Show windows` on a Chromebook, then click in the answer box
+  and paste). No later tutorial, here or in any other package, repeats or
+  paraphrases it; the question just says what to capture. Ask for one specific
+  screenshot, never a hedged choice.
 
 **Never mention learnr or tutorial.helpers** --- in tutorial prose, examples,
 README, or package docs. Students know only learnr2: `show_file()` comes from
