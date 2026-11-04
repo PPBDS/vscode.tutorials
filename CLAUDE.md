@@ -120,7 +120,7 @@ guide's standard Introduction/Summary sequences lean on. Antigravity and GitHub
 Introduction teach them again later; that repetition is deliberate reinforcement.
 
 The dependency runs both ways. The standard class workflow sends students from
-these four tutorials directly into `misc.tutorials`' R4DS family (`r4ds-1` through `imdb-rankings`), so the
+these four tutorials directly into `misc.tutorials`' R4DS family (`r4ds-1` through `r4ds-10`), so the
 first four must supply **every** piece of background that sequence relies on.
 When a downstream tutorial needs a skill not taught through Quarto, the fix
 lands here (or the downstream tutorial scaffolds it explicitly) — it is never
