@@ -43,14 +43,14 @@ Until now, `connect-repo` has done the GitHub setup for you. This section shows 
 
 You should be doing this tutorial in a repo named `github-introduction`. If you are not, create one and then connect to it.
 
-Copy and paste the URL of your `github-introduction` repository on GitHub. Find it under **Your repositories**, as you learned in the Workflow tutorial.
+Copy and paste the URL of your `github-introduction` repository on GitHub. To find it, go to <https://github.com>, click your profile picture at the top right, choose **Your repositories**, and click `github-introduction`, as in the Workflow tutorial.
 
 ```{r}
 #| label: using-git-1
 #| echo: false
 learnr2::question(
-  "You should be doing this tutorial in a repo named github-introduction. If you are not, create one and then connect to it. Copy and paste the URL of your github-introduction repository on GitHub. Find it under Your repositories, as you learned in the Workflow tutorial.",
-  type = "reflection",
+  "You should be doing this tutorial in a repo named github-introduction. If you are not, create one and then connect to it. Copy and paste the URL of your github-introduction repository on GitHub. To find it, go to github.com, click your profile picture at the top right, choose Your repositories, and click github-introduction.",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -74,7 +74,7 @@ Copy and paste the URL of this Codespace, the address in your browser's address 
 #| echo: false
 learnr2::question(
   "Copy and paste the URL of this Codespace, the address in your browser's address bar, ending in .github.dev.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -100,7 +100,7 @@ Copy and paste the URL of this second Codespace.
 #| echo: false
 learnr2::question(
   "Open a second browser tab and go to github.com/codespaces. Click New codespace, choose repository PPBDS/codespace-starter and branch main, and create it. Do not run connect-repo in it. Copy and paste the URL of this second Codespace.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -187,8 +187,7 @@ github.com
   ✓ Logged in to github.com account your-username (GITHUB_TOKEN)
   - Active account: true
   - Git operations protocol: https
-  - Token: ghu_************************************
-  - Token scopes: none
+  - Token: ghu_*****
 ```
 
 ###

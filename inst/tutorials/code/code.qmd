@@ -950,14 +950,14 @@ Behind the Source Control buttons are Git commands. When an AI commits and pushe
 
 ### Exercise 2
 
-In your browser, go to your `code` repository on github.com, as you learned in the Workflow tutorial. Confirm that `script-1.R`, `script-2.R`, and `diamonds.png` are all listed. Copy/paste the URL of your repository.
+In your browser, go to <https://github.com>, click your profile picture at the top right, choose **Your repositories**, and click `code`, as in the Workflow tutorial. Confirm that `script-1.R`, `script-2.R`, and `diamonds.png` are all listed. Copy/paste the URL of your repository.
 
 ```{r}
 #| label: summary-2
 #| echo: false
 learnr2::question(
-  "In your browser, go to your code repository on github.com, as you learned in the Workflow tutorial. Confirm that script-1.R, script-2.R, and diamonds.png are all listed. Copy/paste the URL of your repository.",
-  type = "reflection",
+  "In your browser, go to github.com, click your profile picture at the top right, choose Your repositories, and click code. Confirm that script-1.R, script-2.R, and diamonds.png are all listed. Copy/paste the URL of your repository.",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```

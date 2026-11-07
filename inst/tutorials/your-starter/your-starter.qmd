@@ -38,7 +38,7 @@ Copy and paste the URL for your `your-starter` repository.
 #| echo: false
 learnr2::question(
   "Copy and paste the URL for your your-starter repository.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -231,7 +231,7 @@ Copy and paste the URL of the package page.
 #| echo: false
 learnr2::question(
   "Images pushed by a workflow start out private, and a Codespace pulls its image before you are logged in to anything, so a private image would fail. Make yours public. On github.com, open your profile, click Packages, open your-starter, then Package settings (right side), scroll to Danger Zone, and Change visibility to Public. Copy and paste the URL of the package page.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```

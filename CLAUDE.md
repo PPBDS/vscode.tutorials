@@ -69,8 +69,10 @@ The learnr2 behaviours an author here most often runs into:
   label it: ```` ```{.bash filename="bash Terminal"} ````.
 - **Questions lock on submit.** Every text or image question is
   `type = "reflection"`: one Submit, then the box is locked and our answer
-  appears, so a student cannot copy it back. `reflection_editable` exists for
-  the minutes question only. `student_info()` and the minutes question get an
+  appears, so a student cannot copy it back. The exceptions are
+  `reflection_editable`: the minutes question, and **every question whose
+  answer is a URL** (a repo page, a Codespace address, a published site),
+  because students often paste the wrong one and must be able to fix it. `student_info()` and the minutes question get an
   Edit/Submit cycle instead (Edit reopens, Submit resubmits); a submitted
   screenshot gets an "Edit Answer" button that reopens only the image box.
 - **Continue is gated by default.** `tutorial_options()` (the hidden chunk at
@@ -116,8 +118,8 @@ later ones.)
 
 The Quarto tutorial's Publishing section is what completes this boundary: it
 teaches `.gitignore` and `quarto publish gh-pages`, the last two skills the base
-guide's standard Introduction/Summary sequences lean on. Antigravity and GitHub
-Introduction teach them again later; that repetition is deliberate reinforcement.
+guide's standard Introduction/Summary sequences lean on. GitHub Introduction
+teaches them again later; that repetition is deliberate reinforcement.
 
 The dependency runs both ways. The standard class workflow sends students from
 these four tutorials directly into `misc.tutorials`' R4DS family (`r4ds-1` through `r4ds-10`), so the
@@ -379,12 +381,11 @@ its saved answer is stored under).
   `/workspaces` — in particular, a title that would map to `codespace-starter`
   is forbidden (that folder is always present).
 - There are currently no exceptions to one-title-one-repo: every tutorial uses
-  exactly one repo, named from its title. The Dotfiles tutorial stretches the
-  pattern without breaking it: its repo is still named from its title
-  (`dotfiles`), but it is **private**, created with
-  `gh repo create dotfiles --private --clone` rather than `connect-repo`, never
-  opened as the workspace, and — unlike every other tutorial repo — permanent:
-  students keep it, and the OpenRouter tutorial builds on it. The same tutorial
+  exactly one repo, named from its title, created with `connect-repo`. The
+  Dotfiles tutorial's repo (`dotfiles`) differs only afterwards: an early
+  exercise makes it **private** with `gh repo edit dotfiles --visibility
+  private`, and — unlike every other tutorial repo — it is permanent: students
+  keep it, and the OpenRouter tutorial builds on it. The same tutorial
   has the student store a classic personal access token as the Codespaces
   secret `GH_TOKEN`, so that `gh` and `git` are signed in as the student on
   every new Codespace without `gh auth login`, and their Census API key as
@@ -415,10 +416,11 @@ learnr2:
 
 The R Tutorials extension lists tutorials by `ordering`, lowest first
 (tutorials without one sort after, by folder name). Current order: Orientation
-(1), Workflow, Code, Quarto, Antigravity, Terminal 1--3, GitHub Introduction,
+(1), Workflow, Code, Quarto, Terminal 1--3 (6--8), GitHub Introduction,
 GitHub Advanced, Dotfiles (11), Websites 1--2, Devcontainers, Our Codespace
 Starter, The Devcontainer Dockerfile, Your Starter, OpenRouter, Models And
-Money (19). Dotfiles sits directly after the two GitHub tutorials because it
+Money (19). Antigravity moved to `misc.tutorials` in November 2026, leaving
+ordering 5 unused. Dotfiles sits directly after the two GitHub tutorials because it
 builds on them and retires their once-per-machine login steps; the
 devcontainer tutorials come late and may not be assigned at all. **Every tutorial must set an `ordering`.** Reordering means editing these
 numbers and nothing else.

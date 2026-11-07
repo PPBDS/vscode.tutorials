@@ -41,7 +41,7 @@ Copy/paste the URL for your `websites-1` repository on GitHub.
 #| echo: false
 learnr2::question(
   "Copy/paste the URL for your websites-1 repository on GitHub.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -616,7 +616,7 @@ Copy/paste the URL for your previewed website.
 #| echo: false
 learnr2::question(
   "Copy/paste the URL for your previewed website.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -728,7 +728,7 @@ Copy/paste the resulting URL.
 #| echo: false
 learnr2::question(
   "Go to your websites-1 GitHub repository. Click \"Settings\" on the right side of the top menu. Click \"Pages\" on the left-hand menu. Copy/paste the resulting URL.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -855,7 +855,7 @@ View your website in the browser. Copy/paste its URL.
 #| echo: false
 learnr2::question(
   "View your website in the browser. Copy/paste its URL.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```

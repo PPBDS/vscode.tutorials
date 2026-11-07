@@ -59,9 +59,6 @@ development environment.
 - *Quarto* (“quarto”). Demonstrate more tricks for working with R code
   using VS Code, and also explain Quarto documents.
 
-- *Antigravity* (“antigravity”). Meet the Antigravity CLI agent (`agy`)
-  and use it to create and render a Quarto analysis.
-
 - *Terminal 1* (“terminal-1”). First of three bash Terminal tutorials:
   the core commands, paths, and output redirection.
 

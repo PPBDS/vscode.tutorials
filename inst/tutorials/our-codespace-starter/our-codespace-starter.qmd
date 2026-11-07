@@ -34,7 +34,7 @@ Copy and paste the URL for your `our-codespace-starter` repository.
 #| echo: false
 learnr2::question(
   "Copy and paste the URL for your our-codespace-starter repository.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -60,7 +60,7 @@ Copy and paste the URL for your codespace.
 #| echo: false
 learnr2::question(
   "Copy and paste the URL for your codespace.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -146,7 +146,7 @@ learnr2::question(
 ###
 
 ```{.output}
-"image": "ghcr.io/ppbds/devcontainer:1.3.5",
+"image": "ghcr.io/ppbds/devcontainer:1.3.7",
 ```
 
 ###
@@ -722,7 +722,7 @@ Paste the URL of your `our-codespace-starter` repository.
 #| echo: false
 learnr2::question(
   "Paste the URL of your our-codespace-starter repository.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```

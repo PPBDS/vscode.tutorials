@@ -546,7 +546,7 @@ Copy/paste that URL below.
 #| echo: false
 learnr2::question(
   "In the Explorer (the file tree on the left side of VS Code), find quarto-1.html. Right-click it and select Open with Live Server. Two notices pop up, Server is Started at port : 5500 and Your application running on port 5500 is available, and Port : 5500 appears in the Status Bar at the bottom of the window. A new browser tab opens with quarto-1.html, served through your Codespace. The URL will look something like https://[codespace-name]-5500.app.github.dev/quarto-1.html. Copy/paste that URL below.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -1205,7 +1205,7 @@ The publish command printed (and may have opened in your browser) the address of
 #| echo: false
 learnr2::question(
   "The publish command printed (and may have opened in your browser) the address of your page. It can take a minute or two for the page to appear. Copy/paste the URL of your published page.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```

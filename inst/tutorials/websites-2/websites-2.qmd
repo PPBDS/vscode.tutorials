@@ -44,7 +44,7 @@ Copy/paste the URL for your `websites-2` repository on GitHub.
 #| echo: false
 learnr2::question(
   "Copy/paste the URL for your websites-2 repository on GitHub.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -352,7 +352,7 @@ Copy/paste the URL below:
 #| echo: false
 learnr2::question(
   "In the bash Terminal, run quarto publish gh-pages. You may need to hit Enter once. Copy/paste the URL below:",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```

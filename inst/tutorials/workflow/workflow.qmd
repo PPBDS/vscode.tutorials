@@ -836,7 +836,7 @@ Copy and paste the URL for your `workflow` repository. This is the last question
 #| echo: false
 learnr2::question(
   "Copy and paste the URL for your workflow repository. This is the last question in the tutorial.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```

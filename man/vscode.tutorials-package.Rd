@@ -23,7 +23,6 @@ The package includes tutorials focused on VS Code and modern R development:
 \item \strong{Workflow} (workflow): First tutorial after Orientation --- VS Code, the Terminal, repos, R scripts, plots, and Git
 \item \strong{Code} (code): Introduction to VS Code and writing R code in simple scripts
 \item \strong{Quarto} (quarto): Advanced R coding tricks in VS Code and Quarto document creation
-\item \strong{Antigravity} (antigravity): Meeting the Antigravity CLI agent (agy) and using it to create and render a Quarto analysis
 \item \strong{Terminal 1} (terminal-1): First of three bash Terminal tutorials: core commands, paths, and output redirection
 \item \strong{Terminal 2} (terminal-2): Command options, environment variables, looking inside files, and running R and Python programs
 \item \strong{Terminal 3} (terminal-3): Wildcards, regular expressions, grep, and pipes
@@ -47,7 +46,7 @@ To run a tutorial, use:
 \code{learnr2::run_tutorial(name = "short_tutorial_name", package = "vscode.tutorials")}
 
 Available tutorial names include: orientation, workflow, code, quarto,
-antigravity, terminal-1, terminal-2, terminal-3, github-1,
+terminal-1, terminal-2, terminal-3, github-1,
 github-2, dotfiles, websites-1, websites-2, devcontainers,
 our-codespace-starter, docker, your-starter,
 openrouter, and models.

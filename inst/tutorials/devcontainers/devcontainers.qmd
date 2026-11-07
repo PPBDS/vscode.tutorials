@@ -34,7 +34,7 @@ Copy and paste the URL for your `devcontainers` repository.
 #| echo: false
 learnr2::question(
   "Copy and paste the URL for your devcontainers repository.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -58,7 +58,7 @@ Copy and paste the URL for your Codespace.
 #| echo: false
 learnr2::question(
   "Copy and paste the URL for your Codespace.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -164,7 +164,7 @@ Go to https://github.com/codespaces/templates. Then press the "Use This Template
 #| echo: false
 learnr2::question(
   "Go to https://github.com/codespaces/templates. Then press the \"Use This Template\" button for the Jupyter Notebook template. This will open a new Codespace using this template. Copy and paste its URL.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -584,7 +584,7 @@ Go to GitHub. In the upper-right corner, click your profile picture, then select
 #| echo: false
 learnr2::question(
   "Go to GitHub. In the upper-right corner, click your profile picture, then select \"Your repositories\". Click the repository named codespaces-jupyter. Paste the URL of the repo.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -641,7 +641,7 @@ Copy and paste the URL of the new blank codespace.
 #| echo: false
 learnr2::question(
   "Copy and paste the URL of the new blank codespace.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -925,7 +925,7 @@ Go to GitHub. In the upper-right corner, click your profile picture, then select
 #| echo: false
 learnr2::question(
   "Go to GitHub. In the upper-right corner, click your profile picture, then select \"Your repositories\". Click the repository named r-devcontainer. Paste the URL of the repo.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -977,7 +977,7 @@ Go to https://github.com/codespaces. Stop any Codespaces you are no longer using
 #| echo: false
 learnr2::question(
   "Go to https://github.com/codespaces. Stop any Codespaces you are no longer using by clicking the three-dot menu next to each one and selecting \"Stop codespace\". Paste the URL of your codespaces-jupyter GitHub repository below.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -1003,7 +1003,7 @@ Paste the URL of the `r-devcontainer` GitHub repository you created in the New D
 #| echo: false
 learnr2::question(
   "Paste the URL of the r-devcontainer GitHub repository you created in the New Devcontainer section.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```

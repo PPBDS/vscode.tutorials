@@ -48,7 +48,7 @@ Copy and paste the URL for your `openrouter` repository.
 #| echo: false
 learnr2::question(
   "Copy and paste the URL for your openrouter repository.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```
@@ -130,7 +130,7 @@ Once you are signed in, copy and paste the URL of the page you land on.
 #| echo: false
 learnr2::question(
   "Once you are signed in, copy and paste the URL of the page you land on.",
-  type = "reflection",
+  type = "reflection_editable",
   show_text = FALSE
 )
 ```

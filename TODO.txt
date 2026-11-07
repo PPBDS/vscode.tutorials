@@ -30,11 +30,6 @@ Terminal 2 needs to some clean up.
 
 
 
-### Antigravity
-
-Probably belongs in misc.tutorials. After all, we open it in class together, and that provides a good occasion to show that, in addition to vscode.tutorials, there are other packages as well which might have tutorials.
-
-Should shorten Antigravity. Its only purpose is to get you set with Antigravity. Then you might also use it a bit, doing various things. But R4DS-1 is where we do the first teaching of the workflow of ask AI to change the qmd, render, look at HTML and so on.
 
 
 
@@ -66,8 +61,6 @@ Looks fine in the Rmd but then prints out wrapped ugly in the HTML.
 
 * What should repo names be now that tutorial titles (i.e., the "name" of the tutorial) are things like "Getting Started" and "Terminal Introduction"? Perhaps the answer is all lower case with spaces (and other weird characters) replaced with dashes.
 
-* Get the "Want to automatically fetch" pop-up to not appear.
-
 * Get rid of warnings on bash and Codespace terminals at Codebase start up.
 
 
@@ -82,40 +75,9 @@ Question: Does that mean that using this repo as a template will work fast for t
 But under no circumstances do we want them using connect-repo! It is a hack, mainly necessitated by teaching requirements. If they need to do something like that then teach them the raw git commands which accomplish the same thing.
 
 
-## 14-your-dotfiles
 
-Jacob
 
-No need for a repo.
 
-Starts by running echo $COOLEST_TEACHER in the bash Terminal.
-
-That fails!
-
-Create dotfiles repo. Explain that this is a real permanent thing.
-
-Add some dotfiles. Including a bash dotfile which defines 
-
-Flip some switch in GitHub account settings. 
-
-COOLEST_TEACHER=Preceptor
-
-Start a new codespace and run echo $COOLEST_TEACHER
-
-And it works! 
-
-Should there be a dotfiles tutorial, or should an introduction to this topic be handled in 13-my-codebase-starter? I think that, ideally, it is handled in 13. The motivating example is Git/GitHub. We want dotfiles to include all the Git/GitHub info so that connecting a new repo is easy. This is complex stuff! I am still unsure what `gh` does. 
-
-## 15-openrouter and 16-models
-
-Both drafted. 15 is the key plus `aider`; 16 removes the agent --- raw `curl`,
-prices as data, open weights vs closed, then `ellmer` from R.
-
-Two tutorials rather than one because a free OpenRouter account gets 50
-requests a day, which one long tutorial would blow.
-
-`ellmer` needs adding to the PPBDS/devcontainers image; `aider` is already
-there.
 
 ### Still open
 
@@ -123,8 +85,6 @@ What other infrastructure should we teach? The fork-a-broken-repo idea (create
 complex PPBDS repos with planted problems, have students fork, understand, and
 fix them) is the strongest remaining candidate, but it is assessment rather
 than instruction and needs its own spec plus a set of maintained repos.
-
-
 
 
 ## Tutorial Edits
@@ -137,39 +97,6 @@ But, at the same time, we don't want to overwhelm them during week 1. So, we nee
 We can split AI into two parts. In Getting Started and the Introduction, we just use GitHub Copilot. We know it will always be there and will always work for at least a few questions. Then, later, we can learn how to operate something like Antigravity from the command line.
 
 
-### 00-introduction
-
-Skim 01-code and 02-quarto
-
-Don't bother with Antigravity
-
-We need a 01-introduction tutorial. 
-
-  * Comfortable in VS Code
-  * 10 Terminal questions --- just cut and paste from Terminal
-  * Run `.devcontainer/connect-repo.sh introduction`. Discuss what it does. `pwd` is a reasonable questions, as is `ls -a`. Look at the URL for your repo. (Steal from 05-github-1.)
-  * Script 1 (use Copilot) -- maybe cut/paste from 01-code
-  * 5  questions about Git/GitHub.
-  * Log in to Antigravity (steal from 04-ai-1). Mention Copilot, and highlight the possibilities for using all sorts of AI.
-  * Script 2 -- maybe cut/paste from 01-code
-  * After this, we are AI agnostic. (But which pictures?)
-  * Each script finishes with asking AI to make a plot using only library(tidyverse) and a the diamonds data set from the ggplot2 package.
-  * Mention full access but tell students not to use it.
-
-This would be the first tutorial that someone does after Getting Started. Indeed, it should probably repeat key issues from Getting Started. That is, it should be self-contained. We want students to start using AI within the IDE as soon as possible. So, this tutorial would include:
-
-  * Basic vscode components, often taken from 01-code.
-  * A couple of bash Terminal questions, including the -h option.
-  * (maybe) make a script that adds 2 numbers. And run it. Just to show how you make a file and then do stuff with that file.
-  * Two examples of using AI. 
-    + The first would be GitHub Copilot, since we can be pretty sure that this will always work. Have it make a script which adds 10 numbers. Have the AI run the script. Then use show_file() so that we know that it worked.
-    + The second would be Antigravity. All (?) students have Google accounts (and those that don't could just skip these questions). Once it is connected, it could make another script, and then the AI could run it. show_file() again.
-  * Mention that we can't keep this code because we don't own this repo. Question could be `ls` from bash, and then discuss the files we will lose once the codebase closes.
-
-  * Use AI --- whatever AI you want; we don't force particular AI usage --- to create a tidyverse script which makes a beautiful diamonds plot. Tell AI to run the script. show_file() to see their script.  Show/discuss our answer.
-  * Git commit/push by hand. Question is `git log`.
-  * Last question is URL for the repo.
-  * At the end, reinforce how we always do things: Start codespace. Make repo. Start AI. Start tutorial. We assume that you understand these steps and will use them all going forward. We will just tell you to do things. We leave it to you to use AI.
 
 
 
@@ -184,36 +111,6 @@ Still good tutorials, but we make some changes.
   * Right now, the examples are too much like the old world, where we add a new line to the script/quarto with each question. We don't teach coding anymore! We teach using AI and/or infrastructure.
   * Need to teach `Cmd/Ctrl + Shift + K` for rendering qmd files. Even if we use AI to do this later, it is still good to have students do it by hand a bunch, and to see the command which is issued at the bash Terminal when they use those keys.
 
- ### 04-terminal 
- 
-  * Could be shorter since students rarely use shell commands themselves. But it might also include a couple of git commands, like log and status. 
-
-  * Could at least mention a bunch of commands, like `find`, which students will never use but which they might see AI using on their behalf.
- 
-  * Also, this might be a good time to explain how to Upload . . . a file. (Right click the open area in the Explorer tab and "Upload . . ." is an option. This is more important than you might think --- and we should mention these examples. You sometimes need to download data by hand, and so then need to upload it from your Downloads folder. You also sometimes need to upload an image which you want to mimic since, I think, you often can't just "paste" it in to the AI prompt.)
-
-### 05/06 GitHub
-
-  * Not clear that we need two tutorials.
-  * We certainly don't need multiple new repos. But maybe creating one other repo, besides the one we are in, would be a good idea. But we create that one by hand! By going into the /workspace directory, looking at the two repos already there --- codebase-starter and new-repo --- and then using git commands to create a repo. 
-  * The purpose of these tutorials is to teach git (and GitHub) after all.
-  * Might be that the second tutorial walks through what connect-repo is doing, line by line, and issues the same or similar commands. This would show that connect-repo does more than just connect. It reloads the window . . . or whatever that is.
-  * Would be great if students did not need to use create-repo . . .
-
-  ### ai tutorials
-
-  * Maybe there aren't any AI tutorials! 00-introduction introduces the idea and then every subsequent tutorial uses AI. Indeed, the second ai tutorial (which is mostly git?) would just become part of the second GitHub tutorial.
-
-
-### websites
-
-  * It is cool for the first website tutorial to be "by hand," meaning running the `quarto create` command at the terminal, and then exploring each of the resulting files. 
-
-  * It is cool that the website tutorials do a good job of showing students how to organize a project, with different scripts, saved data, and so on. We teach architecture, not coding.
-
-  * Nothing wrong with having two tutorials, but probably not two "website" tutorials. Maybe the first is websites and the second is "projects" more generally, including dashboards.
-
-  * I don't know the best way to handle (or teach) the creation of projects in the era of AI. Instead of remembering/running `quarto create`, can we just tell AI to make all the necessary files for a Quarto website? Instead of remembering `quarto publish`, can we just tell it to publish the website? 
 
 ### infrastructure
 
@@ -230,34 +127,7 @@ Still good tutorials, but we make some changes.
 
   * Retake the screenshot `inst/tutorials/terminal-3/images/grepping-gh-webpage.png` (Exercise 5 in the grep section). It shows the GitHub file page for `grepping.txt` with the Raw button boxed in red, but the breadcrumb reads `vscode.tutorials / inst / tutorials / 03-terminal / images / grepping.txt`, a directory name two renumberings old, and the commit line says "initial copy over from positron.tutorials". The file now lives at `inst/extdata/grepping.txt` (moved 2026-09-27 so renumbering can never break the download URL again), so the page to screenshot is https://github.com/PPBDS/vscode.tutorials/blob/main/inst/extdata/grepping.txt, once that move is pushed. The current image is also in GitHub dark mode; take the new one in light mode, per the standing note that dark-mode screenshots are unreadable, and keep the red box around Raw since that button is the point of the picture.
 
-### Other Stuff
 
-Tutorial times from 2026
-
-   source                    minutes     N
-   <fct>                       <dbl> <int>
- 1 getting-started_answers      35      47
- 2 introduction-to-r_answers    45      43
- 3 01-code_answers              85      40
- 4 02-quarto_answers            90      35
- 5 03-terminal_answers         120      32
- 6 04-ai-1_answers              78      28
- 7 05-github-1_answers          60      29
- 8 06-github-2_answers          73      28
- 9 07-ai-2_answers              50      27
-10 r4ds-1_answers               90      22
-11 08-websites-1_answers        60      24
-12 r4ds-2_answers               90      15
-
-Update images in 01-code.
-
-Should longer tutorials like 1, 4 and 7 have one of their exercises removed?
-
-* Finish skeleton in tutorial.helpers
-
-* Finish "Tutorials in the Age of AI" in tutorial.helpers.
-
-* Rewrite "Instructions"
 
 * Do we need an AI Getting Started tutorial which would highlight things like don't use install.packages() in your scripts and other generic lessons for working with AI? Maybe this is an "Introduction to AI" tutorial in tutorial.helpers?
 
@@ -280,6 +150,4 @@ In total, we make 5 websites. We need to make their construction more consistent
 
 AI could do all the example repos in PPBDS and then leave them up forever, so they would be available to students doing the work. Or for a ppbds-student account.
 
-
-## Schedule
 
