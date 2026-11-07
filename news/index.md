@@ -2,6 +2,10 @@
 
 ## vscode.tutorials (development version)
 
+- Antigravity moved to `misc.tutorials`, shortened to a
+  sign-in-and-try-it tutorial that sits just before R4DS 1. Its ordering
+  slot (5) is left unused here.
+
 - Aligned with codespace-starter’s 2026-10-30 consolidation: the starter
   writes one block to `~/.bashrc` that sources
   `~/.config/codespace-starter/bashrc.d/*.sh`, the short prompt lives in
@@ -29,13 +33,14 @@
   tutorial.
 
 - Dotfiles is rewritten as the graduation from `connect-repo` and moves
-  to directly after GitHub Advanced (ordering 11). A private `dotfiles`
-  repo delivers an install script that appends `bashrc` and `gitconfig`
+  to directly after GitHub Advanced (ordering 11). The `dotfiles` repo,
+  created with `connect-repo` like every other and then made private,
+  delivers an install script that appends `bashrc` and `gitconfig`
   fragments, a new section stores a GitHub token and the student’s
   Census API key as the Codespaces secrets `GH_TOKEN` and
   `CENSUS_API_KEY`, the `bashrc` fragment defines `agyd` as
   `agy --dangerously-skip-permissions`, and a fresh Codespace arrives
-  signed in as the student with tidycensus ready. Its 27 exercises each
+  signed in as the student with tidycensus ready. Its 29 exercises each
   ask for one paste, with a four-part map in the Introduction. Websites
   1 and 2 and the four devcontainer tutorials shift down one slot each.
 
@@ -52,7 +57,7 @@
   which was a learnr artifact.
 
 - Stale image pins in GitHub Advanced and Our Codespace Starter now
-  match codespace-starter (1.3.5).
+  match codespace-starter (1.3.7).
 
 - Orientation no longer says the Explorer hides dot-folders the way
   plain `ls` does. It explains that `codespace-starter` hides its own

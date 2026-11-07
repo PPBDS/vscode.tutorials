@@ -28,9 +28,6 @@ development:
 - **Quarto** (quarto): Advanced R coding tricks in VS Code and Quarto
   document creation
 
-- **Antigravity** (antigravity): Meeting the Antigravity CLI agent (agy)
-  and using it to create and render a Quarto analysis
-
 - **Terminal 1** (terminal-1): First of three bash Terminal tutorials:
   core commands, paths, and output redirection
 
@@ -82,9 +79,9 @@ To run a tutorial, use:
 `learnr2::run_tutorial(name = "short_tutorial_name", package = "vscode.tutorials")`
 
 Available tutorial names include: orientation, workflow, code, quarto,
-antigravity, terminal-1, terminal-2, terminal-3, github-1, github-2,
-dotfiles, websites-1, websites-2, devcontainers, our-codespace-starter,
-docker, your-starter, openrouter, and models.
+terminal-1, terminal-2, terminal-3, github-1, github-2, dotfiles,
+websites-1, websites-2, devcontainers, our-codespace-starter, docker,
+your-starter, openrouter, and models.
 
 ## See also
 
