@@ -47,10 +47,14 @@ Two house choices on top of those: each question's prompt stays in the prose
 above its chunk, with a plain-text copy in `text` and `show_text = FALSE`, and
 the boilerplate sits under `## Information` (`information-1`) and
 `## Download answers` (`download-answers-1`, `download-answers-2`). Check with
-`learnr2::check_tutorial()` (warning-level checks included: it flags bare
-code fences and mentions of the old packages) and
-`learnr2::render_tutorials()`. The version before the move to learnr2 is the
-git tag `last-learnr-version`.
+`learnr2::check_tutorials("vscode.tutorials")`, which runs the static checks
+on every tutorial (warning-level ones included: bare code fences, mentions
+of the old packages), renders each, and confirms the rendered page's
+download file names this package, its version and the tutorial; it is what
+`tests/testthat/test-tutorials.R` calls. For one tutorial while editing,
+`learnr2::check_tutorial("inst/tutorials/<slug>")` and
+`learnr2::render_tutorials("inst/tutorials/<slug>")`. The version before the
+move to learnr2 is the git tag `last-learnr-version`.
 
 The learnr2 behaviours an author here most often runs into:
 

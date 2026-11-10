@@ -1,17 +1,11 @@
-tutorial_paths <- function() {
-  learnr2::available_tutorials(package = "vscode.tutorials", type = "quarto")$path
-}
-
-test_that("tutorial paths can be found", {
-  expect_true(length(tutorial_paths()) > 0)
+test_that("tutorials can be found", {
+  expect_gt(nrow(learnr2::available_tutorials(package = "vscode.tutorials")), 0)
 })
 
-test_that("tutorials pass learnr2's static checks", {
-  expect_no_error(learnr2::check_tutorial(tutorial_paths()))
-})
-
-test_that("tutorials render", {
+test_that("every tutorial passes learnr2's checks and renders", {
   testthat::skip_on_cran() # Rendering every tutorial needs Quarto and takes minutes.
-  testthat::skip_if(is.null(quarto::quarto_path()), "Quarto is not installed")
-  expect_no_error(learnr2::render_tutorials(tutorial_paths()))
+  expect_no_error(learnr2::check_tutorials(
+    "vscode.tutorials",
+    render = !is.null(quarto::quarto_path())
+  ))
 })
